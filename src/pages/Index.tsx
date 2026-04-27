@@ -215,11 +215,12 @@ const Index = () => {
             <div className="mx-auto mt-4 h-1 w-20 bg-gradient-to-r from-civic-gold to-civic-red rounded-full" />
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-4 md:gap-5 pb-2 px-2">
+          {/* Mobile: single column centered | Desktop: all 7 in one row */}
+          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
             {leadership.map((person, i) => (
               <div
                 key={i}
-                className="group flex flex-col items-center text-center w-full sm:w-[calc(50%-1rem)] lg:w-[calc(100%/7-1rem)] min-w-[100px] max-w-[160px] cursor-pointer"
+                className="group flex flex-col items-center text-center w-40 md:w-[calc(100%/7-0.5rem)] md:min-w-[100px] md:max-w-[150px] cursor-pointer"
                 onClick={() => setSelectedLeader(person)}
                 style={{
                   opacity: isVisible ? 1 : 0,
