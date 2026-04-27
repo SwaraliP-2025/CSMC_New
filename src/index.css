@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Use Inter for Latin, Noto Sans Devanagari for Devanagari script */
+@font-face {
+  font-family: 'SiteFont';
+  src: local('Inter');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'SiteFont';
+  src: local('Noto Sans Devanagari');
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Official CSMC Emblem Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 17%;
+
+    /* Official Blue from Emblem - #3B3F8C */
+    --primary: 237 48% 29%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 237 48% 40%;
+
+    /* Gold from Emblem - #E6A64C */
+    --secondary: 38 69% 57%;
+    --secondary-foreground: 0 0% 17%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Red Accent from Emblem - #D32F2F */
+    --accent: 0 72% 51%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 237 48% 29%;
+
+    --radius: 0.5rem;
+
+    /* CSMC Civic Tokens - Using Official Emblem Colors */
+    --civic-gold: 38 69% 57%;
+    --civic-blue: 237 48% 29%;
+    --civic-red: 0 72% 51%;
+    --civic-white: 0 0% 100%;
+    --civic-ink: 0 0% 17%;
+
+    --gradient-heritage: linear-gradient(135deg, hsl(237 48% 29%) 0%, hsl(38 69% 57%) 100%);
+    --gradient-saffron: linear-gradient(180deg, hsl(38 69% 57%) 0%, hsl(0 72% 51%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsl(0 0% 17% / 0.1) 0%, hsl(0 0% 17% / 0.85) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 96%) 100%);
+
+    --shadow-elegant: 0 10px 40px -12px hsl(237 48% 29% / 0.2);
+    --shadow-soft: 0 4px 16px -4px hsl(0 0% 17% / 0.08);
+    --shadow-card: 0 2px 8px -2px hsl(0 0% 17% / 0.06);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 350 30% 8%;
+    --foreground: 40 30% 95%;
+    --card: 350 30% 11%;
+    --card-foreground: 40 30% 95%;
+    --popover: 350 30% 11%;
+    --popover-foreground: 40 30% 95%;
+    --primary: 28 95% 60%;
+    --primary-foreground: 350 50% 12%;
+    --secondary: 350 40% 25%;
+    --secondary-foreground: 40 30% 95%;
+    --muted: 350 20% 18%;
+    --muted-foreground: 40 15% 70%;
+    --accent: 42 75% 55%;
+    --accent-foreground: 350 50% 12%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 350 20% 20%;
+    --input: 350 20% 22%;
+    --ring: 28 95% 60%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans Devanagari', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Noto Sans Devanagari', 'Playfair Display', 'Georgia', serif;
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  .heritage-pattern {
+    background-image:
+      radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  .heritage-divider {
+    height: 4px;
+    background: var(--gradient-heritage);
+    border-radius: 2px;
+  }
+  .marquee {
+    display: inline-block;
+    animation: marquee 35s linear infinite;
+    padding-left: 100%;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
