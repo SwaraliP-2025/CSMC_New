@@ -7,7 +7,7 @@ import { useLang } from "@/i18n/LanguageContext";
 // Using a safe approach that won't crash if file is missing
 let BANNER_SRC = "";
 try {
-  BANNER_SRC = new URL("../assets/banners/tax-rebate-banner.jpg", import.meta.url).href;
+  BANNER_SRC = new URL("/* @vite-ignore */ ../assets/banners/tax-rebate-banner.jpg", import.meta.url).href;
 } catch {
   BANNER_SRC = "";
 }
