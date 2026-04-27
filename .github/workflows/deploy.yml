@@ -35,6 +35,15 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Verify dist exists
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "Build failed: dist/index.html not found"
+            exit 1
+          fi
+          echo "Build successful. Files in dist:"
+          ls dist/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
