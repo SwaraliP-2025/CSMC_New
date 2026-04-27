@@ -233,11 +233,14 @@ export const Header = () => {
           <img src={ascdcl} alt="ASCDCL" width={56} height={56} className="h-12 w-12 md:h-14 md:w-14 object-contain" />
         </div>
 
-        {/* Mobile: hamburger only */}
-        <Button size="icon" variant="ghost" className="md:hidden text-civic-blue shrink-0"
-          onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
+        {/* Mobile: ASCDCL logo + hamburger */}
+        <div className="md:hidden flex items-center gap-2 shrink-0">
+          <img src={ascdcl} alt="ASCDCL" width={40} height={40} className="h-9 w-9 object-contain" />
+          <Button size="icon" variant="ghost" className="text-civic-blue"
+            onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
 
       {/* Row 2 (mobile only): action buttons below logo */}
@@ -257,7 +260,6 @@ export const Header = () => {
           <input type="text" placeholder={en ? "Search..." : "शोधा..."} aria-label="Search"
             className="text-xs bg-transparent outline-none w-full placeholder:text-muted-foreground" />
         </div>
-        <img src={ascdcl} alt="ASCDCL" width={40} height={40} className="h-9 w-9 object-contain shrink-0" />
       </div>
 
       {/* Desktop nav */}
