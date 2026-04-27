@@ -11,7 +11,7 @@ const APPS = [
   { name: "Saksham", nameMr: "सक्षम", img: sakshamImg, url: "/under-construction" },
   { name: "Chalo", nameMr: "चलो", img: chaloImg, url: "https://play.google.com/store/apps/details?id=app.zophop&hl=en_IN&pli=1" },
   { name: "Jal Bell", nameMr: "जल बेल", img: jalBellImg, url: "https://play.google.com/store/apps/details?id=in.xpica.jalbellv2&hl=en_IN" },
-  { name: "Swacchhatasathi", nameMr: "स्वच्छतासाठी", img: mazaImg, url: "https://play.google.com/store/apps/details?id=livetracking.ekatta.in" },
+  { name: "Maza Swacchhatasathi", nameMr: "माझा स्वछतासाथी", img: mazaImg, url: "https://play.google.com/store/apps/details?id=livetracking.ekatta.in" },
   { name: "Clean Streets", nameMr: "क्लीन स्ट्रीट्स", img: cleanStreetsImg, url: "https://play.google.com/store/apps/details?id=com.csamc.clean_streets&hl=en" },
 ];
 
@@ -23,7 +23,7 @@ export const AppsBar = () => {
     <div className="bg-civic-ink border-t border-white/10 py-4">
       <div className="container">
         <p className="text-xs uppercase tracking-widest font-bold text-civic-gold mb-3 text-center">
-          {en ? "Download Our Apps" : "आमचे अॅप्स डाउनलोड करा"}
+          {en ? "Download Our Apps" : "आमचे ॲप डाउनलोड करा"}
         </p>
 
         {/* Mobile: 3-column icon grid */}

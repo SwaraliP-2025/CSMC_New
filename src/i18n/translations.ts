@@ -49,8 +49,7 @@ export const translations = {
     hero: {
       eyebrow: "Smart City. Living Heritage.",
       title: "Building a Cleaner, Greener, Smarter Sambhajinagar",
-      subtitle:
-        "From property tax to birth certificates — access every civic service from one trusted portal, anytime, anywhere.",
+      subtitle: "",
       ctaPrimary: "Pay Property Tax",
       ctaSecondary: "File a Complaint",
     },
@@ -147,8 +146,7 @@ export const translations = {
     hero: {
       eyebrow: "स्मार्ट सिटी. जिवंत वारसा.",
       title: "स्वच्छ, हरित आणि स्मार्ट संभाजीनगर घडवू या",
-      subtitle:
-        "मालमत्ता कर ते जन्म प्रमाणपत्र — सर्व नागरी सेवा एका विश्वासार्ह संकेतस्थळावरून, कधीही, कुठेही.",
+      subtitle: "",
       ctaPrimary: "मालमत्ता कर भरा",
       ctaSecondary: "तक्रार नोंदवा",
     },

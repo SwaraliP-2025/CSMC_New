@@ -79,9 +79,11 @@ export const VideoHero = () => {
               <h2 className="font-serif text-2xl sm:text-4xl md:text-7xl font-bold leading-tight mb-4 md:mb-6 text-white drop-shadow-lg">
                 {t.hero.title}
               </h2>
-              <p className="text-sm md:text-xl text-white/90 max-w-2xl leading-relaxed drop-shadow-md">
-                {t.hero.subtitle}
-              </p>
+              {t.hero.subtitle && (
+                <p className="text-sm md:text-xl text-white/90 max-w-2xl leading-relaxed drop-shadow-md">
+                  {t.hero.subtitle}
+                </p>
+              )}
             </div>
           </div>
         </section>

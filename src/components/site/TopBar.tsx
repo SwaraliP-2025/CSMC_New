@@ -67,9 +67,9 @@ export const TopBar = () => {
               मराठी
             </button>
           </div>
-          <div className="hidden sm:flex items-center gap-1.5 border-l border-white/20 pl-2 opacity-80">
+          <div className="flex items-center gap-1.5 border-l border-white/20 pl-2 opacity-80">
             <span>📅 {formattedDate}</span>
-            <span className="hidden md:inline">🕐 {formattedTime}</span>
+            <span>🕐 {formattedTime}</span>
           </div>
         </div>
 
