@@ -51,7 +51,7 @@ const Organization = () => {
                 maxHeight: "calc(100vh - 260px)", 
                 maxWidth: "100%", 
                 width: "auto",
-                transform: "scale(0.9)",
+                transform: "scale(1.0)",
                 transformOrigin: "top center"
               }}
               onError={(e) => {
