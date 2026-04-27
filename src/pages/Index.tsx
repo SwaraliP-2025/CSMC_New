@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-heritage.jpg"; // Placeholder image for video poster
-import { NoticesPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
+import { NoticesPopup, BannerPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
 
 // Example Guide for different formats:
 // import devendraImg from "@/assets/leadership/devendraji_pic.png";
@@ -114,9 +114,9 @@ const Index = () => {
   const [selectedLeader, setSelectedLeader] = useState<typeof leadership[0] | null>(null);
   const notices = useNoticesPopup();
 
-  // Also open popup when Notices is clicked in navbar
+  // Also open notices popup when Notices is clicked in navbar
   useEffect(() => {
-    const handler = () => notices.show();
+    const handler = () => notices.showNotices();
     window.addEventListener("open-notices-popup", handler);
     return () => window.removeEventListener("open-notices-popup", handler);
   }, []);
@@ -400,7 +400,8 @@ const Index = () => {
         </div>
       )}
 
-      <NoticesPopup open={notices.open} onClose={notices.hide} />
+      <BannerPopup open={notices.bannerOpen} onClose={notices.hideBanner} />
+      <NoticesPopup open={notices.noticesOpen} onClose={notices.hideNotices} />
 
     </HomeLayout>
   );
