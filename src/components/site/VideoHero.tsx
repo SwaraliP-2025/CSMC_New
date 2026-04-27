@@ -1,38 +1,11 @@
 import { useLang } from "@/i18n/LanguageContext";
 import { useState } from "react";
 import hero from "@/assets/hero-heritage.jpg";
-import muncorpPic from "@/assets/muncorp_pic.png";
+import taxRebateBanner from "@/assets/banners/tax-rebate-banner.jpg";
 
-// ─── Banner data ────────────────────────────────────────────────────────────
-// Add new banners here. Set `img` to an imported image path when available.
+// ─── Banner images list ──────────────────────────────────────────────────────
 const BANNERS = [
-  {
-    id: 1,
-    title: "माझा कर, माझी जबाबदारी",
-    subtitle: "वेळेत कर भरा, 10% सूट मिळवा! शहराच्या विकासात हातभार लावा",
-    tag: "विशेष लाभ",
-    body: "30 एप्रिल 2026 पूर्वी मालमत्ता कर भरल्यास 10% सूट (Discount) मिळेल",
-    bg: "from-orange-600 to-red-700",
-    img: null as string | null,
-  },
-  {
-    id: 2,
-    title: "मतदान करा — लोकशाही मजबूत करा",
-    subtitle: "आपला मतदानाचा हक्क बजावा",
-    tag: "महत्त्वाची सूचना",
-    body: "प्रत्येक मत महत्त्वाचे आहे. आपल्या मतदान केंद्रावर जा आणि मतदान करा.",
-    bg: "from-blue-700 to-indigo-800",
-    img: null as string | null,
-  },
-  {
-    id: 3,
-    title: "स्वच्छ सर्वेक्षण 2026",
-    subtitle: "स्वच्छ शहर — सुंदर शहर",
-    tag: "स्वच्छता अभियान",
-    body: "आपल्या परिसर स्वच्छ ठेवा. कचरा कचराकुंडीतच टाका.",
-    bg: "from-green-700 to-emerald-800",
-    img: null as string | null,
-  },
+  { id: 1, img: taxRebateBanner, alt: "माझा कर, माझी जबाबदारी — 10% सूट", link: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
 ];
 
 export const VideoHero = () => {
@@ -40,8 +13,6 @@ export const VideoHero = () => {
   const en = lang === "en";
   const [tab, setTab] = useState<"hero" | "banners">("hero");
   const [bannerIdx, setBannerIdx] = useState(0);
-
-  const banner = BANNERS[bannerIdx];
 
   return (
     <div className="relative w-full">
@@ -91,55 +62,45 @@ export const VideoHero = () => {
 
       {/* Banners tab */}
       {tab === "banners" && (
-        <section className={`relative min-h-[50vh] md:min-h-[85vh] flex items-center overflow-hidden w-full`}>
-          {/* CSMC building as background */}
-          <div className="absolute inset-0 w-full h-full">
-            <img src={muncorpPic} alt="CSMC Building" className="w-full h-full object-cover opacity-30" />
-          </div>
-          <div className={`absolute inset-0 bg-gradient-to-br ${banner.bg} opacity-80`} />
+        <section className="relative min-h-[50vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden w-full bg-black">
+          {/* Banner image — full hero */}
+          <img
+            src={BANNERS[bannerIdx].img}
+            alt={BANNERS[bannerIdx].alt}
+            className="w-full h-full object-contain md:object-cover absolute inset-0"
+            style={{ maxHeight: "85vh" }}
+          />
 
-          <div className="relative container py-16 z-10 flex flex-col md:flex-row items-center gap-10">
-            {/* Banner content */}
-            <div className="flex-1 text-white">
-              <span className="inline-block bg-white/20 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
-                {banner.tag}
-              </span>
-              <h2 className="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg">
-                {banner.title}
-              </h2>
-              <p className="text-lg text-white/90 mb-4 leading-relaxed">{banner.subtitle}</p>
-              <div className="bg-white/15 border border-white/20 rounded-xl px-5 py-4 text-white/95 text-base font-medium leading-relaxed">
-                {banner.body}
+          {/* Clickable overlay */}
+          {BANNERS[bannerIdx].link && (
+            <a
+              href={BANNERS[bannerIdx].link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10"
+              aria-label={BANNERS[bannerIdx].alt}
+            />
+          )}
+
+          {/* Dots — only if multiple banners */}
+          {BANNERS.length > 1 && (
+            <>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+                {BANNERS.map((_, i) => (
+                  <button key={i} onClick={() => setBannerIdx(i)}
+                    className={`transition-all rounded-full ${i === bannerIdx ? "w-6 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/50 hover:bg-white/80"}`} />
+                ))}
               </div>
-            </div>
-
-            {/* Banner image placeholder */}
-            {banner.img ? (
-              <img src={banner.img} alt={banner.title} className="w-72 rounded-2xl shadow-2xl object-cover" />
-            ) : (
-              <div className="w-64 h-64 rounded-2xl bg-white/10 border-2 border-white/20 flex items-center justify-center text-white/40 text-sm font-medium shrink-0">
-                Banner Image
-              </div>
-            )}
-          </div>
-
-          {/* Banner navigation dots */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-            {BANNERS.map((_, i) => (
-              <button key={i} onClick={() => setBannerIdx(i)}
-                className={`transition-all rounded-full ${i === bannerIdx ? "w-6 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/40 hover:bg-white/70"}`} />
-            ))}
-          </div>
-
-          {/* Prev / Next arrows */}
-          <button onClick={() => setBannerIdx(i => (i - 1 + BANNERS.length) % BANNERS.length)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center z-20 transition-colors">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button onClick={() => setBannerIdx(i => (i + 1) % BANNERS.length)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center z-20 transition-colors">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
+              <button onClick={() => setBannerIdx(i => (i - 1 + BANNERS.length) % BANNERS.length)}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white flex items-center justify-center z-20 transition-colors">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button onClick={() => setBannerIdx(i => (i + 1) % BANNERS.length)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white flex items-center justify-center z-20 transition-colors">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </>
+          )}
         </section>
       )}
     </div>
