@@ -18,7 +18,7 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
     <SiteHeader />
     <VideoHero />
-    <main id="main" className="flex-1 mb-10">{children}</main>
+    <main id="main" className="flex-1 mb-10 pb-12">{children}</main>
     <AppsBar />
     <Footer />
     <AnnouncementBar />
@@ -29,7 +29,7 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
 export const Layout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
     <SiteHeader />
-    <main id="main" className="flex-1 mb-10">{children}</main>
+    <main id="main" className="flex-1 mb-10 pb-12">{children}</main>
     <AppsBar />
     <Footer />
     <AnnouncementBar />

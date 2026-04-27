@@ -1,12 +1,14 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
 import { Phone, Mail, MapPin, Quote } from "lucide-react";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
 
 const Commissioner = () => {
   const { lang } = useLang();
   const en = lang === "en";
+  const t = translations[lang];
 
   return (
     <Layout>
@@ -26,7 +28,7 @@ const Commissioner = () => {
                 <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white/30 shadow-xl mb-4">
                   <img src={amolSir} alt="Shri Amol Yedage" className="w-full h-full object-cover" />
                 </div>
-                <h2 className="font-serif text-xl font-bold text-white mb-1">Shri Amol Yedage, IAS</h2>
+                <h2 className="font-serif text-xl font-bold text-white mb-1">{en ? t.commissioner.name : t.commissioner.nameMarathi}</h2>
                 <p className="text-civic-gold text-sm font-semibold">
                   {en ? "Municipal Commissioner & Administrator" : "महानगरपालिका आयुक्त व प्रशासक"}
                 </p>
@@ -53,7 +55,7 @@ const Commissioner = () => {
                     <p className="font-semibold text-civic-ink leading-snug">
                       {en
                         ? "CSMC Main Building, Town Hall, Behind Head Post Office, Chhatrapati Sambhajinagar – 431001"
-                        : "छ.सं.म.न.पा. मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर – ४३१००१"}
+                        : "छत्रपती संभाजीनगर महानगरपालिका मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर – ४३१००१"}
                     </p>
                   </div>
                 </div>
@@ -87,13 +89,13 @@ const Commissioner = () => {
               <p>
                 {en
                   ? "I invite every citizen to actively participate in governance — through our grievance portal, public consultations, and the My Smart Nagarik App. Together, we are shaping a model city — clean, inclusive and ready for tomorrow."
-                  : "मी प्रत्येक नागरिकाला प्रशासनात सक्रियपणे सहभागी होण्याचे आमंत्रण देतो — आमच्या तक्रार पोर्टल, सार्वजनिक सल्लामसलत आणि माय स्मार्ट नागरिक अॅपद्वारे. एकत्रितपणे आपण एक आदर्श शहर घडवत आहोत — स्वच्छ, समावेशक आणि उद्यासाठी सज्ज."}
+                  : "मी प्रत्येक नागरिकाला प्रशासनात सक्रियपणे सहभागी होण्याचे आमंत्रण देतो — आमच्या तक्रार पोर्टल, सार्वजनिक सल्लामसलत आणि माय स्मार्ट नागरिक  ॲपद्वारे. एकत्रितपणे आपण एक आदर्श शहर घडवत आहोत — स्वच्छ, समावेशक आणि उद्यासाठी सज्ज."}
               </p>
             </div>
             <div className="pt-4 border-t border-border">
-              <p className="font-serif text-lg font-bold text-civic-blue">Shri Amol Yedage, IAS</p>
+              <p className="font-serif text-lg font-bold text-civic-blue">{en ? t.commissioner.name : t.commissioner.nameMarathi}</p>
               <p className="text-sm text-muted-foreground font-medium">
-                {en ? "Municipal Commissioner & Administrator, CSMC" : "महानगरपालिका आयुक्त व प्रशासक, छ.सं.म.न.पा."}
+                {en ? "Municipal Commissioner, CSMC" : "महानगरपालिका आयुक्त, छत्रपती संभाजीनगर महानगरपालिका"}
               </p>
             </div>
           </div>

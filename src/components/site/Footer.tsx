@@ -53,7 +53,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#1a1a2e] text-white">
+    <footer className="bg-[#1a1a2e] text-white pb-12">
       <div className="container py-12 grid gap-10 md:grid-cols-4">
 
         {/* Address */}
@@ -177,7 +177,7 @@ export const Footer = () => {
             </span>
             <span>
               {en ? "Designed & developed by" : "निर्मिती:"}{" "}
-              <a href="#" className="text-civic-gold hover:underline font-semibold">MIPL Infotech Pvt Ltd</a>
+              <a href="#" className="text-civic-gold hover:underline font-semibold">Mars Telecom Pvt Ltd</a>
             </span>
           </div>
         </div>

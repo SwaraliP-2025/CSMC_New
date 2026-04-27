@@ -78,6 +78,10 @@ export const translations = {
       name: "Shri Amol Yedge, IAS",
       role: "Municipal Commissioner & Administrator",
     },
+    commissioner: {
+      name: "Shri Amol Yedage, IAS",
+      nameMarathi: "श्री. अमोल येडगे, भा.प्र.से.",
+    },
     notices: { title: "Latest Notices & Announcements", view: "View all" },
     stats: { title: "Our City in Numbers" },
     statsItems: [
@@ -174,6 +178,10 @@ export const translations = {
         "छत्रपती संभाजीनगर हे शतकानुशतकांचा वारसा आणि आधुनिक आकांक्षा यांचा संगम असलेले शहर आहे. तंत्रज्ञानाधारित, प्रतिसादात्मक नागरी सेवा देण्यासाठी आमचे प्रशासन कटिबद्ध आहे — स्वच्छ, समावेशक आणि भविष्यासाठी सज्ज शहर घडवण्याच्या दिशेने आम्ही एकत्रित वाटचाल करत आहोत.",
       name: "श्री. अमोल येडगे, भा.प्र.से.",
       role: "महानगरपालिका आयुक्त व प्रशासक",
+    },
+    commissioner: {
+      name: "Shri Amol Yedage, IAS",
+      nameMarathi: "श्री. अमोल येडगे, भा.प्र.से.",
     },
     notices: { title: "ताज्या सूचना व घोषणा", view: "सर्व पहा" },
     stats: { title: "आपले शहर — आकड्यांत" },
