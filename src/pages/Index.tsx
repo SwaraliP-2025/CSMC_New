@@ -219,7 +219,7 @@ const Index = () => {
             {leadership.map((person, i) => (
               <div
                 key={i}
-                className="group flex flex-col items-center text-center shrink-0 w-[calc(50%-1rem)] sm:w-[calc(33%-1rem)] md:w-[calc(100%/7-1rem)] min-w-[100px] max-w-[140px] cursor-pointer"
+                className="group flex flex-col items-center text-center shrink-0 w-full lg:w-[calc(100%/7-1rem)] min-w-[100px] max-w-[140px] cursor-pointer"
                 onClick={() => setSelectedLeader(person)}
                 style={{
                   opacity: isVisible ? 1 : 0,
