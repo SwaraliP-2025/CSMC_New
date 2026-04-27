@@ -205,14 +205,14 @@ export const Header = () => {
           </div>
         </Link>
 
-        <div className="flex items-center gap-3">
-          {/* WhatsApp */}
-          <div className="relative hidden md:flex items-center">
+        <div className="flex items-center gap-2">
+          {/* WhatsApp — all devices */}
+          <div className="relative flex items-center">
             <a href="https://api.whatsapp.com/send?phone=919485202020&text=Hi" target="_blank" rel="noopener noreferrer"
               onMouseEnter={() => setWaHovered(true)} onMouseLeave={() => setWaHovered(false)}
-              className="flex items-center justify-center w-9 h-9 rounded-full hover:scale-110 transition-transform"
+              className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-full hover:scale-110 transition-transform"
               style={{ backgroundColor: "#25D366" }} aria-label="WhatsApp">
-              <svg viewBox="0 0 32 32" width="20" height="20" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.832 1.783 6.865L2 30l7.335-1.763A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.834-1.594l-.418-.248-4.352 1.046 1.074-4.234-.272-.435A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.388c-.344-.172-2.036-1.004-2.352-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.744.086-.344-.172-1.452-.535-2.766-1.707-1.022-.912-1.712-2.037-1.912-2.381-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.776-1.87-1.063-2.56-.28-.672-.564-.581-.776-.592l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.233 3.328 1.405 3.558c.172.23 2.427 3.706 5.88 5.196.822.355 1.463.567 1.963.726.824.263 1.574.226 2.167.137.661-.099 2.036-.832 2.323-1.635.287-.803.287-1.491.2-1.635-.086-.143-.316-.23-.66-.402z"/></svg>
+              <svg viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.832 1.783 6.865L2 30l7.335-1.763A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.834-1.594l-.418-.248-4.352 1.046 1.074-4.234-.272-.435A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.388c-.344-.172-2.036-1.004-2.352-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.744.086-.344-.172-1.452-.535-2.766-1.707-1.022-.912-1.712-2.037-1.912-2.381-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.776-1.87-1.063-2.56-.28-.672-.564-.581-.776-.592l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.233 3.328 1.405 3.558c.172.23 2.427 3.706 5.88 5.196.822.355 1.463.567 1.963.726.824.263 1.574.226 2.167.137.661-.099 2.036-.832 2.323-1.635.287-.803.287-1.491.2-1.635-.086-.143-.316-.23-.66-.402z"/></svg>
             </a>
             {waHovered && (
               <div className="absolute bottom-full right-0 mb-2 w-44 bg-white text-gray-800 text-[11px] font-semibold px-3 py-2 rounded-xl shadow-xl border border-gray-100 leading-snug z-50">
@@ -222,21 +222,22 @@ export const Header = () => {
             )}
           </div>
 
-          {/* User Policy */}
-          <a href="/under-construction" className="hidden md:inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap">
+          {/* User Policy — all devices */}
+          <a href="/under-construction" className="inline-flex px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap">
             {en ? "User Policy" : "वापरकर्ता नियमावली"}
           </a>
 
-          {/* Search */}
-          <div className="hidden md:flex items-center gap-2 border border-border rounded-full px-3 py-1.5 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30">
-            <Search className="h-4 w-4 text-muted-foreground shrink-0" />
+          {/* Search — all devices */}
+          <div className="flex items-center gap-1.5 border border-border rounded-full px-2 py-1 md:px-3 md:py-1.5 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30">
+            <Search className="h-3.5 w-3.5 md:h-4 md:w-4 text-muted-foreground shrink-0" />
             <input type="text" placeholder={en ? "Search..." : "शोधा..."} aria-label="Search"
-              className="text-sm bg-transparent outline-none w-24 placeholder:text-muted-foreground" />
+              className="text-xs md:text-sm bg-transparent outline-none w-14 md:w-24 placeholder:text-muted-foreground" />
           </div>
 
-          <img src={ascdcl} alt="ASCDCL" width={56} height={56} className="hidden lg:block h-12 w-12 md:h-14 md:w-14 object-contain" />
+          <img src={ascdcl} alt="ASCDCL" width={56} height={56} className="h-10 w-10 md:h-14 md:w-14 object-contain" />
 
-          <Button size="icon" variant="ghost" className="md:hidden text-civic-blue"
+          {/* Hamburger — mobile only */}
+          <Button size="icon" variant="ghost" className="md:hidden text-civic-blue shrink-0"
             onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
