@@ -17,7 +17,7 @@ const Organization = () => {
     <Layout>
       <PageHeader
         eyebrow={en ? "Administration" : "प्रशासन"}
-        title={en ? "CSMC Organogram" : "CSMC संघटनात्मक रचना"}
+        title={en ? "CSMC Organogram" : "CSMC संस्था"}
         subtitle={en
           ? "Organizational structure of Chhatrapati Sambhajinagar Municipal Corporation."
           : "छत्रपती संभाजीनगर महानगरपालिकेची संघटनात्मक रचना."}
@@ -27,7 +27,7 @@ const Organization = () => {
           {/* Header bar */}
           <div className="bg-civic-blue px-6 py-4 flex items-center justify-between">
             <h2 className="font-serif text-lg font-bold text-white">
-              {en ? "CSMC Organogram — Team CSMC" : "CSMC संघटनात्मक रचना — टीम CSMC"}
+              {en ? "CSMC Organogram — Team CSMC" : "CSMC संस्था — टीम CSMC"}
             </h2>
             <a
               href={imgSrc}

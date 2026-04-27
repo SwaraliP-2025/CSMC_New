@@ -24,7 +24,7 @@ const NAV: NavItem[] = [
     children: [
       { labelEn: "About CSMC", labelMr: "CSMC बद्दल", to: "/about" },
       { labelEn: "Hon'ble Municipal Commissioner", labelMr: "मा. महानगरपालिका आयुक्त", to: "/commissioner" },
-      { labelEn: "Organogram / Structure", labelMr: "संघटनात्मक रचना", to: "/organization" },
+      { labelEn: "Organogram / Structure", labelMr: "संस्था", to: "/organization" },
       { labelEn: "Departments", labelMr: "विभाग", to: "/departments" },
       { labelEn: "Minutes of General Body Meeting", labelMr: "सर्वसाधारण सभेचे इतिवृत्त", to: "/public-documents" },
       { labelEn: "Hon'ble Mayors' List", labelMr: "मा. महापौरांची यादी", to: "/mayors-list" },
