@@ -1,6 +1,7 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
+import organogramImg from "@/assets/organogram.png";
 
 // Save the organogram image as: src/assets/organogram.png
 // Then uncomment the import below:
@@ -10,13 +11,7 @@ const Organization = () => {
   const { lang } = useLang();
   const en = lang === "en";
 
-  // Safe URL — won't crash if organogram.png doesn't exist
-  let imgSrc = "";
-  try {
-    imgSrc = new URL("../../assets/organogram.png", import.meta.url).href;
-  } catch {
-    imgSrc = "";
-  }
+  const imgSrc = organogramImg;
 
   return (
     <Layout>

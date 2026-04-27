@@ -1,6 +1,7 @@
 import { useLang } from "@/i18n/LanguageContext";
 import { useState } from "react";
 import hero from "@/assets/hero-heritage.jpg";
+import muncorpPic from "@/assets/muncorp_pic.png";
 
 // ─── Banner data ────────────────────────────────────────────────────────────
 // Add new banners here. Set `img` to an imported image path when available.
@@ -88,9 +89,12 @@ export const VideoHero = () => {
 
       {/* Banners tab */}
       {tab === "banners" && (
-        <section className={`relative min-h-[70vh] md:min-h-[85vh] flex items-center overflow-hidden w-full bg-gradient-to-br ${banner.bg}`}>
-          <div className="absolute inset-0 opacity-10"
-            style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "20px 20px" }} />
+        <section className={`relative min-h-[50vh] md:min-h-[85vh] flex items-center overflow-hidden w-full`}>
+          {/* CSMC building as background */}
+          <div className="absolute inset-0 w-full h-full">
+            <img src={muncorpPic} alt="CSMC Building" className="w-full h-full object-cover opacity-30" />
+          </div>
+          <div className={`absolute inset-0 bg-gradient-to-br ${banner.bg} opacity-80`} />
 
           <div className="relative container py-16 z-10 flex flex-col md:flex-row items-center gap-10">
             {/* Banner content */}
