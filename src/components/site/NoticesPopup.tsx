@@ -3,10 +3,14 @@ import { createPortal } from "react-dom";
 import { X, Bell, Download, ExternalLink } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 
-// ─── Save your banner image as: src/assets/banners/tax-rebate-banner.jpg ───
-// Then uncomment: import bannerImg from "@/assets/banners/tax-rebate-banner.jpg";
-// For now using dynamic import with fallback
-const BANNER_SRC = new URL("../assets/banners/tax-rebate-banner.jpg", import.meta.url).href;
+// Banner image — save as src/assets/banners/tax-rebate-banner.jpg
+// Using a safe approach that won't crash if file is missing
+let BANNER_SRC = "";
+try {
+  BANNER_SRC = new URL("../assets/banners/tax-rebate-banner.jpg", import.meta.url).href;
+} catch {
+  BANNER_SRC = "";
+}
 
 const NOTICES = [
   { id: 1, title: "Property Tax Rebate — 10% discount till 30 April 2026", titleMr: "मालमत्ता कर सवलत — ३० एप्रिल २०२६ पर्यंत १०% सूट", date: "1 Apr 2026", category: "Revenue", categoryMr: "महसूल", link: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },

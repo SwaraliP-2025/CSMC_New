@@ -10,8 +10,13 @@ const Organization = () => {
   const { lang } = useLang();
   const en = lang === "en";
 
-  // Change to: src={organogram} once you add the image
-  const imgSrc = new URL("../../assets/organogram.png", import.meta.url).href;
+  // Safe URL — won't crash if organogram.png doesn't exist
+  let imgSrc = "";
+  try {
+    imgSrc = new URL("../../assets/organogram.png", import.meta.url).href;
+  } catch {
+    imgSrc = "";
+  }
 
   return (
     <Layout>
