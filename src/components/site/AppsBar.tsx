@@ -54,7 +54,7 @@ export const AppsBar = () => {
       <p className="text-xs uppercase tracking-widest font-bold text-civic-gold mb-4 text-center">
         {en ? "Download Our Apps" : "आमचे अॅप्स डाउनलोड करा"}
       </p>
-      <div className="flex flex-nowrap justify-center gap-2">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
         {APPS.map((app) => (
           <a
             key={app.name}

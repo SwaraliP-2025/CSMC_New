@@ -65,20 +65,20 @@ export const VideoHero = () => {
 
       {/* Hero image tab */}
       {tab === "hero" && (
-        <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center overflow-hidden w-full">
+        <section className="relative min-h-[50vh] md:min-h-[85vh] flex items-center overflow-hidden w-full">
           <div className="absolute inset-0 w-full h-full">
             <img src={hero} alt="Chhatrapati Sambhajinagar" className="w-full h-full object-cover" />
           </div>
           <div className="absolute inset-0 bg-gradient-overlay opacity-80" />
-          <div className="relative container py-24 md:py-36 z-10 animate-fade-up">
+          <div className="relative container py-12 md:py-36 z-10 animate-fade-up">
             <div className="max-w-3xl">
-              <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-civic-gold font-bold mb-4 drop-shadow-md">
+              <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-civic-gold font-bold mb-3 md:mb-4 drop-shadow-md">
                 {t.hero.eyebrow}
               </p>
-              <h2 className="font-serif text-4xl md:text-7xl font-bold leading-tight mb-6 text-white drop-shadow-lg">
+              <h2 className="font-serif text-2xl sm:text-4xl md:text-7xl font-bold leading-tight mb-4 md:mb-6 text-white drop-shadow-lg">
                 {t.hero.title}
               </h2>
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed drop-shadow-md">
+              <p className="text-sm md:text-xl text-white/90 max-w-2xl leading-relaxed drop-shadow-md">
                 {t.hero.subtitle}
               </p>
             </div>

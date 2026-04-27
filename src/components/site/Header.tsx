@@ -191,15 +191,15 @@ export const Header = () => {
   return (
     <header className="bg-white border-b border-border shadow-card-soft">
       {/* Logo row */}
-      <div className="container py-3 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3 group">
+      <div className="container py-2 md:py-3 flex items-center justify-between gap-2 md:gap-4">
+        <Link to="/" className="flex items-center gap-2 md:gap-3 group min-w-0 flex-1">
           <img src={emblem} alt="CSMC Emblem" width={56} height={56}
-            className="h-12 w-12 md:h-14 md:w-14 object-contain transition-transform group-hover:scale-105" />
-          <div className="leading-tight">
-            <h1 className="font-serif text-base md:text-xl text-civic-blue font-bold tracking-tight">
+            className="h-10 w-10 md:h-14 md:w-14 object-contain shrink-0 transition-transform group-hover:scale-105" />
+          <div className="leading-tight min-w-0">
+            <h1 className="font-serif text-sm md:text-xl text-civic-blue font-bold tracking-tight line-clamp-1">
               {en ? "Chhatrapati Sambhajinagar Municipal Corporation" : "छत्रपती संभाजीनगर महानगरपालिका"}
             </h1>
-            <p className="text-[11px] md:text-xs text-muted-foreground font-medium">
+            <p className="text-[10px] md:text-xs text-muted-foreground font-medium hidden sm:block">
               {en ? "City of Heritage, Vision of Tomorrow" : "वारशाचे शहर, उद्याचे स्वप्न"}
             </p>
           </div>
@@ -234,7 +234,7 @@ export const Header = () => {
               className="text-sm bg-transparent outline-none w-24 placeholder:text-muted-foreground" />
           </div>
 
-          <img src={ascdcl} alt="ASCDCL" width={56} height={56} className="hidden md:block h-12 w-12 md:h-14 md:w-14 object-contain" />
+          <img src={ascdcl} alt="ASCDCL" width={56} height={56} className="hidden lg:block h-12 w-12 md:h-14 md:w-14 object-contain" />
 
           <Button size="icon" variant="ghost" className="md:hidden text-civic-blue"
             onClick={() => setMobileOpen(o => !o)} aria-label="Menu">

@@ -44,7 +44,7 @@ const SocialMediaSection = () => {
           <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-2">{en ? "Stay Connected" : "आमच्याशी जोडलेले राहा"}</p>
           <h2 className="font-serif text-2xl md:text-3xl text-civic-blue font-bold">{en ? "Our Social Media" : "आपले सोशल मीडिया"}</h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Facebook */}
           <div className="border border-border rounded-xl overflow-hidden bg-white">
@@ -158,7 +158,7 @@ const Index = () => {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{t.quick.subtitle}</p>
             <div className="mx-auto mt-6 h-1.5 w-24 bg-gradient-heritage rounded-full" />
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
             {t.quick.items.map((item, i) => {
               const Icon = icons[i] ?? icons[0];
               const cls = "group bg-white border border-border rounded-3xl p-8 hover:shadow-elegant hover:border-civic-blue/20 transition-all hover:-translate-y-2 flex flex-col items-center text-center relative overflow-hidden";
@@ -215,11 +215,11 @@ const Index = () => {
             <div className="mx-auto mt-4 h-1 w-20 bg-gradient-to-r from-civic-gold to-civic-red rounded-full" />
           </div>
 
-          <div className="flex flex-nowrap justify-center gap-5 pb-2 px-2">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-5 pb-2 px-2">
             {leadership.map((person, i) => (
               <div
                 key={i}
-                className="group flex flex-col items-center text-center shrink-0 w-[calc(100%/7-1rem)] min-w-[120px] max-w-[160px] cursor-pointer"
+                className="group flex flex-col items-center text-center shrink-0 w-[calc(50%-1rem)] sm:w-[calc(33%-1rem)] md:w-[calc(100%/7-1rem)] min-w-[100px] max-w-[140px] cursor-pointer"
                 onClick={() => setSelectedLeader(person)}
                 style={{
                   opacity: isVisible ? 1 : 0,
