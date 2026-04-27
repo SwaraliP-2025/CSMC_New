@@ -4,13 +4,16 @@ import { ArrowRight, Calendar, Landmark, MapPin, Phone, Mail, Facebook, Twitter,
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
-import hero from "@/assets/hero-heritage.jpg"; // Placeholder image for video poster
 import { NoticesPopup, BannerPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
 
-// Example Guide for different formats:
-// import devendraImg from "@/assets/leadership/devendraji_pic.png";
-// import eknathImg from "@/assets/leadership/eknathji_pic.jpg";
-// ... works for both .png and .jpg!
+// Static imports for leadership images — avoids new URL() crashes on GitHub Pages
+import devendraImg from "@/assets/leadership/devendraji_pic.jpg";
+import eknathImg from "@/assets/leadership/eknathji_pic.png";
+import suntraImg from "@/assets/leadership/Suntera_mam.jpeg";
+import madhuriImg from "@/assets/leadership/madhuri_misal2.jpg";
+import sameerImg from "@/assets/leadership/samir-bhaiya-rajurkar.png";
+import rajuImg from "@/assets/leadership/raju-bhaiya-janjal1.png";
+import amolImg from "@/assets/leadership/shri_amol_sir.png";
 
 const icons = [
   Landmark,
@@ -138,13 +141,13 @@ const Index = () => {
   }, []);
 
   const leadership = [
-    { name: en ? "Shri Devendra Fadnavis" : "श्री. देवेंद्र फडणवीस", role: en ? "Hon'ble Chief Minister of Maharashtra" : "मा. मुख्यमंत्री, महाराष्ट्र राज्य", image: "leadership/devendraji_pic.jpg" },
-    { name: en ? "Shri Eknath Shinde" : "श्री. एकनाथ शिंदे", role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : "मा. उपमुख्यमंत्री, महाराष्ट्र राज्य", image: "leadership/eknathji_pic.png" },
-    { name: en ? "Smt. Sunetra A. Pawar" : "सौ. सुनेत्रा अजित पवार", role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : "मा. उपमुख्यमंत्री, महाराष्ट्र राज्य", image: "leadership/Suntera_mam.jpeg" },
-    { name: en ? "Smt. Madhuri Misal" : "सौ. माधुरी मिसाळ", role: en ? "Hon'ble Minister of State, Urban Development Department" : "मा. राज्यमंत्री, नगरविकास विभाग", image: "leadership/madhuri_misal2.jpg" },
-    { name: en ? "Shri Sameer Rajurkar" : "श्री. समीर राजूरकर", role: en ? "Hon'ble Mayor" : "मा. महापौर", image: "leadership/samir-bhaiya-rajurkar.png" },
-    { name: en ? "Shri Rajendra Janjal" : "श्री. राजेंद्र जांजळ", role: en ? "Hon'ble Deputy Mayor" : "मा. उपमहापौर", image: "leadership/raju-bhaiya-janjal1.png" },
-    { name: en ? "Shri Amol Yedage" : "श्री. अमोल येडगे", role: en ? "Hon'ble Municipal Commissioner" : "मा. महानगरपालिका आयुक्त", image: "leadership/shri_amol_sir.png" },
+    { name: en ? "Shri Devendra Fadnavis" : "श्री. देवेंद्र फडणवीस", role: en ? "Hon'ble Chief Minister of Maharashtra" : "मा. मुख्यमंत्री, महाराष्ट्र राज्य", image: devendraImg },
+    { name: en ? "Shri Eknath Shinde" : "श्री. एकनाथ शिंदे", role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : "मा. उपमुख्यमंत्री, महाराष्ट्र राज्य", image: eknathImg },
+    { name: en ? "Smt. Sunetra A. Pawar" : "सौ. सुनेत्रा अजित पवार", role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : "मा. उपमुख्यमंत्री, महाराष्ट्र राज्य", image: suntraImg },
+    { name: en ? "Smt. Madhuri Misal" : "सौ. माधुरी मिसाळ", role: en ? "Hon'ble Minister of State, Urban Development Department" : "मा. राज्यमंत्री, नगरविकास विभाग", image: madhuriImg },
+    { name: en ? "Shri Sameer Rajurkar" : "श्री. समीर राजूरकर", role: en ? "Hon'ble Mayor" : "मा. महापौर", image: sameerImg },
+    { name: en ? "Shri Rajendra Janjal" : "श्री. राजेंद्र जांजळ", role: en ? "Hon'ble Deputy Mayor" : "मा. उपमहापौर", image: rajuImg },
+    { name: en ? "Shri Amol Yedage" : "श्री. अमोल येडगे", role: en ? "Hon'ble Municipal Commissioner" : "मा. महानगरपालिका आयुक्त", image: amolImg },
   ];
 
   return (
@@ -234,9 +237,7 @@ const Index = () => {
                 <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
                   {person.image ? (
                     <img
-                      src={person.image.startsWith("http") || person.image.startsWith("/")
-                        ? person.image
-                        : new URL(`../assets/${person.image}`, import.meta.url).href}
+                      src={person.image}
                       alt={person.name}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-200"
                     />
@@ -382,9 +383,7 @@ const Index = () => {
             {/* Photo — full, no overlay */}
             <div className="px-6 pb-2">
               <img
-                src={selectedLeader.image.startsWith("http") || selectedLeader.image.startsWith("/")
-                  ? selectedLeader.image
-                  : new URL(`../assets/${selectedLeader.image}`, import.meta.url).href}
+                src={selectedLeader.image}
                 alt={selectedLeader.name}
                 className="w-full rounded-xl object-cover object-top"
                 style={{ maxHeight: "280px" }}
