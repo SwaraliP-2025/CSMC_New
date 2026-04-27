@@ -5,7 +5,6 @@ import { Footer } from "./Footer";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { VideoHero } from "./VideoHero";
 import { AppsBar } from "./AppsBar";
-import { AccessibilityToolbar } from "./AccessibilityToolbar";
 
 const SiteHeader = () => (
   <div className="sticky top-0 z-50 w-full">
@@ -23,7 +22,6 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
     <AppsBar />
     <Footer />
     <AnnouncementBar />
-    <AccessibilityToolbar />
   </div>
 );
 
@@ -35,6 +33,5 @@ export const Layout = ({ children }: { children: ReactNode }) => (
     <AppsBar />
     <Footer />
     <AnnouncementBar />
-    <AccessibilityToolbar />
   </div>
 );
