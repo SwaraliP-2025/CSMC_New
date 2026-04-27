@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/csmc-portal/", // 👈 Change this to your GitHub repo name
+  base: "/CSMC_New/", // GitHub repo name
   server: {
     host: "::",
     port: 8080,
