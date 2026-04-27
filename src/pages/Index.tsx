@@ -81,7 +81,7 @@ const SocialMediaSection = () => {
               <a href={IG_URL} target="_blank" rel="noopener noreferrer"
                 className="ml-auto text-xs bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded transition-colors">Follow</a>
             </div>
-            <div className="p-4 min-h-[460px]">
+            <div className="overflow-hidden min-h-[460px]">
               <blockquote
                 className="instagram-media"
                 data-instgrm-permalink={IG_URL}
