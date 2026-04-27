@@ -25,7 +25,7 @@ export const AccessibilityToolbar = () => {
       {/* Toggle tab */}
       <button
         onClick={() => setOpen(o => !o)}
-        className="bg-civic-blue text-white px-2 py-3 rounded-l-xl shadow-lg flex flex-col items-center gap-1 hover:bg-civic-blue/90 transition-colors"
+        className="bg-civic-blue text-white px-2 py-3 rounded-l-xl shadow-lg flex flex-col items-center gap-1 hover:bg-civic-blue/90 transition-colors sm:block"
         aria-label="Accessibility options"
         title="Accessibility"
       >
@@ -35,7 +35,7 @@ export const AccessibilityToolbar = () => {
 
       {/* Panel */}
       {open && (
-        <div className="absolute right-10 bg-white border border-border rounded-2xl shadow-2xl p-4 w-52 flex flex-col gap-3">
+        <div className="absolute right-10 bottom-0 sm:bottom-auto bg-white border border-border rounded-2xl shadow-2xl p-4 w-52 flex flex-col gap-3">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Accessibility</p>
 
           {/* Font size */}
