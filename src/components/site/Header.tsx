@@ -66,7 +66,7 @@ const NAV: NavItem[] = [
       { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "/grievance" },
     ],
   },
-  { labelEn: "FAQ", labelMr: "प्रश्न", to: "/faq" },
+
   { labelEn: "RTI", labelMr: "RTI", to: "/rti-act" },
   { labelEn: "RTS", labelMr: "RTS", to: "/rts-act" },
   { labelEn: "DP Plan", labelMr: "DP", to: "/dp-plan" },
