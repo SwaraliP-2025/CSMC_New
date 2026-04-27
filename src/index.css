@@ -128,12 +128,13 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Noto Sans Devanagari', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0;
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: 'Noto Sans Devanagari', 'Playfair Display', 'Georgia', serif;
-    @apply tracking-tight;
+    font-family: 'Noto Serif Devanagari', 'Playfair Display', 'Georgia', serif;
+    letter-spacing: 0;
   }
 }
 
@@ -153,6 +154,23 @@ All colors MUST be HSL.
     animation: marquee 35s linear infinite;
     padding-left: 100%;
   }
+}
+
+/* ── Devanagari: zero letter-spacing always ─────────────────────────────────
+   Tailwind tracking-* utilities break Devanagari conjuncts (matras detach).
+   This unicode-range rule overrides any tracking class for Devanagari glyphs. */
+
+/* Nuclear option: override tracking for ALL text since this is a bilingual site.
+   Placed in @layer utilities so it wins over all Tailwind tracking-* classes. */
+@layer utilities {
+  * {
+    letter-spacing: 0 !important;
+  }
+}
+
+@keyframes skyline-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes marquee {

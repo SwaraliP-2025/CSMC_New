@@ -1,6 +1,6 @@
 import { HomeLayout } from "@/components/site/Layout";
 import { useLang } from "@/i18n/LanguageContext";
-import { ArrowRight, Calendar, Landmark, MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { ArrowRight, Landmark, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, MapPin, LayoutGrid } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
@@ -15,17 +15,22 @@ import sameerImg from "@/assets/leadership/samir-bhaiya-rajurkar.png";
 import rajuImg from "@/assets/leadership/raju-bhaiya-janjal1.png";
 import amolImg from "@/assets/leadership/shri_amol_sir.png";
 
+// Icons mapped to each quick service in order:
+// Property Tax, Pay Water Tax, Birth Certificate, Death Certificate,
+// Trade License, Building Permission, Grievance, Tenders,
+// Know Application Status, Gunthewari Challan, All Services
 const icons = [
-  Landmark,
-  MapPin,
-  Phone,
-  Mail,
-  Calendar,
-  ArrowRight,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
+  Receipt,           // Property Tax
+  Droplets,          // Pay Water Tax
+  Baby,              // Birth Certificate
+  ScrollText,        // Death Certificate
+  Store,             // Trade License
+  Building2,         // Building Permission
+  MessageSquareWarning, // Grievance
+  Landmark,          // Tenders
+  FileSearch,        // Know Application Status
+  MapPin,            // Gunthewari Challan
+  LayoutGrid,        // All Services
 ];
 
 const SocialMediaSection = () => {
