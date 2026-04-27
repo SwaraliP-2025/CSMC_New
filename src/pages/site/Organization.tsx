@@ -42,17 +42,15 @@ const Organization = () => {
           </div>
 
           {/* Organogram image */}
-          <div className="p-2 bg-gray-50 overflow-auto flex items-start justify-center" style={{ maxHeight: "calc(100vh - 220px)" }}>
+          <div className="p-4 bg-gray-50 overflow-auto" style={{ maxHeight: "80vh" }}>
             <img
               src={imgSrc}
               alt="CSMC Organogram"
-              className="rounded-xl shadow-md object-contain"
+              className="rounded-xl shadow-md"
               style={{ 
-                maxHeight: "calc(100vh - 260px)", 
-                maxWidth: "100%", 
-                width: "auto",
-                transform: "scale(1.0)",
-                transformOrigin: "top center"
+                width: "100%",
+                minWidth: "900px",
+                height: "auto",
               }}
               onError={(e) => {
                 // Fallback if image not yet added

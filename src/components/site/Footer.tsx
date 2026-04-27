@@ -31,7 +31,7 @@ export const Footer = () => {
   const en = lang === "en";
 
   const othersLinks = [
-    { en: "FAQ's", mr: "वारंवार विचारले जाणारे प्रश्न", to: "/under-construction" },
+    { en: "FAQ's", mr: "वारंवार विचारले जाणारे प्रश्न", to: "/faq" },
     { en: "Web Site Policies", mr: "संकेतस्थळ धोरणे", to: "/under-construction" },
     { en: "Disclaimer", mr: "अस्वीकरण", to: "/under-construction" },
     { en: "Citizen Feedback", mr: "नागरिक अभिप्राय", to: "/under-construction" },
