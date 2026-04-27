@@ -128,13 +128,13 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', 'Inter', system-ui, sans-serif;
-    letter-spacing: 0;
+    font-family: 'Noto Sans Devanagari', 'Inter', system-ui, sans-serif;
+    letter-spacing: normal;
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: 'Noto Serif Devanagari', 'Playfair Display', 'Georgia', serif;
-    letter-spacing: 0;
+    font-family: 'Noto Sans Devanagari', 'Playfair Display', 'Georgia', serif;
+    letter-spacing: normal;
   }
 }
 
@@ -164,7 +164,7 @@ All colors MUST be HSL.
    Placed in @layer utilities so it wins over all Tailwind tracking-* classes. */
 @layer utilities {
   * {
-    letter-spacing: 0 !important;
+    letter-spacing: normal !important;
   }
 }
 
