@@ -228,7 +228,7 @@ const Index = () => {
             {leadership.map((person, i) => (
               <div
                 key={i}
-                className="group flex flex-col items-center text-center w-40 md:w-[calc(100%/7-0.5rem)] md:min-w-[100px] md:max-w-[150px] cursor-pointer"
+                className="group flex flex-col items-center text-center w-40 md:w-[calc(100%/7-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer"
                 onClick={() => setSelectedLeader(person)}
                 style={{
                   opacity: isVisible ? 1 : 0,
@@ -256,13 +256,19 @@ const Index = () => {
                 {/* Gold accent line */}
                 <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" />
 
-                {/* Name */}
-                <h3 className="text-[11px] md:text-xs font-bold text-civic-blue leading-snug mb-1 group-hover:text-civic-red transition-colors duration-150 px-1 line-clamp-2" style={{ fontFamily: "'Noto Sans Devanagari', 'Inter', sans-serif" }}>
+                {/* Name — fixed height = 1 line, all names align */}
+                <h3
+                  className="text-[11px] md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center"
+                  style={{ fontFamily: "'Noto Sans Devanagari', 'Inter', sans-serif", height: "1.25rem", lineHeight: "1.25rem", overflow: "hidden", whiteSpace: "nowrap" }}
+                >
                   {person.name}
                 </h3>
 
-                {/* Role */}
-                <p className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1" style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}>
+                {/* Role — fixed min-height for up to 3 lines, starts same row for all */}
+                <p
+                  className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1"
+                  style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", minHeight: "3rem" }}
+                >
                   {person.role}
                 </p>
               </div>
