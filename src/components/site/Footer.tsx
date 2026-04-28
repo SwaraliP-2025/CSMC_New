@@ -67,10 +67,10 @@ export const Footer = () => {
             )}
           </p>
           <div className="flex gap-3">
-            <a href="#" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
+            <a href="https://www.youtube.com/channel/UCMEBXuyMv6mJ0S0QpM8LSpQ" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Youtube className="h-4 w-4" />
             </a>
-            <a href="#" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
+            <a href="https://www.facebook.com/people/Csmc-Mahapalika/61551631623144/#" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Facebook className="h-4 w-4" />
             </a>
             <a href="#" aria-label="X (Twitter)" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
