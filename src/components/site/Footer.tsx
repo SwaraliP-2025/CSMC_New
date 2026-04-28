@@ -118,12 +118,12 @@ export const Footer = () => {
 
         {/* Visitors + App + WCAG */}
         <div className="space-y-6">
-          <div>
+          {/* <div>
             <p className="text-sm font-bold text-white mb-2">{en ? "Total Visitors Count :" : "एकूण भेटी :"}</p>
             <span className="inline-block bg-civic-gold text-civic-ink font-bold text-sm px-3 py-1 rounded">
               {TOTAL_VISITORS.toLocaleString()}
             </span>
-          </div>
+          </div> */}
           <div>
             <div className="flex gap-3 mb-2">
               <a href="/under-construction" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
