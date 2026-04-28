@@ -23,7 +23,7 @@ const About = () => {
       />
 
       {/* Building photo banner */}
-      <div className="w-full overflow-hidden" style={{ maxHeight: "260px" }}>
+      <div className="w-full overflow-hidden" style={{ maxHeight: "300px" }}>
         <img src={muncorpPic} alt="CSMC Main Building" className="w-full object-cover object-center" />
       </div>
 

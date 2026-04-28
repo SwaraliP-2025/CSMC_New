@@ -25,14 +25,14 @@ interface DeptInfo {
 const DEPARTMENTS: DeptInfo[] = [
   {
     slug: "municipal-commissioner",
-    nameEn: "Municipal Commissioner", nameMr: "महनगरपलक आयकत",
-    headEn: "Shri Amol Yedage, IAS", headMr: "शर. अमल यडग, भ.पर.स.",
-    designationEn: "Municipal Commissioner & Administrator", designationMr: "महनगरपलक आयकत व परशसक",
+    nameEn: "Municipal Commissioner", nameMr: "महानगरपालिका आयुक्त",
+    headEn: "Shri Amol Yedage, IAS", headMr: "श्री. अमोल येडगे, भा.प्र.से.",
+    designationEn: "Municipal Commissioner & Administrator", designationMr: "महानगरपालिका आयुक्त",
     phone: "0240-2331731", email: "commissioner@csmc.gov.in",
     addressEn: "CSMC Main Building, Town Hall, Behind Head Post Office, Chhatrapati Sambhajinagar – 431001",
-    addressMr: "छतरपत सभजनगर महनगरपलक मखय इमरत, टऊन हल, हड पसट ऑफसचय मग, छतरपत सभजनगर – ",
+    addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर, महाराष्ट्र, भारत, ४३१००१ ",
     aboutEn: "The Municipal Commissioner is the chief executive officer of the Chhatrapati Sambhajinagar Municipal Corporation, responsible for overall administration, policy implementation and citizen service delivery.",
-    aboutMr: "महनगरपलक आयकत ह छतरपत सभजनगर महनगरपलकच मखय करयकर अधकर असन त एकण परशसन, धरण अमलबजवण आण नगरक सव वतरणसठ जबबदर आहत.",
+    aboutMr: "महानगरपालिका आयुक्त ह छतरपत सभजनगर महनगरपलकच मखय करयकर अधकर असन त एकण परशसन, धरण अमलबजवण आण नगरक सव वतरणसठ जबबदर आहत.",
     updates: [
       { en: "Smart City project review meeting scheduled", mr: "समरट सट परकलप आढव बठक नयजत", date: "28 Apr 2026" },
       { en: "Annual budget presentation to General Body", mr: "सरवसधरण सभल वरषक अरथसकलप सदरकरण", date: "25 Apr 2026" },
