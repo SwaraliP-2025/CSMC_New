@@ -47,7 +47,7 @@ const NAV: NavItem[] = [
       { labelEn: "Pay Water Tax", labelMr: "पाणी कर भरा", to: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do", external: true },
       { labelEn: "Birth Certificate", labelMr: "जन्म प्रमाणपत्र", to: "https://rts.chhsambhajinagarmc.org/links/dashboard", external: true },
       { labelEn: "Death Certificate", labelMr: "मृत्यू प्रमाणपत्र", to: "https://rts.chhsambhajinagarmc.org/links/dashboard", external: true },
-      { labelEn: "Track Application", labelMr: "अर्ज स्थिती", to: "/track" },
+      { labelEn: "Track Application", labelMr: "अर्ज स्थिती", to: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250" },
       { labelEn: "Tax Calculator", labelMr: "कर कॅल्क्युलेटर", to: "/tax-calculator" },
       { labelEn: "Gunthewari Challan", labelMr: "गुंठेवारी चलन", to: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2", external: true },
     ],
@@ -63,7 +63,7 @@ const NAV: NavItem[] = [
     children: [
       { labelEn: "Emergency Contact (Fire & Disaster)", labelMr: "आपत्कालीन संपर्क", to: "/disaster-management" },
       { labelEn: "Municipal Contact", labelMr: "महानगरपालिका संपर्क", to: "/contact" },
-      { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "/grievance" },
+      { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "https://chhsambhajinagarmc.org/citizen-feedback-form" },
     ],
   },
 

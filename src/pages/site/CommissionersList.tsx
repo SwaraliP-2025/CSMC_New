@@ -7,11 +7,12 @@ import { PhotoModal } from "@/components/site/PhotoModal";
 import amolImg from "@/assets/leadership/shri_amol_sir.png";
 
 const commissioners = [
-  { sr: 1, name: "Shri. Amol Yedage, IAS", nameMr: "श्री. अमोल येडगे, भा.प्र.से.", from: "Mar 2023", to: "Present", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: amolImg, current: true },
-  { sr: 2, name: "Shri. Abhijit Chaudhari, IAS", nameMr: "श्री. अभिजित चौधरी, भा.प्र.से.", from: "Jun 2021", to: "Feb 2023", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
-  { sr: 3, name: "Shri. Astik Kumar Pandey, IAS", nameMr: "श्री. आस्तिक कुमार पांडे, भा.प्र.से.", from: "Jan 2019", to: "May 2021", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
-  { sr: 4, name: "Shri. D. M. Muglikar, IAS", nameMr: "श्री. डी. एम. मुगळीकर, भा.प्र.से.", from: "Apr 2017", to: "Dec 2018", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
-  { sr: 5, name: "Shri. Omprakash Bakoria, IAS", nameMr: "श्री. ओमप्रकाश बकोरिया, भा.प्र.से.", from: "Jan 2015", to: "Mar 2017", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
+  { sr: 1, name: "Shri. Amol Yedage, IAS", nameMr: "श्री. अमोल येडगे, भा.प्र.से.", from: "Apr 2026", to: "Present", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: amolImg, current: true },
+  { sr: 2, name: "Shri. G Sreekanth, IAS", nameMr: "श्री. जी श्रीकांत, भा.प्र.से.", from: "Mar 2022", to: "Apr 2026", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
+  { sr: 3, name: "Shri. Abhijit Chaudhari, IAS", nameMr: "श्री. अभिजित चौधरी, भा.प्र.से.", from: "Jun 2021", to: "Mar 2022", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
+  { sr: 4, name: "Shri. Astik Kumar Pandey, IAS", nameMr: "श्री. आस्तिक कुमार पांडेय, भा.प्र.से.", from: "Jan 2019", to: "May 2021", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
+  { sr: 5, name: "Shri. D. M. Muglikar, IAS", nameMr: "श्री. डी. एम. मुगळीकर, भा.प्र.से.", from: "Apr 2017", to: "Dec 2018", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
+  // { sr: 5, name: "Shri. Omprakash Bakoria, IAS", nameMr: "श्री. ओमप्रकाश बकोरिया, भा.प्र.से.", from: "Jan 2015", to: "Mar 2017", cadre: "Maharashtra", cadreMr: "महाराष्ट्र", img: null, current: false },
 ];
 
 const Avatar = ({ src, name, size = "md" }: { src: string | null; name: string; size?: "sm" | "md" }) => {

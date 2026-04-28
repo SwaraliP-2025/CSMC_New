@@ -31,6 +31,7 @@ import Organization from "./pages/site/Organization.tsx";
 import DPPlan from "./pages/site/DPPlan.tsx";
 import CommissionersList from "./pages/site/CommissionersList.tsx";
 import MayorsList from "./pages/site/MayorsList.tsx";
+import DepartmentDetail from "./pages/site/DepartmentDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/departments" element={<Departments />} />
+            <Route path="/departments/:slug" element={<DepartmentDetail />} />
             <Route path="/services" element={<Services />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="/tenders" element={<Tenders />} />

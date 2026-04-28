@@ -1,50 +1,54 @@
-import { Layout } from "@/components/site/Layout";
+﻿import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
+import { Link } from "react-router-dom";
+import { DEPARTMENTS } from "./DepartmentDetail";
 import {
-  Trash2, Droplets, Lightbulb, TreePine, ShieldPlus, GraduationCap,
-  Building2, Receipt, Truck, HeartPulse, Hammer, Bus
+  UserCog, Users, HeartPulse, PawPrint, Waves, TreePine,
+  Building, Receipt, Droplets, Landmark, Flame, FileCheck,
+  Zap, Briefcase, ArrowRight
 } from "lucide-react";
+
+const ICONS = [UserCog, Users, Users, HeartPulse, PawPrint, Waves, TreePine, Building, Receipt, Droplets, Landmark, Flame, FileCheck, Zap, Briefcase];
 
 const Departments = () => {
   const { lang } = useLang();
   const en = lang === "en";
-  const items = [
-    { Icon: Trash2, en: "Solid Waste Management", mr: "घनकचरा व्यवस्थापन" },
-    { Icon: Droplets, en: "Water Supply", mr: "पाणी पुरवठा" },
-    { Icon: Lightbulb, en: "Electrical & Street Lights", mr: "विद्युत व पथदिवे" },
-    { Icon: TreePine, en: "Garden & Horticulture", mr: "उद्यान व उद्यानविद्या" },
-    { Icon: ShieldPlus, en: "Fire & Emergency", mr: "अग्निशमन व आपत्कालीन" },
-    { Icon: GraduationCap, en: "Education", mr: "शिक्षण" },
-    { Icon: Building2, en: "Town Planning", mr: "नगर रचना" },
-    { Icon: Receipt, en: "Tax & Revenue", mr: "कर व महसूल" },
-    { Icon: Truck, en: "Transport & Roads", mr: "वाहतूक व रस्ते" },
-    { Icon: HeartPulse, en: "Health & Sanitation", mr: "आरोग्य व स्वच्छता" },
-    { Icon: Hammer, en: "Public Works", mr: "सार्वजनिक बांधकाम" },
-    { Icon: Bus, en: "City Bus Service", mr: "शहर बस सेवा" },
-  ];
+
   return (
     <Layout>
       <PageHeader
-        eyebrow={en ? "Administration" : "प्रशासन"}
-        title={en ? "Departments" : "विभाग"}
-        subtitle={en ? "Our departments work in concert to keep the city clean, safe and progressing." : "स्वच्छ, सुरक्षित आणि प्रगतीशील शहरासाठी आमचे विभाग एकत्रितपणे कार्यरत आहेत."}
+        eyebrow={en ? "Administration" : "परशसन"}
+        title={en ? "Departments" : "वभग"}
+        subtitle={en ? "Our departments work in concert to keep the city clean, safe and progressing." : "सवचछ, सरकषत आण परगतशल शहरसठ आमच वभग एकतरतपण करयरत आहत."}
       />
-      <section className="py-16 container">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map(({ Icon, en: e, mr }, i) => (
-            <article key={i} className="group bg-white border border-border rounded-3xl p-8 hover:shadow-elegant hover:-translate-y-2 hover:border-civic-gold/20 transition-all">
-              <div className="h-16 w-16 grid place-items-center rounded-2xl bg-civic-gold/10 text-civic-gold mb-6 group-hover:bg-civic-blue group-hover:text-white transition-all duration-300 shadow-sm">
-                <Icon className="h-7 w-7" />
-              </div>
-              <h3 className="font-serif text-xl font-bold text-civic-blue mb-3">{en ? e : mr}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {en
-                  ? "Citizen-facing services, project updates, contact details and grievance routing."
-                  : "नागरिकांसाठी सेवा, प्रकल्प माहिती, संपर्क तपशील व तक्रार निवारण."}
-              </p>
-            </article>
-          ))}
+      <section className="py-12 md:py-16 container">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {DEPARTMENTS.map((dept, i) => {
+            const Icon = ICONS[i] ?? UserCog;
+            return (
+              <Link
+                key={dept.slug}
+                to={`/departments/${dept.slug}`}
+                className="group bg-white border border-border rounded-3xl p-6 md:p-8 hover:shadow-elegant hover:-translate-y-1 hover:border-civic-gold/30 transition-all flex flex-col gap-4"
+              >
+                <div className="h-14 w-14 grid place-items-center rounded-2xl bg-civic-gold/10 text-civic-gold group-hover:bg-civic-blue group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-serif text-base md:text-lg font-bold text-civic-blue mb-1 group-hover:text-civic-red transition-colors">
+                    {en ? dept.nameEn : dept.nameMr}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {en ? dept.designationEn : dept.designationMr}
+                  </p>
+                </div>
+                <div className="flex items-center text-civic-blue font-bold text-xs gap-1 opacity-0 group-hover:opacity-100 transition-all">
+                  {en ? "View Department" : "वभग पह"} <ArrowRight className="h-3.5 w-3.5" />
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
     </Layout>

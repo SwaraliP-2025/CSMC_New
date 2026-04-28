@@ -34,7 +34,7 @@ const Contact = () => {
           <img
             src={muncorpPic}
             alt="Chhatrapati Sambhajinagar Municipal Corporation Building"
-            className="w-full h-48 object-cover"
+            className="w-full h-100 object-cover"
           />
         </div>
 
@@ -51,9 +51,9 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Key Contact table */}
+        {/* Key Contact table #d6e4d6->original website's color*/}
         <div className="mb-10 border border-border rounded-lg overflow-hidden text-sm">
-          <div className="bg-[#d6e4d6] px-4 py-2.5 font-bold text-civic-ink border-b border-border">
+          <div className="bg[#D6D8F0] px-4 py-2.5 font-bold text-civic-ink border-b border-border">
             {en ? "Key Contact" : "मुख्य संपर्क"}
           </div>
           <div className="divide-y divide-border bg-white">
@@ -85,7 +85,7 @@ const Contact = () => {
         </div>
 
         {/* Contact form */}
-        <div className="border border-border rounded-lg overflow-hidden">
+        {/* <div className="border border-border rounded-lg overflow-hidden">
           <div className="bg-[#d6e4d6] px-4 py-2.5 font-bold text-civic-ink border-b border-border">
             {en ? "Send us a Message" : "आम्हाला संदेश पाठवा"}
           </div>
@@ -132,7 +132,7 @@ const Contact = () => {
               {en ? "Submit" : "सबमिट करा"}
             </Button>
           </form>
-        </div>
+        </div> */}
 
       </section>
     </Layout>
