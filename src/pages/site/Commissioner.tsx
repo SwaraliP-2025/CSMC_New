@@ -30,7 +30,7 @@ const Commissioner = () => {
                 </div>
                 <h2 className="font-serif text-xl font-bold text-white mb-1">{en ? t.commissioner.name : t.commissioner.nameMarathi}</h2>
                 <p className="text-civic-gold text-sm font-semibold">
-                  {en ? "Municipal Commissioner & Administrator" : "महानगरपालिका आयुक्त व प्रशासक"}
+                  {en ? "Municipal Commissioner" : "महानगरपालिका आयुक्त"}
                 </p>
               </div>
               <div className="p-6 space-y-4">
