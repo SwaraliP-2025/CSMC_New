@@ -274,7 +274,7 @@ const UpdatesTicker = ({ updates, en }: { updates: DeptInfo["updates"]; en: bool
     <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm h-full flex flex-col">
       <div className="bg-civic-blue px-4 py-3 flex items-center gap-2">
         <Bell className="h-4 w-4 text-civic-gold" />
-        <span className="text-white font-bold text-sm">{en ? "Latest Updates" : "तजय घडमड"}</span>
+        <span className="text-white font-bold text-sm">{en ? "Latest Updates" : "ताज्या घडामोडी"}</span>
       </div>
       <div ref={ref} className="flex-1 overflow-hidden" style={{ maxHeight: "340px" }}>
         <div>
@@ -299,11 +299,11 @@ const DepartmentDetail = () => {
   if (!dept) {
     return (
       <Layout>
-        <PageHeader eyebrow={en ? "Departments" : "वभग"} title={en ? "Department Not Found" : "वभग सपडल नह"} subtitle="" />
+        <PageHeader eyebrow={en ? "Departments" : "विभाग"} title={en ? "Department Not Found" : "विभाग सापडला नाही"} subtitle="" />
         <section className="py-16 container text-center">
-          <p className="text-muted-foreground mb-6">{en ? "The requested department page does not exist." : "वनत कलल वभग पषठ असततवत नह."}</p>
+          <p className="text-muted-foreground mb-6">{en ? "The requested department page does not exist." : "विभाग उपलब्ध नाही"}</p>
           <Link to="/departments" className="inline-flex items-center gap-2 text-civic-blue font-bold hover:underline">
-            <ArrowLeft className="h-4 w-4" /> {en ? "Back to Departments" : "वभगकड परत"}
+            <ArrowLeft className="h-4 w-4" /> {en ? "Back to Departments" : "विभागाकडे परत"}
           </Link>
         </section>
       </Layout>
@@ -313,14 +313,14 @@ const DepartmentDetail = () => {
   return (
     <Layout>
       <PageHeader
-        eyebrow={en ? "Departments" : "वभग"}
+        eyebrow={en ? "Departments" : "विभाग"}
         title={en ? dept.nameEn : dept.nameMr}
-        subtitle={en ? "Department information, head of department and latest updates." : "वभग महत, वभगपरमख आण तजय घडमड."}
+        subtitle={en ? "Department information, head of department and latest updates." : "विभाग माहिती विभागप्रमुख आणि ताज्या घडामोडी"}
       />
       <section className="py-8 md:py-14 container">
         {/* Back link */}
         <Link to="/departments" className="inline-flex items-center gap-1.5 text-civic-blue text-sm font-semibold hover:text-civic-red transition-colors mb-8">
-          <ArrowLeft className="h-4 w-4" /> {en ? "All Departments" : "सरव वभग"}
+          <ArrowLeft className="h-4 w-4" /> {en ? "All Departments" : "सर्व विभाग"}
         </Link>
 
         {/* Main grid: profile + updates */}
@@ -352,21 +352,21 @@ const DepartmentDetail = () => {
                 <div className="flex items-start gap-3 text-sm">
                   <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Phone" : "दरधवन"}</p>
+                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Phone" : "दुरध्वनी"}</p>
                     <p className="font-semibold text-civic-ink">{dept.phone}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 text-sm">
                   <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Email" : "ईमल"}</p>
+                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Email" : "ई-मेल"}</p>
                     <p className="font-semibold text-civic-ink break-all">{dept.email}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 text-sm">
                   <MapPin className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Office Address" : "करयलय पतत"}</p>
+                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Office Address" : "कार्यालय पत्ता"}</p>
                     <p className="font-semibold text-civic-ink leading-snug">{en ? dept.addressEn : dept.addressMr}</p>
                   </div>
                 </div>

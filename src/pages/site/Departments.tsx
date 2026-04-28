@@ -18,9 +18,9 @@ const Departments = () => {
   return (
     <Layout>
       <PageHeader
-        eyebrow={en ? "Administration" : "परशसन"}
-        title={en ? "Departments" : "वभग"}
-        subtitle={en ? "Our departments work in concert to keep the city clean, safe and progressing." : "सवचछ, सरकषत आण परगतशल शहरसठ आमच वभग एकतरतपण करयरत आहत."}
+        eyebrow={en ? "Administration" : "प्रशासन"}
+        title={en ? "Departments" : "विभाग"}
+        subtitle={en ? "Our departments work in concert to keep the city clean, safe and progressing." : "स्वच्छ, सुरक्षित आणि प्रगतशील शहरासाठी आमचे विभाग एकत्रितपणे कार्यरत आहेत."}
       />
       <section className="py-12 md:py-16 container">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -44,7 +44,7 @@ const Departments = () => {
                   </p>
                 </div>
                 <div className="flex items-center text-civic-blue font-bold text-xs gap-1 opacity-0 group-hover:opacity-100 transition-all">
-                  {en ? "View Department" : "वभग पह"} <ArrowRight className="h-3.5 w-3.5" />
+                  {en ? "View Department" : "विभाग पहा"} <ArrowRight className="h-3.5 w-3.5" />
                 </div>
               </Link>
             );
