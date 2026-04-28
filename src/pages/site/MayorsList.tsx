@@ -10,7 +10,7 @@ const mayors = [
   { sr: 1, name: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", from: "Jan 2022", to: "Present", party: "BJP", partyMr: "भाजप", img: sameerImg, current: true },
   // { sr: 2, name: "Smt. Vijaya Rahangdale", nameMr: "सौ. विजया राहांगडाले", from: "Jan 2020", to: "Dec 2021", party: "BJP", partyMr: "भाजप", img: null, current: false },
   { sr: 2, name: "Shri. Nandkumar Ghodele", nameMr: "श्री. नंदकुमार घोडेले", from: "Jan 2018", to: "Dec 2019", party: "Shiv Sena", partyMr: "शिवसेना", img: null, current: false },
-  { sr: 3, name: "Smt. Bhagwat Karad", nameMr: "सौ. भगवत कराड", from: "Jan 2016", to: "Dec 2017", party: "BJP", partyMr: "भाजप", img: null, current: false },
+  { sr: 3, name: "Shri. Bhagwat Karad", nameMr: "श्री. भागवत कराड", from: "Jan 2016", to: "Dec 2017", party: "BJP", partyMr: "भाजप", img: null, current: false },
   // { sr: 4, name: "Shri. Tukaram Ugale", nameMr: "श्री. तुकाराम उगले", from: "Jan 2014", to: "Dec 2015", party: "NCP", partyMr: "राष्ट्रवादी", img: null, current: false },
 ];
 
