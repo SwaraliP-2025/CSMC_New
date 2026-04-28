@@ -1,66 +1,84 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 
+// Drop logo files in src/assets/govtlinks/ with these exact names
+import aapleSarkarLogo from "@/assets/govtlinks/aaple-sarkar.png";
+import nationalGovtLogo from "@/assets/govtlinks/national-govt-services.png";
+import goiDirectoryLogo from "@/assets/govtlinks/goi-directory.png";
+import makeInIndiaLogo from "@/assets/govtlinks/make-in-india.png";
+import incredibleIndiaLogo from "@/assets/govtlinks/incredible-india.png";
+import pmIndiaLogo from "@/assets/govtlinks/pm-india.png";
+import myGovLogo from "@/assets/govtlinks/mygov.png";
+import pmnrfLogo from "@/assets/govtlinks/pmnrf.png";
+
 const LINKS = [
   {
     nameEn: "Aaple Sarkar",
     nameMr: "आपले सरकार",
     url: "https://aaplesarkar.mahaonline.gov.in",
-    placeholder: "AS",
+    logo: aapleSarkarLogo,
     color: "#FF6B00",
+    placeholder: "AS",
   },
   {
     nameEn: "National Govt Services Portal",
     nameMr: "राष्ट्रीय सरकारी सेवा पोर्टल",
     url: "https://services.india.gov.in",
-    placeholder: "NG",
+    logo: nationalGovtLogo,
     color: "#1a3a6b",
+    placeholder: "NG",
   },
   {
     nameEn: "GOI Web Directory",
     nameMr: "भारत सरकार वेब निर्देशिका",
     url: "https://goidirectory.nic.in",
-    placeholder: "GD",
+    logo: goiDirectoryLogo,
     color: "#0d6efd",
+    placeholder: "GD",
   },
   {
     nameEn: "Make in India",
     nameMr: "मेक इन इंडिया",
     url: "https://www.makeinindia.com",
-    placeholder: "MI",
+    logo: makeInIndiaLogo,
     color: "#FF9933",
+    placeholder: "MI",
   },
   {
     nameEn: "Incredible India",
     nameMr: "अतुल्य भारत",
     url: "https://www.incredibleindia.org",
-    placeholder: "II",
+    logo: incredibleIndiaLogo,
     color: "#138808",
+    placeholder: "II",
   },
   {
     nameEn: "PM India",
     nameMr: "पंतप्रधान भारत",
     url: "https://www.pmindia.gov.in",
-    placeholder: "PM",
+    logo: pmIndiaLogo,
     color: "#1a3a6b",
+    placeholder: "PM",
   },
   {
     nameEn: "MyGov",
     nameMr: "माझे सरकार",
     url: "https://www.mygov.in",
-    placeholder: "MG",
+    logo: myGovLogo,
     color: "#FF6B00",
+    placeholder: "MG",
   },
   {
     nameEn: "PMNRF",
     nameMr: "पंतप्रधान राष्ट्रीय मदत निधी",
     url: "https://pmnrf.gov.in",
-    placeholder: "NRF",
+    logo: pmnrfLogo,
     color: "#c0392b",
+    placeholder: "NRF",
   },
 ];
 
-const VISIBLE = 4; // cards visible at once
+const VISIBLE = 4;
 const INTERVAL = 5000;
 
 export const GovtLinksCarousel = () => {
@@ -68,7 +86,6 @@ export const GovtLinksCarousel = () => {
   const en = lang === "en";
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
   const total = LINKS.length;
 
   const startTimer = () => {
@@ -83,19 +100,15 @@ export const GovtLinksCarousel = () => {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
-  const goTo = (i: number) => {
-    setCurrent(i);
-    startTimer();
-  };
+  const goTo = (i: number) => { setCurrent(i); startTimer(); };
 
-  // Build visible indices (wrap around)
   const visibleLinks = Array.from({ length: VISIBLE }, (_, i) => LINKS[(current + i) % total]);
 
   return (
     <section className="bg-[#fff8f0] border-t border-b border-civic-gold/20 py-8">
       <div className="container">
         <div className="text-center mb-6">
-          <p className="text-xs uppercase tracking-[0.2em] text-civic-red font-bold mb-1">
+          <p className="text-xs uppercase text-civic-red font-bold mb-1">
             {en ? "Related Websites" : "इतर संबंधित संकेतस्थळे"}
           </p>
           <h2 className="font-serif text-xl md:text-2xl text-civic-blue font-bold">
@@ -112,14 +125,21 @@ export const GovtLinksCarousel = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center gap-3 bg-white border-2 border-transparent hover:border-civic-gold rounded-2xl p-4 shadow-sm hover:shadow-md transition-all group"
-              style={{ animationDelay: `${i * 80}ms` }}
             >
-              {/* Logo placeholder — replace src with actual logo later */}
-              <div
-                className="w-16 h-16 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform"
-                style={{ backgroundColor: link.color }}
-              >
-                {link.placeholder}
+              {/* Logo image with colored placeholder fallback */}
+              <div className="w-20 h-16 flex items-center justify-center rounded-xl overflow-hidden bg-gray-50">
+                <img
+                  src={link.logo}
+                  alt={link.nameEn}
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+                  onError={(e) => {
+                    const el = e.currentTarget;
+                    el.style.display = "none";
+                    const parent = el.parentElement!;
+                    parent.style.backgroundColor = link.color;
+                    parent.innerHTML = `<span style="color:white;font-weight:700;font-size:1.1rem">${link.placeholder}</span>`;
+                  }}
+                />
               </div>
               <p className="text-xs font-bold text-civic-ink text-center leading-tight group-hover:text-civic-blue transition-colors">
                 {en ? link.nameEn : link.nameMr}
@@ -135,10 +155,8 @@ export const GovtLinksCarousel = () => {
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
-                i === current
-                  ? "bg-civic-gold w-5"
-                  : "bg-civic-blue/30 hover:bg-civic-blue/60"
+              className={`h-2.5 rounded-full transition-all ${
+                i === current ? "bg-civic-gold w-5" : "bg-civic-blue/30 hover:bg-civic-blue/60 w-2.5"
               }`}
             />
           ))}
