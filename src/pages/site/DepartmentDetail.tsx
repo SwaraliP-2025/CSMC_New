@@ -5,6 +5,8 @@ import { useLang } from "@/i18n/LanguageContext";
 import { Phone, Mail, MapPin, ArrowLeft, Bell } from "lucide-react";
 import { useEffect, useRef } from "react";
 
+// import amolSir from "@assets/departments/shri_amol_sir.png";
+
 interface DeptInfo {
   slug: string;
   nameEn: string;
@@ -17,6 +19,7 @@ interface DeptInfo {
   email: string;
   addressEn: string;
   addressMr: string;
+  image?: string;
   updates: { en: string; mr: string; date: string }[];
 }
 
@@ -31,6 +34,7 @@ const DEPARTMENTS: DeptInfo[] = [
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर, महाराष्ट्र, भारत, ४३१००१ ",
     // aboutEn: "The Municipal Commissioner is the chief executive officer of the Chhatrapati Sambhajinagar Municipal Corporation, responsible for overall administration, policy implementation and citizen service delivery.",
     // aboutMr: "महानगरपालिका आयुक्त हे छत्रपती संभाजीनगर महानगरपालिकेचे मुख्य कार्यकारी अधिकारी असून ते एकूण प्रशासन, धोरण, अंमलबजावणी आणि नागरिक सेवा वितरणासाठी जबाबदार आहेत.",
+    // image: amolSir,
     updates: [
       { en: "Smart City project review meeting scheduled", mr: "स्मार्ट सिटी प्रकल्प आढावा बैठक नियोजित", date: "28 Apr 2026" },
       { en: "Annual budget presentation to General Body", mr: "सर्वसाधारण सभेला वार्षिक अर्थसंकल्प सादरीकरण", date: "25 Apr 2026" },
@@ -192,7 +196,7 @@ const DEPARTMENTS: DeptInfo[] = [
     slug: "fire",
     nameEn: "Fire Department", nameMr: "अग्निशमन विभाग ",
     headEn: "Shri Ankush Pandhare", headMr: "श्री अंकुश पांढरे",
-    designationEn: "Chief Fire Officer", designationMr: "मखय अगनशमन अधकर",
+    designationEn: "", designationMr: "",
     phone: "101", email: "fire@csmc.gov.in",
     addressEn: "CSMC Fire Station, Osmanpura, Chhatrapati Sambhajinagar – 431001",
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
@@ -222,7 +226,7 @@ const DEPARTMENTS: DeptInfo[] = [
     slug: "electrical",
     nameEn: "Electrical Department", nameMr: "विद्युत विभाग",
     headEn: "", headMr: "",
-    designationEn: "Executive Engineer (Electrical)", designationMr: "करयकर अभयत (वदयत)",
+    designationEn: "", designationMr: "",
     phone: "0240-2331753", email: "electrical@csmc.gov.in",
     addressEn: "CSMC Electrical Office, Town Hall Campus, Chhatrapati Sambhajinagar – 431001",
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
@@ -331,10 +335,14 @@ const DepartmentDetail = () => {
             <div className="bg-white border border-border rounded-3xl overflow-hidden shadow-sm">
               {/* Blue header */}
               <div className="bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl flex items-center justify-center shrink-0">
-                  <span className="text-white font-bold text-3xl md:text-4xl">
-                    {(en ? dept.nameEn : dept.nameMr).charAt(0)}
-                  </span>
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl flex items-center justify-center shrink-0 overflow-hidden">
+                  {dept.image ? (
+                    <img src={dept.image} alt={en ? dept.headEn : dept.headMr} className="w-full h-full object-cover object-top" />
+                  ) : (
+                    <span className="text-white font-bold text-3xl md:text-4xl">
+                      {(en ? dept.nameEn : dept.nameMr).charAt(0)}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h2 className="font-serif text-lg md:text-xl font-bold text-white mb-1">
