@@ -120,7 +120,7 @@ const DropdownPortal = ({
 // ─── Single nav item (desktop) ────────────────────────────────────────────────
 const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
   const { pathname } = useLocation();
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
   const isActive = item.to ? pathname === item.to : false;
@@ -142,12 +142,17 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
   }
 
   return (
-    <>
-      <div ref={ref} className={baseCls} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div
+      ref={containerRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className={baseCls}>
         {label}
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </div>
-      <DropdownPortal anchorRef={ref} open={open} onClose={() => setOpen(false)}>
+      <DropdownPortal anchorRef={containerRef} open={open} onClose={() => setOpen(false)}>
         {item.children.map(child => {
           const childLabel = label.includes("मा") || label.includes("नागरिक") || label.includes("झोन") || label.includes("संपर्क") || label.includes("महानगरपालिका")
             ? child.labelMr : child.labelEn;
@@ -157,12 +162,11 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
                 <div className="px-4 py-2.5 text-sm text-white/70 font-bold uppercase tracking-wider text-[10px]">{childLabel}</div>
               ) : child.external ? (
                 <a href={child.to} target="_blank" rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
                   className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
                   {childLabel}
                 </a>
               ) : (
-                <Link to={child.to!} onClick={() => setOpen(false)}
+                <Link to={child.to!}
                   className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
                   {childLabel}
                 </Link>
@@ -171,7 +175,7 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
           );
         })}
       </DropdownPortal>
-    </>
+    </div>
   );
 };
 
