@@ -1,4 +1,5 @@
 import { HomeLayout } from "@/components/site/Layout";
+import { GovtLinksCarousel } from "@/components/site/GovtLinksCarousel";
 import { useLang } from "@/i18n/LanguageContext";
 import { ArrowRight, Landmark, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, MapPin, LayoutGrid } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -413,7 +414,7 @@ const Index = () => {
 
       <BannerPopup open={notices.bannerOpen} onClose={notices.hideBanner} />
       <NoticesPopup open={notices.noticesOpen} onClose={notices.hideNotices} />
-
+      <GovtLinksCarousel />
     </HomeLayout>
   );
 };

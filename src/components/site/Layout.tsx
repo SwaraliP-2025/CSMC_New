@@ -6,7 +6,6 @@ import { AnnouncementBar } from "./AnnouncementBar";
 import { VideoHero } from "./VideoHero";
 import { AppsBar } from "./AppsBar";
 import { CitySkyline } from "./CitySkyline";
-import { GovtLinksCarousel } from "./GovtLinksCarousel";
 import { ChevronUp } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 
@@ -52,7 +51,6 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
     <SiteHeader />
     <VideoHero />
     <main id="main" className="flex-1 mb-10 pb-12">{children}</main>
-    <GovtLinksCarousel />
     <CitySkyline />
     <AppsBar />
     <Footer />
@@ -66,7 +64,6 @@ export const Layout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
     <SiteHeader />
     <main id="main" className="flex-1 mb-10 pb-12">{children}</main>
-    <GovtLinksCarousel />
     <CitySkyline />
     <AppsBar />
     <Footer />

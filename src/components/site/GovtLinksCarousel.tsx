@@ -105,29 +105,29 @@ export const GovtLinksCarousel = () => {
   const visibleLinks = Array.from({ length: VISIBLE }, (_, i) => LINKS[(current + i) % total]);
 
   return (
-    <section className="bg-[#fff8f0] border-t border-b border-civic-gold/20 py-8">
+    <section className="bg-[#fff8f0] border-2 border-civic-gold/60 py-6 mx-4 md:mx-8 rounded-lg shadow-md mb-6">
       <div className="container">
-        <div className="text-center mb-6">
-          <p className="text-xs uppercase text-civic-red font-bold mb-1">
+        <div className="text-center mb-4">
+          <p className="text-[10px] uppercase text-civic-red font-bold mb-1">
             {en ? "Related Websites" : "इतर संबंधित संकेतस्थळे"}
           </p>
-          <h2 className="font-serif text-xl md:text-2xl text-civic-blue font-bold">
+          <h2 className="font-serif text-lg md:text-xl text-civic-blue font-bold">
             {en ? "Government Portals" : "शासकीय पोर्टल"}
           </h2>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {visibleLinks.map((link, i) => (
             <a
               key={`${current}-${i}`}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 bg-white border-2 border-transparent hover:border-civic-gold rounded-2xl p-4 shadow-sm hover:shadow-md transition-all group"
+              className="flex flex-col items-center gap-2 bg-white border-2 border-transparent hover:border-civic-gold rounded-xl p-3 shadow-sm hover:shadow-md transition-all group"
             >
               {/* Logo image with colored placeholder fallback */}
-              <div className="w-20 h-16 flex items-center justify-center rounded-xl overflow-hidden bg-gray-50">
+              <div className="w-16 h-12 flex items-center justify-center rounded-lg overflow-hidden bg-gray-50">
                 <img
                   src={link.logo}
                   alt={link.nameEn}
@@ -137,11 +137,11 @@ export const GovtLinksCarousel = () => {
                     el.style.display = "none";
                     const parent = el.parentElement!;
                     parent.style.backgroundColor = link.color;
-                    parent.innerHTML = `<span style="color:white;font-weight:700;font-size:1.1rem">${link.placeholder}</span>`;
+                    parent.innerHTML = `<span style="color:white;font-weight:700;font-size:0.9rem">${link.placeholder}</span>`;
                   }}
                 />
               </div>
-              <p className="text-xs font-bold text-civic-ink text-center leading-tight group-hover:text-civic-blue transition-colors">
+              <p className="text-[10px] font-bold text-civic-ink text-center leading-tight group-hover:text-civic-blue transition-colors">
                 {en ? link.nameEn : link.nameMr}
               </p>
             </a>
@@ -149,7 +149,7 @@ export const GovtLinksCarousel = () => {
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-2 mt-5">
+        <div className="flex justify-center gap-1.5 mt-3">
           {LINKS.map((_, i) => (
             <button
               key={i}

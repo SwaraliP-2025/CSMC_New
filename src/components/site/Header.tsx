@@ -143,7 +143,7 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
 
   return (
     <>
-      <div ref={ref} className={baseCls} onClick={() => setOpen(o => !o)}>
+      <div ref={ref} className={baseCls} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
         {label}
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </div>
@@ -201,7 +201,7 @@ export const Header = () => {
               {en ? "Chhatrapati Sambhajinagar Municipal Corporation" : "छत्रपती संभाजीनगर महानगरपालिका"}
             </h1>
             <p className="text-[10px] md:text-xs text-muted-foreground font-medium hidden sm:block">
-              {en ? "City of Heritage, Vision of Tomorrow" : "वारशाचे शहर, उद्याचे स्वप्न"}
+              {en ? "City of Heritage, Vision of Tomorrow" : "शहर वारसाचे, स्वप्न उद्याचे "}
             </p>
           </div>
         </Link>
