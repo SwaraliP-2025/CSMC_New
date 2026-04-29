@@ -20,7 +20,7 @@ const Organization = () => {
         title={en ? "CSMC Organogram" : "CSMC संस्था"}
         subtitle={en
           ? "Organizational structure of Chhatrapati Sambhajinagar Municipal Corporation."
-          : "छत्रपती संभाजीनगर महानगरपालिकेची संघटनात्मक रचना."}
+          : "छत्रपती संभाजीनगर महानगरपालिकेची संस्थात्मक रचना."}
       />
       <section className="py-10 container">
         <div className="bg-white border border-border rounded-2xl shadow-sm overflow-hidden">

@@ -47,7 +47,7 @@ export const translations = {
       tagline: "City of Heritage, Vision of Tomorrow",
     },
     hero: {
-      eyebrow: "Smart City. Living Heritage.",
+      eyebrow: "",
       title: "Building a Cleaner, Greener, Smarter Sambhajinagar",
       subtitle: "",
       ctaPrimary: "Pay Property Tax",
@@ -148,7 +148,7 @@ export const translations = {
       tagline: "वारशाचे शहर, उद्याचे स्वप्न",
     },
     hero: {
-      eyebrow: "स्मार्ट सिटी. जिवंत वारसा.",
+      eyebrow: "",
       title: "स्वच्छ, हरित आणि स्मार्ट संभाजीनगर घडवू या",
       subtitle: "",
       ctaPrimary: "मालमत्ता कर भरा",
