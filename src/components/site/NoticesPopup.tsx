@@ -166,8 +166,15 @@ export const useNoticesPopup = () => {
   const [noticesOpen, setNoticesOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setBannerOpen(true), 1200);
-    return () => clearTimeout(timer);
+    // Show banner only if not shown before in this browser
+    const bannerShown = localStorage.getItem('banner_shown');
+    if (!bannerShown) {
+      const timer = setTimeout(() => {
+        setBannerOpen(true);
+        localStorage.setItem('banner_shown', '1');
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return {
