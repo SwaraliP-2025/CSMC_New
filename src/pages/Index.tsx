@@ -147,13 +147,13 @@ const Index = () => {
   }, []);
 
   const leadership = [
-    { name: en ? "Shri Devendra Fadnavis" : <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, role: en ? "Hon'ble Chief Minister of Maharashtra" : <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg },
-    { name: en ? "Shri Eknath Shinde" : <span className="devanagari">श्री. एकनाथ शिंदे</span>, role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg },
-    { name: en ? "Smt. Sunetra A. Pawar" : <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg },
-    { name: en ? "Smt. Madhuri Misal" : <span className="devanagari">श्रीमती  माधुरी मिसाळ</span>, role: en ? "Hon'ble Minister of State, Urban Development Department" : <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
-    { name: en ? "Shri Sameer Rajurkar" : <span className="devanagari">श्री. समीर राजूरकर</span>, role: en ? "Hon'ble Mayor" : <span className="devanagari">मा. महापौर</span>, image: sameerImg },
-    { name: en ? "Shri Rajendra Janjal" : <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, role: en ? "Hon'ble Deputy Mayor" : <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg },
-    { name: en ? "Shri Amol Yedage" : <span className="devanagari">श्री. अमोल येडगे</span>, role: en ? "Hon'ble Municipal Commissioner" : <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg },
+    { nameEn: "Shri Devendra Fadnavis", nameMr: <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg },
+    { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg },
+    { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg },
+    { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती  माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
+    { nameEn: "Shri Sameer Rajurkar", nameMr: <span className="devanagari">श्री. समीर राजूरकर</span>, roleEn: "Hon'ble Mayor", roleMr: <span className="devanagari">मा. महापौर</span>, image: sameerImg },
+    { nameEn: "Shri Rajendra Janjal", nameMr: <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, roleEn: "Hon'ble Deputy Mayor", roleMr: <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg },
+    { nameEn: "Shri Amol Yedage", nameMr: <span className="devanagari">श्री. अमोल येडगे</span>, roleEn: "Hon'ble Municipal Commissioner", roleMr: <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg },
   ];
 
   return (
@@ -244,33 +244,24 @@ const Index = () => {
                   {person.image ? (
                     <img
                       src={person.image}
-                      alt={person.name}
+                      alt={en ? person.nameEn : ""}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-200"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold">
-                      {person.name.split(" ").map(n => n[0]).join("")}
+                      {person.nameEn.split(" ").map(n => n[0]).join("")}
                     </div>
                   )}
                 </div>
-
                 {/* Gold accent line */}
                 <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" />
-
-                {/* Name — fixed height = 1 line, all names align */}
-                <h3
-                  className="text-[11px] md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center"
-                  style={{ fontFamily: "'Noto Sans Devanagari', 'Inter', sans-serif", height: "1.25rem", lineHeight: "1.25rem", overflow: "hidden", whiteSpace: "nowrap" }}
-                >
-                  {person.name}
+                {/* Name */}
+                <h3 className="text-[11px] md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center" style={{ height: "1.25rem", lineHeight: "1.25rem", overflow: "hidden", whiteSpace: "nowrap" }}>
+                  {en ? person.nameEn : person.nameMr}
                 </h3>
-
-                {/* Role — fixed min-height for up to 3 lines, starts same row for all */}
-                <p
-                  className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1"
-                  style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", minHeight: "3rem" }}
-                >
-                  {person.role}
+                {/* Role */}
+                <p className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1" style={{ minHeight: "3rem" }}>
+                  {en ? person.roleEn : person.roleMr}
                 </p>
               </div>
             ))}
@@ -372,41 +363,24 @@ const Index = () => {
       </section>
       {/* Leader Modal */}
       {selectedLeader && (
-        <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-          style={{ backgroundColor: "rgba(0,0,0,0.55)" }}
-          onClick={() => setSelectedLeader(null)}
-        >
-          <div
-            className="bg-white rounded-2xl shadow-2xl w-72 overflow-hidden"
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Close button — solid, always visible */}
-            <div className="flex justify-end px-4 pt-4">
-              <button
-                onClick={() => setSelectedLeader(null)}
-                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-xl font-bold leading-none transition-colors"
-                aria-label="Close"
-              >
-                ×
-              </button>
-            </div>
-
-            {/* Photo — full, no overlay */}
-            <div className="px-6 pb-2">
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0" onClick={() => setSelectedLeader(null)}>
+          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl relative" onClick={e => e.stopPropagation()}>
+            <button className="absolute top-3 right-3 text-civic-blue hover:text-civic-red transition-colors" onClick={() => setSelectedLeader(null)}>
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div className="w-full h-48 md:h-56 rounded-t-3xl overflow-hidden bg-civic-blue/10 flex items-center justify-center">
               <img
                 src={selectedLeader.image}
-                alt={selectedLeader.name}
-                className="w-full rounded-xl object-cover object-top"
+                alt={en ? selectedLeader.nameEn : ""}
+                className="w-full h-full object-cover object-top"
                 style={{ maxHeight: "280px" }}
               />
             </div>
-
             {/* Info */}
             <div className="px-6 pb-6 pt-3 text-center">
               <div className="w-10 h-0.5 bg-civic-gold rounded-full mx-auto mb-3" />
-              <h3 className="font-serif text-lg font-bold text-civic-blue mb-1">{selectedLeader.name}</h3>
-              <p className="text-xs text-muted-foreground font-medium leading-relaxed">{selectedLeader.role}</p>
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-1">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
+              <p className="text-xs text-muted-foreground font-medium leading-relaxed">{en ? selectedLeader.roleEn : selectedLeader.roleMr}</p>
             </div>
           </div>
         </div>
