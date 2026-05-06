@@ -147,13 +147,13 @@ const Index = () => {
   }, []);
 
   const leadership = [
-    { name: en ? "Shri Devendra Fadnavis" : "श्री. देवेंद्र फडणवीस", role: en ? "Hon'ble Chief Minister of Maharashtra" : "मा. मुख्यमंत्री, महाराष्ट्र राज्य", image: devendraImg },
-    { name: en ? "Shri Eknath Shinde" : "श्री. एकनाथ शिंदे", role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : "मा. उपमुख्यमंत्री, महाराष्ट्र राज्य", image: eknathImg },
-    { name: en ? "Smt. Sunetra A. Pawar" : "श्रीमती सुनेत्रा अजित पवार", role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : "मा. उपमुख्यमंत्री, महाराष्ट्र राज्य", image: suntraImg },
-    { name: en ? "Smt. Madhuri Misal" : "श्रीमती  माधुरी मिसाळ", role: en ? "Hon'ble Minister of State, Urban Development Department" : "मा. राज्यमंत्री, नगरविकास विभाग", image: madhuriImg },
-    { name: en ? "Shri Sameer Rajurkar" : "श्री. समीर राजूरकर", role: en ? "Hon'ble Mayor" : "मा. महापौर", image: sameerImg },
-    { name: en ? "Shri Rajendra Janjal" : "श्री. राजेंद्र  जंजाळ", role: en ? "Hon'ble Deputy Mayor" : "मा. उपमहापौर", image: rajuImg },
-    { name: en ? "Shri Amol Yedage" : "श्री. अमोल येडगे", role: en ? "Hon'ble Municipal Commissioner" : "मा. महानगरपालिका आयुक्त", image: amolImg },
+    { name: en ? "Shri Devendra Fadnavis" : <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, role: en ? "Hon'ble Chief Minister of Maharashtra" : <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg },
+    { name: en ? "Shri Eknath Shinde" : <span className="devanagari">श्री. एकनाथ शिंदे</span>, role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg },
+    { name: en ? "Smt. Sunetra A. Pawar" : <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, role: en ? "Hon'ble Deputy Chief Minister of Maharashtra" : <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg },
+    { name: en ? "Smt. Madhuri Misal" : <span className="devanagari">श्रीमती  माधुरी मिसाळ</span>, role: en ? "Hon'ble Minister of State, Urban Development Department" : <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
+    { name: en ? "Shri Sameer Rajurkar" : <span className="devanagari">श्री. समीर राजूरकर</span>, role: en ? "Hon'ble Mayor" : <span className="devanagari">मा. महापौर</span>, image: sameerImg },
+    { name: en ? "Shri Rajendra Janjal" : <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, role: en ? "Hon'ble Deputy Mayor" : <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg },
+    { name: en ? "Shri Amol Yedage" : <span className="devanagari">श्री. अमोल येडगे</span>, role: en ? "Hon'ble Municipal Commissioner" : <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg },
   ];
 
   return (
