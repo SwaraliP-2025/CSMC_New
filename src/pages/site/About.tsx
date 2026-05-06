@@ -33,7 +33,7 @@ const About = () => {
             <Landmark className="h-5 w-5" />
             <span className="text-xs uppercase tracking-[0.2em] font-bold">{en ? "Heritage" : "वारसा"}</span>
           </div>
-          <h2 className="font-serif text-3xl md:text-5xl text-civic-blue font-bold mb-6 leading-tight">{en ? "City of Gates, City of Tomorrow" : "गेट्सचे शहर, उद्याचे शहर"}</h2>
+          <h2 className="font-serif text-3xl md:text-5xl text-civic-blue font-bold mb-6 leading-tight">{en ? "Chhatrapati Sambhajinagar Municipal Corporation" : "छत्रपती संभाजीनगर महानगरपालिका"}</h2>
           <div className="h-1.5 w-20 bg-gradient-saffron rounded-full mb-8" />
           <p className="text-foreground/80 leading-relaxed text-lg mb-6">
             {en

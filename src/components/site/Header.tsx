@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { Menu, X, Search, ChevronDown, Home, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Search, ChevronDown } from "lucide-react";
 import emblem from "@/assets/cs-emblem.png";
 import ascdcl from "@/assets/ascdcl.png";
 import { useLang } from "@/i18n/LanguageContext";
@@ -73,54 +72,9 @@ const NAV: NavItem[] = [
   { labelEn: "Site Map", labelMr: "साइटमॅप", to: "/site-map" },
 ];
 
-// ─── Portal Dropdown ──────────────────────────────────────────────────────────
-const DropdownPortal = ({
-  anchorRef, open, onClose, children, align = "left",
-}: {
-  anchorRef: React.RefObject<HTMLDivElement>;
-  open: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  align?: "left" | "right";
-}) => {
-  const [pos, setPos] = useState({ top: 0, left: 0 });
-  const panelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (open && anchorRef.current) {
-      const r = anchorRef.current.getBoundingClientRect();
-      setPos({
-        top: r.bottom + window.scrollY,
-        left: align === "right" ? r.right - 240 + window.scrollX : r.left + window.scrollX,
-      });
-    }
-  }, [open, anchorRef, align]);
-
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: MouseEvent) => {
-      const t = e.target as Node;
-      if (!anchorRef.current?.contains(t) && !panelRef.current?.contains(t)) onClose();
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open, onClose, anchorRef]);
-
-  if (!open) return null;
-  return createPortal(
-    <div ref={panelRef}
-      style={{ position: "absolute", top: pos.top, left: pos.left, zIndex: 9999, minWidth: 240 }}
-      className="bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden">
-      {children}
-    </div>,
-    document.body
-  );
-};
-
 // ─── Single nav item (desktop) ────────────────────────────────────────────────
 const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
   const { pathname } = useLocation();
-  const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
   const isActive = item.to ? pathname === item.to : false;
@@ -143,7 +97,6 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
 
   return (
     <div
-      ref={containerRef}
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
@@ -152,29 +105,31 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
         {label}
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </div>
-      <DropdownPortal anchorRef={containerRef} open={open} onClose={() => setOpen(false)}>
-        {item.children.map(child => {
-          const childLabel = label.includes("मा") || label.includes("नागरिक") || label.includes("झोन") || label.includes("संपर्क") || label.includes("महानगरपालिका")
-            ? child.labelMr : child.labelEn;
-          return (
-            <div key={child.labelEn} className="border-b border-white/10 last:border-0">
-              {child.children ? (
-                <div className="px-4 py-2.5 text-sm text-white/70 font-bold uppercase tracking-wider text-[10px]">{childLabel}</div>
-              ) : child.external ? (
-                <a href={child.to} target="_blank" rel="noopener noreferrer"
-                  className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
-                  {childLabel}
-                </a>
-              ) : (
-                <Link to={child.to!}
-                  className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
-                  {childLabel}
-                </Link>
-              )}
-            </div>
-          );
-        })}
-      </DropdownPortal>
+      {open && (
+        <div className="absolute top-full left-0 z-50 min-w-[240px] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden">
+          {item.children.map(child => {
+            const childLabel = label.includes("मा") || label.includes("नागरिक") || label.includes("झोन") || label.includes("संपर्क") || label.includes("महानगरपालिका")
+              ? child.labelMr : child.labelEn;
+            return (
+              <div key={child.labelEn} className="border-b border-white/10 last:border-0">
+                {child.children ? (
+                  <div className="px-4 py-2.5 text-sm text-white/70 font-bold uppercase tracking-wider text-[10px]">{childLabel}</div>
+                ) : child.external ? (
+                  <a href={child.to} target="_blank" rel="noopener noreferrer"
+                    className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
+                    {childLabel}
+                  </a>
+                ) : (
+                  <Link to={child.to!}
+                    className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
+                    {childLabel}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
@@ -221,7 +176,7 @@ export const Header = () => {
             </a>
             {waHovered && (
               <div className="absolute bottom-full right-0 mb-2 w-44 bg-white text-gray-800 text-[11px] font-semibold px-3 py-2 rounded-xl shadow-xl border border-gray-100 leading-snug z-50">
-                {en ? "Smart Chhatrapati Sambhajinagar Whatsapp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सअॅप चॅटबॉट"}
+                {en ? "Smart Chhatrapati Sambhajinagar Whatsapp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट"}
                 <span className="absolute -bottom-2 right-4 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[8px] border-t-white" />
               </div>
             )}
