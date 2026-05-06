@@ -364,23 +364,23 @@ const Index = () => {
       {/* Leader Modal */}
       {selectedLeader && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0" onClick={() => setSelectedLeader(null)}>
-          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl relative" onClick={e => e.stopPropagation()}>
-            <button className="absolute top-3 right-3 text-civic-blue hover:text-civic-red transition-colors" onClick={() => setSelectedLeader(null)}>
+          <div className="bg-white rounded-2xl max-w-xs w-full shadow-2xl relative p-0" onClick={e => e.stopPropagation()}>
+            <button className="absolute top-2 right-2 text-civic-blue hover:text-civic-red transition-colors z-10" onClick={() => setSelectedLeader(null)}>
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
-            <div className="w-full h-48 md:h-56 rounded-t-3xl overflow-hidden bg-civic-blue/10 flex items-center justify-center">
+            <div className="w-full flex items-center justify-center bg-civic-blue/10 pt-4 pb-2 px-2 rounded-t-2xl">
               <img
                 src={selectedLeader.image}
-                alt={en ? selectedLeader.nameEn : ""}
-                className="w-full h-full object-cover object-top"
-                style={{ maxHeight: "280px" }}
+                alt={en ? selectedLeader.nameEn : ''}
+                className="max-h-48 max-w-full rounded-xl shadow border-2 border-white"
+                style={{ objectFit: 'contain', background: '#fff' }}
               />
             </div>
             {/* Info */}
-            <div className="px-6 pb-6 pt-3 text-center">
-              <div className="w-10 h-0.5 bg-civic-gold rounded-full mx-auto mb-3" />
-              <h3 className="font-serif text-lg font-bold text-civic-blue mb-1">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
-              <p className="text-xs text-muted-foreground font-medium leading-relaxed">{en ? selectedLeader.roleEn : selectedLeader.roleMr}</p>
+            <div className="px-3 pb-4 pt-2 text-center">
+              <div className="w-8 h-0.5 bg-civic-gold rounded-full mx-auto mb-2" />
+              <h3 className="font-serif text-base font-bold text-civic-blue mb-1 leading-tight">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
+              <p className="text-xs text-muted-foreground font-medium leading-tight">{en ? selectedLeader.roleEn : selectedLeader.roleMr}</p>
             </div>
           </div>
         </div>
