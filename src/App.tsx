@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { ScrollToTopOnNavigate } from "@/components/ScrollToTopOnNavigate";
 import Index from "./pages/Index.tsx";
 import About from "./pages/site/About.tsx";
 import Departments from "./pages/site/Departments.tsx";
@@ -44,7 +45,8 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter basename="/CSMC_New">
-          <Routes>
+            <ScrollToTopOnNavigate />
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/departments" element={<Departments />} />
@@ -73,8 +75,8 @@ const App = () => (
             <Route path="/commissioners-list" element={<CommissionersList />} />
             <Route path="/mayors-list" element={<MayorsList />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>
   </QueryClientProvider>
