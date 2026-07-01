@@ -189,7 +189,7 @@ export const Header = () => {
             <input type="text" placeholder={en ? "Search..." : "शोधा..."} aria-label="Search"
               className="text-sm bg-transparent outline-none w-24 placeholder:text-muted-foreground" />
           </div>
-          <img src={ascdcl} alt="ASCDCL" width={56} height={56} className="h-12 w-12 md:h-14 md:w-14 object-contain" />
+          
         </div>
 
         {/* Mobile: ASCDCL logo + hamburger */}
