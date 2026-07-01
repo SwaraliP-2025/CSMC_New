@@ -150,7 +150,7 @@ const Index = () => {
     { nameEn: "Shri Devendra Fadnavis", nameMr: <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg },
     { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg },
     { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg },
-    { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती  माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
+    { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
     { nameEn: "Shri Sameer Rajurkar", nameMr: <span className="devanagari">श्री. समीर राजूरकर</span>, roleEn: "Hon'ble Mayor", roleMr: <span className="devanagari">मा. महापौर</span>, image: sameerImg },
     { nameEn: "Shri Rajendra Janjal", nameMr: <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, roleEn: "Hon'ble Deputy Mayor", roleMr: <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg },
     { nameEn: "Shri Amol Yedage", nameMr: <span className="devanagari">श्री. अमोल येडगे</span>, roleEn: "Hon'ble Municipal Commissioner", roleMr: <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg },
@@ -218,12 +218,6 @@ const Index = () => {
       {/* Leadership Section */}
       <section ref={leadershipRef} className="py-16 bg-white">
         <div className="container">
-          <div className="text-center mb-10">
-            <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-2">{en ? "Our Leadership" : "आमचे नेतृत्व"}</p>
-            <h2 className="font-serif text-3xl md:text-4xl text-civic-blue font-bold">{en ? "Honourable Leaders" : "मा. नेते"}</h2>
-            <div className="mx-auto mt-4 h-1 w-20 bg-gradient-to-r from-civic-gold to-civic-red rounded-full" />
-          </div>
-
           {/* Mobile: single column centered | Desktop: all 7 in one row */}
           <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
             {leadership.map((person, i) => (

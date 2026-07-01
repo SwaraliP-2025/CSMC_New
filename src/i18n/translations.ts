@@ -57,7 +57,7 @@ export const translations = {
       title: "Quick Services",
       subtitle: "Most-used citizen services, just one click away.",
       items: [
-        { t: "Property Tax", d: "View dues & pay online", url: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
+        { t: "Property Tax", d: "View bill & pay online", url: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
         { t: "Pay Water Tax", d: "Check & pay water charges", url: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do" },
         { t: "Birth Certificate", d: "Apply or download", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "Death Certificate", d: "Apply or download", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
@@ -158,8 +158,8 @@ export const translations = {
       title: "जलद सेवा",
       subtitle: "नागरिकांसाठी सर्वाधिक वापरल्या जाणार्‍या सेवा एका क्लिकवर.",
       items: [
-        { t: "मालमत्ता कर", d: "थकबाकी पहा व ऑनलाइन भरा", url: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
-        { t: "पाणी कर भरा", d: "बिल पहा व भरा", url: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do" },
+        { t: "मालमत्ता कर", d: "बिल पहा व ऑनलाइन भरा", url: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
+        { t: "पाणी कर भरा", d: "बिल पहा व ऑनलाइन भरा", url: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do" },
         { t: "जन्म प्रमाणपत्र", d: "अर्ज करा / डाउनलोड", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "मृत्यू प्रमाणपत्र", d: "अर्ज करा / डाउनलोड", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "व्यापार परवाना", d: "नवीन व नूतनीकरण", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
