@@ -12,7 +12,7 @@ export const translations = {
       sitemap: "Sitemap",
       help: "Help",
       employeeLogin: "Employee Login",
-      userPolicy: "User Policy",
+      userPolicy: "User Manual",
       citizenLogin: "Citizen Login",
     },
     nav: {

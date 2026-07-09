@@ -177,7 +177,14 @@ export const Footer = () => {
             </span>
             <span>
               {en ? "Designed & developed by" : "निर्मिती:"}{" "}
-              <a href="www.consultmipl.com" className="text-civic-gold hover:underline font-semibold">MIPL</a>
+              <a
+                href="https://www.consultmipl.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-civic-gold hover:underline font-semibold"
+              >
+                {en ? "Maha Infotech Pvt Ltd" : "महा इन्फोटेक प्रा. लि."}
+              </a>
             </span>
           </div>
         </div>
