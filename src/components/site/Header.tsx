@@ -23,7 +23,7 @@ const NAV: NavItem[] = [
     children: [
       { labelEn: "About CSMC", labelMr: "CSMC बद्दल", to: "/about" },
       { labelEn: "Hon'ble Municipal Commissioner", labelMr: "मा. महानगरपालिका आयुक्त", to: "/commissioner" },
-      { labelEn: "Organogram / Structure", labelMr: "संस्था", to: "/organization" },
+      { labelEn: "Organogram / Organizational Structure", labelMr: "प्रशासकीय रचना", to: "/organization" },
       { labelEn: "Departments", labelMr: "विभाग", to: "/departments" },
       { labelEn: "Minutes of General Body Meeting", labelMr: "सर्वसाधारण सभेचे इतिवृत्त", to: "/public-documents" },
       { labelEn: "Hon'ble Mayors' List", labelMr: "मा. महापौरांची यादी", to: "/mayors-list" },
@@ -182,7 +182,7 @@ export const Header = () => {
             )}
           </div>
           <a href="/under-construction" className="inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap">
-            {en ? "User Policy" : "वापरकर्ता नियमावली"}
+            {en ? "User Manual" : "वापरकर्ता नियमावली"}
           </a>
           <div className="flex items-center gap-2 border border-border rounded-full px-3 py-1.5 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30">
             <Search className="h-4 w-4 text-muted-foreground shrink-0" />
