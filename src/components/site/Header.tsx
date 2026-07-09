@@ -107,7 +107,7 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
       {open && (
         <div className="absolute top-full left-0 z-50 min-w-[240px] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden">
           {item.children.map(child => {
-            const childLabel = label.includes("मा") || label.includes("नागरिक") || label.includes("झोन") || label.includes("संपर्क") || label.includes("महानगरपालिका")
+            const childLabel = label.includes("मा") || label.includes("नागरिक") || label.includes("झोन") || label.includes("संपर्क") || label.includes("महानगरपालिका") || label.includes("प्रकाशने")
               ? child.labelMr : child.labelEn;
             return (
               <div key={child.labelEn} className="border-b border-white/10 last:border-0">
