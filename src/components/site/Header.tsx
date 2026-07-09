@@ -59,16 +59,16 @@ const NAV: NavItem[] = [
     labelEn: "Contact", labelMr: "संपर्क",
     children: [
       { labelEn: "Emergency Contact (Fire & Disaster)", labelMr: "आपत्कालीन संपर्क", to: "/disaster-management" },
-      { labelEn: "Disaster Mgmt", labelMr: "आपत्ती", to: "/disaster-management" },
+      { labelEn: "Disaster Management", labelMr: "आपत्ती", to: "/disaster-management" },
       { labelEn: "Municipal Contact", labelMr: "महानगरपालिका संपर्क", to: "/contact" },
       { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "https://chhsambhajinagarmc.org/citizen-feedback-form" },
     ],
   },
 
-  { labelEn: "RTI", labelMr: "RTI", to: "/rti-act" },
-  { labelEn: "RTS", labelMr: "RTS", to: "/rts-act" },
-  { labelEn: "DP Plan", labelMr: "DP", to: "/dp-plan" },
-  { labelEn: "Site Map", labelMr: "साइटमॅप", to: "/site-map" },
+  { labelEn: "Right To Information", labelMr: "माहिती अधिकार कायदा", to: "/rti-act" },
+  { labelEn: "Right To Service", labelMr: "सेवा हक्क कायदा", to: "/rts-act" },
+  { labelEn: "DP Plan", labelMr: "डी पी प्लॅन", to: "/dp-plan" },
+  { labelEn: "Site Map", labelMr: "साईट मॅप", to: "/site-map" },
 ];
 
 // ─── Single nav item (desktop) ────────────────────────────────────────────────
@@ -77,7 +77,7 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
   const [open, setOpen] = useState(false);
 
   const isActive = item.to ? pathname === item.to : false;
-  const baseCls = `px-2 py-3 text-[11px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none w-full h-full ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
+  const baseCls = `px-2 py-3 text-[10px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none w-full h-full ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
 
   if (!item.children) {
     if (item.external) return <a href={item.to} target="_blank" rel="noopener noreferrer" className={baseCls}>{label}</a>;

@@ -2,17 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Use Inter for Latin, Noto Sans Devanagari for Devanagari script */
-@font-face {
-  font-family: 'SiteFont';
-  src: local('Inter');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'SiteFont';
-  src: local('Noto Sans Devanagari');
-  unicode-range: U+0900-097F, U+1CD0-1CFF, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
-}
+/* Google Fonts – loaded here as CSS fallback (index.html preconnect handles the network request) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap');
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -128,12 +119,12 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Noto Sans Devanagari', 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', 'Noto Sans Devanagari', system-ui, sans-serif;
     letter-spacing: normal;
   }
 
   h1, h2, h3, h4, h5 {
-    font-family: 'Noto Sans Devanagari', 'Playfair Display', 'Georgia', serif;
+    font-family: 'Playfair Display', 'Noto Sans Devanagari', 'Georgia', serif;
     letter-spacing: normal;
   }
 }

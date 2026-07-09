@@ -10,7 +10,7 @@ const XIcon = () => (
 
 const TOTAL_VISITORS = 662770;
 const TODAY_VISITORS = 2659;
-const LAST_UPDATED = "11-01-2026";
+const LAST_UPDATED = "11-03-2026";
 
 const AppleIcon = () => (
   <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
@@ -141,7 +141,7 @@ export const Footer = () => {
                 </div>
               </a>
             </div>
-            <p className="text-xs text-white/50">{en ? "Download My Smart Nagarik App" : "माय स्मार्ट नागरिक अॅप डाउनलोड करा"}</p>
+            <p className="text-xs text-white/50">{en ? "Download My Smart Nagarik App" : "माय स्मार्ट नागरिक ॲप डाउनलोड करा"}</p>
           </div>
           <div>
             <a href="https://www.w3.org/WAI/WCAG2AA-Conformance" target="_blank" rel="noopener noreferrer"

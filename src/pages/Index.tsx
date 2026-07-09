@@ -148,8 +148,8 @@ const Index = () => {
 
   const leadership = [
     { nameEn: "Shri Devendra Fadnavis", nameMr: <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg },
-    { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg },
-    { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg },
+    { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg},
+    { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg }, 
     { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
     { nameEn: "Shri Sameer Rajurkar", nameMr: <span className="devanagari">श्री. समीर राजूरकर</span>, roleEn: "Hon'ble Mayor", roleMr: <span className="devanagari">मा. महापौर</span>, image: sameerImg },
     { nameEn: "Shri Rajendra Janjal", nameMr: <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, roleEn: "Hon'ble Deputy Mayor", roleMr: <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg },
