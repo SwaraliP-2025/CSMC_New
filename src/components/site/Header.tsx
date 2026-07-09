@@ -28,11 +28,6 @@ const NAV: NavItem[] = [
       { labelEn: "Minutes of General Body Meeting", labelMr: "सर्वसाधारण सभेचे इतिवृत्त", to: "/public-documents" },
       { labelEn: "Hon'ble Mayors' List", labelMr: "मा. महापौरांची यादी", to: "/mayors-list" },
       { labelEn: "Hon'ble Commissioners' List", labelMr: "मा. आयुक्तांची यादी", to: "/commissioners-list" },
-    ],
-  },
-  {
-    labelEn: "Zones / Wards", labelMr: "झोन / प्रभाग",
-    children: [
       { labelEn: "Zone List", labelMr: "झोन यादी", to: "/zones-wards" },
       { labelEn: "Ward Offices", labelMr: "प्रभाग कार्यालये", to: "/zones-wards" },
     ],
@@ -51,16 +46,20 @@ const NAV: NavItem[] = [
       { labelEn: "Gunthewari Challan", labelMr: "गुंठेवारी चलन", to: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2", external: true },
     ],
   },
-  { labelEn: "Tenders", labelMr: "निविदा", to: "https://mahatenders.gov.in/nicgep/app", external: true },
-  { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
-  { labelEn: "Govt. Orders", labelMr: "शासन निर्णय", to: "/govt-orders" },
-  { labelEn: "Recruitment", labelMr: "भरती", to: "/recruitment" },
-  { labelEn: "Elections", labelMr: "निवडणूक", to: "/elections" },
-  { labelEn: "Disaster Mgmt", labelMr: "आपत्ती", to: "/disaster-management" },
+  {
+    labelEn: "Publications", labelMr: "प्रकाशने",
+    children: [
+      { labelEn: "Tenders", labelMr: "निविदा", to: "https://mahatenders.gov.in/nicgep/app", external: true },
+      { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
+      { labelEn: "Govt. Orders", labelMr: "शासन निर्णय", to: "/govt-orders" },
+      { labelEn: "Recruitment", labelMr: "भरती", to: "/recruitment" },
+    ],
+  },
   {
     labelEn: "Contact", labelMr: "संपर्क",
     children: [
       { labelEn: "Emergency Contact (Fire & Disaster)", labelMr: "आपत्कालीन संपर्क", to: "/disaster-management" },
+      { labelEn: "Disaster Mgmt", labelMr: "आपत्ती", to: "/disaster-management" },
       { labelEn: "Municipal Contact", labelMr: "महानगरपालिका संपर्क", to: "/contact" },
       { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "https://chhsambhajinagarmc.org/citizen-feedback-form" },
     ],
@@ -78,7 +77,7 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
   const [open, setOpen] = useState(false);
 
   const isActive = item.to ? pathname === item.to : false;
-  const baseCls = `px-1.5 py-3 text-[10px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center gap-0.5 cursor-pointer select-none flex-1 justify-center ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
+  const baseCls = `px-2 py-3 text-[11px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none w-full h-full ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
 
   if (!item.children) {
     if (item.external) return <a href={item.to} target="_blank" rel="noopener noreferrer" className={baseCls}>{label}</a>;
@@ -113,15 +112,15 @@ const NavItemDesktop = ({ item, label }: { item: NavItem; label: string }) => {
             return (
               <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                 {child.children ? (
-                  <div className="px-4 py-2.5 text-sm text-white/70 font-bold uppercase tracking-wider text-[10px]">{childLabel}</div>
+                  <div className="px-4 py-2 text-[12px] text-white/70 font-bold uppercase tracking-wider">{childLabel}</div>
                 ) : child.external ? (
                   <a href={child.to} target="_blank" rel="noopener noreferrer"
-                    className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
+                    className="block px-5 py-2 text-[12px] text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
                     {childLabel}
                   </a>
                 ) : (
                   <Link to={child.to!}
-                    className="block px-5 py-2.5 text-sm text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
+                    className="block px-5 py-2 text-[12px] text-white hover:bg-civic-gold hover:text-civic-ink transition-colors">
                     {childLabel}
                   </Link>
                 )}
@@ -223,9 +222,11 @@ export const Header = () => {
 
       {/* Desktop nav */}
       <nav id="nav" className="hidden md:block bg-[#1a3a6b]">
-        <div className="w-full flex items-center justify-between px-2">
+        <div className="w-full flex items-stretch">
           {NAV.map(item => (
-            <NavItemDesktop key={item.labelEn} item={item} label={label(item)} />
+            <div key={item.labelEn} className="flex-1">
+              <NavItemDesktop item={item} label={label(item)} />
+            </div>
           ))}
         </div>
       </nav>
