@@ -59,7 +59,6 @@ const NAV: NavItem[] = [
     labelEn: "Contact", labelMr: "संपर्क",
     children: [
       { labelEn: "Emergency Contact (Fire & Disaster)", labelMr: "आपत्कालीन संपर्क", to: "/disaster-management" },
-      { labelEn: "Disaster Management", labelMr: "आपत्ती", to: "/disaster-management" },
       { labelEn: "Municipal Contact", labelMr: "महानगरपालिका संपर्क", to: "/contact" },
       { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "https://chhsambhajinagarmc.org/citizen-feedback-form" },
     ],
