@@ -44,5 +44,5 @@
 .devanagari {
   font-family: 'Noto Sans Devanagari', sans-serif !important;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: 0 !important;
 }

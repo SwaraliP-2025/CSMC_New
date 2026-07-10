@@ -2,8 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Google Fonts – loaded here as CSS fallback (index.html preconnect handles the network request) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap');
+/*
+  Devanagari subset injected into the 'Inter' font family via unicode-range.
+  The browser uses these faces automatically for any Devanagari codepoint
+  in ANY element — no wrapper class needed.
+  Files are served by Google Fonts (already preconnected in index.html).
+*/
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/notosansdevanagari/v30/TuGoUUFzXI5FBtUq5a8bjKYTZjtRU6Sgv3NaV_SNmI0b8QQCQmHn6B2OHjbL_08AlXQly-A.ttf) format('truetype');
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/notosansdevanagari/v30/TuGoUUFzXI5FBtUq5a8bjKYTZjtRU6Sgv3NaV_SNmI0b8QQCQmHn6B2OHjbL_08AlUYly-A.ttf) format('truetype');
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/notosansdevanagari/v30/TuGoUUFzXI5FBtUq5a8bjKYTZjtRU6Sgv3NaV_SNmI0b8QQCQmHn6B2OHjbL_08Alaoiy-A.ttf) format('truetype');
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/notosansdevanagari/v30/TuGoUUFzXI5FBtUq5a8bjKYTZjtRU6Sgv3NaV_SNmI0b8QQCQmHn6B2OHjbL_08AlZMiy-A.ttf) format('truetype');
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -120,12 +156,12 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', 'Noto Sans Devanagari', system-ui, sans-serif;
-    letter-spacing: normal;
+    letter-spacing: 0;
   }
 
   h1, h2, h3, h4, h5 {
     font-family: 'Playfair Display', 'Noto Sans Devanagari', 'Georgia', serif;
-    letter-spacing: normal;
+    letter-spacing: 0;
   }
 }
 
@@ -147,15 +183,14 @@ All colors MUST be HSL.
   }
 }
 
-/* ── Devanagari: zero letter-spacing always ─────────────────────────────────
-   Tailwind tracking-* utilities break Devanagari conjuncts (matras detach).
-   This unicode-range rule overrides any tracking class for Devanagari glyphs. */
-
-/* Nuclear option: override tracking for ALL text since this is a bilingual site.
-   Placed in @layer utilities so it wins over all Tailwind tracking-* classes. */
+/* ── letter-spacing: 0 everywhere ───────────────────────────────────────────
+   Devanagari conjuncts (ट्र, क्ष, ज्ञ etc.) REQUIRE zero letter-spacing.
+   Any non-zero value — including browser-computed "normal" — inserts spacing
+   between the base glyph and its virama/rakar and visually splits the conjunct.
+   This site is bilingual so we enforce 0 globally. */
 @layer utilities {
-  * {
-    letter-spacing: normal !important;
+  *, *::before, *::after {
+    letter-spacing: 0 !important;
   }
 }
 

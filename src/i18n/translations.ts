@@ -83,6 +83,16 @@ export const translations = {
       nameMarathi: "श्री. अमोल येडगे, भा.प्र.से.",
     },
     notices: { title: "Latest Notices & Announcements", view: "View all" },
+    announcements: {
+      label: "Announcement",
+      items: [
+        "Gunthewari Challan Calculator",
+        "Chhatrapati Sambhajinagar Municipal Corporation Rating",
+        "Pradhan Mantri Awas Yojana (Urban)",
+        "Property tax rebate of 10% extended till 30 May 2026",
+        "New e-tender for SWM Phase II now live",
+      ],
+    },
     stats: { title: "Our City in Numbers" },
     statsItems: [
       { v: "17.5L+", l: "Population Served" },
@@ -184,6 +194,16 @@ export const translations = {
       nameMarathi: "श्री. अमोल येडगे, भा.प्र.से.",
     },
     notices: { title: "ताज्या सूचना व घोषणा", view: "सर्व पहा" },
+    announcements: {
+      label: "घोषणा",
+      items: [
+        "गुंठेवारी चलन कॅल्क्युलेटर",
+        "छत्रपती संभाजीनगर महानगरपालिका रेटिंग",
+        "प्रधानमंत्री आवास योजना (शहरी)",
+        "मालमत्ता कर १०% सवलत ३० मे २०२६ पर्यंत वाढवली",
+        "घनकचरा प्रकल्प टप्पा-२ ई-निविदा सक्रिय",
+      ],
+    },
     stats: { title: "आपले शहर — आकड्यांत" },
     statsItems: [
       { v: "१७.५ लाख+", l: "लोकसंख्या" },

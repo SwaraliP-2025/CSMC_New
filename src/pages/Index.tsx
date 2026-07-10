@@ -254,7 +254,7 @@ const Index = () => {
                   {en ? person.nameEn : person.nameMr}
                 </h3>
                 {/* Role */}
-                <p className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1" style={{ minHeight: "3rem" }}>
+                <p className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1" lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
                   {en ? person.roleEn : person.roleMr}
                 </p>
               </div>

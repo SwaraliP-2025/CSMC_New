@@ -6,6 +6,7 @@ let _fontSize = 100;
 
 export const TopBar = () => {
   const { lang, setLang } = useLang();
+  const en = lang === "en";
   const [dateTime, setDateTime] = useState(new Date());
   const [fontSize, setFontSize] = useState(_fontSize);
   const [highContrast, setHighContrast] = useState(false);
@@ -38,14 +39,14 @@ export const TopBar = () => {
 
         {/* Left: Accessibility — visible on ALL devices */}
         <div className="flex items-center gap-0.5 whitespace-nowrap">
-          <button onClick={() => applyFontSize(Math.max(80, fontSize - 10))} title="Decrease text size"
-            className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none">A-</button>
+          <button onClick={() => applyFontSize(Math.max(80, fontSize - 10))} title={en ? "Decrease text size" : "अक्षर लहान करा"}
+            className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none">{en ? "A-" : "अ-"}</button>
           <span className="text-white/20 mx-0.5">|</span>
-          <button onClick={() => applyFontSize(100)} title="Normal text size"
-            className={`px-1.5 py-0.5 transition-colors font-bold text-base leading-none ${fontSize === 100 ? "text-civic-gold" : "hover:text-civic-gold"}`}>A</button>
+          <button onClick={() => applyFontSize(100)} title={en ? "Normal text size" : "सामान्य अक्षर आकार"}
+            className={`px-1.5 py-0.5 transition-colors font-bold text-base leading-none ${fontSize === 100 ? "text-civic-gold" : "hover:text-civic-gold"}`}>{en ? "A" : "अ"}</button>
           <span className="text-white/20 mx-0.5">|</span>
-          <button onClick={() => applyFontSize(Math.min(150, fontSize + 10))} title="Increase text size"
-            className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-lg leading-none">A+</button>
+          <button onClick={() => applyFontSize(Math.min(150, fontSize + 10))} title={en ? "Increase text size" : "अक्षर मोठे करा"}
+            className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-lg leading-none">{en ? "A+" : "अ+"}</button>
           <span className="text-white/20 mx-0.5">|</span>
           <button onClick={toggleContrast}
             className={`px-2 py-0.5 rounded transition-colors font-bold text-[11px] ${highContrast ? "bg-white text-civic-ink" : "hover:text-civic-gold"}`}>

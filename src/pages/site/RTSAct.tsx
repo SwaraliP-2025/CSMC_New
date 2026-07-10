@@ -24,7 +24,7 @@ const RTSAct = () => {
       <section className="py-12 container">
         <div className="bg-green-50 border border-green-200 rounded-xl px-5 py-4 mb-8 flex items-start gap-3">
           <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
-          <p className="text-sm text-green-800 font-medium">
+          <p className="text-sm text-green-800 font-medium" lang={en ? "en" : "mr"}>
             {en ? "Under the Maharashtra Right to Services Act, 2015, citizens are entitled to receive designated services within the specified time limit. Failure to do so entitles the citizen to compensation."
               : "महाराष्ट्र लोकसेवा हक्क अधिनियम, २०१५ अंतर्गत नागरिकांना निर्धारित वेळमर्यादेत नामनिर्देशित सेवा मिळण्याचा हक्क आहे. असे न झाल्यास नागरिकाला नुकसानभरपाई मिळण्याचा अधिकार आहे."}
           </p>
