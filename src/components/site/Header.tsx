@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, Home } from "lucide-react";
 import { GlobalSearch } from "@/components/site/GlobalSearch";
 import emblem from "@/assets/cs-emblem.png";
-import ascdcl from "@/assets/ascdcl.png";
 import { useLang } from "@/i18n/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipArrow } from "@/components/ui/tooltip";
@@ -168,9 +167,8 @@ export const Header = () => {
         </div>
       </div>
 
-        {/* Mobile: ASCDCL logo + hamburger */}
+        {/* Mobile: hamburger */}
         <div className="md:hidden flex items-center gap-2 shrink-0">
-          <img src={ascdcl} alt="ASCDCL" width={40} height={40} className="h-9 w-9 object-contain" />
           <Button size="icon" variant="ghost" className="text-civic-blue"
             onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
