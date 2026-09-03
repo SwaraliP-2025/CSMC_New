@@ -83,7 +83,7 @@ export const BannerPopup = ({ open, onClose }: { open: boolean; onClose: () => v
 
 // ─── Notices List Popup (opens when clicking Notices in nav) ─────────────────
 export const NoticesPopup = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
 
   useEffect(() => {
@@ -129,12 +129,12 @@ export const NoticesPopup = ({ open, onClose }: { open: boolean; onClose: () => 
             <div key={n.id} className="flex items-start gap-4 px-5 py-4 hover:bg-muted/30 transition-colors group">
               <div className="w-2 h-2 rounded-full bg-civic-red mt-2 shrink-0 animate-pulse" />
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-civic-ink leading-snug">{en ? n.title : n.titleMr}</p>
+                <p className="font-semibold text-sm text-civic-ink leading-snug">{d(en ? n.title : n.titleMr)}</p>
                 <div className="flex items-center gap-2 mt-1.5">
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${categoryColors[n.category] || "bg-gray-100 text-gray-600"}`}>
                     {en ? n.category : n.categoryMr}
                   </span>
-                  <span className="text-xs text-muted-foreground">{n.date}</span>
+                  <span className="text-xs text-muted-foreground">{d(n.date)}</span>
                 </div>
               </div>
               <a href={n.link} target={n.link?.startsWith("http") ? "_blank" : undefined}
@@ -148,7 +148,7 @@ export const NoticesPopup = ({ open, onClose }: { open: boolean; onClose: () => 
 
         {/* Footer */}
         <div className="px-5 py-3 bg-muted/30 border-t border-border flex items-center justify-between shrink-0">
-          <p className="text-xs text-muted-foreground">{en ? `${NOTICES.length} notices` : `${NOTICES.length} सूचना`}</p>
+          <p className="text-xs text-muted-foreground">{en ? `${NOTICES.length} notices` : `${d(NOTICES.length)} सूचना`}</p>
           <a href="/notices" onClick={onClose}
             className="flex items-center gap-1.5 text-xs font-bold text-civic-blue hover:text-civic-red transition-colors">
             {en ? "View All Notices" : "सर्व सूचना पहा"} <ExternalLink className="h-3.5 w-3.5" />

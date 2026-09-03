@@ -5,7 +5,7 @@ import { Calendar, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Notices = () => {
-  const { t, lang } = useLang();
+  const { t, lang, d } = useLang();
   const en = lang === "en";
   const list = [
     { date: "22 Apr 2026", tag: en ? "Notice" : "सूचना", title: en ? "Property tax 10% rebate window extended till 30 May 2026." : "मालमत्ता कर १०% सवलत ३० मे २०२६ पर्यंत वाढवली." },
@@ -28,9 +28,9 @@ const Notices = () => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-3 flex-wrap">
                   <span className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full bg-civic-red/10 text-civic-red">{n.tag}</span>
-                  <span className="text-xs font-medium text-muted-foreground">{n.date}</span>
+                  <span className="text-xs font-medium text-muted-foreground">{d(n.date)}</span>
                 </div>
-                <p className="text-base md:text-xl font-bold text-civic-ink group-hover:text-civic-blue transition-colors leading-tight">{n.title}</p>
+                <p className="text-base md:text-xl font-bold text-civic-ink group-hover:text-civic-blue transition-colors leading-tight">{d(n.title)}</p>
               </div>
               <Button size="lg" variant="ghost" className="shrink-0 text-civic-blue hover:bg-civic-blue/5 px-4 h-12">
                 <Download className="h-5 w-5 md:mr-2" />

@@ -15,7 +15,7 @@ const services = [
 ];
 
 const RTSAct = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   return (
     <Layout>
@@ -44,9 +44,9 @@ const RTSAct = () => {
                 <tr key={i} className="hover:bg-muted/30 transition-colors">
                   <td className="px-5 py-3 font-semibold text-civic-ink">{en ? s.service : s.serviceMr}</td>
                   <td className="px-5 py-3 text-center">
-                    <span className="bg-civic-blue/10 text-civic-blue font-bold px-2 py-0.5 rounded text-xs">{s.days} {en ? "days" : "दिवस"}</span>
+                    <span className="bg-civic-blue/10 text-civic-blue font-bold px-2 py-0.5 rounded text-xs">{d(s.days)} {en ? "days" : "दिवस"}</span>
                   </td>
-                  <td className="px-5 py-3 text-center text-muted-foreground">{s.fee}</td>
+                  <td className="px-5 py-3 text-center text-muted-foreground">{d(s.fee)}</td>
                   <td className="px-5 py-3 text-center">
                     <a href="https://rts.chhsambhajinagarmc.org/links/dashboard" target="_blank" rel="noopener noreferrer"
                       className="text-xs font-bold text-civic-blue border border-civic-blue px-3 py-1.5 rounded-lg hover:bg-civic-blue hover:text-white transition-colors">

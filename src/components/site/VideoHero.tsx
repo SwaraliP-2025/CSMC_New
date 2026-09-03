@@ -41,7 +41,7 @@ const HERO_QUICK_ACTIONS: {
   {
     labelEn: "Register Your Complaint",
     labelMr: "तक्रार नोंदवा",
-    href: "https://chhsambhajinagarmc.org/csms/complaint_form.php",
+    href: "https://aurangabadmahapalika.org/csms/complaint_form.php",
     icon: Megaphone,
     iconClass: "text-orange-600",
   },

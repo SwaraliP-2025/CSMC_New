@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { MapPin, Phone, Clock, ExternalLink } from "lucide-react";
+import { localizeDigits } from "@/i18n/digits";
 import type { FacilityRecord } from "@/lib/facilities";
 
 export const FacilityList = ({
@@ -22,23 +23,23 @@ export const FacilityList = ({
           <div className="flex items-start justify-between gap-3 mb-4">
             <div>
               <h3 className="font-serif text-xl font-bold text-civic-blue mb-2">{item.name}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.address}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{localizeDigits(item.address, en ? "en" : "mr")}</p>
             </div>
             {/* Removed the category pill label (e.g. "Public Facilities") */}
           </div>
           <dl className="grid gap-3 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-civic-blue" />
-              <span>{item.phone || (en ? "No phone available" : "फोन माहिती नाही")}</span>
+              <span>{item.phone ? localizeDigits(item.phone, en ? "en" : "mr") : (en ? "No phone available" : "फोन माहिती नाही")}</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-civic-blue" />
-              <span>{item.timings || (en ? "Operating hours not listed" : "कार्य वेळा उपलब्ध नाही")}</span>
+              <span>{item.timings ? localizeDigits(item.timings, en ? "en" : "mr") : (en ? "Operating hours not listed" : "कार्य वेळा उपलब्ध नाही")}</span>
             </div>
             {!hideCoordinatesRow && item.latitude && item.longitude && (
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-civic-blue" />
-                <span>{`${item.latitude}, ${item.longitude}`}</span>
+                <span>{localizeDigits(`${item.latitude}, ${item.longitude}`, en ? "en" : "mr")}</span>
               </div>
             )}
           </dl>

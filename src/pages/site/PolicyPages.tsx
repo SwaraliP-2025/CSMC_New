@@ -39,7 +39,7 @@ const META: Record<PolicyKind, { en: string; mr: string; eyebrowEn: string; eyeb
 };
 
 function PolicyBody({ kind, en }: { kind: PolicyKind; en: boolean }) {
-  const updated = "03 September 2026";
+  const updated = en ? "03 September 2026" : "०३ सप्टेंबर २०२६";
 
   if (kind === "policies") {
     return (

@@ -7,7 +7,7 @@ import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Contact = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
 
   return (
@@ -73,10 +73,10 @@ const Contact = () => {
           <div className="divide-y divide-border bg-white">
             <div className="px-4 py-3">
               <p className="font-semibold text-civic-ink">Chhatrapati Sambhajinagar Municipal Corporation</p>
-              <p className="text-muted-foreground mt-1">Telephone No.: 02402333536</p>
+              <p className="text-muted-foreground mt-1">{en ? "Telephone No.:" : "दूरध्वनी क्र.:"} {d("02402333536")}</p>
             </div>
             <div className="px-4 py-3">
-              <p className="text-muted-foreground">Mobile No.: 0242333537</p>
+              <p className="text-muted-foreground">{en ? "Mobile No.:" : "मोबाईल क्र.:"} {d("0242333537")}</p>
             </div>
             <div className="px-4 py-3">
               <p className="text-muted-foreground">

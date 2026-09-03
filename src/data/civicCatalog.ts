@@ -263,7 +263,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentEn: "General Administration",
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-01-10",
-    href: "https://chhsambhajinagarmc.org/csms/complaint_form.php",
+    href: "https://aurangabadmahapalika.org/csms/complaint_form.php",
     external: true,
   }),
   rec("svc-tourism", "service", {

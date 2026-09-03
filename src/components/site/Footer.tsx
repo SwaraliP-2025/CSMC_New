@@ -31,7 +31,7 @@ const linkCls = "flex items-center gap-1 text-white/65 hover:text-civic-gold tra
 type FootLink = { en: string; mr: string; to: string; external?: boolean };
 
 export const Footer = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
 
   const othersLinks: FootLink[] = [
@@ -96,7 +96,7 @@ export const Footer = () => {
             <a href="https://www.youtube.com/channel/UCMEBXuyMv6mJ0S0QpM8LSpQ" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Youtube className="h-4 w-4" />
             </a>
-            <a href="https://www.facebook.com/people/Csmc-Mahapalika/61551631623144/#" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
+            <a href="https://www.facebook.com/SmarterAurangabad" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Facebook className="h-4 w-4" />
             </a>
             <a href="https://www.facebook.com/ChhSambhajinagarMC" aria-label={en ? "X / social (via Facebook page)" : "सोशल माध्यम"} className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
@@ -126,11 +126,11 @@ export const Footer = () => {
         <div className="space-y-6">
           <div>
             <div className="flex gap-3 mb-2">
-              <a href={OFFICIAL.smartNagarik} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
+              <a href={OFFICIAL.smartNagarikAppStore} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
                 <AppleIcon />
                 <div className="leading-tight">
                   <p className="text-[9px] text-white/60">{en ? "Also on" : "उपलब्ध"}</p>
-                  <p className="text-xs font-bold text-white">App Store*</p>
+                  <p className="text-xs font-bold text-white">App Store</p>
                 </div>
               </a>
               <a href={OFFICIAL.smartNagarik} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
@@ -143,8 +143,8 @@ export const Footer = () => {
             </div>
             <p className="text-xs text-white/50">
               {en
-                ? "Download My Smart Nagarik App (Play Store link; App Store listing may vary)."
-                : "माय स्मार्ट नागरिक ॲप डाउनलोड करा (Play Store दुवा; App Store यादी वेगळी असू शकते)."}
+                ? "Download My Smart Nagarik App."
+                : "माय स्मार्ट नागरिक ॲप डाउनलोड करा."}
             </p>
           </div>
           <div>
@@ -170,15 +170,15 @@ export const Footer = () => {
           <div className="flex flex-wrap items-center gap-3">
             <span>
               {en ? "Last Updated On:" : "शेवटचे अद्यतन:"}{" "}
-              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{LAST_UPDATED}</span>
+              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{d(LAST_UPDATED)}</span>
             </span>
             <span>
               {en ? "Visitors (sample):" : "भेटी (नमुना):"}{" "}
-              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{TOTAL_VISITORS.toLocaleString()}</span>
+              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{d(TOTAL_VISITORS.toLocaleString("en-IN"))}</span>
             </span>
             <span>
               {en ? "Today (sample):" : "आज (नमुना):"}{" "}
-              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{TODAY_VISITORS.toLocaleString()}</span>
+              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{d(TODAY_VISITORS.toLocaleString("en-IN"))}</span>
             </span>
             <span>
               {en ? "Designed & developed by" : "निर्मिती:"}{" "}

@@ -7,15 +7,15 @@ export const OFFICIAL = {
   waterTax: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
   rtsDashboard: "https://rts.chhsambhajinagarmc.org/links/dashboard",
   gunthewari: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2",
-  complaintForm: "https://chhsambhajinagarmc.org/csms/complaint_form.php",
+  complaintForm: "https://aurangabadmahapalika.org/csms/complaint_form.php",
   trackComplaint: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250",
   citizenFeedback: "https://chhsambhajinagarmc.org/citizen-feedback-form",
   mahatenders: "https://mahatenders.gov.in/nicgep/app",
   gis: "https://gis.chhsambhajinagarmc.org/ascdlcitygis/",
   imegs: "https://chhsambhajinagarmc.org/dashboard/",
   aapleSarkar: "https://aaplesarkar.mahaonline.gov.in",
-  /** Aaple Sarkar – Grievance Redressal (Samadhaan / Takrar channel) */
-  samadhaan: "https://grievances.maharashtra.gov.in/en",
+  /** Samadhaan – CSMC complaint resolution system */
+  samadhaan: "https://aurangabadmahapalika.org/csms/complaint_form.php",
   /** Online RTI via Maharashtra Aaple Sarkar RTS services */
   onlineRti: "https://aaplesarkar.mahaonline.gov.in/en",
   contractorRegistration: "https://eroc.emahapwd.com/instructions",
@@ -24,6 +24,8 @@ export const OFFICIAL = {
   chalo: "https://www.chalo.com/",
   smartNagarik:
     "https://play.google.com/store/apps/details?id=vmax.com.smartnagrik&hl=en_IN",
+  smartNagarikAppStore:
+    "https://apps.apple.com/in/app/smart-nagrik-aurangabad-amc/id1633410274",
   whatsappChatbot: "https://api.whatsapp.com/send?phone=919485202020&text=Hi",
   cityMaps:
     "https://www.google.com/maps/place/Chhatrapati+Sambhajinagar,+Maharashtra",

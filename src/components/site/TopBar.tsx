@@ -90,7 +90,7 @@ const Sep = () => <span className="text-white/15 select-none mx-1">│</span>;
 
 // ── Main TopBar ───────────────────────────────────────────────────────────────
 export const TopBar = () => {
-  const { lang, setLang } = useLang();
+  const { lang, setLang, d } = useLang();
   const { enabled: colorBlind, toggle: toggleColorBlind } = useColorBlind();
   const en = lang === "en";
   const [dateTime, setDateTime] = useState(new Date());
@@ -144,12 +144,16 @@ export const TopBar = () => {
     document.documentElement.style.fontSize = `${size}%`;
   };
 
-  const formattedDate = dateTime.toLocaleDateString("en-IN", {
-    day: "numeric", month: "numeric", year: "numeric",
-  });
-  const formattedTime = dateTime.toLocaleTimeString("en-IN", {
-    hour: "2-digit", minute: "2-digit", second: "2-digit",
-  });
+  const formattedDate = d(
+    dateTime.toLocaleDateString(en ? "en-IN" : "mr-IN", {
+      day: "numeric", month: "numeric", year: "numeric",
+    }),
+  );
+  const formattedTime = d(
+    dateTime.toLocaleTimeString(en ? "en-IN" : "mr-IN", {
+      hour: "2-digit", minute: "2-digit", second: "2-digit",
+    }),
+  );
 
   // ── Derived display values ──────────────────────────────────────────────────
   const aqiCat     = aqi !== null ? getAQICategory(aqi, colorBlind) : null;
@@ -164,28 +168,28 @@ export const TopBar = () => {
   const tempTip = tempC !== null
     ? t(
         `${weatherLbl.en} · Current temperature in Chhatrapati Sambhajinagar is ${tempC}°C`,
-        `${weatherLbl.mr} · छत्रपती संभाजीनगरमधील सध्याचे तापमान ${tempC}°C आहे`
+        `${weatherLbl.mr} · छत्रपती संभाजीनगरमधील सध्याचे तापमान ${d(tempC)}°C आहे`
       )
     : "";
 
   const humidTip = humidity !== null
     ? t(
         `Relative humidity is ${humidity}% — higher humidity makes it feel warmer and stickier`,
-        `सापेक्ष आर्द्रता ${humidity}% आहे — जास्त आर्द्रतेमुळे उकाडा जास्त जाणवतो`
+        `सापेक्ष आर्द्रता ${d(humidity)}% आहे — जास्त आर्द्रतेमुळे उकाडा जास्त जाणवतो`
       )
     : "";
 
   const rainTip = rain !== null
     ? t(
         `${rainPct}% chance of rain in the next 3 hours — ${rain.en}`,
-        `पुढील ३ तासांत ${rainPct}% पावसाची शक्यता — ${rain.mr}`
+        `पुढील ${d(3)} तासांत ${d(rainPct)}% पावसाची शक्यता — ${rain.mr}`
       )
     : "";
 
   const aqiTip = aqiCat
     ? t(
         `Air Quality Index is ${aqi} (${aqiCat.labelEn}) — ${aqiCat.descEn}`,
-        `वायू गुणवत्ता निर्देशांक ${aqi} (${aqiCat.labelMr}) — ${aqiCat.descMr}`
+        `वायू गुणवत्ता निर्देशांक ${d(aqi)} (${aqiCat.labelMr}) — ${aqiCat.descMr}`
       )
     : "";
 
@@ -248,7 +252,7 @@ export const TopBar = () => {
             <Tip tip={tempTip}>
               <div className="flex items-center gap-1.5 pr-2 text-white/90">
                 <span className="text-[13px] leading-none" aria-hidden>{weatherEmoji}</span>
-                <span className="font-bold text-white">{tempC}°C</span>
+                <span className="font-bold text-white">{d(tempC)}°C</span>
               </div>
             </Tip>
           )}
@@ -260,7 +264,7 @@ export const TopBar = () => {
               <Tip tip={humidTip}>
                 <div className="hidden sm:flex items-center gap-1 px-2 text-white/55">
                   <span>💧</span>
-                  <span>{humidity}% {t("humidity", "आर्द्रता")}</span>
+                  <span>{d(humidity)}% {t("humidity", "आर्द्रता")}</span>
                 </div>
               </Tip>
             </>
@@ -279,7 +283,7 @@ export const TopBar = () => {
                   <svg viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3 opacity-85 shrink-0">
                     <path fillRule="evenodd" d="M10 1.75a.75.75 0 0 1 .6.3l5.25 7a.75.75 0 0 1-.094 1.001A3.75 3.75 0 1 1 4.244 9.55a.75.75 0 0 1-.094-1L9.4 2.05a.75.75 0 0 1 .6-.3ZM10 15.5a2.25 2.25 0 0 0 1.893-3.462l-1.89.001L8.107 12.038A2.25 2.25 0 0 0 10 15.5Z" clipRule="evenodd" />
                   </svg>
-                  <span>{rainPct}%</span>
+                  <span>{d(rainPct)}%</span>
                   <span className="hidden sm:inline text-white/50 font-normal">
                     {t(rain.en, rain.mr)}
                   </span>
@@ -300,7 +304,7 @@ export const TopBar = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8h11a3 3 0 0 1 0 6H3M3 12h8" />
                   </svg>
                   <span className="font-bold" style={{ color: aqiCat.color }}>
-                    {t("AQI", "वायुगुणवत्ता")} {aqi}
+                    {t("AQI", "वायुगुणवत्ता")} {d(aqi)}
                   </span>
                   <Dot color={aqiCat.color} />
                   {/* badge */}

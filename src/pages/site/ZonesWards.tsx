@@ -116,7 +116,7 @@ const ZonesWards = () => {
                       {en ? "Population" : "लोकसंख्या"}
                     </span>
                     <span className="flex items-center gap-1 col-span-2">
-                      <MapPin className="h-3 w-3" /> {z.office}
+                      <MapPin className="h-3 w-3" /> {en ? z.office : toDevanagariDigits(z.office)}
                     </span>
                     <span className="flex items-center gap-1 col-span-2">
                       <Phone className="h-3 w-3" />{" "}

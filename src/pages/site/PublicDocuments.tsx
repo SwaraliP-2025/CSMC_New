@@ -100,7 +100,7 @@ function downloadPrototypePdf(doc: Doc) {
 }
 
 const PublicDocuments = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const [searchParams] = useSearchParams();
   const [category, setCategory] = useState<DocCategory>("all");
@@ -183,13 +183,13 @@ const PublicDocuments = () => {
                 <FileText className="h-5 w-5 text-civic-blue group-hover:text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-civic-ink truncate">{doc.title}</p>
+                <p className="font-semibold text-sm text-civic-ink truncate">{d(doc.title)}</p>
                 <div className="flex items-center gap-2 mt-1 flex-wrap">
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${CATEGORY_COLORS[doc.category]}`}>
                     {CATEGORY_LABELS[doc.category]}
                   </span>
-                  <span className="text-xs text-muted-foreground">{doc.date}</span>
-                  <span className="text-xs text-muted-foreground">• {doc.size}</span>
+                  <span className="text-xs text-muted-foreground">{d(doc.date)}</span>
+                  <span className="text-xs text-muted-foreground">• {d(doc.size)}</span>
                   {doc.repoId && (
                     <Link
                       to={`/digital-repository/${doc.repoId}`}

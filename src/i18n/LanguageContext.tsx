@@ -1,7 +1,14 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { localizeDigits } from "./digits";
 import { translations, type Lang, type Translations } from "./translations";
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Translations };
+type Ctx = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: Translations;
+  /** Convert digits for the active language (Devanagari in Marathi, 0–9 in English). */
+  d: (value: string | number | null | undefined) => string;
+};
 const LanguageContext = createContext<Ctx | undefined>(undefined);
 
 // translations.ts is a data module. Fast Refresh cannot update this file
@@ -40,7 +47,14 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [lang]);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] }}>
+    <LanguageContext.Provider
+      value={{
+        lang,
+        setLang,
+        t: translations[lang],
+        d: (value) => localizeDigits(value, lang),
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );

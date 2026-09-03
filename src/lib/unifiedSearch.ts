@@ -1,5 +1,6 @@
 import { CIVIC_CATALOG, REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import { CATEGORY_LABELS } from "@/data/civicLabels";
+import { localizeDigits } from "@/i18n/digits";
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
 import { groupHits, smartSearch, type SearchHit } from "@/lib/semanticSearch";
 import { prepareSearchQuery } from "@/lib/searchAliases";
@@ -69,13 +70,17 @@ export function downloadCivicRecord(record: CivicRecord) {
 }
 
 export function formatCivicDate(iso: string, en: boolean) {
-  const d = new Date(`${iso}T00:00:00`);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString(en ? "en-IN" : "mr-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const parsed = new Date(`${iso}T00:00:00`);
+  const lang = en ? "en" : "mr";
+  if (Number.isNaN(parsed.getTime())) return localizeDigits(iso, lang);
+  return localizeDigits(
+    parsed.toLocaleDateString(en ? "en-IN" : "mr-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    lang,
+  );
 }
 
 export function documentPermalink(id: string) {

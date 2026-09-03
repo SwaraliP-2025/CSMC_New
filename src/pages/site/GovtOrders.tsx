@@ -15,7 +15,7 @@ const orders = [
 ];
 
 const GovtOrders = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const [search, setSearch] = useState("");
   const filtered = orders.filter(o =>
@@ -39,11 +39,11 @@ const GovtOrders = () => {
                 <FileText className="h-5 w-5 text-civic-blue group-hover:text-white transition-colors" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-civic-ink">{en ? o.title : o.titleMr}</p>
+                <p className="font-semibold text-sm text-civic-ink">{d(en ? o.title : o.titleMr)}</p>
                 <div className="flex items-center gap-3 mt-1">
-                  <span className="text-xs font-mono text-muted-foreground">{o.no}</span>
+                  <span className="text-xs font-mono text-muted-foreground">{d(o.no)}</span>
                   <span className="text-xs bg-civic-blue/10 text-civic-blue font-bold px-2 py-0.5 rounded">{en ? o.dept : o.deptMr}</span>
-                  <span className="text-xs text-muted-foreground">{o.date}</span>
+                  <span className="text-xs text-muted-foreground">{d(o.date)}</span>
                 </div>
               </div>
               {"repoId" in o && o.repoId ? (

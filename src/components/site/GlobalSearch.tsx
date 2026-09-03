@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { ExternalLink, Mic, MicOff, Search, X } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
+import { localizeDigits } from "@/i18n/digits";
 import { CATEGORY_LABELS, SEARCH_GROUP_LABELS } from "@/data/civicLabels";
 import { formatCivicDate, groupSearchResults, recordHref, searchHits } from "@/lib/unifiedSearch";
 import { highlightText, type SearchHit } from "@/lib/semanticSearch";
@@ -34,7 +35,7 @@ function getSpeechRecognitionCtor(): (new () => SpeechRecognitionLike) | null {
 }
 
 export function GlobalSearch({ compact = false }: { compact?: boolean }) {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const listId = useId();
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -255,7 +256,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                     <div key={group} className="px-3 py-3 border-t border-border">
                       <p className="text-[10px] font-bold uppercase tracking-wide text-civic-red mb-2">
                         {en ? SEARCH_GROUP_LABELS[group].en : SEARCH_GROUP_LABELS[group].mr}
-                        <span className="text-muted-foreground font-medium ml-1">({items.length})</span>
+                        <span className="text-muted-foreground font-medium ml-1">({d(items.length)})</span>
                       </p>
                       <ul className="space-y-1">
                         {items.slice(0, MAX_PER_GROUP).map((hit) => (
@@ -316,7 +317,7 @@ function ResultRow({
               <span key={i}>{part.text}</span>
             )
           )}
-          {hit.ocrPage ? ` · p.${hit.ocrPage}` : ""}
+          {hit.ocrPage ? ` · p.${localizeDigits(hit.ocrPage, en ? "en" : "mr")}` : ""}
         </p>
       )}
       <p className="text-[11px] text-muted-foreground mt-0.5">

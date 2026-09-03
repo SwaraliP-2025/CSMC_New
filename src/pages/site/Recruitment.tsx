@@ -14,7 +14,7 @@ const posts = [
 ];
 
 const Recruitment = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   return (
     <Layout>
@@ -50,8 +50,8 @@ const Recruitment = () => {
                     <Briefcase className="h-4 w-4 text-civic-blue shrink-0" />
                     {en ? p.post : p.postMr}
                   </td>
-                  <td className="px-5 py-4 text-center font-bold text-civic-blue">{p.vacancies}</td>
-                  <td className="px-5 py-4 text-center text-muted-foreground">{p.lastDate}</td>
+                  <td className="px-5 py-4 text-center font-bold text-civic-blue">{d(p.vacancies)}</td>
+                  <td className="px-5 py-4 text-center text-muted-foreground">{d(p.lastDate)}</td>
                   <td className="px-5 py-4 text-center">
                     <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${p.status === "Open" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
                       {en ? p.status : p.statusMr}

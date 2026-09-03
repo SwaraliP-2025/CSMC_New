@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
 const Tenders = () => {
-  const { t, lang } = useLang();
+  const { t, lang, d } = useLang();
   const en = lang === "en";
   const rows = [
     { id: "CSMC/2026/142", title: en ? "Solid Waste Processing Facility — Phase II" : "घनकचरा प्रक्रिया केंद्र — टप्पा २", value: "₹ 84.5 Cr", close: "12 May 2026" },
@@ -31,10 +31,10 @@ const Tenders = () => {
             <tbody>
               {rows.map((r, i) => (
                 <tr key={r.id} className={`${i % 2 ? "bg-white" : "bg-civic-gold/5"} border-t border-border hover:bg-civic-gold/10 transition-colors group`}>
-                  <td className="px-8 py-6 font-mono text-xs font-bold text-civic-blue">{r.id}</td>
-                  <td className="px-8 py-6 font-bold text-civic-ink group-hover:text-civic-blue transition-colors">{r.title}</td>
-                  <td className="px-8 py-6 text-muted-foreground font-medium">{r.value}</td>
-                  <td className="px-8 py-6 text-muted-foreground font-medium">{r.close}</td>
+                  <td className="px-8 py-6 font-mono text-xs font-bold text-civic-blue">{d(r.id)}</td>
+                  <td className="px-8 py-6 font-bold text-civic-ink group-hover:text-civic-blue transition-colors">{d(r.title)}</td>
+                  <td className="px-8 py-6 text-muted-foreground font-medium">{d(r.value)}</td>
+                  <td className="px-8 py-6 text-muted-foreground font-medium">{d(r.close)}</td>
                   <td className="px-8 py-6 text-right">
                     <Button asChild size="sm" variant="ghost" className="text-civic-blue hover:bg-civic-blue hover:text-white px-4 font-bold transition-all">
                       <a href="https://mahatenders.gov.in/nicgep/app" target="_blank" rel="noopener noreferrer">

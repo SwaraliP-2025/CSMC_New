@@ -26,7 +26,7 @@ const Avatar = ({ src, name, size = "md" }: { src: string | null; name: string; 
 };
 
 const MayorsList = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const [selected, setSelected] = useState<{ src: string; name: string; role: string } | null>(null);
 
@@ -61,16 +61,16 @@ const MayorsList = () => {
                       <Avatar src={m.img} name={en ? m.name : m.nameMr} />
                     </div>
                   </td>
-                  <td className="px-4 py-4 text-center font-bold text-muted-foreground">{m.sr}</td>
+                  <td className="px-4 py-4 text-center font-bold text-muted-foreground">{d(m.sr)}</td>
                   <td className="px-4 py-4">
                     <p className="font-bold text-civic-ink">{en ? m.name : m.nameMr}</p>
                     {m.current && <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">{en ? "Current Mayor" : "विद्यमान महापौर"}</span>}
                   </td>
-                  <td className="px-4 py-4 text-center text-muted-foreground">{m.from}</td>
+                  <td className="px-4 py-4 text-center text-muted-foreground">{d(m.from)}</td>
                   <td className="px-4 py-4 text-center">
                     {m.to === "Present"
                       ? <span className="bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full text-xs">{en ? "Present" : "विद्यमान"}</span>
-                      : <span className="text-muted-foreground">{m.to}</span>}
+                      : <span className="text-muted-foreground">{d(m.to)}</span>}
                   </td>
                   <td className="px-4 py-4 text-center">
                     <span className="bg-civic-blue/10 text-civic-blue font-bold px-2.5 py-1 rounded-full text-xs">{en ? m.party : m.partyMr}</span>
@@ -98,13 +98,13 @@ const MayorsList = () => {
                 </div>
                 {m.current && <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">{en ? "Current Mayor" : "विद्यमान महापौर"}</span>}
                 <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                  <span>#{m.sr}</span>
+                  <span>#{d(m.sr)}</span>
                   <span>•</span>
-                  <span>{m.from}</span>
+                  <span>{d(m.from)}</span>
                   <span>→</span>
                   {m.to === "Present"
                     ? <span className="bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">{en ? "Present" : "विद्यमान"}</span>
-                    : <span>{m.to}</span>}
+                    : <span>{d(m.to)}</span>}
                 </div>
               </div>
             </div>

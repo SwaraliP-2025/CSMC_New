@@ -4,6 +4,7 @@ import type {
   LocalitySuggestion,
   Prabhag,
 } from "@/types/corporator";
+import { fromDevanagariDigits } from "@/i18n/digits";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -18,7 +19,7 @@ let cache: Promise<{
 }> | null = null;
 
 function normalizeText(text: string): string {
-  return text
+  return fromDevanagariDigits(text)
     .trim()
     .toLowerCase()
     .replace(/\(part\)/gi, "")

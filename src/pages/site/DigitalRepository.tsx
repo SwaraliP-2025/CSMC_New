@@ -22,6 +22,7 @@ import {
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
+import { localizeDigits } from "@/i18n/digits";
 import { REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import {
   CATEGORY_LABELS,
@@ -40,7 +41,7 @@ const isRepoCategory = (v: string | null): v is CivicCategory =>
   !!v && (REPOSITORY_CATEGORIES as string[]).includes(v);
 
 const DigitalRepository = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const [params, setParams] = useSearchParams();
   const [category, setCategory] = useState<CivicCategory | "all">("all");
@@ -169,22 +170,22 @@ const DigitalRepository = () => {
           <SummaryCard
             icon={FileText}
             label={en ? "Total Documents" : "एकूण दस्तऐवज"}
-            value={String(REPOSITORY_DOCUMENTS.length)}
+            value={d(REPOSITORY_DOCUMENTS.length)}
           />
           <SummaryCard
             icon={FolderOpen}
             label={en ? "Categories" : "वर्ग"}
-            value={String(REPOSITORY_CATEGORIES.length)}
+            value={d(REPOSITORY_CATEGORIES.length)}
           />
           <SummaryCard
             icon={Building2}
             label={en ? "Departments" : "विभाग"}
-            value={String(departments.length)}
+            value={d(departments.length)}
           />
           <SummaryCard
             icon={Sparkles}
             label={en ? "Recently Added" : "अलीकडे जोडले"}
-            value={String(recent.length)}
+            value={d(recent.length)}
             hint={en ? recent[0]?.titleEn : recent[0]?.titleMr}
           />
         </div>
@@ -202,7 +203,7 @@ const DigitalRepository = () => {
                 : "border-border text-muted-foreground hover:border-civic-blue hover:text-civic-blue"
             }`}
           >
-            {en ? "All" : "सर्व"} ({REPOSITORY_DOCUMENTS.length})
+            {en ? "All" : "सर्व"} ({d(REPOSITORY_DOCUMENTS.length)})
           </button>
           {REPOSITORY_CATEGORIES.map((c) => (
             <button
@@ -215,7 +216,7 @@ const DigitalRepository = () => {
                   : "border-border text-muted-foreground hover:border-civic-blue hover:text-civic-blue"
               }`}
             >
-              {en ? CATEGORY_LABELS[c].en : CATEGORY_LABELS[c].mr} ({counts[c] ?? 0})
+              {en ? CATEGORY_LABELS[c].en : CATEGORY_LABELS[c].mr} ({d(counts[c] ?? 0)})
             </button>
           ))}
         </div>
@@ -255,7 +256,7 @@ const DigitalRepository = () => {
             <option value="all">{en ? "All years" : "सर्व वर्षे"}</option>
             {years.map((y) => (
               <option key={y} value={y}>
-                {y}
+                {d(y)}
               </option>
             ))}
           </select>
@@ -358,7 +359,7 @@ const DigitalRepository = () => {
                     </span>
                     <span>{en ? doc.departmentEn : doc.departmentMr}</span>
                     <span>{formatCivicDate(doc.publishedAt, en)}</span>
-                    {ocrHits.get(doc.id)?.ocrPage ? <span>p.{ocrHits.get(doc.id)?.ocrPage}</span> : null}
+                    {ocrHits.get(doc.id)?.ocrPage ? <span>p.{d(ocrHits.get(doc.id)?.ocrPage)}</span> : null}
                   </div>
                 </div>
                 <Link
@@ -393,6 +394,7 @@ function DocCard({
   onBookmark: () => void;
   onCopy: () => void;
 }) {
+  const digits = (value: string | number) => localizeDigits(value, en ? "en" : "mr");
   const snippet = en ? hit?.snippetEn : hit?.snippetMr;
   return (
     <article className="bg-white border border-border rounded-2xl p-5 hover:shadow-elegant hover:border-civic-gold/30 transition-all flex flex-col">
@@ -401,7 +403,7 @@ function DocCard({
           {en ? "Official" : "अधिकृत"}
         </span>
         <span className="text-[10px] font-bold uppercase tracking-wide text-civic-blue bg-civic-blue/10 px-1.5 py-0.5 rounded">
-          v{doc.version}
+          v{digits(doc.version)}
         </span>
         <span
           className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
@@ -432,7 +434,7 @@ function DocCard({
               <span key={i}>{part.text}</span>
             )
           )}
-          {hit?.ocrPage ? <span className="text-civic-blue font-semibold"> · p.{hit.ocrPage}</span> : null}
+          {hit?.ocrPage ? <span className="text-civic-blue font-semibold"> · p.{digits(hit.ocrPage)}</span> : null}
         </p>
       ) : (
         <p className="text-xs text-muted-foreground mb-3 line-clamp-3 flex-1">
@@ -443,13 +445,13 @@ function DocCard({
         {en ? doc.departmentEn : doc.departmentMr}
         {" · "}
         {en ? LANGUAGE_LABELS[doc.language].en : LANGUAGE_LABELS[doc.language].mr}
-        {doc.fileSize ? ` · ${doc.fileSize}` : ""}
+        {doc.fileSize ? ` · ${digits(doc.fileSize)}` : ""}
         {" · "}
         {en ? "Published" : "प्रकाशित"} {formatCivicDate(doc.publishedAt, en)}
         {" · "}
         {en ? "Updated" : "अद्यतन"} {formatCivicDate(doc.updatedAt, en)}
         {" · "}
-        <Clock className="inline h-3 w-3 mb-0.5" /> {en ? `${doc.readingMinutes} min` : `${doc.readingMinutes} मि.`}
+        <Clock className="inline h-3 w-3 mb-0.5" /> {en ? `${digits(doc.readingMinutes)} min` : `${digits(doc.readingMinutes)} मि.`}
       </p>
       <div className="flex flex-wrap gap-1.5 mt-auto">
         <Link

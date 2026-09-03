@@ -60,7 +60,7 @@ export const SITE_NAV: NavItem[] = [
           {
             labelEn: "Map of City",
             labelMr: "शहराचा नकाशा",
-            to: "https://www.google.com/maps/place/Chhatrapati+Sambhajinagar,+Maharashtra",
+            to: "https://gis.chhsambhajinagarmc.org/ascdlcitygis/map/all",
             external: true,
           },
           {
@@ -196,15 +196,9 @@ export const SITE_NAV: NavItem[] = [
         external: true,
       },
       {
-        labelEn: "Online RTI",
-        labelMr: "ऑनलाइन माहिती अधिकार",
+        labelEn: "Aaple Sarkar",
+        labelMr: "आपले सरकार",
         to: OFFICIAL.onlineRti,
-        external: true,
-      },
-      {
-        labelEn: "Contractor Registration",
-        labelMr: "कंत्राटदार नोंदणी",
-        to: OFFICIAL.contractorRegistration,
         external: true,
       },
     ],
@@ -227,6 +221,12 @@ export const SITE_NAV: NavItem[] = [
         to: "/digital-repository",
       },
       { labelEn: "Recruitment", labelMr: "भरती", to: "/recruitment" },
+      {
+        labelEn: "Contractor Registration",
+        labelMr: "कंत्राटदार नोंदणी",
+        to: OFFICIAL.contractorRegistration,
+        external: true,
+      },
     ],
   },
   {

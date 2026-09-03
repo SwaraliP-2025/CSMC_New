@@ -24,7 +24,7 @@ interface PrabhagData {
 }
 
 export default function Prabhag2025() {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -88,10 +88,10 @@ export default function Prabhag2025() {
 
             {/* ── Summary stats ── */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-              <StatCard label={en ? "Total Prabhags" : "एकूण प्रभाग"} value={String(data.prabhags.length)} />
-              <StatCard label={en ? "Total Population" : "एकूण लोकसंख्या"} value={totalPop.toLocaleString("en-IN")} />
-              <StatCard label={en ? "SC Population" : "अ.जा. लोकसंख्या"} value={totalSC.toLocaleString("en-IN")} />
-              <StatCard label={en ? "ST Population" : "अ.ज. लोकसंख्या"} value={totalST.toLocaleString("en-IN")} />
+              <StatCard label={en ? "Total Prabhags" : "एकूण प्रभाग"} value={d(data.prabhags.length)} />
+              <StatCard label={en ? "Total Population" : "एकूण लोकसंख्या"} value={d(totalPop.toLocaleString("en-IN"))} />
+              <StatCard label={en ? "SC Population" : "अ.जा. लोकसंख्या"} value={d(totalSC.toLocaleString("en-IN"))} />
+              <StatCard label={en ? "ST Population" : "अ.ज. लोकसंख्या"} value={d(totalST.toLocaleString("en-IN"))} />
             </div>
 
             {/* ── Search ── */}
@@ -122,24 +122,24 @@ export default function Prabhag2025() {
                       className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-muted/30 transition-colors"
                     >
                       <span className="w-12 h-12 rounded-xl bg-civic-blue text-white flex items-center justify-center font-bold text-base shrink-0">
-                        {p.no}
+                        {d(p.no)}
                       </span>
                       <div className="flex-1 min-w-0">
                         <p className="font-serif font-bold text-civic-blue text-sm">
-                          {en ? `Prabhag ${p.no}` : `प्रभाग ${p.no}`}
+                          {en ? `Prabhag ${p.no}` : `प्रभाग ${d(p.no)}`}
                         </p>
                         <p className="text-xs text-muted-foreground truncate">
                           {p.localities.slice(0, 4).join(", ")}
-                          {p.localities.length > 4 ? ` +${p.localities.length - 4} more` : ""}
+                          {p.localities.length > 4 ? ` +${d(p.localities.length - 4)} more` : ""}
                         </p>
                       </div>
                       <div className="hidden sm:flex items-center gap-6 text-sm shrink-0">
                         <div className="text-center">
-                          <p className="font-bold text-civic-blue">{p.population.toLocaleString("en-IN")}</p>
+                          <p className="font-bold text-civic-blue">{d(p.population.toLocaleString("en-IN"))}</p>
                           <p className="text-xs text-muted-foreground">{en ? "Population" : "लोकसंख्या"}</p>
                         </div>
                         <div className="text-center">
-                          <p className="font-bold">{p.seats}</p>
+                          <p className="font-bold">{d(p.seats)}</p>
                           <p className="text-xs text-muted-foreground">{en ? "Seats" : "जागा"}</p>
                         </div>
                       </div>
@@ -149,8 +149,8 @@ export default function Prabhag2025() {
                     {isOpen && (
                       <div className="border-t border-border px-5 py-4 bg-muted/20">
                         <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 mb-4">
-                          <MiniStat label={en ? "Population" : "लोकसंख्या"} value={p.population.toLocaleString("en-IN")} />
-                          <MiniStat label={en ? "Seats" : "जागा"} value={String(p.seats)} />
+                          <MiniStat label={en ? "Population" : "लोकसंख्या"} value={d(p.population.toLocaleString("en-IN"))} />
+                          <MiniStat label={en ? "Seats" : "जागा"} value={d(p.seats)} />
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-2 flex items-center gap-1">
@@ -175,7 +175,7 @@ export default function Prabhag2025() {
             <p className="text-xs text-muted-foreground mt-6 text-center">
               {en
                 ? `Showing ${filtered.length} of ${data.prabhags.length} prabhags · Source: ${data.source}`
-                : `${data.prabhags.length} पैकी ${filtered.length} प्रभाग दाखवत आहे · स्रोत: ${data.source}`}
+                : `${d(data.prabhags.length)} पैकी ${d(filtered.length)} प्रभाग दाखवत आहे · स्रोत: ${d(data.source)}`}
             </p>
           </>
         )}

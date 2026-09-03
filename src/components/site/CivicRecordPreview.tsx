@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { CATEGORY_LABELS } from "@/data/civicLabels";
+import { localizeDigits } from "@/i18n/digits";
 import { downloadCivicRecord, formatCivicDate } from "@/lib/unifiedSearch";
 import type { CivicRecord } from "@/types/civicCatalog";
 
@@ -42,7 +43,7 @@ export function CivicRecordPreview({
             {en ? record.departmentEn : record.departmentMr}
           </span>
           <span>{formatCivicDate(record.publishedAt, en)}</span>
-          {record.fileSize && <span>• {record.fileSize}</span>}
+          {record.fileSize && <span>• {localizeDigits(record.fileSize, en ? "en" : "mr")}</span>}
         </div>
         <p className="text-sm text-foreground/80 leading-relaxed">
           {en ? record.descriptionEn : record.descriptionMr}

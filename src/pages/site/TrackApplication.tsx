@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Search, CheckCircle2, Clock, Truck, XCircle, FileText, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/i18n/LanguageContext";
+import { fromDevanagariDigits } from "@/i18n/digits";
 import { OFFICIAL } from "@/data/officialLinks";
 
 type Status = "in_review" | "approved" | "dispatched" | "rejected" | "pending";
@@ -37,13 +38,13 @@ const statusConfig: Record<Status, { label: string; color: string; bg: string; I
 const steps: Status[] = ["pending", "in_review", "approved", "dispatched"];
 
 const TrackApplication = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<ApplicationResult | null | "not_found">(null);
 
   const handleSearch = () => {
-    const found = MOCK_DATA[query.trim().toUpperCase()];
+    const found = MOCK_DATA[fromDevanagariDigits(query.trim()).toUpperCase()];
     setResult(found ?? "not_found");
   };
 
@@ -83,7 +84,7 @@ const TrackApplication = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            placeholder={en ? "e.g. CSMC-2026-00123" : "उदा. CSMC-2026-00123"}
+            placeholder={en ? "e.g. CSMC-2026-00123" : `उदा. ${d("CSMC-2026-00123")}`}
             className="flex-1 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue/30"
             aria-label={en ? "Application ID" : "अर्ज आयडी"}
           />
@@ -94,9 +95,9 @@ const TrackApplication = () => {
 
         <p className="text-xs text-muted-foreground mb-8">
           {en ? "Try sample IDs:" : "नमुना आयडी वापरा:"}{" "}
-          <button type="button" className="font-mono text-civic-blue" onClick={() => setQuery("CSMC-2026-00123")}>CSMC-2026-00123</button>,{" "}
-          <button type="button" className="font-mono text-civic-blue" onClick={() => setQuery("CSMC-2026-00456")}>CSMC-2026-00456</button>,{" "}
-          <button type="button" className="font-mono text-civic-blue" onClick={() => setQuery("CSMC-2026-00789")}>CSMC-2026-00789</button>
+          <button type="button" className="font-mono text-civic-blue" onClick={() => setQuery("CSMC-2026-00123")}>{d("CSMC-2026-00123")}</button>,{" "}
+          <button type="button" className="font-mono text-civic-blue" onClick={() => setQuery("CSMC-2026-00456")}>{d("CSMC-2026-00456")}</button>,{" "}
+          <button type="button" className="font-mono text-civic-blue" onClick={() => setQuery("CSMC-2026-00789")}>{d("CSMC-2026-00789")}</button>
         </p>
 
         {result === "not_found" && (
@@ -115,14 +116,14 @@ const TrackApplication = () => {
               <cfg.Icon className={`h-6 w-6 ${cfg.color}`} />
               <div>
                 <p className={`font-bold text-base ${cfg.color}`}>{cfg.label}</p>
-                <p className="text-xs text-muted-foreground">Last updated: {result.lastUpdated}</p>
+                <p className="text-xs text-muted-foreground">Last updated: {d(result.lastUpdated)}</p>
               </div>
             </div>
             <div className="px-6 py-5 grid grid-cols-2 gap-4 text-sm">
-              <div><p className="text-muted-foreground text-xs mb-1">Application ID</p><p className="font-mono font-bold">{result.id}</p></div>
+              <div><p className="text-muted-foreground text-xs mb-1">Application ID</p><p className="font-mono font-bold">{d(result.id)}</p></div>
               <div><p className="text-muted-foreground text-xs mb-1">Service Type</p><p className="font-semibold">{result.type}</p></div>
               <div><p className="text-muted-foreground text-xs mb-1">Applicant</p><p className="font-semibold">{result.applicant}</p></div>
-              <div><p className="text-muted-foreground text-xs mb-1">Submitted On</p><p className="font-semibold">{result.submitted}</p></div>
+              <div><p className="text-muted-foreground text-xs mb-1">Submitted On</p><p className="font-semibold">{d(result.submitted)}</p></div>
             </div>
             {result.status !== "rejected" && (
               <div className="px-6 pb-5">
@@ -134,7 +135,7 @@ const TrackApplication = () => {
                       <div key={s} className="flex items-center flex-1 last:flex-none">
                         <div className="flex flex-col items-center">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 text-xs font-bold transition-all ${done ? "bg-civic-blue border-civic-blue text-white" : "border-border text-muted-foreground"}`}>
-                            {i + 1}
+                            {d(i + 1)}
                           </div>
                           <span className={`text-[10px] mt-1 font-semibold ${done ? "text-civic-blue" : "text-muted-foreground"}`}>{sc.label}</span>
                         </div>
@@ -147,7 +148,7 @@ const TrackApplication = () => {
             )}
             <div className="px-6 pb-6">
               <p className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">Remarks</p>
-              <p className="text-sm text-foreground/80 bg-muted/40 rounded-lg px-4 py-3">{result.remarks}</p>
+              <p className="text-sm text-foreground/80 bg-muted/40 rounded-lg px-4 py-3">{d(result.remarks)}</p>
             </div>
           </div>
         )}

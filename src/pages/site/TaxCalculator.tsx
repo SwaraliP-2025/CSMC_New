@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { useState } from "react";
 import { Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLang } from "@/i18n/LanguageContext";
 
 const ZONE_RATES: Record<string, number> = {
   "1": 0.28, "2": 0.26, "3": 0.24, "4": 0.22,
@@ -10,6 +11,7 @@ const ZONE_RATES: Record<string, number> = {
 };
 
 const TaxCalculator = () => {
+  const { d } = useLang();
   const [area, setArea] = useState("");
   const [ratePerSqft, setRatePerSqft] = useState("");
   const [zone, setZone] = useState("1");
@@ -67,7 +69,7 @@ const TaxCalculator = () => {
                 <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-1.5 block">Zone</label>
                 <select value={zone} onChange={e => setZone(e.target.value)}
                   className="w-full border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue/30 bg-white">
-                  {Object.keys(ZONE_RATES).map(z => <option key={z} value={z}>Zone {z}</option>)}
+                  {Object.keys(ZONE_RATES).map(z => <option key={z} value={z}>Zone {d(z)}</option>)}
                 </select>
               </div>
               <div>
@@ -90,16 +92,16 @@ const TaxCalculator = () => {
           <div className="mt-8 border border-border rounded-2xl overflow-hidden shadow-sm">
             <div className="bg-civic-blue text-white px-6 py-4">
               <p className="text-xs uppercase tracking-widest font-bold opacity-70 mb-1">Estimated Annual Tax</p>
-              <p className="font-serif text-4xl font-bold">₹{result.total.toLocaleString("en-IN", { maximumFractionDigits: 0 })}</p>
+              <p className="font-serif text-4xl font-bold">₹{d(result.total.toLocaleString("en-IN", { maximumFractionDigits: 0 }))}</p>
             </div>
             <div className="divide-y divide-border">
               {result.breakdown.map((b, i) => (
                 <div key={i} className="px-6 py-4 flex items-start justify-between gap-4">
                   <div>
                     <p className="font-semibold text-sm text-civic-ink">{b.label}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{b.note}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{d(b.note)}</p>
                   </div>
-                  <p className="font-bold text-civic-blue whitespace-nowrap">₹{b.amount.toLocaleString("en-IN", { maximumFractionDigits: 0 })}</p>
+                  <p className="font-bold text-civic-blue whitespace-nowrap">₹{d(b.amount.toLocaleString("en-IN", { maximumFractionDigits: 0 }))}</p>
                 </div>
               ))}
             </div>

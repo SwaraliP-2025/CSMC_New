@@ -32,7 +32,7 @@ const RTI_DOCS = [
 ];
 
 const RTIAct = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   return (
     <Layout>
@@ -96,7 +96,7 @@ const RTIAct = () => {
                 <p className="text-xs font-bold text-civic-red uppercase tracking-wide mb-1">{en ? o.role : o.roleMr}</p>
                 <p className="font-bold text-civic-ink">{o.name}</p>
                 <p className="text-xs text-muted-foreground">{o.dept}</p>
-                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1"><Phone className="h-3 w-3" />{o.phone}</p>
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1"><Phone className="h-3 w-3" />{d(o.phone)}</p>
               </div>
             </div>
           ))}

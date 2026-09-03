@@ -8,7 +8,7 @@ import organogramImg from "@/assets/organogram.png";
 // import organogram from "@/assets/organogram.png";
 
 const Organization = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
 
   const imgSrc = organogramImg;
@@ -79,7 +79,7 @@ const Organization = () => {
             { v: "12", l: en ? "Departments" : "विभाग" },
           ].map((s, i) => (
             <div key={i} className="bg-white border border-border rounded-xl p-4 text-center hover:shadow-sm transition-shadow">
-              <p className="font-serif text-3xl font-bold text-civic-gold">{s.v}</p>
+              <p className="font-serif text-3xl font-bold text-civic-gold">{d(s.v)}</p>
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wide mt-1">{s.l}</p>
             </div>
           ))}

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
+import { localizeDigits } from "@/i18n/digits";
 import { useLang } from "@/i18n/LanguageContext";
 import { CIVIC_CATALOG, getCivicRecord } from "@/data/civicCatalog";
 import {
@@ -84,6 +85,7 @@ const DocumentViewer = () => {
   }
 
   const en = viewEn;
+  const digits = (value: string | number | null | undefined) => localizeDigits(value, en ? "en" : "mr");
   const docId = officialDocumentId(record.id, record.year);
   const latest = record.versions.find((v) => v.status === "current") ?? record.versions[0];
   const previous = record.versions.find((v) => v.version !== latest?.version);
@@ -148,16 +150,16 @@ const DocumentViewer = () => {
                   label={en ? "Language" : "भाषा"}
                   value={en ? LANGUAGE_LABELS[record.language].en : LANGUAGE_LABELS[record.language].mr}
                 />
-                <MetaRow label={en ? "Version" : "आवृत्ती"} value={`v${record.version}`} />
+                <MetaRow label={en ? "Version" : "आवृत्ती"} value={`v${digits(record.version)}`} />
                 <MetaRow
                   label={en ? "Status" : "स्थिती"}
                   value={en ? DOCUMENT_STATUS_LABELS[record.status].en : DOCUMENT_STATUS_LABELS[record.status].mr}
                 />
-                <MetaRow label={en ? "Document ID" : "दस्तऐवज आयडी"} value={docId} />
-                {record.fileSize && <MetaRow label={en ? "File size" : "फाइल आकार"} value={record.fileSize} />}
+                <MetaRow label={en ? "Document ID" : "दस्तऐवज आयडी"} value={digits(docId)} />
+                {record.fileSize && <MetaRow label={en ? "File size" : "फाइल आकार"} value={digits(record.fileSize)} />}
                 <MetaRow
                   label={en ? "Reading time" : "वाचन वेळ"}
-                  value={en ? `${record.readingMinutes} min` : `${record.readingMinutes} मिनिटे`}
+                  value={en ? `${digits(record.readingMinutes)} min` : `${digits(record.readingMinutes)} मिनिटे`}
                 />
               </dl>
 
@@ -167,7 +169,7 @@ const DocumentViewer = () => {
                   {en ? "AI summary" : "एआय सारांश"}
                   <span className="ml-auto font-medium text-muted-foreground normal-case tracking-normal flex items-center gap-1">
                     <Clock className="h-3 w-3" />
-                    {en ? `${record.readingMinutes} min read` : `${record.readingMinutes} मिनिटे वाचन`}
+                    {en ? `${digits(record.readingMinutes)} min read` : `${digits(record.readingMinutes)} मिनिटे वाचन`}
                   </span>
                 </p>
                 <p className="text-sm text-foreground/80 leading-relaxed">
@@ -312,7 +314,7 @@ const DocumentViewer = () => {
                 {record.versions.map((v) => (
                   <li key={v.version} className="border-l-2 border-civic-blue/20 pl-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-civic-ink">v{v.version}</span>
+                      <span className="text-sm font-bold text-civic-ink">v{digits(v.version)}</span>
                       {v.status === "current" && (
                         <span className="text-[10px] font-bold bg-civic-blue text-white px-1.5 py-0.5 rounded">
                           {en ? "Latest" : "नवीनतम"}
@@ -346,7 +348,7 @@ const DocumentViewer = () => {
                   <p className="text-xs text-foreground/80 leading-relaxed">
                     {en
                       ? `Latest v${latest.version} (${formatCivicDate(latest.publishedAt, true)}): ${latest.notesEn} Previous v${previous.version}: ${previous.notesEn}`
-                      : `नवीनतम v${latest.version}: ${latest.notesMr} मागील v${previous.version}: ${previous.notesMr}`}
+                      : `नवीनतम v${digits(latest.version)}: ${latest.notesMr} मागील v${digits(previous.version)}: ${previous.notesMr}`}
                   </p>
                 </div>
               )}

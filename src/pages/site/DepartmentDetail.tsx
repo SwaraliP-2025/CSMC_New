@@ -414,7 +414,7 @@ const UpdatesTicker = ({ updates, en }: { updates: DeptInfo["updates"]; en: bool
 
 const DepartmentDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const base = DEPARTMENTS.find(d => d.slug === slug);
   const dept = base ? { ...base, ...(DEPT_EXTRAS[base.slug] ?? {}) } : undefined;
@@ -480,7 +480,7 @@ const DepartmentDetail = () => {
                   <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
                   <div>
                     <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Phone" : "दुरध्वनी"}</p>
-                    <p className="font-semibold text-civic-ink">{dept.phone}</p>
+                    <p className="font-semibold text-civic-ink">{d(dept.phone)}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 text-sm">
@@ -494,7 +494,7 @@ const DepartmentDetail = () => {
                   <MapPin className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
                   <div>
                     <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Office Address" : "कार्यालय पत्ता"}</p>
-                    <p className="font-semibold text-civic-ink leading-snug">{en ? dept.addressEn : dept.addressMr}</p>
+                    <p className="font-semibold text-civic-ink leading-snug">{d(en ? dept.addressEn : dept.addressMr)}</p>
                   </div>
                 </div>
               </div>

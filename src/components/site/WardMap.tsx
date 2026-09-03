@@ -23,6 +23,7 @@ import proj4 from "proj4";
 import "leaflet/dist/leaflet.css";
 import { Search, MapPin, X, Loader2, Info } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
+import { fromDevanagariDigits } from "@/i18n/digits";
 import { useColorBlind } from "@/i18n/ColorBlindContext";
 
 // ── proj4 definitions ──────────────────────────────────────────────────────────
@@ -405,7 +406,7 @@ type GeocodeResult = {
 };
 
 function normalizeText(text: string) {
-  return text
+  return fromDevanagariDigits(text)
     .trim()
     .toLowerCase()
     .replace(/\(part\)/gi, "")
@@ -662,7 +663,7 @@ L.Icon.Default.mergeOptions({
 const CSMC_CENTER: LatLngExpression = [19.877, 75.343];
 
 export const WardMap = () => {
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const { enabled: colorBlind } = useColorBlind();
   const en = lang === "en";
   const zoneColors = colorBlind ? ZONE_COLORS_COLORBLIND : ZONE_COLORS;
@@ -931,8 +932,8 @@ export const WardMap = () => {
         return;
       }
 
-      // 3) Prabhag number only (e.g. "20" or "प्रभाग 20")
-      if (/^(prabhag|प्रभाग)?\s*#?\s*\d{1,2}$/i.test(query.trim())) {
+      // 3) Prabhag number only (e.g. "20", "२०", or "प्रभाग 20")
+      if (/^(prabhag|प्रभाग)?\s*#?\s*\d{1,2}$/i.test(fromDevanagariDigits(query.trim()))) {
         const digits = normalizeText(query).replace(/\D/g, "");
         const prabhag =
           prabhags[digits.padStart(2, "0")] ||
@@ -1039,7 +1040,7 @@ export const WardMap = () => {
   const resultTitle =
     matchedLocality?.trim() ||
     selectedWard?.ward_name ||
-    (selectedPrabhag ? (en ? `Prabhag ${selectedPrabhag.no}` : `प्रभाग ${selectedPrabhag.no}`) : "");
+    (selectedPrabhag ? (en ? `Prabhag ${selectedPrabhag.no}` : `प्रभाग ${d(selectedPrabhag.no)}`) : "");
 
   return (
     <div className="flex flex-col gap-4">
@@ -1154,19 +1155,19 @@ export const WardMap = () => {
           <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-muted-foreground">
             <InfoRow
               label={en ? "Prabhag Number" : "प्रभाग क्रमांक"}
-              value={selectedPrabhag.no}
+              value={d(selectedPrabhag.no)}
             />
             <InfoRow
               label={en ? "Population" : "लोकसंख्या"}
-              value={selectedPrabhag.population.toLocaleString()}
+              value={d(selectedPrabhag.population.toLocaleString("en-IN"))}
             />
             <InfoRow
               label={en ? "Seats" : "आसने"}
-              value={`${selectedPrabhag.seats}`}
+              value={d(selectedPrabhag.seats)}
             />
             <InfoRow
               label={en ? "Localities" : "परिसर"}
-              value={`${selectedPrabhag.localities.length}`}
+              value={d(selectedPrabhag.localities.length)}
             />
           </div>
         </div>
@@ -1207,36 +1208,36 @@ export const WardMap = () => {
           <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
             <InfoRow
               label={en ? "Ward Number" : "वॉर्ड क्रमांक"}
-              value={selectedWard.ward_no}
+              value={d(selectedWard.ward_no)}
             />
             {selectedPrabhag && (
               <InfoRow
                 label={en ? "Prabhag Number" : "प्रभाग क्रमांक"}
-                value={selectedPrabhag.no}
+                value={d(selectedPrabhag.no)}
               />
             )}
             <InfoRow
               label={en ? "Zone" : "झोन"}
               value={(() => {
-                const z = ZONE_DEFINITIONS.find((d) => d.zoneNo === selectedWard.zone_no);
+                const z = ZONE_DEFINITIONS.find((def) => def.zoneNo === selectedWard.zone_no);
                 if (z) {
                   const place = en
                     ? z.name.replace(/^Zone [A-Z]\d+\s*[–—-]\s*/, "")
                     : z.nameMr.replace(/^झोन [A-Z][०-९\d]+\s*[–—-]\s*/, "");
-                  return en ? `Zone ${z.code} ${place}` : `झोन ${z.codeMr} ${place}`;
+                  return d(en ? `Zone ${z.code} ${place}` : `झोन ${z.codeMr} ${place}`);
                 }
-                return selectedWard.zone_name || String(selectedWard.zone_no);
+                return d(selectedWard.zone_name || String(selectedWard.zone_no));
               })()}
             />
             {selectedPrabhag && (
               <>
                 <InfoRow
                   label={en ? "Prabhag Population" : "प्रभाग लोकसंख्या"}
-                  value={selectedPrabhag.population.toLocaleString()}
+                  value={d(selectedPrabhag.population.toLocaleString("en-IN"))}
                 />
                 <InfoRow
                   label={en ? "Prabhag Seats" : "प्रभाग आसने"}
-                  value={`${selectedPrabhag.seats}`}
+                  value={d(selectedPrabhag.seats)}
                 />
               </>
             )}
@@ -1244,35 +1245,35 @@ export const WardMap = () => {
               <InfoRow
                 label={en ? "Ward Officer" : "वॉर्ड अधिकारी"}
                 value={selectedWard.wardoffname}
-                sub={selectedWard.wardoffno ?? undefined}
+                sub={selectedWard.wardoffno ? d(selectedWard.wardoffno) : undefined}
               />
             )}
             {selectedWard.zonoffname && (
               <InfoRow
                 label={en ? "Zone Officer" : "झोन अधिकारी"}
                 value={selectedWard.zonoffname}
-                sub={selectedWard.zonoffno ?? undefined}
+                sub={selectedWard.zonoffno ? d(selectedWard.zonoffno) : undefined}
               />
             )}
             {selectedWard.wardengineername && (
               <InfoRow
                 label={en ? "Ward Engineer" : "वॉर्ड अभियंता"}
                 value={selectedWard.wardengineername}
-                sub={selectedWard.wardengineerno ?? undefined}
+                sub={selectedWard.wardengineerno ? d(selectedWard.wardengineerno) : undefined}
               />
             )}
             {selectedWard.water_lineman_1 && (
               <InfoRow
                 label={en ? "Water Lineman" : "पाणी लाइनमन"}
                 value={selectedWard.water_lineman_1}
-                sub={selectedWard.water_lineman_1_mobileno ?? undefined}
+                sub={selectedWard.water_lineman_1_mobileno ? d(selectedWard.water_lineman_1_mobileno) : undefined}
               />
             )}
             {selectedWard.garbagesupervisorname && (
               <InfoRow
                 label={en ? "Garbage Supervisor" : "कचरा पर्यवेक्षक"}
                 value={selectedWard.garbagesupervisorname}
-                sub={selectedWard.garbagesupervisormobileno ?? undefined}
+                sub={selectedWard.garbagesupervisormobileno ? d(selectedWard.garbagesupervisormobileno) : undefined}
               />
             )}
           </div>
@@ -1354,7 +1355,7 @@ export const WardMap = () => {
               <Tooltip direction="top" offset={[0, -8]} opacity={1} permanent={false}>
                 <div className="text-sm font-semibold leading-snug break-words">
                   {selectedWard
-                    ? `${en ? "Prabhag" : "प्रभाग"} ${selectedWard.ward_no} • ${(
+                    ? `${en ? "Prabhag" : "प्रभाग"} ${d(selectedWard.ward_no)} • ${(
                         matchedLocality || selectedWard.ward_name
                       ).toUpperCase()}`
                     : en
@@ -1363,14 +1364,14 @@ export const WardMap = () => {
                 </div>
                 {selectedWard && (
                   <div className="text-xs text-muted-foreground mt-1 leading-snug">
-                    {en ? "Zone" : "झोन"}: {selectedWard.zone_name}
+                    {en ? "Zone" : "झोन"}: {d(selectedWard.zone_name)}
                   </div>
                 )}
               </Tooltip>
               <Popup>
                 <div className="text-sm font-semibold break-words">
                   {selectedWard
-                    ? `${en ? "Prabhag" : "प्रभाग"} ${selectedWard.ward_no} • ${(
+                    ? `${en ? "Prabhag" : "प्रभाग"} ${d(selectedWard.ward_no)} • ${(
                         matchedLocality || selectedWard.ward_name
                       ).toUpperCase()}`
                     : en
@@ -1379,7 +1380,7 @@ export const WardMap = () => {
                 </div>
                 {selectedWard && (
                   <div className="text-xs text-muted-foreground mt-1">
-                    {en ? "Zone" : "झोन"}: {selectedWard.zone_name}
+                    {en ? "Zone" : "झोन"}: {d(selectedWard.zone_name)}
                   </div>
                 )}
               </Popup>

@@ -10,7 +10,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 
 const FacilityDetails = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { lang } = useLang();
+  const { lang, d } = useLang();
   const en = lang === "en";
   const category = slug ? facilityCategoryMap[slug] : undefined;
   const [items, setItems] = useState<FacilityRecord[]>([]);
@@ -102,9 +102,9 @@ const FacilityDetails = () => {
               <AccordionItem value={zone} key={zone} className="overflow-hidden rounded-3xl border border-border bg-white">
                 <AccordionTrigger className="px-6">
                   <div className="flex items-center justify-between w-full gap-4 text-left">
-                    <span className="font-semibold text-civic-blue">{zone}</span>
+                    <span className="font-semibold text-civic-blue">{d(zone)}</span>
                     <span className="text-sm text-muted-foreground">
-                      {groupedBannerLocations[zone].length} {en ? "locations" : "ठिकाणे"}
+                      {d(groupedBannerLocations[zone].length)} {en ? "locations" : "ठिकाणे"}
                     </span>
                   </div>
                 </AccordionTrigger>
@@ -116,15 +116,15 @@ const FacilityDetails = () => {
                           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                             <div>
                               <h3 className="font-serif text-lg font-semibold text-civic-blue">{location.name}</h3>
-                              <p className="text-sm text-muted-foreground leading-relaxed mt-2">{location.address}</p>
+                              <p className="text-sm text-muted-foreground leading-relaxed mt-2">{d(location.address)}</p>
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {location.zone && <p>{location.zone}</p>}
-                              {location.phone && <p>{location.phone}</p>}
+                              {location.zone && <p>{d(location.zone)}</p>}
+                              {location.phone && <p>{d(location.phone)}</p>}
                             </div>
                           </div>
                           {location.timings && (
-                            <p className="mt-4 text-sm text-muted-foreground">{location.timings}</p>
+                            <p className="mt-4 text-sm text-muted-foreground">{d(location.timings)}</p>
                           )}
                         </li>
                       ))}

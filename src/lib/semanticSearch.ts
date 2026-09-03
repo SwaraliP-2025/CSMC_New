@@ -335,6 +335,7 @@
 
 import { CIVIC_CATALOG } from "@/data/civicCatalog";
 import { CATEGORY_LABELS, SEARCH_GROUP_ORDER, searchGroupFor } from "@/data/civicLabels";
+import { fromDevanagariDigits } from "@/i18n/digits";
 import { expandSearchQuery } from "@/lib/searchAliases";
 import type { CivicRecord, SearchGroup } from "@/types/civicCatalog";
 
@@ -660,7 +661,7 @@ const INTENT: {
 ];
 
 function norm(s: string) {
-  return s
+  return fromDevanagariDigits(s)
     .normalize("NFC")
     .toLowerCase()
     .replace(/[\u00A0\u202F\u2007]/g, " ")

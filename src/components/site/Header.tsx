@@ -88,7 +88,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         }
 
         return (
-          <div className="absolute top-full left-0 z-50 min-w-[280px] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden">
+          <div className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg">
             {item.children!.map(child => {
               const childLabel = en ? child.labelEn : child.labelMr;
               return (
