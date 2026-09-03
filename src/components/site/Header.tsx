@@ -1,86 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Home } from "lucide-react";
+import { GlobalSearch } from "@/components/site/GlobalSearch";
 import emblem from "@/assets/cs-emblem.png";
 import ascdcl from "@/assets/ascdcl.png";
 import { useLang } from "@/i18n/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipArrow } from "@/components/ui/tooltip";
+import { SITE_NAV, isExternalHref, type NavItem } from "@/navigation/siteNav";
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-interface NavItem {
-  labelEn: string;
-  labelMr: string;
-  to?: string;
-  external?: boolean;
-  children?: NavItem[];
-}
-
-// ─── Nav structure ────────────────────────────────────────────────────────────
-const NAV: NavItem[] = [
-  { labelEn: "Home", labelMr: "मुख्यपृष्ठ", to: "/" },
-  {
-    labelEn: "Mahangarpalika", labelMr: "महानगरपालिका",
-    children: [
-      { labelEn: "About CSMC", labelMr: "CSMC बद्दल", to: "/about" },
-      { labelEn: "Hon'ble Municipal Commissioner", labelMr: "मा. महानगरपालिका आयुक्त", to: "/commissioner" },
-      { labelEn: "Organogram / Organizational Structure", labelMr: "प्रशासकीय रचना", to: "/organization" },
-      { labelEn: "Departments", labelMr: "विभाग", to: "/departments" },
-      { labelEn: "Minutes of General Body Meeting", labelMr: "सर्वसाधारण सभेचे इतिवृत्त", to: "/public-documents" },
-      { labelEn: "Hon'ble Mayors' List", labelMr: "मा. महापौरांची यादी", to: "/mayors-list" },
-      { labelEn: "Hon'ble Commissioners' List", labelMr: "मा. आयुक्तांची यादी", to: "/commissioners-list" },
-      { labelEn: "Zone List", labelMr: "झोन यादी", to: "/zones-wards" },
-      { labelEn: "Ward Offices", labelMr: "प्रभाग कार्यालये", to: "/zones-wards" },
-    ],
-  },
-  {
-    labelEn: "Citizen Services", labelMr: "नागरिक सेवा",
-    children: [
-      { labelEn: "All Services", labelMr: "सर्व सेवा", to: "/services" },
-      { labelEn: "Online Services", labelMr: "ऑनलाइन सेवा", to: "https://rts.chhsambhajinagarmc.org/links/dashboard", external: true },
-      { labelEn: "Property Tax", labelMr: "मालमत्ता कर", to: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi", external: true },
-      { labelEn: "Pay Water Tax", labelMr: "पाणी कर भरा", to: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do", external: true },
-      { labelEn: "Birth Certificate", labelMr: "जन्म प्रमाणपत्र", to: "https://rts.chhsambhajinagarmc.org/links/dashboard", external: true },
-      { labelEn: "Death Certificate", labelMr: "मृत्यू प्रमाणपत्र", to: "https://rts.chhsambhajinagarmc.org/links/dashboard", external: true },
-      { labelEn: "Track Application", labelMr: "अर्ज स्थिती", to: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250" },
-      { labelEn: "Tax Calculator", labelMr: "कर कॅल्क्युलेटर", to: "/tax-calculator" },
-      { labelEn: "Gunthewari Challan", labelMr: "गुंठेवारी चलन", to: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2", external: true },
-    ],
-  },
-  {
-    labelEn: "Publications", labelMr: "प्रकाशने",
-    children: [
-      { labelEn: "Tenders", labelMr: "निविदा", to: "https://mahatenders.gov.in/nicgep/app", external: true },
-      { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
-      { labelEn: "Govt. Orders", labelMr: "शासन निर्णय", to: "/govt-orders" },
-      { labelEn: "Recruitment", labelMr: "भरती", to: "/recruitment" },
-    ],
-  },
-  {
-    labelEn: "Contact", labelMr: "संपर्क",
-    children: [
-      { labelEn: "Emergency Contact (Fire & Disaster)", labelMr: "आपत्कालीन संपर्क", to: "/disaster-management" },
-      { labelEn: "Municipal Contact", labelMr: "महानगरपालिका संपर्क", to: "/contact" },
-      { labelEn: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "https://chhsambhajinagarmc.org/citizen-feedback-form" },
-    ],
-  },
-
-  { labelEn: "Right To Information", labelMr: "माहिती अधिकार कायदा", to: "/rti-act" },
-  { labelEn: "Right To Service", labelMr: "सेवा हक्क कायदा", to: "/rts-act" },
-  { labelEn: "DP Plan", labelMr: "डी पी प्लॅन", to: "/dp-plan" },
-  { labelEn: "Site Map", labelMr: "साईट मॅप", to: "/site-map" },
-];
+const NAV = SITE_NAV;
 
 // ─── Single nav item (desktop) ────────────────────────────────────────────────
 const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en: boolean }) => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
-  const dropdownTextCls = en ? "text-[10px]" : "text-[12px]";
+  const dropdownTextCls = en ? "text-[12px]" : "text-[14px]";
 
   const isActive = item.to ? pathname === item.to : false;
-  const baseCls = `px-2 py-3 text-[10px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none w-full h-full ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
+  const isHome = item.to === "/";
+  const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
+  const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : label;
 
   if (!item.children) {
-    if (item.external) return <a href={item.to} target="_blank" rel="noopener noreferrer" className={baseCls}>{label}</a>;
+    if (isExternalHref(item.to, item.external)) return <a href={item.to} target="_blank" rel="noopener noreferrer" className={baseCls} aria-label={label}>{content}</a>;
     // Notices item fires a custom event so the homepage popup opens
     if (item.to === "/notices") {
       return (
@@ -91,7 +34,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         </span>
       );
     }
-    return <Link to={item.to!} className={baseCls}>{label}</Link>;
+    return <Link to={item.to!} className={baseCls} aria-label={label} title={label}>{content}</Link>;
   }
 
   return (
@@ -104,30 +47,70 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         {label}
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </div>
-      {open && (
-        <div className="absolute top-full left-0 z-50 min-w-[240px] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden">
-          {item.children.map(child => {
-            const childLabel = en ? child.labelEn : child.labelMr;
+      {open && (() => {
+        const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
+        const renderLink = (child: NavItem) => {
+          const childLabel = en ? child.labelEn : child.labelMr;
+          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors rounded-sm`;
+          if (isExternalHref(child.to, child.external)) {
             return (
-              <div key={child.labelEn} className="border-b border-white/10 last:border-0">
-                {child.children ? (
-                  <div className={`px-4 py-2 ${dropdownTextCls} text-white/70 font-bold uppercase tracking-wider`}>{childLabel}</div>
-                ) : child.external ? (
-                  <a href={child.to} target="_blank" rel="noopener noreferrer"
-                    className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
-                    {childLabel}
-                  </a>
-                ) : (
-                  <Link to={child.to!}
-                    className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
-                    {childLabel}
-                  </Link>
-                )}
-              </div>
+              <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer" className={cls}>
+                {childLabel}
+              </a>
             );
-          })}
-        </div>
-      )}
+          }
+          return (
+            <Link key={child.labelEn} to={child.to!} className={cls}>
+              {childLabel}
+            </Link>
+          );
+        };
+
+        if (hasGroups) {
+          return (
+            <div className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden p-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {item.children!.map(group => {
+                  const groupLabel = en ? group.labelEn : group.labelMr;
+                  return (
+                    <div key={group.labelEn} className="min-w-0">
+                      <div className={`px-2 py-1.5 mb-1 ${dropdownTextCls} text-civic-gold font-bold uppercase tracking-wider border-b border-civic-gold/40`}>
+                        {groupLabel}
+                      </div>
+                      <div className="flex flex-col">
+                        {(group.children ?? []).map(renderLink)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <div className="absolute top-full left-0 z-50 min-w-[280px] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden">
+            {item.children!.map(child => {
+              const childLabel = en ? child.labelEn : child.labelMr;
+              return (
+                <div key={child.labelEn} className="border-b border-white/10 last:border-0">
+                  {isExternalHref(child.to, child.external) ? (
+                    <a href={child.to} target="_blank" rel="noopener noreferrer"
+                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
+                      {childLabel}
+                    </a>
+                  ) : (
+                    <Link to={child.to!}
+                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
+                      {childLabel}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      })()}
     </div>
   );
 };
@@ -139,11 +122,11 @@ export const Header = () => {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [waHovered, setWaHovered] = useState(false);
 
   useEffect(() => { setMobileOpen(false); setMobileExpanded(null); }, [pathname]);
 
   const label = (item: NavItem) => en ? item.labelEn : item.labelMr;
+  const whatsappLabel = en ? "Smart Chhatrapati Sambhajinagar WhatsApp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट";
 
   return (
     <header className="bg-white border-b border-border shadow-card-soft">
@@ -157,38 +140,33 @@ export const Header = () => {
             <h1 className="font-serif text-sm sm:text-base md:text-xl text-civic-blue font-bold tracking-tight">
               {en ? "Chhatrapati Sambhajinagar Municipal Corporation" : "छत्रपती संभाजीनगर महानगरपालिका"}
             </h1>
-            <p className="text-[10px] md:text-xs text-muted-foreground font-medium hidden sm:block">
+            <p className="text-xs md:text-sm text-muted-foreground font-normal hidden sm:block">
               {en ? "City of Heritage, Vision of Tomorrow" : "शहर वारसाचे, स्वप्न उद्याचे "}
             </p>
           </div>
         </Link>
-
-        {/* Desktop actions */}
-        <div className="hidden md:flex items-center gap-3">
-          <div className="relative flex items-center">
+        <Tooltip>
+          <TooltipTrigger asChild>
             <a href="https://api.whatsapp.com/send?phone=919485202020&text=Hi" target="_blank" rel="noopener noreferrer"
-              onMouseEnter={() => setWaHovered(true)} onMouseLeave={() => setWaHovered(false)}
-              className="flex items-center justify-center w-9 h-9 rounded-full hover:scale-110 transition-transform"
-              style={{ backgroundColor: "#25D366" }} aria-label="WhatsApp">
-              <svg viewBox="0 0 32 32" width="20" height="20" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.832 1.783 6.865L2 30l7.335-1.763A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.834-1.594l-.418-.248-4.352 1.046 1.074-4.234-.272-.435A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.388c-.344-.172-2.036-1.004-2.352-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.744.086-.344-.172-1.452-.535-2.766-1.707-1.022-.912-1.712-2.037-1.912-2.381-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.776-1.87-1.063-2.56-.28-.672-.564-.581-.776-.592l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.233 3.328 1.405 3.558c.172.23 2.427 3.706 5.88 5.196.822.355 1.463.567 1.963.726.824.263 1.574.226 2.167.137.661-.099 2.036-.832 2.323-1.635.287-.803.287-1.491.2-1.635-.086-.143-.316-.23-.66-.402z"/></svg>
+              className="flex items-center justify-center w-8 h-8 rounded-full hover:scale-110 transition-transform"
+              style={{ backgroundColor: "#25D366" }} aria-label={whatsappLabel}>
+              <svg viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.832 1.783 6.865L2 30l7.335-1.763A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.834-1.594l-.418-.248-4.352 1.046 1.074-4.234-.272-.435A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.388c-.344-.172-2.036-1.004-2.352-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.744.086-.344-.172-1.452-.535-2.766-1.707-1.022-.912-1.712-2.037-1.912-2.381-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.776-1.87-1.063-2.56-.28-.672-.564-.581-.776-.592l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.233 3.328 1.405 3.558c.172.23 2.427 3.706 5.88 5.196.822.355 1.463.567 1.963.726.824.263 1.574.226 2.167.137.661-.099 2.036-.832 2.323-1.635.287-.803.287-1.491.2-1.635-.086-.143-.316-.23-.66-.402z"/></svg>
             </a>
-            {waHovered && (
-              <div className="absolute bottom-full right-0 mb-2 w-44 bg-white text-gray-800 text-[11px] font-semibold px-3 py-2 rounded-xl shadow-xl border border-gray-100 leading-snug z-50">
-                {en ? "Smart Chhatrapati Sambhajinagar Whatsapp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट"}
-                <span className="absolute -bottom-2 right-4 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[8px] border-t-white" />
-              </div>
-            )}
-          </div>
-          <Link to="/user-manual" className="inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap">
-            {en ? "User Manual" : "वापरकर्ता नियमावली"}
-          </Link>
-          <div className="flex items-center gap-2 border border-border rounded-full px-3 py-1.5 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30">
-            <Search className="h-4 w-4 text-muted-foreground shrink-0" />
-            <input type="text" placeholder={en ? "Search..." : "शोधा..."} aria-label="Search"
-              className="text-sm bg-transparent outline-none w-24 placeholder:text-muted-foreground" />
-          </div>
-          
+          </TooltipTrigger>
+          <TooltipContent side="left" align="center" className="max-w-[220px] text-center">
+            <span className="block leading-tight text-sm font-semibold">
+              {whatsappLabel}
+            </span>
+            <TooltipArrow className="mx-auto mt-1" />
+          </TooltipContent>
+        </Tooltip>
+        <Link to="/user-manual" className="inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap">
+          {en ? "User Manual" : "वापरकर्ता नियमावली"}
+        </Link>
+        <div className="hidden md:block">
+          <GlobalSearch />
         </div>
+      </div>
 
         {/* Mobile: ASCDCL logo + hamburger */}
         <div className="md:hidden flex items-center gap-2 shrink-0">
@@ -198,32 +176,27 @@ export const Header = () => {
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
-      </div>
 
       {/* Row 2 (mobile only): action buttons below logo */}
       <div className="md:hidden border-t border-border/50 px-3 py-2 flex items-center gap-2">
-        <div className="relative flex items-center">
+          <div className="relative flex items-center">
           <a href="https://api.whatsapp.com/send?phone=919485202020&text=Hi" target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center w-8 h-8 rounded-full hover:scale-110 transition-transform"
-            style={{ backgroundColor: "#25D366" }} aria-label="WhatsApp">
+            style={{ backgroundColor: "#25D366" }} aria-label={whatsappLabel} title={whatsappLabel}>
             <svg viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.832 1.783 6.865L2 30l7.335-1.763A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.834-1.594l-.418-.248-4.352 1.046 1.074-4.234-.272-.435A11.46 11.46 0 0 1 4.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.29-8.388c-.344-.172-2.036-1.004-2.352-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.744.086-.344-.172-1.452-.535-2.766-1.707-1.022-.912-1.712-2.037-1.912-2.381-.2-.344-.021-.53.15-.701.155-.154.344-.402.516-.603.172-.2.23-.344.344-.574.115-.23.058-.43-.029-.603-.086-.172-.776-1.87-1.063-2.56-.28-.672-.564-.581-.776-.592l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.233 3.328 1.405 3.558c.172.23 2.427 3.706 5.88 5.196.822.355 1.463.567 1.963.726.824.263 1.574.226 2.167.137.661-.099 2.036-.832 2.323-1.635.287-.803.287-1.491.2-1.635-.086-.143-.316-.23-.66-.402z"/></svg>
           </a>
         </div>
         <Link to="/user-manual" className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold border-2 border-civic-blue text-civic-blue whitespace-nowrap">
           {en ? "User Policy" : "वापरकर्ता नियमावली"}
         </Link>
-        <div className="flex items-center gap-1.5 border border-border rounded-full px-2.5 py-1 bg-white flex-1">
-          <Search className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-          <input type="text" placeholder={en ? "Search..." : "शोधा..."} aria-label="Search"
-            className="text-xs bg-transparent outline-none w-full placeholder:text-muted-foreground" />
-        </div>
+        <GlobalSearch compact />
       </div>
 
       {/* Desktop nav */}
       <nav id="nav" className="hidden md:block bg-[#1a3a6b]">
         <div className="w-full flex items-stretch">
           {NAV.map(item => (
-            <div key={item.labelEn} className="flex-1">
+            <div key={item.labelEn} className={item.to === "/" ? "shrink-0" : "flex-1"}>
               <NavItemDesktop item={item} label={label(item)} en={en} />
             </div>
           ))}
@@ -243,7 +216,27 @@ export const Header = () => {
                     <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpanded === item.labelEn ? "rotate-180" : ""}`} />
                   </button>
                   {mobileExpanded === item.labelEn && item.children.map(child => (
-                    child.external ? (
+                    child.children ? (
+                      <div key={child.labelEn}>
+                        <div className="px-6 py-2 text-xs font-bold uppercase tracking-wider text-civic-blue bg-civic-blue/5 border-b border-border">
+                          {label(child)}
+                        </div>
+                        {child.children.map(sub => (
+                          isExternalHref(sub.to, sub.external) ? (
+                            <a key={sub.labelEn} href={sub.to} target="_blank" rel="noopener noreferrer"
+                              onClick={() => setMobileOpen(false)}
+                              className="block px-10 py-2.5 text-sm border-b border-border text-muted-foreground">
+                              {label(sub)}
+                            </a>
+                          ) : (
+                            <Link key={sub.labelEn} to={sub.to!} onClick={() => setMobileOpen(false)}
+                              className="block px-10 py-2.5 text-sm border-b border-border text-muted-foreground">
+                              {label(sub)}
+                            </Link>
+                          )
+                        ))}
+                      </div>
+                    ) : isExternalHref(child.to, child.external) ? (
                       <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer"
                         onClick={() => setMobileOpen(false)}
                         className="block px-8 py-2.5 text-sm border-b border-border text-muted-foreground">
@@ -257,7 +250,7 @@ export const Header = () => {
                     )
                   ))}
                 </>
-              ) : item.external ? (
+              ) : isExternalHref(item.to, item.external) ? (
                 <a href={item.to} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}
                   className="block px-4 py-3 text-sm border-b border-border text-foreground">
                   {label(item)}

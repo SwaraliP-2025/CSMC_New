@@ -2,85 +2,152 @@ import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
+import {
+  SITE_NAV,
+  HEADER_UTILITY_LINKS,
+  OTHER_SITE_PAGES,
+  isExternalHref,
+  type NavItem,
+} from "@/navigation/siteNav";
 
-const sections = [
-  {
-    title: "Main Pages", titleMr: "मुख्य पृष्ठे",
-    links: [
-      { label: "Home", labelMr: "मुख्यपृष्ठ", to: "/" },
-      { label: "About CSMC", labelMr: "CSMC बद्दल", to: "/about" },
-      { label: "Municipal Commissioner", labelMr: "महानगरपालिका आयुक्त", to: "/commissioner" },
-      { label: "Departments", labelMr: "विभाग", to: "/departments" },
-      { label: "Zones & Wards", labelMr: "झोन / प्रभाग", to: "/zones-wards" },
-    ],
-  },
-  {
-    title: "Citizen Services", titleMr: "नागरिक सेवा",
-    links: [
-      { label: "All Services", labelMr: "सर्व सेवा", to: "/services" },
-      { label: "Track Application", labelMr: "अर्ज स्थिती", to: "/track" },
-      { label: "Tax Calculator", labelMr: "कर कॅल्क्युलेटर", to: "/tax-calculator" },
-      { label: "Lodge Grievance", labelMr: "तक्रार नोंदवा", to: "/grievance" },
-    ],
-  },
-  {
-    title: "Information", titleMr: "माहिती",
-    links: [
-      { label: "Public Notices", labelMr: "जाहीर सूचना", to: "/notices" },
-      { label: "Govt. Orders", labelMr: "शासन निर्णय", to: "/govt-orders" },
-      { label: "Public Documents", labelMr: "सार्वजनिक दस्तऐवज", to: "/public-documents" },
-      { label: "Recruitment", labelMr: "भरती", to: "/recruitment" },
-      { label: "Elections", labelMr: "निवडणूक", to: "/elections" },
-    ],
-  },
-  {
-    title: "Legal & Compliance", titleMr: "कायदेशीर",
-    links: [
-      { label: "RTI Act", labelMr: "माहिती अधिकार", to: "/rti-act" },
-      { label: "RTS Act", labelMr: "सेवा हक्क", to: "/rts-act" },
-      { label: "FAQ", labelMr: "सामान्य प्रश्न", to: "/faq" },
-      { label: "Disaster Management", labelMr: "आपत्ती व्यवस्थापन", to: "/disaster-management" },
-    ],
-  },
-  {
-    title: "Contact", titleMr: "संपर्क",
-    links: [
-      { label: "Contact Us", labelMr: "संपर्क करा", to: "/contact" },
-      { label: "Citizen Feedback", labelMr: "नागरिक अभिप्राय", to: "/grievance" },
-    ],
-  },
-];
+const linkCls =
+  "flex items-center gap-2 text-sm text-muted-foreground hover:text-civic-blue transition-colors group";
 
+function NavLink({ item, en }: { item: NavItem; en: boolean }) {
+  const label = en ? item.labelEn : item.labelMr;
+  if (!item.to) {
+    return (
+      <span className={`${linkCls} cursor-default opacity-70`}>
+        <ChevronRight className="h-3.5 w-3.5 shrink-0 text-civic-gold" />
+        <span className="min-w-0">{label}</span>
+      </span>
+    );
+  }
+  const to = item.to;
+  const external = isExternalHref(item.to, item.external);
+  const icon = (
+    <ChevronRight className="h-3.5 w-3.5 shrink-0 text-civic-gold group-hover:translate-x-0.5 transition-transform" />
+  );
+
+  if (external) {
+    return (
+      <a href={to} target="_blank" rel="noopener noreferrer" className={linkCls}>
+        {icon}
+        <span className="min-w-0">{label}</span>
+        <ExternalLink className="h-3 w-3 shrink-0 opacity-50" aria-hidden />
+      </a>
+    );
+  }
+
+  return (
+    <Link to={to} className={linkCls}>
+      {icon}
+      <span className="min-w-0">{label}</span>
+    </Link>
+  );
+}
+
+function LinkList({ items, en }: { items: NavItem[]; en: boolean }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li key={`${item.labelEn}-${item.to ?? ""}`}>
+          <NavLink item={item} en={en} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * Renders Site Map from the same SITE_NAV tree as the header,
+ * so every dropdown item appears under the same menu heading.
+ */
 const SiteMap = () => {
   const { lang } = useLang();
   const en = lang === "en";
+
   return (
     <Layout>
-      <PageHeader eyebrow={en ? "Navigation" : "नेव्हिगेशन"} title={en ? "Site Map" : "साइटमॅप"}
-        subtitle={en ? "Complete directory of all pages on this website." : "या वेबसाइटवरील सर्व पृष्ठांची संपूर्ण निर्देशिका."} />
-      <section className="py-12 container">
+      <PageHeader
+        eyebrow={en ? "Navigation" : "नेव्हिगेशन"}
+        title={en ? "Site Map" : "साइटमॅप"}
+        subtitle={
+          en
+            ? "Directory of pages organised exactly as in the main menu."
+            : "मुख्य मेनूमधील संरचनेनुसार पृष्ठांची निर्देशिका."
+        }
+      />
+      <section className="py-12 container space-y-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sections.map((s, i) => (
-            <div key={i}>
-              <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
-                {en ? s.title : s.titleMr}
-              </h2>
-              <ul className="space-y-2">
-                {s.links.map(l => (
-                  <li key={l.to}>
-                    <Link to={l.to} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-civic-blue transition-colors group">
-                      <ChevronRight className="h-3.5 w-3.5 text-civic-gold group-hover:translate-x-0.5 transition-transform" />
-                      {en ? l.label : l.labelMr}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {SITE_NAV.map((item) => {
+            const title = en ? item.labelEn : item.labelMr;
+            const hasGroups = item.children?.some((c) => c.children && c.children.length > 0);
+
+            // Leaf top-level item (Home, RTI, RTS, DP Plan, Site Map)
+            if (!item.children?.length) {
+              return (
+                <div key={item.labelEn}>
+                  <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
+                    {title}
+                  </h2>
+                  <LinkList items={[item]} en={en} />
+                </div>
+              );
+            }
+
+            // Mega-menu parent with named groups (Mahanagarpalika)
+            if (hasGroups) {
+              return (
+                <div key={item.labelEn} className="md:col-span-2 lg:col-span-3">
+                  <h2 className="font-serif text-xl font-bold text-civic-blue mb-5 pb-2 border-b border-civic-gold/30">
+                    {title}
+                  </h2>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {item.children!.map((group) => (
+                      <div key={group.labelEn}>
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-civic-gold mb-3">
+                          {en ? group.labelEn : group.labelMr}
+                        </h3>
+                        <LinkList items={group.children ?? []} en={en} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            // Flat dropdown (Citizen Services, Publications, Contact)
+            return (
+              <div key={item.labelEn}>
+                <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
+                  {title}
+                </h2>
+                <LinkList items={item.children!} en={en} />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Header utility + other live pages not in the main NAV bar */}
+        <div className="grid md:grid-cols-2 gap-8 pt-2 border-t border-border">
+          <div>
+            <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
+              {en ? "Header links" : "हेडर दुवे"}
+            </h2>
+            <LinkList items={HEADER_UTILITY_LINKS} en={en} />
+          </div>
+          <div>
+            <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
+              {en ? "Other pages" : "इतर पृष्ठे"}
+            </h2>
+            <LinkList items={OTHER_SITE_PAGES} en={en} />
+          </div>
         </div>
       </section>
     </Layout>
   );
 };
+
 export default SiteMap;

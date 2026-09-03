@@ -2,6 +2,7 @@ import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { Download, Calendar, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const posts = [
   { post: "Junior Engineer (Civil)", postMr: "कनिष्ठ अभियंता (स्थापत्य)", vacancies: 12, lastDate: "30 May 2026", status: "Open", statusMr: "खुली" },
@@ -9,7 +10,7 @@ const posts = [
   { post: "Tax Inspector", postMr: "कर निरीक्षक", vacancies: 15, lastDate: "20 May 2026", status: "Closed", statusMr: "बंद" },
   { post: "Clerk (Grade III)", postMr: "लिपिक (श्रेणी III)", vacancies: 30, lastDate: "15 Jun 2026", status: "Open", statusMr: "खुली" },
   { post: "Electrician", postMr: "विद्युत तंत्रज्ञ", vacancies: 6, lastDate: "10 Jun 2026", status: "Open", statusMr: "खुली" },
-  { post: "Sanitation Worker", postMr: "स्वच्छता कर्मचारी", vacancies: 50, lastDate: "5 Jun 2026", status: "Open", statusMr: "खुली" },
+  { post: "Sanitation Worker", postMr: "स्वच्छता कर्मचारी", vacancies: 50, lastDate: "5 Jun 2026", status: "Open", statusMr: "खुली", repoId: "not-recruitment" },
 ];
 
 const Recruitment = () => {
@@ -23,7 +24,12 @@ const Recruitment = () => {
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 mb-8 flex items-start gap-3">
           <Calendar className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
           <p className="text-sm text-amber-800 font-medium">
-            {en ? "All applications must be submitted online through the official portal. Physical applications will not be accepted." : "सर्व अर्ज अधिकृत पोर्टलद्वारे ऑनलाइन सादर करणे आवश्यक आहे. प्रत्यक्ष अर्ज स्वीकारले जाणार नाहीत."}
+            {en
+              ? "This page lists sample openings for the prototype. Live applications must use the official CSMC recruitment notice when published. A related sample notification is available in the Municipal Knowledge Repository."
+              : "हे पृष्ठ नमुना जागा दाखवते. थेट अर्ज प्रकाशित अधिकृत CSMC भरती सूचनेद्वारेच करावेत. संबंधित नमुना अधिसूचना महापालिका ज्ञान भांडारात उपलब्ध आहे."}{" "}
+            <Link to="/digital-repository/not-recruitment" className="underline font-bold text-amber-900 hover:text-civic-blue">
+              {en ? "View sample notice" : "नमुना सूचना पहा"}
+            </Link>
           </p>
         </div>
         <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
@@ -53,9 +59,21 @@ const Recruitment = () => {
                   </td>
                   <td className="px-5 py-4 text-center">
                     {p.status === "Open" ? (
-                      <a href="#" className="inline-flex items-center gap-1 text-xs font-bold text-civic-blue border border-civic-blue px-3 py-1.5 rounded-lg hover:bg-civic-blue hover:text-white transition-colors">
-                        <Download className="h-3.5 w-3.5" /> {en ? "Apply" : "अर्ज करा"}
-                      </a>
+                      "repoId" in p && p.repoId ? (
+                        <Link
+                          to={`/digital-repository/${p.repoId}`}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-civic-blue border border-civic-blue px-3 py-1.5 rounded-lg hover:bg-civic-blue hover:text-white transition-colors"
+                        >
+                          <Download className="h-3.5 w-3.5" /> {en ? "View notice" : "सूचना पहा"}
+                        </Link>
+                      ) : (
+                        <span
+                          className="inline-flex items-center gap-1 text-xs font-bold text-muted-foreground border border-border px-3 py-1.5 rounded-lg cursor-not-allowed"
+                          title={en ? "Official apply link not available in this prototype" : "या नमुना आवृत्तीत अधिकृत अर्ज दुवा उपलब्ध नाही"}
+                        >
+                          {en ? "Apply (unavailable)" : "अर्ज (अनुपलब्ध)"}
+                        </span>
+                      )
                     ) : (
                       <span className="text-xs text-muted-foreground">{en ? "Closed" : "बंद"}</span>
                     )}

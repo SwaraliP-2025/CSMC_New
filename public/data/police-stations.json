@@ -1,0 +1,189 @@
+[
+  {
+    "id": "police-001",
+    "name": "वालुज पोलीस स्टेशन",
+    "address": "वालुज, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2240560",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Waluj%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-002",
+    "name": "डोलाबाद पोलीस स्टेशन",
+    "address": "डोलाबाद, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2615651",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Dolabad%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-003",
+    "name": "एमआयडीसी वालुज पोलीस स्टेशन",
+    "address": "एमआयडीसी वालुज, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2240559",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=MIDC%20Waluj%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-004",
+    "name": "वेदांतनगर पोलीस स्टेशन",
+    "address": "वेदांतनगर, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2351333",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Vedantnagar%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-005",
+    "name": "सातारा पोलीस स्टेशन",
+    "address": "सातारा, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240565",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Satara%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-006",
+    "name": "एमआयडीसी सिडको पोलीस स्टेशन",
+    "address": "एमआयडीसी सिडको, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240558",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=MIDC%20Shivaji%20Nagar%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-007",
+    "name": "जिन्सी पोलीस स्टेशन",
+    "address": "जिन्सी, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240555",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Jinsi%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-008",
+    "name": "बेगमपुरा पोलीस स्टेशन",
+    "address": "बेगमपुरा, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2240562",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Begampura%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-009",
+    "name": "पुंडलिक नगर पोलीस स्टेशन",
+    "address": "पुंडलिक नगर, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2484400",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Pundalik%20Nagar%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-010",
+    "name": "मुकुंद वाडी पोलीस स्टेशन",
+    "address": "मुकुंद वाडी, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240557",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Mukundwadi%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-011",
+    "name": "क्रांती चौक पोलीस स्टेशन",
+    "address": "क्रांती चौक, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2240552",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kranti%20Chowk%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-012",
+    "name": "चावानी पोलीस स्टेशन",
+    "address": "चावानी, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2240554",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Chavni%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-013",
+    "name": "सिडको पोलीस स्टेशन",
+    "address": "सिडको, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240553",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Shivaji%20Nagar%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-014",
+    "name": "जवाहर नगर पोलीस स्टेशन",
+    "address": "जवाहर नगर, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240556",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Jawahar%20Nagar%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-015",
+    "name": "शहर चावक पोलीस स्टेशन",
+    "address": "शहर चावक, छत्रपती संभाजीनगर",
+    "zone": "Zone 1",
+    "phone": "0240-2240551",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Shahar%20Chowk%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-016",
+    "name": "हर्सूल पोलीस स्टेशन",
+    "address": "हर्सूल, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2981033",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Harsul%20Police%20Station%20Aurangabad"
+  },
+  {
+    "id": "police-017",
+    "name": "उस्मानपुरा पोलीस स्टेशन",
+    "address": "उस्मानपुरा, छत्रपती संभाजीनगर",
+    "zone": "Zone 2",
+    "phone": "0240-2240561",
+    "timings": "24/7",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Usmanpura%20Police%20Station%20Aurangabad"
+  }
+]

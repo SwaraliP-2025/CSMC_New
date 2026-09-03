@@ -1,0 +1,22 @@
+[
+  {
+    "id": "phc-001",
+    "name": "Bibi Ka Maqbara PHC",
+    "address": "Near Bibi Ka Maqbara, Paithan Road, Sambhajinagar",
+    "phone": "0240-1234567",
+    "timings": "9:00 AM - 5:00 PM",
+    "latitude": "19.8770",
+    "longitude": "75.3450",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8770,75.3450"
+  },
+  {
+    "id": "phc-002",
+    "name": "CIDCO PHC",
+    "address": "CIDCO Sector 1, Sambhajinagar",
+    "phone": "0240-2345678",
+    "timings": "8:30 AM - 4:30 PM",
+    "latitude": "19.8735",
+    "longitude": "75.3112",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8735,75.3112"
+  }
+]

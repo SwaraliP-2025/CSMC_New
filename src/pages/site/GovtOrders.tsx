@@ -3,13 +3,14 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { FileText, Download, Search } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const orders = [
-  { no: "GR/2026/001", title: "Property Tax Rebate Scheme 2026-27", titleMr: "मालमत्ता कर सवलत योजना २०२६-२७", date: "1 Apr 2026", dept: "Revenue", deptMr: "महसूल" },
-  { no: "GR/2026/002", title: "Solid Waste Management Guidelines", titleMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे", date: "15 Mar 2026", dept: "SWM", deptMr: "घनकचरा" },
-  { no: "GR/2026/003", title: "Water Supply Regulation Order", titleMr: "पाणी पुरवठा नियमन आदेश", date: "10 Mar 2026", dept: "Water Supply", deptMr: "पाणी पुरवठा" },
-  { no: "GR/2026/004", title: "Building Permission Fee Revision", titleMr: "बांधकाम परवानगी शुल्क सुधारणा", date: "1 Mar 2026", dept: "Town Planning", deptMr: "नगर रचना" },
-  { no: "GR/2025/045", title: "Street Light Maintenance Circular", titleMr: "पथदिवे देखभाल परिपत्रक", date: "20 Dec 2025", dept: "Electrical", deptMr: "विद्युत" },
+  { no: "GR/2026/001", title: "Property Tax Rebate Scheme 2026-27", titleMr: "मालमत्ता कर सवलत योजना २०२६-२७", date: "1 Apr 2026", dept: "Revenue", deptMr: "महसूल", repoId: "gr-tax-rebate" },
+  { no: "GR/2026/002", title: "Solid Waste Management Guidelines", titleMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे", date: "15 Mar 2026", dept: "SWM", deptMr: "घनकचरा", repoId: "gr-swm" },
+  { no: "GR/2026/003", title: "Water Supply Regulation Order", titleMr: "पाणी पुरवठा नियमन आदेश", date: "10 Mar 2026", dept: "Water Supply", deptMr: "पाणी पुरवठा", repoId: "gr-water-reg" },
+  { no: "GR/2026/004", title: "Building Permission Fee Revision", titleMr: "बांधकाम परवानगी शुल्क सुधारणा", date: "1 Mar 2026", dept: "Town Planning", deptMr: "नगर रचना", repoId: "gr-bldg-fee" },
+  { no: "GR/2025/045", title: "Street Light Maintenance Circular", titleMr: "पथदिवे देखभाल परिपत्रक", date: "20 Dec 2025", dept: "Electrical", deptMr: "विद्युत", repoId: "cir-streetlight" },
   { no: "GR/2025/044", title: "Health Camp Organization Guidelines", titleMr: "आरोग्य शिबिर आयोजन मार्गदर्शक तत्त्वे", date: "15 Dec 2025", dept: "Health", deptMr: "आरोग्य" },
 ];
 
@@ -45,9 +46,21 @@ const GovtOrders = () => {
                   <span className="text-xs text-muted-foreground">{o.date}</span>
                 </div>
               </div>
-              <a href="#" className="flex items-center gap-1.5 text-xs font-bold text-civic-blue hover:text-white hover:bg-civic-blue px-3 py-1.5 rounded-lg border border-civic-blue transition-all shrink-0">
-                <Download className="h-3.5 w-3.5" /> PDF
-              </a>
+              {"repoId" in o && o.repoId ? (
+                <Link
+                  to={`/digital-repository/${o.repoId}`}
+                  className="flex items-center gap-1.5 text-xs font-bold text-civic-blue hover:text-white hover:bg-civic-blue px-3 py-1.5 rounded-lg border border-civic-blue transition-all shrink-0"
+                >
+                  <Download className="h-3.5 w-3.5" /> {en ? "View" : "पहा"}
+                </Link>
+              ) : (
+                <span
+                  className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground px-3 py-1.5 rounded-lg border border-border shrink-0 cursor-not-allowed"
+                  title={en ? "Document not available in this prototype" : "या नमुना आवृत्तीत दस्तऐवज उपलब्ध नाही"}
+                >
+                  {en ? "Unavailable" : "अनुपलब्ध"}
+                </span>
+              )}
             </div>
           ))}
         </div>

@@ -1,11 +1,14 @@
 import { HomeLayout } from "@/components/site/Layout";
 import { GovtLinksCarousel } from "@/components/site/GovtLinksCarousel";
 import { useLang } from "@/i18n/LanguageContext";
-import { ArrowRight, Landmark, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, MapPin, LayoutGrid } from "lucide-react";
+import { ArrowRight, Landmark, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, MapPin, LayoutGrid, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { NoticesPopup, BannerPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
+import { FacilityCategoryCard } from "@/components/site/FacilityCategoryCard";
+import { TouristCard } from "@/components/site/TouristCard";
+import { facilityCategories, type TouristPlaceRecord } from "@/lib/facilities";
 
 // Static imports for leadership images — avoids new URL() crashes on GitHub Pages
 import devendraImg from "@/assets/leadership/devendraji_pic.jpg";
@@ -111,6 +114,73 @@ const SocialMediaSection = () => {
   );
 };
 
+// ── Public Facilities Slider ───────────────────────────────────────────────────
+const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const items = facilityCategories.filter(c => c.showInOverview !== false);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!sliderRef.current) return;
+    const cardWidth = sliderRef.current.querySelector("a")?.offsetWidth ?? 300;
+    sliderRef.current.scrollBy({ left: dir === "left" ? -(cardWidth + 16) : (cardWidth + 16), behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative">
+      {/* Prev button */}
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors"
+        aria-label="Previous"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+
+      {/* Slider track */}
+      <div
+        ref={sliderRef}
+        className="flex gap-4 overflow-x-auto scroll-smooth pb-2 px-1"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {items.map(category => {
+          const Icon = category.icon;
+          return (
+            <Link
+              key={category.slug}
+              to={`/public-facilities/${category.slug}`}
+              className="group flex-shrink-0 w-[260px] bg-white border border-border hover:border-civic-blue/30 hover:shadow-elegant rounded-2xl p-5 transition-all flex flex-col gap-3"
+            >
+              <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-civic-blue/10 text-civic-blue group-hover:bg-civic-blue group-hover:text-white transition-colors">
+                <Icon className="h-6 w-6" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-serif font-bold text-civic-blue text-base mb-1">
+                  {en ? category.titleEn : category.titleMr}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                  {en ? category.descriptionEn : category.descriptionMr}
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-civic-blue group-hover:text-civic-red transition-colors">
+                {en ? "View All" : "सर्व पहा"} <ArrowRight className="h-3.5 w-3.5" />
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+
+      {/* Next button */}
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors"
+        aria-label="Next"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </div>
+  );
+};
+
 const Index = () => {
   const { t, lang } = useLang();
   const en = lang === "en";
@@ -121,7 +191,35 @@ const Index = () => {
   };
   const [isVisible, setIsVisible] = useState(false);
   const [selectedLeader, setSelectedLeader] = useState<typeof leadership[0] | null>(null);
+  const [touristPlaces, setTouristPlaces] = useState<TouristPlaceRecord[]>([]);
+  const [featuredTouristPlaces, setFeaturedTouristPlaces] = useState<TouristPlaceRecord[]>([]);
   const notices = useNoticesPopup();
+
+  const featuredPlaces = featuredTouristPlaces.length > 0 ? featuredTouristPlaces : touristPlaces.slice(0, 4);
+
+  useEffect(() => {
+    // Use Vite's base URL so the fetch works when the app is served from a subpath
+    const url = `${import.meta.env.BASE_URL}data/tourist-places.json`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data: TouristPlaceRecord[]) => setTouristPlaces(data))
+      .catch((err) => console.error("Failed to load tourist places:", err));
+  }, []);
+
+  useEffect(() => {
+    const featuredOrder = [
+      "ellora-caves",
+      "ajanta-caves",
+      "daulatabad-fort",
+      "bibi-ka-maqbara",
+    ];
+
+    setFeaturedTouristPlaces(
+      featuredOrder
+        .map((slug) => touristPlaces.find((place) => place.slug === slug))
+        .filter((place): place is TouristPlaceRecord => Boolean(place))
+    );
+  }, [touristPlaces]);
 
   // Also open notices popup when Notices is clicked in navbar
   useEffect(() => {
@@ -191,6 +289,21 @@ const Index = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-civic-blue/5">
+        <div className="container">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">{en ? "Public Facilities" : "सार्वजनिक सुविधा"}</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-civic-blue font-bold">{en ? "Explore Public Facilities" : "सार्वजनिक सुविधांचा शोध घ्या"}</h2>
+            </div>
+            <Link to="/public-facilities" className="text-sm font-semibold text-civic-blue hover:text-civic-red transition-colors whitespace-nowrap">
+              {en ? "Explore all public facilities" : "सर्व सार्वजनिक सुविधा पहा"} <ArrowRight className="inline-block ml-2 h-4 w-4" />
+            </Link>
+          </div>
+          <PublicFacilitiesSlider en={en} />
         </div>
       </section>
 
@@ -302,10 +415,10 @@ const Index = () => {
                 className="w-9 h-9 rounded-full bg-civic-blue text-white flex items-center justify-center hover:bg-civic-gold hover:text-civic-ink transition-colors shadow-md">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
               </button>
-              <a href="/under-construction"
+              <Link to="/explore"
                 className="flex items-center gap-1.5 px-4 py-2 rounded-full border-2 border-civic-blue text-civic-blue font-bold text-xs hover:bg-civic-blue hover:text-white transition-all">
                 {en ? "View All" : "सर्व पहा"} <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+              </Link>
             </div>
           </div>
           <div ref={galleryRef} className="flex gap-4 overflow-x-auto pb-3" style={{ scrollbarWidth: "none", scrollBehavior: "smooth" }}>
@@ -383,6 +496,26 @@ const Index = () => {
       <BannerPopup open={notices.bannerOpen} onClose={notices.hideBanner} />
       <NoticesPopup open={notices.noticesOpen} onClose={notices.hideNotices} />
       <GovtLinksCarousel />
+
+      {/* Nearby Tourist Spots (moved below government portal) */}
+      <section className="py-20 bg-white">
+        <div className="container">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">{en ? "Nearby Tourist Spots" : "जवळची पर्यटन स्थळे"}</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-civic-blue font-bold">{en ? "Discover Local Attractions" : "स्थानिक आकर्षणे शोधा"}</h2>
+            </div>
+            <Link to="/explore" className="text-sm font-semibold text-civic-blue hover:text-civic-red transition-colors">
+              {en ? "View all attractions" : "सर्व आकर्षणे पहा"} <ArrowRight className="inline-block ml-2 h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredPlaces.map((place) => (
+              <TouristCard key={place.id} place={place} en={en} />
+            ))}
+          </div>
+        </div>
+      </section>
     </HomeLayout>
   );
 };

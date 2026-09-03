@@ -4,12 +4,18 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/i18n/LanguageContext";
+import { ColorBlindProvider } from "@/i18n/ColorBlindContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ScrollToTopOnNavigate } from "@/components/ScrollToTopOnNavigate";
+import { SeoHead } from "@/components/SeoHead";
 import Index from "./pages/Index.tsx";
 import About from "./pages/site/About.tsx";
 import Departments from "./pages/site/Departments.tsx";
 import Services from "./pages/site/Services.tsx";
+import PublicFacilities from "./pages/PublicFacilities.tsx";
+import FacilityDetails from "./pages/FacilityDetails.tsx";
+import TouristPlaces from "./pages/TouristPlaces.tsx";
+import TouristAttractionDetail from "./pages/TouristAttractionDetail.tsx";
 import Notices from "./pages/site/Notices.tsx";
 import Tenders from "./pages/site/Tenders.tsx";
 import Contact from "./pages/site/Contact.tsx";
@@ -35,6 +41,20 @@ import MayorsList from "./pages/site/MayorsList.tsx";
 import DepartmentDetail from "./pages/site/DepartmentDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import UserManual from "./pages/site/UserManual.tsx";
+import Initiatives from "./pages/site/Initiatives.tsx";
+import KnowYourCorporator from "./pages/site/KnowYourCorporator.tsx";
+import Prabhag2025 from "./pages/site/Prabhag2025.tsx";
+import DigitalRepository from "./pages/site/DigitalRepository.tsx";
+import DocumentViewer from "./pages/site/DocumentViewer.tsx";
+import CityAlerts from "./pages/site/CityAlerts.tsx";
+import HowToReach from "./pages/site/HowToReach.tsx";
+import {
+  PrivacyPolicy,
+  DisclaimerPage,
+  TermsPage,
+  AccessibilityStatement,
+  WebsitePolicies,
+} from "./pages/site/PolicyPages.tsx";
 
 const queryClient = new QueryClient();
 
@@ -42,17 +62,24 @@ const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
+        <ColorBlindProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter basename="/CSMC_New">
             <ScrollToTopOnNavigate />
+            <SeoHead />
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
+            <Route path="/initiatives" element={<Initiatives />} />
             <Route path="/departments" element={<Departments />} />
             <Route path="/departments/:slug" element={<DepartmentDetail />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/public-facilities" element={<PublicFacilities />} />
+            <Route path="/public-facilities/:slug" element={<FacilityDetails />} />
+            <Route path="/explore" element={<TouristPlaces />} />
+            <Route path="/tourist-attraction/:slug" element={<TouristAttractionDetail />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/contact" element={<Contact />} />
@@ -71,17 +98,29 @@ const App = () => (
             <Route path="/govt-orders" element={<GovtOrders />} />
             <Route path="/site-map" element={<SiteMap />} />
             <Route path="/zones-wards" element={<ZonesWards />} />
+            <Route path="/know-your-corporator" element={<KnowYourCorporator />} />
             <Route path="/organization" element={<Organization />} />
             <Route path="/dp-plan" element={<DPPlan />} />
             <Route path="/commissioners-list" element={<CommissionersList />} />
             <Route path="/mayors-list" element={<MayorsList />} />
             <Route path="/user-manual" element={<UserManual />} />
+            <Route path="/prabhag-2025" element={<Prabhag2025 />} />
+            <Route path="/digital-repository" element={<DigitalRepository />} />
+            <Route path="/digital-repository/:id" element={<DocumentViewer />} />
+            <Route path="/city-alerts" element={<CityAlerts />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/disclaimer" element={<DisclaimerPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
+            <Route path="/website-policies" element={<WebsitePolicies />} />
+            <Route path="/how-to-reach" element={<HowToReach />} />
             <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
-  </QueryClientProvider>
+        </TooltipProvider>
+        </ColorBlindProvider>
+      </LanguageProvider>
+    </QueryClientProvider>
   </ErrorBoundary>
 );
 

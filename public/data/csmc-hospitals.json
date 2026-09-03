@@ -1,0 +1,22 @@
+[
+  {
+    "id": "hospital-001",
+    "name": "CSMC General Hospital",
+    "address": "Main Road, Sambhajinagar",
+    "phone": "0240-3344556",
+    "timings": "24 Hours",
+    "latitude": "19.8823",
+    "longitude": "75.3378",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8823,75.3378"
+  },
+  {
+    "id": "hospital-002",
+    "name": "CSMC Women & Child Hospital",
+    "address": "Aurangabad Road, Sambhajinagar",
+    "phone": "0240-4455667",
+    "timings": "24 Hours",
+    "latitude": "19.8709",
+    "longitude": "75.3507",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8709,75.3507"
+  }
+]

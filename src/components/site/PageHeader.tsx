@@ -4,6 +4,7 @@ import { useLang } from "@/i18n/LanguageContext";
 
 const routeLabels: Record<string, string> = {
   about: "About",
+  initiatives: "Initiatives by CSMC",
   departments: "Departments",
   services: "Citizen Services",
   notices: "Notices",
@@ -14,6 +15,7 @@ const routeLabels: Record<string, string> = {
   "mayors-list": "Mayors' List",
   organization: "Organogram",
   "zones-wards": "Zones & Wards",
+  "know-your-corporator": "Know Your Corporator",
   track: "Track Application",
   "tax-calculator": "Tax Calculator",
   "public-documents": "Public Documents",
@@ -29,6 +31,14 @@ const routeLabels: Record<string, string> = {
   "dp-plan": "DP Plan",
   "under-construction": "Under Construction",
   "user-manual": "User Manual",
+  "digital-repository": "Municipal Knowledge Repository",
+  "city-alerts": "Live City Alerts",
+  "privacy-policy": "Privacy Policy",
+  disclaimer: "Disclaimer",
+  terms: "Copyright & Terms",
+  "accessibility-statement": "Accessibility Statement",
+  "website-policies": "Website Policies",
+  "how-to-reach": "How to Reach",
 };
 
 export const PageHeader = ({

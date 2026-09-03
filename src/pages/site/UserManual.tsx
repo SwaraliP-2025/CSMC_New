@@ -51,6 +51,7 @@ const bottomRow = manuals.slice(3);
 
 const ManualCard = ({ item, en }: { item: ManualItem; en: boolean }) => {
   const Icon = item.icon;
+  const unavailable = en ? "Not available in this prototype" : "या नमुना आवृत्तीत उपलब्ध नाही";
   return (
     <article className="h-full min-h-[280px] bg-white rounded-xl shadow-card border border-border/60 p-6 sm:p-8 flex flex-col items-center text-center hover:shadow-elegant hover:-translate-y-0.5 transition-all">
       <div
@@ -61,27 +62,25 @@ const ManualCard = ({ item, en }: { item: ManualItem; en: boolean }) => {
       </div>
 
       <div className="flex items-center justify-center gap-3 mb-5 text-sm font-semibold shrink-0">
-        <a
-          href="#"
-          className="inline-flex items-center gap-1.5 text-civic-blue hover:text-civic-gold transition-colors"
-          onClick={(e) => e.preventDefault()}
-          aria-label={en ? `PDF — ${item.titleEn}` : `पीडीएफ — ${item.titleMr}`}
+        <span
+          className="inline-flex items-center gap-1.5 text-muted-foreground cursor-not-allowed"
+          title={unavailable}
+          aria-label={`${en ? "PDF" : "पीडीएफ"} — ${unavailable}`}
         >
-          <FileText className="h-4 w-4 shrink-0 text-civic-blue" />
-          {en ? "PDF" : "पीडीएफ"}
-        </a>
+          <FileText className="h-4 w-4 shrink-0" />
+          {en ? "PDF (unavailable)" : "पीडीएफ (अनुपलब्ध)"}
+        </span>
         <span className="text-civic-blue/30 font-normal" aria-hidden>
           |
         </span>
-        <a
-          href="#"
-          className="inline-flex items-center gap-1.5 text-civic-blue hover:text-civic-gold transition-colors"
-          onClick={(e) => e.preventDefault()}
-          aria-label={en ? `Video — ${item.titleEn}` : `व्हिडिओ — ${item.titleMr}`}
+        <span
+          className="inline-flex items-center gap-1.5 text-muted-foreground cursor-not-allowed"
+          title={unavailable}
+          aria-label={`${en ? "Video" : "व्हिडिओ"} — ${unavailable}`}
         >
-          <PlayCircle className="h-4 w-4 shrink-0 text-civic-blue" />
-          {en ? "Video" : "व्हिडिओ"}
-        </a>
+          <PlayCircle className="h-4 w-4 shrink-0" />
+          {en ? "Video (unavailable)" : "व्हिडिओ (अनुपलब्ध)"}
+        </span>
       </div>
 
       <h2 className="mt-auto min-h-[3.5rem] flex items-center justify-center font-serif text-base sm:text-lg font-bold text-civic-blue leading-snug">

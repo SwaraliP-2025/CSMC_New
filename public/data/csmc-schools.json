@@ -1,0 +1,22 @@
+[
+  {
+    "id": "school-001",
+    "name": "CSMC Primary School No. 1",
+    "address": "CIDCO Sector 5, Sambhajinagar",
+    "phone": "0240-5566778",
+    "timings": "9:00 AM - 4:00 PM",
+    "latitude": "19.8700",
+    "longitude": "75.3260",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8700,75.3260"
+  },
+  {
+    "id": "school-002",
+    "name": "CSMC Secondary School No. 3",
+    "address": "Garkheda Road, Sambhajinagar",
+    "phone": "0240-6677889",
+    "timings": "9:00 AM - 4:00 PM",
+    "latitude": "19.8600",
+    "longitude": "75.3150",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8600,75.3150"
+  }
+]

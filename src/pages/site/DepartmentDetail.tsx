@@ -2,7 +2,8 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { Phone, Mail, MapPin, ArrowLeft, Bell } from "lucide-react";
+import { getCivicRecord } from "@/data/civicCatalog";
+import { Phone, Mail, MapPin, ArrowLeft, Bell, FileText } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 // import amolSir from "@assets/departments/shri_amol_sir.png";
@@ -21,7 +22,124 @@ interface DeptInfo {
   addressMr: string;
   image?: string;
   updates: { en: string; mr: string; date: string }[];
+  responsibilitiesEn?: string[];
+  responsibilitiesMr?: string[];
+  servicesEn?: string[];
+  servicesMr?: string[];
+  relatedDocIds?: string[];
 }
+
+/** Optional extended content keyed by slug (merged at render). */
+const DEPT_EXTRAS: Record<
+  string,
+  Pick<DeptInfo, "responsibilitiesEn" | "responsibilitiesMr" | "servicesEn" | "servicesMr" | "relatedDocIds">
+> = {
+  "municipal-commissioner": {
+    responsibilitiesEn: ["Overall civic administration", "Policy implementation", "Citizen service delivery oversight"],
+    responsibilitiesMr: ["एकूण नागरिक प्रशासन", "धोरण अंमलबजावणी", "नागरिक सेवा वितरण देखरेख"],
+    servicesEn: ["Commissioner office correspondence", "Administrative approvals"],
+    servicesMr: ["आयुक्त कार्यालय पत्रव्यवहार", "प्रशासकीय मंजुरी"],
+    relatedDocIds: ["bud-2627", "act-rti"],
+  },
+  "additional-commissioner-1": {
+    responsibilitiesEn: ["Civic infrastructure oversight", "Public works coordination", "Capital project monitoring"],
+    responsibilitiesMr: ["नागरी पायाभूत सुविधा देखरेख", "सार्वजनिक कामे समन्वय", "भांडवली प्रकल्प निरीक्षण"],
+    servicesEn: ["Works sanctions follow-up", "Project status review"],
+    servicesMr: ["कामे मंजुरी अनुवर्ती", "प्रकल्प स्थिती आढावा"],
+    relatedDocIds: ["mm-sc-apr"],
+  },
+  "additional-commissioner-2": {
+    responsibilitiesEn: ["Revenue and taxation oversight", "Citizen services", "Grievance redressal coordination"],
+    responsibilitiesMr: ["महसूल व कर देखरेख", "नागरिक सेवा", "तक्रार निवारण समन्वय"],
+    servicesEn: ["Revenue drives", "Grievance camps"],
+    servicesMr: ["महसूल मोहिमा", "तक्रार शिबिरे"],
+    relatedDocIds: ["not-tax-rebate", "bud-2526"],
+  },
+  health: {
+    responsibilitiesEn: ["Public health services", "Vaccination and epidemic control", "Municipal dispensaries"],
+    responsibilitiesMr: ["सार्वजनिक आरोग्य सेवा", "लसीकरण व साथरोग नियंत्रण", "महापालिका दवाखाने"],
+    servicesEn: ["Health camps", "Vaccination drives", "Dispensary services"],
+    servicesMr: ["आरोग्य शिबिरे", "लसीकरण मोहिमा", "दवाखाना सेवा"],
+    relatedDocIds: ["dept-health"],
+  },
+  "animal-husbandry": {
+    responsibilitiesEn: ["Stray animal control", "Veterinary services", "Animal birth control programmes"],
+    responsibilitiesMr: ["भटक्या प्राण्यांचे नियंत्रण", "पशुवैद्यकीय सेवा", "प्राणी जन्म नियंत्रण कार्यक्रम"],
+    servicesEn: ["ABC programme", "Stray vaccination"],
+    servicesMr: ["ABC कार्यक्रम", "भटक्या प्राण्यांचे लसीकरण"],
+    relatedDocIds: [],
+  },
+  drainage: {
+    responsibilitiesEn: ["Sewerage network maintenance", "STP operations", "Pre-monsoon drain cleaning"],
+    responsibilitiesMr: ["गटार जाळे देखभाल", "STP संचालन", "पूर्व-मान्सून नाला सफाई"],
+    servicesEn: ["Drain cleaning requests", "STP information"],
+    servicesMr: ["नाला सफाई विनंत्या", "STP माहिती"],
+    relatedDocIds: ["dept-drainage", "cir-water-summer"],
+  },
+  garden: {
+    responsibilitiesEn: ["Public gardens and parks", "Tree plantation drives", "Green cover maintenance"],
+    responsibilitiesMr: ["सार्वजनिक उद्याने व बागा", "वृक्षारोपण मोहिमा", "हरित आच्छादन देखभाल"],
+    servicesEn: ["Garden bookings enquiry", "Plantation drives"],
+    servicesMr: ["उद्यान बुकिंग चौकशी", "वृक्षारोपण मोहिमा"],
+    relatedDocIds: [],
+  },
+  estate: {
+    responsibilitiesEn: ["Corporation property management", "Leases and encroachments", "Municipal land records"],
+    responsibilitiesMr: ["महापालिका मालमत्ता व्यवस्थापन", "भाडेपट्टे व अतिक्रमणे", "महापालिका जमीन नोंदी"],
+    servicesEn: ["Lease renewal", "Encroachment complaints routing"],
+    servicesMr: ["भाडेपट्टी नूतनीकरण", "अतिक्रमण तक्रार मार्गदर्शन"],
+    relatedDocIds: [],
+  },
+  "property-tax": {
+    responsibilitiesEn: ["Property assessment", "Tax collection and rebates", "Revision of property tax"],
+    responsibilitiesMr: ["मालमत्ता मूल्यांकन", "कर संकलन व सवलती", "मालमत्ता कर सुधारणा"],
+    servicesEn: ["Online property tax payment", "Assessment enquiry"],
+    servicesMr: ["ऑनलाइन मालमत्ता कर भरणे", "मूल्यांकन चौकशी"],
+    relatedDocIds: ["dept-ptax", "not-tax-rebate", "faq-ptax"],
+  },
+  "water-tax": {
+    responsibilitiesEn: ["Water billing", "New connections", "Supply schedule coordination"],
+    responsibilitiesMr: ["पाणी बिलिंग", "नवीन जोडण्या", "पुरवठा वेळापत्रक समन्वय"],
+    servicesEn: ["Online water tax payment", "New connection guidance"],
+    servicesMr: ["ऑनलाइन पाणी कर भरणे", "नवीन जोडणी मार्गदर्शन"],
+    relatedDocIds: ["cir-water-summer"],
+  },
+  "town-planning": {
+    responsibilitiesEn: ["Building permissions", "Development plan implementation", "Layout approvals"],
+    responsibilitiesMr: ["बांधकाम परवानग्या", "विकास आराखडा अंमलबजावणी", "लेआउट मंजुरी"],
+    servicesEn: ["Building permission guidance", "DP enquiry"],
+    servicesMr: ["बांधकाम परवाना मार्गदर्शन", "DP चौकशी"],
+    relatedDocIds: ["dept-tp", "not-dp-revision", "dp-2025"],
+  },
+  fire: {
+    responsibilitiesEn: ["Fire fighting and rescue", "Fire NOC", "Disaster response support"],
+    responsibilitiesMr: ["अग्निशमन व बचाव", "अग्नि NOC", "आपत्ती प्रतिसाद सहाय्य"],
+    servicesEn: ["Emergency dial 101", "Fire NOC guidance"],
+    servicesMr: ["आपत्कालीन १०१", "अग्नि NOC मार्गदर्शन"],
+    relatedDocIds: [],
+  },
+  license: {
+    responsibilitiesEn: ["Trade licences", "Shop establishment certificates", "Hawker permits"],
+    responsibilitiesMr: ["व्यापार परवाने", "दुकान स्थापना प्रमाणपत्रे", "फिरते विक्रेता परवाने"],
+    servicesEn: ["Licence renewal camps", "Online licence guidance"],
+    servicesMr: ["परवाना नूतनीकरण शिबिरे", "ऑनलाइन परवाना मार्गदर्शन"],
+    relatedDocIds: ["act-rts"],
+  },
+  electrical: {
+    responsibilitiesEn: ["Street lighting", "LED upgrades", "Municipal electrical maintenance"],
+    responsibilitiesMr: ["पथदिवे", "LED अद्यतने", "महापालिका विद्युत देखभाल"],
+    servicesEn: ["Streetlight complaint routing", "LED upgrade information"],
+    servicesMr: ["पथदिवा तक्रार मार्गदर्शन", "LED अद्यतन माहिती"],
+    relatedDocIds: ["cir-streetlight"],
+  },
+  nulm: {
+    responsibilitiesEn: ["Urban livelihoods mission", "Skill development", "SHG and street vendor support"],
+    responsibilitiesMr: ["नगर उपजीविका अभियान", "कौशल्य विकास", "बचत गट व फिरते विक्रेता सहाय्य"],
+    servicesEn: ["Skill training batches", "SHG loan camps"],
+    servicesMr: ["कौशल्य प्रशिक्षण बॅच", "बचत गट कर्ज शिबिरे"],
+    relatedDocIds: [],
+  },
+};
 
 const DEPARTMENTS: DeptInfo[] = [
   {
@@ -298,7 +416,8 @@ const DepartmentDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { lang } = useLang();
   const en = lang === "en";
-  const dept = DEPARTMENTS.find(d => d.slug === slug);
+  const base = DEPARTMENTS.find(d => d.slug === slug);
+  const dept = base ? { ...base, ...(DEPT_EXTRAS[base.slug] ?? {}) } : undefined;
 
   if (!dept) {
     return (
@@ -380,6 +499,57 @@ const DepartmentDetail = () => {
                 </div>
               </div>
             </div>
+
+            {/* Extended sections — below contact card; profile header unchanged */}
+            {((en ? dept.responsibilitiesEn : dept.responsibilitiesMr)?.length ?? 0) > 0 && (
+              <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm">
+                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                  {en ? "Key Responsibilities" : "मुख्य जबाबदाऱ्या"}
+                </h3>
+                <ul className="text-sm text-muted-foreground space-y-1.5 list-disc list-inside">
+                  {(en ? dept.responsibilitiesEn! : dept.responsibilitiesMr!).map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {((en ? dept.servicesEn : dept.servicesMr)?.length ?? 0) > 0 && (
+              <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm">
+                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                  {en ? "Services" : "सेवा"}
+                </h3>
+                <ul className="text-sm text-muted-foreground space-y-1.5 list-disc list-inside">
+                  {(en ? dept.servicesEn! : dept.servicesMr!).map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {(dept.relatedDocIds?.filter((id) => getCivicRecord(id)).length ?? 0) > 0 && (
+              <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm">
+                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                  {en ? "Related Documents" : "संबंधित दस्तऐवज"}
+                </h3>
+                <ul className="space-y-2">
+                  {dept.relatedDocIds!
+                    .map((id) => getCivicRecord(id))
+                    .filter((r): r is NonNullable<typeof r> => !!r)
+                    .map((rec) => (
+                      <li key={rec.id}>
+                        <Link
+                          to={`/digital-repository/${rec.id}`}
+                          className="flex items-center gap-2 text-sm font-semibold text-civic-blue hover:underline"
+                        >
+                          <FileText className="h-4 w-4 shrink-0" />
+                          {en ? rec.titleEn : rec.titleMr}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
 
           </div>
 

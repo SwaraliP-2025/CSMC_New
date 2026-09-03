@@ -46,3 +46,80 @@
   font-weight: 500;
   letter-spacing: 0 !important;
 }
+
+/* ── Leaflet ward tooltip ─────────────────────────────────────────── */
+.leaflet-ward-tooltip {
+  background: rgba(26, 58, 107, 0.92);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.leaflet-ward-tooltip::before {
+  border-top-color: rgba(26, 58, 107, 0.92);
+}
+
+/* Prevent Leaflet tile attribution from overlapping page chrome */
+.leaflet-bottom.leaflet-right {
+  bottom: 4px;
+}
+
+/* Hide scrollbar on the public facilities slider */
+.facilities-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Keep Leaflet map below sticky header / announcement bar.
+ * Do NOT use transform — it paints map chrome over sticky headers.
+ */
+.ward-map-shell {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  /* visible so marker tooltips/popups are not clipped at the map edge */
+  overflow: visible;
+}
+
+.ward-map-shell .leaflet-container {
+  position: relative !important;
+  z-index: 0 !important;
+  overflow: visible !important;
+  border-radius: 1rem;
+}
+
+.ward-map-shell .leaflet-tooltip {
+  padding: 8px 12px !important;
+  white-space: normal !important;
+  max-width: 280px;
+  line-height: 1.35;
+  overflow: visible !important;
+}
+
+.ward-map-shell .leaflet-tooltip-pane,
+.ward-map-shell .leaflet-popup-pane {
+  z-index: 650 !important;
+  overflow: visible !important;
+}
+
+/* Keep default Leaflet zoom (+/-) inside the map stacking context */
+.ward-map-shell .leaflet-control-container {
+  position: absolute !important;
+  inset: 0;
+  pointer-events: none;
+  z-index: 500 !important;
+}
+
+.ward-map-shell .leaflet-control {
+  pointer-events: auto;
+}
+
+.ward-map-shell .leaflet-top,
+.ward-map-shell .leaflet-bottom {
+  z-index: 500 !important;
+}
+

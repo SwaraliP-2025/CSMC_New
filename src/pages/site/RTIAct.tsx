@@ -1,11 +1,34 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { FileText, Download, User, Phone } from "lucide-react";
+import { OFFICIAL } from "@/data/officialLinks";
+import { Link } from "react-router-dom";
+import { FileText, Download, User, Phone, ExternalLink } from "lucide-react";
 
 const officers = [
   { role: "Public Information Officer (PIO)", roleMr: "जन माहिती अधिकारी (PIO)", name: "Shri. Rajesh Patil", dept: "General Administration", phone: "0240-2331731" },
   { role: "Appellate Authority", roleMr: "अपीलीय प्राधिकरण", name: "Shri. Suresh Deshmukh", dept: "Administration", phone: "0240-2331732" },
+];
+
+const RTI_DOCS = [
+  {
+    title: "RTI Application Form",
+    titleMr: "RTI अर्ज नमुना",
+    to: "/digital-repository/act-rti",
+    external: false,
+  },
+  {
+    title: "First Appeal Form / Quarterly Disclosure",
+    titleMr: "प्रथम अपील / तिमाही प्रकटीकरण",
+    to: "/digital-repository/rti-q4",
+    external: false,
+  },
+  {
+    title: "Online RTI Application",
+    titleMr: "ऑनलाइन RTI अर्ज",
+    to: OFFICIAL.onlineRti,
+    external: true,
+  },
 ];
 
 const RTIAct = () => {
@@ -16,6 +39,27 @@ const RTIAct = () => {
       <PageHeader eyebrow={en ? "Transparency" : "पारदर्शकता"} title={en ? "Right to Information Act" : "माहिती अधिकार अधिनियम"}
         subtitle={en ? "Information under Section 4(1)(b) of the RTI Act, 2005." : "माहिती अधिकार अधिनियम, २००५ च्या कलम ४(१)(ब) अंतर्गत माहिती."} />
       <section className="py-12 container">
+        <div className="flex flex-wrap gap-3 mb-8">
+          <a
+            href={OFFICIAL.onlineRti}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-civic-blue text-white text-sm font-bold hover:bg-civic-blue/90 transition-colors"
+          >
+            {en ? "Apply Online RTI (Aaple Sarkar)" : "ऑनलाइन RTI अर्ज (आपले सरकार)"}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href={OFFICIAL.samadhaan}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-civic-blue text-civic-blue text-sm font-bold hover:bg-civic-blue/5 transition-colors"
+          >
+            {en ? "Samadhaan / Grievance Portal" : "समाधान / तक्रार पोर्टल"}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-8 mb-10">
           <div className="bg-civic-blue/5 border border-civic-blue/20 rounded-2xl p-6">
             <h2 className="font-serif text-xl font-bold text-civic-blue mb-4">{en ? "About RTI Act" : "माहिती अधिकार अधिनियमाबद्दल"}</h2>
@@ -60,19 +104,21 @@ const RTIAct = () => {
 
         <h2 className="font-serif text-xl font-bold text-civic-blue mb-5">{en ? "RTI Documents" : "RTI दस्तऐवज"}</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          {[
-            { title: "RTI Application Form", titleMr: "RTI अर्ज नमुना" },
-            { title: "First Appeal Form", titleMr: "प्रथम अपील नमुना" },
-            { title: "Annual RTI Report 2025-26", titleMr: "वार्षिक RTI अहवाल २०२५-२६" },
-          ].map((d, i) => (
+          {RTI_DOCS.map((d, i) => (
             <div key={i} className="flex items-center justify-between bg-white border border-border rounded-xl px-4 py-3 hover:shadow-sm transition-shadow">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0">
                 <FileText className="h-5 w-5 text-civic-blue shrink-0" />
-                <span className="text-sm font-semibold text-civic-ink">{en ? d.title : d.titleMr}</span>
+                <span className="text-sm font-semibold text-civic-ink truncate">{en ? d.title : d.titleMr}</span>
               </div>
-              <a href="#" className="text-civic-blue hover:text-civic-red transition-colors">
-                <Download className="h-4 w-4" />
-              </a>
+              {d.external ? (
+                <a href={d.to} target="_blank" rel="noopener noreferrer" className="text-civic-blue hover:text-civic-red transition-colors shrink-0" aria-label={en ? d.title : d.titleMr}>
+                  <Download className="h-4 w-4" />
+                </a>
+              ) : (
+                <Link to={d.to} className="text-civic-blue hover:text-civic-red transition-colors shrink-0" aria-label={en ? d.title : d.titleMr}>
+                  <Download className="h-4 w-4" />
+                </Link>
+              )}
             </div>
           ))}
         </div>

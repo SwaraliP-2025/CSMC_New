@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
 import { Youtube, Facebook, ChevronRight } from "lucide-react";
+import { OFFICIAL } from "@/data/officialLinks";
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -8,9 +9,10 @@ const XIcon = () => (
   </svg>
 );
 
+/** Prototype display figures — labelled in UI as sample. */
 const TOTAL_VISITORS = 662770;
 const TODAY_VISITORS = 2659;
-const LAST_UPDATED = "11-03-2026";
+const LAST_UPDATED = "03-09-2026";
 
 const AppleIcon = () => (
   <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
@@ -26,37 +28,61 @@ const PlayIcon = () => (
 
 const linkCls = "flex items-center gap-1 text-white/65 hover:text-civic-gold transition-colors text-sm py-0.5";
 
+type FootLink = { en: string; mr: string; to: string; external?: boolean };
+
 export const Footer = () => {
   const { lang } = useLang();
   const en = lang === "en";
 
-  const othersLinks = [
+  const othersLinks: FootLink[] = [
     { en: "FAQ's", mr: "वारंवार विचारले जाणारे प्रश्न", to: "/faq" },
-    { en: "Web Site Policies", mr: "संकेतस्थळ धोरणे", to: "/under-construction" },
-    { en: "Disclaimer", mr: "अस्वीकरण", to: "/under-construction" },
-    { en: "Citizen Feedback", mr: "नागरिक अभिप्राय", to: "/under-construction" },
-    { en: "Sitemap", mr: "साइटमॅप", to: "/under-construction" },
-    { en: "RTI", mr: "माहिती अधिकार", to: "/under-construction" },
+    { en: "Web Site Policies", mr: "संकेतस्थळ धोरणे", to: "/website-policies" },
+    { en: "Privacy Policy", mr: "गोपनीयता धोरण", to: "/privacy-policy" },
+    { en: "Disclaimer", mr: "अस्वीकरण", to: "/disclaimer" },
+    { en: "Copyright & Terms", mr: "कॉपीराइट व अटी", to: "/terms" },
+    { en: "Accessibility Statement", mr: "सुलभता निवेदन", to: "/accessibility-statement" },
+    { en: "Citizen Feedback", mr: "नागरिक अभिप्राय", to: OFFICIAL.citizenFeedback, external: true },
+    { en: "Sitemap", mr: "साइटमॅप", to: "/site-map" },
+    { en: "RTI", mr: "माहिती अधिकार", to: "/rti-act" },
     { en: "Public Documents", mr: "सार्वजनिक दस्तऐवज", to: "/public-documents" },
+    { en: "How to Reach", mr: "कसे पोहोचावे", to: "/how-to-reach" },
   ];
 
-  const serviceLinks = [
-    { en: "Right To Services (RTS)", mr: "सेवा हक्क (RTS)", to: "/under-construction" },
-    { en: "Property Tax", mr: "मालमत्ता कर", to: "/services" },
-    { en: "Pay Your Water Charges", mr: "पाणी कर भरा", to: "/services" },
-    { en: "RTI", mr: "माहिती अधिकार", to: "/under-construction" },
-    { en: "e-Tender", mr: "ई-निविदा", to: "https://mahatenders.gov.in/nicgep/app" },
-    { en: "Birth Certificate", mr: "जन्म प्रमाणपत्र", to: "/services" },
-    { en: "Death Certificate", mr: "मृत्यू प्रमाणपत्र", to: "/services" },
-    { en: "Track Application", mr: "अर्ज स्थिती", to: "/track" },
+  const serviceLinks: FootLink[] = [
+    { en: "Right To Services (RTS)", mr: "सेवा हक्क (RTS)", to: "/rts-act" },
+    { en: "All Citizen Services", mr: "सर्व नागरिक सेवा", to: "/services" },
+    { en: "Property Tax", mr: "मालमत्ता कर", to: OFFICIAL.propertyTax, external: true },
+    { en: "Pay Your Water Charges", mr: "पाणी कर भरा", to: OFFICIAL.waterTax, external: true },
+    { en: "Samadhaan Grievance", mr: "समाधान तक्रार", to: OFFICIAL.samadhaan, external: true },
+    { en: "RTI", mr: "माहिती अधिकार", to: "/rti-act" },
+    { en: "e-Tender", mr: "ई-निविदा", to: OFFICIAL.mahatenders, external: true },
+    { en: "Birth Certificate", mr: "जन्म प्रमाणपत्र", to: OFFICIAL.rtsDashboard, external: true },
+    { en: "Death Certificate", mr: "मृत्यू प्रमाणपत्र", to: OFFICIAL.rtsDashboard, external: true },
+    { en: "Track Application (Official)", mr: "अर्ज स्थिती (अधिकृत)", to: OFFICIAL.trackComplaint, external: true },
     { en: "Tax Calculator", mr: "कर कॅल्क्युलेटर", to: "/tax-calculator" },
   ];
+
+  const renderLink = (item: FootLink) => {
+    const label = en ? item.en : item.mr;
+    if (item.external || /^https?:\/\//i.test(item.to)) {
+      return (
+        <a href={item.to} target="_blank" rel="noopener noreferrer" className={linkCls}>
+          <ChevronRight className="h-3.5 w-3.5 text-civic-gold shrink-0" />
+          {label}
+        </a>
+      );
+    }
+    return (
+      <Link to={item.to} className={linkCls}>
+        <ChevronRight className="h-3.5 w-3.5 text-civic-gold shrink-0" />
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <footer className="bg-[#1a1a2e] text-white pb-12">
       <div className="container py-12 grid gap-10 md:grid-cols-4">
-
-        {/* Address */}
         <div>
           <h3 className="font-bold text-base mb-5 text-white">{en ? "Address" : "पत्ता"}</h3>
           <p className="text-white/65 text-sm leading-relaxed mb-5">
@@ -73,67 +99,41 @@ export const Footer = () => {
             <a href="https://www.facebook.com/people/Csmc-Mahapalika/61551631623144/#" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Facebook className="h-4 w-4" />
             </a>
-            <a href="#" aria-label="X (Twitter)" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
+            <a href="https://www.facebook.com/ChhSambhajinagarMC" aria-label={en ? "X / social (via Facebook page)" : "सोशल माध्यम"} className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <XIcon />
             </a>
           </div>
         </div>
 
-        {/* Others */}
         <div>
           <h3 className="font-bold text-base mb-5 text-white">{en ? "Others" : "इतर"}</h3>
           <ul className="space-y-1">
-            {othersLinks.map(item => (
-              <li key={item.en}>
-                <Link to={item.to} className={linkCls}>
-                  <ChevronRight className="h-3.5 w-3.5 text-civic-gold shrink-0" />
-                  {en ? item.en : item.mr}
-                </Link>
-              </li>
+            {othersLinks.map((item) => (
+              <li key={item.en}>{renderLink(item)}</li>
             ))}
           </ul>
         </div>
 
-        {/* Services */}
         <div>
           <h3 className="font-bold text-base mb-5 text-white">{en ? "Services" : "सेवा"}</h3>
           <ul className="space-y-1">
-            {serviceLinks.map(item => (
-              <li key={item.en}>
-                {item.to.startsWith("http") ? (
-                  <a href={item.to} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                    <ChevronRight className="h-3.5 w-3.5 text-civic-gold shrink-0" />
-                    {en ? item.en : item.mr}
-                  </a>
-                ) : (
-                  <Link to={item.to} className={linkCls}>
-                    <ChevronRight className="h-3.5 w-3.5 text-civic-gold shrink-0" />
-                    {en ? item.en : item.mr}
-                  </Link>
-                )}
-              </li>
+            {serviceLinks.map((item) => (
+              <li key={item.en}>{renderLink(item)}</li>
             ))}
           </ul>
         </div>
 
-        {/* Visitors + App + WCAG */}
         <div className="space-y-6">
-          {/* <div>
-            <p className="text-sm font-bold text-white mb-2">{en ? "Total Visitors Count :" : "एकूण भेटी :"}</p>
-            <span className="inline-block bg-civic-gold text-civic-ink font-bold text-sm px-3 py-1 rounded">
-              {TOTAL_VISITORS.toLocaleString()}
-            </span>
-          </div> */}
           <div>
             <div className="flex gap-3 mb-2">
-              <a href="/under-construction" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
+              <a href={OFFICIAL.smartNagarik} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
                 <AppleIcon />
                 <div className="leading-tight">
-                  <p className="text-[9px] text-white/60">{en ? "Download on the" : "डाउनलोड करा"}</p>
-                  <p className="text-xs font-bold text-white">App Store</p>
+                  <p className="text-[9px] text-white/60">{en ? "Also on" : "उपलब्ध"}</p>
+                  <p className="text-xs font-bold text-white">App Store*</p>
                 </div>
               </a>
-              <a href="/under-construction" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
+              <a href={OFFICIAL.smartNagarik} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
                 <PlayIcon />
                 <div className="leading-tight">
                   <p className="text-[9px] text-white/60">{en ? "Get it on" : "मिळवा"}</p>
@@ -141,22 +141,27 @@ export const Footer = () => {
                 </div>
               </a>
             </div>
-            <p className="text-xs text-white/50">{en ? "Download My Smart Nagarik App" : "माय स्मार्ट नागरिक ॲप डाउनलोड करा"}</p>
+            <p className="text-xs text-white/50">
+              {en
+                ? "Download My Smart Nagarik App (Play Store link; App Store listing may vary)."
+                : "माय स्मार्ट नागरिक ॲप डाउनलोड करा (Play Store दुवा; App Store यादी वेगळी असू शकते)."}
+            </p>
           </div>
           <div>
-            <a href="https://www.w3.org/WAI/WCAG2AA-Conformance" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-white/20 rounded-xl px-3 py-2 hover:border-civic-gold transition-colors">
+            <Link
+              to="/accessibility-statement"
+              className="inline-flex items-center gap-2 border border-white/20 rounded-xl px-3 py-2 hover:border-civic-gold transition-colors"
+            >
               <p className="text-[10px] font-bold text-[#005A9C]" style={{ fontFamily: "serif" }}>W3C</p>
               <div className="leading-tight">
-                <p className="text-xs font-bold text-white">WAI-A</p>
-                <p className="text-[10px] text-white/60">WCAG 2.1</p>
+                <p className="text-xs font-bold text-white">WAI-AA</p>
+                <p className="text-[10px] text-white/60">{en ? "WCAG 2.2 target" : "WCAG २.२ लक्ष्य"}</p>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-white/10 bg-black/30">
         <div className="container py-3 flex flex-wrap items-center justify-between gap-3 text-[11px] text-white/50">
           <span className="font-medium">
@@ -168,11 +173,11 @@ export const Footer = () => {
               <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{LAST_UPDATED}</span>
             </span>
             <span>
-              {en ? "Total Visitors:" : "एकूण भेटी:"}{" "}
+              {en ? "Visitors (sample):" : "भेटी (नमुना):"}{" "}
               <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{TOTAL_VISITORS.toLocaleString()}</span>
             </span>
             <span>
-              {en ? "Today Visitors:" : "आजच्या भेटी:"}{" "}
+              {en ? "Today (sample):" : "आज (नमुना):"}{" "}
               <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{TODAY_VISITORS.toLocaleString()}</span>
             </span>
             <span>

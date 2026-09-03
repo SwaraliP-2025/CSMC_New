@@ -1,0 +1,1069 @@
+import type { AiFaq, CivicRecord, DocumentStatus, DocumentVersion, OcrPage } from "@/types/civicCatalog";
+
+type RecInput = Omit<
+  CivicRecord,
+  | "id"
+  | "category"
+  | "year"
+  | "language"
+  | "status"
+  | "version"
+  | "versions"
+  | "relatedIds"
+  | "bodyEn"
+  | "bodyMr"
+  | "summaryEn"
+  | "summaryMr"
+  | "highlightsEn"
+  | "highlightsMr"
+  | "readingMinutes"
+  | "updatedAt"
+  | "keywords"
+  | "ocrPages"
+  | "applicableEn"
+  | "applicableMr"
+  | "simpleEn"
+  | "simpleMr"
+  | "aiFaqs"
+> & {
+  year?: number;
+  language?: CivicRecord["language"];
+  status?: DocumentStatus;
+  version?: string;
+  versions?: DocumentVersion[];
+  relatedIds?: string[];
+  bodyEn?: string[];
+  bodyMr?: string[];
+  summaryEn?: string;
+  summaryMr?: string;
+  highlightsEn?: string[];
+  highlightsMr?: string[];
+  readingMinutes?: number;
+  updatedAt?: string;
+  keywords?: string[];
+  ocrPages?: OcrPage[];
+  applicableEn?: string;
+  applicableMr?: string;
+  simpleEn?: string;
+  simpleMr?: string;
+  aiFaqs?: AiFaq[];
+};
+
+const rec = (
+  id: string,
+  category: CivicRecord["category"],
+  rest: RecInput
+): CivicRecord => {
+  const year = rest.year ?? Number(rest.publishedAt.slice(0, 4));
+  const language = rest.language ?? "both";
+  const version = rest.version ?? "1.0";
+  const status = rest.status ?? "current";
+  const bodyEn =
+    rest.bodyEn ??
+    [
+      rest.descriptionEn,
+      rest.previewEn,
+      `This ${category.replace(/-/g, " ")} is issued by the ${rest.departmentEn} department of Chhatrapati Sambhajinagar Municipal Corporation for public information.`,
+      "Citizens may read the document online. Downloads remain optional. For related civic services, use the links provided with this record.",
+    ];
+  const bodyMr =
+    rest.bodyMr ??
+    [
+      rest.descriptionMr,
+      rest.previewMr,
+      `हा दस्तऐवज छत्रपती संभाजीनगर महानगरपालिकेच्या ${rest.departmentMr} विभागाने नागरिकांच्या माहितीसाठी प्रकाशित केला आहे.`,
+      "दस्तऐवज ऑनलाइन वाचता येतो. डाउनलोड ऐच्छिक आहे. संबंधित सेवांसाठी या नोंदीवरील दुवे वापरा.",
+    ];
+  const words = bodyEn.join(" ").split(/\s+/).filter(Boolean).length;
+  const keywords = rest.keywords ?? [
+    ...rest.titleEn.toLowerCase().split(/\W+/).filter((w) => w.length > 3),
+    rest.departmentEn.toLowerCase(),
+    category.replace(/-/g, " "),
+  ];
+  const ocrPages: OcrPage[] =
+    rest.ocrPages ??
+    bodyEn.map((textEn, i) => ({
+      page: i + 1,
+      textEn,
+      textMr: bodyMr[i] ?? textEn,
+    }));
+  return {
+    id,
+    category,
+    ...rest,
+    year,
+    language,
+    status,
+    version,
+    relatedIds: rest.relatedIds ?? [],
+    bodyEn,
+    bodyMr,
+    summaryEn: rest.summaryEn ?? rest.descriptionEn,
+    summaryMr: rest.summaryMr ?? rest.descriptionMr,
+    highlightsEn: rest.highlightsEn ?? [rest.previewEn, `Issued by ${rest.departmentEn}.`, `Published ${rest.publishedAt}.`],
+    highlightsMr: rest.highlightsMr ?? [rest.previewMr, `${rest.departmentMr} विभागाने जारी.`, `प्रकाशन ${rest.publishedAt}.`],
+    readingMinutes: rest.readingMinutes ?? Math.max(3, Math.round(words / 160) + 2),
+    updatedAt: rest.updatedAt ?? rest.publishedAt,
+    keywords,
+    ocrPages,
+    fileSize: rest.fileSize ?? `${Math.max(180, words * 18)} KB`,
+    applicableEn:
+      rest.applicableEn ??
+      "All residents, businesses and applicants dealing with this municipal subject in Chhatrapati Sambhajinagar.",
+    applicableMr:
+      rest.applicableMr ??
+      "छत्रपती संभाजीनगरमधील या विषयाशी संबंधित सर्व नागरिक, व्यवसाय व अर्जदार.",
+    simpleEn:
+      rest.simpleEn ??
+      `${rest.descriptionEn} In short: read this page, then use the related service if you need to apply or pay.`,
+    simpleMr:
+      rest.simpleMr ??
+      `${rest.descriptionMr} थोडक्यात: हे पृष्ठ वाचा; अर्ज किंवा भरणा करायचा असल्यास संबंधित सेवा वापरा.`,
+    aiFaqs: rest.aiFaqs ?? [
+      {
+        qEn: "Who should read this?",
+        aEn: rest.descriptionEn,
+        qMr: "हे कोणी वाचावे?",
+        aMr: rest.descriptionMr,
+      },
+      {
+        qEn: "Which department issued this?",
+        aEn: `${rest.departmentEn} department of CSMC.`,
+        qMr: "हे कोणत्या विभागाने जारी केले?",
+        aMr: `CSMC चा ${rest.departmentMr} विभाग.`,
+      },
+    ],
+    versions: rest.versions ?? [
+      {
+        version,
+        publishedAt: rest.publishedAt,
+        status,
+        notesEn: status === "current" ? "Latest official version." : "Earlier official version.",
+        notesMr: status === "current" ? "नवीनतम अधिकृत आवृत्ती." : "पूर्वीची अधिकृत आवृत्ती.",
+      },
+    ],
+  };
+};
+
+const DOCUMENT_CATS = [
+  "circular",
+  "notification",
+  "government-resolution",
+  "corporation-resolution",
+  "budget",
+  "annual-report",
+  "development-plan",
+  "building-bye-laws",
+  "citizen-charter",
+  "policy",
+  "acts-rules",
+  "rti",
+  "meeting-minutes",
+  "tender",
+] as const;
+
+const RAW_CATALOG: CivicRecord[] = [
+  rec("svc-property-tax", "service", {
+    titleEn: "Pay Property Tax",
+    titleMr: "मालमत्ता कर भरा",
+    descriptionEn: "View your property tax bill and pay online with rebate where applicable.",
+    descriptionMr: "मालमत्ता कर बिल पहा आणि लागू असल्यास सवलतीसह ऑनलाइन भरा.",
+    previewEn: "Enter property ID, review dues and pay through the official CSMC tax portal.",
+    previewMr: "मालमत्ता आयडी टाका, थकबाकी पहा आणि अधिकृत CSMC कर पोर्टलवरून भरा.",
+    departmentEn: "Property Tax",
+    departmentMr: "मालमत्ता कर",
+    publishedAt: "2026-04-01",
+    href: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi",
+    external: true,
+    relatedServiceHref: "/services",
+    relatedServiceLabelEn: "All Services",
+    relatedServiceLabelMr: "सर्व सेवा",
+  }),
+  rec("svc-water-tax", "service", {
+    titleEn: "Pay Water Tax",
+    titleMr: "पाणी कर भरा",
+    descriptionEn: "Check water charges and pay your water tax online.",
+    descriptionMr: "पाणी शुल्क तपासा आणि पाणी कर ऑनलाइन भरा.",
+    previewEn: "Use your consumer number to view the ledger and complete payment.",
+    previewMr: "ग्राहक क्रमांक वापरून लेजर पहा आणि पेमेंट पूर्ण करा.",
+    departmentEn: "Water Tax",
+    departmentMr: "पाणी कर",
+    publishedAt: "2026-04-01",
+    href: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
+    external: true,
+    relatedServiceHref: "/services",
+    relatedServiceLabelEn: "All Services",
+    relatedServiceLabelMr: "सर्व सेवा",
+  }),
+  rec("svc-birth", "service", {
+    titleEn: "Birth Certificate",
+    titleMr: "जन्म प्रमाणपत्र",
+    descriptionEn: "Apply for or download a birth certificate through RTS services.",
+    descriptionMr: "RTS सेवांद्वारे जन्म प्रमाणपत्रासाठी अर्ज करा किंवा डाउनलोड करा.",
+    previewEn: "Hospital discharge summary and parents’ identity proof are required. Processing takes about 7 working days.",
+    previewMr: "रुग्णालय डिस्चार्ज सारांश व पालकांचे ओळखपत्र आवश्यक. प्रक्रिया सुमारे ७ कामकाजाचे दिवस.",
+    departmentEn: "Health",
+    departmentMr: "आरोग्य",
+    publishedAt: "2026-03-15",
+    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    external: true,
+    relatedServiceHref: "/services",
+    relatedServiceLabelEn: "All Services",
+    relatedServiceLabelMr: "सर्व सेवा",
+  }),
+  rec("svc-death", "service", {
+    titleEn: "Death Certificate",
+    titleMr: "मृत्यू प्रमाणपत्र",
+    descriptionEn: "Apply for a death certificate online via the RTS citizen portal.",
+    descriptionMr: "RTS नागरिक पोर्टलवरून मृत्यू प्रमाणपत्रासाठी ऑनलाइन अर्ज करा.",
+    previewEn: "Submit the required medical and identity documents for verification.",
+    previewMr: " पडताळणीसाठी आवश्यक वैद्यकीय व ओळख दस्तऐवज सादर करा.",
+    departmentEn: "Health",
+    departmentMr: "आरोग्य",
+    publishedAt: "2026-03-15",
+    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    external: true,
+  }),
+  rec("svc-building", "service", {
+    titleEn: "Building Permission",
+    titleMr: "बांधकाम परवानगी",
+    descriptionEn: "Track building plan approval and permission status.",
+    descriptionMr: "बांधकाम नकाशा मंजुरी व परवानगी स्थिती तपासा.",
+    previewEn: "Submit drawings as per building bye-laws and Development Plan reservations.",
+    previewMr: "बांधकाम उपविधी व विकास आराखड्यातील आरक्षणानुसार नकाशे सादर करा.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2026-04-10",
+    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    external: true,
+    relatedServiceHref: "/dp-plan",
+    relatedServiceLabelEn: "DP Plan",
+    relatedServiceLabelMr: "डी पी प्लॅन",
+  }),
+  rec("svc-trade", "service", {
+    titleEn: "Trade License",
+    titleMr: "व्यापार परवाना",
+    descriptionEn: "Apply for a new trade licence or renew an existing licence.",
+    descriptionMr: "नवीन व्यापार परवान्यासाठी अर्ज करा किंवा नूतनीकरण करा.",
+    previewEn: "Business registration, address proof and fire NOC (if applicable) are required.",
+    previewMr: "व्यवसाय नोंदणी, पत्ता पुरावा आणि लागू असल्यास अग्निशमन NOC आवश्यक.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-02-01",
+    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    external: true,
+  }),
+  rec("svc-grievance", "service", {
+    titleEn: "Lodge a Grievance",
+    titleMr: "तक्रार नोंदवा",
+    descriptionEn: "Register and track civic complaints through the grievance portal.",
+    descriptionMr: "तक्रार पोर्टलद्वारे नागरी तक्रारी नोंदवा व मागोवा घ्या.",
+    previewEn: "You will receive a complaint ID to track status until closure.",
+    previewMr: "समाप्तीपर्यंत स्थिती पाहण्यासाठी तक्रार आयडी मिळेल.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-01-10",
+    href: "https://chhsambhajinagarmc.org/csms/complaint_form.php",
+    external: true,
+  }),
+
+  rec("cir-water-summer", "circular", {
+    titleEn: "Summer 2026 Ward-wise Water Supply Schedule",
+    titleMr: "उन्हाळा २०२६ प्रभागनिहाय पाणी पुरवठा वेळापत्रक",
+    descriptionEn: "Circular notifying revised water supply timings for all zones during summer 2026.",
+    descriptionMr: "उन्हाळा २०२६ दरम्यान सर्व झोनसाठी सुधारित पाणी पुरवठा वेळापत्रकाचे परिपत्रक.",
+    previewEn: "Supply will operate on an alternate-day roster in high-demand zones. Citizens are advised to store water responsibly.",
+    previewMr: "जास्त मागणी असलेल्या झोनमध्ये एक दिवसाआड पुरवठा. नागरिकांनी पाणी जबाबदारीने साठवावे.",
+    departmentEn: "Water Supply",
+    departmentMr: "पाणी पुरवठा",
+    publishedAt: "2026-03-20",
+    downloadable: true,
+    fileSize: "420 KB",
+    relatedServiceHref: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
+    relatedServiceLabelEn: "Pay Water Tax",
+    relatedServiceLabelMr: "पाणी कर भरा",
+  }),
+  rec("cir-streetlight", "circular", {
+    titleEn: "Street Light Maintenance Circular",
+    titleMr: "पथदिवे देखभाल परिपत्रक",
+    descriptionEn: "Instructions for reporting and repairing non-functional street lights.",
+    descriptionMr: "खराब पथदिवे कळविणे व दुरुस्तीबाबत सूचना.",
+    previewEn: "Complaints registered before 3 PM are targeted for same-day inspection in municipal limits.",
+    previewMr: "दुपारी ३ वाजेपूर्वी नोंदलेल्या तक्रारींची त्याच दिवशी तपासणी करण्याचे उद्दिष्ट.",
+    departmentEn: "Electrical",
+    departmentMr: "विद्युत",
+    publishedAt: "2025-12-20",
+    downloadable: true,
+    fileSize: "280 KB",
+  }),
+  rec("cir-swm", "circular", {
+    titleEn: "Source Segregation of Municipal Solid Waste",
+    titleMr: "घनकचऱ्याचे स्त्रोत स्तरावरील वर्गीकरण",
+    descriptionEn: "Mandatory wet/dry waste segregation for households and commercial establishments.",
+    descriptionMr: "घरे व व्यावसायिक आस्थापनांसाठी ओला/सुका कचरा वर्गीकरण अनिवार्य.",
+    previewEn: "Non-segregated waste may not be collected. Ward offices will support awareness drives.",
+    previewMr: "अवर्गीकृत कचरा गोळा न होऊ शकतो. प्रभाग कार्यालये जनजागृतीस मदत करतील.",
+    departmentEn: "Solid Waste Management",
+    departmentMr: "घनकचरा व्यवस्थापन",
+    publishedAt: "2026-03-15",
+    downloadable: true,
+    fileSize: "510 KB",
+  }),
+
+  rec("not-tax-rebate", "notification", {
+    titleEn: "Property Tax 10% Rebate Extended till 30 May 2026",
+    titleMr: "मालमत्ता कर १०% सवलत ३० मे २०२६ पर्यंत वाढवली",
+    descriptionEn: "Official notification extending the early-payment rebate window.",
+    descriptionMr: "वेळेवर भरणा सवलत कालावधी वाढवण्याची अधिकृत अधिसूचना.",
+    previewEn: "Pay the current year’s property tax online or at facilitation centres to avail 10% rebate.",
+    previewMr: "१०% सवलतीसाठी चालू वर्षाचा मालमत्ता कर ऑनलाइन किंवा सुलभ केंद्रांवर भरा.",
+    departmentEn: "Property Tax",
+    departmentMr: "मालमत्ता कर",
+    publishedAt: "2026-04-22",
+    downloadable: true,
+    fileSize: "190 KB",
+    relatedServiceHref: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi",
+    relatedServiceLabelEn: "Pay Property Tax",
+    relatedServiceLabelMr: "मालमत्ता कर भरा",
+  }),
+  rec("not-dp-revision", "notification", {
+    titleEn: "Development Plan Revision — Public Notice",
+    titleMr: "विकास आराखडा सुधारणा — सार्वजनिक सूचना",
+    descriptionEn: "Invitation of suggestions and objections on the draft DP revision.",
+    descriptionMr: "मसुदा विकास आराखडा सुधारणेवर सूचना व हरकती मागविणे.",
+    previewEn: "Draft maps are available at the Town Planning office and on the DP Plan page.",
+    previewMr: "मसुदा नकाशे नगर रचना कार्यालय व डी पी प्लॅन पृष्ठावर उपलब्ध.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2026-04-28",
+    downloadable: true,
+    fileSize: "1.1 MB",
+    relatedServiceHref: "/dp-plan",
+    relatedServiceLabelEn: "View DP Plan",
+    relatedServiceLabelMr: "डी पी प्लॅन पहा",
+  }),
+  rec("not-recruitment", "notification", {
+    titleEn: "Engagement of 240 Sanitation Supervisors",
+    titleMr: "२४० स्वच्छता पर्यवेक्षकांच्या नियुक्तीची सूचना",
+    descriptionEn: "Applications invited for sanitation supervisor engagement.",
+    descriptionMr: "स्वच्छता पर्यवेक्षक नियुक्तीसाठी अर्ज मागविणे.",
+    previewEn: "Eligibility, age and application procedure are detailed in the notification PDF.",
+    previewMr: "पात्रता, वयोमर्यादा व अर्ज प्रक्रिया अधिसूचना PDF मध्ये नमूद.",
+    departmentEn: "Solid Waste Management",
+    departmentMr: "घनकचरा व्यवस्थापन",
+    publishedAt: "2026-03-29",
+    downloadable: true,
+    fileSize: "640 KB",
+    relatedServiceHref: "/recruitment",
+    relatedServiceLabelEn: "Recruitment",
+    relatedServiceLabelMr: "भरती",
+  }),
+
+  rec("gr-tax-rebate", "government-resolution", {
+    titleEn: "Property Tax Rebate Scheme 2026-27",
+    titleMr: "मालमत्ता कर सवलत योजना २०२६-२७",
+    descriptionEn: "Government Resolution approving the 10% early-payment rebate.",
+    descriptionMr: "१०% वेळेवर भरणा सवलत मंजूर करणारा शासन निर्णय.",
+    previewEn: "GR No. GR/2026/001. Applicable to current-year dues paid within the notified window.",
+    previewMr: "श.नि. क्र. GR/2026/001. अधिसूचित कालावधीत भरलेल्या चालू वर्षाच्या थकबाकीस लागू.",
+    departmentEn: "Revenue",
+    departmentMr: "महसूल",
+    publishedAt: "2026-04-01",
+    downloadable: true,
+    fileSize: "860 KB",
+  }),
+  rec("gr-swm", "government-resolution", {
+    titleEn: "Solid Waste Management Guidelines",
+    titleMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे",
+    descriptionEn: "State guidelines adopted by CSMC for SWM operations.",
+    descriptionMr: "CSMC ने स्वीकारलेली घनकचरा व्यवस्थापनाची राज्य मार्गदर्शक तत्त्वे.",
+    previewEn: "Covers collection, processing, landfill and user-fee provisions.",
+    previewMr: "संकलन, प्रक्रिया, लँडफिल व वापरकर्ता शुल्क तरतुदी.",
+    departmentEn: "Solid Waste Management",
+    departmentMr: "घनकचरा व्यवस्थापन",
+    publishedAt: "2026-03-15",
+    downloadable: true,
+    fileSize: "2.4 MB",
+  }),
+  rec("gr-water-reg", "government-resolution", {
+    titleEn: "Water Supply Regulation Order",
+    titleMr: "पाणी पुरवठा नियमन आदेश",
+    descriptionEn: "Order regulating water connections, metering and summer roster.",
+    descriptionMr: "पाणी जोडणी, मीटरिंग व उन्हाळी वेळापत्रक नियमित करणारा आदेश.",
+    previewEn: "New connections require a completed application and outstanding dues clearance.",
+    previewMr: "नवीन जोडणीसाठी पूर्ण अर्ज व थकबाकी भरून काढणे आवश्यक.",
+    departmentEn: "Water Supply",
+    departmentMr: "पाणी पुरवठा",
+    publishedAt: "2026-03-10",
+    downloadable: true,
+    fileSize: "720 KB",
+  }),
+  rec("gr-bldg-fee", "government-resolution", {
+    titleEn: "Building Permission Fee Revision",
+    titleMr: "बांधकाम परवानगी शुल्क सुधारणा",
+    descriptionEn: "Revised scrutiny and development charges for building permissions.",
+    descriptionMr: "बांधकाम परवानग्यांसाठी सुधारित तपासणी व विकास शुल्क.",
+    previewEn: "Fee schedule is effective from 1 March 2026 for new applications.",
+    previewMr: "नवीन अर्जांसाठी शुल्कपत्रक १ मार्च २०२६ पासून लागू.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2026-03-01",
+    downloadable: true,
+    fileSize: "540 KB",
+  }),
+
+  rec("cr-gb-mar", "corporation-resolution", {
+    titleEn: "General Body Resolution — March 2026",
+    titleMr: "सर्वसाधारण सभा ठराव — मार्च २०२६",
+    descriptionEn: "Resolutions passed by the General Body in March 2026.",
+    descriptionMr: "मार्च २०२६ च्या सर्वसाधारण सभेत पारित ठराव.",
+    previewEn: "Includes budget approvals, works sanctions and administrative decisions.",
+    previewMr: "अर्थसंकल्प मंजुरी, कामे व प्रशासकीय निर्णय समाविष्ट.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-03-28",
+    downloadable: true,
+    fileSize: "1.2 MB",
+  }),
+  rec("cr-gb-feb", "corporation-resolution", {
+    titleEn: "General Body Resolution — February 2026",
+    titleMr: "सर्वसाधारण सभा ठराव — फेब्रुवारी २०२६",
+    descriptionEn: "Resolutions passed by the General Body in February 2026.",
+    descriptionMr: "फेब्रुवारी २०२६ च्या सर्वसाधारण सभेत पारित ठराव.",
+    previewEn: "Covers standing committee references and public works sanctions.",
+    previewMr: "स्थायी समिती संदर्भ व सार्वजनिक बांधकाम मंजुरी.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-02-25",
+    downloadable: true,
+    fileSize: "980 KB",
+  }),
+
+  rec("ten-swm", "tender", {
+    titleEn: "E-tender — SWM Phase II Processing Facility",
+    titleMr: "ई-निविदा — घनकचरा प्रकल्प टप्पा-२ प्रक्रिया सुविधा",
+    descriptionEn: "NIT No. CSMC/SWM/2026/01 for SWM Phase II works.",
+    descriptionMr: "घनकचरा टप्पा-२ कामांसाठी निविदा सूचना क्र. CSMC/SWM/2026/01.",
+    previewEn: "Bid documents are available on the MahaTenders portal. Bid closing date is notified in the NIT.",
+    previewMr: "निविदा कागदपत्रे MahaTenders पोर्टलवर उपलब्ध. बंद तारीख निविदा सूचनेत नमूद.",
+    departmentEn: "Solid Waste Management",
+    departmentMr: "घनकचरा व्यवस्थापन",
+    publishedAt: "2026-04-10",
+    downloadable: true,
+    fileSize: "890 KB",
+    relatedServiceHref: "https://mahatenders.gov.in/nicgep/app",
+    relatedServiceLabelEn: "MahaTenders",
+    relatedServiceLabelMr: "महाटेंडर्स",
+  }),
+  rec("ten-roads", "tender", {
+    titleEn: "Tender — Road Resurfacing Zones 4–6",
+    titleMr: "निविदा — झोन ४ ते ६ रस्ता पुनर्पृष्ठीकरण",
+    descriptionEn: "Works tender for bituminous resurfacing in Zones 4, 5 and 6.",
+    descriptionMr: "झोन ४, ५ व ६ मधील बिटुमिनस पुनर्पृष्ठीकरण कामाची निविदा.",
+    previewEn: "Eligible contractors registered with CSMC / PWD may participate.",
+    previewMr: "CSMC / PWD कडे नोंदणीकृत पात्र कंत्राटदार सहभागी होऊ शकतात.",
+    departmentEn: "Public Works",
+    departmentMr: "सार्वजनिक बांधकाम",
+    publishedAt: "2026-04-05",
+    downloadable: true,
+    fileSize: "760 KB",
+    relatedServiceHref: "https://mahatenders.gov.in/nicgep/app",
+    relatedServiceLabelEn: "MahaTenders",
+    relatedServiceLabelMr: "महाटेंडर्स",
+  }),
+
+  rec("cc-health", "citizen-charter", {
+    titleEn: "Citizen Charter — Health Services",
+    titleMr: "नागरिक सनद — आरोग्य सेवा",
+    descriptionEn: "Service standards and timelines for municipal health services.",
+    descriptionMr: "महापालिका आरोग्य सेवांसाठी सेवा मानके व कालमर्यादा.",
+    previewEn: "Lists dispensary hours, vaccination camps and RTS timelines for certificates.",
+    previewMr: "दवाखाना वेळ, लसीकरण शिबिरे व प्रमाणपत्रांच्या RTS कालमर्यादा.",
+    departmentEn: "Health",
+    departmentMr: "आरोग्य",
+    publishedAt: "2026-01-15",
+    downloadable: true,
+    fileSize: "1.4 MB",
+    relatedServiceHref: "/rts-act",
+    relatedServiceLabelEn: "Right to Service",
+    relatedServiceLabelMr: "सेवा हक्क कायदा",
+  }),
+  rec("cc-revenue", "citizen-charter", {
+    titleEn: "Citizen Charter — Revenue & Tax Services",
+    titleMr: "नागरिक सनद — महसूल व कर सेवा",
+    descriptionEn: "Timelines for property tax, water tax and related certificates.",
+    descriptionMr: "मालमत्ता कर, पाणी कर व संबंधित प्रमाणपत्रांच्या कालमर्यादा.",
+    previewEn: "Facilitation centres operate Monday to Saturday, 10:00 AM to 6:00 PM.",
+    previewMr: "सुलभ केंद्र सोमवार ते शनिवार सकाळी १० ते सायंकाळी ६.",
+    departmentEn: "Revenue",
+    departmentMr: "महसूल",
+    publishedAt: "2026-01-15",
+    downloadable: true,
+    fileSize: "1.1 MB",
+  }),
+
+  rec("byl-dcr", "building-bye-laws", {
+    titleEn: "CSMC Building Bye-laws (Unified DCR)",
+    titleMr: "CSMC बांधकाम उपविधी (एकीकृत DCR)",
+    descriptionEn: "Development Control Regulations applicable within municipal limits.",
+    descriptionMr: "महापालिका हद्दीत लागू विकास नियंत्रण विनियम.",
+    previewEn: "Covers FSI, setbacks, parking, fire norms and heritage precincts.",
+    previewMr: "FSI, मागे सरकणे, पार्किंग, अग्निशमन नियम व वारसा परिसर.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2025-11-12",
+    downloadable: true,
+    fileSize: "8.6 MB",
+    relatedServiceHref: "/dp-plan",
+    relatedServiceLabelEn: "DP Plan",
+    relatedServiceLabelMr: "डी पी प्लॅन",
+    keywords: ["building", "bye-laws", "dcr", "fsi", "permission", "fire noc", "parking", "बांधकाम"],
+    applicableEn: "Property owners, architects, developers and anyone applying for building permission in municipal limits.",
+    applicableMr: "महापालिका हद्दीत बांधकाम परवानगी घेणारे मालक, वास्तुविशारद, विकासक व नागरिक.",
+    simpleEn:
+      "These are the city's building rules. If you want to construct or change a building, your plan must follow this document. Apply for building permission after checking FSI, parking and fire norms.",
+    simpleMr:
+      "हे शहराचे बांधकाम नियम आहेत. इमारत बांधायची किंवा बदल करायचा असल्यास योजना या दस्तऐवजानुसार असावी. FSI, पार्किंग व अग्निशमन नियम पाहून बांधकाम परवानगीसाठी अर्ज करा.",
+  }),
+  rec("byl-parking", "building-bye-laws", {
+    titleEn: "Parking & Access Standards Addendum",
+    titleMr: "पार्किंग व प्रवेश मानके — परिशिष्ट",
+    descriptionEn: "Addendum to bye-laws on parking, ramps and barrier-free access.",
+    descriptionMr: "पार्किंग, रॅम्प व निर्बाध प्रवेशाबाबत उपविधी परिशिष्ट.",
+    previewEn: "Mandatory accessible parking in new commercial buildings.",
+    previewMr: "नवीन व्यावसायिक इमारतींत प्रवेशयोग्य पार्किंग अनिवार्य.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2026-02-18",
+    downloadable: true,
+    fileSize: "1.8 MB",
+  }),
+
+  rec("dp-2025", "development-plan", {
+    titleEn: "Development Plan — Sanctioned Map",
+    titleMr: "विकास आराखडा — मंजूर नकाशा",
+    descriptionEn: "Sanctioned Development Plan of Chhatrapati Sambhajinagar.",
+    descriptionMr: "छत्रपती संभाजीनगरचा मंजूर विकास आराखडा.",
+    previewEn: "Shows land-use zones, reservations, roads and amenity plots.",
+    previewMr: "भूवापर झोन, आरक्षणे, रस्ते व सुविधा भूखंड दर्शवितो.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2025-09-01",
+    downloadable: true,
+    fileSize: "24 MB",
+    href: "/dp-plan",
+    relatedServiceHref: "/dp-plan",
+    relatedServiceLabelEn: "Open DP Plan",
+    relatedServiceLabelMr: "डी पी प्लॅन उघडा",
+  }),
+  rec("dp-report", "development-plan", {
+    titleEn: "Development Plan Report (Explanatory)",
+    titleMr: "विकास आराखडा अहवाल (स्पष्टीकरणात्मक)",
+    descriptionEn: "Explanatory report accompanying the sanctioned DP.",
+    descriptionMr: "मंजूर विकास आराखड्यासोबतचा स्पष्टीकरणात्मक अहवाल.",
+    previewEn: "Population projections, existing land use and proposed infrastructure.",
+    previewMr: "लोकसंख्या अंदाज, विद्यमान भूवापर व प्रस्तावित पायाभूत सुविधा.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2025-09-01",
+    downloadable: true,
+    fileSize: "6.2 MB",
+    href: "/dp-plan",
+  }),
+
+  rec("ar-2025", "annual-report", {
+    titleEn: "CSMC Annual Report 2024-25",
+    titleMr: "CSMC वार्षिक अहवाल २०२४-२५",
+    descriptionEn: "Performance, finances and civic works for financial year 2024-25.",
+    descriptionMr: "आर्थिक वर्ष २०२४-२५ चा कामगिरी, वित्त व नागरी कामांचा अहवाल.",
+    previewEn: "Summarises zone-wise works, tax collection and flagship programmes.",
+    previewMr: "झोननिहाय कामे, कर वसुली व प्रमुख कार्यक्रम सारांश.",
+    departmentEn: "Accounts",
+    departmentMr: "लेखा",
+    publishedAt: "2025-09-30",
+    downloadable: true,
+    fileSize: "9.4 MB",
+  }),
+  rec("ar-2024", "annual-report", {
+    titleEn: "CSMC Annual Report 2023-24",
+    titleMr: "CSMC वार्षिक अहवाल २०२३-२४",
+    descriptionEn: "Annual administrative report for 2023-24.",
+    descriptionMr: "२०२३-२४ चा वार्षिक प्रशासकीय अहवाल.",
+    previewEn: "Includes audited highlights and department-wise achievements.",
+    previewMr: "लेखापरीक्षित ठळक बाबी व विभागनिहाय कामगिरी.",
+    departmentEn: "Accounts",
+    departmentMr: "लेखा",
+    publishedAt: "2024-09-28",
+    downloadable: true,
+    fileSize: "8.1 MB",
+  }),
+
+  rec("pol-open-data", "policy", {
+    titleEn: "Open Data & Proactive Disclosure Policy",
+    titleMr: "मुक्त डेटा व सक्रिय प्रकटीकरण धोरण",
+    descriptionEn: "Policy on publishing municipal datasets and RTI Section 4 disclosures.",
+    descriptionMr: "महापालिका डेटासेट व माहिती अधिकार कलम ४ प्रकटीकरण धोरण.",
+    previewEn: "Documents in the Municipal Knowledge Repository are released under this policy.",
+    previewMr: "ज्ञान भांडारातील दस्तऐवज या धोरणानुसार प्रकाशित.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2025-08-14",
+    downloadable: true,
+    fileSize: "430 KB",
+    relatedServiceHref: "/rti-act",
+    relatedServiceLabelEn: "RTI Act",
+    relatedServiceLabelMr: "माहिती अधिकार",
+  }),
+  rec("pol-inclusion", "policy", {
+    titleEn: "Inclusive Access Policy for Civic Services",
+    titleMr: "नागरी सेवांसाठी समावेशक प्रवेश धोरण",
+    descriptionEn: "Accessibility standards for offices, websites and public facilities.",
+    descriptionMr: "कार्यालये, संकेतस्थळ व सार्वजनिक सुविधांसाठी सुलभता मानके.",
+    previewEn: "Covers language, disability access and digital service design.",
+    previewMr: "भाषा, दिव्यांग सुलभता व डिजिटल सेवा रचना.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-01-26",
+    downloadable: true,
+    fileSize: "370 KB",
+  }),
+
+  rec("act-rti", "acts-rules", {
+    titleEn: "Right to Information Act, 2005 — Guide",
+    titleMr: "माहिती अधिकार अधिनियम, २००५ — मार्गदर्शिका",
+    descriptionEn: "How to file an RTI application with CSMC Public Information Officers.",
+    descriptionMr: "CSMC जनमाहिती अधिकाऱ्यांकडे माहिती अधिकार अर्ज कसा करावा.",
+    previewEn: "Fee, format and first appellate authority details are listed.",
+    previewMr: "शुल्क, नमूना व प्रथम अपील प्राधिकारी तपशील.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2025-06-01",
+    downloadable: true,
+    fileSize: "1.0 MB",
+    href: "/rti-act",
+    relatedServiceHref: "/rti-act",
+    relatedServiceLabelEn: "RTI Officers",
+    relatedServiceLabelMr: "RTI अधिकारी",
+  }),
+  rec("act-rts", "acts-rules", {
+    titleEn: "Maharashtra Right to Service Act — Timelines",
+    titleMr: "महाराष्ट्र सेवा हक्क अधिनियम — कालमर्यादा",
+    descriptionEn: "Notified RTS services and stipulated time limits for CSMC.",
+    descriptionMr: "CSMC च्या अधिसूचित RTS सेवा व निर्धारित कालमर्यादा.",
+    previewEn: "Birth/death certificates, licences and selected permissions are covered.",
+    previewMr: "जन्म/मृत्यू प्रमाणपत्रे, परवाने व निवडक परवानग्या समाविष्ट.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2025-07-01",
+    downloadable: true,
+    fileSize: "890 KB",
+    href: "/rts-act",
+    relatedServiceHref: "/rts-act",
+    relatedServiceLabelEn: "RTS Act",
+    relatedServiceLabelMr: "सेवा हक्क कायदा",
+  }),
+
+  rec("rti-q4", "rti", {
+    titleEn: "RTI Disclosure — Quarterly Report Q4 2025-26",
+    titleMr: "माहिती अधिकार प्रकटीकरण — तिमाही अहवाल Q4 २०२५-२६",
+    descriptionEn: "Proactive disclosure under Section 4(1)(b) for Q4 2025-26.",
+    descriptionMr: "कलम ४(१)(ब) अंतर्गत Q4 २०२५-२६ चे सक्रिय प्रकटीकरण.",
+    previewEn: "Organisation, duties, budgets and decision-making particulars.",
+    previewMr: "संघटना, कर्तव्ये, अर्थसंकल्प व निर्णय प्रक्रिया तपशील.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-04-01",
+    downloadable: true,
+    fileSize: "3.4 MB",
+    href: "/public-documents?category=rti",
+  }),
+  rec("rti-q3", "rti", {
+    titleEn: "RTI Disclosure — Quarterly Report Q3 2025-26",
+    titleMr: "माहिती अधिकार प्रकटीकरण — तिमाही अहवाल Q3 २०२५-२६",
+    descriptionEn: "Section 4 disclosure for October–December 2025.",
+    descriptionMr: "ऑक्टोबर–डिसेंबर २०२५ साठी कलम ४ प्रकटीकरण.",
+    previewEn: "Includes PIO list and pending-application statistics.",
+    previewMr: "जनमाहिती अधिकारी यादी व प्रलंबित अर्ज आकडेवारी.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-01-01",
+    downloadable: true,
+    fileSize: "3.1 MB",
+    href: "/public-documents?category=rti",
+  }),
+
+  rec("mm-sc-apr", "meeting-minutes", {
+    titleEn: "Standing Committee Minutes — April 2026",
+    titleMr: "स्थायी समिती इतिवृत्त — एप्रिल २०२६",
+    descriptionEn: "Confirmed minutes of the April 2026 Standing Committee meeting.",
+    descriptionMr: "एप्रिल २०२६ स्थायी समिती बैठकीचे निश्चित इतिवृत्त.",
+    previewEn: "Agenda items on works, tenders and administrative proposals.",
+    previewMr: "कामे, निविदा व प्रशासकीय प्रस्तावांचे अजेंडा मुद्दे.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-04-15",
+    downloadable: true,
+    fileSize: "2.1 MB",
+    href: "/public-documents?category=minutes&type=minutes",
+  }),
+  rec("mm-sc-agenda", "meeting-minutes", {
+    titleEn: "Standing Committee Meeting Agenda — April 2026",
+    titleMr: "स्थायी समिती बैठक अजेंडा — एप्रिल २०२६",
+    descriptionEn: "Agenda circulated for the April Standing Committee meeting.",
+    descriptionMr: "एप्रिल स्थायी समिती बैठकीसाठी प्रसारित अजेंडा.",
+    previewEn: "Includes notes for discussion and previous-meeting follow-up.",
+    previewMr: "चर्चेसाठी टिपा व मागील बैठक अनुवर्ती बाबी.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-04-14",
+    downloadable: true,
+    fileSize: "820 KB",
+    href: "/public-documents?category=minutes&type=agenda",
+  }),
+
+  rec("bud-2627", "budget", {
+    titleEn: "Annual Budget 2026-27 — Approved",
+    titleMr: "वार्षिक अर्थसंकल्प २०२६-२७ — मंजूर",
+    descriptionEn: "Approved municipal budget for financial year 2026-27.",
+    descriptionMr: "आर्थिक वर्ष २०२६-२७ चा मंजूर महापालिका अर्थसंकल्प.",
+    previewEn: "Receipts, expenditure heads and capital works programme.",
+    previewMr: "प्राप्ती, खर्च शीर्ष व भांडवली कामांचा कार्यक्रम.",
+    departmentEn: "Accounts",
+    departmentMr: "लेखा",
+    publishedAt: "2026-03-20",
+    downloadable: true,
+    fileSize: "5.6 MB",
+    href: "/public-documents?category=budget&year=2026",
+  }),
+  rec("bud-2526", "budget", {
+    titleEn: "Annual Budget 2025-26 — Approved",
+    titleMr: "वार्षिक अर्थसंकल्प २०२५-२६ — मंजूर",
+    descriptionEn: "Approved municipal budget for financial year 2025-26.",
+    descriptionMr: "आर्थिक वर्ष २०२५-२६ चा मंजूर महापालिका अर्थसंकल्प.",
+    previewEn: "PDF of the sanctioned budget as placed before the General Body.",
+    previewMr: "सर्वसाधारण सभेसमोर सादर झालेला मंजूर अर्थसंकल्प PDF.",
+    departmentEn: "Accounts",
+    departmentMr: "लेखा",
+    publishedAt: "2025-03-22",
+    downloadable: true,
+    fileSize: "5.2 MB",
+    href: "/public-documents?category=budget&year=2025",
+  }),
+  rec("bud-2425", "budget", {
+    titleEn: "Annual Budget 2024-25 — Approved",
+    titleMr: "वार्षिक अर्थसंकल्प २०२४-२५ — मंजूर",
+    descriptionEn: "Approved municipal budget for financial year 2024-25.",
+    descriptionMr: "आर्थिक वर्ष २०२४-२५ चा मंजूर महापालिका अर्थसंकल्प.",
+    previewEn: "Historical budget for comparison with the current year.",
+    previewMr: "चालू वर्षाशी तुलना करण्यासाठी पूर्वीचा अर्थसंकल्प.",
+    departmentEn: "Accounts",
+    departmentMr: "लेखा",
+    publishedAt: "2024-03-25",
+    downloadable: true,
+    fileSize: "4.8 MB",
+    href: "/public-documents?category=budget&year=2024",
+  }),
+
+  rec("faq-ptax", "faq", {
+    titleEn: "How do I pay my property tax online?",
+    titleMr: "मी माझा मालमत्ता कर ऑनलाइन कसा भरू?",
+    descriptionEn: "Use Pay Property Tax on the homepage or Citizen Services, enter your property ID and follow the payment steps.",
+    descriptionMr: "मुख्यपृष्ठ किंवा नागरिक सेवांवरील मालमत्ता कर भरा वापरा, मालमत्ता आयडी टाका व पेमेंट चरण पूर्ण करा.",
+    previewEn: "A 10% rebate is available when paid within the notified window.",
+    previewMr: "अधिसूचित कालावधीत भरल्यास १०% सवलत मिळते.",
+    departmentEn: "Property Tax",
+    departmentMr: "मालमत्ता कर",
+    publishedAt: "2026-04-01",
+    href: "/faq",
+    relatedServiceHref: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi",
+    relatedServiceLabelEn: "Pay Property Tax",
+    relatedServiceLabelMr: "मालमत्ता कर भरा",
+  }),
+  rec("faq-birth", "faq", {
+    titleEn: "How can I apply for a birth certificate?",
+    titleMr: "मी जन्म प्रमाणपत्रासाठी कसा अर्ज करू?",
+    descriptionEn: "Apply online through Citizen Services with hospital discharge summary and parents’ ID proof.",
+    descriptionMr: "रुग्णालय डिस्चार्ज सारांश व पालकांचे ओळखपत्रासह नागरिक सेवांमधून ऑनलाइन अर्ज करा.",
+    previewEn: "Processing takes 7 working days under RTS timelines.",
+    previewMr: "RTS कालमर्यादेनुसार प्रक्रिया ७ कामकाजाचे दिवस.",
+    departmentEn: "Health",
+    departmentMr: "आरोग्य",
+    publishedAt: "2026-03-01",
+    href: "/faq",
+  }),
+  rec("faq-hours", "faq", {
+    titleEn: "What are the office hours of CSMC?",
+    titleMr: "CSMC चे कार्यालयीन वेळ काय आहे?",
+    descriptionEn: "Offices are open Monday to Saturday, 10:00 AM to 6:00 PM. Closed on Sundays and public holidays.",
+    descriptionMr: "कार्यालये सोमवार ते शनिवार सकाळी १० ते सायंकाळी ६. रविवार व सार्वजनिक सुट्ट्यांना बंद.",
+    previewEn: "Emergency services (fire, disaster control) operate 24×7.",
+    previewMr: "आपत्कालीन सेवा (अग्निशमन, आपत्ती नियंत्रण) २४×७.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-01-01",
+    href: "/faq",
+  }),
+
+  rec("news-plantation", "news", {
+    titleEn: "City-wide Tree Plantation Drive on World Environment Day",
+    titleMr: "जागतिक पर्यावरण दिनी शहर वृक्षारोपण मोहीम",
+    descriptionEn: "Citizens are invited to join plantation at designated gardens and ward sites.",
+    descriptionMr: "नियुक्त उद्याने व प्रभाग स्थळांवर वृक्षारोपणासाठी नागरिकांना आमंत्रण.",
+    previewEn: "Saplings will be provided by the Garden Department. Carry a water bottle and wear comfortable footwear.",
+    previewMr: "उद्यान विभाग रोपे देईल. पाण्याची बाटली आणा व सोयीस्कर पादत्राणे घाला.",
+    departmentEn: "Garden",
+    departmentMr: "उद्यान",
+    publishedAt: "2026-04-12",
+    href: "/notices",
+  }),
+  rec("news-trade-portal", "news", {
+    titleEn: "New Trade Licence Renewal Portal Goes Live",
+    titleMr: "नवीन व्यापार परवाना नूतनीकरण पोर्टल कार्यान्वित",
+    descriptionEn: "Renewals can now be completed online through RTS services.",
+    descriptionMr: "नूतनीकरण आता RTS सेवांद्वारे ऑनलाइन पूर्ण करता येईल.",
+    previewEn: "Keep previous licence number and GST details ready.",
+    previewMr: "मागील परवाना क्रमांक व GST तपशील तयार ठेवा.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-04-05",
+    href: "/notices",
+  }),
+
+  rec("dept-health", "department", {
+    titleEn: "Health Department",
+    titleMr: "आरोग्य विभाग",
+    descriptionEn: "Public health services, dispensaries, vaccination and epidemic control.",
+    descriptionMr: "सार्वजनिक आरोग्य सेवा, दवाखाने, लसीकरण व साथीचे नियंत्रण.",
+    previewEn: "HOD: Dr. Paras Mandlecha. Phone: 0240-2331740.",
+    previewMr: "विभाग प्रमुख: डॉ. पारस मंडलेचा. दूरध्वनी: ०२४०-२३३१७४०.",
+    departmentEn: "Health",
+    departmentMr: "आरोग्य",
+    publishedAt: "2026-04-28",
+    href: "/departments/health",
+  }),
+  rec("dept-tp", "department", {
+    titleEn: "Town Planning Department",
+    titleMr: "नगर रचना विभाग",
+    descriptionEn: "Building permissions, Development Plan and urban regulations.",
+    descriptionMr: "बांधकाम परवानग्या, विकास आराखडा व नगर विनियम.",
+    previewEn: "HOD: Shri Manoj Garje. Phone: 0240-2331751.",
+    previewMr: "विभाग प्रमुख: श्री मनोज गर्जे. दूरध्वनी: ०२४०-२३३१७५१.",
+    departmentEn: "Town Planning",
+    departmentMr: "नगर रचना",
+    publishedAt: "2026-04-28",
+    href: "/departments/town-planning",
+  }),
+  rec("dept-ptax", "department", {
+    titleEn: "Property Tax Department",
+    titleMr: "मालमत्ता कर विभाग",
+    descriptionEn: "Assessment, collection and revision of property tax.",
+    descriptionMr: "मालमत्ता कराचे मूल्यमापन, वसुली व सुधारणा.",
+    previewEn: "HOD: Shri Vikas Nawale. Phone: 0240-2331749.",
+    previewMr: "विभाग प्रमुख: श्री विकास नवाळे. दूरध्वनी: ०२४०-२३३१७४९.",
+    departmentEn: "Property Tax",
+    departmentMr: "मालमत्ता कर",
+    publishedAt: "2026-04-28",
+    href: "/departments/property-tax",
+  }),
+  rec("dept-drainage", "department", {
+    titleEn: "Drainage Department",
+    titleMr: "मलनिस्सारण विभाग",
+    descriptionEn: "Sewerage network, STP operations and pre-monsoon drain cleaning.",
+    descriptionMr: "मलनिस्सारण जाळे, STP कार्य व पूर्व-मान्सून नाला सफाई.",
+    previewEn: "HOD: Shri Anil Tanpure. Phone: 0240-2331746.",
+    previewMr: "विभाग प्रमुख: श्री अनिल तनपुरे. दूरध्वनी: ०२४०-२३३१७४६.",
+    departmentEn: "Drainage",
+    departmentMr: "मलनिस्सारण",
+    publishedAt: "2026-04-28",
+    href: "/departments/drainage",
+  }),
+
+  rec("con-fire", "contact", {
+    titleEn: "Fire Brigade Control Room",
+    titleMr: "अग्निशमन नियंत्रण कक्ष",
+    descriptionEn: "24×7 fire emergency — dial 101.",
+    descriptionMr: "२४×७ अग्निशमन आपत्काल — १०१ वर कॉल करा.",
+    previewEn: "For fire, building collapse and rescue within municipal limits.",
+    previewMr: "महापालिका हद्दीतील आग, इमारत कोसळणे व बचाव.",
+    departmentEn: "Fire",
+    departmentMr: "अग्निशमन",
+    publishedAt: "2026-01-01",
+    href: "/disaster-management",
+    relatedServiceHref: "tel:101",
+    relatedServiceLabelEn: "Call 101",
+    relatedServiceLabelMr: "१०१ वर कॉल करा",
+  }),
+  rec("con-disaster", "contact", {
+    titleEn: "CSMC Disaster Control Room",
+    titleMr: "CSMC आपत्ती नियंत्रण कक्ष",
+    descriptionEn: "24×7 municipal disaster control — 0240-2331731.",
+    descriptionMr: "२४×७ महापालिका आपत्ती नियंत्रण — ०२४०-२३३१७३१.",
+    previewEn: "Coordinates flood, storm and city-wide emergency response.",
+    previewMr: "पूर, वादळ व शहरव्यापी आपत्कालीन प्रतिसाद समन्वय.",
+    departmentEn: "Disaster Management",
+    departmentMr: "आपत्ती व्यवस्थापन",
+    publishedAt: "2026-01-01",
+    href: "/disaster-management",
+  }),
+  rec("con-office", "contact", {
+    titleEn: "Municipal Contact — Town Hall",
+    titleMr: "महापालिका संपर्क — टाऊन हॉल",
+    descriptionEn: "CSMC Main Building, Town Hall, behind Head Post Office, Chhatrapati Sambhajinagar 431001.",
+    descriptionMr: "CSMC मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर ४३१००१.",
+    previewEn: "Office hours: Monday–Saturday, 10:00 AM – 6:00 PM.",
+    previewMr: "कार्यालयीन वेळ: सोमवार–शनिवार, सकाळी १० ते सायंकाळी ६.",
+    departmentEn: "General Administration",
+    departmentMr: "सामान्य प्रशासन",
+    publishedAt: "2026-01-01",
+    href: "/contact",
+  }),
+];
+
+const VERSION_HISTORY: Record<string, CivicRecord["versions"]> = {
+  "gr-tax-rebate": [
+    {
+      version: "2.0",
+      publishedAt: "2026-04-01",
+      status: "current",
+      notesEn: "Rebate window extended till 30 May 2026.",
+      notesMr: "सवलत कालावधी ३० मे २०२६ पर्यंत वाढवला.",
+    },
+    {
+      version: "1.0",
+      publishedAt: "2026-03-01",
+      status: "superseded",
+      notesEn: "Original rebate scheme for FY 2026-27.",
+      notesMr: "आर्थिक वर्ष २०२६-२७ ची मूळ सवलत योजना.",
+    },
+  ],
+  "byl-dcr": [
+    {
+      version: "2.1",
+      publishedAt: "2025-11-12",
+      status: "current",
+      notesEn: "Unified DCR with parking addendum incorporated.",
+      notesMr: "पार्किंग परिशिष्टासह एकीकृत DCR.",
+    },
+    {
+      version: "2.0",
+      publishedAt: "2024-06-01",
+      status: "superseded",
+      notesEn: "Previous unified development control regulations.",
+      notesMr: "मागील एकीकृत विकास नियंत्रण विनियम.",
+    },
+  ],
+  "dp-2025": [
+    {
+      version: "1.1",
+      publishedAt: "2025-09-01",
+      status: "current",
+      notesEn: "Sanctioned development plan map.",
+      notesMr: "मंजूर विकास आराखडा नकाशा.",
+    },
+    {
+      version: "1.0",
+      publishedAt: "2024-12-15",
+      status: "superseded",
+      notesEn: "Draft plan published for objections.",
+      notesMr: "हरकतींसाठी मसुदा आराखडा.",
+    },
+  ],
+  "ar-2024": [
+    {
+      version: "1.0",
+      publishedAt: "2024-09-28",
+      status: "archived",
+      notesEn: "Previous financial year report (archived).",
+      notesMr: "मागील आर्थिक वर्षाचा अहवाल (संग्रहित).",
+    },
+  ],
+};
+
+const RELATED_FORCE: Record<string, string[]> = {
+  "svc-property-tax": ["faq-ptax", "dept-ptax", "not-tax-rebate", "gr-tax-rebate", "cc-revenue"],
+  "faq-ptax": ["svc-property-tax", "dept-ptax", "not-tax-rebate"],
+  "svc-birth": ["faq-birth", "dept-health", "act-rts", "cc-health"],
+  "faq-birth": ["svc-birth", "dept-health"],
+  "svc-grievance": ["faq-hours", "dept-health"],
+  "svc-building": ["byl-dcr", "dp-2025", "not-dp-revision", "dept-tp", "cc-revenue", "byl-parking"],
+  "byl-dcr": ["svc-building", "dp-2025", "con-fire", "cc-revenue", "not-dp-revision", "dept-tp", "byl-parking"],
+  "dp-2025": ["byl-dcr", "svc-building", "not-dp-revision", "dept-tp", "dp-report"],
+  "svc-water-tax": ["cir-water-summer", "dept-drainage", "faq-hours"],
+  "cir-swm": ["gr-swm", "ten-swm", "not-recruitment"],
+  "gr-swm": ["cir-swm", "ten-swm"],
+  "ten-swm": ["cir-swm", "gr-swm"],
+  "act-rti": ["rti-q4", "pol-open-data", "faq-hours"],
+};
+
+const OCR_EXTRAS: Record<string, CivicRecord["ocrPages"]> = {
+  "cir-swm": [
+    {
+      page: 18,
+      textEn:
+        "Solid Waste collected from households must be segregated at source into wet and dry fractions. Non-segregated solid waste may not be lifted. Ward offices will support awareness drives on solid waste management.",
+      textMr:
+        "घरांमधील घनकचरा स्त्रोत स्तरावर ओला व सुका असा वर्गीकृत करावा. अवर्गीकृत घनकचरा उचलला जाणार नाही.",
+    },
+  ],
+  "gr-swm": [
+    {
+      page: 18,
+      textEn:
+        "These Solid Waste Management Guidelines cover collection, processing, landfill operations and user-fee provisions for municipal solid waste across all zones.",
+      textMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे संकलन, प्रक्रिया, लँडफिल व वापरकर्ता शुल्क समाविष्ट करतात.",
+    },
+  ],
+  "ten-swm": [
+    {
+      page: 12,
+      textEn:
+        "The SWM Phase II processing facility shall handle municipal solid waste in accordance with the Solid Waste Management Rules and CSMC specifications.",
+      textMr: "घनकचरा प्रकल्प टप्पा-२ प्रक्रिया सुविधा घनकचरा व्यवस्थापन नियमांनुसार कार्य करेल.",
+    },
+  ],
+  "byl-dcr": [
+    {
+      page: 22,
+      textEn:
+        "Fire NOC from the Municipal Fire Department is mandatory for high-rise and assembly buildings before an occupancy certificate is issued. Related municipal services: building permission, DP Plan and parking standards.",
+      textMr:
+        "उंच व सभागृह इमारतींसाठी भोगवटा प्रमाणपत्रापूर्वी अग्निशमन विभागाचे फायर एनओसी अनिवार्य आहे.",
+    },
+  ],
+};
+
+export const CIVIC_CATALOG: CivicRecord[] = RAW_CATALOG.map((r) => {
+  const versions = VERSION_HISTORY[r.id] ?? r.versions;
+  const latest = versions.find((v) => v.status === "current") ?? versions[0];
+  const forced = RELATED_FORCE[r.id];
+  const related = forced
+    ? forced
+    : RAW_CATALOG.filter(
+        (o) =>
+          o.id !== r.id &&
+          (o.departmentEn === r.departmentEn ||
+            ((DOCUMENT_CATS as readonly string[]).includes(o.category) &&
+              (DOCUMENT_CATS as readonly string[]).includes(r.category)))
+      )
+        .slice(0, 4)
+        .map((o) => o.id);
+  const extraOcr = OCR_EXTRAS[r.id] ?? [];
+  return {
+    ...r,
+    versions,
+    version: latest?.version ?? r.version,
+    status: r.id === "ar-2024" ? "archived" : r.status,
+    relatedIds: related,
+    ocrPages: [...r.ocrPages, ...extraOcr],
+    updatedAt: latest?.publishedAt ?? r.updatedAt,
+    keywords: [...new Set([...r.keywords, ...extraOcr.flatMap((p) => p.textEn.toLowerCase().split(/\W+/).filter((w) => w.length > 4))])],
+  };
+});
+
+export const REPOSITORY_DOCUMENTS = CIVIC_CATALOG.filter((r) =>
+  (DOCUMENT_CATS as readonly string[]).includes(r.category)
+);
+
+export function getCivicRecord(id: string): CivicRecord | undefined {
+  return CIVIC_CATALOG.find((r) => r.id === id);
+}

@@ -1,24 +1,14 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
 import muncorpPic from "@/assets/muncorp_pic.png";
+import { OFFICIAL } from "@/data/officialLinks";
+import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const { lang } = useLang();
   const en = lang === "en";
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: en ? "Message received" : "संदेश प्राप्त",
-      description: en ? "Our team will respond within 2 working days." : "आमची टीम २ कामकाजाच्या दिवसांत उत्तर देईल.",
-    });
-    (e.target as HTMLFormElement).reset();
-  };
 
   return (
     <Layout>
@@ -28,17 +18,15 @@ const Contact = () => {
       />
 
       <section className="py-10 container max-w-4xl">
-
-        {/* Building photo */}
         <div className="w-full rounded-xl overflow-hidden mb-8 shadow-sm border border-border">
           <img
             src={muncorpPic}
-            alt="Chhatrapati Sambhajinagar Municipal Corporation Building"
+            alt={en ? "Chhatrapati Sambhajinagar Municipal Corporation Building" : "छत्रपती संभाजीनगर महानगरपालिका इमारत"}
             className="w-full h-100 object-cover"
+            loading="lazy"
           />
         </div>
 
-        {/* Intro text */}
         <div className="mb-6">
           <h2 className="text-base font-bold text-civic-ink mb-3">
             {en ? "Contact No" : "संपर्क क्रमांक"}
@@ -46,14 +34,40 @@ const Contact = () => {
           <hr className="border-border mb-4" />
           <p className="text-sm text-muted-foreground leading-relaxed">
             {en
-              ? "Thank you for your interest in service of Chhatrapati Sambhajinagar Municipal Corporation. Please provide the following information about your needs in order to help us serve you better. This information will enable us to route your request to appropriate person."
-              : "छत्रपती संभाजीनगर महानगरपालिकेच्या सेवेत आपल्या स्वारस्याबद्दल धन्यवाद. आम्हाला आपली अधिक चांगली सेवा करण्यासाठी कृपया खालील माहिती द्या."}
+              ? "Thank you for your interest in service of Chhatrapati Sambhajinagar Municipal Corporation. Use the official channels below — this prototype does not host a live message inbox."
+              : "छत्रपती संभाजीनगर महानगरपालिकेच्या सेवेत आपल्या स्वारस्याबद्दल धन्यवाद. खालील अधिकृत मार्ग वापरा — या प्रोटोटाइपवर थेट संदेश इनबॉक्स नाही."}
           </p>
         </div>
 
-        {/* Key Contact table #d6e4d6->original website's color*/}
+        <div className="flex flex-wrap gap-2 mb-8">
+          <a
+            href={OFFICIAL.citizenFeedback}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-bold bg-civic-blue text-white rounded-lg px-3 py-2"
+          >
+            {en ? "Official citizen feedback form" : "अधिकृत नागरिक अभिप्राय फॉर्म"}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href={OFFICIAL.samadhaan}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-bold border border-civic-blue text-civic-blue rounded-lg px-3 py-2"
+          >
+            {en ? "Samadhaan grievance" : "समाधान तक्रार"}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <Link to="/disaster-management" className="inline-flex items-center gap-1.5 text-xs font-bold border border-border rounded-lg px-3 py-2">
+            {en ? "Emergency contacts" : "आपत्कालीन संपर्क"}
+          </Link>
+          <Link to="/how-to-reach" className="inline-flex items-center gap-1.5 text-xs font-bold border border-border rounded-lg px-3 py-2">
+            {en ? "How to reach" : "कसे पोहोचावे"}
+          </Link>
+        </div>
+
         <div className="mb-10 border border-border rounded-lg overflow-hidden text-sm">
-          <div className="bg[#D6D8F0] px-4 py-2.5 font-bold text-civic-ink border-b border-border">
+          <div className="bg-[#D6D8F0] px-4 py-2.5 font-bold text-civic-ink border-b border-border">
             {en ? "Key Contact" : "मुख्य संपर्क"}
           </div>
           <div className="divide-y divide-border bg-white">
@@ -78,62 +92,13 @@ const Contact = () => {
             </div>
             <div className="px-4 py-3">
               <p className="text-muted-foreground">
-                Address: Main Building, Town Hall, behind Post Office, Chhatrapati Sambhajinagar, Maharashtra 431001
+                {en
+                  ? "Address: Main Building, Town Hall, behind Post Office, Chhatrapati Sambhajinagar, Maharashtra 431001"
+                  : "पत्ता: मुख्य इमारत, टाऊन हॉल, पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर, महाराष्ट्र ४३१००१"}
               </p>
             </div>
           </div>
         </div>
-
-        {/* Contact form */}
-        {/* <div className="border border-border rounded-lg overflow-hidden">
-          <div className="bg-[#d6e4d6] px-4 py-2.5 font-bold text-civic-ink border-b border-border">
-            {en ? "Send us a Message" : "आम्हाला संदेश पाठवा"}
-          </div>
-          <form onSubmit={onSubmit} className="bg-white p-6 space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-xs font-bold text-civic-ink uppercase tracking-wider mb-1.5 block">
-                  {en ? "Full Name" : "पूर्ण नाव"} *
-                </label>
-                <Input required placeholder={en ? "Your name" : "आपले नाव"}
-                  className="rounded-lg border-border focus:border-civic-blue h-10 text-sm" />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-civic-ink uppercase tracking-wider mb-1.5 block">
-                  {en ? "Mobile No." : "मोबाईल क्र."} *
-                </label>
-                <Input required placeholder="10-digit mobile"
-                  className="rounded-lg border-border focus:border-civic-blue h-10 text-sm" />
-              </div>
-            </div>
-            <div>
-              <label className="text-xs font-bold text-civic-ink uppercase tracking-wider mb-1.5 block">
-                {en ? "Email" : "ईमेल"}
-              </label>
-              <Input type="email" placeholder="you@example.com"
-                className="rounded-lg border-border focus:border-civic-blue h-10 text-sm" />
-            </div>
-            <div>
-              <label className="text-xs font-bold text-civic-ink uppercase tracking-wider mb-1.5 block">
-                {en ? "Subject" : "विषय"} *
-              </label>
-              <Input required placeholder={en ? "Brief subject" : "थोडक्यात विषय"}
-                className="rounded-lg border-border focus:border-civic-blue h-10 text-sm" />
-            </div>
-            <div>
-              <label className="text-xs font-bold text-civic-ink uppercase tracking-wider mb-1.5 block">
-                {en ? "Message" : "संदेश"} *
-              </label>
-              <Textarea required rows={4} placeholder={en ? "Write your message…" : "आपला संदेश लिहा…"}
-                className="rounded-lg border-border focus:border-civic-blue text-sm resize-none" />
-            </div>
-            <Button type="submit"
-              className="bg-civic-blue text-white hover:bg-civic-blue/90 px-8 py-2.5 rounded-lg font-bold text-sm">
-              {en ? "Submit" : "सबमिट करा"}
-            </Button>
-          </form>
-        </div> */}
-
       </section>
     </Layout>
   );

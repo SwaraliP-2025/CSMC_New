@@ -1,27 +1,28 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { translations, type Lang, type Translations } from "./translations";
 
-// Session-only key — resets to Marathi on every new tab/visit
-const LANG_KEY = "csmc-lang-session";
-
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Translations };
 const LanguageContext = createContext<Ctx | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLangState] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "mr";
-    // Clear any old localStorage keys
-    localStorage.removeItem("csmc-lang");
-    localStorage.removeItem("csmc-lang-v2");
-    // Use sessionStorage so each new visit defaults to Marathi
-    const stored = sessionStorage.getItem(LANG_KEY) as Lang | null;
-    return stored === "en" ? "en" : "mr";
-  });
+  // Always start in Marathi for citizens; preference is kept only while navigating
+  // this session after the user explicitly switches language.
+  const [lang, setLangState] = useState<Lang>("mr");
 
   const setLang = (l: Lang) => {
     setLangState(l);
-    sessionStorage.setItem(LANG_KEY, l);
   };
+
+  useEffect(() => {
+    // Clear any legacy stored language so EN cannot stick across visits
+    try {
+      localStorage.removeItem("csmc-lang");
+      localStorage.removeItem("csmc-lang-v2");
+      sessionStorage.removeItem("csmc-lang-session");
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = lang === "mr" ? "mr" : "en";

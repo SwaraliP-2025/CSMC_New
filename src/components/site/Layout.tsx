@@ -10,11 +10,23 @@ import { ChevronUp } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 
 const SiteHeader = () => (
-  <div className="sticky top-0 z-50 w-full">
+  <div className="sticky top-0 z-[2000] w-full bg-white">
     <TopBar />
     <Header />
   </div>
 );
+
+const SkipToMain = () => {
+  const { t } = useLang();
+  return (
+    <a
+      href="#main"
+      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[3000] focus:rounded-lg focus:bg-civic-blue focus:px-4 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
+    >
+      {t.topbar.skip}
+    </a>
+  );
+};
 
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
@@ -37,7 +49,7 @@ const ScrollToTop = () => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       aria-label={label}
-      className="fixed bottom-20 right-6 z-50 flex items-center gap-1.5 rounded-full bg-civic-blue text-white shadow-lg px-3 py-2.5 hover:bg-civic-gold hover:text-civic-ink transition-all duration-200 hover:scale-105"
+      className="fixed bottom-20 right-6 z-[1100] flex items-center gap-1.5 rounded-full bg-civic-blue text-white shadow-lg px-3 py-2.5 hover:bg-civic-gold hover:text-civic-ink transition-all duration-200 hover:scale-105"
     >
       <ChevronUp className="h-5 w-5 shrink-0" />
       {hovered && <span className="text-xs font-bold whitespace-nowrap">{label}</span>}
@@ -48,9 +60,10 @@ const ScrollToTop = () => {
 // Home layout — includes the hero banner
 export const HomeLayout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
+    <SkipToMain />
     <SiteHeader />
     <VideoHero />
-    <main id="main" className="flex-1 mb-10 pb-12">{children}</main>
+    <main id="main" className="flex-1 mb-10 pb-16">{children}</main>
     <CitySkyline />
     <AppsBar />
     <Footer />
@@ -62,8 +75,9 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
 // Standard layout — no hero banner (used on all sub-pages)
 export const Layout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
+    <SkipToMain />
     <SiteHeader />
-    <main id="main" className="flex-1 mb-10 pb-12">{children}</main>
+    <main id="main" className="flex-1 mb-10 pb-16">{children}</main>
     <CitySkyline />
     <AppsBar />
     <Footer />
