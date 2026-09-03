@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cfc-001",
+    "name": "CFC Aurangabad Road",
+    "address": "Aurangabad Road, Sambhajinagar",
+    "phone": "0240-7788990",
+    "timings": "9:30 AM - 5:30 PM",
+    "latitude": "19.8738",
+    "longitude": "75.3482",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8738,75.3482"
+  },
+  {
+    "id": "cfc-002",
+    "name": "CFC CIDCO",
+    "address": "CIDCO Sector 3, Sambhajinagar",
+    "phone": "0240-8899001",
+    "timings": "9:30 AM - 5:30 PM",
+    "latitude": "19.8687",
+    "longitude": "75.3195",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8687,75.3195"
+  }
+]

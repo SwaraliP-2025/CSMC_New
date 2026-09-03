@@ -1,0 +1,32 @@
+[
+  {
+    "id": "zone-001",
+    "name": "Zone A1 – Town Hall",
+    "address": "Town Hall, Chhatrapati Sambhajinagar",
+    "phone": "0240-2481001",
+    "timings": "10:00 AM - 6:00 PM",
+    "latitude": "19.89408",
+    "longitude": "75.31156",
+    "googleMapsUrl": "https://maps.google.com/?q=19.89408,75.31156"
+  },
+  {
+    "id": "zone-002",
+    "name": "Zone G2 – Mondha Naka Sillekhana",
+    "address": "Mondha Naka Sillekhana, Chhatrapati Sambhajinagar",
+    "phone": "0240-2482001",
+    "timings": "10:00 AM - 6:00 PM",
+    "latitude": "19.88206",
+    "longitude": "75.33200",
+    "googleMapsUrl": "https://maps.google.com/?q=19.88206,75.33200"
+  },
+  {
+    "id": "zone-010",
+    "name": "Zone J10 – Railway Station",
+    "address": "Railway Station area (Hamalwada), Chhatrapati Sambhajinagar",
+    "phone": "0240-2490001",
+    "timings": "10:00 AM - 6:00 PM",
+    "latitude": "19.855355",
+    "longitude": "75.311797",
+    "googleMapsUrl": "https://maps.google.com/?q=19.855355,75.311797"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "fire-001",
+    "name": "Central Fire Station",
+    "address": "Main Road, Sambhajinagar",
+    "phone": "0240-9990011",
+    "timings": "24 Hours",
+    "latitude": "19.8855",
+    "longitude": "75.3388",
+    "googleMapsUrl": "https://maps.google.com/?q=19.8855,75.3388"
+  },
+  {
+    "id": "fire-002",
+    "name": "North Fire Station",
+    "address": "Pathardi Phata, Sambhajinagar",
+    "phone": "0240-9990022",
+    "timings": "24 Hours",
+    "latitude": "19.9050",
+    "longitude": "75.3175",
+    "googleMapsUrl": "https://maps.google.com/?q=19.9050,75.3175"
+  }
+]
