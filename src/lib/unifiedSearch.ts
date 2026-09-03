@@ -2,12 +2,13 @@ import { CIVIC_CATALOG, REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import { CATEGORY_LABELS } from "@/data/civicLabels";
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
 import { groupHits, smartSearch, type SearchHit } from "@/lib/semanticSearch";
+import { prepareSearchQuery } from "@/lib/searchAliases";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 export type { SearchHit };
 
 export function searchHits(query: string): SearchHit[] {
-  return smartSearch(query);
+  return smartSearch(prepareSearchQuery(query));
 }
 
 export function searchCatalog(query: string): CivicRecord[] {

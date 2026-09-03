@@ -15,7 +15,11 @@ type SpeechRecognitionLike = {
   interimResults: boolean;
   start: () => void;
   stop: () => void;
-  onresult: ((event: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null;
+  onresult:
+    | ((event: {
+        results: ArrayLike<ArrayLike<{ transcript: string }> & { 0?: { transcript: string } }>;
+      }) => void)
+    | null;
   onerror: (() => void) | null;
   onend: (() => void) | null;
 };
@@ -43,7 +47,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const speechAvailable = !!getSpeechRecognitionCtor();
 
   const hits = useMemo(() => (query.trim().length >= 2 ? searchHits(query) : []), [query]);
-  const best = hits[0];
+  const best = useMemo(() => hits.find((h) => h.isBestAction) ?? hits[0], [hits]);
   const grouped = useMemo(() => {
     const rest = best ? hits.filter((h) => h.record.id !== best.record.id) : hits;
     return groupSearchResults(rest);
@@ -120,7 +124,19 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.onresult = (event) => {
-      const transcript = event.results?.[0]?.[0]?.transcript?.trim();
+      const parts: string[] = [];
+      const list = event.results;
+      for (let i = 0; i < list.length; i++) {
+        const said = list[i]?.[0]?.transcript ?? "";
+        if (said) parts.push(said);
+      }
+      const raw = parts.join(" ");
+      const transcript = raw
+        .normalize("NFC")
+        .replace(/[\u00A0\u202F\u2007]/g, " ")
+        .replace(/[.,!?;:।]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
       if (transcript) {
         setQuery(transcript);
         setOpen(true);
@@ -198,12 +214,12 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             }
             aria-pressed={listening}
             onClick={toggleVoice}
-            className={`shrink-0 ${listening ? "text-civic-red" : "text-muted-foreground hover:text-civic-blue"}`}
+            className={`shrink-0 ${listening ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
           >
             {listening ? (
-              <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
-            ) : (
               <Mic className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
+            ) : (
+              <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
             )}
           </button>
         )}

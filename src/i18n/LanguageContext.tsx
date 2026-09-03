@@ -4,6 +4,14 @@ import { translations, type Lang, type Translations } from "./translations";
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Translations };
 const LanguageContext = createContext<Ctx | undefined>(undefined);
 
+// translations.ts is a data module. Fast Refresh cannot update this file
+// (it also exports useLang), so accept those edits and reload the page.
+if (import.meta.hot) {
+  import.meta.hot.accept("./translations", () => {
+    import.meta.hot?.invalidate();
+  });
+}
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   // Always start in Marathi for citizens; preference is kept only while navigating
   // this session after the user explicitly switches language.

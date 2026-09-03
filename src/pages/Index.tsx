@@ -245,13 +245,13 @@ const Index = () => {
   }, []);
 
   const leadership = [
-    { nameEn: "Shri Devendra Fadnavis", nameMr: <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg },
-    { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg},
-    { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg }, 
-    { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg },
-    { nameEn: "Shri Sameer Rajurkar", nameMr: <span className="devanagari">श्री. समीर राजूरकर</span>, roleEn: "Hon'ble Mayor", roleMr: <span className="devanagari">मा. महापौर</span>, image: sameerImg },
-    { nameEn: "Shri Rajendra Janjal", nameMr: <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, roleEn: "Hon'ble Deputy Mayor", roleMr: <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg },
-    { nameEn: "Shri Amol Yedage", nameMr: <span className="devanagari">श्री. अमोल येडगे</span>, roleEn: "Hon'ble Municipal Commissioner", roleMr: <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg },
+    { nameEn: "Shri Devendra Fadnavis", nameMr: <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg, photoSize: "132%", photoTop: "-10%" },
+    { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg, photoSize: "114%", photoTop: "-2%" },
+    { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg, photoSize: "124%", photoTop: "-6%" },
+    { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg, photoSize: "124%", photoTop: "-8%" },
+    { nameEn: "Shri Sameer Rajurkar", nameMr: <span className="devanagari">श्री. समीर राजूरकर</span>, roleEn: "Hon'ble Mayor", roleMr: <span className="devanagari">मा. महापौर</span>, image: sameerImg, photoSize: "130%", photoTop: "-10%" },
+    { nameEn: "Shri Rajendra Janjal", nameMr: <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, roleEn: "Hon'ble Deputy Mayor", roleMr: <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg, photoSize: "126%", photoTop: "-8%" },
+    { nameEn: "Shri Amol Yedage", nameMr: <span className="devanagari">श्री. अमोल येडगे</span>, roleEn: "Hon'ble Municipal Commissioner", roleMr: <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg, photoSize: "126%", photoTop: "-8%" },
   ];
 
   return (
@@ -346,14 +346,24 @@ const Index = () => {
                     : "none",
                 }}
               >
-                {/* Photo */}
+                {/* Photo — per-person size/top keeps head-top and chest crop aligned */}
                 <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
                   {person.image ? (
-                    <img
-                      src={person.image}
-                      alt={en ? person.nameEn : ""}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-200"
-                    />
+                    <div className="absolute inset-0 transition-transform duration-200 group-hover:scale-105">
+                      <img
+                        src={person.image}
+                        alt={en ? person.nameEn : ""}
+                        className="absolute left-1/2 object-cover"
+                        style={{
+                          width: person.photoSize,
+                          height: person.photoSize,
+                          minWidth: "115%",
+                          minHeight: "115%",
+                          top: person.photoTop,
+                          transform: "translateX(-50%)",
+                        }}
+                      />
+                    </div>
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold">
                       {person.nameEn.split(" ").map(n => n[0]).join("")}

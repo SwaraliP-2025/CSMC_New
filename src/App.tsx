@@ -66,7 +66,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter basename="/CSMC_New">
+          <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "") || "/"}>
             <ScrollToTopOnNavigate />
             <SeoHead />
             <Routes>
