@@ -1426,7 +1426,7 @@ export const WardMap = () => {
                 color: #000;
                 font-size: 16px;
                 font-weight: 900;
-                font-family: "Noto Sans Devanagari", sans-serif;
+                font-family: CSMCDevanagari;
                 white-space: nowrap;
                 text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 0 2px 4px rgba(0,0,0,0.2);
                 pointer-events: none;

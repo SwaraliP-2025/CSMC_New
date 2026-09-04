@@ -181,7 +181,7 @@ html[lang="mr"],
 html[lang="mr"] *,
 html[lang="mr"] .font-sans,
 html[lang="mr"] .font-serif {
-  font-family: "Noto Sans Devanagari", sans-serif;
+  font-family: CSMCDevanagari;
   font-synthesis: none;
 }
 
