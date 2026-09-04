@@ -1,39 +1,8 @@
 /*
- * Authoritative Noto Sans Devanagari @font-face (Vite-resolved local TTFs).
- * Full files — no unicode-range — so spaces/punctuation stay on Noto (conjunct shaping).
+ * Bundled Noto Sans Devanagari (devanagari + latin + latin-ext per weight).
+ * Complements the Google Fonts stylesheet in index.html.
  */
-@font-face {
-  font-family: "Noto Sans Devanagari";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("../assets/fonts/NotoSansDevanagari-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Noto Sans Devanagari";
-  font-style: normal;
-  font-weight: 500;
-  font-display: block;
-  src: url("../assets/fonts/NotoSansDevanagari-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Noto Sans Devanagari";
-  font-style: normal;
-  font-weight: 600;
-  font-display: block;
-  src: url("../assets/fonts/NotoSansDevanagari-SemiBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Noto Sans Devanagari";
-  font-style: normal;
-  font-weight: 700;
-  font-display: block;
-  src: url("../assets/fonts/NotoSansDevanagari-Bold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Noto Sans Devanagari";
-  font-style: normal;
-  font-weight: 800;
-  font-display: block;
-  src: url("../assets/fonts/NotoSansDevanagari-Bold.ttf") format("truetype");
-}
+@import "@fontsource/noto-sans-devanagari/400.css";
+@import "@fontsource/noto-sans-devanagari/500.css";
+@import "@fontsource/noto-sans-devanagari/600.css";
+@import "@fontsource/noto-sans-devanagari/700.css";
