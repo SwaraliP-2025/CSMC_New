@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useState, ReactNode } from "react";
 import { localizeDigits } from "./digits";
 import { translations, type Lang, type Translations } from "./translations";
 
@@ -39,11 +39,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.lang = lang === "mr" ? "mr" : "en";
-    document.body.style.fontFamily = lang === "mr"
-      ? "'Noto Sans Devanagari', 'Inter', sans-serif"
-      : "";
   }, [lang]);
 
   return (

@@ -1,0 +1,39 @@
+/*
+ * Authoritative Noto Sans Devanagari @font-face (Vite-resolved local TTFs).
+ * Full files — no unicode-range — so spaces/punctuation stay on Noto (conjunct shaping).
+ */
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../assets/fonts/NotoSansDevanagari-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("../assets/fonts/NotoSansDevanagari-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url("../assets/fonts/NotoSansDevanagari-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url("../assets/fonts/NotoSansDevanagari-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  font-style: normal;
+  font-weight: 800;
+  font-display: block;
+  src: url("../assets/fonts/NotoSansDevanagari-Bold.ttf") format("truetype");
+}

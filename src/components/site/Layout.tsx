@@ -63,7 +63,7 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
     <SkipToMain />
     <SiteHeader />
     <VideoHero />
-    <main id="main" className="flex-1 mb-10 pb-16">{children}</main>
+    <main id="main" className="flex-1">{children}</main>
     <CitySkyline />
     <AppsBar />
     <Footer />

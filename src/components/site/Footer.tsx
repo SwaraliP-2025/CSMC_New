@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
-import { Youtube, Facebook, ChevronRight } from "lucide-react";
+import { Youtube, Facebook, Instagram, ChevronRight } from "lucide-react";
 import { OFFICIAL } from "@/data/officialLinks";
 
 const XIcon = () => (
@@ -15,15 +15,22 @@ const TODAY_VISITORS = 2659;
 const LAST_UPDATED = "03-09-2026";
 
 const AppleIcon = () => (
-  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-  </svg>
+  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white" aria-hidden>
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="#111">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+  </span>
 );
 
 const PlayIcon = () => (
-  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-    <path d="M3.18 23.76c.3.17.64.24.99.2l13.5-7.8-2.83-2.83-11.66 10.43zm16.7-9.65L16.35 12l3.53-2.11-3.53-2.11L3.18.24C2.83.07 2.49.07 2.18.24L15.88 14 3.18 23.76c.3.17.64.24.99.2l15.71-9.07c.63-.36.63-1.22 0-1.58z"/>
-  </svg>
+  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white" aria-hidden>
+    <svg viewBox="0 0 512 512" width="18" height="18">
+      <path fill="#4285F4" d="M96 48.4c0-9.6 5.3-16.3 9.5-19.8L368 256 105.5 483.4c-4.2-3.5-9.5-10.2-9.5-19.8V48.4z" />
+      <path fill="#34A853" d="M368 256 105.5 28.6C108.3 26.4 111.8 25 115.6 25c4.6 0 9 1.5 12.6 4.3L410 186.4 368 256z" />
+      <path fill="#EA4335" d="M410 325.6 128.2 482.7c-3.6 2.8-8 4.3-12.6 4.3-3.8 0-7.3-1.4-10.1-3.6L368 256l42 69.6z" />
+      <path fill="#FBBC04" d="M410 186.4 368 256l42 69.6c13.3-7.6 22-19.7 22-34.8s-8.7-27.2-22-34.8z" />
+    </svg>
+  </span>
 );
 
 const linkCls = "flex items-center gap-1 text-white/65 hover:text-civic-gold transition-colors text-sm py-0.5";
@@ -85,7 +92,7 @@ export const Footer = () => {
       <div className="container py-12 grid gap-10 md:grid-cols-4">
         <div>
           <h3 className="font-bold text-base mb-5 text-white">{en ? "Address" : "पत्ता"}</h3>
-          <p className="text-white/65 text-sm leading-relaxed mb-5">
+          <p className={`text-white/65 text-sm leading-relaxed mb-5 ${en ? "" : "devanagari"}`}>
             {en ? (
               <>Chhatrapati Sambhajinagar Municipal Corporation,<br />Main Building, Town Hall,<br />behind Head Post Office,<br />Chhatrapati SambhajiNagar,<br />Maharashtra, India, 431001</>
             ) : (
@@ -93,7 +100,7 @@ export const Footer = () => {
             )}
           </p>
           <div className="flex gap-3">
-            <a href="https://www.youtube.com/channel/UCMEBXuyMv6mJ0S0QpM8LSpQ" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
+            <a href="https://youtube.com/@gbmeeting?si=XNiAe54yA50ljkqZ" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Youtube className="h-4 w-4" />
             </a>
             <a href="https://www.facebook.com/SmarterAurangabad" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
@@ -101,6 +108,9 @@ export const Footer = () => {
             </a>
             <a href="https://www.facebook.com/ChhSambhajinagarMC" aria-label={en ? "X / social (via Facebook page)" : "सोशल माध्यम"} className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <XIcon />
+            </a>
+            <a href="https://www.instagram.com/csmc_municipalcommissioner/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
+              <Instagram className="h-4 w-4" />
             </a>
           </div>
         </div>

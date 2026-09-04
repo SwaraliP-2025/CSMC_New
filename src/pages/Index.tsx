@@ -272,13 +272,13 @@ const Index = () => {
   }, []);
 
   const leadership = [
-    { nameEn: "Shri Devendra Fadnavis", nameMr: <span className="devanagari">श्री. देवेंद्र फडणवीस</span>, roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. मुख्यमंत्री, महाराष्ट्र राज्य</span>, image: devendraImg, photoSize: "132%", photoTop: "-10%" },
-    { nameEn: "Shri Eknath Shinde", nameMr: <span className="devanagari">श्री. एकनाथ शिंदे</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: eknathImg, photoSize: "114%", photoTop: "-2%" },
-    { nameEn: "Smt. Sunetra A. Pawar", nameMr: <span className="devanagari">श्रीमती सुनेत्रा अजित पवार</span>, roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <span className="devanagari">मा. उपमुख्यमंत्री, महाराष्ट्र राज्य</span>, image: suntraImg, photoSize: "124%", photoTop: "-6%" },
-    { nameEn: "Smt. Madhuri Misal", nameMr: <span className="devanagari">श्रीमती माधुरी मिसाळ</span>, roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: <span className="devanagari">मा. राज्यमंत्री, नगरविकास विभाग</span>, image: madhuriImg, photoSize: "124%", photoTop: "-8%" },
-    { nameEn: "Shri Sameer Rajurkar", nameMr: <span className="devanagari">श्री. समीर राजूरकर</span>, roleEn: "Hon'ble Mayor", roleMr: <span className="devanagari">मा. महापौर</span>, image: sameerImg, photoSize: "130%", photoTop: "-10%" },
-    { nameEn: "Shri Rajendra Janjal", nameMr: <span className="devanagari">श्री. राजेंद्र  जंजाळ</span>, roleEn: "Hon'ble Deputy Mayor", roleMr: <span className="devanagari">मा. उपमहापौर</span>, image: rajuImg, photoSize: "126%", photoTop: "-8%" },
-    { nameEn: "Shri Amol Yedage", nameMr: <span className="devanagari">श्री. अमोल येडगे</span>, roleEn: "Hon'ble Municipal Commissioner", roleMr: <span className="devanagari">मा. महानगरपालिका आयुक्त</span>, image: amolImg, photoSize: "126%", photoTop: "-8%" },
+    { nameEn: "Shri Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <>मा. मुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: devendraImg, photoSize: "132%", photoTop: "-10%" },
+    { nameEn: "Shri Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: eknathImg, photoSize: "114%", photoTop: "-2%" },
+    { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: suntraImg, photoSize: "124%", photoTop: "-6%" },
+    { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: "मा. राज्यमंत्री, नगरविकास विभाग", image: madhuriImg, photoSize: "124%", photoTop: "-8%" },
+    { nameEn: "Shri Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: "Hon'ble Mayor", roleMr: "मा. महापौर", image: sameerImg, photoSize: "130%", photoTop: "-10%" },
+    { nameEn: "Shri Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: "Hon'ble Deputy Mayor", roleMr: "मा. उपमहापौर", image: rajuImg, photoSize: "126%", photoTop: "-8%" },
+    { nameEn: "Shri Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: "Hon'ble Municipal Commissioner", roleMr: "मा. महानगरपालिका आयुक्त", image: amolImg, photoSize: "126%", photoTop: "-8%" },
   ];
 
   return (
@@ -404,7 +404,7 @@ const Index = () => {
                   {en ? person.nameEn : person.nameMr}
                 </h3>
                 {/* Role */}
-                <p className="text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1" lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
+                <p className={`text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1 ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
                   {en ? person.roleEn : person.roleMr}
                 </p>
               </div>
@@ -508,7 +508,7 @@ const Index = () => {
       {/* Leader Modal */}
       {selectedLeader && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0" onClick={() => setSelectedLeader(null)}>
-          <div className="bg-white rounded-2xl max-w-xs w-full shadow-2xl relative p-0" onClick={e => e.stopPropagation()}>
+          <div className="bg-white rounded-2xl max-w-xs w-full shadow-2xl relative top-8 p-0" onClick={e => e.stopPropagation()}>
             <button className="absolute top-2 right-2 text-civic-blue hover:text-civic-red transition-colors z-10" onClick={() => setSelectedLeader(null)}>
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
@@ -535,7 +535,7 @@ const Index = () => {
       <GovtLinksCarousel />
 
       {/* Nearby Tourist Spots (moved below government portal) */}
-      <section className="py-20 bg-white">
+      <section className="pt-12 pb-4 bg-white">
         <div className="container">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
             <div>

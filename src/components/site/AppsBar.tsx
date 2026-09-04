@@ -56,6 +56,8 @@ export const AppsBar = () => {
 
     : "सक्षम — या नमुना आवृत्तीत अधिकृत स्टोअर दुवा उपलब्ध नाही";
 
+  const appLabel = (app: (typeof APPS)[number]) => (en ? app.name : app.nameMr);
+
 
 
   return (
@@ -94,9 +96,9 @@ export const AppsBar = () => {
 
                 <img src={app.img} alt={app.name} className="w-10 h-10 rounded-lg object-contain bg-white p-0.5" />
 
-                <p className="text-white text-[10px] font-semibold text-center leading-tight">
+                <p className={`text-white text-[10px] font-semibold text-center leading-tight ${en ? "" : "devanagari"}`}>
 
-                  {en ? app.name : app.nameMr}
+                  {appLabel(app)}
 
                 </p>
 
@@ -128,9 +130,9 @@ export const AppsBar = () => {
 
                 <img src={app.img} alt={app.name} className="w-10 h-10 rounded-lg object-contain bg-white p-0.5" />
 
-                <p className="text-white text-[10px] font-semibold text-center leading-tight group-hover:text-civic-gold transition-colors">
+                <p className={`text-white text-[10px] font-semibold text-center leading-tight ${en ? "" : "devanagari"} group-hover:text-civic-gold transition-colors`}>
 
-                  {en ? app.name : app.nameMr}
+                  {appLabel(app)}
 
                 </p>
 
@@ -168,9 +170,9 @@ export const AppsBar = () => {
 
                 <div>
 
-                  <p className="text-white font-semibold text-[11px] leading-tight whitespace-nowrap">
-
-                    {en ? app.name : app.nameMr}
+                  <p className={`text-white font-semibold text-[11px] leading-tight ${en ? "" : "devanagari"}`}>
+  
+                    {appLabel(app)}
 
                   </p>
 
@@ -202,9 +204,9 @@ export const AppsBar = () => {
 
                 <div>
 
-                  <p className="text-white font-semibold text-[11px] leading-tight group-hover:text-civic-gold transition-colors whitespace-nowrap">
+                  <p className={`text-white font-semibold text-[11px] leading-tight ${en ? "" : "devanagari"} group-hover:text-civic-gold transition-colors`}>
 
-                    {en ? app.name : app.nameMr}
+                    {appLabel(app)}
 
                   </p>
 
