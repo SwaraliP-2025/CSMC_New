@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
@@ -7,9 +8,14 @@ import {
   SITE_NAV,
   HEADER_UTILITY_LINKS,
   OTHER_SITE_PAGES,
+  CITIZEN_TOOLS_PAGES,
+  POLICY_PAGES,
   isExternalHref,
   type NavItem,
 } from "@/navigation/siteNav";
+import { DEPARTMENTS } from "./DepartmentDetail";
+import { facilityCategories } from "@/lib/facilities";
+import type { TouristPlaceRecord } from "@/lib/facilities";
 
 const linkCls =
   "flex items-center gap-2 text-sm text-muted-foreground hover:text-civic-blue transition-colors group";
@@ -60,6 +66,28 @@ function LinkList({ items, en }: { items: NavItem[]; en: boolean }) {
   );
 }
 
+function SiteMapSection({
+  title,
+  items,
+  en,
+  className = "",
+}: {
+  title: string;
+  items: NavItem[];
+  en: boolean;
+  className?: string;
+}) {
+  if (!items.length) return null;
+  return (
+    <div className={className}>
+      <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
+        {title}
+      </h2>
+      <LinkList items={items} en={en} />
+    </div>
+  );
+}
+
 /**
  * Renders Site Map from the same SITE_NAV tree as the header,
  * so every dropdown item appears under the same menu heading.
@@ -67,6 +95,33 @@ function LinkList({ items, en }: { items: NavItem[]; en: boolean }) {
 const SiteMap = () => {
   const { lang } = useLang();
   const en = lang === "en";
+  const [touristPlaces, setTouristPlaces] = useState<TouristPlaceRecord[]>([]);
+
+  useEffect(() => {
+    const url = `${import.meta.env.BASE_URL}data/tourist-places.json`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data: TouristPlaceRecord[]) => setTouristPlaces(data))
+      .catch(() => setTouristPlaces([]));
+  }, []);
+
+  const departmentPages: NavItem[] = DEPARTMENTS.map((dept) => ({
+    labelEn: dept.nameEn,
+    labelMr: dept.nameMr,
+    to: `/departments/${dept.slug}`,
+  }));
+
+  const facilityPages: NavItem[] = facilityCategories.map((cat) => ({
+    labelEn: cat.titleEn,
+    labelMr: cat.titleMr,
+    to: `/public-facilities/${cat.slug}`,
+  }));
+
+  const touristPages: NavItem[] = touristPlaces.map((place) => ({
+    labelEn: place.nameEn,
+    labelMr: place.nameMr,
+    to: `/tourist-attraction/${place.slug}`,
+  }));
 
   return (
     <Layout>
@@ -75,8 +130,8 @@ const SiteMap = () => {
         title={en ? "Site Map" : "साइटमॅप"}
         subtitle={
           en
-            ? "Directory of pages organised exactly as in the main menu."
-            : "मुख्य मेनूमधील संरचनेनुसार पृष्ठांची निर्देशिका."
+            ? "Complete directory of all pages on this website, organised by section."
+            : "या संकेतस्थळावरील सर्व पृष्ठांची विभागानुसार संपूर्ण निर्देशिका."
         }
       />
       <section className="py-12 container space-y-10">
@@ -130,21 +185,53 @@ const SiteMap = () => {
           })}
         </div>
 
-        {/* Header utility + other live pages not in the main NAV bar */}
-        <div className="grid md:grid-cols-2 gap-8 pt-2 border-t border-border">
-          <div>
-            <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
-              {en ? "Header links" : "हेडर दुवे"}
-            </h2>
-            <LinkList items={HEADER_UTILITY_LINKS} en={en} />
-          </div>
-          <div>
-            <h2 className="font-serif text-lg font-bold text-civic-blue mb-4 pb-2 border-b border-civic-gold/30">
-              {en ? "Other pages" : "इतर पृष्ठे"}
-            </h2>
-            <LinkList items={OTHER_SITE_PAGES} en={en} />
-          </div>
+        {/* Pages outside the main NAV bar */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-2 border-t border-border">
+          <SiteMapSection
+            title={en ? "Header links" : "हेडर दुवे"}
+            items={HEADER_UTILITY_LINKS}
+            en={en}
+          />
+          <SiteMapSection
+            title={en ? "Citizen tools" : "नागरिक साधने"}
+            items={CITIZEN_TOOLS_PAGES}
+            en={en}
+          />
+          <SiteMapSection
+            title={en ? "Other pages" : "इतर पृष्ठे"}
+            items={OTHER_SITE_PAGES}
+            en={en}
+          />
+          <SiteMapSection
+            title={en ? "Policies & legal" : "धोरणे व कायदेशीर"}
+            items={POLICY_PAGES}
+            en={en}
+          />
         </div>
+
+        <div className="grid md:grid-cols-2 gap-8 pt-2 border-t border-border">
+          <SiteMapSection
+            title={en ? "Department pages" : "विभाग पृष्ठे"}
+            items={departmentPages}
+            en={en}
+          />
+          <SiteMapSection
+            title={en ? "Public facility categories" : "सार्वजनिक सुविधा प्रकार"}
+            items={facilityPages}
+            en={en}
+          />
+        </div>
+
+        {touristPages.length > 0 && (
+          <div className="pt-2 border-t border-border">
+            <SiteMapSection
+              title={en ? "Tourist attractions" : "पर्यटन आकर्षणे"}
+              items={touristPages}
+              en={en}
+              className="md:max-w-2xl"
+            />
+          </div>
+        )}
       </section>
     </Layout>
   );

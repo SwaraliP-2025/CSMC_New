@@ -2,13 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
-  Bookmark,
-  BookmarkCheck,
   BookOpen,
   Building2,
-  Check,
   Clock,
-  Copy,
   Download,
   FileText,
   Languages,
@@ -28,7 +24,7 @@ import {
   officialDocumentId,
 } from "@/data/civicLabels";
 import { documentPermalink, downloadCivicRecord, formatCivicDate, recordHref } from "@/lib/unifiedSearch";
-import { copyLink, isBookmarked, shareLink, toggleBookmark } from "@/lib/bookmarks";
+import { shareLink } from "@/lib/bookmarks";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 const DocumentViewer = () => {
@@ -37,18 +33,12 @@ const DocumentViewer = () => {
   const enSite = lang === "en";
   const navigate = useNavigate();
   const record = getCivicRecord(id);
-  const [copied, setCopied] = useState(false);
-  const [bookmarked, setBookmarked] = useState(false);
   const [viewEn, setViewEn] = useState(enSite);
   const [simple, setSimple] = useState(false);
 
   useEffect(() => {
     setViewEn(enSite);
   }, [enSite, id]);
-
-  useEffect(() => {
-    setBookmarked(isBookmarked(id));
-  }, [id]);
 
   const related = useMemo(
     () =>
@@ -89,12 +79,6 @@ const DocumentViewer = () => {
   const docId = officialDocumentId(record.id, record.year);
   const latest = record.versions.find((v) => v.status === "current") ?? record.versions[0];
   const previous = record.versions.find((v) => v.version !== latest?.version);
-
-  const onCopy = async () => {
-    await copyLink(documentPermalink(record.id));
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <Layout>
@@ -238,22 +222,6 @@ const DocumentViewer = () => {
                 >
                   <Share2 className="h-3.5 w-3.5" />
                   {en ? "Share" : "शेअर"}
-                </button>
-                <button
-                  type="button"
-                  onClick={onCopy}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
-                >
-                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                  {copied ? (en ? "Copied" : "कॉपी झाले") : en ? "Copy link" : "दुवा कॉपी करा"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBookmarked(toggleBookmark(record.id).includes(record.id))}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
-                >
-                  {bookmarked ? <BookmarkCheck className="h-3.5 w-3.5" /> : <Bookmark className="h-3.5 w-3.5" />}
-                  {bookmarked ? (en ? "Bookmarked" : "साठवले") : en ? "Bookmark" : "साठवा"}
                 </button>
                 {record.downloadable && (
                   <button

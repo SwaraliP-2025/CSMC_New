@@ -264,12 +264,29 @@ export const HEADER_UTILITY_LINKS: NavItem[] = [
   { labelEn: "User Manual", labelMr: "वापरकर्ता मार्गदर्शक", to: "/user-manual" },
 ];
 
+/** Citizen tools linked from homepage / footer but not in the main NAV bar. */
+export const CITIZEN_TOOLS_PAGES: NavItem[] = [
+  { labelEn: "Track Application", labelMr: "अर्ज स्थिती", to: "/track" },
+  { labelEn: "Tax Calculator", labelMr: "कर कॅल्क्युलेटर", to: "/tax-calculator" },
+  { labelEn: "Lodge Complaint / Grievance", labelMr: "तक्रार नोंदवा", to: "/grievance" },
+];
+
+/** Footer policy & legal pages. */
+export const POLICY_PAGES: NavItem[] = [
+  { labelEn: "Website Policies", labelMr: "संकेतस्थळ धोरणे", to: "/website-policies" },
+  { labelEn: "Privacy Policy", labelMr: "गोपनीयता धोरण", to: "/privacy-policy" },
+  { labelEn: "Disclaimer", labelMr: "अस्वीकरण", to: "/disclaimer" },
+  { labelEn: "Copyright & Terms", labelMr: "कॉपीराइट व अटी", to: "/terms" },
+  { labelEn: "Accessibility Statement", labelMr: "सुलभता निवेदन", to: "/accessibility-statement" },
+];
+
 /** Extra live pages reachable from content/footer but not listed in the main NAV. */
 export const OTHER_SITE_PAGES: NavItem[] = [
   { labelEn: "Explore Sambhajinagar", labelMr: "संभाजीनगर शोधा", to: "/explore" },
   { labelEn: "FAQ", labelMr: "सामान्य प्रश्न", to: "/faq" },
   { labelEn: "Elections", labelMr: "निवडणूक", to: "/elections" },
   { labelEn: "Prabhag 2025", labelMr: "प्रभाग २०२५", to: "/prabhag-2025" },
+  { labelEn: "Tenders", labelMr: "निविदा", to: "/tenders" },
 ];
 
 export function isExternalHref(to?: string, external?: boolean): boolean {

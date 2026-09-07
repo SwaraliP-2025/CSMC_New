@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        serif: ["Playfair Display", "Georgia", "serif"],
+        sans: ["Noto Sans", "Arial", "sans-serif"],
+        serif: ["Noto Sans", "Arial", "sans-serif"],
         devanagari: ["CSMCDevanagari"],
       },
       colors: {

@@ -20,6 +20,42 @@ import sameerImg from "@/assets/leadership/samir-bhaiya-rajurkar.png";
 import rajuImg from "@/assets/leadership/raju-bhaiya-janjal1.png";
 import amolImg from "@/assets/leadership/shri_amol_sir.png";
 
+/** Two-line posts. Each line is a block so the break is layout, not a `<br>` the build can ignore. */
+type Leader = {
+  nameEn: string;
+  nameMr: string;
+  roleEn: readonly [string, string];
+  roleMr: readonly [string, string];
+  image: string;
+  photoSize: string;
+  photoTop: string;
+};
+
+const leadership: Leader[] = [
+  { nameEn: "Shri. Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: ["Hon'ble Chief Minister,", "Maharashtra"], roleMr: ["मा. मुख्यमंत्री,", "महाराष्ट्र राज्य"], image: devendraImg, photoSize: "132%", photoTop: "-10%" },
+  { nameEn: "Shri. Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: eknathImg, photoSize: "114%", photoTop: "-2%" },
+  { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: suntraImg, photoSize: "124%", photoTop: "-6%" },
+  { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: ["Hon'ble Minister of State,", "Urban Development Department"], roleMr: ["मा. राज्यमंत्री,", "नगरविकास विभाग"], image: madhuriImg, photoSize: "124%", photoTop: "-8%" },
+  { nameEn: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: ["Hon'ble Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महापौर,", "छत्रपती संभाजीनगर"], image: sameerImg, photoSize: "130%", photoTop: "-10%" },
+  { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photoSize: "126%", photoTop: "-8%" },
+  { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photoSize: "126%", photoTop: "-8%" },
+];
+
+const RoleLines = ({ lines, isMr }: { lines: readonly string[]; isMr: boolean }) => (
+  <>
+    {lines.map((line) => (
+      <span
+        key={line}
+        className="block"
+        lang={isMr ? "mr" : "en"}
+        style={{ overflowWrap: "normal", wordBreak: "keep-all" }}
+      >
+        {line}
+      </span>
+    ))}
+  </>
+);
+
 // Icons mapped to each quick service in order:
 // Property Tax, Pay Water Tax, Birth Certificate, Death Certificate,
 // Trade License, Building Permission, Grievance, Tenders,
@@ -271,16 +307,6 @@ const Index = () => {
     return () => document.removeEventListener("keydown", handler);
   }, []);
 
-  const leadership = [
-    { nameEn: "Shri Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <>मा. मुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: devendraImg, photoSize: "132%", photoTop: "-10%" },
-    { nameEn: "Shri Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: eknathImg, photoSize: "114%", photoTop: "-2%" },
-    { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: suntraImg, photoSize: "124%", photoTop: "-6%" },
-    { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: "मा. राज्यमंत्री, नगरविकास विभाग", image: madhuriImg, photoSize: "124%", photoTop: "-8%" },
-    { nameEn: "Shri Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: "Hon'ble Mayor", roleMr: "मा. महापौर", image: sameerImg, photoSize: "130%", photoTop: "-10%" },
-    { nameEn: "Shri Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: "Hon'ble Deputy Mayor", roleMr: "मा. उपमहापौर", image: rajuImg, photoSize: "126%", photoTop: "-8%" },
-    { nameEn: "Shri Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: "Hon'ble Municipal Commissioner", roleMr: "मा. महानगरपालिका आयुक्त", image: amolImg, photoSize: "126%", photoTop: "-8%" },
-  ];
-
   return (
     <HomeLayout>
       {/* Quick services */}
@@ -404,8 +430,8 @@ const Index = () => {
                   {en ? person.nameEn : person.nameMr}
                 </h3>
                 {/* Role */}
-                <p className={`text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1 ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
-                  {en ? person.roleEn : person.roleMr}
+                <p className={`text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1 whitespace-normal ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
+                  <RoleLines lines={en ? person.roleEn : person.roleMr} isMr={!en} />
                 </p>
               </div>
             ))}
@@ -524,7 +550,9 @@ const Index = () => {
             <div className="px-3 pb-4 pt-2 text-center">
               <div className="w-8 h-0.5 bg-civic-gold rounded-full mx-auto mb-2" />
               <h3 className="font-serif text-base font-bold text-civic-blue mb-1 leading-tight">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
-              <p className="text-xs text-muted-foreground font-medium leading-tight">{en ? selectedLeader.roleEn : selectedLeader.roleMr}</p>
+              <p className={`text-xs text-muted-foreground font-medium leading-tight whitespace-normal ${en ? "" : "devanagari"}`}>
+                <RoleLines lines={en ? selectedLeader.roleEn : selectedLeader.roleMr} isMr={!en} />
+              </p>
             </div>
           </div>
         </div>
