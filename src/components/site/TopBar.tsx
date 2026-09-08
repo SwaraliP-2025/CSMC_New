@@ -248,7 +248,7 @@ export const TopBar = () => {
               <Globe className="h-3 w-3 opacity-50 shrink-0 hidden sm:block" />
               <button type="button" onClick={() => setLang("en")}
                 className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
-                EN
+                ENGLISH
               </button>
               <span className="opacity-20">|</span>
               <button type="button" onClick={() => setLang("mr")}
@@ -265,7 +265,7 @@ export const TopBar = () => {
                 <Globe className="h-3 w-3 opacity-50 shrink-0" />
                 <button type="button" onClick={() => setLang("en")}
                   className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
-                  EN
+                  ENGLISH
                 </button>
                 <span className="opacity-20">|</span>
                 <button type="button" onClick={() => setLang("mr")}
