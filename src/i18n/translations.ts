@@ -61,8 +61,8 @@ export const translations = {
       items: [
         { t: "Pay Property Tax", d: "Check & Pay online", url: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
         { t: "Pay Water Tax", d: "Check & Pay online", url: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do" },
-        { t: "Birth Certificate", d: "Apply or download", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
-        { t: "Death Certificate", d: "Apply or download", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
+        { t: "Birth Certificate", d: "Apply or download", url: "https://rts.chhsambhajinagarmc.org/links/birth-certificate" },
+        { t: "Death Certificate", d: "Apply or download", url: "https://rts.chhsambhajinagarmc.org/links/death-certificate" },
         { t: "Trade License", d: "New & renewal", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "Building Permission", d: "Plan approval status", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "Grievance", d: "Lodge & track complaints", url: "https://aurangabadmahapalika.org/csms/complaint_form.php" },
@@ -176,8 +176,8 @@ export const translations = {
       items: [
         { t: "मालमत्ता कर भरा", d: "पहा व ऑनलाइन भरा", url: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
         { t: "पाणी कर भरा", d: "पहा व ऑनलाइन भरा", url: "https://chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do" },
-        { t: "जन्म प्रमाणपत्र", d: "अर्ज करा / डाउनलोड करा", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
-        { t: "मृत्यू प्रमाणपत्र", d: "अर्ज करा / डाउनलोड करा", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
+        { t: "जन्म प्रमाणपत्र", d: "अर्ज करा / डाउनलोड करा", url: "https://rts.chhsambhajinagarmc.org/links/birth-certificate" },
+        { t: "मृत्यू प्रमाणपत्र", d: "अर्ज करा / डाउनलोड करा", url: "https://rts.chhsambhajinagarmc.org/links/death-certificate" },
         { t: "व्यापार परवाना", d: "नवीन व नूतनीकरण", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "बांधकाम परवानगी", d: "नकाशा मंजुरी स्थिती", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "तक्रार", d: "नोंदवा व स्थिती तपासा", url: "https://aurangabadmahapalika.org/csms/complaint_form.php" },

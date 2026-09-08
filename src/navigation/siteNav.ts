@@ -162,13 +162,13 @@ export const SITE_NAV: NavItem[] = [
       {
         labelEn: "Birth Certificate",
         labelMr: "जन्म प्रमाणपत्र",
-        to: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+        to: "https://rts.chhsambhajinagarmc.org/links/birth-certificate",
         external: true,
       },
       {
         labelEn: "Death Certificate",
         labelMr: "मृत्यू प्रमाणपत्र",
-        to: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+        to: "https://rts.chhsambhajinagarmc.org/links/death-certificate",
         external: true,
       },
       {

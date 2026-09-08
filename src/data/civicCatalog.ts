@@ -205,7 +205,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentEn: "Health",
     departmentMr: "आरोग्य",
     publishedAt: "2026-03-15",
-    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    href: "https://rts.chhsambhajinagarmc.org/links/birth-certificate",
     external: true,
     relatedServiceHref: "/services",
     relatedServiceLabelEn: "All Services",
@@ -221,7 +221,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentEn: "Health",
     departmentMr: "आरोग्य",
     publishedAt: "2026-03-15",
-    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    href: "https://rts.chhsambhajinagarmc.org/links/death-certificate",
     external: true,
   }),
   rec("svc-building", "service", {

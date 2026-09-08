@@ -91,8 +91,8 @@ export type PageSeo = {
 export const ROUTE_SEO: Record<string, PageSeo> = {
   "/": {
     path: "/",
-    title: "CSMC — Chhatrapati Sambhajinagar Municipal Corporation Official Website",
-    titleMr: "CSMC — छत्रपती संभाजीनगर महानगरपालिका अधिकृत संकेतस्थळ",
+    title: "CSMC - Chhatrapati Sambhajinagar Municipal Corporation Official Website",
+    titleMr: "CSMC - छत्रपती संभाजीनगर महानगरपालिका अधिकृत संकेतस्थळ",
     description: DEFAULT_DESCRIPTION_EN,
     descriptionMr: DEFAULT_DESCRIPTION_MR,
   },

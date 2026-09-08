@@ -97,7 +97,7 @@ export const VideoHero = () => {
 
       {/* Hero image tab */}
       {tab === "hero" && (
-        <section className="relative min-h-[48vh] md:min-h-[75vh] flex items-center overflow-hidden w-full">
+        <section className="relative min-h-[52vh] md:min-h-[75vh] flex items-center overflow-hidden w-full">
           <div className="absolute inset-0 w-full h-full">
             <img
               src={hero}
@@ -107,7 +107,7 @@ export const VideoHero = () => {
           </div>
           <div className="absolute inset-0 bg-gradient-overlay opacity-80" />
           <div className="relative container py-10 md:py-24 z-10 animate-fade-up">
-            <div className="max-w-3xl pr-0 md:pr-[280px]">
+            <div className="max-w-3xl pr-[min(48%,11.25rem)] md:pr-[280px]">
               <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-civic-gold font-bold mb-3 md:mb-4 drop-shadow-md">
                 {t.hero.eyebrow}
               </p>
@@ -120,32 +120,10 @@ export const VideoHero = () => {
                 </p>
               )}
             </div>
-
-            {/* Mobile quick actions (below title) */}
-            <div className="mt-6 flex w-max flex-col items-stretch gap-2 md:hidden">
-              {HERO_QUICK_ACTIONS.map((action) => {
-                const Icon = action.icon;
-                const label = en ? action.labelEn : action.labelMr;
-                return (
-                  <a
-                    key={`m-${action.labelEn}`}
-                    href={action.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex w-full items-center gap-2 bg-white text-civic-ink rounded-full pl-2.5 pr-3 py-1.5 shadow-lg border border-white/80"
-                  >
-                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
-                      <Icon className="h-3.5 w-3.5" aria-hidden />
-                    </span>
-                    <span className="text-xs font-bold leading-snug whitespace-nowrap">{label}</span>
-                  </a>
-                );
-              })}
-            </div>
           </div>
 
-          {/* Desktop right-side quick action pills */}
-          <div className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-max flex-col items-stretch gap-2">
+          {/* Quick actions: right side; raised on mobile so they stay inside the hero */}
+          <div className="absolute right-2 sm:right-3 md:right-6 top-[4.75rem] md:top-1/2 md:-translate-y-1/2 z-20 w-max max-w-[min(58vw,13rem)] md:max-w-none flex flex-col items-stretch gap-1 md:gap-2.5">
             {HERO_QUICK_ACTIONS.map((action) => {
               const Icon = action.icon;
               const label = en ? action.labelEn : action.labelMr;
@@ -155,12 +133,12 @@ export const VideoHero = () => {
                   href={action.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center gap-2 bg-white text-civic-ink rounded-full pl-2.5 pr-3.5 py-2 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
+                  className="flex w-full items-center gap-1.5 md:gap-2.5 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-1 md:pl-3.5 md:pr-5 md:py-2.5 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
                 >
-                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
-                    <Icon className="h-3.5 w-3.5" aria-hidden />
+                  <span className={`flex h-5 w-5 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
+                    <Icon className="h-3 w-3 md:h-4 md:w-4" aria-hidden />
                   </span>
-                  <span className="text-xs font-bold leading-snug whitespace-nowrap">{label}</span>
+                  <span className="text-[9px] sm:text-[10px] md:text-sm font-bold leading-snug whitespace-nowrap">{label}</span>
                 </a>
               );
             })}
