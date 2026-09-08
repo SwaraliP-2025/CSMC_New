@@ -63,8 +63,8 @@ export const Footer = () => {
     { en: "Samadhaan Grievance", mr: "समाधान तक्रार", to: OFFICIAL.samadhaan, external: true },
     { en: "RTI", mr: "माहिती अधिकार", to: "/rti-act" },
     { en: "e-Tender", mr: "ई-निविदा", to: OFFICIAL.mahatenders, external: true },
-    { en: "Birth Certificate", mr: "जन्म प्रमाणपत्र", to: OFFICIAL.rtsDashboard, external: true },
-    { en: "Death Certificate", mr: "मृत्यू प्रमाणपत्र", to: OFFICIAL.rtsDashboard, external: true },
+    { en: "Birth Certificate", mr: "जन्म प्रमाणपत्र", to: OFFICIAL.birthCertificate, external: true },
+    { en: "Death Certificate", mr: "मृत्यू प्रमाणपत्र", to: OFFICIAL.deathCertificate, external: true },
     { en: "Track Application (Official)", mr: "अर्ज स्थिती (अधिकृत)", to: OFFICIAL.trackComplaint, external: true },
     { en: "Tax Calculator", mr: "कर कॅल्क्युलेटर", to: "/tax-calculator" },
   ];
