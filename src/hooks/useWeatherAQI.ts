@@ -5,9 +5,9 @@
  *   – current temperature, weather_code
  *   – hourly precipitation_probability for next 3 hrs → max rain chance
  *
- * AQI      → AQICN / waqi.info (optional VITE_AQICN_TOKEN)
- *   – returns aqi directly (already US EPA scale)
- *   – skipped gracefully when token is empty
+ * AQI      → Open-Meteo Air Quality API (free, no key)
+ *   – current US AQI for Chhatrapati Sambhajinagar (same 0–500 EPA bands)
+ *   – optional VITE_AQICN_TOKEN overrides with a nearby station feed
  *
  * Refreshes every 10 minutes.
  */
@@ -149,7 +149,16 @@ export function useWeatherAQI(): WeatherAQIState {
         `&forecast_hours=6` +
         `&timezone=Asia%2FKolkata`;
 
-      const weatherRes = await fetch(weatherUrl);
+      const aqiUrl =
+        `https://air-quality-api.open-meteo.com/v1/air-quality` +
+        `?latitude=${LAT}&longitude=${LON}` +
+        `&current=us_aqi,pm2_5,pm10` +
+        `&timezone=Asia%2FKolkata`;
+
+      const [weatherRes, aqiRes] = await Promise.all([
+        fetch(weatherUrl),
+        fetch(aqiUrl).catch(() => null),
+      ]);
       const weather = await weatherRes.json();
 
       // ── Parse weather ──────────────────────────────────────────────────────
@@ -170,21 +179,34 @@ export function useWeatherAQI(): WeatherAQIState {
         }
       });
 
-      // ── Parse AQI (optional token) ─────────────────────────────────────────
+      // ── Parse AQI (Open-Meteo, no key) ─────────────────────────────────────
       let aqi: number | null = null;
-      let aqiStation = "Aurangabad";
-      if (AQICN_TOKEN) {
+      let aqiStation = "Chhatrapati Sambhajinagar";
+      if (aqiRes && aqiRes.ok) {
         try {
-          const aqiUrl =
-            `https://api.waqi.info/feed/geo:${LAT};${LON}/?token=${encodeURIComponent(AQICN_TOKEN)}`;
-          const aqiRes = await fetch(aqiUrl);
-          const aqiData = await aqiRes.json();
-          if (aqiData?.status === "ok") {
-            aqi = typeof aqiData.data?.aqi === "number" ? aqiData.data.aqi : null;
-            aqiStation = aqiData.data?.city?.name ?? "Aurangabad";
+          const omAqi = await aqiRes.json();
+          const usAqi = omAqi?.current?.us_aqi;
+          if (typeof usAqi === "number" && Number.isFinite(usAqi)) {
+            aqi = Math.round(usAqi);
           }
         } catch {
           /* keep weather; AQI stays null */
+        }
+      }
+
+      // Optional station-level override when a WAQI token is configured
+      if (AQICN_TOKEN) {
+        try {
+          const waqiUrl =
+            `https://api.waqi.info/feed/geo:${LAT};${LON}/?token=${encodeURIComponent(AQICN_TOKEN)}`;
+          const waqiRes = await fetch(waqiUrl);
+          const aqiData = await waqiRes.json();
+          if (aqiData?.status === "ok" && typeof aqiData.data?.aqi === "number") {
+            aqi = aqiData.data.aqi;
+            aqiStation = aqiData.data?.city?.name ?? aqiStation;
+          }
+        } catch {
+          /* keep Open-Meteo AQI */
         }
       }
 

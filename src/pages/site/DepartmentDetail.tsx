@@ -5,8 +5,7 @@ import { useLang } from "@/i18n/LanguageContext";
 import { getCivicRecord } from "@/data/civicCatalog";
 import { Phone, Mail, MapPin, ArrowLeft, Bell, FileText } from "lucide-react";
 import { useEffect, useRef } from "react";
-
-// import amolSir from "@assets/departments/shri_amol_sir.png";
+import amolSir from "@/assets/leadership/shri_amol_sir.png";
 
 interface DeptInfo {
   slug: string;
@@ -21,6 +20,8 @@ interface DeptInfo {
   addressEn: string;
   addressMr: string;
   image?: string;
+  photoSize?: string;
+  photoTop?: string;
   updates: { en: string; mr: string; date: string }[];
   responsibilitiesEn?: string[];
   responsibilitiesMr?: string[];
@@ -150,9 +151,9 @@ const DEPARTMENTS: DeptInfo[] = [
     phone: "0240-2331731", email: "commissioner@csmc.gov.in",
     addressEn: "CSMC Main Building, Town Hall, Behind Head Post Office, Chhatrapati Sambhajinagar – 431001",
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर, महाराष्ट्र, भारत, ४३१००१ ",
-    // aboutEn: "The Municipal Commissioner is the chief executive officer of the Chhatrapati Sambhajinagar Municipal Corporation, responsible for overall administration, policy implementation and citizen service delivery.",
-    // aboutMr: "महानगरपालिका आयुक्त हे छत्रपती संभाजीनगर महानगरपालिकेचे मुख्य कार्यकारी अधिकारी असून ते एकूण प्रशासन, धोरण, अंमलबजावणी आणि नागरिक सेवा वितरणासाठी जबाबदार आहेत.",
-    // image: amolSir,
+    image: amolSir,
+    photoSize: "126%",
+    photoTop: "-8%",
     updates: [
       { en: "Smart City project review meeting scheduled", mr: "स्मार्ट सिटी प्रकल्प आढावा बैठक नियोजित", date: "28 Apr 2026" },
       { en: "Annual budget presentation to General Body", mr: "सर्वसाधारण सभेला वार्षिक अर्थसंकल्प सादरीकरण", date: "25 Apr 2026" },
@@ -454,12 +455,24 @@ const DepartmentDetail = () => {
             <div className="bg-white border border-border rounded-3xl overflow-hidden shadow-sm">
               {/* Blue header */}
               <div className="bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl flex items-center justify-center shrink-0 overflow-hidden">
+                <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl shrink-0 overflow-hidden">
                   {dept.image ? (
-                    <img src={dept.image} alt={en ? dept.headEn : dept.headMr} className="w-full h-full object-cover object-top" />
+                    <img
+                      src={dept.image}
+                      alt={en ? dept.headEn : dept.headMr}
+                      className="absolute left-1/2 object-cover"
+                      style={{
+                        width: dept.photoSize ?? "100%",
+                        height: dept.photoSize ?? "100%",
+                        minWidth: dept.photoSize ? "115%" : "100%",
+                        minHeight: dept.photoSize ? "115%" : "100%",
+                        top: dept.photoTop ?? "0",
+                        transform: "translateX(-50%)",
+                      }}
+                    />
                   ) : (
-                    <span className="text-white font-bold text-3xl md:text-4xl">
-                      {(en ? dept.nameEn : dept.nameMr).charAt(0)}
+                    <span className="flex h-full w-full items-center justify-center text-white font-bold text-3xl md:text-4xl">
+                      {(en ? dept.headEn : dept.headMr).charAt(0)}
                     </span>
                   )}
                 </div>
@@ -470,7 +483,12 @@ const DepartmentDetail = () => {
                   <p className="text-civic-gold text-sm font-semibold">
                     {en ? dept.designationEn : dept.designationMr}
                   </p>
-                  <p className="text-white/70 text-xs mt-1">{en ? dept.nameEn : dept.nameMr}</p>
+                  {(en ? dept.nameEn : dept.nameMr) !== (en ? dept.designationEn : dept.designationMr) &&
+                    !(en ? dept.designationEn : dept.designationMr)
+                      .toLowerCase()
+                      .includes((en ? dept.nameEn : dept.nameMr).toLowerCase()) && (
+                    <p className="text-white/70 text-xs mt-1">{en ? dept.nameEn : dept.nameMr}</p>
+                  )}
                 </div>
               </div>
 

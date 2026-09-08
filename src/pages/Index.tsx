@@ -284,7 +284,7 @@ const Index = () => {
   return (
     <HomeLayout>
       {/* Quick services */}
-      <section className="py-20 bg-white relative z-10 -mt-10 rounded-t-[3rem] shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.1)]">
+      <section className="py-20 bg-white relative z-10 -mt-6 md:-mt-10 rounded-t-[3rem] shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.1)]">
         <div className="container">
           <div className="text-center mb-16">
             <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">{t.quick.title}</p>
