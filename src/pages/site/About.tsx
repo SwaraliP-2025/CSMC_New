@@ -599,12 +599,12 @@ const About = () => {
               <li className="pl-4 border-l-4 border-civic-gold/50">
                 {en ? (
                   <>
-                    Following the official renaming of the city, the civic body is now known as the{" "}
+                    Following the official renaming of the city on 15th September 2023, the civic body is now known as the{" "}
                     <strong className="text-civic-blue">Chhatrapati Sambhajinagar Municipal Corporation (CSMC).</strong>
                   </>
                 ) : (
                   <>
-                    शहराच्या अधिकृत नामकरणानंतर ही संस्था आता{" "}
+                    १५ सप्टेंबर २०२३ रोजी शहराचे अधिकृत नामकरण झाल्यानंतर, महानगरपालिका आता{" "}
                     <strong className="text-civic-blue">छत्रपती संभाजीनगर महानगरपालिका (CSMC)</strong> म्हणून ओळखली जाते.
                   </>
                 )}
