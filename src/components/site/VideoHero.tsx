@@ -261,8 +261,8 @@ export const VideoHero = () => {
             </div>
           </div>
 
-          {/* Quick actions: right side; raised on mobile so they stay inside the hero */}
-          <div className="absolute right-2 sm:right-3 md:right-6 top-[4.5rem] md:top-1/2 md:-translate-y-1/2 z-20 w-max max-w-[min(60vw,14rem)] md:max-w-none flex flex-col items-stretch gap-0.5 md:gap-2">
+          {/* Quick actions: stay fully inside the hero on mid-size laptops */}
+          <div className="absolute right-2 sm:right-3 md:right-5 top-20 sm:top-24 bottom-14 z-20 w-max max-w-[min(58vw,13.5rem)] md:max-w-none flex flex-col justify-center items-stretch gap-0.5 md:gap-1.5 max-h-[calc(100%-8.5rem)] overflow-y-auto overscroll-contain pr-0.5">
             {HERO_QUICK_ACTIONS.map((action) => {
               const Icon = action.icon;
               const label = en ? action.labelEn : action.labelMr;
@@ -272,12 +272,12 @@ export const VideoHero = () => {
                   href={action.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center gap-1.5 md:gap-2.5 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-0.5 md:pl-3.5 md:pr-5 md:py-2 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
+                  className="flex w-full items-center gap-1.5 md:gap-2 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-0.5 md:pl-3 md:pr-4 md:py-1.5 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
                 >
-                  <span className={`flex h-5 w-5 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
-                    <Icon className="h-3 w-3 md:h-4 md:w-4" aria-hidden />
+                  <span className={`flex h-5 w-5 md:h-7 md:w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
+                    <Icon className="h-3 w-3 md:h-3.5 md:w-3.5" aria-hidden />
                   </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-sm font-bold leading-snug whitespace-nowrap">{label}</span>
+                  <span className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold leading-snug whitespace-nowrap">{label}</span>
                 </a>
               );
             })}

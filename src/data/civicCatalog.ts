@@ -1,4 +1,5 @@
 import type { AiFaq, CivicRecord, DocumentStatus, DocumentVersion, OcrPage } from "@/types/civicCatalog";
+import { enrichCatalogWithSiteNav } from "@/lib/navSearchEnrichment";
 
 type RecInput = Omit<
   CivicRecord,
@@ -655,7 +656,7 @@ const RAW_CATALOG: CivicRecord[] = [
   }),
   rec("svc-contact", "service", {
     titleEn: "Municipal Contact",
-    titleMr: "महापालिका संपर्क",
+    titleMr: "महानगरपालिका संपर्क",
     descriptionEn: "Contact details and citizen feedback channels for CSMC.",
     descriptionMr: "CSMC साठी संपर्क तपशील व नागरिक अभिप्राय मार्ग.",
     previewEn: "Address, feedback form hand-off and related contact pages.",
@@ -664,7 +665,16 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-04-01",
     href: "/contact",
-    keywords: ["contact", "संपर्क", "कॉन्टॅक्ट", "feedback", "अभिप्राय"],
+    keywords: [
+      "contact",
+      "संपर्क",
+      "कॉन्टॅक्ट",
+      "feedback",
+      "अभिप्राय",
+      "महानगरपालिका",
+      "महापालिका",
+      "municipal corporation",
+    ],
   }),
   rec("svc-disaster", "service", {
     titleEn: "Disaster Management & Emergency",
@@ -729,7 +739,20 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-04-01",
     href: "/about",
-    keywords: ["about", "परिचय", "अबाउट", "heritage", "वारसा"],
+    keywords: [
+      "about",
+      "परिचय",
+      "अबाउट",
+      "heritage",
+      "वारसा",
+      "महानगरपालिका",
+      "महापालिका",
+      "municipal corporation",
+      "mahanagarpalika",
+      "csmc",
+      "corporation",
+      "छत्रपती संभाजीनगर महानगरपालिका",
+    ],
   }),
   rec("svc-govt-orders", "service", {
     titleEn: "Government Orders & Circulars",
@@ -1513,7 +1536,7 @@ const OCR_EXTRAS: Record<string, CivicRecord["ocrPages"]> = {
   ],
 };
 
-export const CIVIC_CATALOG: CivicRecord[] = RAW_CATALOG.map((r) => {
+const _CATALOG_BASE: CivicRecord[] = RAW_CATALOG.map((r) => {
   const versions = VERSION_HISTORY[r.id] ?? r.versions;
   const latest = versions.find((v) => v.status === "current") ?? versions[0];
   const forced = RELATED_FORCE[r.id];
@@ -1540,6 +1563,8 @@ export const CIVIC_CATALOG: CivicRecord[] = RAW_CATALOG.map((r) => {
     keywords: [...new Set([...r.keywords, ...extraOcr.flatMap((p) => p.textEn.toLowerCase().split(/\W+/).filter((w) => w.length > 4))])],
   };
 });
+
+export const CIVIC_CATALOG: CivicRecord[] = enrichCatalogWithSiteNav(_CATALOG_BASE);
 
 export const REPOSITORY_DOCUMENTS = CIVIC_CATALOG.filter((r) =>
   (DOCUMENT_CATS as readonly string[]).includes(r.category)

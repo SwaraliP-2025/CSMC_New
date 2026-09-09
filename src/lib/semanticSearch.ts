@@ -645,9 +645,20 @@ const INTENT: {
     actionMr: "नियमावली",
   },
   {
-    phrases: ["about csmc", "about", "परिचय", "अबाउट"],
+    phrases: [
+      "about csmc",
+      "about",
+      "परिचय",
+      "अबाउट",
+      "महानगरपालिका",
+      "महापालिका",
+      "municipal corporation",
+      "mahanagarpalika",
+      "csmc",
+      "छत्रपती संभाजीनगर महानगरपालिका",
+    ],
     actionId: "svc-about",
-    relatedIds: [],
+    relatedIds: ["svc-contact"],
     actionEn: "About CSMC",
     actionMr: "परिचय",
   },
@@ -849,7 +860,10 @@ export function smartSearch(query: string): SearchHit[] {
     else if (title.includes(q)) s += 70;
     else if (aliasTerms.some((t) => {
       const nt = norm(t);
-      return nt.length >= 4 && (titleEn.includes(nt) || titleMr.includes(nt));
+      if (nt.length < 4) return false;
+      if (titleEn.includes(nt) || titleMr.includes(nt)) return true;
+      if (r.keywords.some((k) => fuzzyIncludes(norm(k), nt) || norm(k).includes(nt))) return true;
+      return hay.includes(nt);
     })) s += 55;
     else if (qTokens.length > 0 && qTokens.every((t) => fuzzyIncludes(title, t))) s += 70;
 

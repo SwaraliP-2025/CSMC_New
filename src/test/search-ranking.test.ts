@@ -22,6 +22,13 @@ describe("search ranking", () => {
     expect(topId("corporator")).toBe("svc-corporator");
   });
 
+  it("finds municipal corporation terms used in nav and voice (EN/MR)", () => {
+    expect(topId("महानगरपालिका")).toBe("svc-about");
+    expect(topId("महापालिका")).toBe("svc-about");
+    expect(topId("municipal corporation")).toBe("svc-about");
+    expect(topId("mahanagarpalika")).toBe("svc-about");
+  });
+
   it("ranks a named attraction over the generic tourism hub", () => {
     expect(topId("Ellora caves")).toBe("place-ellora-caves");
     expect(topId("Bibi Ka Maqbara")).toBe("place-bibi-ka-maqbara");

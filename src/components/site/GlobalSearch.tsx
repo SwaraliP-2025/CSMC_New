@@ -41,6 +41,8 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+  const voiceAttemptRef = useRef(0);
+  const voiceGotResultRef = useRef(false);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [pos, setPos] = useState({ top: 0, left: 0, width: 0 });
@@ -106,6 +108,66 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     };
   }, []);
 
+  const applyTranscript = (raw: string) => {
+    const transcript = raw
+      .normalize("NFC")
+      .replace(/[\u00A0\u202F\u2007]/g, " ")
+      .replace(/[.,!?;:।]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!transcript) return false;
+    setQuery(transcript);
+    setOpen(true);
+    inputRef.current?.focus();
+    return true;
+  };
+
+  /** Prefer UI language, then the other (EN ↔ MR) so voice works bilingually. */
+  const voiceLangs = lang === "mr" ? (["mr-IN", "en-IN"] as const) : (["en-IN", "mr-IN"] as const);
+
+  const startVoiceAttempt = (Ctor: new () => SpeechRecognitionLike, attempt: number) => {
+    const recognition = new Ctor();
+    recognition.lang = voiceLangs[attempt] ?? voiceLangs[0];
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.onresult = (event) => {
+      const parts: string[] = [];
+      const list = event.results;
+      for (let i = 0; i < list.length; i++) {
+        const said = list[i]?.[0]?.transcript ?? "";
+        if (said) parts.push(said);
+      }
+      if (applyTranscript(parts.join(" "))) {
+        voiceGotResultRef.current = true;
+      }
+    };
+    recognition.onerror = () => {
+      // Fall through to onend for language retry
+    };
+    recognition.onend = () => {
+      if (voiceGotResultRef.current) {
+        setListening(false);
+        recognitionRef.current = null;
+        return;
+      }
+      const next = attempt + 1;
+      if (next < voiceLangs.length) {
+        voiceAttemptRef.current = next;
+        try {
+          startVoiceAttempt(Ctor, next);
+        } catch {
+          setListening(false);
+          recognitionRef.current = null;
+        }
+        return;
+      }
+      setListening(false);
+      recognitionRef.current = null;
+    };
+    recognitionRef.current = recognition;
+    recognition.start();
+  };
+
   const toggleVoice = () => {
     const Ctor = getSpeechRecognitionCtor();
     if (!Ctor) return;
@@ -117,38 +179,14 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
         /* ignore */
       }
       setListening(false);
+      recognitionRef.current = null;
       return;
     }
 
-    const recognition = new Ctor();
-    recognition.lang = lang === "mr" ? "mr-IN" : "en-IN";
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.onresult = (event) => {
-      const parts: string[] = [];
-      const list = event.results;
-      for (let i = 0; i < list.length; i++) {
-        const said = list[i]?.[0]?.transcript ?? "";
-        if (said) parts.push(said);
-      }
-      const raw = parts.join(" ");
-      const transcript = raw
-        .normalize("NFC")
-        .replace(/[\u00A0\u202F\u2007]/g, " ")
-        .replace(/[.,!?;:।]+/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-      if (transcript) {
-        setQuery(transcript);
-        setOpen(true);
-        inputRef.current?.focus();
-      }
-    };
-    recognition.onerror = () => setListening(false);
-    recognition.onend = () => setListening(false);
-    recognitionRef.current = recognition;
+    voiceAttemptRef.current = 0;
+    voiceGotResultRef.current = false;
     try {
-      recognition.start();
+      startVoiceAttempt(Ctor, 0);
       setListening(true);
     } catch {
       setListening(false);
@@ -210,8 +248,8 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                   ? "Stop voice search"
                   : "आवाज शोध थांबवा"
                 : en
-                  ? "Voice search"
-                  : "आवाजाने शोधा"
+                  ? "Voice search (English or Marathi)"
+                  : "आवाजाने शोधा (मराठी किंवा इंग्रजी)"
             }
             aria-pressed={listening}
             onClick={toggleVoice}

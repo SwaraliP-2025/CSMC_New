@@ -189,11 +189,15 @@ export const SEARCH_ALIAS_GROUPS: string[][] = [
     "वापरकर्ता नियमावली", "मार्गदर्शक",
     "युजर मॅन्युअल", "मॅन्युअल",
   ],
-  // About / city
+  // About / city / municipal corporation (nav uses महानगरपालिका)
   [
     "about", "about csmc", "history",
     "परिचय", "बद्दल",
     "अबाउट",
+    "महानगरपालिका", "महापालिका",
+    "municipal corporation", "mahanagarpalika", "mahapalika",
+    "corporation", "csmc",
+    "छत्रपती संभाजीनगर महानगरपालिका",
   ],
   // Commissioner
   [
