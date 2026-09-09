@@ -2,16 +2,19 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Bell, Download, ExternalLink } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
+import { HERO_BANNER_SLIDES } from "@/data/heroBanners";
 import bannerImg from "@/assets/banners/tax-rebate-banner.jpg";
 
 const BANNER_SRC = bannerImg;
-const NOTICES = [
-  { id: 1, title: "Property Tax Rebate — 10% discount till 30 April 2026", titleMr: "मालमत्ता कर सवलत — ३० एप्रिल २०२६ पर्यंत १०% सूट", date: "1 Apr 2026", category: "Revenue", categoryMr: "महसूल", link: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
-  { id: 2, title: "Gunthewari Regularisation Scheme — Apply Now", titleMr: "गुंठेवारी नियमितीकरण योजना — आता अर्ज करा", date: "15 Mar 2026", category: "Town Planning", categoryMr: "नगर रचना", link: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2" },
-  { id: 3, title: "Water Supply Shutdown — Zone 3 & 4 on 28 Apr 2026", titleMr: "पाणी पुरवठा बंद — झोन ३ व ४, २८ एप्रिल २०२६", date: "25 Apr 2026", category: "Water Supply", categoryMr: "पाणी पुरवठा", link: "/notices" },
-  { id: 4, title: "New e-Tender: SWM Phase II — NIT No. CSMC/SWM/2026/01", titleMr: "नवीन ई-निविदा: SWM टप्पा II — NIT क्र. CSMC/SWM/2026/01", date: "10 Apr 2026", category: "Tenders", categoryMr: "निविदा", link: "https://mahatenders.gov.in/nicgep/app" },
-  { id: 5, title: "Recruitment Notice — Junior Engineer (Civil) — 12 Posts", titleMr: "भरती सूचना — कनिष्ठ अभियंता (स्थापत्य) — १२ जागा", date: "5 Apr 2026", category: "Recruitment", categoryMr: "भरती", link: "/recruitment" },
-];
+const NOTICES = HERO_BANNER_SLIDES.map((s) => ({
+  id: s.id,
+  title: s.titleEn,
+  titleMr: s.titleMr,
+  date: s.date ?? "",
+  category: s.categoryEn ?? "Notice",
+  categoryMr: s.categoryMr ?? "सूचना",
+  link: s.link,
+}));
 
 const categoryColors: Record<string, string> = {
   Revenue: "bg-amber-100 text-amber-700",

@@ -2,7 +2,7 @@ import { HomeLayout } from "@/components/site/Layout";
 import { GovtLinksCarousel } from "@/components/site/GovtLinksCarousel";
 import { useLang } from "@/i18n/LanguageContext";
 import { OFFICIAL } from "@/data/officialLinks";
-import { ArrowRight, Landmark, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, MapPin, LayoutGrid, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, FileText, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
@@ -27,18 +27,18 @@ type Leader = {
   roleEn: readonly [string, string];
   roleMr: readonly [string, string];
   image: string;
-  photoSize: string;
-  photoTop: string;
+  /** Crop percentages of the circular frame (width/height/left/top). */
+  photo: { w: string; h: string; l: string; t: string };
 };
 
 const leadership: Leader[] = [
-  { nameEn: "Shri. Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: ["Hon'ble Chief Minister,", "Maharashtra"], roleMr: ["मा. मुख्यमंत्री,", "महाराष्ट्र राज्य"], image: devendraImg, photoSize: "132%", photoTop: "-10%" },
-  { nameEn: "Shri. Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: eknathImg, photoSize: "114%", photoTop: "-2%" },
-  { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: suntraImg, photoSize: "124%", photoTop: "-6%" },
-  { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: ["Hon'ble Minister of State,", "Urban Development Department"], roleMr: ["मा. राज्यमंत्री,", "नगरविकास विभाग"], image: madhuriImg, photoSize: "124%", photoTop: "-8%" },
-  { nameEn: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: ["Hon'ble Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महापौर,", "छत्रपती संभाजीनगर"], image: sameerImg, photoSize: "130%", photoTop: "-10%" },
-  { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photoSize: "126%", photoTop: "-8%" },
-  { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photoSize: "126%", photoTop: "-8%" },
+  { nameEn: "Shri. Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: ["Hon'ble Chief Minister,", "Maharashtra"], roleMr: ["मा. मुख्यमंत्री,", "महाराष्ट्र राज्य"], image: devendraImg, photo: { w: "96.64%", h: "103.51%", l: "6.45%", t: "0.25%" } },
+  { nameEn: "Shri. Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: eknathImg, photo: { w: "103.52%", h: "93.35%", l: "-4.19%", t: "6.29%" } },
+  { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: suntraImg, photo: { w: "96%", h: "106.89%", l: "4.97%", t: "1.45%" } },
+  { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: ["Hon'ble Minister of State,", "Urban Development Department"], roleMr: ["मा. राज्यमंत्री,", "नगरविकास विभाग"], image: madhuriImg, photo: { w: "112.83%", h: "107.12%", l: "-4.76%", t: "-5.77%" } },
+  { nameEn: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: ["Hon'ble Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महापौर,", "छत्रपती संभाजीनगर"], image: sameerImg, photo: { w: "101.08%", h: "99.68%", l: "2.96%", t: "-2.83%" } },
+  { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photo: { w: "96%", h: "90.63%", l: "1.19%", t: "-1.82%" } },
+  { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "106.49%", h: "96.59%", l: "-2.45%", t: "-0.48%" } },
 ];
 
 const RoleLines = ({ lines, isMr }: { lines: readonly string[]; isMr: boolean }) => (
@@ -59,7 +59,7 @@ const RoleLines = ({ lines, isMr }: { lines: readonly string[]; isMr: boolean })
 // Icons mapped to each quick service in order:
 // Property Tax, Pay Water Tax, Birth Certificate, Death Certificate,
 // Trade License, Building Permission, Grievance, Tenders,
-// Know Application Status, Gunthewari Challan, All Services
+// Know Application Status, Gunthewari Challan, Ramai Awas Yojana, All Services
 const icons = [
   Receipt,           // Property Tax
   Droplets,          // Pay Water Tax
@@ -68,9 +68,10 @@ const icons = [
   Store,             // Trade License
   Building2,         // Building Permission
   MessageSquareWarning, // Grievance
-  Landmark,          // Tenders
+  FileText,          // Tenders
   FileSearch,        // Know Application Status
-  MapPin,            // Gunthewari Challan
+  Calculator,        // Gunthewari Challan
+  HousePlus,         // Ramai Awas Yojana
   LayoutGrid,        // All Services
 ];
 
@@ -307,10 +308,25 @@ const Index = () => {
     return () => document.removeEventListener("keydown", handler);
   }, []);
 
+
+  // Per-photo crop maps each source so the crown/hairline sits on one shared
+  // line (~10% from the top of the circle) with similar head size. Values are
+  // percentages of the circular frame (width/height/left/top).
+  const leadership = [
+    { nameEn: "Shri Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <>मा. मुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: devendraImg, photo: { w: "96.64%", h: "103.51%", l: "6.45%", t: "0.25%" } },
+    { nameEn: "Shri Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: eknathImg, photo: { w: "103.52%", h: "93.35%", l: "-4.19%", t: "6.29%" } },
+    { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: suntraImg, photo: { w: "96%", h: "106.89%", l: "4.97%", t: "1.45%" } },
+    { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: "मा. राज्यमंत्री, नगरविकास विभाग", image: madhuriImg, photo: { w: "112.83%", h: "107.12%", l: "-4.76%", t: "-5.77%" } },
+    { nameEn: "Shri Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: "Hon'ble Mayor Chhatrapati Sambhajinagar", roleMr: "मा. महापौर", image: sameerImg, photo: { w: "101.08%", h: "99.68%", l: "2.96%", t: "-2.83%" } },
+    { nameEn: "Shri Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: "Hon'ble Deputy Mayor Chhatrapati Sambhajinagar", roleMr: "मा. उपमहापौर", image: rajuImg, photo: { w: "96%", h: "90.63%", l: "1.19%", t: "-1.82%" } },
+    { nameEn: "Shri Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: "Hon'ble Municipal Commissioner Chhatrapati Sambhajinagar", roleMr: "मा. महानगरपालिका आयुक्त", image: amolImg, photo: { w: "106.49%", h: "96.59%", l: "-2.45%", t: "-0.48%" } },
+  ];
+
+
   return (
     <HomeLayout>
-      {/* Quick services */}
-      <section className="py-20 bg-white relative z-10 -mt-6 md:-mt-10 rounded-t-[3rem] shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.1)]">
+      {/* Quick services — clean separation from hero (no negative margin overlap) */}
+      <section className="py-16 md:py-20 bg-white relative border-t border-border/60">
         <div className="container">
           <div className="text-center mb-16">
             <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">{t.quick.title}</p>
@@ -385,7 +401,7 @@ const Index = () => {
       <section ref={leadershipRef} className="py-16 bg-white">
         <div className="container">
           {/* Mobile: single column centered | Desktop: all 7 in one row */}
-          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
             {leadership.map((person, i) => (
               <div
                 key={i}
@@ -399,24 +415,20 @@ const Index = () => {
                     : "none",
                 }}
               >
-                {/* Photo — per-person size/top keeps head-top and chest crop aligned */}
+                {/* Photo — per-person crop keeps crown/hairline on one shared line */}
                 <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
                   {person.image ? (
-                    <div className="absolute inset-0 transition-transform duration-200 group-hover:scale-105">
-                      <img
-                        src={person.image}
-                        alt={en ? person.nameEn : ""}
-                        className="absolute left-1/2 object-cover"
-                        style={{
-                          width: person.photoSize,
-                          height: person.photoSize,
-                          minWidth: "115%",
-                          minHeight: "115%",
-                          top: person.photoTop,
-                          transform: "translateX(-50%)",
-                        }}
-                      />
-                    </div>
+                    <img
+                      src={person.image}
+                      alt={en ? person.nameEn : ""}
+                      className="absolute max-w-none"
+                      style={{
+                        width: person.photo.w,
+                        height: person.photo.h,
+                        left: person.photo.l,
+                        top: person.photo.t,
+                      }}
+                    />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold">
                       {person.nameEn.split(" ").map(n => n[0]).join("")}

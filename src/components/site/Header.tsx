@@ -130,11 +130,11 @@ export const Header = () => {
   return (
     <header className="bg-white border-b border-border shadow-card-soft">
       {/* Row 1: Logo + actions (desktop also has search) */}
-      <div className="container py-2 md:py-3 flex items-center justify-between gap-2 md:gap-4">
+      <div className="container py-2 md:py-3 flex items-center justify-between gap-2 md:gap-4 pl-3 sm:pl-4 md:pl-5">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 md:gap-3 group min-w-0 flex-1">
-          <img src={emblem} alt="CSMC Emblem" width={56} height={56}
-            className="h-10 w-10 md:h-14 md:w-14 object-contain shrink-0 transition-transform group-hover:scale-105" />
+          <img src={emblem} alt="CSMC Emblem" width={80} height={80}
+            className="h-14 w-14 md:h-20 md:w-20 object-contain shrink-0 transition-transform group-hover:scale-105" />
           <div className="leading-tight min-w-0">
             <h1 className="font-serif text-sm sm:text-base md:text-xl text-civic-blue font-bold tracking-tight">
               {en ? "Chhatrapati Sambhajinagar Municipal Corporation" : "छत्रपती संभाजीनगर महानगरपालिका"}

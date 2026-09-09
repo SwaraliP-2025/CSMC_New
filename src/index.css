@@ -156,6 +156,11 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 
+  :focus-visible {
+    outline: 2px solid hsl(var(--civic-gold));
+    outline-offset: 2px;
+  }
+
   /* English / Latin — GoI Digital Brand Identity Manual: Noto Sans */
   html[lang="en"] body,
   html[lang="en"] .font-sans,
@@ -237,8 +242,18 @@ html[lang="mr"] [class*="tracking"] {
   filter: saturate(1.22) contrast(1.08) brightness(1.06);
 }
 
-.group:hover .about-collage-img {
+.group:hover .about-collage-img,
+.group:focus-within .about-collage-img {
   filter: saturate(1.32) contrast(1.1) brightness(1.1);
+}
+
+/* Touch screens have no hover — keep site names readable */
+@media (hover: none) {
+  .about-collage-overlay,
+  .about-collage-caption {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Prefer reduced motion: disable / slow marquees and decorative scroll animations */

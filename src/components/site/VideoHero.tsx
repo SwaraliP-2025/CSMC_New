@@ -1,21 +1,21 @@
 import { useLang } from "@/i18n/LanguageContext";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   CreditCard,
   Droplets,
   Megaphone,
   Calculator,
+  HousePlus,
   Search,
   LayoutGrid,
+  ChevronLeft,
+  ChevronRight,
   type LucideIcon,
 } from "lucide-react";
 import hero from "@/assets/hero-heritage.jpg";
-import taxRebateBanner from "@/assets/banners/tax-rebate-banner.jpg";
-
-// ─── Banner images list ──────────────────────────────────────────────────────
-const BANNERS = [
-  { id: 1, img: taxRebateBanner, alt: "माझा कर, माझी जबाबदारी — 10% सूट", link: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi" },
-];
+import emblem from "@/assets/cs-emblem.png";
+import { HERO_BANNER_SLIDES } from "@/data/heroBanners";
 
 const HERO_QUICK_ACTIONS: {
   labelEn: string;
@@ -53,6 +53,13 @@ const HERO_QUICK_ACTIONS: {
     iconClass: "text-violet-600",
   },
   {
+    labelEn: "Ramai Awas Yojana",
+    labelMr: "रमाई आवास योजना",
+    href: "https://chhsambhajinagarmc.org/RAMAI/ws/user/login.do",
+    icon: HousePlus,
+    iconClass: "text-amber-700",
+  },
+  {
     labelEn: "Know Your Application Status",
     labelMr: "अर्ज स्थिती जाणून घ्या",
     href: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250",
@@ -68,29 +75,100 @@ const HERO_QUICK_ACTIONS: {
   },
 ];
 
+const SLIDE_MS = 6500;
+
 export const VideoHero = () => {
   const { t, lang } = useLang();
   const en = lang === "en";
   const [tab, setTab] = useState<"hero" | "banners">("hero");
   const [bannerIdx, setBannerIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const slides = HERO_BANNER_SLIDES;
+  const slide = slides[bannerIdx] ?? slides[0];
+  const slideCount = slides.length;
+
+  const goPrev = useCallback(() => {
+    setBannerIdx((i) => (i - 1 + slideCount) % slideCount);
+  }, [slideCount]);
+
+  const goNext = useCallback(() => {
+    setBannerIdx((i) => (i + 1) % slideCount);
+  }, [slideCount]);
+
+  useEffect(() => {
+    if (tab !== "banners" || paused || slideCount <= 1) return;
+    const id = window.setInterval(goNext, SLIDE_MS);
+    return () => window.clearInterval(id);
+  }, [tab, paused, slideCount, goNext]);
+
+  useEffect(() => {
+    if (tab !== "banners") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [tab, goPrev, goNext]);
+
+  const title = en ? slide.titleEn : slide.titleMr;
+  const subtitle = en ? slide.subtitleEn : slide.subtitleMr;
+  const category = en ? slide.categoryEn : slide.categoryMr;
+  const ctaLabel = en ? "Read more" : "अधिक वाचा";
+
+  const slideBody = (
+    <div className="relative z-10 flex h-full w-full flex-col md:flex-row items-center justify-center gap-4 md:gap-10 px-4 md:px-16 py-14 md:py-16">
+      {slide.img ? (
+        <div className="relative w-full max-w-xl md:max-w-2xl shrink-0 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20 bg-black/20">
+          <img
+            src={slide.img}
+            alt={title}
+            className="w-full h-auto max-h-[38vh] md:max-h-[56vh] object-contain mx-auto"
+          />
+        </div>
+      ) : null}
+
+      <div className={`max-w-xl text-center ${slide.img ? "md:text-left" : "md:text-center"} text-white`}>
+        {(category || slide.date) && (
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold text-civic-gold mb-2 md:mb-3">
+            {[category, slide.date].filter(Boolean).join(" · ")}
+          </p>
+        )}
+        <h2 className={`font-serif font-bold leading-snug drop-shadow-lg ${slide.img ? "text-lg sm:text-2xl md:text-3xl" : "text-xl sm:text-3xl md:text-4xl"}`}>
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="mt-3 text-sm md:text-base text-white/85 leading-relaxed drop-shadow-md line-clamp-4">
+            {subtitle}
+          </p>
+        )}
+        <span className="mt-5 inline-flex items-center rounded-full bg-civic-gold px-5 py-2 text-xs md:text-sm font-bold text-civic-ink shadow-lg">
+          {ctaLabel} →
+        </span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="relative w-full">
       {/* Tab switcher */}
-      <div className="absolute top-4 right-4 z-20 flex gap-1 bg-black/40 backdrop-blur-sm rounded-full p-1">
+      <div className="absolute top-4 right-4 z-30 flex gap-1 bg-black/40 backdrop-blur-sm rounded-full p-1">
         <button
+          type="button"
           onClick={() => setTab("hero")}
           className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${tab === "hero" ? "bg-white text-civic-ink" : "text-white/80 hover:text-white"}`}
         >
           {t.hero.tabHome}
         </button>
         <button
+          type="button"
           onClick={() => setTab("banners")}
           className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${tab === "banners" ? "bg-civic-gold text-civic-ink" : "text-white/80 hover:text-white"}`}
         >
           {t.hero.tabNotices}
-          {BANNERS.length > 0 && (
-            <span className="ml-1 bg-red-500 text-white text-[9px] rounded-full px-1">{BANNERS.length}</span>
+          {slideCount > 0 && (
+            <span className="ml-1 bg-civic-red text-white text-[9px] rounded-full px-1">{slideCount}</span>
           )}
         </button>
       </div>
@@ -123,7 +201,7 @@ export const VideoHero = () => {
           </div>
 
           {/* Quick actions: right side; raised on mobile so they stay inside the hero */}
-          <div className="absolute right-2 sm:right-3 md:right-6 top-[4.75rem] md:top-1/2 md:-translate-y-1/2 z-20 w-max max-w-[min(58vw,13rem)] md:max-w-none flex flex-col items-stretch gap-1 md:gap-2.5">
+          <div className="absolute right-2 sm:right-3 md:right-6 top-[4.5rem] md:top-1/2 md:-translate-y-1/2 z-20 w-max max-w-[min(60vw,14rem)] md:max-w-none flex flex-col items-stretch gap-0.5 md:gap-2">
             {HERO_QUICK_ACTIONS.map((action) => {
               const Icon = action.icon;
               const label = en ? action.labelEn : action.labelMr;
@@ -133,7 +211,7 @@ export const VideoHero = () => {
                   href={action.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center gap-1.5 md:gap-2.5 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-1 md:pl-3.5 md:pr-5 md:py-2.5 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
+                  className="flex w-full items-center gap-1.5 md:gap-2.5 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-0.5 md:pl-3.5 md:pr-5 md:py-2 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
                 >
                   <span className={`flex h-5 w-5 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
                     <Icon className="h-3 w-3 md:h-4 md:w-4" aria-hidden />
@@ -146,45 +224,88 @@ export const VideoHero = () => {
         </section>
       )}
 
-      {/* Banners tab */}
+      {/* Banner / updates slider tab */}
       {tab === "banners" && (
-        <section className="relative min-h-[48vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden w-full bg-black">
-          {/* Banner image — full hero */}
+        <section
+          className="relative min-h-[52vh] md:min-h-[75vh] w-full overflow-hidden"
+          aria-roledescription="carousel"
+          aria-label={en ? "Municipal updates and notices" : "महापालिका अद्यतने व सूचना"}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) setPaused(false);
+          }}
+        >
+          {/* CSMC-style fill behind variable-size artwork */}
+          <div className="absolute inset-0 bg-gradient-to-br from-civic-blue via-[#123a6b] to-civic-ink" aria-hidden />
+          <div className="absolute inset-0 heritage-pattern opacity-40" aria-hidden />
           <img
-            src={BANNERS[bannerIdx].img}
-            alt={BANNERS[bannerIdx].alt}
-            className="w-full h-full object-contain md:object-cover absolute inset-0"
-            style={{ maxHeight: "75vh" }}
+            src={emblem}
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[min(70%,28rem)] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.08] object-contain select-none"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-black/25" aria-hidden />
 
-          {/* Clickable overlay */}
-          {BANNERS[bannerIdx].link && (
+          {slide.external ? (
             <a
-              href={BANNERS[bannerIdx].link}
+              href={slide.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute inset-0 z-10"
-              aria-label={BANNERS[bannerIdx].alt}
-            />
+              className="absolute inset-0 z-10 block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-civic-gold"
+              aria-label={title}
+            >
+              {slideBody}
+            </a>
+          ) : (
+            <Link
+              to={slide.link}
+              className="absolute inset-0 z-10 block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-civic-gold"
+              aria-label={title}
+            >
+              {slideBody}
+            </Link>
           )}
 
-          {/* Dots — only if multiple banners */}
-          {BANNERS.length > 1 && (
+          {slideCount > 1 && (
             <>
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-                {BANNERS.map((_, i) => (
-                  <button key={i} onClick={() => setBannerIdx(i)}
-                    className={`transition-all rounded-full ${i === bannerIdx ? "w-6 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/50 hover:bg-white/80"}`} />
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label={en ? "Previous update" : "मागील अद्यतन"}
+                className="absolute left-2 md:left-4 top-1/2 z-20 -translate-y-1/2 flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-black/25 text-white/90 backdrop-blur-sm hover:bg-black/45 transition-colors"
+              >
+                <ChevronLeft className="h-5 w-5" aria-hidden />
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label={en ? "Next update" : "पुढील अद्यतन"}
+                className="absolute right-2 md:right-4 top-1/2 z-20 -translate-y-1/2 flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-black/25 text-white/90 backdrop-blur-sm hover:bg-black/45 transition-colors"
+              >
+                <ChevronRight className="h-5 w-5" aria-hidden />
+              </button>
+
+              <div
+                className="absolute bottom-4 md:bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2"
+                role="tablist"
+                aria-label={en ? "Banner slides" : "बॅनर स्लाइड्स"}
+              >
+                {slides.map((s, i) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === bannerIdx}
+                    aria-label={en ? `Slide ${i + 1}: ${s.titleEn}` : `स्लाइड ${i + 1}: ${s.titleMr}`}
+                    onClick={() => setBannerIdx(i)}
+                    className={`rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                      i === bannerIdx ? "h-2 w-6 bg-white" : "h-2 w-2 bg-white/45 hover:bg-white/75"
+                    }`}
+                  />
                 ))}
               </div>
-              <button onClick={() => setBannerIdx(i => (i - 1 + BANNERS.length) % BANNERS.length)}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white flex items-center justify-center z-20 transition-colors">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-              </button>
-              <button onClick={() => setBannerIdx(i => (i + 1) % BANNERS.length)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white flex items-center justify-center z-20 transition-colors">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
-              </button>
             </>
           )}
         </section>

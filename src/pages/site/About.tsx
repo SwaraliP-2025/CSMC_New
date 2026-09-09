@@ -48,6 +48,8 @@ type CollageTile = {
   /** contain = show full image (no crop); cover = fill cell */
   fit?: "cover" | "contain";
   featured?: boolean;
+  captionEn?: string;
+  captionMr?: string;
 };
 
 /**
@@ -72,12 +74,14 @@ const ABOUT_COLLAGE: CollageTile[] = [
   },
   {
     src: muncorpPic,
-    altEn: "CSMC Main Building",
-    altMr: "CSMC मुख्य इमारत",
+    altEn: "CSMC Main Administrative Building",
+    altMr: "CSMC मुख्य प्रशासकीय इमारत",
     className:
       "col-span-4 row-span-2 md:col-span-3 md:row-span-2 md:col-start-2 md:row-start-1 order-first md:order-none",
     featured: true,
     objectPosition: "center 40%",
+    captionEn: "CSMC Main Administrative Building",
+    captionMr: "CSMC मुख्य प्रशासकीय इमारत",
   },
   {
     src: aboutShivajiGate,
@@ -97,6 +101,8 @@ const ABOUT_COLLAGE: CollageTile[] = [
     src: aboutElloraElephants,
     altEn: "Ellora Caves — Kailasa temple elephant carvings",
     altMr: "एलोरा लेणी — कैलास मंदिर हत्ती शिल्पे",
+    captionEn: "Kailasa Temple, Ellora",
+    captionMr: "कैलास मंदिर, एलोरा",
     className: "col-span-2 md:col-span-2 md:col-start-5 md:row-start-2",
     objectPosition: "center 55%",
   },
@@ -140,6 +146,8 @@ const ABOUT_COLLAGE: CollageTile[] = [
     src: aboutKranti,
     altEn: "Kranti Chowk — Chhatrapati Shivaji Maharaj statue",
     altMr: "क्रांती चौक — छत्रपती शिवाजी महाराज पुतळा",
+    captionEn: "Kranti Chowk",
+    captionMr: "क्रांती चौक",
     className: "col-span-2 md:col-span-1 md:col-start-5 md:row-start-1",
     fit: "contain",
     objectPosition: "center center",
@@ -426,55 +434,44 @@ const About = () => {
         }
       />
 
-      {/* Heritage & civic collage — object-cover fills each cell; caption under CSMC */}
+      {/* Heritage & civic collage — site names appear on hover */}
       <section
         aria-label={en ? "City and Corporation highlights" : "शहर व महानगरपालिका झलक"}
         className="relative w-full overflow-hidden bg-[#0a2748]"
       >
         <div className="grid grid-cols-4 auto-rows-[minmax(130px,1fr)] md:grid-cols-6 md:grid-rows-[repeat(3,minmax(175px,1fr))] gap-2 md:gap-2.5 p-2 md:p-2.5 min-h-[min(92vw,560px)] md:h-[min(54vw,680px)]">
-          {ABOUT_COLLAGE.map((tile, i) => (
-            <div
-              key={`${tile.altEn}-${i}`}
-              className={`relative overflow-hidden rounded-lg ring-1 ring-white/10 group ${tile.className} ${
-                tile.featured
-                  ? "flex flex-col bg-[#0a2748] ring-2 ring-civic-gold/80 shadow-[0_8px_28px_rgba(0,0,0,0.28)]"
-                  : "bg-[#0a2748]"
-              }`}
-            >
-              {tile.featured ? (
-                <>
-                  <div className="relative min-h-0 flex-1 overflow-hidden">
-                    <img
-                      src={tile.src}
-                      alt={en ? tile.altEn : tile.altMr}
-                      className="about-collage-img absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                      style={{
-                        animationDelay: `${i * 55}ms`,
-                        objectPosition: tile.objectPosition ?? "center center",
-                      }}
-                      loading="eager"
-                    />
-                  </div>
-                  <p className="relative z-10 shrink-0 bg-civic-blue px-2 py-1.5 text-center text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] text-civic-gold">
-                    {en ? "CSMC Main Building" : "CSMC मुख्य इमारत"}
-                  </p>
-                </>
-              ) : (
+          {ABOUT_COLLAGE.map((tile, i) => {
+            const caption = en ? (tile.captionEn ?? tile.altEn) : (tile.captionMr ?? tile.altMr);
+            return (
+              <div
+                key={`${tile.altEn}-${i}`}
+                tabIndex={0}
+                className={`relative overflow-hidden rounded-lg ring-1 ring-white/10 bg-[#0a2748] group outline-none focus-visible:ring-2 focus-visible:ring-civic-gold ${tile.className} ${
+                  tile.featured ? "ring-2 ring-civic-gold/80 shadow-[0_8px_28px_rgba(0,0,0,0.28)]" : ""
+                }`}
+              >
                 <img
                   src={tile.src}
                   alt={en ? tile.altEn : tile.altMr}
-                  className={`about-collage-img absolute inset-0 h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.03] ${
+                  className={`about-collage-img absolute inset-0 h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-within:scale-[1.03] ${
                     tile.fit === "contain" ? "object-contain" : "object-cover"
                   }`}
                   style={{
                     animationDelay: `${i * 55}ms`,
                     objectPosition: tile.objectPosition ?? "center center",
                   }}
-                  loading={i < 3 ? "eager" : "lazy"}
+                  loading={tile.featured || i < 3 ? "eager" : "lazy"}
                 />
-              )}
-            </div>
-          ))}
+                <div
+                  className="about-collage-overlay pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
+                  aria-hidden
+                />
+                <p className={`about-collage-caption pointer-events-none absolute inset-x-0 bottom-0 z-10 px-2 py-2 text-center text-[11px] md:text-xs font-bold leading-tight text-white opacity-0 translate-y-1.5 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 ${en ? "" : "devanagari"}`}>
+                  {caption}
+                </p>
+              </div>
+            );
+          })}
         </div>
 
         <div className="relative z-10 border-t border-white/10 bg-gradient-to-r from-civic-blue via-[#123a6b] to-civic-blue px-4 py-4 md:px-8 md:py-5">

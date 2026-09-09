@@ -250,7 +250,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentEn: "General Administration",
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-02-01",
-    href: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+    href: "https://rts.chhsambhajinagarmc.org/links/dashboard#:~:text=LICENSE%20DEPARTMENT",
     external: true,
   }),
   rec("svc-grievance", "service", {

@@ -6,6 +6,9 @@ export const OFFICIAL = {
   propertyTax: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi",
   waterTax: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
   rtsDashboard: "https://rts.chhsambhajinagarmc.org/links/dashboard",
+  /** RTS dashboard scrolled to License Department (Chromium text fragment) */
+  tradeLicense:
+    "https://rts.chhsambhajinagarmc.org/links/dashboard#:~:text=LICENSE%20DEPARTMENT",
   birthCertificate: "https://rts.chhsambhajinagarmc.org/links/birth-certificate",
   deathCertificate: "https://rts.chhsambhajinagarmc.org/links/death-certificate",
   gunthewari: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2",
@@ -188,7 +191,7 @@ export const SERVICE_ENTRIES: ServiceEntry[] = [
     feesMr: "परवाना वेळापत्रकानुसार वर्गवारीनिहाय.",
     timelineEn: "As per RTS.",
     timelineMr: "RTS नुसार.",
-    url: OFFICIAL.rtsDashboard,
+    url: OFFICIAL.tradeLicense,
     external: true,
     categoryEn: "Licences",
     categoryMr: "परवाने",
