@@ -103,14 +103,11 @@ export const VideoHero = () => {
   const [tab, setTab] = useState<"hero" | "banners">("hero");
   const [bannerIdx, setBannerIdx] = useState(0);
   const [heroIdx, setHeroIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [heroPaused, setHeroPaused] = useState(false);
 
   const slides = HERO_BANNER_SLIDES;
   const slide = slides[bannerIdx] ?? slides[0];
   const slideCount = slides.length;
   const heroCount = HERO_BG_SLIDES.length;
-  const heroSlide = HERO_BG_SLIDES[heroIdx] ?? HERO_BG_SLIDES[0];
 
   const goPrev = useCallback(() => {
     setBannerIdx((i) => (i - 1 + slideCount) % slideCount);
@@ -128,19 +125,23 @@ export const VideoHero = () => {
     setHeroIdx((i) => (i + 1) % heroCount);
   }, [heroCount]);
 
-  // Banner tab: auto-slide every ~6.5s
+  // Banner notices: always auto-advance every 5s while tab is active
   useEffect(() => {
-    if (tab !== "banners" || paused || slideCount <= 1) return;
-    const id = window.setInterval(goNext, BANNER_SLIDE_MS);
+    if (tab !== "banners" || slideCount <= 1) return;
+    const id = window.setInterval(() => {
+      setBannerIdx((i) => (i + 1) % slideCount);
+    }, BANNER_SLIDE_MS);
     return () => window.clearInterval(id);
-  }, [tab, paused, slideCount, goNext]);
+  }, [tab, slideCount]);
 
-  // Hero tab: auto-slide backgrounds every ~6s
+  // Hero backgrounds: auto-advance when more than one image
   useEffect(() => {
-    if (tab !== "hero" || heroPaused || heroCount <= 1) return;
-    const id = window.setInterval(goHeroNext, HERO_SLIDE_MS);
+    if (tab !== "hero" || heroCount <= 1) return;
+    const id = window.setInterval(() => {
+      setHeroIdx((i) => (i + 1) % heroCount);
+    }, HERO_SLIDE_MS);
     return () => window.clearInterval(id);
-  }, [tab, heroPaused, heroCount, goHeroNext]);
+  }, [tab, heroCount]);
 
   useEffect(() => {
     if (tab !== "banners") return;
@@ -229,12 +230,6 @@ export const VideoHero = () => {
           className="relative min-h-[52vh] md:min-h-[75vh] flex items-center overflow-hidden w-full"
           aria-roledescription="carousel"
           aria-label={en ? "Heritage hero images" : "वारसा मुख्य प्रतिमा"}
-          onMouseEnter={() => setHeroPaused(true)}
-          onMouseLeave={() => setHeroPaused(false)}
-          onFocusCapture={() => setHeroPaused(true)}
-          onBlurCapture={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget as Node)) setHeroPaused(false);
-          }}
         >
           <div className="absolute inset-0 w-full h-full bg-[#0b1f3a]">
             {HERO_BG_SLIDES.map((bg, i) => (
@@ -337,12 +332,6 @@ export const VideoHero = () => {
           className="relative min-h-[52vh] md:min-h-[75vh] w-full overflow-hidden"
           aria-roledescription="carousel"
           aria-label={en ? "Municipal updates and notices" : "महापालिका अद्यतने व सूचना"}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
-          onBlurCapture={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget as Node)) setPaused(false);
-          }}
         >
           {/* CSMC-style fill behind variable-size artwork */}
           <div className="absolute inset-0 bg-gradient-to-br from-civic-blue via-[#123a6b] to-civic-ink" aria-hidden />
