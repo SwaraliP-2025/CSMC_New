@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <h1 style={{ color: "#1a3a6b" }}>Chhatrapati Sambhajinagar Municipal Corporation</h1>
           <p style={{ color: "#666", marginTop: "1rem" }}>
             The page encountered an error. Please{" "}
-            <a href="/" style={{ color: "#1a3a6b" }}>click here to reload</a>.
+            <a href={import.meta.env.BASE_URL} style={{ color: "#1a3a6b" }}>click here to reload</a>.
           </p>
           {import.meta.env.DEV && (
             <pre style={{ marginTop: "1rem", textAlign: "left", background: "#f5f5f5", padding: "1rem", borderRadius: "8px", fontSize: "12px", overflow: "auto" }}>

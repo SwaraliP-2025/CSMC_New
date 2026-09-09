@@ -48,7 +48,7 @@ export const translations = {
     },
     hero: {
       eyebrow: "",
-      title: "Building a Cleaner, Greener, Smarter Chhatrapati Sambhajinagar",
+      title: "Building Cleaner, Greener, Smarter\nChhatrapati Sambhajinagar",
       subtitle: "",
       ctaPrimary: "Pay Property Tax",
       ctaSecondary: "File a Complaint",

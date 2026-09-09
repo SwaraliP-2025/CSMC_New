@@ -2,7 +2,7 @@ import { HomeLayout } from "@/components/site/Layout";
 import { GovtLinksCarousel } from "@/components/site/GovtLinksCarousel";
 import { useLang } from "@/i18n/LanguageContext";
 import { OFFICIAL } from "@/data/officialLinks";
-import { ArrowRight, FileText, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, FileText, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight, Facebook, Instagram, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
@@ -45,6 +45,7 @@ const leadership: Leader[] = [
   { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "106.49%", h: "96.59%", l: "-2.45%", t: "-0.48%" } },
 ];
 
+
 const topRowLeaders = leadership.slice(0, -3);
 const bottomRowLeaders = leadership.slice(-3);
 
@@ -62,6 +63,7 @@ const RoleLines = ({ lines, isMr }: { lines: readonly string[]; isMr: boolean })
     ))}
   </>
 );
+
 
 const LeaderCard = ({
   person,
@@ -139,7 +141,9 @@ const SocialMediaSection = () => {
   const { lang } = useLang();
   const en = lang === "en";
   const embedRef = useRef<HTMLDivElement>(null);
+  const igFrameRef = useRef<HTMLDivElement>(null);
   const [embedWidth, setEmbedWidth] = useState(500);
+  const [igLoaded, setIgLoaded] = useState(false);
 
   const FB_URL = "https://www.facebook.com/SmarterAurangabad";
   const IG_URL = "https://www.instagram.com/csmc_municipalcommissioner/";
@@ -169,24 +173,74 @@ const SocialMediaSection = () => {
     return () => window.clearTimeout(t);
   }, [embedWidth]);
 
-  return (
-    <section className="py-12 bg-white border-t border-border">
-      <div className="container">
-        <div className="text-center mb-8">
-          <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-2">{en ? "Stay Connected" : "आमच्याशी जोडलेले राहा"}</p>
-          <h2 className="font-serif text-2xl md:text-3xl text-civic-blue font-bold">{en ? "Our Social Media" : "आपले सोशल मीडिया"}</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1040px] mx-auto">
+  useEffect(() => {
+    const root = igFrameRef.current;
+    if (!root) return;
 
+    const markLoaded = () => {
+      if (root.querySelector("iframe")) setIgLoaded(true);
+    };
+
+    markLoaded();
+    const observer = new MutationObserver(markLoaded);
+    observer.observe(root, { childList: true, subtree: true });
+    const t1 = window.setTimeout(markLoaded, 1200);
+    const t2 = window.setTimeout(markLoaded, 3500);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, []);
+
+  const followLabel = en ? "Follow" : "फॉलो करा";
+  const viewFb = en ? "View on Facebook" : "फेसबुकवर पहा";
+  const viewIg = en ? "View on Instagram" : "इंस्टाग्रामवर पहा";
+
+  return (
+    <section
+      className="py-16 md:py-20 bg-civic-blue/5 relative border-t border-border/60"
+      aria-labelledby="stay-connected-heading"
+    >
+      <div className="container">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">
+            {en ? "Social Media" : "सोशल मीडिया"}
+          </p>
+          <h2
+            id="stay-connected-heading"
+            className="font-serif text-3xl md:text-5xl text-civic-blue font-bold mb-4"
+          >
+            {en ? "Stay Connected with CSMC" : "CSMC शी जोडलेले राहा"}
+          </h2>
+          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            {en
+              ? "Get the latest updates, announcements and civic initiatives from Chhatrapati Sambhajinagar Municipal Corporation."
+              : "छत्रपती संभाजीनगर महानगरपालिकेकडून अद्यतने, सूचना आणि नागरी उपक्रमांची माहिती मिळवा."}
+          </p>
+          <div className="mx-auto mt-6 h-1.5 w-24 bg-gradient-heritage rounded-full" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto min-w-0">
           {/* Facebook */}
-          <div className="social-embed-card border border-border rounded-xl overflow-hidden bg-white flex flex-col">
-            <div className="flex items-center gap-2 px-4 py-2.5 bg-[#1877F2] text-white text-sm font-semibold shrink-0">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              CSMC — Facebook
-              <a href={FB_URL} target="_blank" rel="noopener noreferrer"
-                className="ml-auto text-xs bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded transition-colors">Follow</a>
-            </div>
-            <div ref={embedRef} className="social-embed-frame">
+          <article className="social-embed-card border border-border rounded-3xl overflow-hidden bg-white flex flex-col shadow-sm hover:shadow-elegant transition-shadow min-w-0">
+            <header className="flex items-center gap-2.5 px-4 py-3 bg-[#1877F2] text-white text-sm font-semibold shrink-0">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/20" aria-hidden>
+                <Facebook className="h-4 w-4" fill="currentColor" strokeWidth={0} />
+              </span>
+              <span className="min-w-0 truncate">CSMC — Facebook</span>
+              <a
+                href={FB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto shrink-0 inline-flex items-center gap-1 text-xs font-bold bg-white text-[#1877F2] hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white px-3 py-1.5 rounded-full transition-colors"
+                aria-label={en ? "Follow CSMC on Facebook (opens in a new tab)" : "CSMC फेसबुक फॉलो करा (नवीन टॅबमध्ये उघडेल)"}
+              >
+                {followLabel}
+                <ExternalLink className="h-3 w-3" aria-hidden />
+              </a>
+            </header>
+            <div ref={embedRef} className="social-embed-frame min-w-0">
               <iframe
                 src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_URL)}&tabs=timeline&width=${embedWidth}&height=${EMBED_H}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`}
                 width={embedWidth}
@@ -195,43 +249,103 @@ const SocialMediaSection = () => {
                 scrolling="no"
                 frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                title="Chhatrapati Sambhajinagar Smart City Facebook Page"
+                title={en ? "CSMC Facebook timeline" : "CSMC फेसबुक टाइमलाइन"}
                 loading="lazy"
               />
             </div>
-            <a href={FB_URL} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-3 text-[#1877F2] text-sm font-semibold border-t border-border hover:bg-blue-50 transition-colors shrink-0">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              View on Facebook →
+            <a
+              href={FB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-3.5 text-[#1877F2] text-sm font-bold border-t border-border hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#1877F2] transition-colors shrink-0"
+              aria-label={en ? "View CSMC Facebook page (opens in a new tab)" : "CSMC फेसबुक पृष्ठ पहा (नवीन टॅबमध्ये उघडेल)"}
+            >
+              <Facebook className="h-4 w-4" fill="currentColor" strokeWidth={0} aria-hidden />
+              {viewFb}
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </a>
-          </div>
+          </article>
 
           {/* Instagram */}
-          <div className="social-embed-card border border-border rounded-xl overflow-hidden bg-white flex flex-col">
-            <div className="flex items-center gap-2 px-4 py-2.5 text-white text-sm font-semibold shrink-0"
-              style={{ background: "linear-gradient(90deg,#f09433,#dc2743,#bc1888)" }}>
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              @{IG_HANDLE}
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer"
-                className="ml-auto text-xs bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded transition-colors">Follow</a>
-            </div>
-            <div className="social-embed-frame social-embed-ig">
+          <article className="social-embed-card border border-border rounded-3xl overflow-hidden bg-white flex flex-col shadow-sm hover:shadow-elegant transition-shadow min-w-0">
+            <header
+              className="flex items-center gap-2.5 px-4 py-3 text-white text-sm font-semibold shrink-0"
+              style={{ background: "linear-gradient(90deg,#f09433,#dc2743,#bc1888)" }}
+            >
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/20" aria-hidden>
+                <Instagram className="h-4 w-4" />
+              </span>
+              <span className="min-w-0 truncate">@{IG_HANDLE}</span>
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto shrink-0 inline-flex items-center gap-1 text-xs font-bold bg-white text-[#bc1888] hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white px-3 py-1.5 rounded-full transition-colors"
+                aria-label={en ? "Follow @csmc_municipalcommissioner on Instagram (opens in a new tab)" : "@csmc_municipalcommissioner इंस्टाग्राम फॉलो करा (नवीन टॅबमध्ये उघडेल)"}
+              >
+                {followLabel}
+                <ExternalLink className="h-3 w-3" aria-hidden />
+              </a>
+            </header>
+            <div ref={igFrameRef} className="social-embed-frame social-embed-ig relative min-w-0">
+              {/* Polished fallback when Instagram embed is blocked / slow / unavailable */}
+              <div
+                className={`absolute inset-0 z-0 flex flex-col items-center justify-center gap-4 px-6 text-center transition-opacity ${
+                  igLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+                }`}
+                style={{ background: "linear-gradient(160deg, #fff7ed 0%, #fdf2f8 45%, #faf5ff 100%)" }}
+                aria-hidden={igLoaded}
+              >
+                <div
+                  className="flex h-16 w-16 items-center justify-center rounded-2xl text-white shadow-md"
+                  style={{ background: "linear-gradient(135deg,#f09433,#dc2743,#bc1888)" }}
+                >
+                  <Instagram className="h-8 w-8" aria-hidden />
+                </div>
+                <div>
+                  <p className="font-serif text-lg font-bold text-civic-ink">@{IG_HANDLE}</p>
+                  <p className="mt-1 text-sm text-muted-foreground max-w-xs mx-auto">
+                    {en
+                      ? "Follow the Municipal Commissioner’s official Instagram for civic updates and city highlights."
+                      : "नागरी अद्यतने व शहराच्या घडामोडींसाठी आयुक्त यांच्या अधिकृत इंस्टाग्रामला फॉलो करा."}
+                  </p>
+                </div>
+                <a
+                  href={IG_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-md hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bc1888] transition-opacity"
+                  style={{ background: "linear-gradient(90deg,#f09433,#dc2743,#bc1888)" }}
+                  tabIndex={igLoaded ? -1 : 0}
+                  aria-label={en ? "Open Instagram profile @csmc_municipalcommissioner (opens in a new tab)" : "@csmc_municipalcommissioner इंस्टाग्राम प्रोफाइल उघडा (नवीन टॅबमध्ये उघडेल)"}
+                >
+                  {en ? "Open Instagram" : "इंस्टाग्राम उघडा"}
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                </a>
+              </div>
               <blockquote
-                className="instagram-media"
+                className="instagram-media relative z-[1]"
                 data-instgrm-permalink={`${IG_URL}?utm_source=ig_embed&utm_campaign=loading`}
                 data-instgrm-version="14"
               >
-                <a href={IG_URL} target="_blank" rel="noopener noreferrer">View @{IG_HANDLE} on Instagram</a>
+                <a href={IG_URL} target="_blank" rel="noopener noreferrer">
+                  {en ? `View @${IG_HANDLE} on Instagram` : `@${IG_HANDLE} इंस्टाग्रामवर पहा`}
+                </a>
               </blockquote>
             </div>
-            <a href={IG_URL} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-3 text-sm font-semibold border-t border-border hover:bg-pink-50 transition-colors shrink-0"
-              style={{ color: "#bc1888" }}>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              View on Instagram →
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-3.5 text-sm font-bold border-t border-border hover:bg-pink-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#bc1888] transition-colors shrink-0"
+              style={{ color: "#bc1888" }}
+              aria-label={en ? "View CSMC Instagram profile (opens in a new tab)" : "CSMC इंस्टाग्राम प्रोफाइल पहा (नवीन टॅबमध्ये उघडेल)"}
+            >
+              <Instagram className="h-4 w-4" aria-hidden />
+              {viewIg}
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </a>
-          </div>
-
+          </article>
         </div>
       </div>
     </section>
@@ -371,6 +485,9 @@ const Index = () => {
 
   return (
     <HomeLayout>
+      {/* Stay Connected — social feeds */}
+      <SocialMediaSection />
+
       {/* Quick services — clean separation from hero (no negative margin overlap) */}
       <section className="py-16 md:py-20 bg-white relative border-t border-border/60">
         <div className="container">
@@ -493,9 +610,6 @@ const Index = () => {
           </div>
         </div>
       </section> */}
-
-      {/* Social Media Section */}
-      <SocialMediaSection />
 
       {/* Gallery Section */}
       <section className="py-12 bg-civic-light">
