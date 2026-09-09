@@ -77,18 +77,27 @@ const HERO_QUICK_ACTIONS: {
 ];
 
 /** Home-tab background images (auto-rotate + manual controls). */
-const HERO_BG_SLIDES: { src: string; altEn: string; altMr: string; objectPos: string }[] = [
+const HERO_BG_SLIDES: {
+  src: string;
+  altEn: string;
+  altMr: string;
+  objectPos: string;
+  /** Square Deogiri uses contain so the full fort isn't cropped by the wide hero. */
+  fit: "cover" | "contain";
+}[] = [
   {
     src: heroEllora,
     altEn: "Kailasa Temple, Ellora Caves — Chhatrapati Sambhajinagar",
     altMr: "कैलास मंदिर, वेरूळ लेणी — छत्रपती संभाजीनगर",
     objectPos: "object-[center_22%]",
+    fit: "cover",
   },
   {
     src: heroDeogiri,
     altEn: "Daulatabad Fort (Deogiri) — Chhatrapati Sambhajinagar",
     altMr: "दौलताबाद किल्ला (देवगिरी) — छत्रपती संभाजीनगर",
     objectPos: "object-center",
+    fit: "contain",
   },
 ];
 
@@ -236,14 +245,14 @@ export const VideoHero = () => {
             if (!e.currentTarget.contains(e.relatedTarget as Node)) setHeroPaused(false);
           }}
         >
-          <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 w-full h-full bg-[#0b1f3a]">
             {HERO_BG_SLIDES.map((bg, i) => (
               <img
                 key={bg.src}
                 src={bg.src}
                 alt={i === heroIdx ? (en ? bg.altEn : bg.altMr) : ""}
                 aria-hidden={i !== heroIdx}
-                className={`absolute inset-0 w-full h-full object-cover ${bg.objectPos} transition-opacity duration-700 ease-in-out ${
+                className={`absolute inset-0 w-full h-full ${bg.fit === "contain" ? "object-contain" : "object-cover"} ${bg.objectPos} transition-opacity duration-700 ease-in-out ${
                   i === heroIdx ? "opacity-100" : "opacity-0"
                 }`}
               />
