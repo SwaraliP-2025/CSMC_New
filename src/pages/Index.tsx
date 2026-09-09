@@ -12,6 +12,8 @@ import { TouristCard } from "@/components/site/TouristCard";
 import { facilityCategories, type TouristPlaceRecord } from "@/lib/facilities";
 
 // Static imports for leadership images — avoids new URL() crashes on GitHub Pages
+import presidentImg from "@/assets/leadership/President_of_India_Droupadi_Murmu_official_pic.png";
+import modiImg from "@/assets/leadership/narendraji_pic.jpg";
 import devendraImg from "@/assets/leadership/devendraji_pic.jpg";
 import eknathImg from "@/assets/leadership/eknathji_pic.png";
 import suntraImg from "@/assets/leadership/Suntera_mam.jpeg";
@@ -32,6 +34,8 @@ type Leader = {
 };
 
 const leadership: Leader[] = [
+  { nameEn: "Smt. Droupadi Murmu", nameMr: "श्रीमती द्रौपदी मुर्मू", roleEn: ["Hon'ble President,", "India"], roleMr: ["मा. राष्ट्रपती,", "भारत"], image: presidentImg, photo: { w: "84%", h: "105%", l: "8%", t: "8%" } },
+  { nameEn: "Shri. Narendra Modi", nameMr: "श्री. नरेंद्र मोदी", roleEn: ["Hon'ble Prime Minister,", "India"], roleMr: ["मा. पंतप्रधान,", "भारत"], image: modiImg, photo: { w: "175%", h: "105%", l: "-37.5%", t: "8%" } },
   { nameEn: "Shri. Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: ["Hon'ble Chief Minister,", "Maharashtra"], roleMr: ["मा. मुख्यमंत्री,", "महाराष्ट्र राज्य"], image: devendraImg, photo: { w: "96.64%", h: "103.51%", l: "6.45%", t: "0.25%" } },
   { nameEn: "Shri. Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: eknathImg, photo: { w: "103.52%", h: "93.35%", l: "-4.19%", t: "6.29%" } },
   { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: suntraImg, photo: { w: "96%", h: "106.89%", l: "4.97%", t: "1.45%" } },
@@ -40,6 +44,9 @@ const leadership: Leader[] = [
   { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photo: { w: "96%", h: "90.63%", l: "1.19%", t: "-1.82%" } },
   { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "106.49%", h: "96.59%", l: "-2.45%", t: "-0.48%" } },
 ];
+
+const topRowLeaders = leadership.slice(0, -3);
+const bottomRowLeaders = leadership.slice(-3);
 
 const RoleLines = ({ lines, isMr }: { lines: readonly string[]; isMr: boolean }) => (
   <>
@@ -54,6 +61,59 @@ const RoleLines = ({ lines, isMr }: { lines: readonly string[]; isMr: boolean })
       </span>
     ))}
   </>
+);
+
+const LeaderCard = ({
+  person,
+  index,
+  isVisible,
+  en,
+  onSelect,
+}: {
+  person: Leader;
+  index: number;
+  isVisible: boolean;
+  en: boolean;
+  onSelect: (person: Leader) => void;
+}) => (
+  <div
+    className="group flex flex-col items-center text-center w-40 md:w-[calc(100%/6-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer"
+    onClick={() => onSelect(person)}
+    style={{
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible ? "translateY(0)" : "translateY(24px)",
+      transition: isVisible
+        ? `opacity 300ms ease ${index * 70}ms, transform 300ms cubic-bezier(0.34,1.4,0.64,1) ${index * 70}ms`
+        : "none",
+    }}
+  >
+    <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-4 border-white bg-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
+      {person.image ? (
+        <img
+          src={person.image}
+          alt={en ? person.nameEn : ""}
+          className="absolute max-w-none"
+          style={{
+            width: person.photo.w,
+            height: person.photo.h,
+            left: person.photo.l,
+            top: person.photo.t,
+          }}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold">
+          {person.nameEn.split(" ").map((n) => n[0]).join("")}
+        </div>
+      )}
+    </div>
+    <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" />
+    <h3 className="text-[11px] md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center" style={{ height: "1.25rem", lineHeight: "1.25rem", overflow: "hidden", whiteSpace: "nowrap" }}>
+      {en ? person.nameEn : person.nameMr}
+    </h3>
+    <p className={`text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1 whitespace-normal ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
+      <RoleLines lines={en ? person.roleEn : person.roleMr} isMr={!en} />
+    </p>
+  </div>
 );
 
 // Icons mapped to each quick service in order:
@@ -254,7 +314,7 @@ const Index = () => {
     if (galleryRef.current) galleryRef.current.scrollBy({ left: dir === "left" ? -440 : 440, behavior: "smooth" });
   };
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedLeader, setSelectedLeader] = useState<typeof leadership[0] | null>(null);
+  const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
   const [touristPlaces, setTouristPlaces] = useState<TouristPlaceRecord[]>([]);
   const [featuredTouristPlaces, setFeaturedTouristPlaces] = useState<TouristPlaceRecord[]>([]);
   const notices = useNoticesPopup();
@@ -307,20 +367,6 @@ const Index = () => {
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, []);
-
-
-  // Per-photo crop maps each source so the crown/hairline sits on one shared
-  // line (~10% from the top of the circle) with similar head size. Values are
-  // percentages of the circular frame (width/height/left/top).
-  const leadership = [
-    { nameEn: "Shri Devendra Fadnavis", nameMr: "श्री. देवेंद्र फडणवीस", roleEn: "Hon'ble Chief Minister of Maharashtra", roleMr: <>मा. मुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: devendraImg, photo: { w: "96.64%", h: "103.51%", l: "6.45%", t: "0.25%" } },
-    { nameEn: "Shri Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: eknathImg, photo: { w: "103.52%", h: "93.35%", l: "-4.19%", t: "6.29%" } },
-    { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: "Hon'ble Deputy Chief Minister of Maharashtra", roleMr: <>मा. उपमुख्यमंत्री,<br />महाराष्ट्र राज्य</>, image: suntraImg, photo: { w: "96%", h: "106.89%", l: "4.97%", t: "1.45%" } },
-    { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: "Hon'ble Minister of State, Urban Development Department", roleMr: "मा. राज्यमंत्री, नगरविकास विभाग", image: madhuriImg, photo: { w: "112.83%", h: "107.12%", l: "-4.76%", t: "-5.77%" } },
-    { nameEn: "Shri Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: "Hon'ble Mayor Chhatrapati Sambhajinagar", roleMr: "मा. महापौर", image: sameerImg, photo: { w: "101.08%", h: "99.68%", l: "2.96%", t: "-2.83%" } },
-    { nameEn: "Shri Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: "Hon'ble Deputy Mayor Chhatrapati Sambhajinagar", roleMr: "मा. उपमहापौर", image: rajuImg, photo: { w: "96%", h: "90.63%", l: "1.19%", t: "-1.82%" } },
-    { nameEn: "Shri Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: "Hon'ble Municipal Commissioner Chhatrapati Sambhajinagar", roleMr: "मा. महानगरपालिका आयुक्त", image: amolImg, photo: { w: "106.49%", h: "96.59%", l: "-2.45%", t: "-0.48%" } },
-  ];
 
 
   return (
@@ -400,52 +446,30 @@ const Index = () => {
       {/* Leadership Section */}
       <section ref={leadershipRef} className="py-16 bg-white">
         <div className="container">
-          {/* Mobile: single column centered | Desktop: all 7 in one row */}
+          {/* Top row: President, PM, and state leadership */}
           <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
-            {leadership.map((person, i) => (
-              <div
-                key={i}
-                className="group flex flex-col items-center text-center w-40 md:w-[calc(100%/7-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer"
-                onClick={() => setSelectedLeader(person)}
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? "translateY(0)" : "translateY(24px)",
-                  transition: isVisible
-                    ? `opacity 300ms ease ${i * 70}ms, transform 300ms cubic-bezier(0.34,1.4,0.64,1) ${i * 70}ms`
-                    : "none",
-                }}
-              >
-                {/* Photo — per-person crop keeps crown/hairline on one shared line */}
-                <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
-                  {person.image ? (
-                    <img
-                      src={person.image}
-                      alt={en ? person.nameEn : ""}
-                      className="absolute max-w-none"
-                      style={{
-                        width: person.photo.w,
-                        height: person.photo.h,
-                        left: person.photo.l,
-                        top: person.photo.t,
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold">
-                      {person.nameEn.split(" ").map(n => n[0]).join("")}
-                    </div>
-                  )}
-                </div>
-                {/* Gold accent line */}
-                <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" />
-                {/* Name */}
-                <h3 className="text-[11px] md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center" style={{ height: "1.25rem", lineHeight: "1.25rem", overflow: "hidden", whiteSpace: "nowrap" }}>
-                  {en ? person.nameEn : person.nameMr}
-                </h3>
-                {/* Role */}
-                <p className={`text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1 whitespace-normal ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
-                  <RoleLines lines={en ? person.roleEn : person.roleMr} isMr={!en} />
-                </p>
-              </div>
+            {topRowLeaders.map((person, i) => (
+              <LeaderCard
+                key={person.nameEn}
+                person={person}
+                index={i}
+                isVisible={isVisible}
+                en={en}
+                onSelect={setSelectedLeader}
+              />
+            ))}
+          </div>
+          {/* Last three (Mayor, Deputy Mayor, Commissioner) centered below */}
+          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2 mt-6">
+            {bottomRowLeaders.map((person, i) => (
+              <LeaderCard
+                key={person.nameEn}
+                person={person}
+                index={topRowLeaders.length + i}
+                isVisible={isVisible}
+                en={en}
+                onSelect={setSelectedLeader}
+              />
             ))}
           </div>
         </div>
