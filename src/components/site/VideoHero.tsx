@@ -14,7 +14,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import heroEllora from "@/assets/hero-heritage.jpg";
-import heroDeogiri from "@/assets/hero-deogiri.jpg";
 import emblem from "@/assets/cs-emblem.png";
 import { HERO_BANNER_SLIDES } from "@/data/heroBanners";
 
@@ -82,7 +81,6 @@ const HERO_BG_SLIDES: {
   altEn: string;
   altMr: string;
   objectPos: string;
-  /** Square Deogiri uses contain so the full fort isn't cropped by the wide hero. */
   fit: "cover" | "contain";
 }[] = [
   {
@@ -91,13 +89,6 @@ const HERO_BG_SLIDES: {
     altMr: "कैलास मंदिर, वेरूळ लेणी — छत्रपती संभाजीनगर",
     objectPos: "object-[center_22%]",
     fit: "cover",
-  },
-  {
-    src: heroDeogiri,
-    altEn: "Daulatabad Fort (Deogiri) — Chhatrapati Sambhajinagar",
-    altMr: "दौलताबाद किल्ला (देवगिरी) — छत्रपती संभाजीनगर",
-    objectPos: "object-center",
-    fit: "contain",
   },
 ];
 
