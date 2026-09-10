@@ -11,7 +11,7 @@ import {
   rainLabel,
 } from "@/hooks/useWeatherAQI";
 import { GoogleTranslateWidget } from "@/components/site/GoogleTranslateWidget";
-import { clearGoogleTranslateCookie } from "@/components/site/googleTranslate";
+import { clearGoogleTranslateCookie, readGoogleTranslateTarget } from "@/components/site/googleTranslate";
 
 let _fontSize = 100;
 
@@ -95,6 +95,17 @@ export const TopBar = () => {
   const { lang, setLang, d } = useLang();
   const { enabled: colorBlind, toggle: toggleColorBlind } = useColorBlind();
   const en = lang === "en";
+  const machineTranslationActive = readGoogleTranslateTarget() !== null;
+  const enOfficialActive = !machineTranslationActive && lang === "en";
+  const mrOfficialActive = !machineTranslationActive && lang === "mr";
+  const officialLangBtnClass = (active: boolean) =>
+    `px-1 sm:px-1.5 py-0.5 rounded transition-all text-[10px] sm:text-[11px] whitespace-nowrap ${
+      active ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"
+    }`;
+  const officialLangBtnClassPortal = (active: boolean) =>
+    `px-1.5 py-0.5 rounded transition-all text-[11px] ${
+      active ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"
+    }`;
   const [dateTime, setDateTime] = useState(new Date());
   const [fontSize, setFontSize] = useState(_fontSize);
 
@@ -257,12 +268,14 @@ export const TopBar = () => {
             >
               <Globe className="h-3 w-3 opacity-50 shrink-0 hidden sm:block" />
               <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("en"); }}
-                className={`px-1 sm:px-1.5 py-0.5 rounded transition-all text-[10px] sm:text-[11px] whitespace-nowrap ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+                className={officialLangBtnClass(enOfficialActive)}
+                aria-pressed={enOfficialActive}>
                 ENGLISH
               </button>
               <span className="opacity-20">|</span>
               <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("mr"); }}
-                className={`px-1 sm:px-1.5 py-0.5 rounded transition-all text-[10px] sm:text-[11px] whitespace-nowrap ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+                className={officialLangBtnClass(mrOfficialActive)}
+                aria-pressed={mrOfficialActive}>
                 मराठी
               </button>
             </div>
@@ -275,12 +288,14 @@ export const TopBar = () => {
               >
                 <Globe className="h-3 w-3 opacity-50 shrink-0" />
                 <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("en"); }}
-                  className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+                  className={officialLangBtnClassPortal(enOfficialActive)}
+                  aria-pressed={enOfficialActive}>
                   ENGLISH
                 </button>
                 <span className="opacity-20">|</span>
                 <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("mr"); }}
-                  className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+                  className={officialLangBtnClassPortal(mrOfficialActive)}
+                  aria-pressed={mrOfficialActive}>
                   मराठी
                 </button>
               </div>,
