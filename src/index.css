@@ -316,3 +316,93 @@ html[lang="mr"] [class*="tracking"] {
   min-width: 100% !important;
   max-width: 100% !important;
 }
+
+/* Google Website Translator — top bar widget, hide banner / layout shift */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+body > .skiptranslate {
+  display: none !important;
+}
+
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+/* Hidden Google host — our styled select drives translation */
+.google-translate-host {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.google-translate-widget {
+  position: relative;
+  width: 100%;
+  max-width: min(42vw, 7.25rem);
+}
+
+@media (min-width: 400px) {
+  .google-translate-widget {
+    max-width: min(44vw, 8rem);
+  }
+}
+
+@media (min-width: 640px) {
+  .google-translate-widget {
+    max-width: 10.5rem;
+  }
+}
+
+.csmc-translate-select {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 3px 1.35rem 3px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.08);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23ffffffb3' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.4rem center;
+  background-size: 10px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.csmc-translate-select:hover {
+  border-color: rgba(240, 160, 32, 0.55);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.csmc-translate-select:focus-visible {
+  outline: 2px solid hsl(var(--civic-gold));
+  outline-offset: 2px;
+}
+
+.csmc-translate-select option {
+  color: hsl(var(--civic-ink));
+  background: hsl(var(--civic-white));
+  font-weight: 500;
+}

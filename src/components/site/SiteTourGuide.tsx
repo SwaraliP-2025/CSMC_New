@@ -248,7 +248,6 @@ export const SiteTourGuide = () => {
   const descId = useId();
   const cardRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
-
   const total = TOUR_STEPS.length;
   const current = TOUR_STEPS[step] ?? TOUR_STEPS[0];
   const L = tourLang;
@@ -264,14 +263,16 @@ export const SiteTourGuide = () => {
     window.dispatchEvent(new CustomEvent("csmc-tour-close-mobile-nav"));
   };
 
+  const guideTriggerEl = () =>
+    (document.getElementById("csmc-tour-trigger-btn") ??
+      document.getElementById("csmc-tour-trigger-btn-mobile")) as HTMLElement | null;
+
   const dismiss = useCallback((skipped: boolean) => {
     markTourFinished({ skipped });
     closeMobileNav();
     setOpen(false);
     setDemoQuery(null);
-    const restore =
-      previouslyFocused.current ??
-      (document.getElementById("csmc-tour-trigger-btn") as HTMLElement | null);
+    const restore = previouslyFocused.current ?? guideTriggerEl();
     requestAnimationFrame(() => restore?.focus());
   }, []);
 
@@ -296,7 +297,7 @@ export const SiteTourGuide = () => {
     };
   }, [openTour]);
 
-  // Hero Website Guide launcher
+  // Hero / Quick Services Website Guide launcher
   useEffect(() => {
     const onOpen = () => openTour();
     window.addEventListener("csmc-tour-open", onOpen);

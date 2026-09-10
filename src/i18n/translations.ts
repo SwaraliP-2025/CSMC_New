@@ -1,3 +1,5 @@
+import { OFFICIAL } from "@/data/officialLinks";
+
 export type Lang = "en" | "mr";
 
 export const translations = {
@@ -66,7 +68,7 @@ export const translations = {
         { t: "Trade License", d: "New Trade License", url: "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTITradeLicenceNew.do" },
         { t: "Building Permission", d: "Plan approval status", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "Grievance", d: "Lodge & track complaints", url: "https://aurangabadmahapalika.org/csms/complaint_form.php" },
-        { t: "Tenders", d: "Active e-tenders", url: "https://mahatenders.gov.in/nicgep/app" },
+        { t: "Tenders", d: "Active e-tenders", url: OFFICIAL.mahatenders },
         { t: "Know Application Status", d: "Track your complaint status", url: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250" },
         { t: "Gunthewari Challan", d: "Gunthewari regularisation", url: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2" },
         { t: "Ramai Awas Yojana", d: "Housing scheme login portal", url: "https://chhsambhajinagarmc.org/RAMAI/ws/user/login.do" },
@@ -182,7 +184,7 @@ export const translations = {
         { t: "व्यापार परवाना", d: "नवीन व्यापार परवाना", url: "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTITradeLicenceNew.do" },
         { t: "बांधकाम परवानगी", d: "नकाशा मंजुरी स्थिती", url: "https://rts.chhsambhajinagarmc.org/links/dashboard" },
         { t: "तक्रार", d: "नोंदवा व स्थिती तपासा", url: "https://aurangabadmahapalika.org/csms/complaint_form.php" },
-        { t: "निविदा", d: "सक्रिय ई-निविदा", url: "https://mahatenders.gov.in/nicgep/app" },
+        { t: "निविदा", d: "सक्रिय ई-निविदा", url: OFFICIAL.mahatenders },
         { t: "अर्ज स्थिती जाणून घ्या", d: "तक्रार स्थिती तपासा", url: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250" },
         { t: "गुंठेवारी चलन", d: "गुंठेवारी नियमितीकरण", url: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2" },
         { t: "रमाई आवास योजना", d: "गृहनिर्माण योजना लॉगिन पोर्टल", url: "https://chhsambhajinagarmc.org/RAMAI/ws/user/login.do" },

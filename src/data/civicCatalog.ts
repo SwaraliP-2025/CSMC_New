@@ -1,5 +1,6 @@
 import type { AiFaq, CivicRecord, DocumentStatus, DocumentVersion, OcrPage } from "@/types/civicCatalog";
 import { enrichCatalogWithSiteNav } from "@/lib/navSearchEnrichment";
+import { OFFICIAL } from "@/data/officialLinks";
 
 type RecInput = Omit<
   CivicRecord,
@@ -952,7 +953,7 @@ const RAW_CATALOG: CivicRecord[] = [
     publishedAt: "2026-04-10",
     downloadable: true,
     fileSize: "890 KB",
-    relatedServiceHref: "https://mahatenders.gov.in/nicgep/app",
+    relatedServiceHref: OFFICIAL.mahatenders,
     relatedServiceLabelEn: "MahaTenders",
     relatedServiceLabelMr: "महाटेंडर्स",
   }),
@@ -968,7 +969,7 @@ const RAW_CATALOG: CivicRecord[] = [
     publishedAt: "2026-04-05",
     downloadable: true,
     fileSize: "760 KB",
-    relatedServiceHref: "https://mahatenders.gov.in/nicgep/app",
+    relatedServiceHref: OFFICIAL.mahatenders,
     relatedServiceLabelEn: "MahaTenders",
     relatedServiceLabelMr: "महाटेंडर्स",
   }),
