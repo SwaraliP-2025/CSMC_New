@@ -79,7 +79,7 @@ const LeaderCard = ({
   onSelect: (person: Leader) => void;
 }) => (
   <div
-    className="group flex flex-col items-center text-center w-40 md:w-[calc(100%/6-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer"
+    className="group flex flex-col items-center text-center w-60 md:w-[calc(100%/6-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer"
     onClick={() => onSelect(person)}
     style={{
       opacity: isVisible ? 1 : 0,
@@ -89,7 +89,7 @@ const LeaderCard = ({
         : "none",
     }}
   >
-    <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-4 border-white bg-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
+    <div className="relative w-[9.25rem] h-[9.25rem] md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-[5px] md:border-4 border-white bg-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
       {person.image ? (
         <img
           src={person.image}
@@ -109,10 +109,10 @@ const LeaderCard = ({
       )}
     </div>
     <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" />
-    <h3 className="text-[11px] md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center" style={{ height: "1.25rem", lineHeight: "1.25rem", overflow: "hidden", whiteSpace: "nowrap" }}>
+    <h3 className="text-lg md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center h-9 md:h-5 leading-9 md:leading-5 overflow-hidden whitespace-nowrap">
       {en ? person.nameEn : person.nameMr}
     </h3>
-    <p className={`text-[10px] md:text-[11px] text-muted-foreground font-medium leading-tight px-1 w-full text-center mt-1 whitespace-normal ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"} style={{ minHeight: "3rem" }}>
+    <p className={`text-sm md:text-[11px] text-muted-foreground font-medium leading-snug md:leading-tight px-1 w-full text-center mt-1 whitespace-normal min-h-[4rem] md:min-h-[3rem] ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"}>
       <RoleLines lines={en ? person.roleEn : person.roleMr} isMr={!en} />
     </p>
   </div>
@@ -500,16 +500,17 @@ const Index = () => {
           <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
             {t.quick.items.map((item, i) => {
               const Icon = icons[i] ?? icons[0];
-              const cls = "group bg-white border border-border rounded-3xl p-8 hover:shadow-elegant hover:border-civic-blue/20 transition-all hover:-translate-y-2 flex flex-col items-center text-center relative overflow-hidden";
+              const cls =
+                "group bg-white border border-border rounded-3xl p-8 flex flex-col items-center text-center relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-elegant hover:border-orange-300 hover:bg-gradient-to-br hover:from-amber-200 hover:via-orange-300 hover:to-orange-400";
               const content = (
                 <>
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-civic-gold/10 rounded-bl-full -mr-12 -mt-12 group-hover:bg-civic-gold/20 transition-colors" />
-                  <div className="h-16 w-16 grid place-items-center rounded-2xl bg-civic-blue/10 text-civic-blue mb-6 group-hover:bg-civic-blue group-hover:text-white transition-all duration-300 shadow-sm">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-civic-gold/10 rounded-bl-full -mr-12 -mt-12 group-hover:bg-white/20 transition-colors duration-300" />
+                  <div className="relative z-[1] h-16 w-16 grid place-items-center rounded-2xl bg-civic-blue/10 text-civic-blue mb-6 group-hover:bg-civic-blue group-hover:text-white transition-all duration-300 shadow-sm">
                     <Icon className="h-7 w-7" />
                   </div>
-                  <h3 className="font-serif text-xl font-bold text-civic-ink mb-3 group-hover:text-civic-blue transition-colors">{item.t}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{item.d}</p>
-                  <div className="mt-6 flex items-center text-civic-red font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                  <h3 className="relative z-[1] font-serif text-xl font-bold text-civic-ink mb-3 group-hover:text-civic-ink transition-colors duration-300">{item.t}</h3>
+                  <p className="relative z-[1] text-sm text-muted-foreground leading-relaxed line-clamp-2 group-hover:text-civic-ink/80 transition-colors duration-300">{item.d}</p>
+                  <div className="relative z-[1] mt-6 flex items-center text-civic-red font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 group-hover:text-civic-blue transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     {en ? "Access Service" : "सेवा मिळवा"} <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </div>
                 </>

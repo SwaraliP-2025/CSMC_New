@@ -210,7 +210,7 @@ export const SITE_NAV: NavItem[] = [
       {
         labelEn: "Tenders",
         labelMr: "निविदा",
-        to: "https://mahatenders.gov.in/nicgep/app",
+        to: OFFICIAL.mahatenders,
         external: true,
       },
       { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
@@ -286,7 +286,7 @@ export const OTHER_SITE_PAGES: NavItem[] = [
   { labelEn: "FAQ", labelMr: "सामान्य प्रश्न", to: "/faq" },
   { labelEn: "Elections", labelMr: "निवडणूक", to: "/elections" },
   { labelEn: "Prabhag 2025", labelMr: "प्रभाग २०२५", to: "/prabhag-2025" },
-  { labelEn: "Tenders", labelMr: "निविदा", to: "/tenders" },
+  { labelEn: "Tenders", labelMr: "निविदा", to: OFFICIAL.mahatenders, external: true },
 ];
 
 export function isExternalHref(to?: string, external?: boolean): boolean {

@@ -264,7 +264,8 @@ export const SiteTourGuide = () => {
   };
 
   const guideTriggerEl = () =>
-    document.getElementById("csmc-tour-trigger-btn") as HTMLElement | null;
+    (document.getElementById("csmc-tour-trigger-btn") ??
+      document.getElementById("csmc-tour-trigger-btn-mobile")) as HTMLElement | null;
 
   const dismiss = useCallback((skipped: boolean) => {
     markTourFinished({ skipped });

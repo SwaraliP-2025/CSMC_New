@@ -15,7 +15,9 @@ export const OFFICIAL = {
   complaintForm: "https://aurangabadmahapalika.org/csms/complaint_form.php",
   trackComplaint: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250",
   citizenFeedback: "https://chhsambhajinagarmc.org/citizen-feedback-form",
-  mahatenders: "https://mahatenders.gov.in/nicgep/app",
+  /** CSMC organisation tenders on Maharashtra e-Procurement (MahaTenders). */
+  mahatenders:
+    "https://mahatenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SrjbUla7R2QopyZN%2B%2BDH9ONS0Fec7wUuNy1YFXyqSerE%3D",
   gis: "https://gis.chhsambhajinagarmc.org/ascdlcitygis/",
   imegs: "https://chhsambhajinagarmc.org/dashboard/",
   aapleSarkar: "https://aaplesarkar.mahaonline.gov.in",

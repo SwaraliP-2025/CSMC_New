@@ -1,0 +1,221 @@
+/** Tourist / machine translation via Google Website Translator (client-side). */
+
+/** Dropdown: native name + English — sync codes with `GOOGLE_TRANSLATE_INCLUDED_LANGUAGES`. */
+export const TOURIST_TRANSLATE_LANGUAGES = [
+  { code: "ja", label: "日本語 (Japanese)" },
+  { code: "ko", label: "한국어 (Korean)" },
+  { code: "zh-CN", label: "简体中文 (Chinese Simplified)" },
+  { code: "zh-TW", label: "繁體中文 (Chinese Traditional)" },
+  { code: "ar", label: "العربية (Arabic)" },
+  { code: "hi", label: "हिन्दी (Hindi)" },
+  { code: "bn", label: "বাংলা (Bengali)" },
+  { code: "ta", label: "தமிழ் (Tamil)" },
+  { code: "te", label: "తెలుగు (Telugu)" },
+  { code: "ur", label: "اردو (Urdu)" },
+  { code: "th", label: "ไทย (Thai)" },
+  { code: "vi", label: "Tiếng Việt (Vietnamese)" },
+  { code: "id", label: "Bahasa Indonesia (Indonesian)" },
+  { code: "ms", label: "Bahasa Melayu (Malay)" },
+  { code: "de", label: "Deutsch (German)" },
+  { code: "fr", label: "Français (French)" },
+  { code: "es", label: "Español (Spanish)" },
+  { code: "pt", label: "Português (Portuguese)" },
+  { code: "it", label: "Italiano (Italian)" },
+  { code: "nl", label: "Nederlands (Dutch)" },
+  { code: "ru", label: "Русский (Russian)" },
+  { code: "pl", label: "Polski (Polish)" },
+  { code: "tr", label: "Türkçe (Turkish)" },
+  { code: "fa", label: "فارسی (Persian)" },
+  { code: "he", label: "עברית (Hebrew)" },
+  { code: "sv", label: "Svenska (Swedish)" },
+  { code: "no", label: "Norsk (Norwegian)" },
+] as const;
+
+export const GOOGLE_TRANSLATE_INCLUDED_LANGUAGES = [
+  "ja",
+  "en",
+  "mr",
+  ...TOURIST_TRANSLATE_LANGUAGES.map((l) => l.code),
+]
+  .filter((code, i, arr) => arr.indexOf(code) === i)
+  .join(",");
+
+declare global {
+  interface Window {
+    googleTranslateElementInit?: () => void;
+    __csmcGoogleTranslateReady?: () => void;
+    google?: {
+      translate: {
+        TranslateElement: {
+          new (
+            options: {
+              pageLanguage: string;
+              includedLanguages: string;
+              layout: number;
+              autoDisplay: boolean;
+            },
+            elementId: string,
+          ): void;
+          InlineLayout: { HORIZONTAL: number; VERTICAL: number; SIMPLE: number };
+        };
+      };
+    };
+  }
+}
+
+let scriptLoading: Promise<void> | null = null;
+let lastMountedPageLang: string | null = null;
+
+function cookieDomains(): string[] {
+  const host = window.location.hostname;
+  if (!host || host === "localhost" || /^\d+\.\d+\.\d+\.\d+$/.test(host)) {
+    return [host].filter(Boolean);
+  }
+  const parts = host.split(".");
+  const domains = [host];
+  if (parts.length >= 2) {
+    domains.push(`.${parts.slice(-2).join(".")}`);
+  }
+  return domains;
+}
+
+export function readGoogleTranslateTarget(): string | null {
+  if (typeof document === "undefined") return null;
+  const raw = document.cookie
+    .split(";")
+    .map((c) => c.trim())
+    .find((c) => c.startsWith("googtrans="));
+  if (!raw) return null;
+  const value = decodeURIComponent(raw.split("=")[1] ?? "");
+  if (!value || value === "/auto/en" || value === "/auto/mr") return null;
+  const segments = value.split("/").filter(Boolean);
+  if (segments.length < 2) return null;
+  const source = segments[0];
+  const target = segments[1];
+  if (source === target) return null;
+  return target;
+}
+
+export function clearGoogleTranslateCookie() {
+  if (typeof document === "undefined") return;
+  const expire = "expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = `googtrans=;${expire};path=/`;
+  for (const domain of cookieDomains()) {
+    document.cookie = `googtrans=;${expire};path=/;domain=${domain}`;
+  }
+}
+
+export function setGoogleTranslateTarget(
+  pageLanguage: "en" | "mr",
+  target: string | null,
+) {
+  clearGoogleTranslateCookie();
+  if (target) {
+    const entry = `/${pageLanguage}/${target}`;
+    const expire = new Date(Date.now() + 365 * 86400000).toUTCString();
+    document.cookie = `googtrans=${entry};expires=${expire};path=/`;
+    for (const domain of cookieDomains()) {
+      document.cookie = `googtrans=${entry};expires=${expire};path=/;domain=${domain}`;
+    }
+  }
+  window.location.reload();
+}
+
+function loadGoogleTranslateScript(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if (window.google?.translate?.TranslateElement) return Promise.resolve();
+
+  if (scriptLoading) return scriptLoading;
+
+  scriptLoading = new Promise((resolve, reject) => {
+    window.__csmcGoogleTranslateReady = () => resolve();
+
+    window.googleTranslateElementInit = () => {
+      window.__csmcGoogleTranslateReady?.();
+    };
+
+    const existing = document.querySelector(
+      'script[data-csmc-google-translate="1"]',
+    );
+    if (existing) {
+      const waitForGoogle = () => {
+        if (window.google?.translate?.TranslateElement) resolve();
+        else setTimeout(waitForGoogle, 50);
+      };
+      waitForGoogle();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src =
+      "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    script.defer = true;
+    script.dataset.csmcGoogleTranslate = "1";
+    script.onerror = () =>
+      reject(new Error("Google Translate script failed to load"));
+    document.body.appendChild(script);
+  });
+
+  return scriptLoading;
+}
+
+export async function mountGoogleTranslateElement(
+  containerId: string,
+  pageLanguage: "en" | "mr",
+) {
+  await loadGoogleTranslateScript();
+  const container = document.getElementById(containerId);
+  if (!container || !window.google?.translate?.TranslateElement) return;
+
+  if (
+    lastMountedPageLang === pageLanguage &&
+    container.querySelector(".goog-te-combo")
+  ) {
+    return;
+  }
+
+  container.innerHTML = "";
+  new window.google.translate.TranslateElement(
+    {
+      pageLanguage,
+      includedLanguages: GOOGLE_TRANSLATE_INCLUDED_LANGUAGES,
+      layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+      autoDisplay: false,
+    },
+    containerId,
+  );
+  lastMountedPageLang = pageLanguage;
+}
+
+export function waitForGoogleTranslateCombo(
+  containerId: string,
+  timeoutMs = 12000,
+): Promise<HTMLSelectElement | null> {
+  return new Promise((resolve) => {
+    const started = Date.now();
+    const tick = () => {
+      const combo = document.querySelector(
+        `#${containerId} .goog-te-combo`,
+      ) as HTMLSelectElement | null;
+      if (combo) {
+        resolve(combo);
+        return;
+      }
+      if (Date.now() - started > timeoutMs) {
+        resolve(null);
+        return;
+      }
+      requestAnimationFrame(tick);
+    };
+    tick();
+  });
+}
+
+/** Reliable path: Google reads `googtrans` on full page load after init. */
+export function applyGoogleTranslateTarget(
+  pageLanguage: "en" | "mr",
+  target: string | null,
+) {
+  setGoogleTranslateTarget(pageLanguage, target);
+}

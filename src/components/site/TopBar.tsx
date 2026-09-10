@@ -10,6 +10,8 @@ import {
   wmoLabel,
   rainLabel,
 } from "@/hooks/useWeatherAQI";
+import { GoogleTranslateWidget } from "@/components/site/GoogleTranslateWidget";
+import { clearGoogleTranslateCookie } from "@/components/site/googleTranslate";
 
 let _fontSize = 100;
 
@@ -198,7 +200,7 @@ export const TopBar = () => {
       <div className="container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-1 py-1.5 sm:py-2 min-w-0">
 
         {/* Mobile row 1: accessibility + language. Desktop: accessibility left, language/date via order. */}
-        <div className="flex items-center justify-between gap-2 w-full sm:w-auto sm:contents">
+        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 w-full sm:w-auto sm:contents">
 
           {/* ── LEFT: Accessibility + language (Website Guide spotlight target) ── */}
           <div
@@ -241,38 +243,43 @@ export const TopBar = () => {
             </button>
           </div>
 
-          {/* ── Language + date (right of row 1 on mobile, far right on desktop) ── */}
-          <div className="flex items-center shrink-0 sm:order-3">
+          {/* ── Language + date (wraps to full width on phones so मराठी stays visible) ── */}
+          <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 w-full min-w-0 basis-full sm:basis-auto sm:w-auto sm:flex-nowrap sm:shrink-0 sm:order-3 sm:gap-1">
+            <div className="flex items-center min-w-0 max-w-[48%] min-[420px]:max-w-[9rem] sm:max-w-none sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3">
+              <GoogleTranslateWidget />
+            </div>
             <div
               ref={langSlotRef}
               data-lang-switcher=""
               data-tour="lang-switch"
-              className={`flex items-center gap-0.5 sm:gap-1 sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3 ${dialogOpen ? "invisible" : ""}`}
+              translate="no"
+              className={`notranslate flex items-center gap-0.5 sm:gap-1 shrink-0 sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3 ${dialogOpen ? "invisible" : ""}`}
             >
               <Globe className="h-3 w-3 opacity-50 shrink-0 hidden sm:block" />
-              <button type="button" onClick={() => setLang("en")}
-                className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+              <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("en"); }}
+                className={`px-1 sm:px-1.5 py-0.5 rounded transition-all text-[10px] sm:text-[11px] whitespace-nowrap ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
                 ENGLISH
               </button>
               <span className="opacity-20">|</span>
-              <button type="button" onClick={() => setLang("mr")}
-                className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+              <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("mr"); }}
+                className={`px-1 sm:px-1.5 py-0.5 rounded transition-all text-[10px] sm:text-[11px] whitespace-nowrap ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
                 मराठी
               </button>
             </div>
             {dialogOpen && langSlot && ReactDOM.createPortal(
               <div
                 data-lang-switcher=""
-                className="fixed z-[1200] flex items-center gap-1 rounded-md bg-civic-blue px-2 py-0.5 shadow-lg border border-white/10 text-white"
+                translate="no"
+                className="notranslate fixed z-[1200] flex items-center gap-1 rounded-md bg-civic-blue px-2 py-0.5 shadow-lg border border-white/10 text-white"
                 style={{ top: langSlot.top, left: langSlot.left }}
               >
                 <Globe className="h-3 w-3 opacity-50 shrink-0" />
-                <button type="button" onClick={() => setLang("en")}
+                <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("en"); }}
                   className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
                   ENGLISH
                 </button>
                 <span className="opacity-20">|</span>
-                <button type="button" onClick={() => setLang("mr")}
+                <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("mr"); }}
                   className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
                   मराठी
                 </button>
