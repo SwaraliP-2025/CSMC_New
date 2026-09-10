@@ -5,7 +5,7 @@ import { ExternalLink, Mic, MicOff, Search, X } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { localizeDigits } from "@/i18n/digits";
 import { CATEGORY_LABELS, SEARCH_GROUP_LABELS } from "@/data/civicLabels";
-import { formatCivicDate, groupSearchResults, recordHref, searchHits } from "@/lib/unifiedSearch";
+import { formatCivicDate, groupSearchResults, recordHref, searchHits, suggestDidYouMean } from "@/lib/unifiedSearch";
 import { highlightText, type SearchHit } from "@/lib/semanticSearch";
 
 const MAX_PER_GROUP = 4;
@@ -50,11 +50,30 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const speechAvailable = !!getSpeechRecognitionCtor();
 
   const hits = useMemo(() => (query.trim().length >= 2 ? searchHits(query) : []), [query]);
+  const didYouMean = useMemo(
+    () => (query.trim().length >= 4 ? suggestDidYouMean(query) : null),
+    [query],
+  );
   const best = useMemo(() => hits.find((h) => h.isBestAction) ?? hits[0], [hits]);
-  const grouped = useMemo(() => {
-    const rest = best ? hits.filter((h) => h.record.id !== best.record.id) : hits;
-    return groupSearchResults(rest);
+  const bilingualTwin = useMemo(() => {
+    if (!best) return null;
+    return (
+      hits.find(
+        (h) =>
+          h.isBilingualTwin &&
+          h.record.id === best.record.id &&
+          h.displayLang &&
+          h.displayLang !== best.displayLang,
+      ) ?? null
+    );
   }, [hits, best]);
+  const grouped = useMemo(() => {
+    const skip = new Set<string>();
+    if (best) skip.add(best.resultKey ?? best.record.id);
+    if (bilingualTwin) skip.add(bilingualTwin.resultKey ?? `${bilingualTwin.record.id}:twin`);
+    const rest = hits.filter((h) => !skip.has(h.resultKey ?? h.record.id));
+    return groupSearchResults(rest);
+  }, [hits, best, bilingualTwin]);
   const showPanel = open && query.trim().length >= 2;
 
   const syncPos = () => {
@@ -106,6 +125,26 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
         /* ignore */
       }
     };
+  }, []);
+
+  // Website Guide can focus search with an example query after the tour ends.
+  useEffect(() => {
+    const onTourSearch = (e: Event) => {
+      const detail = (e as CustomEvent<{ query?: string }>).detail;
+      const q = detail?.query?.trim() ?? "";
+      if (q) {
+        setQuery(q);
+        setOpen(true);
+        requestAnimationFrame(() => {
+          syncPos();
+          inputRef.current?.focus();
+        });
+      } else {
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener("csmc-tour-focus-search", onTourSearch);
+    return () => window.removeEventListener("csmc-tour-focus-search", onTourSearch);
   }, []);
 
   const applyTranscript = (raw: string) => {
@@ -274,6 +313,25 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             style={{ top: pos.top, left: pos.left, width: pos.width, maxHeight: "min(70vh, 520px)" }}
           >
             <div className="overflow-y-auto" style={{ maxHeight: "min(70vh, 520px)" }}>
+              {didYouMean && (
+                <div className="px-4 py-2.5 border-b border-border bg-slate-50/90">
+                  <p className="text-xs text-muted-foreground">
+                    {en ? "Did you mean" : "तुम्हाला हे म्हणायचे होते का"}{" "}
+                    <button
+                      type="button"
+                      className="font-semibold text-civic-blue underline-offset-2 hover:underline"
+                      onClick={() => {
+                        setQuery(didYouMean);
+                        setOpen(true);
+                        inputRef.current?.focus();
+                      }}
+                    >
+                      “{didYouMean}”
+                    </button>
+                    ?
+                  </p>
+                </div>
+              )}
               {hits.length === 0 ? (
                 <p className="py-10 px-5 text-center text-sm text-muted-foreground">
                   {en ? "No matching results." : "जुळणारे निकाल नाहीत."}
@@ -285,8 +343,11 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                       <p className="text-[10px] font-bold uppercase tracking-wide text-civic-red mb-2">
                         {en ? "Best match" : "सर्वोत्तम जुळणी"}
                       </p>
-                      <ul>
+                      <ul className="space-y-1">
                         <ResultRow hit={best} en={en} featured onNavigate={() => setOpen(false)} />
+                        {bilingualTwin && (
+                          <ResultRow hit={bilingualTwin} en={en} onNavigate={() => setOpen(false)} />
+                        )}
                       </ul>
                     </div>
                   )}
@@ -298,7 +359,12 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                       </p>
                       <ul className="space-y-1">
                         {items.slice(0, MAX_PER_GROUP).map((hit) => (
-                          <ResultRow key={hit.record.id} hit={hit} en={en} onNavigate={() => setOpen(false)} />
+                          <ResultRow
+                            key={hit.resultKey ?? hit.record.id}
+                            hit={hit}
+                            en={en}
+                            onNavigate={() => setOpen(false)}
+                          />
                         ))}
                       </ul>
                     </div>
@@ -326,8 +392,12 @@ function ResultRow({
 }) {
   const item = hit.record;
   const dest = recordHref(item);
-  const action = en ? hit.actionLabelEn : hit.actionLabelMr;
-  const snippet = en ? hit.snippetEn : hit.snippetMr;
+  const showEn = hit.displayLang ? hit.displayLang === "en" : en;
+  const action = showEn ? hit.actionLabelEn : hit.actionLabelMr;
+  const snippet = showEn ? hit.snippetEn : hit.snippetMr;
+  const title = showEn ? item.titleEn : item.titleMr;
+  const department = showEn ? item.departmentEn : item.departmentMr;
+  const category = showEn ? CATEGORY_LABELS[item.category].en : CATEGORY_LABELS[item.category].mr;
   const className = `block rounded-lg px-2 py-2 hover:bg-civic-blue/[0.05] transition-colors ${
     featured ? "bg-civic-gold/10 border border-civic-gold/30" : ""
   }`;
@@ -335,7 +405,7 @@ function ResultRow({
     <>
       <div className="flex items-start justify-between gap-2">
         <p className="text-sm font-semibold text-civic-blue leading-snug">
-          {en ? item.titleEn : item.titleMr}
+          {title}
           {dest.external && <ExternalLink className="inline h-3 w-3 ml-1 opacity-60" />}
         </p>
         {action && (
@@ -355,15 +425,15 @@ function ResultRow({
               <span key={i}>{part.text}</span>
             )
           )}
-          {hit.ocrPage ? ` · p.${localizeDigits(hit.ocrPage, en ? "en" : "mr")}` : ""}
+          {hit.ocrPage ? ` · p.${localizeDigits(hit.ocrPage, showEn ? "en" : "mr")}` : ""}
         </p>
       )}
       <p className="text-[11px] text-muted-foreground mt-0.5">
-        {en ? item.departmentEn : item.departmentMr}
+        {department}
         {" · "}
-        {en ? CATEGORY_LABELS[item.category].en : CATEGORY_LABELS[item.category].mr}
+        {category}
         {" · "}
-        {formatCivicDate(item.publishedAt, en)}
+        {formatCivicDate(item.publishedAt, showEn)}
       </p>
     </>
   );

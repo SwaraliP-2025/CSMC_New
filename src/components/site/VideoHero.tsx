@@ -11,11 +11,13 @@ import {
   LayoutGrid,
   ChevronLeft,
   ChevronRight,
+  HelpCircle,
   type LucideIcon,
 } from "lucide-react";
 import heroEllora from "@/assets/hero-heritage.jpg";
 import emblem from "@/assets/cs-emblem.png";
 import { HERO_BANNER_SLIDES } from "@/data/heroBanners";
+import { TOUR_UI } from "@/data/tourContent";
 
 const HERO_QUICK_ACTIONS: {
   labelEn: string;
@@ -214,6 +216,7 @@ export const VideoHero = () => {
         </button>
         <button
           type="button"
+          data-tour="notices-tab"
           onClick={() => setTab("banners")}
           className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${tab === "banners" ? "bg-civic-gold text-civic-ink" : "text-white/80 hover:text-white"}`}
         >
@@ -227,11 +230,11 @@ export const VideoHero = () => {
       {/* Hero image tab */}
       {tab === "hero" && (
         <section
-          className="relative min-h-[52vh] md:min-h-[75vh] flex items-center overflow-hidden w-full"
+          className="relative min-h-[36rem] sm:min-h-[38rem] md:min-h-[max(75vh,40rem)] flex items-center overflow-hidden w-full pb-12"
           aria-roledescription="carousel"
           aria-label={en ? "Heritage hero images" : "वारसा मुख्य प्रतिमा"}
         >
-          <div className="absolute inset-0 w-full h-full bg-[#0b1f3a]">
+          <div className="absolute inset-0 w-full h-full bg-[#122440]">
             {HERO_BG_SLIDES.map((bg, i) => (
               <img
                 key={bg.src}
@@ -244,9 +247,9 @@ export const VideoHero = () => {
               />
             ))}
           </div>
-          <div className="absolute inset-0 bg-gradient-overlay opacity-80" />
+          <div className="absolute inset-0 bg-gradient-overlay" />
           <div className="relative container py-10 md:py-24 z-10 animate-fade-up">
-            <div className="max-w-3xl pr-[min(48%,11.25rem)] md:pr-[280px]">
+            <div className="max-w-3xl pr-[min(48%,11.25rem)] sm:pr-[min(42%,14rem)] md:pr-[280px]">
               <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-civic-gold font-bold mb-3 md:mb-4 drop-shadow-md">
                 {t.hero.eyebrow}
               </p>
@@ -261,26 +264,59 @@ export const VideoHero = () => {
             </div>
           </div>
 
-          {/* Quick actions: stay fully inside the hero on mid-size laptops */}
-          <div className="absolute right-2 sm:right-3 md:right-5 top-20 sm:top-24 bottom-14 z-20 w-max max-w-[min(58vw,13.5rem)] md:max-w-none flex flex-col justify-center items-stretch gap-0.5 md:gap-1.5 max-h-[calc(100%-8.5rem)] overflow-y-auto overscroll-contain pr-0.5">
-            {HERO_QUICK_ACTIONS.map((action) => {
-              const Icon = action.icon;
-              const label = en ? action.labelEn : action.labelMr;
-              return (
-                <a
-                  key={action.labelEn}
-                  href={action.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex w-full items-center gap-1.5 md:gap-2 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-0.5 md:pl-3 md:pr-4 md:py-1.5 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
-                >
-                  <span className={`flex h-5 w-5 md:h-7 md:w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
-                    <Icon className="h-3 w-3 md:h-3.5 md:w-3.5" aria-hidden />
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold leading-snug whitespace-nowrap">{label}</span>
-                </a>
-              );
-            })}
+          {/*
+            Laptop/desktop (sm+): single-column stack at the original comfortable size.
+            Phones only: 2-column so all actions fit without shrinking pills.
+            Website Guide sits above Property Tax; Quick Services tour targets only the service list.
+          */}
+          <div className="absolute z-20 right-2 sm:right-3 md:right-6 top-[4.5rem] md:top-24 bottom-14 flex items-center justify-end max-w-[calc(100%-0.75rem)]">
+            <div className="w-max flex flex-col gap-1.5 md:gap-2 max-sm:w-[min(96vw,20.5rem)] [@media(max-height:520px)]:w-[min(96vw,22rem)]">
+              <button
+                type="button"
+                id="csmc-tour-trigger-btn"
+                onClick={() => window.dispatchEvent(new CustomEvent("csmc-tour-open"))}
+                aria-label={TOUR_UI.fabAria[en ? "en" : "mr"]}
+                className="flex w-full max-w-full items-center gap-1.5 md:gap-2 rounded-full border border-[#ff9933]/85 bg-[#003366] pl-1.5 pr-2.5 py-1 md:pl-3 md:pr-4 md:py-1.5 text-white shadow-md hover:bg-[#00264d] hover:shadow-lg transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff9933]"
+              >
+                <span className="flex h-6 w-6 md:h-7 md:w-7 shrink-0 items-center justify-center rounded-full bg-[#ff9933]/20 text-[#ff9933]">
+                  <HelpCircle className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
+                </span>
+                <span className="text-[10px] sm:text-[11px] md:text-xs font-bold leading-snug whitespace-nowrap truncate">
+                  {en ? TOUR_UI.fab.en : TOUR_UI.fab.mr}
+                </span>
+              </button>
+
+              <nav
+                data-tour="quick-services"
+                aria-label={en ? "Quick citizen services" : "जलद नागरिक सेवा"}
+              >
+                <ul className="m-0 p-0 list-none w-full flex flex-col gap-1.5 md:gap-2 max-sm:grid max-sm:grid-cols-2 max-sm:gap-1.5 [@media(max-height:520px)]:grid [@media(max-height:520px)]:grid-cols-2 [@media(max-height:520px)]:gap-1.5">
+                  {HERO_QUICK_ACTIONS.map((action) => {
+                    const Icon = action.icon;
+                    const label = en ? action.labelEn : action.labelMr;
+                    const isRts = action.labelEn === "All RTS Services";
+                    return (
+                      <li key={action.labelEn} className="min-w-0">
+                        <a
+                          href={action.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          {...(isRts ? { "data-tour": "rts-services" as const } : {})}
+                          className="flex w-full items-center gap-1.5 md:gap-2.5 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-1 md:pl-3.5 md:pr-5 md:py-2 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80"
+                        >
+                          <span className={`flex h-6 w-6 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
+                            <Icon className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
+                          </span>
+                          <span className="text-[10px] sm:text-[11px] md:text-sm font-bold leading-snug whitespace-nowrap">
+                            {label}
+                          </span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
           </div>
 
           {heroCount > 1 && (
@@ -334,7 +370,7 @@ export const VideoHero = () => {
           aria-label={en ? "Municipal updates and notices" : "महापालिका अद्यतने व सूचना"}
         >
           {/* CSMC-style fill behind variable-size artwork */}
-          <div className="absolute inset-0 bg-gradient-to-br from-civic-blue via-[#123a6b] to-civic-ink" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-br from-civic-blue via-primary-glow to-civic-ink" aria-hidden />
           <div className="absolute inset-0 heritage-pattern opacity-40" aria-hidden />
           <img
             src={emblem}

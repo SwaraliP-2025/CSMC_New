@@ -4,12 +4,15 @@ import { localizeDigits } from "@/i18n/digits";
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
 import { groupHits, smartSearch, type SearchHit } from "@/lib/semanticSearch";
 import { prepareSearchQuery } from "@/lib/searchAliases";
+import { applyLanguageAwareRanking, suggestDidYouMean } from "@/lib/searchLanguage";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 export type { SearchHit };
+export { suggestDidYouMean };
 
 export function searchHits(query: string): SearchHit[] {
-  return smartSearch(prepareSearchQuery(query));
+  const prepared = prepareSearchQuery(query);
+  return applyLanguageAwareRanking(smartSearch(prepared), prepared);
 }
 
 export function searchCatalog(query: string): CivicRecord[] {

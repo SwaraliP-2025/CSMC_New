@@ -350,6 +350,12 @@ export interface SearchHit {
   highlight?: string;
   ocrPage?: number;
   isBestAction?: boolean;
+  /** Prefer this language for title/snippet display (query-language aware). */
+  displayLang?: "en" | "mr";
+  /** Stable key when the same record appears twice (EN + MR). */
+  resultKey?: string;
+  /** Second bilingual row for the top match. */
+  isBilingualTwin?: boolean;
 }
 
 const STOP = new Set([

@@ -67,14 +67,14 @@ const Tip = ({
             }}
           >
             <div
-              className="bg-[#0f172a] border border-white/15 text-white/90 text-[11px]
+              className="bg-[#122440] border border-white/15 text-white/90 text-[11px]
                          font-medium rounded-lg px-3 py-2 shadow-2xl leading-snug"
               style={{ maxWidth: 340, width: "max-content" }}
             >
               {/* arrow pointing up */}
               <span
                 className="absolute -top-1.5 left-1/2 -translate-x-1/2
-                           border-4 border-transparent border-b-[#0f172a]"
+                           border-4 border-transparent border-b-[#122440]"
               />
               {tip}
             </div>
@@ -200,8 +200,11 @@ export const TopBar = () => {
         {/* Mobile row 1: accessibility + language. Desktop: accessibility left, language/date via order. */}
         <div className="flex items-center justify-between gap-2 w-full sm:w-auto sm:contents">
 
-          {/* ── LEFT: Accessibility ── */}
-          <div className="flex items-center gap-0.5 whitespace-nowrap shrink-0">
+          {/* ── LEFT: Accessibility + language (Website Guide spotlight target) ── */}
+          <div
+            data-tour="a11y"
+            className="flex items-center gap-0.5 whitespace-nowrap shrink-0 rounded-md"
+          >
             <button onClick={() => applyFontSize(Math.max(80, fontSize - 10))}
               title={t("Decrease text size", "अक्षर लहान करा")}
               className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none">
@@ -243,6 +246,7 @@ export const TopBar = () => {
             <div
               ref={langSlotRef}
               data-lang-switcher=""
+              data-tour="lang-switch"
               className={`flex items-center gap-0.5 sm:gap-1 sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3 ${dialogOpen ? "invisible" : ""}`}
             >
               <Globe className="h-3 w-3 opacity-50 shrink-0 hidden sm:block" />
@@ -259,7 +263,7 @@ export const TopBar = () => {
             {dialogOpen && langSlot && ReactDOM.createPortal(
               <div
                 data-lang-switcher=""
-                className="fixed z-[1200] flex items-center gap-1 rounded-md bg-[#0b2d5c] px-2 py-0.5 shadow-lg border border-white/10 text-white"
+                className="fixed z-[1200] flex items-center gap-1 rounded-md bg-civic-blue px-2 py-0.5 shadow-lg border border-white/10 text-white"
                 style={{ top: langSlot.top, left: langSlot.left }}
               >
                 <Globe className="h-3 w-3 opacity-50 shrink-0" />

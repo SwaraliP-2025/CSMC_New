@@ -4,6 +4,7 @@ import { X, Bell, Download, ExternalLink } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { HERO_BANNER_SLIDES } from "@/data/heroBanners";
 import bannerImg from "@/assets/banners/tax-rebate-banner.jpg";
+import { isTourDoneForPromos } from "@/lib/tourPersistence";
 
 const BANNER_SRC = bannerImg;
 const NOTICES = HERO_BANNER_SLIDES.map((s) => ({
@@ -169,15 +170,23 @@ export const useNoticesPopup = () => {
   const [noticesOpen, setNoticesOpen] = useState(false);
 
   useEffect(() => {
-    // Show banner only if not shown before in this browser
-    const bannerShown = localStorage.getItem('banner_shown');
-    if (!bannerShown) {
-      const timer = setTimeout(() => {
-        setBannerOpen(true);
-        localStorage.setItem('banner_shown', '1');
-      }, 1200);
-      return () => clearTimeout(timer);
-    }
+    // Defer tax banner until the Website Guide is done for the current tour version.
+    if (localStorage.getItem("banner_shown")) return;
+
+    const tryShow = () => {
+      if (localStorage.getItem("banner_shown")) return true;
+      if (!isTourDoneForPromos()) return false;
+      setBannerOpen(true);
+      localStorage.setItem("banner_shown", "1");
+      return true;
+    };
+
+    if (tryShow()) return;
+
+    const poll = window.setInterval(() => {
+      if (tryShow()) window.clearInterval(poll);
+    }, 400);
+    return () => window.clearInterval(poll);
   }, []);
 
   return {

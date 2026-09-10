@@ -474,7 +474,7 @@ const About = () => {
           })}
         </div>
 
-        <div className="relative z-10 border-t border-white/10 bg-gradient-to-r from-civic-blue via-[#123a6b] to-civic-blue px-4 py-4 md:px-8 md:py-5">
+        <div className="relative z-10 border-t border-white/10 bg-gradient-to-r from-civic-blue via-primary-glow to-civic-blue px-4 py-4 md:px-8 md:py-5">
           <div className="container max-w-7xl">
             <h2 className="font-serif text-lg md:text-xl lg:text-2xl font-bold text-white leading-snug md:whitespace-nowrap">
               {en
@@ -559,7 +559,7 @@ const About = () => {
                 {values.map((value) => (
                   <div
                     key={value}
-                    className="flex items-center gap-2.5 rounded-xl border border-border bg-[#faf8f4] px-3 py-2.5 text-sm font-semibold text-civic-blue"
+                    className="flex items-center gap-2.5 rounded-xl border border-border bg-civic-light px-3 py-2.5 text-sm font-semibold text-civic-blue"
                   >
                     <CheckCircle2 className="h-4 w-4 text-civic-gold shrink-0" />
                     {value}
@@ -621,7 +621,7 @@ const About = () => {
             <table className="w-full text-sm">
               <tbody>
                 {keyFacts.map((fact, i) => (
-                  <tr key={fact.label} className={i % 2 === 0 ? "bg-white" : "bg-[#faf8f4]"}>
+                  <tr key={fact.label} className={i % 2 === 0 ? "bg-white" : "bg-civic-light"}>
                     <td className="px-6 py-3.5 font-medium text-muted-foreground border-t border-border w-[48%]">
                       {fact.label}
                     </td>
@@ -704,7 +704,7 @@ const About = () => {
       </section>
 
       {/* 4. About the City */}
-      <section className="py-16 bg-[#faf8f4]">
+      <section className="py-16 bg-civic-light">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-10 items-center mb-12">
             <div>

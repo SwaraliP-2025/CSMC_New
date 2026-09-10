@@ -133,7 +133,7 @@ const Initiatives = () => {
 
             {/* Why + Highlights */}
             <div className="grid lg:grid-cols-2 gap-6">
-              <div className="rounded-2xl border border-border bg-[#faf8f4] p-6">
+              <div className="rounded-2xl border border-border bg-civic-light p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <HeartHandshake className="h-5 w-5 text-civic-red" />
                   <h3 className="font-serif text-lg font-bold text-civic-blue">

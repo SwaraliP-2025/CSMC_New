@@ -67,7 +67,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
 
         if (hasGroups) {
           return (
-            <div className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden p-3">
+            <div className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden p-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {item.children!.map(group => {
                   const groupLabel = en ? group.labelEn : group.labelMr;
@@ -88,7 +88,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         }
 
         return (
-          <div className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-[#1a3a6b] shadow-2xl border-t-2 border-civic-gold rounded-b-lg">
+          <div className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg">
             {item.children!.map(child => {
               const childLabel = en ? child.labelEn : child.labelMr;
               return (
@@ -123,6 +123,21 @@ export const Header = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
   useEffect(() => { setMobileOpen(false); setMobileExpanded(null); }, [pathname]);
+
+  // Website Guide can open/close the mobile menu without hover-only UX.
+  useEffect(() => {
+    const open = () => setMobileOpen(true);
+    const close = () => {
+      setMobileOpen(false);
+      setMobileExpanded(null);
+    };
+    window.addEventListener("csmc-tour-open-mobile-nav", open);
+    window.addEventListener("csmc-tour-close-mobile-nav", close);
+    return () => {
+      window.removeEventListener("csmc-tour-open-mobile-nav", open);
+      window.removeEventListener("csmc-tour-close-mobile-nav", close);
+    };
+  }, []);
 
   const label = (item: NavItem) => en ? item.labelEn : item.labelMr;
   const whatsappLabel = en ? "Smart Chhatrapati Sambhajinagar WhatsApp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट";
@@ -159,10 +174,14 @@ export const Header = () => {
             <TooltipArrow className="mx-auto mt-1" />
           </TooltipContent>
         </Tooltip>
-        <Link to="/user-manual" className="hidden md:inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap">
+        <Link
+          to="/user-manual"
+          data-tour="user-manual"
+          className="hidden md:inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap"
+        >
           {en ? "User Manual" : "वापरकर्ता नियमावली"}
         </Link>
-        <div className="hidden md:block">
+        <div className="hidden md:block" data-tour="global-search">
           <GlobalSearch />
         </div>
       </div>
@@ -171,17 +190,24 @@ export const Header = () => {
       <div className="md:hidden border-t border-border/50 px-3 py-2 flex items-center gap-2">
         <Button size="icon" variant="ghost"
           className="shrink-0 h-9 w-9 text-civic-blue"
+          data-tour="mobile-menu-btn"
           onClick={() => setMobileOpen(o => !o)} aria-label="Menu" aria-expanded={mobileOpen}>
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
-        <Link to="/user-manual" className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold border-2 border-civic-blue text-civic-blue whitespace-nowrap">
+        <Link
+          to="/user-manual"
+          data-tour="user-manual"
+          className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold border-2 border-civic-blue text-civic-blue whitespace-nowrap"
+        >
           {en ? "User Policy" : "वापरकर्ता नियमावली"}
         </Link>
-        <GlobalSearch compact />
+        <div className="flex-1 min-w-0" data-tour="global-search">
+          <GlobalSearch compact />
+        </div>
       </div>
 
       {/* Desktop nav */}
-      <nav id="nav" className="hidden md:block bg-[#1a3a6b]">
+      <nav id="nav" data-tour="main-nav" className="hidden md:block bg-civic-blue">
         <div className="w-full flex items-stretch">
           {NAV.map(item => (
             <div key={item.labelEn} className={item.to === "/" ? "shrink-0" : "flex-1"}>
@@ -193,7 +219,7 @@ export const Header = () => {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto">
+        <nav data-tour="mobile-nav" className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto">
           {NAV.map(item => (
             <div key={item.labelEn}>
               {item.children ? (

@@ -235,7 +235,7 @@ const DocumentViewer = () => {
                 )}
               </div>
 
-              <article className="bg-[#faf8f4] border border-border rounded-xl p-6 md:p-8">
+              <article className="bg-civic-light border border-border rounded-xl p-6 md:p-8">
                 <div className="flex items-center gap-2 text-civic-blue mb-4 pb-3 border-b border-civic-gold/40">
                   <BookOpen className="h-4 w-4" />
                   <p className="text-xs font-bold uppercase tracking-wide">

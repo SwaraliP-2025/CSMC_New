@@ -88,7 +88,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#1a1a2e] text-white pb-12">
+    <footer className="bg-[#12182B] text-white pb-12">
       <div className="container py-12 grid gap-10 md:grid-cols-4">
         <div>
           <h3 className="font-bold text-base mb-5 text-white">{en ? "Address" : "पत्ता"}</h3>

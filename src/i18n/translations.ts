@@ -31,8 +31,8 @@ export const translations = {
       faq: "FAQ",
       rtiAct: "RTI Act",
       govtOrders: "Govt. Orders",
-      mahangarpalika: "Mahangarpalika",
-      mahangarpalikaItems: [
+      mahanagarpalika: "Mahanagarpalika",
+      mahanagarpalikaItems: [
         { label: "About CSMC & Chhatrapati Sambhajinagar", to: "/about" },
         { label: "Hon'ble Municipal Commissioner", to: "/commissioner" },
         { label: "Departments", to: "/departments" },
@@ -148,8 +148,8 @@ export const translations = {
       faq: "सामान्य प्रश्न",
       rtiAct: "लोकसेवा हक्क अधिनियम",
       govtOrders: "शासन निर्णय / परिपत्रके",
-      mahangarpalika: "महानगरपालिका",
-      mahangarpalikaItems: [
+      mahanagarpalika: "महानगरपालिका",
+      mahanagarpalikaItems: [
         { label: "CSMC व छत्रपती संभाजीनगर बद्दल", to: "/about" },
         { label: "विभाग", to: "/departments" },
         { label: "मा. महापौरांची यादी", to: "/about#mayors" },

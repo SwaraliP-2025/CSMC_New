@@ -77,7 +77,7 @@ export const SeoHead = () => {
     upsertMeta("name", "application-name", `${SITE_SHORT} Official Portal`);
     upsertMeta("name", "robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
     upsertMeta("name", "googlebot", "index, follow");
-    upsertMeta("name", "theme-color", "#1a3a6b");
+    upsertMeta("name", "theme-color", "#1A3A6B");
 
     upsertMeta("property", "og:locale", en ? "en_IN" : "mr_IN");
     upsertMeta("property", "og:locale:alternate", en ? "mr_IN" : "en_IN");

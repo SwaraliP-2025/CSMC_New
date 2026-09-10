@@ -8,56 +8,72 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Official CSMC Emblem Colors */
+    /* CSMC civic palette — white-dominant, institutional navy, saffron accents */
+    /* Main Background #FFFFFF */
     --background: 0 0% 100%;
-    --foreground: 0 0% 17%;
+    /* Main Text #1A1A1A */
+    --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 17%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 17%;
+    --popover-foreground: 0 0% 10%;
 
-    /* Official Blue from Emblem - #3B3F8C */
-    --primary: 237 48% 29%;
+    /* Institutional Navy #1A3A6B */
+    --primary: 216 61% 26%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 237 48% 40%;
+    /* Secondary Blue #245A9E */
+    --primary-glow: 213 63% 38%;
 
-    /* Gold from Emblem - #E6A64C */
-    --secondary: 38 69% 57%;
-    --secondary-foreground: 0 0% 17%;
+    /* Saffron / Orange #F0A020 */
+    --secondary: 37 87% 53%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    /* Soft Section Background #F7F8FA */
+    --muted: 220 20% 97%;
+    /* Secondary Text #5C6570 */
+    --muted-foreground: 213 10% 40%;
 
-    /* Red Accent from Emblem - #D32F2F */
-    --accent: 0 72% 51%;
+    /* Alert / Error Red #C62828 — reserved for alerts, not general brand accent */
+    --accent: 0 66% 47%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 66% 47%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 237 48% 29%;
+    /* Borders #E2E6EC */
+    --border: 220 18% 91%;
+    --input: 220 18% 91%;
+    --ring: 216 61% 26%;
 
     --radius: 0.5rem;
 
-    /* CSMC Civic Tokens - Using Official Emblem Colors */
-    --civic-gold: 38 69% 57%;
-    --civic-blue: 237 48% 29%;
-    --civic-red: 0 72% 51%;
+    /* CSMC Civic Tokens */
+    --civic-gold: 37 87% 53%; /* #F0A020 saffron */
+    --civic-blue: 216 61% 26%; /* #1A3A6B institutional navy */
+    --civic-red: 0 66% 47%; /* #C62828 alerts */
     --civic-white: 0 0% 100%;
-    --civic-ink: 0 0% 17%;
+    --civic-ink: 0 0% 10%; /* #1A1A1A */
+    --civic-light: 220 20% 97%; /* #F7F8FA soft sections */
+    --civic-saffron-soft: 44 100% 92%; /* #FFF4D6 */
 
-    --gradient-heritage: linear-gradient(135deg, hsl(237 48% 29%) 0%, hsl(38 69% 57%) 100%);
-    --gradient-saffron: linear-gradient(180deg, hsl(38 69% 57%) 0%, hsl(0 72% 51%) 100%);
-    --gradient-overlay: linear-gradient(180deg, hsl(0 0% 17% / 0.1) 0%, hsl(0 0% 17% / 0.85) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 96%) 100%);
+    --gradient-heritage: linear-gradient(135deg, hsl(216 61% 26%) 0%, hsl(37 87% 53%) 100%);
+    --gradient-saffron: linear-gradient(180deg, hsl(37 87% 53%) 0%, hsl(32 90% 48%) 100%);
+    /* Left-weighted hero overlay: readable title on left, brighter image on right */
+    --gradient-overlay: linear-gradient(
+      105deg,
+      hsl(216 50% 8% / 0.72) 0%,
+      hsl(216 50% 8% / 0.52) 26%,
+      hsl(216 50% 8% / 0.22) 52%,
+      hsl(216 50% 8% / 0.08) 74%,
+      hsl(216 50% 8% / 0.03) 100%
+    );
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 97%) 100%);
 
-    --shadow-elegant: 0 10px 40px -12px hsl(237 48% 29% / 0.2);
-    --shadow-soft: 0 4px 16px -4px hsl(0 0% 17% / 0.08);
-    --shadow-card: 0 2px 8px -2px hsl(0 0% 17% / 0.06);
+    --shadow-elegant: 0 10px 40px -12px hsl(216 61% 26% / 0.18);
+    --shadow-soft: 0 4px 16px -4px hsl(0 0% 10% / 0.08);
+    --shadow-card: 0 2px 8px -2px hsl(0 0% 10% / 0.06);
 
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -103,6 +119,8 @@ All colors MUST be HSL.
     --civic-blue: 207 90% 32%;
     --civic-red: 27 98% 44%;
     --civic-ink: 0 0% 12%;
+    --civic-light: 220 20% 97%;
+    --civic-saffron-soft: 44 100% 92%;
 
     --gradient-heritage: linear-gradient(135deg, hsl(207 90% 32%) 0%, hsl(41 98% 48%) 100%);
     --gradient-saffron: linear-gradient(180deg, hsl(41 98% 48%) 0%, hsl(27 98% 44%) 100%);
