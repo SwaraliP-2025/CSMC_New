@@ -111,8 +111,8 @@ export const DEPARTMENT_GROUPS: DepartmentGroupMeta[] = [
   },
   {
     id: "commissioner",
-    titleEn: "Under Hon. Municipal Commissioner (from Commissioner Office)",
-    titleMr: "मा. महानगरपालिका आयुक्त यांच्या अधिपत्याखालील विभाग (आयुक्त कार्यालयापासून)",
+    titleEn: "Under Hon. Municipal Commissioner",
+    titleMr: "मा. महानगरपालिका आयुक्त यांच्या अधिपत्याखालील विभाग",
     shortEn: "Municipal Commissioner",
     shortMr: "महा. आयुक्त",
   },
