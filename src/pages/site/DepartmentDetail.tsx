@@ -1792,6 +1792,36 @@ const DEPARTMENTS: DeptInfo[] = [
   addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
   updates: [],
 },
+
+{
+  slug: "additional-city-engineer",
+  nameEn: "Executive Engineer & In-Charge Additional City Engineer",
+  nameMr: "कार्यकारी अभियंता तथा प्रभारी अतिरिक्त शहर अभियंता",
+  headEn: "Shri Amol Kulkarni",
+  headMr: "श्री अमोल कुलकर्णी",
+  designationEn: "Executive Engineer & In-Charge Additional City Engineer",
+  designationMr: "कार्यकारी अभियंता तथा प्रभारी अतिरिक्त शहर अभियंता",
+  phone: DEPARTMENT_CONTACT_PHONE,
+  email: "",
+  addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar - 431001",
+  addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
+  updates: [],
+},
+
+{
+  slug: "chief-accounts-finance-officer",
+  nameEn: "Chief Accounts & Finance Officer & Encroachment Control Officer",
+  nameMr: "मुख्य लेखा व वित्त अधिकारी तथा अतिक्रमण नियंत्रण अधिकारी",
+  headEn: "Shri Santosh Vahule",
+  headMr: "श्री संतोष व्हहुळे",
+  designationEn: "Chief Accounts & Finance Officer & Encroachment Control Officer",
+  designationMr: "मुख्य लेखा व वित्त अधिकारी तथा अतिक्रमण नियंत्रण अधिकारी",
+  phone: DEPARTMENT_CONTACT_PHONE,
+  email: "",
+  addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar - 431001",
+  addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
+  updates: [],
+},
   /* ============================================================
    * ADDITIONAL COMMISSIONER – I CONTROLLED DEPARTMENTS
    * PDF DATED 03/09/2026
