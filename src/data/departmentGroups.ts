@@ -1,6 +1,11 @@
 import type { DeptInfo } from "@/pages/site/DepartmentDetail";
 
-export type DepartmentGroupId = "leadership" | "ac1" | "ac2" | "technical";
+export type DepartmentGroupId =
+  | "independent"
+  | "commissioner"
+  | "ac1"
+  | "ac2"
+  | "technical";
 
 export type DepartmentGroupFilter = "all" | DepartmentGroupId;
 
@@ -12,8 +17,8 @@ export type DepartmentGroupMeta = {
   shortMr: string;
 };
 
-/** First six entries in DEPARTMENTS — under Hon. Municipal Commissioner. */
-const COMMISSIONER_OFFICE_SLUGS = [
+/** First six entries — commissionerate & senior officers (independent section). */
+const INDEPENDENT_OFFICER_SLUGS = [
   "municipal-commissioner",
   "additional-commissioner-1",
   "additional-commissioner-2",
@@ -22,13 +27,17 @@ const COMMISSIONER_OFFICE_SLUGS = [
   "chief-accounts-finance-officer",
 ] as const;
 
-const AC1_SLUGS = [
+/** Six wings from Ayukt Karyalay onward — under Hon. Municipal Commissioner. */
+const COMMISSIONER_WING_SLUGS = [
   "commissioner-office",
   "accounts-department",
   "town-planning-department",
   "audit-department",
   "municipal-secretary-department",
   "statistics-cell",
+] as const;
+
+const AC1_SLUGS = [
   "general-administration",
   "labour",
   "education",
@@ -84,7 +93,8 @@ const TECHNICAL_SLUGS = [
 
 const SLUG_TO_GROUP = new Map<string, DepartmentGroupId>(
   [
-    ...COMMISSIONER_OFFICE_SLUGS.map((s) => [s, "leadership"] as const),
+    ...INDEPENDENT_OFFICER_SLUGS.map((s) => [s, "independent"] as const),
+    ...COMMISSIONER_WING_SLUGS.map((s) => [s, "commissioner"] as const),
     ...AC1_SLUGS.map((s) => [s, "ac1"] as const),
     ...AC2_SLUGS.map((s) => [s, "ac2"] as const),
     ...TECHNICAL_SLUGS.map((s) => [s, "technical"] as const),
@@ -93,9 +103,16 @@ const SLUG_TO_GROUP = new Map<string, DepartmentGroupId>(
 
 export const DEPARTMENT_GROUPS: DepartmentGroupMeta[] = [
   {
-    id: "leadership",
-    titleEn: "Under Hon. Municipal Commissioner",
-    titleMr: "मा. महानगरपालिका आयुक्त यांच्या अधिपत्याखालील विभाग",
+    id: "independent",
+    titleEn: "Commissionerate & senior officers",
+    titleMr: "आयुक्त व वरिष्ठ अधिकारी",
+    shortEn: "Senior officers",
+    shortMr: "वरिष्ठ अधिकारी",
+  },
+  {
+    id: "commissioner",
+    titleEn: "Under Hon. Municipal Commissioner (from Commissioner Office)",
+    titleMr: "मा. महानगरपालिका आयुक्त यांच्या अधिपत्याखालील विभाग (आयुक्त कार्यालयापासून)",
     shortEn: "Municipal Commissioner",
     shortMr: "महा. आयुक्त",
   },
@@ -157,7 +174,8 @@ export function groupDepartmentsBySection(
   departments: DeptInfo[],
 ): Record<DepartmentGroupId, DeptInfo[]> {
   const buckets: Record<DepartmentGroupId, DeptInfo[]> = {
-    leadership: [],
+    independent: [],
+    commissioner: [],
     ac1: [],
     ac2: [],
     technical: [],

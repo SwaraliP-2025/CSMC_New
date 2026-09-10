@@ -81,7 +81,13 @@ const Departments = () => {
 
   const sections = useMemo(() => {
     const buckets = groupDepartmentsBySection(filtered);
-    const order: DepartmentGroupId[] = ["leadership", "ac1", "ac2", "technical"];
+    const order: DepartmentGroupId[] = [
+      "independent",
+      "commissioner",
+      "ac1",
+      "ac2",
+      "technical",
+    ];
     return order
       .map((id) => ({ id, departments: buckets[id] }))
       .filter((s) => s.departments.length > 0);
@@ -97,8 +103,8 @@ const Departments = () => {
         title={en ? "Departments" : "विभाग"}
         subtitle={
           en
-            ? "Grouped under the Municipal Commissioner, Additional Commissioners, and technical wings—or search by department or officer name."
-            : "महानगरपालिका आयुक्त, अतिरिक्त आयुक्त व तांत्रिक विभागानुसार पहा, किंवा विभाग/अधिकारी नावाने शोधा."
+            ? "Senior officers, wings under the Municipal Commissioner (from Commissioner Office), Additional Commissioners, and technical branches—or search by name."
+            : "वरिष्ठ अधिकारी, आयुक्त कार्यालयापासूनचे विभाग, अतिरिक्त आयुक्त व तांत्रिक शाखा—किंवा नावाने शोधा."
         }
       />
       <section className="py-12 md:py-16 container">
@@ -109,7 +115,10 @@ const Departments = () => {
               aria-hidden
             />
             <Input
-              type="search"
+              type="text"
+              role="searchbox"
+              inputMode="search"
+              autoComplete="off"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={
