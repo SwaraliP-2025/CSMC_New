@@ -80,8 +80,8 @@ export const TOUR_UI = {
     en: "Try this",
   } as const,
   searchResultHint: {
-    mr: "शीर्ष परिणाम (फक्त उदाहरण — टूर बंद होणार नाही)",
-    en: "Top matches (demo only — tour stays open)",
+    mr: "शीर्ष परिणाम (फक्त उदाहरण — मार्गदर्शक खुला राहील)",
+    en: "Top matches (demo only — guide stays open)",
   } as const,
   wantToDo: {
     mr: "तुम्हाला काय करायचे आहे?",

@@ -34,10 +34,10 @@ function titleMatchBoost(hit: SearchHit, queryLang: QueryLang, queryNorm: string
   if (queryLang === "en") {
     if (titleEn === queryNorm) return 36;
     if (titleEn.startsWith(`${queryNorm} `) || titleEn.endsWith(` ${queryNorm}`)) return 14;
+    if (titleEn.includes(queryNorm) && queryNorm.length >= 8) return 6;
     return 0;
   }
   if (titleMr === queryNorm) return 36;
-  // Exact keyword hit for civic org terms should favor About over Contact.
   if (
     (queryNorm === "महानगरपालिका" || queryNorm === "महापालिका") &&
     hit.record.id === "svc-about"
@@ -45,6 +45,7 @@ function titleMatchBoost(hit: SearchHit, queryLang: QueryLang, queryNorm: string
     return 40;
   }
   if (titleMr.startsWith(`${queryNorm} `) || titleMr.endsWith(` ${queryNorm}`)) return 8;
+  if (titleMr.includes(queryNorm) && queryNorm.length >= 4) return 6;
   return 0;
 }
 
@@ -61,7 +62,7 @@ function cloneHit(hit: SearchHit, displayLang: "en" | "mr", opts?: Partial<Searc
 
 /**
  * Prefer query-language titles without replacing relevance.
- * Inserts the bilingual equivalent of the top service directly as #2 when available.
+ * Inserts the bilingual equivalent of the top match as #2 when available.
  */
 export function applyLanguageAwareRanking(hits: SearchHit[], query: string): SearchHit[] {
   if (!hits.length) return hits;
@@ -93,7 +94,6 @@ export function applyLanguageAwareRanking(hits: SearchHit[], query: string): Sea
   const preferred: "en" | "mr" = queryLang === "mr" ? "mr" : queryLang === "en" ? "en" : "en";
   const other: "en" | "mr" = preferred === "en" ? "mr" : "en";
 
-  // Prefer an exact title match in the query language (never a partial longer title).
   if (queryLang === "en" || queryLang === "mr") {
     const exactPreferred = scored.find((h) => {
       const t = queryLang === "en" ? h.record.titleEn.toLowerCase() : h.record.titleMr;
@@ -112,8 +112,8 @@ export function applyLanguageAwareRanking(hits: SearchHit[], query: string): Sea
   if (!top) return scored;
 
   const bilingual =
-    top.record.titleEn.trim() &&
-    top.record.titleMr.trim() &&
+    Boolean(top.record.titleEn.trim()) &&
+    Boolean(top.record.titleMr.trim()) &&
     top.record.titleEn.trim().toLowerCase() !== top.record.titleMr.trim().toLowerCase();
 
   if (queryLang === "mixed" || !bilingual) {
@@ -210,7 +210,6 @@ function buildSuggestionCorpus(): { phrase: string; lang: QueryLang }[] {
       add(r.titleMr);
     }
   }
-  // High-value civic phrases citizens commonly mistype
   [
     "Property Tax",
     "Pay Property Tax",
@@ -246,7 +245,6 @@ export function suggestDidYouMean(query: string): string | null {
   const queryLang = detectQueryLanguage(prepared);
   const corpus = getCorpus();
 
-  // Exact known phrase → no suggestion
   if (corpus.some((c) => normPhrase(c.phrase) === n)) return null;
 
   let best: { phrase: string; dist: number; score: number } | null = null;
@@ -264,7 +262,6 @@ export function suggestDidYouMean(query: string): string | null {
     if (dist === 0 || dist > maxDist) continue;
     if (dist / Math.max(n.length, cn.length) > 0.28) continue;
 
-    // Prefer similar length + shorter edit distance
     const score = dist * 10 + Math.abs(cn.length - n.length);
     if (!best || score < best.score) {
       best = { phrase: cand.phrase, dist, score };
@@ -273,7 +270,6 @@ export function suggestDidYouMean(query: string): string | null {
 
   if (!best || best.dist > 2) return null;
 
-  // Preserve a clean display form (title-ish for English)
   const suggestion = best.phrase;
   if (normPhrase(suggestion) === n) return null;
   return suggestion;

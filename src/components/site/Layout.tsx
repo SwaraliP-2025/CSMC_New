@@ -50,7 +50,7 @@ const ScrollToTop = () => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       aria-label={label}
-      className="fixed bottom-32 right-4 z-[1100] flex items-center gap-1.5 rounded-full bg-civic-blue text-white shadow-lg px-3 py-2.5 hover:bg-civic-gold hover:text-civic-ink transition-all duration-200 hover:scale-105 sm:right-6"
+      className="fixed bottom-20 right-4 z-[1100] flex items-center gap-1.5 rounded-full bg-civic-blue text-white shadow-lg px-3 py-2.5 hover:bg-civic-gold hover:text-civic-ink transition-all duration-200 hover:scale-105 sm:right-6"
     >
       <ChevronUp className="h-5 w-5 shrink-0" />
       {hovered && <span className="text-xs font-bold whitespace-nowrap">{label}</span>}
