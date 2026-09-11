@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
@@ -12,7 +12,7 @@ const GalleryCard = ({ story, en }: { story: VisualStory; en: boolean }) => {
   return (
     <Link
       to={storyPath(story.id)}
-      className="group relative shrink-0 w-[220px] sm:w-[240px] md:w-[260px] overflow-hidden bg-white border border-border/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
+      className="group relative block h-full overflow-hidden bg-white border border-border/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
       aria-label={title}
     >
       <span className="block aspect-[4/3] overflow-hidden bg-civic-blue/10">
@@ -40,12 +40,36 @@ export const GallerySection = () => {
   const en = lang === "en";
   const items = getHomepageGalleryStories();
   const trackRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  const updateScrollState = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setCanPrev(el.scrollLeft > 8);
+    setCanNext(max > 8 && el.scrollLeft < max - 8);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    const ro = new ResizeObserver(updateScrollState);
+    ro.observe(el);
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      el.removeEventListener("scroll", updateScrollState);
+      ro.disconnect();
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [items.length, updateScrollState]);
 
   const scroll = (dir: "left" | "right") => {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.querySelector("a");
-    const step = (card?.clientWidth ?? 240) + 12;
+    const step = Math.round(el.clientWidth * 0.85);
     el.scrollBy({ left: dir === "left" ? -step : step, behavior: "smooth" });
   };
 
@@ -71,11 +95,16 @@ export const GallerySection = () => {
           </Link>
         </div>
 
-        <div className="relative">
+        <div className="relative sm:px-12">
           <button
             type="button"
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-[38%] -translate-y-1/2 -translate-x-2 z-10 hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-white border border-border text-civic-blue shadow-sm hover:bg-civic-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              scroll("left");
+            }}
+            disabled={!canPrev}
+            className="absolute left-0 top-[38%] z-20 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-civic-blue shadow-sm pointer-events-auto sm:flex hover:bg-civic-blue hover:text-white disabled:pointer-events-none disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
             aria-label={en ? "Previous photographs" : "मागील छायाचित्रे"}
           >
             <ChevronLeft className="h-4 w-4" aria-hidden />
@@ -87,7 +116,10 @@ export const GallerySection = () => {
             style={{ scrollbarWidth: "none" }}
           >
             {items.map((story) => (
-              <div key={story.id} className="snap-start">
+              <div
+                key={story.id}
+                className="snap-start shrink-0 w-[78vw] sm:w-[calc((100%-0.75rem)/2)] lg:w-[calc((100%-1.5rem)/3)]"
+              >
                 <GalleryCard story={story} en={en} />
               </div>
             ))}
@@ -95,8 +127,13 @@ export const GallerySection = () => {
 
           <button
             type="button"
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-[38%] -translate-y-1/2 translate-x-2 z-10 hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-white border border-border text-civic-blue shadow-sm hover:bg-civic-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              scroll("right");
+            }}
+            disabled={!canNext}
+            className="absolute right-0 top-[38%] z-20 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-civic-blue shadow-sm pointer-events-auto sm:flex hover:bg-civic-blue hover:text-white disabled:pointer-events-none disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
             aria-label={en ? "Next photographs" : "पुढील छायाचित्रे"}
           >
             <ChevronRight className="h-4 w-4" aria-hidden />

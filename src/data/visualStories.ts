@@ -272,8 +272,6 @@ export function getHeroStories() {
     .sort((a, b) => (a.heroOrder ?? 99) - (b.heroOrder ?? 99));
 }
 
-const HOMEPAGE_GALLERY_LIMIT = 4;
-
 /** Civic / event photographs only — never heritage monuments. */
 export function getGalleryStories() {
   return VISUAL_STORIES
@@ -282,8 +280,9 @@ export function getGalleryStories() {
     .sort((a, b) => (a.galleryOrder ?? 99) - (b.galleryOrder ?? 99));
 }
 
+/** Homepage slider: all civic photos so the track can overflow and arrows can scroll. */
 export function getHomepageGalleryStories() {
-  return getGalleryStories().slice(0, HOMEPAGE_GALLERY_LIMIT);
+  return getGalleryStories();
 }
 
 export function getRelatedStories(story: VisualStory) {

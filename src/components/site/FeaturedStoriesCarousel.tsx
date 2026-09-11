@@ -36,6 +36,12 @@ export const FeaturedStoriesCarousel = () => {
   const [reduced, setReduced] = useState(false);
   const lastNav = useRef(0);
   const pointerX = useRef<number | null>(null);
+  const pausedRef = useRef(false);
+
+  const setHoverPaused = (value: boolean) => {
+    pausedRef.current = value;
+    setPaused(value);
+  };
 
   const current = stories[index] ?? stories[0];
   const heritage = current ? isHeritageStory(current) : false;
@@ -62,13 +68,13 @@ export const FeaturedStoriesCarousel = () => {
   const goNext = useCallback(() => goTo(index + 1), [goTo, index]);
 
   useEffect(() => {
-    if (reduced || paused || count <= 1) return;
+    if (reduced || count <= 1) return;
     const id = window.setInterval(() => {
-      if (document.hidden) return;
+      if (document.hidden || pausedRef.current) return;
       setIndex((i) => (i + 1) % count);
     }, SLIDE_MS);
     return () => window.clearInterval(id);
-  }, [reduced, paused, count, index]);
+  }, [reduced, count]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowLeft") {
@@ -113,19 +119,14 @@ export const FeaturedStoriesCarousel = () => {
       aria-roledescription="carousel"
       aria-label={en ? "City photographs" : "शहराची छायाचित्रे"}
       tabIndex={0}
+      aria-live="off"
+      aria-atomic="false"
+      aria-paused={paused || reduced}
       onKeyDown={onKeyDown}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
       onPointerCancel={() => {
         pointerX.current = null;
-      }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={(e) => {
-        if ((e.target as HTMLElement).closest("button, a")) setPaused(true);
-      }}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setPaused(false);
       }}
     >
       <div className="absolute inset-0 w-full h-full bg-[#122440]">
@@ -136,6 +137,8 @@ export const FeaturedStoriesCarousel = () => {
             alt={i === index ? (en ? story.altEn : story.altMr) : ""}
             aria-hidden={i !== index}
             draggable={false}
+            decoding="async"
+            fetchPriority={i === index ? "high" : "low"}
             className={`absolute inset-0 w-full h-full object-cover select-none ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
@@ -171,7 +174,14 @@ export const FeaturedStoriesCarousel = () => {
             <p className="mt-2 text-sm text-white/90 max-w-md leading-relaxed drop-shadow-md">
               {en ? current.shortDescriptionEn : current.shortDescriptionMr}
             </p>
-            <StoryCta story={current} en={en} />
+            <span
+              onMouseEnter={() => setHoverPaused(true)}
+              onMouseLeave={() => setHoverPaused(false)}
+              onFocus={() => setHoverPaused(true)}
+              onBlur={() => setHoverPaused(false)}
+            >
+              <StoryCta story={current} en={en} />
+            </span>
           </div>
         </div>
       )}
@@ -181,7 +191,15 @@ export const FeaturedStoriesCarousel = () => {
       </p>
 
       {count > 1 && (
-        <div className="absolute bottom-4 md:bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 md:gap-3">
+        <div
+          className="absolute bottom-4 md:bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 md:gap-3"
+          onMouseEnter={() => setHoverPaused(true)}
+          onMouseLeave={() => setHoverPaused(false)}
+          onFocus={() => setHoverPaused(true)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) setHoverPaused(false);
+          }}
+        >
           <button
             type="button"
             onClick={goPrev}
