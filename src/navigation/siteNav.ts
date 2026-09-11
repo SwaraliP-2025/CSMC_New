@@ -46,6 +46,7 @@ export const SITE_NAV: NavItem[] = [
             to: "/public-documents",
           },
           { labelEn: "Hon'ble Mayors' List", labelMr: "मा. महापौरांची यादी", to: "/mayors-list" },
+          { labelEn: "Hon'ble Deputy Mayors' List", labelMr: "मा. उपमहापौरांची यादी", to: "/deputy-mayors-list" },
           {
             labelEn: "Hon'ble Commissioners' List",
             labelMr: "मा. आयुक्तांची यादी",

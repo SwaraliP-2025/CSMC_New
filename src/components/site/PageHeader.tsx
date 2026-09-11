@@ -13,6 +13,7 @@ const routeLabels: Record<string, string> = {
   commissioner: "Municipal Commissioner",
   "commissioners-list": "Commissioners' List",
   "mayors-list": "Mayors' List",
+  "deputy-mayors-list": "Deputy Mayors' List",
   organization: "Organogram",
   "zones-wards": "Zones & Wards",
   "know-your-corporator": "Know Your Corporator",

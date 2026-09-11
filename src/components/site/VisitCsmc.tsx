@@ -21,7 +21,7 @@ export const VisitCsmc = () => {
     : "https://www.google.com/maps?q=19.8900943,75.3243991&z=17&hl=mr&output=embed";
 
   const iconBtn =
-    "inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-white text-civic-blue shadow-sm hover:bg-civic-blue hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold";
+    "inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white text-[#1A73E8] shadow-sm hover:bg-slate-50 hover:border-slate-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold";
 
   return (
     <section
@@ -184,11 +184,11 @@ export const VisitCsmc = () => {
                       href={CSMC_DIRECTIONS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${iconBtn} bg-[#1A73E8] text-white border-[#1A73E8] hover:bg-[#1557b0] hover:text-white`}
+                      className={iconBtn}
                       aria-label={en ? "Get directions" : "दिशा मिळवा"}
                       title={en ? "Get directions" : "दिशा मिळवा"}
                     >
-                      <Navigation className="h-4 w-4" aria-hidden />
+                      <Navigation className="h-4 w-4 fill-current" aria-hidden />
                     </a>
                   </div>
                 </div>

@@ -207,6 +207,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Hon'ble Mayors' List | CSMC",
     description: "List of Hon'ble Mayors of Chhatrapati Sambhajinagar Municipal Corporation.",
   },
+  "/deputy-mayors-list": {
+    path: "/deputy-mayors-list",
+    title: "Hon'ble Deputy Mayors' List | CSMC",
+    titleMr: "मा. उपमहापौरांची यादी | CSMC",
+    description: "List of Hon'ble Deputy Mayors of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या मा. उपमहापौरांची यादी.",
+  },
   "/commissioners-list": {
     path: "/commissioners-list",
     title: "Hon'ble Commissioners' List | CSMC",

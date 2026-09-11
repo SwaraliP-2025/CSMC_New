@@ -4,7 +4,7 @@ import { useLang } from "@/i18n/LanguageContext";
 import { User } from "lucide-react";
 import { useState } from "react";
 import { PhotoModal } from "@/components/site/PhotoModal";
-import { COMMISSIONERS } from "@/data/commissioners";
+import { DEPUTY_MAYORS } from "@/data/deputyMayors";
 
 const Avatar = ({ src, name, size = "md" }: { src: string | null; name: string; size?: "sm" | "md" }) => {
   const cls = size === "sm"
@@ -21,7 +21,7 @@ const Avatar = ({ src, name, size = "md" }: { src: string | null; name: string; 
   );
 };
 
-const CommissionersList = () => {
+const DeputyMayorsList = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
   const [selected, setSelected] = useState<{ src: string; name: string; role: string } | null>(null);
@@ -30,8 +30,8 @@ const CommissionersList = () => {
     <Layout>
       <PageHeader
         eyebrow={en ? "Administration" : "प्रशासन"}
-        title={en ? "Hon'ble Commissioners' List" : "मा. आयुक्तांची यादी"}
-        subtitle={en ? "List of Municipal Commissioners of Chhatrapati Sambhajinagar Municipal Corporation." : "छत्रपती संभाजीनगर महानगरपालिकेच्या महानगरपालिका आयुक्तांची यादी."}
+        title={en ? "Hon'ble Deputy Mayors' List" : "मा. उपमहापौरांची यादी"}
+        subtitle={en ? "List of Hon'ble Deputy Mayors of Chhatrapati Sambhajinagar Municipal Corporation." : "छत्रपती संभाजीनगर महानगरपालिकेच्या मा. उपमहापौरांची यादी."}
       />
       <section className="py-12 container max-w-5xl">
 
@@ -40,39 +40,39 @@ const CommissionersList = () => {
             <thead>
               <tr className="bg-civic-blue text-white">
                 <th className="px-4 py-4 text-center font-bold w-8">{en ? "Sr." : "क्र."}</th>
-                <th className="px-4 py-4 text-left font-bold">{en ? "Hon'ble Commissioner" : "मा. आयुक्त"}</th>
+                <th className="px-4 py-4 text-left font-bold">{en ? "Hon'ble Deputy Mayor" : "मा. उपमहापौर"}</th>
                 <th className="px-4 py-4 text-center font-bold">{en ? "Working Period" : "कार्यकाल"}</th>
                 <th className="px-4 py-4 text-center font-bold w-20">{en ? "Photo" : "फोटो"}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-white">
-              {COMMISSIONERS.map((c) => (
-                <tr key={c.sr} className={`hover:bg-muted/30 transition-colors ${c.current ? "bg-civic-gold/5" : ""}`}>
-                  <td className="px-4 py-4 text-center font-bold text-muted-foreground">{d(c.sr)}</td>
+              {DEPUTY_MAYORS.map((m) => (
+                <tr key={m.sr} className={`hover:bg-muted/30 transition-colors ${m.current ? "bg-civic-gold/5" : ""}`}>
+                  <td className="px-4 py-4 text-center font-bold text-muted-foreground">{d(m.sr)}</td>
                   <td className="px-4 py-4">
-                    <p className="font-bold text-civic-ink">{en ? c.nameEn : c.nameMr}</p>
-                    {c.current && (
+                    <p className="font-bold text-civic-ink">{en ? m.nameEn : m.nameMr}</p>
+                    {m.current && (
                       <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">
-                        {en ? "Current Commissioner" : "विद्यमान आयुक्त"}
+                        {en ? "Current Deputy Mayor" : "विद्यमान उपमहापौर"}
                       </span>
                     )}
                   </td>
                   <td className="px-4 py-4 text-center text-muted-foreground whitespace-nowrap">
-                    {d(c.from)} {en ? "to" : "ते"}{" "}
-                    {c.to === "Present"
+                    {d(m.from)} {en ? "to" : "ते"}{" "}
+                    {m.to === "Present"
                       ? <span className="bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full text-xs">{en ? "Till Date" : "आजतागायत"}</span>
-                      : d(c.to)}
+                      : d(m.to)}
                   </td>
                   <td className="px-4 py-4 text-center">
                     <div
-                      className={c.img ? "cursor-zoom-in" : ""}
-                      onClick={() => c.img && setSelected({
-                        src: c.img,
-                        name: en ? c.nameEn : c.nameMr,
-                        role: en ? "Hon'ble Commissioner" : "मा. आयुक्त",
+                      className={m.img ? "cursor-zoom-in" : ""}
+                      onClick={() => m.img && setSelected({
+                        src: m.img,
+                        name: en ? m.nameEn : m.nameMr,
+                        role: en ? "Hon'ble Deputy Mayor" : "मा. उपमहापौर",
                       })}
                     >
-                      <Avatar src={c.img} name={en ? c.nameEn : c.nameMr} />
+                      <Avatar src={m.img} name={en ? m.nameEn : m.nameMr} />
                     </div>
                   </td>
                 </tr>
@@ -82,31 +82,31 @@ const CommissionersList = () => {
         </div>
 
         <div className="md:hidden flex flex-col gap-3">
-          {COMMISSIONERS.map((c) => (
-            <div key={c.sr} className={`rounded-2xl border border-border bg-white shadow-sm p-4 flex gap-4 items-start ${c.current ? "border-civic-gold/40 bg-civic-gold/5" : ""}`}>
+          {DEPUTY_MAYORS.map((m) => (
+            <div key={m.sr} className={`rounded-2xl border border-border bg-white shadow-sm p-4 flex gap-4 items-start ${m.current ? "border-civic-gold/40 bg-civic-gold/5" : ""}`}>
               <div
-                className={c.img ? "cursor-zoom-in shrink-0" : "shrink-0"}
-                onClick={() => c.img && setSelected({
-                  src: c.img,
-                  name: en ? c.nameEn : c.nameMr,
-                  role: en ? "Hon'ble Commissioner" : "मा. आयुक्त",
+                className={m.img ? "cursor-zoom-in shrink-0" : "shrink-0"}
+                onClick={() => m.img && setSelected({
+                  src: m.img,
+                  name: en ? m.nameEn : m.nameMr,
+                  role: en ? "Hon'ble Deputy Mayor" : "मा. उपमहापौर",
                 })}
               >
-                <Avatar src={c.img} name={en ? c.nameEn : c.nameMr} size="sm" />
+                <Avatar src={m.img} name={en ? m.nameEn : m.nameMr} size="sm" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-bold text-civic-ink text-sm leading-snug">{en ? c.nameEn : c.nameMr}</p>
-                  <span className="text-[10px] font-bold text-muted-foreground shrink-0">#{d(c.sr)}</span>
+                  <p className="font-bold text-civic-ink text-sm leading-snug">{en ? m.nameEn : m.nameMr}</p>
+                  <span className="text-[10px] font-bold text-muted-foreground shrink-0">#{d(m.sr)}</span>
                 </div>
-                {c.current && (
+                {m.current && (
                   <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">
-                    {en ? "Current Commissioner" : "विद्यमान आयुक्त"}
+                    {en ? "Current Deputy Mayor" : "विद्यमान उपमहापौर"}
                   </span>
                 )}
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {d(c.from)} {en ? "to" : "ते"}{" "}
-                  {c.to === "Present" ? (en ? "Till Date" : "आजतागायत") : d(c.to)}
+                  {d(m.from)} {en ? "to" : "ते"}{" "}
+                  {m.to === "Present" ? (en ? "Till Date" : "आजतागायत") : d(m.to)}
                 </p>
               </div>
             </div>
@@ -124,4 +124,4 @@ const CommissionersList = () => {
     </Layout>
   );
 };
-export default CommissionersList;
+export default DeputyMayorsList;

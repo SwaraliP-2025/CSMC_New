@@ -93,6 +93,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://chhsambhajinagarmc.org/CSMC_New/deputy-mayors-list</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://chhsambhajinagarmc.org/CSMC_New/commissioners-list</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

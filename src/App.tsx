@@ -38,6 +38,7 @@ import Organization from "./pages/site/Organization.tsx";
 import DPPlan from "./pages/site/DPPlan.tsx";
 import CommissionersList from "./pages/site/CommissionersList.tsx";
 import MayorsList from "./pages/site/MayorsList.tsx";
+import DeputyMayorsList from "./pages/site/DeputyMayorsList.tsx";
 import DepartmentDetail from "./pages/site/DepartmentDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import UserManual from "./pages/site/UserManual.tsx";
@@ -103,6 +104,7 @@ const App = () => (
             <Route path="/dp-plan" element={<DPPlan />} />
             <Route path="/commissioners-list" element={<CommissionersList />} />
             <Route path="/mayors-list" element={<MayorsList />} />
+            <Route path="/deputy-mayors-list" element={<DeputyMayorsList />} />
             <Route path="/user-manual" element={<UserManual />} />
             <Route path="/prabhag-2025" element={<Prabhag2025 />} />
             <Route path="/digital-repository" element={<DigitalRepository />} />
