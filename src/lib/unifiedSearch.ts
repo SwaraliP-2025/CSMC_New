@@ -35,8 +35,23 @@ export function recordHref(record: CivicRecord): { to: string; external: boolean
   return { to: `/digital-repository/${record.id}`, external: false };
 }
 
-export function downloadCivicRecord(record: CivicRecord) {
-  const text = [
+/** Open a generated PDF blob in a new tab (preview). Falls back to download if popups are blocked. */
+export function openPdfBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, "_blank", "noopener,noreferrer");
+  if (!win) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  window.setTimeout(() => URL.revokeObjectURL(url), 120_000);
+}
+
+function civicRecordPdfText(record: CivicRecord) {
+  return [
     "Chhatrapati Sambhajinagar Municipal Corporation",
     "Official public document",
     "",
@@ -60,8 +75,27 @@ export function downloadCivicRecord(record: CivicRecord) {
     "This PDF is generated from the CSMC Municipal Knowledge Repository.",
     `Record ID: ${record.id}`,
   ].join("\n");
+}
 
-  const blob = buildSimplePdf(text);
+export function civicRecordPdfBlob(record: CivicRecord) {
+  return buildSimplePdf(civicRecordPdfText(record));
+}
+
+/** Preview / open the document PDF in a new browser tab. */
+export function openCivicRecordPdf(record: CivicRecord) {
+  const blob = civicRecordPdfBlob(record);
+  openPdfBlob(blob, pdfFilename(record.titleEn, record.id));
+}
+
+/** Open the actual document when possible; returns false if caller should open the detail page. */
+export function tryOpenCivicDocument(record: CivicRecord): boolean {
+  if (!record.downloadable) return false;
+  openCivicRecordPdf(record);
+  return true;
+}
+
+export function downloadCivicRecord(record: CivicRecord) {
+  const blob = civicRecordPdfBlob(record);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;

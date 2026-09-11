@@ -798,7 +798,7 @@ export const SiteTourGuide = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex shrink-0 items-center gap-2 border-b border-[#003366]/15 bg-[#003366] px-4 py-3 text-white sm:px-5">
-                <Globe2 className="h-5 w-5 shrink-0 text-[#ff9933]" aria-hidden />
+                <Globe2 className="h-5 w-5 shrink-0 text-[hsl(var(--civic-gold))]" aria-hidden />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-bold tracking-wide">{TOUR_UI.guideTitle[L]}</p>
                   <p className="text-[11px] text-white/75">{TOUR_UI.stepOf(step + 1, total, L)}</p>
@@ -814,7 +814,7 @@ export const SiteTourGuide = () => {
                     onClick={() => setLang("mr")}
                     aria-pressed={L === "mr"}
                     className={`min-h-[36px] rounded-md px-2.5 py-1.5 transition-colors ${
-                      L === "mr" ? "bg-[#ff9933] text-[#003366]" : "text-white/90 hover:bg-white/15"
+                      L === "mr" ? "bg-[hsl(var(--civic-gold))] text-[#003366]" : "text-white/90 hover:bg-white/15"
                     }`}
                   >
                     {TOUR_UI.langMr}

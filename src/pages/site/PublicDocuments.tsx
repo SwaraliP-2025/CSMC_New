@@ -2,8 +2,9 @@ import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { FileText, Download, Search, Filter, ExternalLink } from "lucide-react";
+import { FileText, Download, Search, Filter, ExternalLink, Eye } from "lucide-react";
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
+import { openPdfBlob } from "@/lib/unifiedSearch";
 import { useLang } from "@/i18n/LanguageContext";
 
 type DocCategory = "all" | "resolutions" | "minutes" | "rti" | "budget" | "tenders";
@@ -68,7 +69,7 @@ const CATEGORY_COLORS: Record<Exclude<DocCategory, "all">, string> = {
 const isDocCategory = (v: string | null): v is DocCategory =>
   !!v && ["all", "resolutions", "minutes", "rti", "budget", "tenders"].includes(v);
 
-function downloadPrototypePdf(doc: Doc) {
+function prototypePdfBlob(doc: Doc) {
   const text = [
     "Chhatrapati Sambhajinagar Municipal Corporation",
     "Prototype sample PDF — not an official gazette copy",
@@ -88,7 +89,15 @@ function downloadPrototypePdf(doc: Doc) {
     .filter(Boolean)
     .join("\n");
 
-  const blob = buildSimplePdf(text);
+  return buildSimplePdf(text);
+}
+
+function openPrototypePdf(doc: Doc) {
+  openPdfBlob(prototypePdfBlob(doc), pdfFilename(doc.title, `pub-doc-${doc.id}`));
+}
+
+function downloadPrototypePdf(doc: Doc) {
+  const blob = prototypePdfBlob(doc);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -200,14 +209,24 @@ const PublicDocuments = () => {
                   )}
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => downloadPrototypePdf(doc)}
-                title="Prototype sample PDF"
-                className="flex items-center gap-1.5 text-xs font-bold text-civic-blue hover:text-white hover:bg-civic-blue px-3 py-1.5 rounded-lg border border-civic-blue transition-all shrink-0"
-              >
-                <Download className="h-3.5 w-3.5" /> {doc.format === "excel" ? "Excel sample" : "PDF sample"}
-              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => openPrototypePdf(doc)}
+                  title={en ? "Preview document" : "दस्तऐवज पूर्वावलोकन"}
+                  className="flex items-center gap-1.5 text-xs font-bold text-white bg-civic-blue hover:bg-civic-blue/90 px-3 py-1.5 rounded-lg transition-all"
+                >
+                  <Eye className="h-3.5 w-3.5" /> {en ? "Preview" : "पहा"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => downloadPrototypePdf(doc)}
+                  title={en ? "Download sample PDF" : "नमुना PDF डाउनलोड"}
+                  className="flex items-center gap-1.5 text-xs font-bold text-civic-blue hover:text-white hover:bg-civic-blue px-3 py-1.5 rounded-lg border border-civic-blue transition-all"
+                >
+                  <Download className="h-3.5 w-3.5" /> {doc.format === "excel" ? (en ? "Excel" : "एक्सेल") : "PDF"}
+                </button>
+              </div>
             </div>
           ))}
         </div>

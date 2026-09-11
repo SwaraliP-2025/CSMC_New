@@ -4,8 +4,8 @@ import {
   ArrowLeft,
   BookOpen,
   Building2,
-  Clock,
   Download,
+  Eye,
   FileText,
   Languages,
   Share2,
@@ -23,7 +23,13 @@ import {
   LANGUAGE_LABELS,
   officialDocumentId,
 } from "@/data/civicLabels";
-import { documentPermalink, downloadCivicRecord, formatCivicDate, recordHref } from "@/lib/unifiedSearch";
+import {
+  documentPermalink,
+  downloadCivicRecord,
+  formatCivicDate,
+  openCivicRecordPdf,
+  recordHref,
+} from "@/lib/unifiedSearch";
 import { shareLink } from "@/lib/bookmarks";
 import type { CivicRecord } from "@/types/civicCatalog";
 
@@ -38,6 +44,7 @@ const DocumentViewer = () => {
 
   useEffect(() => {
     setViewEn(enSite);
+    setSimple(false);
   }, [enSite, id]);
 
   const related = useMemo(
@@ -75,10 +82,10 @@ const DocumentViewer = () => {
   }
 
   const en = viewEn;
+  /** AI copy always follows the site language the citizen selected. */
+  const aiEn = enSite;
   const digits = (value: string | number | null | undefined) => localizeDigits(value, en ? "en" : "mr");
   const docId = officialDocumentId(record.id, record.year);
-  const latest = record.versions.find((v) => v.status === "current") ?? record.versions[0];
-  const previous = record.versions.find((v) => v.version !== latest?.version);
 
   return (
     <Layout>
@@ -122,69 +129,34 @@ const DocumentViewer = () => {
                 {en ? record.titleEn : record.titleMr}
               </h1>
 
-              <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-xs mb-6">
-                <MetaRow label={en ? "Department" : "विभाग"} value={en ? record.departmentEn : record.departmentMr} />
-                <MetaRow
-                  label={en ? "Category" : "वर्ग"}
-                  value={en ? CATEGORY_LABELS[record.category].en : CATEGORY_LABELS[record.category].mr}
-                />
-                <MetaRow label={en ? "Published date" : "प्रकाशन दिनांक"} value={formatCivicDate(record.publishedAt, en)} />
-                <MetaRow label={en ? "Last updated" : "शेवटचे अद्यतन"} value={formatCivicDate(record.updatedAt, en)} />
-                <MetaRow
-                  label={en ? "Language" : "भाषा"}
-                  value={en ? LANGUAGE_LABELS[record.language].en : LANGUAGE_LABELS[record.language].mr}
-                />
-                <MetaRow label={en ? "Version" : "आवृत्ती"} value={`v${digits(record.version)}`} />
-                <MetaRow
-                  label={en ? "Status" : "स्थिती"}
-                  value={en ? DOCUMENT_STATUS_LABELS[record.status].en : DOCUMENT_STATUS_LABELS[record.status].mr}
-                />
-                <MetaRow label={en ? "Document ID" : "दस्तऐवज आयडी"} value={digits(docId)} />
-                {record.fileSize && <MetaRow label={en ? "File size" : "फाइल आकार"} value={digits(record.fileSize)} />}
-                <MetaRow
-                  label={en ? "Reading time" : "वाचन वेळ"}
-                  value={en ? `${digits(record.readingMinutes)} min` : `${digits(record.readingMinutes)} मिनिटे`}
-                />
-              </dl>
-
-              <div className="rounded-xl border border-civic-gold/40 bg-civic-gold/10 p-5 mb-5">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-2 flex items-center gap-1">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  {en ? "AI summary" : "एआय सारांश"}
-                  <span className="ml-auto font-medium text-muted-foreground normal-case tracking-normal flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    {en ? `${digits(record.readingMinutes)} min read` : `${digits(record.readingMinutes)} मिनिटे वाचन`}
-                  </span>
-                </p>
-                <p className="text-sm text-foreground/80 leading-relaxed">
-                  {simple ? (en ? record.simpleEn : record.simpleMr) : en ? record.summaryEn : record.summaryMr}
-                </p>
-                {!simple && (
-                  <ul className="mt-3 space-y-1.5">
-                    {(en ? record.highlightsEn : record.highlightsMr).map((h) => (
-                      <li key={h} className="text-sm text-muted-foreground flex gap-2">
-                        <span className="text-civic-gold font-bold">•</span>
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
               <div className="flex flex-wrap gap-2 mb-6">
+                {record.downloadable && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => openCivicRecordPdf(record)}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue/90 transition-all"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                      {en ? "Open document" : "दस्तऐवज उघडा"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => downloadCivicRecord(record)}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground border border-border rounded-lg px-3 py-1.5 hover:border-civic-blue hover:text-civic-blue transition-all"
+                    >
+                      <Download className="h-3.5 w-3.5" />
+                      {en ? "Download PDF" : "PDF डाउनलोड"}
+                    </button>
+                  </>
+                )}
                 <button
                   type="button"
-                  onClick={() => setSimple((v) => !v)}
+                  onClick={() => shareLink(en ? record.titleEn : record.titleMr, documentPermalink(record.id))}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
                 >
-                  <Sparkles className="h-3.5 w-3.5" />
-                  {simple
-                    ? en
-                      ? "Show official summary"
-                      : "अधिकृत सारांश दाखवा"
-                    : en
-                      ? "Explain in simple language"
-                      : "सोप्या भाषेत समजावून सांगा"}
+                  <Share2 className="h-3.5 w-3.5" />
+                  {en ? "Share" : "शेअर"}
                 </button>
                 <button
                   type="button"
@@ -196,50 +168,44 @@ const DocumentViewer = () => {
                 </button>
               </div>
 
-              <div className="rounded-xl border border-border bg-muted/30 p-4 mb-6">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-1 flex items-center gap-1">
-                  <Users className="h-3.5 w-3.5" />
-                  {en ? "Applicable citizens" : "लागू नागरिक"}
-                </p>
-                <p className="text-sm text-foreground/80">{en ? record.applicableEn : record.applicableMr}</p>
-              </div>
-
-              {record.keywords.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {record.keywords.slice(0, 8).map((k) => (
-                    <span key={k} className="text-[10px] px-2 py-0.5 rounded-full bg-civic-blue/8 text-civic-blue font-semibold">
-                      {k}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex flex-wrap gap-2 mb-8">
-                <button
-                  type="button"
-                  onClick={() => shareLink(en ? record.titleEn : record.titleMr, documentPermalink(record.id))}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
-                >
-                  <Share2 className="h-3.5 w-3.5" />
-                  {en ? "Share" : "शेअर"}
-                </button>
-                {record.downloadable && (
+              <div className="rounded-xl border border-civic-gold/40 bg-civic-gold/10 p-5 mb-5">
+                <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-2 flex items-center gap-1">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  {aiEn ? "AI summary" : "एआय सारांश"}
                   <button
                     type="button"
-                    onClick={() => downloadCivicRecord(record)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground border border-border rounded-lg px-3 py-1.5 hover:border-civic-blue hover:text-civic-blue transition-all"
+                    onClick={() => setSimple((v) => !v)}
+                    className="ml-auto font-medium text-muted-foreground normal-case tracking-normal hover:text-civic-blue"
                   >
-                    <Download className="h-3.5 w-3.5" />
-                    {en ? "Download PDF" : "PDF डाउनलोड"}
+                    {simple ? (aiEn ? "Detailed" : "सविस्तर") : aiEn ? "Simpler" : "सोपे"}
                   </button>
+                </p>
+                <p className="text-sm text-foreground/85 leading-relaxed">
+                  {simple
+                    ? aiEn
+                      ? record.simpleEn
+                      : record.simpleMr
+                    : aiEn
+                      ? record.summaryEn
+                      : record.summaryMr}
+                </p>
+                {!simple && (aiEn ? record.highlightsEn : record.highlightsMr).length > 0 && (
+                  <ul className="mt-3 space-y-1">
+                    {(aiEn ? record.highlightsEn : record.highlightsMr).slice(0, 3).map((h) => (
+                      <li key={h} className="text-xs text-muted-foreground flex gap-2">
+                        <span className="text-civic-gold font-bold">•</span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
 
-              <article className="bg-civic-light border border-border rounded-xl p-6 md:p-8">
+              <article className="bg-civic-light border border-border rounded-xl p-6 md:p-8 mb-5">
                 <div className="flex items-center gap-2 text-civic-blue mb-4 pb-3 border-b border-civic-gold/40">
                   <BookOpen className="h-4 w-4" />
                   <p className="text-xs font-bold uppercase tracking-wide">
-                    {en ? "Read online" : "ऑनलाइन वाचा"}
+                    {en ? "Document text" : "दस्तऐवज मजकूर"}
                   </p>
                 </div>
                 <p className="text-center text-[11px] font-semibold text-muted-foreground mb-6">
@@ -254,17 +220,61 @@ const DocumentViewer = () => {
                 ))}
               </article>
 
+              <details className="rounded-xl border border-border bg-muted/20 px-4 py-3 mb-5 group">
+                <summary className="cursor-pointer list-none flex items-center justify-between gap-2 text-sm font-bold text-civic-blue">
+                  <span>{en ? "Document details (metadata)" : "दस्तऐवज तपशील (मेटाडेटा)"}</span>
+                  <span className="text-xs font-semibold text-muted-foreground group-open:hidden">
+                    {en ? "Show" : "दाखवा"}
+                  </span>
+                  <span className="text-xs font-semibold text-muted-foreground hidden group-open:inline">
+                    {en ? "Hide" : "लपवा"}
+                  </span>
+                </summary>
+                <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-xs mt-3 pt-3 border-t border-border">
+                  <MetaRow label={en ? "Department" : "विभाग"} value={en ? record.departmentEn : record.departmentMr} />
+                  <MetaRow
+                    label={en ? "Category" : "वर्ग"}
+                    value={en ? CATEGORY_LABELS[record.category].en : CATEGORY_LABELS[record.category].mr}
+                  />
+                  <MetaRow label={en ? "Published date" : "प्रकाशन दिनांक"} value={formatCivicDate(record.publishedAt, en)} />
+                  <MetaRow label={en ? "Last updated" : "शेवटचे अद्यतन"} value={formatCivicDate(record.updatedAt, en)} />
+                  <MetaRow
+                    label={en ? "Language" : "भाषा"}
+                    value={en ? LANGUAGE_LABELS[record.language].en : LANGUAGE_LABELS[record.language].mr}
+                  />
+                  <MetaRow
+                    label={en ? "Status" : "स्थिती"}
+                    value={en ? DOCUMENT_STATUS_LABELS[record.status].en : DOCUMENT_STATUS_LABELS[record.status].mr}
+                  />
+                  <MetaRow label={en ? "Document ID" : "दस्तऐवज आयडी"} value={digits(docId)} />
+                  {record.fileSize && (
+                    <MetaRow label={en ? "File size" : "फाइल आकार"} value={digits(record.fileSize)} />
+                  )}
+                  <MetaRow
+                    label={en ? "Reading time" : "वाचन वेळ"}
+                    value={en ? `${digits(record.readingMinutes)} min` : `${digits(record.readingMinutes)} मिनिटे`}
+                  />
+                </dl>
+                <div className="mt-3 rounded-lg border border-border bg-white/70 p-3">
+                  <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-1 flex items-center gap-1">
+                    <Users className="h-3.5 w-3.5" />
+                    {en ? "Applicable citizens" : "लागू नागरिक"}
+                  </p>
+                  <p className="text-sm text-foreground/80">{en ? record.applicableEn : record.applicableMr}</p>
+                </div>
+              </details>
+
               {record.aiFaqs.length > 0 && (
-                <div className="mt-6 rounded-xl border border-border p-5">
+                <div className="rounded-xl border border-border p-5">
                   <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-3 flex items-center gap-1">
                     <Sparkles className="h-3.5 w-3.5" />
-                    {en ? "AI generated FAQs" : "एआय सामान्य प्रश्न"}
+                    {aiEn ? "AI generated FAQs" : "एआय सामान्य प्रश्न"}
                   </p>
                   <dl className="space-y-3">
                     {record.aiFaqs.map((faq) => (
                       <div key={faq.qEn}>
-                        <dt className="text-sm font-semibold text-civic-ink">{en ? faq.qEn : faq.qMr}</dt>
-                        <dd className="text-sm text-muted-foreground mt-0.5">{en ? faq.aEn : faq.aMr}</dd>
+                        <dt className="text-sm font-semibold text-civic-ink">{aiEn ? faq.qEn : faq.qMr}</dt>
+                        <dd className="text-sm text-muted-foreground mt-0.5">{aiEn ? faq.aEn : faq.aMr}</dd>
                       </div>
                     ))}
                   </dl>
@@ -274,54 +284,6 @@ const DocumentViewer = () => {
           </div>
 
           <aside className="space-y-6">
-            <div className="bg-white border border-border rounded-2xl p-5">
-              <h2 className="font-serif text-lg font-bold text-civic-blue mb-3">
-                {en ? "Versions" : "आवृत्त्या"}
-              </h2>
-              <ol className="space-y-3">
-                {record.versions.map((v) => (
-                  <li key={v.version} className="border-l-2 border-civic-blue/20 pl-3">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-civic-ink">v{digits(v.version)}</span>
-                      {v.status === "current" && (
-                        <span className="text-[10px] font-bold bg-civic-blue text-white px-1.5 py-0.5 rounded">
-                          {en ? "Latest" : "नवीनतम"}
-                        </span>
-                      )}
-                      {v.status === "superseded" && (
-                        <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">
-                          {en ? "Previous" : "मागील"}
-                        </span>
-                      )}
-                      {v.status === "archived" && (
-                        <span className="text-[10px] font-bold bg-muted text-muted-foreground px-1.5 py-0.5 rounded">
-                          {en ? "Archived" : "संग्रहित"}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-[11px] text-muted-foreground">
-                      {formatCivicDate(v.publishedAt, en)} ·{" "}
-                      {en ? DOCUMENT_STATUS_LABELS[v.status].en : DOCUMENT_STATUS_LABELS[v.status].mr}
-                    </p>
-                    <p className="text-xs text-foreground/70 mt-0.5">{en ? v.notesEn : v.notesMr}</p>
-                  </li>
-                ))}
-              </ol>
-              {latest && previous && (
-                <div className="mt-4 pt-4 border-t border-border">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-2 flex items-center gap-1">
-                    <Sparkles className="h-3.5 w-3.5" />
-                    {en ? "AI version comparison" : "एआय आवृत्ती तुलना"}
-                  </p>
-                  <p className="text-xs text-foreground/80 leading-relaxed">
-                    {en
-                      ? `Latest v${latest.version} (${formatCivicDate(latest.publishedAt, true)}): ${latest.notesEn} Previous v${previous.version}: ${previous.notesEn}`
-                      : `नवीनतम v${digits(latest.version)}: ${latest.notesMr} मागील v${digits(previous.version)}: ${previous.notesMr}`}
-                  </p>
-                </div>
-              )}
-            </div>
-
             <RelatedBlock title={en ? "Related municipal services" : "संबंधित नागरी सेवा"} items={relatedServices} en={en} />
             <RelatedBlock title={en ? "Related circulars" : "संबंधित परिपत्रके"} items={relatedCirculars} en={en} />
             <RelatedBlock title={en ? "Related documents" : "संबंधित दस्तऐवज"} items={relatedDocuments} en={en} />

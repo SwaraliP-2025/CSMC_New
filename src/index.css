@@ -26,8 +26,8 @@ All colors MUST be HSL.
     /* Secondary Blue #245A9E */
     --primary-glow: 213 63% 38%;
 
-    /* Saffron / Orange #F0A020 */
-    --secondary: 37 87% 53%;
+    /* Saffron / Orange — slightly brighter/lighter than #F0A020 (not darker) */
+    --secondary: 37 92% 56%;
     --secondary-foreground: 0 0% 10%;
 
     /* Soft Section Background #F7F8FA */
@@ -50,7 +50,7 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     /* CSMC Civic Tokens */
-    --civic-gold: 37 87% 53%; /* #F0A020 saffron */
+    --civic-gold: 37 92% 56%; /* slightly brighter saffron ~#F2AD2E */
     --civic-blue: 216 61% 26%; /* #1A3A6B institutional navy */
     --civic-red: 0 66% 47%; /* #C62828 alerts */
     --civic-white: 0 0% 100%;
@@ -58,8 +58,8 @@ All colors MUST be HSL.
     --civic-light: 220 20% 97%; /* #F7F8FA soft sections */
     --civic-saffron-soft: 44 100% 92%; /* #FFF4D6 */
 
-    --gradient-heritage: linear-gradient(135deg, hsl(216 61% 26%) 0%, hsl(37 87% 53%) 100%);
-    --gradient-saffron: linear-gradient(180deg, hsl(37 87% 53%) 0%, hsl(32 90% 48%) 100%);
+    --gradient-heritage: linear-gradient(135deg, hsl(216 61% 26%) 0%, hsl(37 92% 56%) 100%);
+    --gradient-saffron: linear-gradient(180deg, hsl(37 92% 56%) 0%, hsl(33 90% 50%) 100%);
     /* Left-weighted hero overlay: readable title on left, brighter image on right */
     --gradient-overlay: linear-gradient(
       105deg,
@@ -392,7 +392,7 @@ body > .skiptranslate {
 }
 
 .csmc-translate-select:hover {
-  border-color: rgba(240, 160, 32, 0.55);
+  border-color: hsl(var(--civic-gold) / 0.75);
   background-color: rgba(255, 255, 255, 0.12);
 }
 

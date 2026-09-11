@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
-import { Youtube, Facebook, Instagram, ChevronRight } from "lucide-react";
-import { OFFICIAL } from "@/data/officialLinks";
+import { Youtube, Facebook, Instagram, ChevronRight, ExternalLink } from "lucide-react";
+import { CSMC_OFFICE_MAPS_URL, OFFICIAL } from "@/data/officialLinks";
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -92,13 +92,32 @@ export const Footer = () => {
       <div className="container py-12 grid gap-10 md:grid-cols-4">
         <div>
           <h3 className="font-bold text-base mb-5 text-white">{en ? "Address" : "पत्ता"}</h3>
-          <p className={`text-white/65 text-sm leading-relaxed mb-5 ${en ? "" : "devanagari"}`}>
+          <p className={`text-white/65 text-sm leading-relaxed mb-4 ${en ? "" : "devanagari"}`}>
             {en ? (
               <>Chhatrapati Sambhajinagar Municipal Corporation,<br />Main Building, Town Hall,<br />behind Head Post Office,<br />Chhatrapati SambhajiNagar,<br />Maharashtra, India, 431001</>
             ) : (
               <>छत्रपती संभाजीनगर महानगरपालिका,<br />मुख्य इमारत, टाऊन हॉल,<br />हेड पोस्ट ऑफिसच्या मागे,<br />छत्रपती संभाजीनगर,<br />महाराष्ट्र, भारत, ४३१००१</>
             )}
           </p>
+          <a
+            href={CSMC_OFFICE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-5 inline-flex flex-col gap-0.5 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-left hover:border-civic-gold/60 hover:bg-white/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold"
+          >
+            <span className="text-sm font-bold text-white">
+              {en ? "CSMC Main Building" : "CSMC मुख्य इमारत"}
+            </span>
+            <span className={`text-xs text-white/60 ${en ? "" : "devanagari"}`}>
+              {en
+                ? "Town Hall, Chhatrapati Sambhajinagar"
+                : "टाऊन हॉल, छत्रपती संभाजीनगर"}
+            </span>
+            <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold text-civic-gold">
+              {en ? "View on Google Maps" : "Google Maps वर पहा"}
+              <ExternalLink className="h-3 w-3" aria-hidden />
+            </span>
+          </a>
           <div className="flex gap-3">
             <a href="https://youtube.com/@gbmeeting?si=XNiAe54yA50ljkqZ" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Youtube className="h-4 w-4" />

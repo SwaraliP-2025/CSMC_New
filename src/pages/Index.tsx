@@ -1,10 +1,8 @@
 import { HomeLayout } from "@/components/site/Layout";
 import { GovtLinksCarousel } from "@/components/site/GovtLinksCarousel";
 import { useLang } from "@/i18n/LanguageContext";
-import { OFFICIAL } from "@/data/officialLinks";
-import { ArrowRight, FileText, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, FileSearch, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight, Facebook, Instagram, ExternalLink } from "lucide-react";
+import { ArrowRight, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight, Facebook, Instagram, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { NoticesPopup, BannerPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
 import { FacilityCategoryCard } from "@/components/site/FacilityCategoryCard";
@@ -120,8 +118,8 @@ const LeaderCard = ({
 
 // Icons mapped to each quick service in order:
 // Property Tax, Pay Water Tax, Birth Certificate, Death Certificate,
-// Trade License, Building Permission, Grievance, Tenders,
-// Know Application Status, Gunthewari Challan, Ramai Awas Yojana, All Services
+// Trade License, Building Permission, Grievance,
+// Gunthewari Challan, Ramai Awas Yojana, All Services
 const icons = [
   Receipt,           // Property Tax
   Droplets,          // Pay Water Tax
@@ -130,8 +128,6 @@ const icons = [
   Store,             // Trade License
   Building2,         // Building Permission
   MessageSquareWarning, // Grievance
-  FileText,          // Tenders
-  FileSearch,        // Know Application Status
   Calculator,        // Gunthewari Challan
   HousePlus,         // Ramai Awas Yojana
   LayoutGrid,        // All Services
@@ -488,6 +484,38 @@ const Index = () => {
       {/* Stay Connected — social feeds */}
       <SocialMediaSection />
 
+      {/* Leadership / Dignitaries — directly below Stay Connected */}
+      <section ref={leadershipRef} className="py-16 bg-white">
+        <div className="container">
+          {/* Top row: President, PM, and state leadership */}
+          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
+            {topRowLeaders.map((person, i) => (
+              <LeaderCard
+                key={person.nameEn}
+                person={person}
+                index={i}
+                isVisible={isVisible}
+                en={en}
+                onSelect={setSelectedLeader}
+              />
+            ))}
+          </div>
+          {/* Last three (Mayor, Deputy Mayor, Commissioner) centered below */}
+          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2 mt-6">
+            {bottomRowLeaders.map((person, i) => (
+              <LeaderCard
+                key={person.nameEn}
+                person={person}
+                index={topRowLeaders.length + i}
+                isVisible={isVisible}
+                en={en}
+                onSelect={setSelectedLeader}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Quick services — clean separation from hero (no negative margin overlap) */}
       <section className="py-16 md:py-20 bg-white relative border-t border-border/60">
         <div className="container">
@@ -561,38 +589,6 @@ const Index = () => {
         </div>
       </section> */}
 
-      {/* Leadership Section */}
-      <section ref={leadershipRef} className="py-16 bg-white">
-        <div className="container">
-          {/* Top row: President, PM, and state leadership */}
-          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
-            {topRowLeaders.map((person, i) => (
-              <LeaderCard
-                key={person.nameEn}
-                person={person}
-                index={i}
-                isVisible={isVisible}
-                en={en}
-                onSelect={setSelectedLeader}
-              />
-            ))}
-          </div>
-          {/* Last three (Mayor, Deputy Mayor, Commissioner) centered below */}
-          <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2 mt-6">
-            {bottomRowLeaders.map((person, i) => (
-              <LeaderCard
-                key={person.nameEn}
-                person={person}
-                index={topRowLeaders.length + i}
-                isVisible={isVisible}
-                en={en}
-                onSelect={setSelectedLeader}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Stats — moved to About CSMC page */}
       {/* <section className="py-24 bg-gradient-heritage text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 heritage-pattern" />
@@ -662,26 +658,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24">
-        <div className="container">
-          <div className="relative rounded-[3rem] bg-gradient-heritage p-10 md:p-20 overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 opacity-10 heritage-pattern" />
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-civic-gold/20 rounded-full -ml-32 -mb-32 blur-3xl" />
-
-            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div className="text-center lg:text-left">
-                <h3 className="font-serif text-3xl md:text-5xl text-white font-bold mb-6">{t.cta.title}</h3>
-                <p className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed">{t.cta.body}</p>
-              </div>
-              <Button asChild size="lg" className="bg-civic-gold text-civic-ink hover:bg-white px-10 py-8 text-xl font-bold shadow-2xl transition-all hover:scale-105 shrink-0">
-                <a href={OFFICIAL.samadhaan} target="_blank" rel="noopener noreferrer">{t.cta.btn}</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
       {/* Leader Modal */}
       {selectedLeader && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0" onClick={() => setSelectedLeader(null)}>

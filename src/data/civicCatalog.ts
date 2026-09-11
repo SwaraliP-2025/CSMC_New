@@ -51,6 +51,26 @@ type RecInput = Omit<
   aiFaqs?: AiFaq[];
 };
 
+function preciseSummaryEn(description: string, preview: string) {
+  const what = description.trim().replace(/\s+/g, " ").replace(/\.$/, "");
+  const focus = preview.trim().replace(/\s+/g, " ").replace(/\.$/, "");
+  if (!focus) return `${what}.`;
+  if (what.toLowerCase().includes(focus.toLowerCase().slice(0, Math.min(24, focus.length)))) {
+    return `${what}.`;
+  }
+  return `${what}. Key point: ${focus}.`;
+}
+
+function preciseSummaryMr(description: string, preview: string) {
+  const what = description.trim().replace(/\s+/g, " ").replace(/\.$/, "");
+  const focus = preview.trim().replace(/\s+/g, " ").replace(/\.$/, "");
+  if (!focus) return `${what}.`;
+  if (what.includes(focus.slice(0, Math.min(16, focus.length)))) {
+    return `${what}.`;
+  }
+  return `${what}. मुख्य मुद्दा: ${focus}.`;
+}
+
 const rec = (
   id: string,
   category: CivicRecord["category"],
@@ -89,6 +109,10 @@ const rec = (
       textEn,
       textMr: bodyMr[i] ?? textEn,
     }));
+  const summaryEn =
+    rest.summaryEn ?? preciseSummaryEn(rest.descriptionEn, rest.previewEn);
+  const summaryMr =
+    rest.summaryMr ?? preciseSummaryMr(rest.descriptionMr, rest.previewMr);
   return {
     id,
     category,
@@ -100,10 +124,22 @@ const rec = (
     relatedIds: rest.relatedIds ?? [],
     bodyEn,
     bodyMr,
-    summaryEn: rest.summaryEn ?? rest.descriptionEn,
-    summaryMr: rest.summaryMr ?? rest.descriptionMr,
-    highlightsEn: rest.highlightsEn ?? [rest.previewEn, `Issued by ${rest.departmentEn}.`, `Published ${rest.publishedAt}.`],
-    highlightsMr: rest.highlightsMr ?? [rest.previewMr, `${rest.departmentMr} विभागाने जारी.`, `प्रकाशन ${rest.publishedAt}.`],
+    summaryEn,
+    summaryMr,
+    highlightsEn:
+      rest.highlightsEn ??
+      [
+        rest.previewEn.replace(/\.$/, ""),
+        `Department: ${rest.departmentEn}`,
+        `Published: ${rest.publishedAt}`,
+      ],
+    highlightsMr:
+      rest.highlightsMr ??
+      [
+        rest.previewMr.replace(/\.$/, ""),
+        `विभाग: ${rest.departmentMr}`,
+        `प्रकाशन: ${rest.publishedAt}`,
+      ],
     readingMinutes: rest.readingMinutes ?? Math.max(3, Math.round(words / 160) + 2),
     updatedAt: rest.updatedAt ?? rest.publishedAt,
     keywords,
@@ -117,22 +153,22 @@ const rec = (
       "छत्रपती संभाजीनगरमधील या विषयाशी संबंधित सर्व नागरिक, व्यवसाय व अर्जदार.",
     simpleEn:
       rest.simpleEn ??
-      `${rest.descriptionEn} In short: read this page, then use the related service if you need to apply or pay.`,
+      `In short: ${(rest.previewEn || rest.descriptionEn).trim().replace(/\.$/, "")}.`,
     simpleMr:
       rest.simpleMr ??
-      `${rest.descriptionMr} थोडक्यात: हे पृष्ठ वाचा; अर्ज किंवा भरणा करायचा असल्यास संबंधित सेवा वापरा.`,
+      `थोडक्यात: ${(rest.previewMr || rest.descriptionMr).trim().replace(/\.$/, "")}.`,
     aiFaqs: rest.aiFaqs ?? [
       {
-        qEn: "Who should read this?",
-        aEn: rest.descriptionEn,
-        qMr: "हे कोणी वाचावे?",
-        aMr: rest.descriptionMr,
+        qEn: "What does this document cover?",
+        aEn: summaryEn,
+        qMr: "या दस्तऐवजात काय समाविष्ट आहे?",
+        aMr: summaryMr,
       },
       {
         qEn: "Which department issued this?",
-        aEn: `${rest.departmentEn} department of CSMC.`,
+        aEn: `${rest.departmentEn}, Chhatrapati Sambhajinagar Municipal Corporation.`,
         qMr: "हे कोणत्या विभागाने जारी केले?",
-        aMr: `CSMC चा ${rest.departmentMr} विभाग.`,
+        aMr: `छत्रपती संभाजीनगर महानगरपालिकेचा ${rest.departmentMr} विभाग.`,
       },
     ],
     versions: rest.versions ?? [

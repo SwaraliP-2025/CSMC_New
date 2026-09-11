@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Download, ExternalLink, ArrowRight } from "lucide-react";
+import { Download, ExternalLink, ArrowRight, Eye } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { CATEGORY_LABELS } from "@/data/civicLabels";
 import { localizeDigits } from "@/i18n/digits";
-import { downloadCivicRecord, formatCivicDate } from "@/lib/unifiedSearch";
+import { downloadCivicRecord, formatCivicDate, openCivicRecordPdf } from "@/lib/unifiedSearch";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 export function CivicRecordPreview({
@@ -46,22 +46,39 @@ export function CivicRecordPreview({
           {record.fileSize && <span>• {localizeDigits(record.fileSize, en ? "en" : "mr")}</span>}
         </div>
         <p className="text-sm text-foreground/80 leading-relaxed">
-          {en ? record.descriptionEn : record.descriptionMr}
+          {en ? record.summaryEn : record.summaryMr}
         </p>
         <div className="rounded-xl bg-muted/40 border border-border p-4 text-sm text-muted-foreground leading-relaxed">
           {en ? record.previewEn : record.previewMr}
         </div>
         <div className="flex flex-wrap gap-2 pt-1">
           {record.downloadable && (
-            <button
-              type="button"
-              onClick={() => downloadCivicRecord(record)}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
-            >
-              <Download className="h-3.5 w-3.5" />
-              {en ? "Download PDF" : "PDF डाउनलोड"}
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => openCivicRecordPdf(record)}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue/90 transition-all"
+              >
+                <Eye className="h-3.5 w-3.5" />
+                {en ? "Preview / Open" : "पूर्वावलोकन / उघडा"}
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadCivicRecord(record)}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
+              >
+                <Download className="h-3.5 w-3.5" />
+                {en ? "Download PDF" : "PDF डाउनलोड"}
+              </button>
+            </>
           )}
+          <Link
+            to={`/digital-repository/${record.id}`}
+            onClick={() => onOpenChange(false)}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
+          >
+            {en ? "Read online" : "ऑनलाइन वाचा"} <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
           {record.href &&
             (record.external ? (
               <a

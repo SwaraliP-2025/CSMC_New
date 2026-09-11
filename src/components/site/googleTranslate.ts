@@ -219,3 +219,36 @@ export function applyGoogleTranslateTarget(
 ) {
   setGoogleTranslateTarget(pageLanguage, target);
 }
+
+/**
+ * Re-scan the live DOM after React mounts/updates (navbar leaf links often miss
+ * Google’s first pass on SPAs).
+ */
+export async function refreshGoogleTranslate(
+  containerId = "google_translate_element",
+) {
+  const target = readGoogleTranslateTarget();
+  if (!target) return;
+  const combo = await waitForGoogleTranslateCombo(containerId);
+  if (!combo) return;
+  const apply = (value: string) => {
+    combo.value = value;
+    combo.dispatchEvent(new Event("change"));
+  };
+  apply("");
+  await new Promise<void>((r) => requestAnimationFrame(() => r()));
+  apply(target);
+}
+
+/** Curated Hindi for top navbar when Translate → Hindi (GT often skips legal EN titles). */
+export const NAV_TOP_LABEL_HI: Record<string, string> = {
+  Home: "मुख्य पृष्ठ",
+  Mahanagarpalika: "नगर निगम",
+  "Citizen Services": "नागरिक सेवा",
+  Publications: "प्रकाशन",
+  Contact: "संपर्क",
+  "Right To Information": "सूचना का अधिकार",
+  "Right To Service": "सेवा का अधिकार",
+  "DP Plan": "विकास योजना",
+  "Site Map": "साइट मैप",
+};

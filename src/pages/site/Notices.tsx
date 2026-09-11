@@ -1,8 +1,10 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { Calendar, Download } from "lucide-react";
+import { Calendar, Download, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
+import { openPdfBlob } from "@/lib/unifiedSearch";
 
 const Notices = () => {
   const { t, lang, d } = useLang();
@@ -15,6 +17,25 @@ const Notices = () => {
     { date: "29 Mar 2026", tag: en ? "Recruitment" : "भरती", title: en ? "Engagement of 240 sanitation supervisors — applications open." : "२४० स्वच्छता पर्यवेक्षकांच्या नियुक्तीसाठी अर्ज खुले." },
     { date: "20 Mar 2026", tag: en ? "Notice" : "सूचना", title: en ? "Ward-wise water supply schedule for summer 2026 published." : "उन्हाळा २०२६ साठी प्रभागनिहाय पाणी पुरवठा वेळापत्रक." },
   ];
+
+  const noticePdf = (n: (typeof list)[number], index: number) => {
+    const text = [
+      "Chhatrapati Sambhajinagar Municipal Corporation",
+      "Official notice — prototype sample",
+      "",
+      n.title,
+      "",
+      `Category: ${n.tag}`,
+      `Date: ${n.date}`,
+      "",
+      "This PDF is generated for portal preview. Official signed notices are issued through CSMC channels.",
+    ].join("\n");
+    return {
+      blob: buildSimplePdf(text),
+      name: pdfFilename(n.title.slice(0, 48), `notice-${index + 1}`),
+    };
+  };
+
   return (
     <Layout>
       <PageHeader eyebrow={en ? "Press & PR" : "प्रसिद्धी"} title={t.notices.title} subtitle={en ? "Official announcements, circulars and notices." : "अधिकृत घोषणा, परिपत्रके व सूचना."} />
@@ -32,10 +53,39 @@ const Notices = () => {
                 </div>
                 <p className="text-base md:text-xl font-bold text-civic-ink group-hover:text-civic-blue transition-colors leading-tight">{d(n.title)}</p>
               </div>
-              <Button size="lg" variant="ghost" className="shrink-0 text-civic-blue hover:bg-civic-blue/5 px-4 h-12">
-                <Download className="h-5 w-5 md:mr-2" />
-                <span className="hidden md:inline font-bold">Download PDF</span>
-              </Button>
+              <div className="flex items-center gap-2 shrink-0">
+                <Button
+                  size="lg"
+                  variant="default"
+                  className="bg-civic-blue text-white hover:bg-civic-blue/90 px-4 h-12"
+                  onClick={() => {
+                    const { blob, name } = noticePdf(n, i);
+                    openPdfBlob(blob, name);
+                  }}
+                >
+                  <Eye className="h-5 w-5 md:mr-2" />
+                  <span className="hidden md:inline font-bold">{en ? "Preview" : "पहा"}</span>
+                </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="text-civic-blue hover:bg-civic-blue/5 px-4 h-12"
+                  onClick={() => {
+                    const { blob, name } = noticePdf(n, i);
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = name;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                  }}
+                >
+                  <Download className="h-5 w-5 md:mr-2" />
+                  <span className="hidden md:inline font-bold">{en ? "Download" : "डाउनलोड"}</span>
+                </Button>
+              </div>
             </article>
           ))}
         </div>

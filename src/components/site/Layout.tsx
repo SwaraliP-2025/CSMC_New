@@ -6,6 +6,7 @@ import { AnnouncementBar } from "./AnnouncementBar";
 import { VideoHero } from "./VideoHero";
 import { AppsBar } from "./AppsBar";
 import { CitySkyline } from "./CitySkyline";
+import { VisitCsmc } from "./VisitCsmc";
 import { ChevronUp } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { SiteTourGuide } from "./SiteTourGuide";
@@ -67,6 +68,7 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
     <main id="main" className="flex-1">{children}</main>
     <CitySkyline />
     <AppsBar />
+    <VisitCsmc />
     <Footer />
     <AnnouncementBar />
     <ScrollToTop />
@@ -82,6 +84,7 @@ export const Layout = ({ children }: { children: ReactNode }) => (
     <main id="main" className="flex-1 mb-10 pb-16">{children}</main>
     <CitySkyline />
     <AppsBar />
+    <VisitCsmc />
     <Footer />
     <AnnouncementBar />
     <ScrollToTop />

@@ -11,7 +11,7 @@ import {
   LayoutGrid,
   ChevronLeft,
   ChevronRight,
-  HelpCircle,
+  Globe2,
   type LucideIcon,
 } from "lucide-react";
 import heroEllora from "@/assets/hero-heritage.jpg";
@@ -119,10 +119,10 @@ const HeroQuickPanel = ({
           id={variant === "mobile" ? "csmc-tour-trigger-btn-mobile" : "csmc-tour-trigger-btn"}
           onClick={() => window.dispatchEvent(new CustomEvent("csmc-tour-open"))}
           aria-label={TOUR_UI.fabAria[en ? "en" : "mr"]}
-          className="flex w-full max-w-full items-center gap-1.5 md:gap-2 rounded-full border border-[#ff9933]/85 bg-[#003366] pl-1.5 pr-2.5 py-1 md:pl-3 md:pr-4 md:py-1.5 text-white shadow-md hover:bg-[#00264d] hover:shadow-lg transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff9933]"
+          className="flex w-full max-w-full items-center gap-1.5 md:gap-2 rounded-full border border-[hsl(var(--civic-gold))] bg-[#003366] pl-1.5 pr-2.5 py-1 md:pl-3 md:pr-4 md:py-1.5 text-white shadow-md hover:bg-[#00264d] hover:shadow-lg transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(var(--civic-gold))]"
         >
-          <span className="flex h-6 w-6 md:h-7 md:w-7 shrink-0 items-center justify-center rounded-full bg-[#ff9933]/20 text-[#ff9933]">
-            <HelpCircle className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
+          <span className="flex h-6 w-6 md:h-7 md:w-7 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--civic-gold)/0.22)] text-[hsl(var(--civic-gold))]">
+            <Globe2 className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
           </span>
           <span className="text-[10px] sm:text-[11px] md:text-xs font-bold leading-snug whitespace-nowrap truncate">
             {en ? TOUR_UI.fab.en : TOUR_UI.fab.mr}

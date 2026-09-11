@@ -7,11 +7,37 @@ import { useLang } from "@/i18n/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipArrow } from "@/components/ui/tooltip";
 import { SITE_NAV, isExternalHref, type NavItem } from "@/navigation/siteNav";
+import {
+  NAV_TOP_LABEL_HI,
+  readGoogleTranslateTarget,
+  refreshGoogleTranslate,
+} from "@/components/site/googleTranslate";
 
 const NAV = SITE_NAV;
 
+const NavLabel = ({ text, lock }: { text: string; lock?: boolean }) => (
+  <span
+    className={lock ? "csmc-nav-label notranslate" : "csmc-nav-label"}
+    translate={lock ? "no" : "yes"}
+  >
+    {text}
+  </span>
+);
+
 // ─── Single nav item (desktop) ────────────────────────────────────────────────
-const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en: boolean }) => {
+const NavItemDesktop = ({
+  item,
+  label,
+  resolveLabel,
+  en,
+  lockTop,
+}: {
+  item: NavItem;
+  label: string;
+  resolveLabel: (item: NavItem) => string;
+  en: boolean;
+  lockTop?: boolean;
+}) => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const dropdownTextCls = en ? "text-[12px]" : "text-[14px]";
@@ -19,7 +45,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
   const isActive = item.to ? pathname === item.to : false;
   const isHome = item.to === "/";
   const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
-  const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : label;
+  const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : <NavLabel text={label} lock={lockTop} />;
 
   if (!item.children) {
     if (isExternalHref(item.to, item.external)) return <a href={item.to} target="_blank" rel="noopener noreferrer" className={baseCls} aria-label={label}>{content}</a>;
@@ -29,7 +55,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         <span className={baseCls} onClick={() => {
           window.dispatchEvent(new CustomEvent("open-notices-popup"));
         }}>
-          {label}
+          <NavLabel text={label} lock={lockTop} />
         </span>
       );
     }
@@ -43,24 +69,24 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
       onMouseLeave={() => setOpen(false)}
     >
       <div className={baseCls}>
-        {label}
+        <NavLabel text={label} lock={lockTop} />
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </div>
       {open && (() => {
         const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
         const renderLink = (child: NavItem) => {
-          const childLabel = en ? child.labelEn : child.labelMr;
+          const childLabel = resolveLabel(child);
           const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors rounded-sm`;
           if (isExternalHref(child.to, child.external)) {
             return (
               <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer" className={cls}>
-                {childLabel}
+                <NavLabel text={childLabel} />
               </a>
             );
           }
           return (
             <Link key={child.labelEn} to={child.to!} className={cls}>
-              {childLabel}
+              <NavLabel text={childLabel} />
             </Link>
           );
         };
@@ -70,11 +96,11 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
             <div className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden p-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {item.children!.map(group => {
-                  const groupLabel = en ? group.labelEn : group.labelMr;
+                  const groupLabel = resolveLabel(group);
                   return (
                     <div key={group.labelEn} className="min-w-0">
                       <div className={`px-2 py-1.5 mb-1 ${dropdownTextCls} text-civic-gold font-bold uppercase tracking-wider border-b border-civic-gold/40`}>
-                        {groupLabel}
+                        <NavLabel text={groupLabel} />
                       </div>
                       <div className="flex flex-col">
                         {(group.children ?? []).map(renderLink)}
@@ -90,18 +116,18 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         return (
           <div className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg">
             {item.children!.map(child => {
-              const childLabel = en ? child.labelEn : child.labelMr;
+              const childLabel = resolveLabel(child);
               return (
                 <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                   {isExternalHref(child.to, child.external) ? (
                     <a href={child.to} target="_blank" rel="noopener noreferrer"
                       className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
-                      {childLabel}
+                      <NavLabel text={childLabel} />
                     </a>
                   ) : (
                     <Link to={child.to!}
                       className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
-                      {childLabel}
+                      <NavLabel text={childLabel} />
                     </Link>
                   )}
                 </div>
@@ -121,8 +147,22 @@ export const Header = () => {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [gtTarget, setGtTarget] = useState(() => readGoogleTranslateTarget());
 
   useEffect(() => { setMobileOpen(false); setMobileExpanded(null); }, [pathname]);
+
+  useEffect(() => {
+    setGtTarget(readGoogleTranslateTarget());
+  }, [pathname]);
+
+  // After route changes, ask Google Translate to re-scan the navbar DOM.
+  useEffect(() => {
+    if (!gtTarget) return;
+    const id = window.setTimeout(() => {
+      void refreshGoogleTranslate();
+    }, 400);
+    return () => window.clearTimeout(id);
+  }, [pathname, gtTarget]);
 
   // Website Guide can open/close the mobile menu without hover-only UX.
   useEffect(() => {
@@ -139,7 +179,16 @@ export const Header = () => {
     };
   }, []);
 
-  const label = (item: NavItem) => en ? item.labelEn : item.labelMr;
+  const label = (item: NavItem) => {
+    if (gtTarget === "hi" && NAV_TOP_LABEL_HI[item.labelEn]) {
+      return NAV_TOP_LABEL_HI[item.labelEn];
+    }
+    // While a tourist language is active, prefer English source text so GT can translate it.
+    if (gtTarget && gtTarget !== "mr") {
+      return item.labelEn;
+    }
+    return en ? item.labelEn : item.labelMr;
+  };
   const whatsappLabel = en ? "Smart Chhatrapati Sambhajinagar WhatsApp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट";
 
   return (
@@ -154,8 +203,10 @@ export const Header = () => {
             <h1 className="font-serif text-sm sm:text-base md:text-xl text-civic-blue font-bold tracking-tight">
               {en ? "Chhatrapati Sambhajinagar Municipal Corporation" : "छत्रपती संभाजीनगर महानगरपालिका"}
             </h1>
-            <p className="text-xs md:text-sm text-muted-foreground font-normal hidden sm:block">
-              {en ? "City of Heritage, Vision of Tomorrow" : "शहर वारसाचे, स्वप्न उद्याचे "}
+            <p className="text-[11px] md:text-sm text-muted-foreground font-normal hidden sm:block leading-snug">
+              {en
+                ? "Tourism Capital of Maharashtra · City of Heritage, Vision of Tomorrow"
+                : "महाराष्ट्राची पर्यटन राजधानी · शहर वारसाचे, स्वप्न उद्याचे"}
             </p>
           </div>
         </Link>
@@ -207,11 +258,22 @@ export const Header = () => {
       </div>
 
       {/* Desktop nav */}
-      <nav id="nav" data-tour="main-nav" className="hidden md:block bg-civic-blue">
+      <nav
+        id="nav"
+        data-tour="main-nav"
+        key={`nav-${gtTarget ?? "none"}-${en ? "en" : "mr"}`}
+        className="hidden md:block bg-civic-blue"
+      >
         <div className="w-full flex items-stretch">
           {NAV.map(item => (
             <div key={item.labelEn} className={item.to === "/" ? "shrink-0" : "flex-1"}>
-              <NavItemDesktop item={item} label={label(item)} en={en} />
+              <NavItemDesktop
+                item={item}
+                label={label(item)}
+                resolveLabel={label}
+                en={en}
+                lockTop={gtTarget === "hi"}
+              />
             </div>
           ))}
         </div>
@@ -226,26 +288,26 @@ export const Header = () => {
                 <>
                   <button onClick={() => setMobileExpanded(e => e === item.labelEn ? null : item.labelEn)}
                     className="flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-semibold text-foreground">
-                    {label(item)}
+                    <NavLabel text={label(item)} lock={gtTarget === "hi"} />
                     <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpanded === item.labelEn ? "rotate-180" : ""}`} />
                   </button>
                   {mobileExpanded === item.labelEn && item.children.map(child => (
                     child.children ? (
                       <div key={child.labelEn}>
                         <div className="px-6 py-2 text-xs font-bold uppercase tracking-wider text-civic-blue bg-civic-blue/5 border-b border-border">
-                          {label(child)}
+                          <NavLabel text={label(child)} />
                         </div>
                         {child.children.map(sub => (
                           isExternalHref(sub.to, sub.external) ? (
                             <a key={sub.labelEn} href={sub.to} target="_blank" rel="noopener noreferrer"
                               onClick={() => setMobileOpen(false)}
                               className="block px-10 py-2.5 text-sm border-b border-border text-muted-foreground">
-                              {label(sub)}
+                              <NavLabel text={label(sub)} />
                             </a>
                           ) : (
                             <Link key={sub.labelEn} to={sub.to!} onClick={() => setMobileOpen(false)}
                               className="block px-10 py-2.5 text-sm border-b border-border text-muted-foreground">
-                              {label(sub)}
+                              <NavLabel text={label(sub)} />
                             </Link>
                           )
                         ))}
@@ -254,12 +316,12 @@ export const Header = () => {
                       <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer"
                         onClick={() => setMobileOpen(false)}
                         className="block px-8 py-2.5 text-sm border-b border-border text-muted-foreground">
-                        {label(child)}
+                        <NavLabel text={label(child)} />
                       </a>
                     ) : (
                       <Link key={child.labelEn} to={child.to!} onClick={() => setMobileOpen(false)}
                         className="block px-8 py-2.5 text-sm border-b border-border text-muted-foreground">
-                        {label(child)}
+                        <NavLabel text={label(child)} />
                       </Link>
                     )
                   ))}
@@ -267,12 +329,12 @@ export const Header = () => {
               ) : isExternalHref(item.to, item.external) ? (
                 <a href={item.to} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}
                   className="block px-4 py-3 text-sm border-b border-border text-foreground">
-                  {label(item)}
+                  <NavLabel text={label(item)} lock={gtTarget === "hi"} />
                 </a>
               ) : (
                 <Link to={item.to!} onClick={() => setMobileOpen(false)}
                   className={`block px-4 py-3 text-sm border-b border-border ${pathname === item.to ? "bg-primary/5 text-primary font-semibold" : "text-foreground"}`}>
-                  {label(item)}
+                  <NavLabel text={label(item)} lock={gtTarget === "hi"} />
                 </Link>
               )}
             </div>
