@@ -49,6 +49,8 @@ import DigitalRepository from "./pages/site/DigitalRepository.tsx";
 import DocumentViewer from "./pages/site/DocumentViewer.tsx";
 import CityAlerts from "./pages/site/CityAlerts.tsx";
 import HowToReach from "./pages/site/HowToReach.tsx";
+import VisualStoryDetail from "./pages/VisualStoryDetail.tsx";
+import PhotoGallery from "./pages/site/PhotoGallery.tsx";
 import {
   PrivacyPolicy,
   DisclaimerPage,
@@ -116,6 +118,8 @@ const App = () => (
             <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
             <Route path="/website-policies" element={<WebsitePolicies />} />
             <Route path="/how-to-reach" element={<HowToReach />} />
+            <Route path="/gallery" element={<PhotoGallery />} />
+            <Route path="/stories/:slug" element={<VisualStoryDetail />} />
             <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

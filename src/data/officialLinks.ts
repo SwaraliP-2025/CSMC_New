@@ -14,8 +14,16 @@ export const OFFICIAL = {
   /** RTS dashboard scrolled to License Department (Chromium text fragment) */
   tradeLicense:
     "https://rts.chhsambhajinagarmc.org/links/dashboard#:~:text=LICENSE%20DEPARTMENT",
+  tradeLicenseNew:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTITradeLicenceNew.do",
+  tradeLicenseRenewal:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTITradeLicenceRenewal.do",
   birthCertificate: "https://rts.chhsambhajinagarmc.org/links/birth-certificate",
   deathCertificate: "https://rts.chhsambhajinagarmc.org/links/death-certificate",
+  waterConnectionNew:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtsapplication/newRTINewWaterConnectionApplication.do",
+  propertyTaxAssessment:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTIPropertyTaxRecovery.do",
   gunthewari: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2",
   complaintForm: "https://aurangabadmahapalika.org/csms/complaint_form.php",
   trackComplaint: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250",

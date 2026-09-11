@@ -14,10 +14,10 @@ import {
   Globe2,
   type LucideIcon,
 } from "lucide-react";
-import heroEllora from "@/assets/hero-heritage.jpg";
 import emblem from "@/assets/cs-emblem.png";
 import { HERO_BANNER_SLIDES } from "@/data/heroBanners";
 import { TOUR_UI } from "@/data/tourContent";
+import { FeaturedStoriesCarousel } from "@/components/site/FeaturedStoriesCarousel";
 
 const HERO_QUICK_ACTIONS: {
   labelEn: string;
@@ -77,27 +77,8 @@ const HERO_QUICK_ACTIONS: {
   },
 ];
 
-/** Home-tab background images (auto-rotate + manual controls). */
-const HERO_BG_SLIDES: {
-  src: string;
-  altEn: string;
-  altMr: string;
-  objectPos: string;
-  fit: "cover" | "contain";
-}[] = [
-  {
-    src: heroEllora,
-    altEn: "Kailasa Temple, Ellora Caves — Chhatrapati Sambhajinagar",
-    altMr: "कैलास मंदिर, वेरूळ लेणी — छत्रपती संभाजीनगर",
-    objectPos: "object-[center_22%]",
-    fit: "cover",
-  },
-];
-
 /** Banner auto-advance. */
 const BANNER_SLIDE_MS = 5000;
-/** Hero background auto-advance. */
-const HERO_SLIDE_MS = 5000;
 
 const HeroQuickPanel = ({
   en,
@@ -108,7 +89,7 @@ const HeroQuickPanel = ({
 }) => {
   const outerClass =
     variant === "mobile"
-      ? "relative z-10 mt-6 w-full max-w-md mx-auto md:hidden"
+      ? "relative z-10 mt-2 w-full max-w-md mx-auto md:hidden"
       : "absolute z-20 right-2 sm:right-3 md:right-6 top-24 bottom-14 hidden md:flex items-center justify-end max-w-[calc(100%-0.75rem)]";
 
   return (
@@ -169,12 +150,10 @@ export const VideoHero = () => {
   const en = lang === "en";
   const [tab, setTab] = useState<"hero" | "banners">("hero");
   const [bannerIdx, setBannerIdx] = useState(0);
-  const [heroIdx, setHeroIdx] = useState(0);
 
   const slides = HERO_BANNER_SLIDES;
   const slide = slides[bannerIdx] ?? slides[0];
   const slideCount = slides.length;
-  const heroCount = HERO_BG_SLIDES.length;
 
   const goPrev = useCallback(() => {
     setBannerIdx((i) => (i - 1 + slideCount) % slideCount);
@@ -183,14 +162,6 @@ export const VideoHero = () => {
   const goNext = useCallback(() => {
     setBannerIdx((i) => (i + 1) % slideCount);
   }, [slideCount]);
-
-  const goHeroPrev = useCallback(() => {
-    setHeroIdx((i) => (i - 1 + heroCount) % heroCount);
-  }, [heroCount]);
-
-  const goHeroNext = useCallback(() => {
-    setHeroIdx((i) => (i + 1) % heroCount);
-  }, [heroCount]);
 
   // Banner notices: always auto-advance every 5s while tab is active
   useEffect(() => {
@@ -201,15 +172,6 @@ export const VideoHero = () => {
     return () => window.clearInterval(id);
   }, [tab, slideCount]);
 
-  // Hero backgrounds: auto-advance when more than one image
-  useEffect(() => {
-    if (tab !== "hero" || heroCount <= 1) return;
-    const id = window.setInterval(() => {
-      setHeroIdx((i) => (i + 1) % heroCount);
-    }, HERO_SLIDE_MS);
-    return () => window.clearInterval(id);
-  }, [tab, heroCount]);
-
   useEffect(() => {
     if (tab !== "banners") return;
     const onKey = (e: KeyboardEvent) => {
@@ -219,16 +181,6 @@ export const VideoHero = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [tab, goPrev, goNext]);
-
-  useEffect(() => {
-    if (tab !== "hero") return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") goHeroPrev();
-      if (e.key === "ArrowRight") goHeroNext();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [tab, goHeroPrev, goHeroNext]);
 
   const title = en ? slide.titleEn : slide.titleMr;
   const subtitle = en ? slide.subtitleEn : slide.subtitleMr;
@@ -292,87 +244,16 @@ export const VideoHero = () => {
         </button>
       </div>
 
-      {/* Hero image tab */}
+      {/* Featured stories / heritage hero */}
       {tab === "hero" && (
-        <section
-          className="relative min-h-[32rem] sm:min-h-[38rem] md:min-h-[max(75vh,40rem)] flex flex-col md:block items-stretch overflow-hidden w-full pb-6 md:pb-12"
-          aria-roledescription="carousel"
-          aria-label={en ? "Heritage hero images" : "वारसा मुख्य प्रतिमा"}
-        >
-          <div className="absolute inset-0 w-full h-full bg-[#122440]">
-            {HERO_BG_SLIDES.map((bg, i) => (
-              <img
-                key={bg.src}
-                src={bg.src}
-                alt={i === heroIdx ? (en ? bg.altEn : bg.altMr) : ""}
-                aria-hidden={i !== heroIdx}
-                className={`absolute inset-0 w-full h-full ${bg.fit === "contain" ? "object-contain" : "object-cover"} ${bg.objectPos} transition-opacity duration-700 ease-in-out ${
-                  i === heroIdx ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
+        <section className="relative w-full overflow-hidden">
+          <div className="relative min-h-[28rem] sm:min-h-[34rem] md:min-h-[max(75vh,40rem)]">
+            <FeaturedStoriesCarousel />
+            <HeroQuickPanel en={en} variant="desktop" />
           </div>
-          <div className="absolute inset-0 bg-gradient-overlay" />
-          <div className="relative container py-8 sm:py-10 md:py-24 z-10 animate-fade-up flex-1 flex flex-col justify-center">
-            <div className="max-w-3xl pr-0 sm:pr-[min(42%,14rem)] md:pr-[280px]">
-              <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-civic-gold font-bold mb-3 md:mb-4 drop-shadow-md">
-                {t.hero.eyebrow}
-              </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 md:mb-6 text-white drop-shadow-lg whitespace-pre-line">
-                {t.hero.title}
-              </h2>
-              {t.hero.subtitle && (
-                <p className="text-sm md:text-xl text-white/90 max-w-2xl leading-relaxed drop-shadow-md">
-                  {t.hero.subtitle}
-                </p>
-              )}
-            </div>
+          <div className="md:hidden relative z-10 px-4 pb-5 pt-1 bg-civic-blue">
             <HeroQuickPanel en={en} variant="mobile" />
           </div>
-
-          {/* md+: Website Guide + quick services stay in the right column (unchanged layout). */}
-          <HeroQuickPanel en={en} variant="desktop" />
-
-          {heroCount > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={goHeroPrev}
-                aria-label={en ? "Previous hero image" : "मागील मुख्य प्रतिमा"}
-                className="absolute left-2 md:left-4 bottom-16 md:bottom-20 z-20 flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-black/25 text-white/90 backdrop-blur-sm hover:bg-black/45 transition-colors"
-              >
-                <ChevronLeft className="h-5 w-5" aria-hidden />
-              </button>
-              <button
-                type="button"
-                onClick={goHeroNext}
-                aria-label={en ? "Next hero image" : "पुढील मुख्य प्रतिमा"}
-                className="absolute right-2 md:right-4 bottom-16 md:bottom-20 z-20 flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-black/25 text-white/90 backdrop-blur-sm hover:bg-black/45 transition-colors"
-              >
-                <ChevronRight className="h-5 w-5" aria-hidden />
-              </button>
-
-              <div
-                className="absolute bottom-4 md:bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2"
-                role="tablist"
-                aria-label={en ? "Hero images" : "मुख्य प्रतिमा"}
-              >
-                {HERO_BG_SLIDES.map((bg, i) => (
-                  <button
-                    key={bg.src}
-                    type="button"
-                    role="tab"
-                    aria-selected={i === heroIdx}
-                    aria-label={en ? `Image ${i + 1}: ${bg.altEn}` : `प्रतिमा ${i + 1}: ${bg.altMr}`}
-                    onClick={() => setHeroIdx(i)}
-                    className={`rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                      i === heroIdx ? "h-2 w-6 bg-white" : "h-2 w-2 bg-white/45 hover:bg-white/75"
-                    }`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
         </section>
       )}
 

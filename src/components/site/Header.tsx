@@ -15,6 +15,18 @@ import {
 
 const NAV = SITE_NAV;
 
+function pathIsActive(to: string | undefined, pathname: string, external?: boolean) {
+  if (!to || isExternalHref(to, external)) return false;
+  const path = to.split("?")[0];
+  if (path === "/") return pathname === "/";
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
+
+function navSectionActive(item: NavItem, pathname: string): boolean {
+  if (pathIsActive(item.to, pathname, item.external)) return true;
+  return item.children?.some((child) => navSectionActive(child, pathname)) ?? false;
+}
+
 const NavLabel = ({ text, lock }: { text: string; lock?: boolean }) => (
   <span
     className={lock ? "csmc-nav-label notranslate" : "csmc-nav-label"}
@@ -42,9 +54,11 @@ const NavItemDesktop = ({
   const [open, setOpen] = useState(false);
   const dropdownTextCls = en ? "text-[12px]" : "text-[14px]";
 
-  const isActive = item.to ? pathname === item.to : false;
   const isHome = item.to === "/";
-  const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
+  const sectionActive = navSectionActive(item, pathname);
+  const isSelected = isHome ? pathname === "/" : sectionActive || open;
+  const selectedCls = isHome ? "csmc-nav-selected-home" : "csmc-nav-selected";
+  const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide csmc-nav-tab transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isSelected ? selectedCls : ""}`;
   const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : <NavLabel text={label} lock={lockTop} />;
 
   if (!item.children) {
@@ -59,7 +73,7 @@ const NavItemDesktop = ({
         </span>
       );
     }
-    return <Link to={item.to!} className={baseCls} aria-label={label} title={label}>{content}</Link>;
+    return <Link to={item.to!} className={baseCls} aria-label={label} title={label} aria-current={isSelected ? "page" : undefined}>{content}</Link>;
   }
 
   return (
@@ -68,7 +82,7 @@ const NavItemDesktop = ({
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <div className={baseCls}>
+      <div className={baseCls} aria-current={isSelected ? "true" : undefined}>
         <NavLabel text={label} lock={lockTop} />
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </div>
@@ -287,7 +301,11 @@ export const Header = () => {
               {item.children ? (
                 <>
                   <button onClick={() => setMobileExpanded(e => e === item.labelEn ? null : item.labelEn)}
-                    className="flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-semibold text-foreground">
+                    className={`flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-semibold ${
+                      navSectionActive(item, pathname) || mobileExpanded === item.labelEn
+                        ? "csmc-nav-selected"
+                        : "text-foreground"
+                    }`}>
                     <NavLabel text={label(item)} lock={gtTarget === "hi"} />
                     <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpanded === item.labelEn ? "rotate-180" : ""}`} />
                   </button>
@@ -333,7 +351,13 @@ export const Header = () => {
                 </a>
               ) : (
                 <Link to={item.to!} onClick={() => setMobileOpen(false)}
-                  className={`block px-4 py-3 text-sm border-b border-border ${pathname === item.to ? "bg-primary/5 text-primary font-semibold" : "text-foreground"}`}>
+                  className={`block px-4 py-3 text-sm border-b border-border ${
+                    navSectionActive(item, pathname)
+                      ? item.to === "/"
+                        ? "csmc-nav-selected-home font-semibold"
+                        : "csmc-nav-selected font-semibold"
+                      : "text-foreground"
+                  }`}>
                   <NavLabel text={label(item)} lock={gtTarget === "hi"} />
                 </Link>
               )}

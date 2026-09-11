@@ -406,3 +406,27 @@ body > .skiptranslate {
   background: hsl(var(--civic-white));
   font-weight: 500;
 }
+
+/*
+ * Navbar gold — derived from --civic-gold / --civic-saffron-soft so
+ * color-blind mode follows the remapped tokens. Kept outside @layer so
+ * it is not dropped by Tailwind and wins over text-white utilities.
+ */
+.csmc-nav-tab {
+  color: #fff;
+}
+
+.csmc-nav-selected,
+.csmc-nav-tab:hover:not(.csmc-nav-selected-home) {
+  background-color: color-mix(
+    in srgb,
+    hsl(var(--civic-gold)) 70%,
+    hsl(var(--civic-saffron-soft))
+  );
+  color: hsl(var(--civic-ink));
+}
+
+.csmc-nav-selected-home {
+  background-color: hsl(var(--civic-gold));
+  color: hsl(var(--civic-ink));
+}

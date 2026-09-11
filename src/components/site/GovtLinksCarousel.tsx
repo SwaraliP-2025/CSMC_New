@@ -90,6 +90,7 @@ export const GovtLinksCarousel = () => {
 
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     timerRef.current = setInterval(() => {
       setCurrent(c => (c + 1) % total);
     }, INTERVAL);
@@ -105,33 +106,46 @@ export const GovtLinksCarousel = () => {
   const visibleLinks = Array.from({ length: VISIBLE }, (_, i) => LINKS[(current + i) % total]);
 
   return (
-    <section className="bg-[#fff8f0] border-2 border-civic-gold/60 py-6 mx-4 md:mx-8 rounded-lg shadow-md mb-6">
+    <section
+      className="bg-[#fff8f0] border-2 border-civic-gold/60 py-10 md:py-14 mx-4 md:mx-8 rounded-lg shadow-md mb-6"
+      onMouseEnter={() => { if (timerRef.current) clearInterval(timerRef.current); }}
+      onMouseLeave={startTimer}
+      onFocus={() => { if (timerRef.current) clearInterval(timerRef.current); }}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) startTimer();
+      }}
+    >
       <div className="container">
-        <div className="text-center mb-4">
-          <p className="text-[10px] uppercase text-civic-red font-bold mb-1">
+        <div className="text-center mb-8">
+          <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-2">
             {en ? "Related Websites" : "इतर संबंधित संकेतस्थळे"}
           </p>
-          <h2 className="font-serif text-lg md:text-xl text-civic-blue font-bold">
+          <h2 className="font-serif text-2xl md:text-3xl text-civic-blue font-bold">
             {en ? "Government Portals" : "शासकीय पोर्टल"}
           </h2>
+          <p className="mt-2 text-sm text-muted-foreground max-w-xl mx-auto">
+            {en
+              ? "Official gateways to national and state government services."
+              : "राष्ट्रीय व राज्य शासकीय सेवांचे अधिकृत प्रवेशद्वार."}
+          </p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
           {visibleLinks.map((link, i) => (
             <a
               key={`${current}-${i}`}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-2 bg-white border-2 border-transparent hover:border-civic-gold rounded-xl p-3 shadow-sm hover:shadow-md transition-all group"
+              className="flex flex-col items-center gap-3 bg-white border-2 border-transparent hover:border-civic-gold rounded-xl px-4 py-5 shadow-sm hover:shadow-md transition-all group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
+              aria-label={en ? `${link.nameEn} (opens in a new tab)` : `${link.nameMr} (नवीन टॅबमध्ये उघडेल)`}
             >
-              {/* Logo image with colored placeholder fallback */}
-              <div className="w-16 h-12 flex items-center justify-center rounded-lg overflow-hidden bg-gray-50">
+              <div className="w-24 h-16 flex items-center justify-center rounded-lg overflow-hidden bg-gray-50">
                 <img
                   src={link.logo}
-                  alt={link.nameEn}
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+                  alt=""
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform motion-reduce:transform-none"
                   onError={(e) => {
                     const el = e.currentTarget;
                     el.style.display = "none";
@@ -141,7 +155,7 @@ export const GovtLinksCarousel = () => {
                   }}
                 />
               </div>
-              <p className="text-[10px] font-bold text-civic-ink text-center leading-tight group-hover:text-civic-blue transition-colors">
+              <p className="text-xs md:text-sm font-bold text-civic-ink text-center leading-tight group-hover:text-civic-blue transition-colors">
                 {en ? link.nameEn : link.nameMr}
               </p>
             </a>
@@ -149,14 +163,17 @@ export const GovtLinksCarousel = () => {
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-1.5 mt-3">
+        <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label={en ? "Government portal groups" : "शासकीय पोर्टल गट"}>
           {LINKS.map((_, i) => (
             <button
               key={i}
+              type="button"
               onClick={() => goTo(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2.5 rounded-full transition-all ${
-                i === current ? "bg-civic-gold w-5" : "bg-civic-blue/30 hover:bg-civic-blue/60 w-2.5"
+              aria-label={en ? `Show portal group ${i + 1}` : `पोर्टल गट ${i + 1} दाखवा`}
+              aria-selected={i === current}
+              role="tab"
+              className={`h-2.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue ${
+                i === current ? "bg-civic-gold w-6" : "bg-civic-blue/30 hover:bg-civic-blue/60 w-2.5"
               }`}
             />
           ))}

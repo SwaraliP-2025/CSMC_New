@@ -40,6 +40,8 @@ const routeLabels: Record<string, string> = {
   "accessibility-statement": "Accessibility Statement",
   "website-policies": "Website Policies",
   "how-to-reach": "How to Reach",
+  stories: "Photo Gallery",
+  gallery: "Photo Gallery",
 };
 
 export const PageHeader = ({
@@ -85,6 +87,7 @@ export const PageHeader = ({
             const path = "/" + segments.slice(0, i + 1).join("/");
             const label = routeLabels[seg] ?? seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " ");
             const isLast = i === segments.length - 1;
+            const to = seg === "stories" && !isLast ? "/gallery" : path;
             return (
               <span key={path} className="flex items-center gap-1">
                 <ChevronRight className={`h-3 w-3 ${dark ? "opacity-60" : "opacity-40"}`} />
@@ -94,10 +97,10 @@ export const PageHeader = ({
                   </span>
                 ) : (
                   <Link
-                    to={path}
+                    to={to}
                     className={`transition-colors ${dark ? "hover:text-white" : "hover:text-civic-blue"}`}
                   >
-                    {label}
+                    {en && seg === "stories" ? "Photo Gallery" : !en && seg === "stories" ? "छायाचित्र दालन" : label}
                   </Link>
                 )}
               </span>

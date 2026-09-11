@@ -1,5 +1,6 @@
 import { HomeLayout } from "@/components/site/Layout";
 import { GovtLinksCarousel } from "@/components/site/GovtLinksCarousel";
+import { GallerySection } from "@/components/site/GallerySection";
 import { useLang } from "@/i18n/LanguageContext";
 import { ArrowRight, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight, Facebook, Instagram, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -419,10 +420,6 @@ const Index = () => {
   const { t, lang } = useLang();
   const en = lang === "en";
   const leadershipRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const scrollGallery = (dir: "left" | "right") => {
-    if (galleryRef.current) galleryRef.current.scrollBy({ left: dir === "left" ? -440 : 440, behavior: "smooth" });
-  };
   const [isVisible, setIsVisible] = useState(false);
   const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
   const [touristPlaces, setTouristPlaces] = useState<TouristPlaceRecord[]>([]);
@@ -609,54 +606,7 @@ const Index = () => {
       </section> */}
 
       {/* Gallery Section */}
-      <section className="py-12 bg-civic-light">
-        <div className="container">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-1">{en ? "Photo Gallery" : "छायाचित्र दालन"}</p>
-              <h2 className="font-serif text-2xl md:text-3xl text-civic-blue font-bold">{en ? "Corporation in Pictures" : "महानगरपालिका छायाचित्रांत"}</h2>
-            </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => scrollGallery("left")}
-                className="w-9 h-9 rounded-full bg-civic-blue text-white flex items-center justify-center hover:bg-civic-gold hover:text-civic-ink transition-colors shadow-md">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-              </button>
-              <button onClick={() => scrollGallery("right")}
-                className="w-9 h-9 rounded-full bg-civic-blue text-white flex items-center justify-center hover:bg-civic-gold hover:text-civic-ink transition-colors shadow-md">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
-              </button>
-              <Link to="/explore"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full border-2 border-civic-blue text-civic-blue font-bold text-xs hover:bg-civic-blue hover:text-white transition-all">
-                {en ? "View All" : "सर्व पहा"} <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </div>
-          <div ref={galleryRef} className="flex gap-4 overflow-x-auto pb-3" style={{ scrollbarWidth: "none", scrollBehavior: "smooth" }}>
-            {[
-              { label: en ? "General Body Meeting" : "सर्वसाधारण सभा", bg: "from-civic-blue to-blue-800" },
-              { label: en ? "Road Work Inauguration" : "रस्ते कामाचे उद्घाटन", bg: "from-amber-700 to-amber-500" },
-              { label: en ? "Swachh Bharat Drive" : "स्वच्छ भारत अभियान", bg: "from-green-700 to-green-500" },
-              { label: en ? "Water Supply Project" : "पाणी पुरवठा प्रकल्प", bg: "from-cyan-700 to-cyan-500" },
-              { label: en ? "Tree Plantation Drive" : "वृक्षारोपण अभियान", bg: "from-emerald-700 to-emerald-500" },
-              { label: en ? "Health Camp" : "आरोग्य शिबिर", bg: "from-red-700 to-red-500" },
-              { label: en ? "Smart City ICCC Launch" : "स्मार्ट सिटी ICCC उद्घाटन", bg: "from-purple-700 to-purple-500" },
-              { label: en ? "Cleanliness Drive" : "स्वच्छता मोहीम", bg: "from-orange-700 to-orange-500" },
-              { label: en ? "Award Ceremony" : "पुरस्कार सोहळा", bg: "from-yellow-700 to-yellow-500" },
-            ].map((item, i) => (
-              <div key={i}
-                className={`relative rounded-2xl overflow-hidden bg-gradient-to-br ${item.bg} group cursor-pointer shrink-0`}
-                style={{ width: "200px", height: "200px" }}>
-                <div className="absolute inset-0 opacity-10"
-                  style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "10px 10px" }} />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-colors" />
-                <div className="absolute inset-0 flex items-end p-3">
-                  <span className="text-white font-bold text-xs drop-shadow-md bg-black/30 px-2 py-1 rounded-lg">{item.label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <GallerySection />
 
       {/* Leader Modal */}
       {selectedLeader && (

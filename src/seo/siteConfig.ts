@@ -234,6 +234,15 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Site Map | CSMC",
     description: "Site map of the official CSMC municipal corporation portal.",
   },
+  "/gallery": {
+    path: "/gallery",
+    title: "Photo Gallery | CSMC",
+    titleMr: "छायाचित्र दालन | CSMC",
+    description:
+      "Civic programmes, meetings and public activities of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr:
+      "छत्रपती संभाजीनगर महानगरपालिकेचे नागरी कार्यक्रम, बैठका व सार्वजनिक उपक्रम.",
+  },
   "/digital-repository": {
     path: "/digital-repository",
     title: "Municipal Knowledge Repository | CSMC",
