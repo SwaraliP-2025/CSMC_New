@@ -1,22 +1,902 @@
 [
   {
     "id": "school-001",
-    "name": "CSMC Primary School No. 1",
-    "address": "CIDCO Sector 5, Sambhajinagar",
-    "phone": "0240-5566778",
-    "timings": "9:00 AM - 4:00 PM",
-    "latitude": "19.8700",
-    "longitude": "75.3260",
-    "googleMapsUrl": "https://maps.google.com/?q=19.8700,75.3260"
+    "name": "Kendriya Prathamik school",
+    "address": "Begampura",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+school+Begampura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
   },
   {
     "id": "school-002",
-    "name": "CSMC Secondary School No. 3",
-    "address": "Garkheda Road, Sambhajinagar",
-    "phone": "0240-6677889",
-    "timings": "9:00 AM - 4:00 PM",
-    "latitude": "19.8600",
-    "longitude": "75.3150",
-    "googleMapsUrl": "https://maps.google.com/?q=19.8600,75.3150"
+    "name": "Prathamik school urdu",
+    "address": "Arif colony",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+school+urdu+Arif+colony+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
+  },
+  {
+    "id": "school-003",
+    "name": "Prathamik school",
+    "address": "Bhavsingpura",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+school+Bhavsingpura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
+  },
+  {
+    "id": "school-004",
+    "name": "Padegaoan Prathamil school",
+    "address": "Padegaoan",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Padegaoan+Prathamil+school+Padegaoan+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
+  },
+  {
+    "id": "school-005",
+    "name": "Prathamik School",
+    "address": "Mittitha",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Mittitha+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
+  },
+  {
+    "id": "school-006",
+    "name": "Kendriya Prathamik School",
+    "address": "Jubili Park",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Jubili+Park+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
+  },
+  {
+    "id": "school-007",
+    "name": "Prathami School Badi Girni",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathami+School+Badi+Girni+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-008",
+    "name": "Prathamik School Juna Bazar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Juna+Bazar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 1"
+      }
+    ]
+  },
+  {
+    "id": "school-009",
+    "name": "Prathamik School NageshwarWadi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+NageshwarWadi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-010",
+    "name": "Prathamik School Manzurpura",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Manzurpura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-011",
+    "name": "Kendriya Prathamik School Kiradpura 1",
+    "address": "Kiradpura",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Kiradpura+1+Kiradpura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 3"
+      }
+    ]
+  },
+  {
+    "id": "school-012",
+    "name": "Prathamik School Kiradpura 2",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Kiradpura+2+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 3"
+      }
+    ]
+  },
+  {
+    "id": "school-013",
+    "name": "Kendriya Prathamik School Kiradpura 3",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Kiradpura+3+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 3"
+      }
+    ]
+  },
+  {
+    "id": "school-014",
+    "name": "Prathamik School chelipura",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+chelipura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-015",
+    "name": "Prathamik School Yashodhara colony",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Yashodhara+colony+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 3"
+      }
+    ]
+  },
+  {
+    "id": "school-016",
+    "name": "Prathamik School N11",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+N11+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 4"
+      }
+    ]
+  },
+  {
+    "id": "school-017",
+    "name": "Prathamik School Ashok nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Ashok+nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 5"
+      }
+    ]
+  },
+  {
+    "id": "school-018",
+    "name": "Prathamik School Brijwadi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Brijwadi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 5"
+      }
+    ]
+  },
+  {
+    "id": "school-019",
+    "name": "Prathamik School Naregaon Marathi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Naregaon+Marathi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 5"
+      }
+    ]
+  },
+  {
+    "id": "school-020",
+    "name": "Prathamik School Naregaon Urdu",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Naregaon+Urdu+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 5"
+      }
+    ]
+  },
+  {
+    "id": "school-021",
+    "name": "Kendriya Prathamik School Mukundwadi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Mukundwadi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 6",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 6"
+      }
+    ]
+  },
+  {
+    "id": "school-022",
+    "name": "Prathamik School Chikalthana",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Chikalthana+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 6",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 6"
+      }
+    ]
+  },
+  {
+    "id": "school-023",
+    "name": "Prathamik School Sanjay Nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Sanjay+Nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 6",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 6"
+      }
+    ]
+  },
+  {
+    "id": "school-024",
+    "name": "Kendriya Prathamik School Priyadarshini",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Priyadarshini+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 8"
+      }
+    ]
+  },
+  {
+    "id": "school-025",
+    "name": "Prathamik School Ganesh Colony Urdu",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Ganesh+Colony+Urdu+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-026",
+    "name": "Prathamik School Eknath Nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Eknath+Nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 9"
+      }
+    ]
+  },
+  {
+    "id": "school-027",
+    "name": "Kendriya Prathamik School Bansilal Nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Bansilal+Nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 9"
+      }
+    ]
+  },
+  {
+    "id": "school-028",
+    "name": "Prathamik School Garkheda",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Garkheda+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 7",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 7"
+      }
+    ]
+  },
+  {
+    "id": "school-029",
+    "name": "Prathamik School Shah Bazar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Shah+Bazar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 3"
+      }
+    ]
+  },
+  {
+    "id": "school-030",
+    "name": "Prathamik School Padampura",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Padampura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 9"
+      }
+    ]
+  },
+  {
+    "id": "school-031",
+    "name": "Prathamik School Osmanpura",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Osmanpura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 9"
+      }
+    ]
+  },
+  {
+    "id": "school-032",
+    "name": "Prathamik School Silk Milk",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Silk+Milk+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 8"
+      }
+    ]
+  },
+  {
+    "id": "school-033",
+    "name": "Prathamik School Paithan Gate",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Paithan+Gate+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-034",
+    "name": "Prathamik School Silli Khana",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Silli+Khana+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-035",
+    "name": "Prathamik School Samtha Nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Samtha+Nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-036",
+    "name": "Prathamik School Rohidaspura",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Rohidaspura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-037",
+    "name": "Kendriya Prathamik School Baijipura",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Baijipura+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 7",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 7"
+      }
+    ]
+  },
+  {
+    "id": "school-038",
+    "name": "Prathamik School Kailash Nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Kailash+Nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 9"
+      }
+    ]
+  },
+  {
+    "id": "school-039",
+    "name": "Prathamik School Rozabagh",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Rozabagh+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 4"
+      }
+    ]
+  },
+  {
+    "id": "school-040",
+    "name": "Prathamik School Nutan Colony",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Nutan+Colony+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 2"
+      }
+    ]
+  },
+  {
+    "id": "school-041",
+    "name": "Kendriya Prathamik School Harsul Gaon",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Harsul+Gaon+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 4"
+      }
+    ]
+  },
+  {
+    "id": "school-042",
+    "name": "Prathamik School Harsul vasat",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Harsul+vasat+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 4"
+      }
+    ]
+  },
+  {
+    "id": "school-043",
+    "name": "Kendriya Prathamik School Banewadi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+Banewadi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 8"
+      }
+    ]
+  },
+  {
+    "id": "school-044",
+    "name": "Prathamik School Vithkhada",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Vithkhada+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 8"
+      }
+    ]
+  },
+  {
+    "id": "school-045",
+    "name": "Prathamik School Kanchanwadi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Kanchanwadi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 8"
+      }
+    ]
+  },
+  {
+    "id": "school-046",
+    "name": "Prathamik School Nakshatrawadi",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Nakshatrawadi+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 8"
+      }
+    ]
+  },
+  {
+    "id": "school-047",
+    "name": "Kendriya Prathamik School N12",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+N12+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 4"
+      }
+    ]
+  },
+  {
+    "id": "school-048",
+    "name": "Kendriya Prathamik School N7",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Kendriya+Prathamik+School+N7+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 5"
+      }
+    ]
+  },
+  {
+    "id": "school-049",
+    "name": "Prathamik School Vithal Nagar",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Vithal+Nagar+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 6",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 6"
+      }
+    ]
+  },
+  {
+    "id": "school-050",
+    "name": "Prathamik School Harsul Urdu",
+    "address": "",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Prathamik+School+Harsul+Urdu+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "Zone 4"
+      }
+    ]
   }
 ]

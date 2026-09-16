@@ -1,22 +1,56 @@
 [
   {
     "id": "fire-001",
-    "name": "Central Fire Station",
-    "address": "Main Road, Sambhajinagar",
-    "phone": "0240-9990011",
-    "timings": "24 Hours",
-    "latitude": "19.8855",
-    "longitude": "75.3388",
-    "googleMapsUrl": "https://maps.google.com/?q=19.8855,75.3388"
+    "name": "Padampura Fire Station",
+    "address": "Railway Station Rd, Shriram Nagar, Padampura, Aurangabad, Maharashtra 431005",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Padampura+Fire+Station+Railway+Station+Rd%2C+Shriram+Nagar%2C+Padampura%2C+Aurangabad%2C+Maharashtra+431005+Chhatrapati+Sambhajinagar",
+    "zone": "Ward 103",
+    "details": [
+      {
+        "labelEn": "Ward",
+        "labelMr": "प्रभाग",
+        "value": "103"
+      }
+    ]
   },
   {
     "id": "fire-002",
-    "name": "North Fire Station",
-    "address": "Pathardi Phata, Sambhajinagar",
-    "phone": "0240-9990022",
-    "timings": "24 Hours",
-    "latitude": "19.9050",
-    "longitude": "75.3175",
-    "googleMapsUrl": "https://maps.google.com/?q=19.9050,75.3175"
+    "name": "7 Hill Fire Station",
+    "address": "M G M, Aurangabad, Maharashtra 431003",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=7+Hill+Fire+Station+M+G+M%2C+Aurangabad%2C+Maharashtra+431003+Chhatrapati+Sambhajinagar",
+    "zone": "Ward 65",
+    "details": [
+      {
+        "labelEn": "Ward",
+        "labelMr": "प्रभाग",
+        "value": "65"
+      }
+    ]
+  },
+  {
+    "id": "fire-003",
+    "name": "MIDC Fire Station",
+    "address": "MIDC Industrial Area, Chilkalthana, Aurangabad, Maharashtra 431006",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=MIDC+Fire+Station+MIDC+Industrial+Area%2C+Chilkalthana%2C+Aurangabad%2C+Maharashtra+431006+Chhatrapati+Sambhajinagar",
+    "zone": "Ward 38",
+    "details": [
+      {
+        "labelEn": "Ward",
+        "labelMr": "प्रभाग",
+        "value": "38"
+      }
+    ]
   }
 ]

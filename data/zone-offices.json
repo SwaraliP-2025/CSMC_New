@@ -1,32 +1,164 @@
 [
   {
     "id": "zone-001",
-    "name": "Zone A1 – Town Hall",
-    "address": "Town Hall, Chhatrapati Sambhajinagar",
-    "phone": "0240-2481001",
-    "timings": "10:00 AM - 6:00 PM",
-    "latitude": "19.89408",
-    "longitude": "75.31156",
-    "googleMapsUrl": "https://maps.google.com/?q=19.89408,75.31156"
+    "name": "Zone Office 1",
+    "address": "Town Hall",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+1+Town+Hall+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "1"
+      }
+    ]
   },
   {
     "id": "zone-002",
-    "name": "Zone G2 – Mondha Naka Sillekhana",
-    "address": "Mondha Naka Sillekhana, Chhatrapati Sambhajinagar",
-    "phone": "0240-2482001",
-    "timings": "10:00 AM - 6:00 PM",
-    "latitude": "19.88206",
-    "longitude": "75.33200",
-    "googleMapsUrl": "https://maps.google.com/?q=19.88206,75.33200"
+    "name": "Zone Office 2",
+    "address": "Sillekhana",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+2+Sillekhana+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "2"
+      }
+    ]
   },
   {
-    "id": "zone-010",
-    "name": "Zone J10 – Railway Station",
-    "address": "Railway Station area (Hamalwada), Chhatrapati Sambhajinagar",
-    "phone": "0240-2490001",
-    "timings": "10:00 AM - 6:00 PM",
-    "latitude": "19.855355",
-    "longitude": "75.311797",
-    "googleMapsUrl": "https://maps.google.com/?q=19.855355,75.311797"
+    "id": "zone-003",
+    "name": "Zone Office 3",
+    "address": "Central Naka",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+3+Central+Naka+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "id": "zone-004",
+    "name": "Zone Office 4",
+    "address": "Near Saubhagya Mangal Karyalay",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+4+Near+Saubhagya+Mangal+Karyalay+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "id": "zone-005",
+    "name": "Zone Office 5 & 6",
+    "address": "Jalgaon Road",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+5+%26+6+Jalgaon+Road+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5 & 6",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "5 & 6"
+      }
+    ]
+  },
+  {
+    "id": "zone-006",
+    "name": "Zone Office 7",
+    "address": "Near Jawahar Colony Police Station",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+7+Near+Jawahar+Colony+Police+Station+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 7",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "7"
+      }
+    ]
+  },
+  {
+    "id": "zone-007",
+    "name": "Zone Office 8",
+    "address": "Beed By Pass",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+8+Beed+By+Pass+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "8"
+      }
+    ]
+  },
+  {
+    "id": "zone-008",
+    "name": "Zone Office 9",
+    "address": "Jalna Road",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+9+Jalna+Road+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "9"
+      }
+    ]
+  },
+  {
+    "id": "zone-009",
+    "name": "Zone Office 10",
+    "address": "Raj Nagar Railway Station Road",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+10+Raj+Nagar+Railway+Station+Road+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 10",
+    "details": [
+      {
+        "labelEn": "Zone",
+        "labelMr": "झोन",
+        "value": "10"
+      }
+    ]
   }
 ]
