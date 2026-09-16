@@ -54,6 +54,8 @@ export const OFFICIAL = {
   railway:
     "https://www.google.com/maps/place/Chhatrapati+Sambhajinagar+Railway+Station",
   nulm: "https://chhsambhajinagarmc.org/nulm-department",
+  /** Ramai Awas Yojana housing scheme portal */
+  ramaiAwas: "https://chhsambhajinagarmc.org/RAMAI/ws/user/login.do",
 } as const;
 
 export type ServiceEntry = {

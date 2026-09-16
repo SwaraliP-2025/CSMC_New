@@ -108,9 +108,14 @@ export const FeaturedStoriesCarousel = () => {
 
   const fadeMs = reduced ? 0 : TRANSITION_MS;
   const title = current ? (en ? current.titleEn : current.titleMr) : "";
-  const liveLabel = en
-    ? `Slide ${index + 1} of ${count}: ${title}`
-    : `स्लाइड ${index + 1} / ${count}: ${title}`;
+  // Heritage slides stay image-only visually; announce position without site names.
+  const liveLabel = heritage
+    ? en
+      ? `Photograph ${index + 1} of ${count}`
+      : `छायाचित्र ${index + 1} / ${count}`
+    : en
+      ? `Slide ${index + 1} of ${count}: ${title}`
+      : `स्लाइड ${index + 1} / ${count}: ${title}`;
 
   return (
     <div
@@ -214,19 +219,29 @@ export const FeaturedStoriesCarousel = () => {
             role="tablist"
             aria-label={en ? "Hero photographs" : "मुख्य छायाचित्रे"}
           >
-            {stories.map((story, i) => (
+            {stories.map((story, i) => {
+              const heritageDot = isHeritageStory(story);
+              const dotLabel = heritageDot
+                ? en
+                  ? `Photograph ${i + 1}`
+                  : `छायाचित्र ${i + 1}`
+                : en
+                  ? `Photograph ${i + 1}: ${story.titleEn}`
+                  : `छायाचित्र ${i + 1}: ${story.titleMr}`;
+              return (
               <button
                 key={story.id}
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={en ? `Photograph ${i + 1}: ${story.titleEn}` : `छायाचित्र ${i + 1}: ${story.titleMr}`}
+                aria-label={dotLabel}
                 onClick={() => goTo(i)}
                 className={`rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                   i === index ? "h-2 w-6 bg-white" : "h-2 w-2 bg-white/45 hover:bg-white/75"
                 }`}
               />
-            ))}
+              );
+            })}
           </div>
 
           <button

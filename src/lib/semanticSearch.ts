@@ -333,7 +333,7 @@
 //   ].filter((p) => p.text);
 // }
 
-import { CIVIC_CATALOG } from "@/data/civicCatalog";
+import { getGlobalSearchIndex } from "@/lib/searchIndex";
 import { CATEGORY_LABELS, SEARCH_GROUP_ORDER, searchGroupFor } from "@/data/civicLabels";
 import { fromDevanagariDigits } from "@/i18n/digits";
 import { expandSearchQuery } from "@/lib/searchAliases";
@@ -548,11 +548,11 @@ const INTENT: {
   },
   {
     phrases: [
-      "public facilities", "facilities", "hospital", "school", "cfc",
-      "सार्वजनिक सुविधा", "सुविधा", "फॅसिलिटीज", "हॉस्पिटल",
+      "public facilities", "facilities",
+      "सार्वजनिक सुविधा", "सुविधा", "फॅसिलिटीज",
     ],
     actionId: "svc-facilities",
-    relatedIds: [],
+    relatedIds: ["fac-fire-stations", "fac-csmc-schools", "fac-cfcs"],
     actionEn: "View facilities",
     actionMr: "सुविधा पहा",
   },
@@ -623,9 +623,12 @@ const INTENT: {
     actionMr: "संपर्क करा",
   },
   {
-    phrases: ["disaster", "emergency", "fire", "आपत्कालीन", "अग्निशमन", "डिझास्टर", "इमर्जन्सी"],
+    phrases: [
+      "disaster", "emergency", "disaster management",
+      "आपत्कालीन", "आपत्ती व्यवस्थापन", "डिझास्टर", "इमर्जन्सी",
+    ],
     actionId: "svc-disaster",
-    relatedIds: ["con-fire", "con-disaster"],
+    relatedIds: ["con-fire", "con-disaster", "fac-fire-stations"],
     actionEn: "Emergency info",
     actionMr: "आपत्कालीन माहिती",
   },
@@ -674,6 +677,127 @@ const INTENT: {
     relatedIds: ["gr-tax-rebate", "gr-swm"],
     actionEn: "Govt. orders",
     actionMr: "शासन निर्णय",
+  },
+  {
+    phrases: [
+      "fire station", "fire stations", "fire brigade",
+      "अग्निशमन केंद्र", "अग्निशमन केंद्रे", "फायर स्टेशन",
+    ],
+    actionId: "fac-fire-stations",
+    relatedIds: ["svc-facilities", "svc-disaster", "con-fire"],
+    actionEn: "View fire stations",
+    actionMr: "अग्निशमन केंद्रे पहा",
+  },
+  {
+    phrases: [
+      "csmc schools", "municipal schools", "schools", "school",
+      "शाळा", "CSMC शाळा", "स्कूल",
+    ],
+    actionId: "fac-csmc-schools",
+    relatedIds: ["svc-facilities"],
+    actionEn: "View schools",
+    actionMr: "शाळा पहा",
+  },
+  {
+    phrases: [
+      "citizen facilitation centre", "citizen facilitation centers", "cfc", "cfcs",
+      "नागरिक सुविधा केंद्र", "नागरिक सुविधा केंद्रे", "सीएफसी",
+    ],
+    actionId: "fac-cfcs",
+    relatedIds: ["svc-facilities"],
+    actionEn: "View CFCs",
+    actionMr: "CFC पहा",
+  },
+  {
+    phrases: [
+      "police station", "police stations",
+      "पोलीस ठाणे", "पोलीस स्टेशन",
+    ],
+    actionId: "fac-police-stations",
+    relatedIds: ["svc-facilities"],
+    actionEn: "View police stations",
+    actionMr: "पोलीस ठाणे पहा",
+  },
+  {
+    phrases: [
+      "hospital", "hospitals", "csmc hospital",
+      "रुग्णालय", "हॉस्पिटल", "CSMC रुग्णालय",
+    ],
+    actionId: "fac-csmc-hospitals",
+    relatedIds: ["svc-facilities", "dept-health"],
+    actionEn: "View hospitals",
+    actionMr: "रुग्णालये पहा",
+  },
+  {
+    phrases: [
+      "hoarding", "hoardings", "banner location", "banner locations",
+      "होर्डिंग", "होर्डिंग्ज", "बॅनर ठिकाणे",
+    ],
+    actionId: "fac-hoardings",
+    relatedIds: ["svc-facilities"],
+    actionEn: "View hoardings",
+    actionMr: "होर्डिंग्ज पहा",
+  },
+  {
+    phrases: ["gis", "city gis", "city map", "municipal map", "जीआयएस", "नकाशा"],
+    actionId: "svc-gis",
+    relatedIds: ["svc-zones-wards"],
+    actionEn: "Open GIS",
+    actionMr: "GIS उघडा",
+  },
+  {
+    phrases: ["tender", "tenders", "e-tender", "etender", "निविदा", "ई-निविदा", "टेंडर"],
+    actionId: "svc-tenders",
+    relatedIds: ["ten-swm", "ten-roads"],
+    actionEn: "View tenders",
+    actionMr: "निविदा पहा",
+  },
+  {
+    phrases: ["budget", "municipal budget", "अर्थसंकल्प", "बजेट"],
+    actionId: "svc-budget",
+    relatedIds: ["bud-2627", "bud-2526"],
+    actionEn: "View budget",
+    actionMr: "अर्थसंकल्प पहा",
+  },
+  {
+    phrases: [
+      "photo gallery", "gallery", "photos", "civic photos",
+      "छायाचित्र दालन", "छायाचित्र", "गॅलरी",
+    ],
+    actionId: "svc-gallery",
+    relatedIds: [],
+    actionEn: "Open gallery",
+    actionMr: "दालन उघडा",
+  },
+  {
+    phrases: [
+      "rts", "right to service", "right to services",
+      "सेवा हक्क", "आरटीएस",
+    ],
+    actionId: "act-rts",
+    relatedIds: ["svc-services-hub", "svc-birth", "svc-death"],
+    actionEn: "RTS information",
+    actionMr: "RTS माहिती",
+  },
+  {
+    phrases: [
+      "ramai", "ramai awas", "ramai awas yojana", "housing scheme",
+      "रमाई", "रमाई आवास", "रमाई आवास योजना", "आवास योजना",
+    ],
+    actionId: "svc-ramai",
+    relatedIds: ["dept-page-ramai-housing"],
+    actionEn: "Open portal",
+    actionMr: "पोर्टल उघडा",
+  },
+  {
+    phrases: [
+      "water supply schedule", "ward-wise water", "summer water schedule",
+      "पाणी पुरवठा वेळापत्रक", "प्रभागनिहाय पाणी",
+    ],
+    actionId: "site-notice-water-schedule",
+    relatedIds: ["svc-notices", "svc-water-tax"],
+    actionEn: "View notice",
+    actionMr: "सूचना पहा",
   },
 ];
 
@@ -800,12 +924,56 @@ function haystack(r: CivicRecord) {
     .toLowerCase();
 }
 
+type PreparedRecord = {
+  record: CivicRecord;
+  titleEn: string;
+  titleMr: string;
+  title: string;
+  hay: string;
+  keywords: string[];
+  ocr: { page: number; textEn: string; textMr: string; blob: string }[];
+};
+
+let preparedCache: PreparedRecord[] | null = null;
+let preparedById: Map<string, CivicRecord> | null = null;
+
+function getPreparedIndex(): PreparedRecord[] {
+  if (preparedCache) return preparedCache;
+  preparedCache = getGlobalSearchIndex().map((r) => {
+    const titleEn = norm(r.titleEn);
+    const titleMr = norm(r.titleMr);
+    return {
+      record: r,
+      titleEn,
+      titleMr,
+      title: `${titleEn} ${titleMr}`.trim(),
+      hay: norm(haystack(r)),
+      keywords: r.keywords.map((k) => norm(k)).filter(Boolean),
+      ocr: r.ocrPages.map((p) => ({
+        page: p.page,
+        textEn: p.textEn,
+        textMr: p.textMr,
+        blob: norm(`${p.textEn} ${p.textMr}`),
+      })),
+    };
+  });
+  preparedById = new Map(preparedCache.map((p) => [p.record.id, p.record]));
+  return preparedCache;
+}
+
+function findPrepared(id: string) {
+  getPreparedIndex();
+  return preparedById?.get(id);
+}
+
 function actionLabel(r: CivicRecord): { en?: string; mr?: string } {
+  if (r.category === "facility") return { en: "View facilities", mr: "सुविधा पहा" };
+  if (r.category === "story") return { en: "View story", mr: "कथा पहा" };
   if (r.category === "service") {
     if (/pay|tax|भरा/i.test(r.titleEn) && !/calculator|कॅल्क्युलेटर/i.test(r.titleEn)) {
       return { en: "Pay online", mr: "ऑनलाइन भरा" };
     }
-    if (/svc-(tourism|how-to-reach|corporator|zones|prabhag|city-alerts|facilities|repository|notices|public-documents|tax-calculator|track|faq|departments|recruitment|contact|disaster|elections|services-hub|user-manual|about|govt-orders)/i.test(r.id) || /^place-/.test(r.id)) {
+    if (/svc-(tourism|how-to-reach|corporator|zones|prabhag|city-alerts|facilities|repository|notices|public-documents|tax-calculator|track|faq|departments|recruitment|contact|disaster|elections|services-hub|user-manual|about|govt-orders|gis|tenders|gallery|budget|commissioner|organization|mayors|deputy|initiatives|rts)/i.test(r.id) || /^place-/.test(r.id) || /^fac-/.test(r.id)) {
       return { en: "Open page", mr: "पृष्ठ उघडा" };
     }
     return { en: "Apply now", mr: "आता अर्ज करा" };
@@ -818,6 +986,7 @@ function actionLabel(r: CivicRecord): { en?: string; mr?: string } {
 }
 
 export function smartSearch(query: string): SearchHit[] {
+  const prepared = getPreparedIndex();
   const q = norm(query);
   if (q.length < 2) return [];
   const { expanded, terms: aliasTerms } = expandSearchQuery(query);
@@ -847,28 +1016,25 @@ export function smartSearch(query: string): SearchHit[] {
   };
 
   if (intent) {
-    const action = CIVIC_CATALOG.find((r) => r.id === intent.actionId);
+    const action = findPrepared(intent.actionId);
     if (action) bump(action, 220, { isBestAction: true, actionLabelEn: intent.actionEn, actionLabelMr: intent.actionMr });
     for (const id of intent.relatedIds) {
-      const rec = CIVIC_CATALOG.find((r) => r.id === id);
-      if (rec) bump(rec, rec.category === "service" ? 90 : rec.category === "faq" ? 80 : 55);
+      const rec = findPrepared(id);
+      if (rec) bump(rec, rec.category === "service" || rec.category === "facility" ? 90 : rec.category === "faq" ? 80 : 55);
     }
   }
 
-  for (const r of CIVIC_CATALOG) {
-    const titleEn = norm(r.titleEn);
-    const titleMr = norm(r.titleMr);
-    const title = `${titleEn} ${titleMr}`.trim();
-    const hay = haystack(r);
+  const aliasNorm = aliasTerms.map((t) => norm(t)).filter((t) => t.length >= 4);
+
+  for (const item of prepared) {
+    const { record: r, titleEn, titleMr, title, hay, keywords } = item;
     let s = 0;
     const exactTitle = titleEn === q || titleMr === q;
     if (exactTitle) s += 200;
     else if (title.includes(q)) s += 70;
-    else if (aliasTerms.some((t) => {
-      const nt = norm(t);
-      if (nt.length < 4) return false;
+    else if (aliasNorm.some((nt) => {
       if (titleEn.includes(nt) || titleMr.includes(nt)) return true;
-      if (r.keywords.some((k) => fuzzyIncludes(norm(k), nt) || norm(k).includes(nt))) return true;
+      if (keywords.some((k) => fuzzyIncludes(k, nt) || k.includes(nt))) return true;
       return hay.includes(nt);
     })) s += 55;
     else if (qTokens.length > 0 && qTokens.every((t) => fuzzyIncludes(title, t))) s += 70;
@@ -876,21 +1042,20 @@ export function smartSearch(query: string): SearchHit[] {
     for (const t of qTokens) {
       if (t.length < 3) continue;
       if (fuzzyIncludes(title, t)) s += 18;
-      else if (r.keywords.some((k) => fuzzyIncludes(norm(k), t))) s += 12;
-      else if (fuzzyIncludes(hay, t)) s += 6;
+      else if (keywords.some((k) => k.includes(t) || fuzzyIncludes(k, t))) s += 12;
+      else if (hay.includes(t)) s += 6;
     }
 
     let ocrHit: { page: number; textEn: string; textMr: string } | undefined;
-    for (const page of r.ocrPages) {
-      const blob = (page.textEn + " " + page.textMr).toLowerCase();
-      if (qTokens.some((t) => t.length >= 4 && blob.includes(t)) || (q.length >= 4 && blob.includes(q))) {
+    for (const page of item.ocr) {
+      if (qTokens.some((t) => t.length >= 4 && page.blob.includes(t)) || (q.length >= 4 && page.blob.includes(q))) {
         ocrHit = page;
         s += 40;
         break;
       }
     }
 
-    if (r.category === "service") s *= 1.35;
+    if (r.category === "service" || r.category === "facility") s *= 1.35;
     else if (r.category === "faq") s *= 1.15;
     else if (r.downloadable && !intent) s *= 0.82;
     if (exactTitle) s += 40;
@@ -913,15 +1078,15 @@ export function smartSearch(query: string): SearchHit[] {
 
   const ranked = [...scores.values()]
     .filter((h) => h.score > 25)
-    .sort((a, b) => b.score - a.score || Number(b.record.category === "service") - Number(a.record.category === "service"));
+    .sort((a, b) => b.score - a.score || Number(b.record.category === "service" || b.record.category === "facility") - Number(a.record.category === "service" || a.record.category === "facility"));
 
   for (const h of ranked) h.isBestAction = false;
   const exactHit = ranked.find((h) => norm(h.record.titleEn) === q || norm(h.record.titleMr) === q);
   if (exactHit) {
     ranked.splice(ranked.indexOf(exactHit), 1);
     ranked.unshift(exactHit);
-    if (exactHit.record.category === "service") exactHit.isBestAction = true;
-  } else if (ranked[0] && (intent || ranked[0].score >= 50) && ranked[0].record.category === "service") {
+    if (exactHit.record.category === "service" || exactHit.record.category === "facility") exactHit.isBestAction = true;
+  } else if (ranked[0] && (intent || ranked[0].score >= 50) && (ranked[0].record.category === "service" || ranked[0].record.category === "facility")) {
     ranked[0].isBestAction = true;
   }
   return ranked;

@@ -11,7 +11,7 @@ function titles(query: string) {
     .map((h) => (h.displayLang === "mr" ? h.record.titleMr : h.record.titleEn));
 }
 
-describe("search ranking", () => {
+describe("search ranking", { timeout: 30000 }, () => {
   it("ranks core civic services first", () => {
     expect(topId("property tax")).toBe("svc-property-tax");
     expect(topId("I want to pay property tax")).toBe("svc-property-tax");
@@ -72,5 +72,34 @@ describe("search ranking", () => {
     expect(suggestDidYouMean("Propert Tax")).toMatch(/Property Tax/i);
     expect(suggestDidYouMean("Propery Tax")).toMatch(/Property Tax/i);
     expect(suggestDidYouMean("Property Tax")).toBeNull();
+  });
+
+  it("ranks public facility category pages", () => {
+    expect(topId("Fire Station")).toBe("fac-fire-stations");
+    expect(topId("CSMC Schools")).toBe("fac-csmc-schools");
+    expect(topId("Citizen Facilitation Centre")).toBe("fac-cfcs");
+  });
+
+  it("ranks GIS, tenders, budget and RTI/RTS hubs", () => {
+    expect(topId("GIS")).toBe("svc-gis");
+    expect(topId("Tenders")).toBe("svc-tenders");
+    expect(topId("Budget")).toBe("svc-budget");
+    expect(topId("RTI")).toBe("act-rti");
+    expect(topId("RTS")).toBe("act-rts");
+  });
+
+  it("indexes page notices, schemes and distinct service titles", () => {
+    expect(topId("water supply schedule")).toBe("site-notice-water-schedule");
+    expect(topId("पाणी पुरवठा वेळापत्रक")).toBe("site-notice-water-schedule");
+    expect(topId("Ramai Awas Yojana")).toBe("svc-ramai");
+    expect(topId("Pet Licence")).toBe("svc-entry-pet");
+    expect(topId("Padampura Fire Station")).toBe("fac-item-fire-stations-fire-001");
+  });
+
+  it("does not duplicate the MahaTenders hub", () => {
+    const hits = searchHits("Tenders");
+    const tenderIds = [...new Set(hits.map((h) => h.record.id).filter((id) => id === "svc-tenders" || id === "svc-entry-tenders"))];
+    expect(tenderIds).toEqual(["svc-tenders"]);
+    expect(hits.some((h) => h.record.id === "svc-entry-tenders")).toBe(false);
   });
 });

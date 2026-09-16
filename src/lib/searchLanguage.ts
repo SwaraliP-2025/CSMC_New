@@ -1,4 +1,4 @@
-import { CIVIC_CATALOG } from "@/data/civicCatalog";
+import { getGlobalSearchIndex } from "@/lib/searchIndex";
 import { prepareSearchQuery, SEARCH_ALIAS_GROUPS } from "@/lib/searchAliases";
 import type { SearchHit } from "@/lib/semanticSearch";
 
@@ -86,7 +86,8 @@ export function applyLanguageAwareRanking(hits: SearchHit[], query: string): Sea
   scored.sort(
     (a, b) =>
       b.score - a.score ||
-      Number(b.record.category === "service") - Number(a.record.category === "service"),
+      Number(b.record.category === "service" || b.record.category === "facility") -
+        Number(a.record.category === "service" || a.record.category === "facility"),
   );
 
   for (const h of scored) h.isBestAction = false;
@@ -119,7 +120,7 @@ export function applyLanguageAwareRanking(hits: SearchHit[], query: string): Sea
   if (queryLang === "mixed" || !bilingual) {
     top.displayLang = preferred;
     top.resultKey = `${top.record.id}:${preferred}`;
-    if (top.record.category === "service") top.isBestAction = true;
+    if (top.record.category === "service" || top.record.category === "facility") top.isBestAction = true;
     return scored.map((h, i) => {
       if (i === 0) return h;
       return {
@@ -131,7 +132,7 @@ export function applyLanguageAwareRanking(hits: SearchHit[], query: string): Sea
   }
 
   const primary = cloneHit(top, preferred, {
-    isBestAction: top.record.category === "service",
+    isBestAction: top.record.category === "service" || top.record.category === "facility",
     score: top.score + 4,
   });
   const twin = cloneHit(top, other, {
@@ -204,8 +205,13 @@ function buildSuggestionCorpus(): { phrase: string; lang: QueryLang }[] {
   for (const group of SEARCH_ALIAS_GROUPS) {
     for (const term of group) add(term);
   }
-  for (const r of CIVIC_CATALOG) {
-    if (r.category === "service" || r.category === "faq" || r.category === "department") {
+  for (const r of getGlobalSearchIndex()) {
+    if (
+      r.category === "service" ||
+      r.category === "facility" ||
+      r.category === "faq" ||
+      r.category === "department"
+    ) {
       add(r.titleEn);
       add(r.titleMr);
     }
@@ -216,11 +222,16 @@ function buildSuggestionCorpus(): { phrase: string; lang: QueryLang }[] {
     "Water Tax",
     "Birth Certificate",
     "Death Certificate",
+    "Fire Stations",
+    "CSMC Schools",
+    "Citizen Facilitation Centres (CFCs)",
     "मालमत्ता कर",
     "पाणी कर",
     "जन्म प्रमाणपत्र",
     "मृत्यू प्रमाणपत्र",
     "तक्रार नोंदवा",
+    "अग्निशमन केंद्रे",
+    "CSMC शाळा",
   ].forEach(add);
 
   return out;

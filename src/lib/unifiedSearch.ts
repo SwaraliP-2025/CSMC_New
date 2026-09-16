@@ -29,8 +29,23 @@ export function groupSearchResults(hits: SearchHit[]) {
 }
 
 export function recordHref(record: CivicRecord): { to: string; external: boolean } {
-  if ((record.category === "service" || record.category === "department" || record.category === "contact") && record.href) {
+  const navigable =
+    record.category === "service" ||
+    record.category === "department" ||
+    record.category === "contact" ||
+    record.category === "facility" ||
+    record.category === "story" ||
+    record.category === "news" ||
+    record.category === "acts-rules" ||
+    record.category === "rti" ||
+    record.category === "faq" ||
+    record.category === "budget" ||
+    record.category === "development-plan";
+  if (navigable && record.href) {
     return { to: record.href, external: !!record.external };
+  }
+  if (record.href && (record.href.startsWith("http") || record.href.startsWith("/"))) {
+    return { to: record.href, external: !!record.external || record.href.startsWith("http") };
   }
   return { to: `/digital-repository/${record.id}`, external: false };
 }

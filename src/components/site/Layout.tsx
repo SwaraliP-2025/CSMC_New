@@ -12,17 +12,17 @@ import { useLang } from "@/i18n/LanguageContext";
 import { SiteTourGuide } from "./SiteTourGuide";
 
 const SiteHeader = () => (
-  <div className="sticky top-0 z-[2000] w-full bg-white">
+  <header className="sticky top-0 z-[2000] w-full bg-white">
     <TopBar />
     <Header />
-  </div>
+  </header>
 );
 
 const SkipToMain = () => {
   const { t } = useLang();
   return (
     <a
-      href="#main"
+      href="#page-content"
       className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[3000] focus:rounded-lg focus:bg-civic-blue focus:px-4 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
     >
       {t.topbar.skip}
@@ -47,13 +47,16 @@ const ScrollToTop = () => {
 
   return (
     <button
+      type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
       aria-label={label}
-      className="fixed bottom-20 right-4 z-[1100] flex items-center gap-1.5 rounded-full bg-civic-blue text-white shadow-lg px-3 py-2.5 hover:bg-civic-gold hover:text-civic-ink transition-all duration-200 hover:scale-105 sm:right-6"
+      className="fixed bottom-20 right-4 z-[1100] flex items-center gap-1.5 rounded-full bg-civic-blue text-white shadow-lg px-3 py-2.5 hover:bg-civic-gold hover:text-civic-ink transition-all duration-200 hover:scale-105 sm:right-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold"
     >
-      <ChevronUp className="h-5 w-5 shrink-0" />
+      <ChevronUp className="h-5 w-5 shrink-0" aria-hidden />
       {hovered && <span className="text-xs font-bold whitespace-nowrap">{label}</span>}
     </button>
   );
@@ -64,8 +67,12 @@ export const HomeLayout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
     <SkipToMain />
     <SiteHeader />
-    <VideoHero />
-    <main id="main" className="flex-1">{children}</main>
+    <div id="page-content">
+      <VideoHero />
+      <main id="main" className="flex-1" tabIndex={-1}>
+        {children}
+      </main>
+    </div>
     <CitySkyline />
     <AppsBar />
     <VisitCsmc />
@@ -81,7 +88,9 @@ export const Layout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen flex flex-col">
     <SkipToMain />
     <SiteHeader />
-    <main id="main" className="flex-1 mb-10 pb-16">{children}</main>
+    <main id="page-content" className="flex-1 mb-10 pb-16" tabIndex={-1}>
+      <div id="main">{children}</div>
+    </main>
     <CitySkyline />
     <AppsBar />
     <VisitCsmc />

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId, useRef } from "react";
 import { Menu, X, ChevronDown, Home } from "lucide-react";
 import { GlobalSearch } from "@/components/site/GlobalSearch";
 import emblem from "@/assets/cs-emblem.png";
@@ -52,7 +52,12 @@ const NavItemDesktop = ({
 }) => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const menuId = useId();
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const openedByKeyboard = useRef(false);
   const dropdownTextCls = en ? "text-[12px]" : "text-[14px]";
+  const hasChildren = Boolean(item.children?.length);
 
   const isHome = item.to === "/";
   const sectionActive = navSectionActive(item, pathname);
@@ -61,16 +66,52 @@ const NavItemDesktop = ({
   const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide csmc-nav-tab transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isSelected ? selectedCls : ""}`;
   const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : <NavLabel text={label} lock={lockTop} />;
 
-  if (!item.children) {
+  const closeMenu = () => {
+    setOpen(false);
+    openedByKeyboard.current = false;
+  };
+
+  useEffect(() => {
+    if (!open || !hasChildren) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeMenu();
+        triggerRef.current?.focus();
+      }
+    };
+    const onDown = (e: MouseEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) closeMenu();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onDown);
+    };
+  }, [open, hasChildren]);
+
+  useEffect(() => {
+    if (!open || !hasChildren || !openedByKeyboard.current) return;
+    const first = wrapRef.current?.querySelector<HTMLElement>("a[href]");
+    first?.focus();
+  }, [open, hasChildren]);
+
+  if (!hasChildren) {
     if (isExternalHref(item.to, item.external)) return <a href={item.to} target="_blank" rel="noopener noreferrer" className={baseCls} aria-label={label}>{content}</a>;
     // Notices item fires a custom event so the homepage popup opens
     if (item.to === "/notices") {
       return (
-        <span className={baseCls} onClick={() => {
-          window.dispatchEvent(new CustomEvent("open-notices-popup"));
-        }}>
+        <button
+          type="button"
+          className={baseCls}
+          aria-label={label}
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent("open-notices-popup"));
+          }}
+        >
           <NavLabel text={label} lock={lockTop} />
-        </span>
+        </button>
       );
     }
     return <Link to={item.to!} className={baseCls} aria-label={label} title={label} aria-current={isSelected ? "page" : undefined}>{content}</Link>;
@@ -78,19 +119,41 @@ const NavItemDesktop = ({
 
   return (
     <div
+      ref={wrapRef}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={() => {
+        openedByKeyboard.current = false;
+        setOpen(true);
+      }}
+      onMouseLeave={() => closeMenu()}
     >
-      <div className={baseCls} aria-current={isSelected ? "true" : undefined}>
+      <button
+        ref={triggerRef}
+        type="button"
+        className={baseCls}
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-controls={menuId}
+        onClick={() => {
+          openedByKeyboard.current = true;
+          setOpen((o) => !o);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openedByKeyboard.current = true;
+            setOpen(true);
+          }
+        }}
+      >
         <NavLabel text={label} lock={lockTop} />
-        <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
-      </div>
+        <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
+      </button>
       {open && (() => {
         const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
         const renderLink = (child: NavItem) => {
           const childLabel = resolveLabel(child);
-          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors rounded-sm`;
+          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors rounded-sm focus-visible:bg-civic-gold focus-visible:text-civic-ink`;
           if (isExternalHref(child.to, child.external)) {
             return (
               <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -99,7 +162,7 @@ const NavItemDesktop = ({
             );
           }
           return (
-            <Link key={child.labelEn} to={child.to!} className={cls}>
+            <Link key={child.labelEn} to={child.to!} className={cls} onClick={closeMenu}>
               <NavLabel text={childLabel} />
             </Link>
           );
@@ -107,7 +170,12 @@ const NavItemDesktop = ({
 
         if (hasGroups) {
           return (
-            <div className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden p-3">
+            <div
+              id={menuId}
+              role="region"
+              aria-label={label}
+              className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg overflow-hidden p-3"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {item.children!.map(group => {
                   const groupLabel = resolveLabel(group);
@@ -128,19 +196,24 @@ const NavItemDesktop = ({
         }
 
         return (
-          <div className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg">
+          <div
+            id={menuId}
+            role="region"
+            aria-label={label}
+            className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-civic-gold rounded-b-lg"
+          >
             {item.children!.map(child => {
               const childLabel = resolveLabel(child);
               return (
                 <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                   {isExternalHref(child.to, child.external) ? (
                     <a href={child.to} target="_blank" rel="noopener noreferrer"
-                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink focus-visible:bg-civic-gold focus-visible:text-civic-ink transition-colors`}>
                       <NavLabel text={childLabel} />
                     </a>
                   ) : (
-                    <Link to={child.to!}
-                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
+                    <Link to={child.to!} onClick={closeMenu}
+                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink focus-visible:bg-civic-gold focus-visible:text-civic-ink transition-colors`}>
                       <NavLabel text={childLabel} />
                     </Link>
                   )}
@@ -162,8 +235,23 @@ export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [gtTarget, setGtTarget] = useState(() => readGoogleTranslateTarget());
+  const mobileMenuBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => { setMobileOpen(false); setMobileExpanded(null); }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMobileOpen(false);
+        setMobileExpanded(null);
+        mobileMenuBtnRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
 
   useEffect(() => {
     setGtTarget(readGoogleTranslateTarget());
@@ -206,12 +294,12 @@ export const Header = () => {
   const whatsappLabel = en ? "Smart Chhatrapati Sambhajinagar WhatsApp Chatbot" : "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट";
 
   return (
-    <header className="bg-white border-b border-border shadow-card-soft">
+    <div className="bg-white border-b border-border shadow-card-soft">
       {/* Row 1: Logo + actions (desktop also has search) */}
       <div className="container py-2 md:py-3 flex items-center justify-between gap-2 md:gap-4 pl-3 sm:pl-4 md:pl-5">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 md:gap-3 group min-w-0 flex-1">
-          <img src={emblem} alt="CSMC Emblem" width={80} height={80}
+          <img src={emblem} alt={en ? "CSMC emblem" : "CSMC चिन्ह"} width={80} height={80}
             className="h-14 w-14 md:h-20 md:w-20 object-contain shrink-0 transition-transform group-hover:scale-105" />
           <div className="leading-tight min-w-0">
             <h1 className="font-serif text-sm sm:text-base md:text-xl text-civic-blue font-bold tracking-tight">
@@ -254,10 +342,14 @@ export const Header = () => {
       {/* Row 2 (mobile only): hamburger + User Policy + search */}
       <div className="md:hidden border-t border-border/50 px-3 py-2 flex items-center gap-2">
         <Button size="icon" variant="ghost"
+          ref={mobileMenuBtnRef}
           className="shrink-0 h-9 w-9 text-civic-blue"
           data-tour="mobile-menu-btn"
-          onClick={() => setMobileOpen(o => !o)} aria-label="Menu" aria-expanded={mobileOpen}>
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          onClick={() => setMobileOpen(o => !o)}
+          aria-label={mobileOpen ? (en ? "Close menu" : "मेनू बंद करा") : (en ? "Open menu" : "मेनू उघडा")}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-primary-nav">
+          {mobileOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
         </Button>
         <Link
           to="/user-manual"
@@ -275,6 +367,7 @@ export const Header = () => {
       <nav
         id="nav"
         data-tour="main-nav"
+        aria-label={en ? "Primary navigation" : "मुख्य नेव्हिगेशन"}
         key={`nav-${gtTarget ?? "none"}-${en ? "en" : "mr"}`}
         className="hidden md:block bg-civic-blue"
       >
@@ -295,19 +388,27 @@ export const Header = () => {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav data-tour="mobile-nav" className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto">
+        <nav
+          id="mobile-primary-nav"
+          data-tour="mobile-nav"
+          aria-label={en ? "Mobile navigation" : "मोबाइल नेव्हिगेशन"}
+          className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto"
+        >
           {NAV.map(item => (
             <div key={item.labelEn}>
               {item.children ? (
                 <>
-                  <button onClick={() => setMobileExpanded(e => e === item.labelEn ? null : item.labelEn)}
+                  <button
+                    type="button"
+                    onClick={() => setMobileExpanded(e => e === item.labelEn ? null : item.labelEn)}
+                    aria-expanded={mobileExpanded === item.labelEn}
                     className={`flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-semibold ${
                       navSectionActive(item, pathname) || mobileExpanded === item.labelEn
                         ? "csmc-nav-selected"
                         : "text-foreground"
                     }`}>
                     <NavLabel text={label(item)} lock={gtTarget === "hi"} />
-                    <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpanded === item.labelEn ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpanded === item.labelEn ? "rotate-180" : ""}`} aria-hidden />
                   </button>
                   {mobileExpanded === item.labelEn && item.children.map(child => (
                     child.children ? (
@@ -365,6 +466,6 @@ export const Header = () => {
           ))}
         </nav>
       )}
-    </header>
+    </div>
   );
 };

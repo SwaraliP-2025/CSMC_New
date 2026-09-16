@@ -54,25 +54,25 @@ const PublicFacilities = () => {
                       <Link
                         key={category.slug}
                         to={`/public-facilities/${category.slug}`}
-                        className="group flex items-center gap-4 bg-white border border-border hover:border-civic-blue/30 hover:shadow-md rounded-2xl px-5 py-4 transition-all"
+                        className="group flex items-center gap-4 bg-white border border-border hover:border-civic-blue/30 hover:shadow-md rounded-2xl px-5 py-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
                       >
                         {/* Icon */}
                         <div className="shrink-0 inline-flex items-center justify-center h-11 w-11 rounded-xl bg-civic-blue/10 text-civic-blue group-hover:bg-civic-blue group-hover:text-white transition-colors">
-                          <Icon className="h-5 w-5" />
+                          <Icon className="h-5 w-5" aria-hidden />
                         </div>
 
                         {/* Text */}
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-civic-blue text-sm group-hover:text-civic-blue transition-colors">
+                          <p className="font-semibold text-civic-blue text-sm group-hover:text-civic-blue transition-colors break-words">
                             {en ? category.titleEn : category.titleMr}
                           </p>
-                          <p className="text-xs text-muted-foreground leading-relaxed mt-0.5 line-clamp-1">
+                          <p className="text-xs text-muted-foreground leading-relaxed mt-0.5 line-clamp-2 break-words">
                             {en ? category.descriptionEn : category.descriptionMr}
                           </p>
                         </div>
 
                         {/* Arrow */}
-                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-civic-blue transition-colors shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-civic-blue transition-colors shrink-0" aria-hidden />
                       </Link>
                     );
                   })}

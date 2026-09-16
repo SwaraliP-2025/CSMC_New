@@ -216,40 +216,65 @@ export const TopBar = () => {
           {/* ── LEFT: Accessibility + language (Website Guide spotlight target) ── */}
           <div
             data-tour="a11y"
+            role="group"
+            aria-label={t(
+              `Text size and colour options. Current text size ${fontSize}%`,
+              `अक्षर आकार व रंग पर्याय. सध्याचा अक्षर आकार ${d(fontSize)}%`,
+            )}
             className="flex items-center gap-0.5 whitespace-nowrap shrink-0 rounded-md"
           >
-            <button onClick={() => applyFontSize(Math.max(80, fontSize - 10))}
+            <button
+              type="button"
+              onClick={() => applyFontSize(Math.max(80, fontSize - 10))}
+              aria-label={t(`Decrease text size (currently ${fontSize}%)`, `अक्षर लहान करा (सध्या ${d(fontSize)}%)`)}
+              aria-pressed={fontSize < 100}
               title={t("Decrease text size", "अक्षर लहान करा")}
-              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none">
+              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold rounded-sm"
+            >
               {t("A-", "अ-")}
             </button>
-            <span className="text-white/15 mx-0.5">|</span>
-            <button onClick={() => applyFontSize(100)}
+            <span className="text-white/15 mx-0.5" aria-hidden>|</span>
+            <button
+              type="button"
+              onClick={() => applyFontSize(100)}
+              aria-label={t("Normal text size", "सामान्य आकार")}
+              aria-pressed={fontSize === 100}
               title={t("Normal text size", "सामान्य आकार")}
-              className={`px-1.5 py-0.5 transition-colors font-bold text-base leading-none ${fontSize === 100 ? "text-civic-gold" : "hover:text-civic-gold"}`}>
+              className={`px-1.5 py-0.5 transition-colors font-bold text-base leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold rounded-sm ${fontSize === 100 ? "text-civic-gold" : "hover:text-civic-gold"}`}
+            >
               {t("A", "अ")}
             </button>
-            <span className="text-white/15 mx-0.5">|</span>
-            <button onClick={() => applyFontSize(Math.min(150, fontSize + 10))}
+            <span className="text-white/15 mx-0.5" aria-hidden>|</span>
+            <button
+              type="button"
+              onClick={() => applyFontSize(Math.min(150, fontSize + 10))}
+              aria-label={t(`Increase text size (currently ${fontSize}%)`, `अक्षर मोठे करा (सध्या ${d(fontSize)}%)`)}
+              aria-pressed={fontSize > 100}
               title={t("Increase text size", "अक्षर मोठे करा")}
-              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-lg leading-none">
+              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-lg leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold rounded-sm"
+            >
               {t("A+", "अ+")}
             </button>
-            <span className="text-white/15 mx-0.5">|</span>
+            <span className="text-white/15 mx-0.5" aria-hidden>|</span>
             <button
               type="button"
               onClick={toggleColorBlind}
               aria-pressed={colorBlind}
+              aria-label={t(
+                colorBlind ? "Disable color-blind friendly mode" : "Enable color-blind friendly mode",
+                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा" : "कलर ब्लाइंड अनुकूल मोड सुरु करा",
+              )}
               title={t(
                 colorBlind ? "Disable color-blind friendly mode" : "Enable color-blind friendly mode",
-                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा " : "कलर ब्लाइंड अनुकूल मोड सुरु करा"            )}
-              className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded transition-colors leading-none ${
+                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा " : "कलर ब्लाइंड अनुकूल मोड सुरु करा",
+              )}
+              className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded transition-colors leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold ${
                 colorBlind ? "text-civic-gold bg-white/10" : "hover:text-civic-gold"
               }`}
             >
               <Contrast className="h-3.5 w-3.5 shrink-0" aria-hidden />
               <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wide">
-                {t("Color blind", "कलर ब्लाइंड" )}
+                {t("Color blind", "कलर ब्लाइंड")}
               </span>
             </button>
           </div>
@@ -264,6 +289,8 @@ export const TopBar = () => {
               data-lang-switcher=""
               data-tour="lang-switch"
               translate="no"
+              role="group"
+              aria-label={t("Official website language", "अधिकृत संकेतस्थळ भाषा")}
               className={`notranslate flex items-center gap-0.5 sm:gap-1 shrink-0 sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3 ${dialogOpen ? "invisible" : ""}`}
             >
               <Globe className="h-3 w-3 opacity-50 shrink-0 hidden sm:block" />

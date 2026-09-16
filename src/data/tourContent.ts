@@ -20,7 +20,6 @@ export type TourTargetId =
   | "global-search"
   | "quick-services"
   | "rts-services"
-  | "notices-tab"
   | "whats-new"
   | "user-manual"
   | null;
@@ -190,16 +189,15 @@ export const TOUR_STEPS: TourStepDef[] = [
   },
   {
     id: "notices",
-    target: "notices-tab",
-    mobileTarget: "whats-new",
+    target: "whats-new",
     layout: "spotlight",
     title: {
       mr: "सूचना व अद्यतने",
       en: "Notices & updates",
     },
     body: {
-      mr: "महत्त्वाच्या सूचना, घोषणा, निविदा आणि इतर अद्यतने पाहण्यासाठी सूचना व What's New विभाग तपासा. तातडीच्या स्थानिक सूचनांसाठी शहर इशारे (City Alerts) देखील पहा.",
-      en: "Check Notices and What's New for important announcements, tenders and updates. For urgent local advisories, also see City Alerts.",
+      mr: "महत्त्वाच्या सूचना, घोषणा, निविदा आणि इतर अद्यतने पाहण्यासाठी What's New विभाग तपासा. तातडीच्या स्थानिक सूचनांसाठी शहर इशारे (City Alerts) देखील पहा.",
+      en: "Check What's New for important announcements, tenders and updates. For urgent local advisories, also see City Alerts.",
     },
     links: [
       {

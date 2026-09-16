@@ -99,11 +99,24 @@ export const SEARCH_ALIAS_GROUPS: string[][] = [
     "शहर इशारे", "इशारे", "सल्ला",
     "सिटी अलर्ट्स", "अलर्ट",
   ],
-  // Facilities
+  // Facilities (more specific than the generic hub)
   [
-    "public facilities", "facilities", "hospital", "school", "fire station", "police", "cfc",
-    "सार्वजनिक सुविधा", "सुविधा", "रुग्णालय", "शाळा", "अग्निशमन",
-    "फॅसिलिटीज", "हॉस्पिटल", "स्कूल",
+    "fire station", "fire stations",
+    "अग्निशमन केंद्र", "अग्निशमन केंद्रे", "फायर स्टेशन",
+  ],
+  [
+    "csmc schools", "municipal schools", "schools",
+    "शाळा", "CSMC शाळा", "स्कूल",
+  ],
+  [
+    "citizen facilitation centre", "cfc", "cfcs",
+    "नागरिक सुविधा केंद्र", "सीएफसी",
+  ],
+  // Facilities hub
+  [
+    "public facilities", "facilities", "hospital", "police",
+    "सार्वजनिक सुविधा", "सुविधा", "रुग्णालय",
+    "फॅसिलिटीज", "हॉस्पिटल",
   ],
   // Repository / documents
   [

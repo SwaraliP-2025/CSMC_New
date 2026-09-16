@@ -42,6 +42,7 @@ const routeLabels: Record<string, string> = {
   "how-to-reach": "How to Reach",
   stories: "Photo Gallery",
   gallery: "Photo Gallery",
+  search: "Search",
 };
 
 export const PageHeader = ({

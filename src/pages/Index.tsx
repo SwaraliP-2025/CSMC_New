@@ -76,10 +76,14 @@ const LeaderCard = ({
   isVisible: boolean;
   en: boolean;
   onSelect: (person: Leader) => void;
-}) => (
-  <div
-    className="group flex flex-col items-center text-center w-60 md:w-[calc(100%/6-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer"
+}) => {
+  const name = en ? person.nameEn : person.nameMr;
+  return (
+  <button
+    type="button"
+    className="group flex flex-col items-center text-center w-60 md:w-[calc(100%/6-0.5rem)] md:min-w-[110px] md:max-w-[160px] cursor-pointer bg-transparent border-0 p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-civic-blue rounded-xl"
     onClick={() => onSelect(person)}
+    aria-label={en ? `View profile: ${person.nameEn}` : `प्रोफाइल पहा: ${person.nameMr}`}
     style={{
       opacity: isVisible ? 1 : 0,
       transform: isVisible ? "translateY(0)" : "translateY(24px)",
@@ -92,7 +96,7 @@ const LeaderCard = ({
       {person.image ? (
         <img
           src={person.image}
-          alt={en ? person.nameEn : ""}
+          alt=""
           className="absolute max-w-none"
           style={{
             width: person.photo.w,
@@ -102,20 +106,21 @@ const LeaderCard = ({
           }}
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold">
+        <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold" aria-hidden>
           {person.nameEn.split(" ").map((n) => n[0]).join("")}
         </div>
       )}
     </div>
-    <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" />
-    <h3 className="text-lg md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center h-9 md:h-5 leading-9 md:leading-5 overflow-hidden whitespace-nowrap">
-      {en ? person.nameEn : person.nameMr}
-    </h3>
-    <p className={`text-sm md:text-[11px] text-muted-foreground font-medium leading-snug md:leading-tight px-1 w-full text-center mt-1 whitespace-normal min-h-[4rem] md:min-h-[3rem] ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"}>
+    <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" aria-hidden />
+    <span className="text-lg md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center h-9 md:h-5 leading-9 md:leading-5 overflow-hidden whitespace-nowrap">
+      {name}
+    </span>
+    <span className={`text-sm md:text-[11px] text-muted-foreground font-medium leading-snug md:leading-tight px-1 w-full text-center mt-1 whitespace-normal min-h-[4rem] md:min-h-[3rem] ${en ? "" : "devanagari"}`} lang={en ? "en" : "mr"}>
       <RoleLines lines={en ? person.roleEn : person.roleMr} isMr={!en} />
-    </p>
-  </div>
-);
+    </span>
+  </button>
+  );
+};
 
 // Icons mapped to each quick service in order:
 // Property Tax, Pay Water Tax, Birth Certificate, Death Certificate,
@@ -364,11 +369,12 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
     <div className="relative">
       {/* Prev button */}
       <button
+        type="button"
         onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors"
-        aria-label="Previous"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
+        aria-label={en ? "Previous facilities" : "मागील सुविधा"}
       >
-        <ChevronLeft className="h-5 w-5" />
+        <ChevronLeft className="h-5 w-5" aria-hidden />
       </button>
 
       {/* Slider track */}
@@ -383,21 +389,21 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
             <Link
               key={category.slug}
               to={`/public-facilities/${category.slug}`}
-              className="group flex-shrink-0 w-[260px] bg-white border border-border hover:border-civic-blue/30 hover:shadow-elegant rounded-2xl p-5 transition-all flex flex-col gap-3"
+              className="group flex-shrink-0 w-[260px] bg-white border border-border hover:border-civic-blue/30 hover:shadow-elegant rounded-2xl p-5 transition-all flex flex-col gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
             >
               <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-civic-blue/10 text-civic-blue group-hover:bg-civic-blue group-hover:text-white transition-colors">
-                <Icon className="h-6 w-6" />
+                <Icon className="h-6 w-6" aria-hidden />
               </div>
-              <div className="flex-1">
-                <h3 className="font-serif font-bold text-civic-blue text-base mb-1">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-serif font-bold text-civic-blue text-base mb-1 leading-snug line-clamp-2 break-words">
                   {en ? category.titleEn : category.titleMr}
                 </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 break-words">
                   {en ? category.descriptionEn : category.descriptionMr}
                 </p>
               </div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-civic-blue group-hover:text-civic-red transition-colors">
-                {en ? "View All" : "सर्व पहा"} <ArrowRight className="h-3.5 w-3.5" />
+                {en ? "View All" : "सर्व पहा"} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
               </span>
             </Link>
           );
@@ -406,11 +412,12 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
 
       {/* Next button */}
       <button
+        type="button"
         onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors"
-        aria-label="Next"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
+        aria-label={en ? "Next facilities" : "पुढील सुविधा"}
       >
-        <ChevronRight className="h-5 w-5" />
+        <ChevronRight className="h-5 w-5" aria-hidden />
       </button>
     </div>
   );
@@ -420,11 +427,18 @@ const Index = () => {
   const { t, lang } = useLang();
   const en = lang === "en";
   const leadershipRef = useRef<HTMLDivElement>(null);
+  const leaderModalCloseRef = useRef<HTMLButtonElement>(null);
+  const leaderTriggerRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
   const [touristPlaces, setTouristPlaces] = useState<TouristPlaceRecord[]>([]);
   const [featuredTouristPlaces, setFeaturedTouristPlaces] = useState<TouristPlaceRecord[]>([]);
   const notices = useNoticesPopup();
+
+  const openLeader = (person: Leader) => {
+    leaderTriggerRef.current = document.activeElement as HTMLElement | null;
+    setSelectedLeader(person);
+  };
 
   const featuredPlaces = featuredTouristPlaces.length > 0 ? featuredTouristPlaces : touristPlaces.slice(0, 4);
 
@@ -468,12 +482,20 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Close modal on Escape
+  // Close modal on Escape; manage focus
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedLeader(null); };
+    if (!selectedLeader) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedLeader(null);
+    };
     document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, []);
+    const t = window.setTimeout(() => leaderModalCloseRef.current?.focus(), 0);
+    return () => {
+      document.removeEventListener("keydown", handler);
+      window.clearTimeout(t);
+      leaderTriggerRef.current?.focus?.();
+    };
+  }, [selectedLeader]);
 
 
   return (
@@ -482,8 +504,11 @@ const Index = () => {
       <SocialMediaSection />
 
       {/* Leadership / Dignitaries — directly below Stay Connected */}
-      <section ref={leadershipRef} className="py-16 bg-white">
+      <section ref={leadershipRef} className="py-16 bg-white" aria-labelledby="leadership-heading">
         <div className="container">
+          <h2 id="leadership-heading" className="sr-only">
+            {en ? "Leadership" : "नेतृत्व"}
+          </h2>
           {/* Top row: President, PM, and state leadership */}
           <div className="flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:items-start md:justify-center md:gap-4 lg:gap-5 pb-2 px-2">
             {topRowLeaders.map((person, i) => (
@@ -493,7 +518,7 @@ const Index = () => {
                 index={i}
                 isVisible={isVisible}
                 en={en}
-                onSelect={setSelectedLeader}
+                onSelect={openLeader}
               />
             ))}
           </div>
@@ -506,7 +531,7 @@ const Index = () => {
                 index={topRowLeaders.length + i}
                 isVisible={isVisible}
                 en={en}
-                onSelect={setSelectedLeader}
+                onSelect={openLeader}
               />
             ))}
           </div>
@@ -531,17 +556,17 @@ const Index = () => {
                 <>
                   <div className="absolute top-0 right-0 w-24 h-24 bg-civic-gold/10 rounded-bl-full -mr-12 -mt-12 group-hover:bg-white/20 transition-colors duration-300" />
                   <div className="relative z-[1] h-16 w-16 grid place-items-center rounded-2xl bg-civic-blue/10 text-civic-blue mb-6 group-hover:bg-civic-blue group-hover:text-white transition-all duration-300 shadow-sm">
-                    <Icon className="h-7 w-7" />
+                    <Icon className="h-7 w-7" aria-hidden />
                   </div>
                   <h3 className="relative z-[1] font-serif text-xl font-bold text-civic-ink mb-3 group-hover:text-civic-ink transition-colors duration-300">{item.t}</h3>
                   <p className="relative z-[1] text-sm text-muted-foreground leading-relaxed line-clamp-2 group-hover:text-civic-ink/80 transition-colors duration-300">{item.d}</p>
-                  <div className="relative z-[1] mt-6 flex items-center text-civic-red font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 group-hover:text-civic-blue transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    {en ? "Access Service" : "सेवा मिळवा"} <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                  <div className="relative z-[1] mt-6 flex items-center text-civic-red font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:text-civic-blue transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 group-focus-visible:translate-y-0">
+                    {en ? "Access Service" : "सेवा मिळवा"} <ArrowRight className="ml-2 h-3.5 w-3.5" aria-hidden />
                   </div>
                 </>
               );
               return (
-                <a key={i} href={item.url} target="_blank" rel="noopener noreferrer" className={cls}>
+                <a key={i} href={item.url} target="_blank" rel="noopener noreferrer" className={`${cls} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue`}>
                   {content}
                 </a>
               );
@@ -610,23 +635,39 @@ const Index = () => {
 
       {/* Leader Modal */}
       {selectedLeader && (
-        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0" onClick={() => setSelectedLeader(null)}>
-          <div className="bg-white rounded-2xl max-w-xs w-full shadow-2xl relative top-8 p-0" onClick={e => e.stopPropagation()}>
-            <button className="absolute top-2 right-2 text-civic-blue hover:text-civic-red transition-colors z-10" onClick={() => setSelectedLeader(null)}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <div
+          className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0"
+          onClick={() => setSelectedLeader(null)}
+          role="presentation"
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="leader-dialog-title"
+            className="bg-white rounded-2xl max-w-xs w-full shadow-2xl relative top-8 p-0"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              ref={leaderModalCloseRef}
+              type="button"
+              className="absolute top-2 right-2 text-civic-blue hover:text-civic-red transition-colors z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue rounded"
+              onClick={() => setSelectedLeader(null)}
+              aria-label={en ? "Close profile" : "प्रोफाइल बंद करा"}
+            >
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
             <div className="w-full flex items-center justify-center bg-civic-blue/10 pt-4 pb-2 px-2 rounded-t-2xl">
               <img
                 src={selectedLeader.image}
-                alt={en ? selectedLeader.nameEn : ''}
+                alt={en ? selectedLeader.nameEn : selectedLeader.nameMr}
                 className="max-h-48 max-w-full rounded-xl shadow border-2 border-white"
                 style={{ objectFit: 'contain', background: '#fff' }}
               />
             </div>
             {/* Info */}
             <div className="px-3 pb-4 pt-2 text-center">
-              <div className="w-8 h-0.5 bg-civic-gold rounded-full mx-auto mb-2" />
-              <h3 className="font-serif text-base font-bold text-civic-blue mb-1 leading-tight">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
+              <div className="w-8 h-0.5 bg-civic-gold rounded-full mx-auto mb-2" aria-hidden />
+              <h3 id="leader-dialog-title" className="font-serif text-base font-bold text-civic-blue mb-1 leading-tight">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
               <p className={`text-xs text-muted-foreground font-medium leading-tight whitespace-normal ${en ? "" : "devanagari"}`}>
                 <RoleLines lines={en ? selectedLeader.roleEn : selectedLeader.roleMr} isMr={!en} />
               </p>

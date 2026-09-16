@@ -243,6 +243,15 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     descriptionMr:
       "छत्रपती संभाजीनगर महानगरपालिकेचे नागरी कार्यक्रम, बैठका व सार्वजनिक उपक्रम.",
   },
+  "/search": {
+    path: "/search",
+    title: "Search | CSMC",
+    titleMr: "शोध | CSMC",
+    description:
+      "Search CSMC citizen services, public facilities, notices, documents, departments and municipal information.",
+    descriptionMr:
+      "CSMC नागरिक सेवा, सार्वजनिक सुविधा, सूचना, दस्तऐवज, विभाग व महापालिका माहिती शोधा.",
+  },
   "/digital-repository": {
     path: "/digital-repository",
     title: "Municipal Knowledge Repository | CSMC",

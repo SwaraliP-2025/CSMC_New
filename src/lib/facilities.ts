@@ -10,6 +10,13 @@ import {
   Flag,
 } from "lucide-react";
 
+/** Curated public-facing extra field (never dump raw GIS columns). */
+export interface FacilityDetailField {
+  labelEn: string;
+  labelMr: string;
+  value: string;
+}
+
 export interface FacilityRecord {
   id: string;
   name: string;
@@ -20,6 +27,7 @@ export interface FacilityRecord {
   latitude: string;
   longitude: string;
   googleMapsUrl: string;
+  details?: FacilityDetailField[];
 }
 
 export interface FacilityCategoryDef {
@@ -32,10 +40,22 @@ export interface FacilityCategoryDef {
   icon: LucideIcon;
   groupEn: string;
   groupMr: string;
+  /** When false, hide from homepage overview slider. */
   showInOverview?: boolean;
 }
 
 export const facilityCategories: FacilityCategoryDef[] = [
+  {
+    slug: "csmc-hospitals",
+    titleEn: "Hospitals",
+    titleMr: "रुग्णालये",
+    descriptionEn: "Hospitals and nursing homes across the city from the CSMC GIS directory.",
+    descriptionMr: "CSMC GIS निर्देशिकेतील शहरभरातील रुग्णालये व नर्सींग होम्स.",
+    dataset: "csmc-hospitals.json",
+    icon: Hospital,
+    groupEn: "Health Services",
+    groupMr: "आरोग्य सेवा",
+  },
   {
     slug: "phcs",
     titleEn: "Primary Health Centres (PHCs)",
@@ -43,21 +63,10 @@ export const facilityCategories: FacilityCategoryDef[] = [
     descriptionEn: "Local primary health centres providing outpatient care and essential medicines.",
     descriptionMr: "बाह्यरुग्ण सेवा व आवश्यक औषधे देणारी स्थानिक प्राथमिक आरोग्य केंद्रे.",
     dataset: "phcs.json",
-    icon: Hospital,
-    groupEn: "Health Services",
-    groupMr: "आरोग्य सेवा",
-    showInOverview: false,
-  },
-  {
-    slug: "csmc-hospitals",
-    titleEn: "CSMC Hospitals",
-    titleMr: "CSMC रुग्णालये",
-    descriptionEn: "Municipal hospitals managed by CSMC for specialist and emergency care.",
-    descriptionMr: "विशेषज्ञ व आपत्कालीन उपचारासाठी CSMC द्वारे चालवली जाणारी महापालिका रुग्णालये.",
-    dataset: "csmc-hospitals.json",
     icon: ShieldAlert,
     groupEn: "Health Services",
     groupMr: "आरोग्य सेवा",
+    showInOverview: false,
   },
   {
     slug: "fire-stations",
@@ -74,8 +83,8 @@ export const facilityCategories: FacilityCategoryDef[] = [
     slug: "police-stations",
     titleEn: "Police Stations",
     titleMr: "पोलीस ठाणे",
-    descriptionEn: "Civic protection centres supporting law, order and public safety in every ward.",
-    descriptionMr: "प्रत्येक प्रभागातील कायदा, सुव्यवस्था व जनसुरक्षितता सुनिश्चित करणारी केंद्रे.",
+    descriptionEn: "Police stations supporting law, order and public safety across the city.",
+    descriptionMr: "शहरभरातील कायदा, सुव्यवस्था व जनसुरक्षितता सुनिश्चित करणारी पोलीस ठाणी.",
     dataset: "police-stations.json",
     icon: Building2,
     groupEn: "Emergency Services",
@@ -102,6 +111,7 @@ export const facilityCategories: FacilityCategoryDef[] = [
     icon: Users,
     groupEn: "Municipal Offices",
     groupMr: "महापालिका कार्यालये",
+    showInOverview: false,
   },
   {
     slug: "csmc-schools",
@@ -115,12 +125,12 @@ export const facilityCategories: FacilityCategoryDef[] = [
     groupMr: "शिक्षण",
   },
   {
-    slug: "banner-locations",
-    titleEn: "Banner Locations",
-    titleMr: "बॅनर ठिकाणे",
-    descriptionEn: "Municipal banner locations managed by CSMC for public messaging and campaigns.",
-    descriptionMr: "जनसंपर्क व मोहिमांसाठी CSMC द्वारे व्यवस्थापित सार्वजनिक बॅनर ठिकाणे.",
-    dataset: "banner-locations.json",
+    slug: "hoardings",
+    titleEn: "Hoardings",
+    titleMr: "होर्डिंग्ज",
+    descriptionEn: "Licensed outdoor advertising hoarding locations managed in the CSMC GIS inventory.",
+    descriptionMr: "CSMC GIS यादीतील परवानाधारक बाह्य जाहिरात होर्डिंग ठिकाणे.",
+    dataset: "hoardings.json",
     icon: Flag,
     groupEn: "Municipal Infrastructure",
     groupMr: "महापालिका पायाभूत सुविधा",
@@ -131,6 +141,18 @@ export const facilityCategoryMap = facilityCategories.reduce<Record<string, Faci
   map[item.slug] = item;
   return map;
 }, {});
+
+/** Legacy URL from earlier Banner Locations category. */
+const hoardings = facilityCategoryMap.hoardings;
+if (hoardings) {
+  facilityCategoryMap["banner-locations"] = { ...hoardings, slug: "hoardings" };
+}
+
+export function facilityHasCoordinates(item: FacilityRecord): boolean {
+  const lat = Number(item.latitude);
+  const lng = Number(item.longitude);
+  return Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) > 0.1 && Math.abs(lng) > 0.1;
+}
 
 export interface TouristPlaceRecord {
   id: string;

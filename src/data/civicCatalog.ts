@@ -1389,7 +1389,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentEn: "Town Planning",
     departmentMr: "नगर रचना",
     publishedAt: "2026-04-28",
-    href: "/departments/town-planning",
+    href: "/departments/town-planning-department",
   }),
   rec("dept-ptax", "department", {
     titleEn: "Property Tax Department",
@@ -1401,7 +1401,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentEn: "Property Tax",
     departmentMr: "मालमत्ता कर",
     publishedAt: "2026-04-28",
-    href: "/departments/property-tax",
+    href: "/departments/tax",
   }),
   rec("dept-drainage", "department", {
     titleEn: "Drainage Department",

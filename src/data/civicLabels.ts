@@ -26,6 +26,8 @@ export const CATEGORY_LABELS: Record<CivicCategory, { en: string; mr: string }> 
   contact: { en: "Contact Directory", mr: "संपर्क निर्देशिका" },
   budget: { en: "Budgets", mr: "अर्थसंकल्प" },
   "meeting-minutes": { en: "Meeting Minutes", mr: "बैठक इतिवृत्त" },
+  facility: { en: "Public Facilities", mr: "सार्वजनिक सुविधा" },
+  story: { en: "Photo Stories", mr: "छायाचित्र कथा" },
 };
 
 export const REPOSITORY_CATEGORIES: CivicCategory[] = [
@@ -47,24 +49,30 @@ export const REPOSITORY_CATEGORIES: CivicCategory[] = [
 
 export const SEARCH_GROUP_LABELS: Record<SearchGroup, { en: string; mr: string }> = {
   services: { en: "Services", mr: "सेवा" },
+  facilities: { en: "Facilities", mr: "सुविधा" },
   documents: { en: "Documents", mr: "दस्तऐवज" },
   notices: { en: "Notices", mr: "सूचना" },
   circulars: { en: "Circulars", mr: "परिपत्रके" },
   departments: { en: "Departments", mr: "विभाग" },
   faqs: { en: "FAQs", mr: "सामान्य प्रश्न" },
+  stories: { en: "Photo Stories", mr: "छायाचित्र कथा" },
 };
 
 export const SEARCH_GROUP_ORDER: SearchGroup[] = [
   "services",
+  "facilities",
   "documents",
   "notices",
   "circulars",
   "departments",
   "faqs",
+  "stories",
 ];
 
 export function searchGroupFor(category: CivicCategory): SearchGroup {
   if (category === "service") return "services";
+  if (category === "facility") return "facilities";
+  if (category === "story") return "stories";
   if (category === "faq") return "faqs";
   if (category === "circular") return "circulars";
   if (category === "news" || category === "notification") return "notices";

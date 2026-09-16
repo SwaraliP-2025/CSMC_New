@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
-import { Youtube, Facebook, Instagram, ChevronRight, ExternalLink } from "lucide-react";
+import { Facebook, Instagram, ChevronRight, ExternalLink } from "lucide-react";
 import { CSMC_OFFICE_MAPS_URL, OFFICIAL } from "@/data/officialLinks";
 
 const XIcon = () => (
@@ -119,9 +119,6 @@ export const Footer = () => {
             </span>
           </a>
           <div className="flex gap-3">
-            <a href="https://youtube.com/@gbmeeting?si=XNiAe54yA50ljkqZ" aria-label="YouTube" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
-              <Youtube className="h-4 w-4" />
-            </a>
             <a href="https://www.facebook.com/SmarterAurangabad" aria-label="Facebook" className="h-8 w-8 rounded-full bg-white/10 hover:bg-civic-gold hover:text-civic-ink flex items-center justify-center transition-all">
               <Facebook className="h-4 w-4" />
             </a>

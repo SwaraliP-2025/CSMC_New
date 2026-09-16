@@ -1,6 +1,6 @@
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExternalLink, Mic, MicOff, Search, X } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { localizeDigits } from "@/i18n/digits";
@@ -34,9 +34,14 @@ function getSpeechRecognitionCtor(): (new () => SpeechRecognitionLike) | null {
   return w.SpeechRecognition || w.webkitSpeechRecognition || null;
 }
 
+function hitKey(hit: SearchHit) {
+  return hit.resultKey ?? hit.record.id;
+}
+
 export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const { lang, d } = useLang();
   const en = lang === "en";
+  const navigate = useNavigate();
   const listId = useId();
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,6 +52,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const [query, setQuery] = useState("");
   const [pos, setPos] = useState({ top: 0, left: 0, width: 0 });
   const [listening, setListening] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const speechAvailable = !!getSpeechRecognitionCtor();
 
   const hits = useMemo(() => (query.trim().length >= 2 ? searchHits(query) : []), [query]);
@@ -69,12 +75,38 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   }, [hits, best]);
   const grouped = useMemo(() => {
     const skip = new Set<string>();
-    if (best) skip.add(best.resultKey ?? best.record.id);
-    if (bilingualTwin) skip.add(bilingualTwin.resultKey ?? `${bilingualTwin.record.id}:twin`);
-    const rest = hits.filter((h) => !skip.has(h.resultKey ?? h.record.id));
+    if (best) skip.add(hitKey(best));
+    if (bilingualTwin) skip.add(hitKey(bilingualTwin));
+    const rest = hits.filter((h) => !skip.has(hitKey(h)));
     return groupSearchResults(rest);
   }, [hits, best, bilingualTwin]);
+
+  const flatOptions = useMemo(() => {
+    const rows: SearchHit[] = [];
+    if (best) rows.push(best);
+    if (bilingualTwin) rows.push(bilingualTwin);
+    for (const { items } of grouped) {
+      for (const hit of items.slice(0, MAX_PER_GROUP)) rows.push(hit);
+    }
+    return rows;
+  }, [best, bilingualTwin, grouped]);
+
   const showPanel = open && query.trim().length >= 2;
+
+  const resultsStatus =
+    showPanel
+      ? hits.length === 0
+        ? en
+          ? "No matching results."
+          : "जुळणारे निकाल नाहीत."
+        : en
+          ? `${hits.length} search ${hits.length === 1 ? "result" : "results"} available. Use arrow keys to review.`
+          : `${d(hits.length)} शोध निकाल उपलब्ध. पुनरावलोकनासाठी बाण कळा वापरा.`
+      : "";
+
+  useEffect(() => {
+    setActiveIndex(-1);
+  }, [query]);
 
   const syncPos = () => {
     const el = wrapRef.current;
@@ -106,15 +138,8 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       if (document.getElementById(listId)?.contains(t)) return;
       setOpen(false);
     };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
     document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
+    return () => document.removeEventListener("mousedown", onDown);
   }, [open, listId]);
 
   useEffect(() => {
@@ -146,6 +171,56 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     window.addEventListener("csmc-tour-focus-search", onTourSearch);
     return () => window.removeEventListener("csmc-tour-focus-search", onTourSearch);
   }, []);
+
+  const goToResultsPage = (q: string) => {
+    const trimmed = q.trim();
+    if (!trimmed) return;
+    setOpen(false);
+    navigate(`/search?q=${encodeURIComponent(trimmed)}`);
+  };
+
+  const activateHit = (hit: SearchHit) => {
+    const dest = recordHref(hit.record);
+    setOpen(false);
+    if (dest.external) {
+      window.open(dest.to, "_blank", "noopener,noreferrer");
+      return;
+    }
+    navigate(dest.to);
+  };
+
+  const onInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setOpen(false);
+      setActiveIndex(-1);
+      return;
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (activeIndex >= 0 && flatOptions[activeIndex]) {
+        activateHit(flatOptions[activeIndex]);
+        return;
+      }
+      goToResultsPage(query);
+      return;
+    }
+
+    if (!showPanel || flatOptions.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setOpen(true);
+      setActiveIndex((i) => (i + 1) % flatOptions.length);
+      return;
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setOpen(true);
+      setActiveIndex((i) => (i <= 0 ? flatOptions.length - 1 : i - 1));
+    }
+  };
 
   const applyTranscript = (raw: string) => {
     const transcript = raw
@@ -181,7 +256,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       }
     };
     recognition.onerror = () => {
-      // Fall through to onend for language retry
+      // Fall through to onend for language retry; text search remains available.
     };
     recognition.onend = () => {
       if (voiceGotResultRef.current) {
@@ -240,7 +315,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           compact ? "py-1 flex-1" : "py-1.5"
         }`}
       >
-        <Search className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"} text-muted-foreground shrink-0`} />
+        <Search className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"} text-muted-foreground shrink-0`} aria-hidden />
         <input
           ref={inputRef}
           type="search"
@@ -253,12 +328,19 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             setOpen(true);
             syncPos();
           }}
+          onKeyDown={onInputKeyDown}
           placeholder={
             en ? "Search services, notices, documents, departments..." : "सेवा, सूचना, दस्तऐवज, विभाग शोधा..."
           }
           aria-label={en ? "Search the CSMC website" : "CSMC संकेतस्थळ शोधा"}
           aria-expanded={showPanel}
           aria-controls={listId}
+          aria-autocomplete="list"
+          aria-activedescendant={
+            activeIndex >= 0 && flatOptions[activeIndex]
+              ? `${listId}-opt-${hitKey(flatOptions[activeIndex])}`
+              : undefined
+          }
           role="combobox"
           autoComplete="off"
           className={`bg-transparent outline-none placeholder:text-muted-foreground min-w-0 ${
@@ -271,11 +353,12 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             aria-label={en ? "Clear search" : "शोध साफ करा"}
             onClick={() => {
               setQuery("");
+              setActiveIndex(-1);
               inputRef.current?.focus();
             }}
-            className="text-muted-foreground hover:text-civic-blue"
+            className="text-muted-foreground hover:text-civic-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue rounded-sm"
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="h-3.5 w-3.5" aria-hidden />
           </button>
         )}
         {speechAvailable && (
@@ -292,16 +375,20 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             }
             aria-pressed={listening}
             onClick={toggleVoice}
-            className={`shrink-0 ${listening ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
+            className={`shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue ${listening ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
           >
             {listening ? (
-              <Mic className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
+              <Mic className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
             ) : (
-              <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} />
+              <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
             )}
           </button>
         )}
       </div>
+
+      <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {resultsStatus}
+      </p>
 
       {showPanel &&
         typeof document !== "undefined" &&
@@ -312,7 +399,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             className="fixed z-[2060] rounded-2xl border border-border bg-white shadow-elegant overflow-hidden"
             style={{ top: pos.top, left: pos.left, width: pos.width, maxHeight: "min(70vh, 520px)" }}
           >
-            <div className="overflow-y-auto" style={{ maxHeight: "min(70vh, 520px)" }}>
+            <div className="overflow-y-auto" style={{ maxHeight: "min(70vh, 480px)" }}>
               {didYouMean && (
                 <div className="px-4 py-2.5 border-b border-border bg-slate-50/90">
                   <p className="text-xs text-muted-foreground">
@@ -333,9 +420,18 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                 </div>
               )}
               {hits.length === 0 ? (
-                <p className="py-10 px-5 text-center text-sm text-muted-foreground">
-                  {en ? "No matching results." : "जुळणारे निकाल नाहीत."}
-                </p>
+                <div className="py-8 px-5 text-center">
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {en ? "No matching results." : "जुळणारे निकाल नाहीत."}
+                  </p>
+                  <button
+                    type="button"
+                    className="text-xs font-bold text-civic-blue hover:underline"
+                    onClick={() => goToResultsPage(query)}
+                  >
+                    {en ? "Open full search page" : "पूर्ण शोध पृष्ठ उघडा"}
+                  </button>
+                </div>
               ) : (
                 <>
                   {best && (
@@ -344,9 +440,22 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                         {en ? "Best match" : "सर्वोत्तम जुळणी"}
                       </p>
                       <ul className="space-y-1">
-                        <ResultRow hit={best} en={en} featured onNavigate={() => setOpen(false)} />
+                        <ResultRow
+                          id={`${listId}-opt-${hitKey(best)}`}
+                          hit={best}
+                          en={en}
+                          featured
+                          active={activeIndex === 0}
+                          onNavigate={() => setOpen(false)}
+                        />
                         {bilingualTwin && (
-                          <ResultRow hit={bilingualTwin} en={en} onNavigate={() => setOpen(false)} />
+                          <ResultRow
+                            id={`${listId}-opt-${hitKey(bilingualTwin)}`}
+                            hit={bilingualTwin}
+                            en={en}
+                            active={activeIndex === 1}
+                            onNavigate={() => setOpen(false)}
+                          />
                         )}
                       </ul>
                     </div>
@@ -358,22 +467,40 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                         <span className="text-muted-foreground font-medium ml-1">({d(items.length)})</span>
                       </p>
                       <ul className="space-y-1">
-                        {items.slice(0, MAX_PER_GROUP).map((hit) => (
-                          <ResultRow
-                            key={hit.resultKey ?? hit.record.id}
-                            hit={hit}
-                            en={en}
-                            onNavigate={() => setOpen(false)}
-                          />
-                        ))}
+                        {items.slice(0, MAX_PER_GROUP).map((hit) => {
+                          const idx = flatOptions.findIndex((h) => hitKey(h) === hitKey(hit));
+                          return (
+                            <ResultRow
+                              key={hitKey(hit)}
+                              id={`${listId}-opt-${hitKey(hit)}`}
+                              hit={hit}
+                              en={en}
+                              active={idx === activeIndex}
+                              onNavigate={() => setOpen(false)}
+                            />
+                          );
+                        })}
                       </ul>
                     </div>
                   ))}
                 </>
               )}
             </div>
+            {query.trim().length >= 2 && (
+              <div className="border-t border-border px-3 py-2.5 bg-slate-50/80">
+                <button
+                  type="button"
+                  className="w-full text-left text-xs font-bold text-civic-blue hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue rounded"
+                  onClick={() => goToResultsPage(query)}
+                >
+                  {en
+                    ? `View all results for “${query.trim()}” →`
+                    : `“${query.trim()}” साठी सर्व निकाल पहा →`}
+                </button>
+              </div>
+            )}
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );
@@ -383,12 +510,16 @@ function ResultRow({
   hit,
   en,
   featured,
+  active,
   onNavigate,
+  id,
 }: {
   hit: SearchHit;
   en: boolean;
   featured?: boolean;
+  active?: boolean;
   onNavigate: () => void;
+  id: string;
 }) {
   const item = hit.record;
   const dest = recordHref(item);
@@ -400,7 +531,7 @@ function ResultRow({
   const category = showEn ? CATEGORY_LABELS[item.category].en : CATEGORY_LABELS[item.category].mr;
   const className = `block rounded-lg px-2 py-2 hover:bg-civic-blue/[0.05] transition-colors ${
     featured ? "bg-civic-gold/10 border border-civic-gold/30" : ""
-  }`;
+  } ${active ? "ring-2 ring-civic-blue/40 bg-civic-blue/[0.06]" : ""}`;
   const inner = (
     <>
       <div className="flex items-start justify-between gap-2">
@@ -423,7 +554,7 @@ function ResultRow({
               </mark>
             ) : (
               <span key={i}>{part.text}</span>
-            )
+            ),
           )}
           {hit.ocrPage ? ` · p.${localizeDigits(hit.ocrPage, showEn ? "en" : "mr")}` : ""}
         </p>
@@ -440,7 +571,7 @@ function ResultRow({
 
   if (dest.external) {
     return (
-      <li>
+      <li role="option" id={id} aria-selected={!!active}>
         <a href={dest.to} target="_blank" rel="noopener noreferrer" onClick={onNavigate} className={className}>
           {inner}
         </a>
@@ -449,7 +580,7 @@ function ResultRow({
   }
 
   return (
-    <li>
+    <li role="option" id={id} aria-selected={!!active}>
       <Link to={dest.to} onClick={onNavigate} className={className}>
         {inner}
       </Link>

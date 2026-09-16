@@ -91,6 +91,15 @@ const TECHNICAL_SLUGS = [
   "security",
 ] as const;
 
+/** All department page slugs — used by global search without importing the detail page. */
+export const ALL_DEPARTMENT_SLUGS: readonly string[] = [
+  ...INDEPENDENT_OFFICER_SLUGS,
+  ...COMMISSIONER_WING_SLUGS,
+  ...AC1_SLUGS,
+  ...AC2_SLUGS,
+  ...TECHNICAL_SLUGS,
+];
+
 const SLUG_TO_GROUP = new Map<string, DepartmentGroupId>(
   [
     ...INDEPENDENT_OFFICER_SLUGS.map((s) => [s, "independent"] as const),
