@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
+import { useLang } from "@/i18n/LanguageContext";
 import type { FacilityRecord } from "@/lib/facilities";
-import { facilityHasCoordinates } from "@/lib/facilities";
+import { displayFacilityName, facilityHasCoordinates } from "@/lib/facilities";
 import "leaflet/dist/leaflet.css";
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
@@ -14,11 +15,7 @@ L.Icon.Default.mergeOptions({
 
 const CSMC_CENTER: [number, number] = [19.877, 75.343];
 
-function FlyToSelection({
-  item,
-}: {
-  item: FacilityRecord | null;
-}) {
+function FlyToSelection({ item }: { item: FacilityRecord | null }) {
   const map = useMap();
   useEffect(() => {
     if (!item || !facilityHasCoordinates(item)) return;
@@ -47,22 +44,19 @@ export function FacilityMap({
   items,
   selectedId,
   onSelect,
-  en,
 }: {
   items: FacilityRecord[];
   selectedId: string | null;
   onSelect: (id: string) => void;
-  en: boolean;
 }) {
+  const { lang, t, d } = useLang();
   const mappable = useMemo(() => items.filter(facilityHasCoordinates), [items]);
   const selected = items.find((i) => i.id === selectedId) ?? null;
 
   if (mappable.length === 0) {
     return (
       <div className="flex h-full min-h-[16rem] items-center justify-center rounded-3xl border border-dashed border-border bg-slate-50 px-6 text-center text-sm text-muted-foreground">
-        {en
-          ? "Map coordinates are not available for these facilities in the current GIS export."
-          : "सध्याच्या GIS निर्यातीत या सुविधांसाठी नकाशा निर्देशांक उपलब्ध नाहीत."}
+        {t.facilities.mapUnavailable}
       </div>
     );
   }
@@ -91,8 +85,12 @@ export function FacilityMap({
             opacity={selectedId && selectedId !== item.id ? 0.55 : 1}
           >
             <Popup>
-              <div className="text-sm font-semibold text-civic-blue max-w-[14rem]">{item.name}</div>
-              {item.address && <div className="text-xs text-muted-foreground mt-1">{item.address}</div>}
+              <div className="text-sm font-semibold text-civic-blue max-w-[14rem]">
+                {displayFacilityName(item.name, lang, d)}
+              </div>
+              {item.address && (
+                <div className="text-xs text-muted-foreground mt-1">{d(item.address)}</div>
+              )}
             </Popup>
           </Marker>
         ))}

@@ -356,6 +356,8 @@ const SocialMediaSection = () => {
 
 // ── Public Facilities Slider ───────────────────────────────────────────────────
 const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
+  const { t } = useLang();
+  const f = t.facilities;
   const sliderRef = useRef<HTMLDivElement>(null);
   const items = facilityCategories.filter(c => c.showInOverview !== false);
 
@@ -372,7 +374,7 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
         type="button"
         onClick={() => scroll("left")}
         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
-        aria-label={en ? "Previous facilities" : "मागील सुविधा"}
+        aria-label={f.prevFacilities}
       >
         <ChevronLeft className="h-5 w-5" aria-hidden />
       </button>
@@ -403,7 +405,7 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
                 </p>
               </div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-civic-blue group-hover:text-civic-red transition-colors">
-                {en ? "View All" : "सर्व पहा"} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                {f.viewAll} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
               </span>
             </Link>
           );
@@ -415,7 +417,7 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
         type="button"
         onClick={() => scroll("right")}
         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white border border-border shadow-md rounded-full w-9 h-9 flex items-center justify-center hover:bg-civic-blue hover:text-white hover:border-civic-blue transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
-        aria-label={en ? "Next facilities" : "पुढील सुविधा"}
+        aria-label={f.nextFacilities}
       >
         <ChevronRight className="h-5 w-5" aria-hidden />
       </button>
@@ -579,11 +581,11 @@ const Index = () => {
         <div className="container">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">{en ? "Public Facilities" : "सार्वजनिक सुविधा"}</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-civic-blue font-bold">{en ? "Explore Public Facilities" : "सार्वजनिक सुविधांचा शोध घ्या"}</h2>
+              <p className="text-xs uppercase tracking-[0.25em] text-civic-red font-bold mb-3">{t.facilities.title}</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-civic-blue font-bold">{t.facilities.exploreTitle}</h2>
             </div>
             <Link to="/public-facilities" className="text-sm font-semibold text-civic-blue hover:text-civic-red transition-colors whitespace-nowrap">
-              {en ? "Explore all public facilities" : "सर्व सार्वजनिक सुविधा पहा"} <ArrowRight className="inline-block ml-2 h-4 w-4" />
+              {t.facilities.exploreAll} <ArrowRight className="inline-block ml-2 h-4 w-4" />
             </Link>
           </div>
           <PublicFacilitiesSlider en={en} />

@@ -2945,7 +2945,62 @@ export const FACILITY_LOCATION_DATASETS: Record<string, FacilityLocationRow[]> =
       "zone": "Zone 10"
     }
   ],
-  "cfcs": [],
+  "cfcs": [
+    {
+      "id": "cfc-001",
+      "name": "CFC — Zone Office 1",
+      "address": "Town Hall",
+      "zone": "Zone 1"
+    },
+    {
+      "id": "cfc-002",
+      "name": "CFC — Zone Office 2",
+      "address": "Sillekhana",
+      "zone": "Zone 2"
+    },
+    {
+      "id": "cfc-003",
+      "name": "CFC — Zone Office 3",
+      "address": "Central Naka",
+      "zone": "Zone 3"
+    },
+    {
+      "id": "cfc-004",
+      "name": "CFC — Zone Office 4",
+      "address": "Near Saubhagya Mangal Karyalay",
+      "zone": "Zone 4"
+    },
+    {
+      "id": "cfc-005",
+      "name": "CFC — Zone Office 5 & 6",
+      "address": "Jalgaon Road",
+      "zone": "Zone 5 & 6"
+    },
+    {
+      "id": "cfc-006",
+      "name": "CFC — Zone Office 7",
+      "address": "Near Jawahar Colony Police Station",
+      "zone": "Zone 7"
+    },
+    {
+      "id": "cfc-007",
+      "name": "CFC — Zone Office 8",
+      "address": "Beed By Pass",
+      "zone": "Zone 8"
+    },
+    {
+      "id": "cfc-008",
+      "name": "CFC — Zone Office 9",
+      "address": "Jalna Road",
+      "zone": "Zone 9"
+    },
+    {
+      "id": "cfc-009",
+      "name": "CFC — Zone Office 10",
+      "address": "Raj Nagar Railway Station Road",
+      "zone": "Zone 10"
+    }
+  ],
   "csmc-schools": [
     {
       "id": "school-001",

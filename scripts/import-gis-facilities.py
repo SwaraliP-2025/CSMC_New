@@ -345,14 +345,51 @@ def main():
         with_coords += coords
         print(f"wrote {filename}: {len(records)} (coords {coords})")
 
-    # Categories without GIS Excel: empty arrays (no fabricated placeholders)
-    for filename in ("phcs.json", "cfcs.json"):
-        write_json(filename, [])
-        report["categories"][filename.replace(".json", "")] = {
-            "imported": 0,
-            "note": "No GIS Excel supplied; dummy sample data removed.",
+    # PHCs: no GIS Excel yet — leave empty (do not invent).
+    write_json("phcs.json", [])
+    report["categories"]["phcs"] = {
+        "imported": 0,
+        "note": "No GIS Excel supplied; dummy sample data removed.",
+    }
+    print("wrote phcs.json: 0 (no source)")
+
+    # CFCs operate at Zone Offices — mirror zone-office locations (no fabricated coords).
+    zone_path = OUT / "zone-offices.json"
+    if zone_path.exists():
+        zones = json.loads(zone_path.read_text(encoding="utf-8"))
+        cfcs = []
+        for i, z in enumerate(zones, 1):
+            cfcs.append(
+                {
+                    "id": f"cfc-{i:03d}",
+                    "name": f"CFC — {z.get('name', f'Zone Office {i}')}",
+                    "address": z.get("address", ""),
+                    "phone": z.get("phone", ""),
+                    "timings": z.get("timings", ""),
+                    "latitude": z.get("latitude", ""),
+                    "longitude": z.get("longitude", ""),
+                    "googleMapsUrl": z.get("googleMapsUrl", ""),
+                    **({"zone": z["zone"]} if z.get("zone") else {}),
+                    "details": [
+                        {
+                            "labelEn": "Located at",
+                            "labelMr": "येथे स्थित",
+                            "value": z.get("name", ""),
+                        }
+                    ],
+                }
+            )
+        write_json("cfcs.json", cfcs)
+        report["categories"]["cfcs"] = {
+            "imported": len(cfcs),
+            "withCoords": sum(1 for c in cfcs if c.get("latitude") and c.get("longitude")),
+            "note": "Derived from zone-offices.json (CFCs co-located with zone offices).",
         }
-        print(f"wrote {filename}: 0 (no source)")
+        print(f"wrote cfcs.json: {len(cfcs)} (from zone offices)")
+    else:
+        write_json("cfcs.json", [])
+        report["categories"]["cfcs"] = {"imported": 0, "note": "zone-offices.json missing"}
+        print("wrote cfcs.json: 0 (no zone offices)")
 
     # Remove obsolete banner file if present (replaced by hoardings.json)
     old = OUT / "banner-locations.json"
