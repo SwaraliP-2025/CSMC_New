@@ -10,6 +10,10 @@ const TRANSITION_MS = 550;
 const NAV_LOCK_MS = 450;
 const SWIPE_PX = 48;
 
+/** Warm cream for civic hero captions — readable on navy gradient, not bright yellow. */
+const HERO_CREAM = "#F4EFE4";
+const HERO_CREAM_SOFT = "rgba(244, 239, 228, 0.9)";
+
 function prefersReducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -19,9 +23,10 @@ const StoryCta = ({ story, en }: { story: VisualStory; en: boolean }) => {
   return (
     <Link
       to={storyPath(story.id)}
-      className="mt-3 inline-flex items-center gap-1.5 text-xs md:text-sm font-bold text-white hover:text-civic-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition-colors"
+      className="mt-4 md:mt-5 inline-flex items-center gap-1.5 rounded-full border border-[hsl(var(--civic-gold))] bg-[hsl(var(--civic-gold)/0.12)] px-4 py-2 text-xs md:text-sm font-bold tracking-wide transition-colors hover:bg-[hsl(var(--civic-gold))] hover:text-civic-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(var(--civic-gold))]"
+      style={{ color: HERO_CREAM }}
     >
-      {label} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+      {label} <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden />
     </Link>
   );
 };
@@ -155,28 +160,51 @@ export const FeaturedStoriesCarousel = () => {
         ))}
       </div>
 
-      {heritage ? (
+      {/* Civic/event: cinematic left→right navy veil for caption readability.
+          Heritage: no caption overlay — image only. */}
+      {!heritage && (
         <div
-          className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"
+          className="pointer-events-none absolute inset-0 z-[1]"
           aria-hidden
-        />
-      ) : (
-        <div
-          className="absolute inset-x-0 bottom-0 h-40 md:h-48 md:w-[min(36rem,calc(100%-18rem))] bg-gradient-to-t from-black/45 via-black/15 to-transparent pointer-events-none"
-          aria-hidden
+          style={{
+            background: `
+              linear-gradient(
+                90deg,
+                hsl(216 55% 12% / 0.88) 0%,
+                hsl(210 42% 18% / 0.72) 22%,
+                hsl(210 38% 22% / 0.42) 42%,
+                hsl(210 38% 22% / 0.14) 58%,
+                transparent 72%
+              ),
+              linear-gradient(
+                180deg,
+                transparent 0%,
+                transparent 55%,
+                hsl(216 55% 10% / 0.35) 100%
+              )
+            `,
+          }}
         />
       )}
 
       {!heritage && current && (
-        <div className="relative h-full container z-10 flex flex-col justify-end md:justify-center py-8 md:py-24 pb-20 md:pb-24">
-          <div className="max-w-lg pr-0 md:pr-[280px]">
-            <p className="text-[10px] uppercase tracking-[0.28em] text-civic-gold font-bold mb-2 drop-shadow-md">
+        <div className="relative z-10 h-full container flex flex-col justify-end md:justify-center py-7 sm:py-8 md:py-24 pb-[4.75rem] md:pb-24">
+          <div className="max-w-[min(100%,22rem)] sm:max-w-md md:max-w-lg md:pr-[min(280px,28vw)]">
+            <p
+              className="text-[10px] sm:text-[11px] uppercase tracking-[0.26em] font-bold text-civic-gold mb-2.5 sm:mb-3"
+            >
               {en ? current.categoryEn : current.categoryMr}
             </p>
-            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold leading-snug text-white drop-shadow-lg">
+            <h2
+              className="font-serif text-[1.25rem] sm:text-2xl md:text-3xl font-bold leading-[1.25] sm:leading-snug break-words"
+              style={{ color: HERO_CREAM }}
+            >
               {en ? current.titleEn : current.titleMr}
             </h2>
-            <p className="mt-2 text-sm text-white/90 max-w-md leading-relaxed drop-shadow-md">
+            <p
+              className="mt-2.5 sm:mt-3 text-[13px] sm:text-sm max-w-md leading-relaxed line-clamp-3 sm:line-clamp-4"
+              style={{ color: HERO_CREAM_SOFT }}
+            >
               {en ? current.shortDescriptionEn : current.shortDescriptionMr}
             </p>
             <span
@@ -229,17 +257,17 @@ export const FeaturedStoriesCarousel = () => {
                   ? `Photograph ${i + 1}: ${story.titleEn}`
                   : `छायाचित्र ${i + 1}: ${story.titleMr}`;
               return (
-              <button
-                key={story.id}
-                type="button"
-                role="tab"
-                aria-selected={i === index}
-                aria-label={dotLabel}
-                onClick={() => goTo(i)}
-                className={`rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                  i === index ? "h-2 w-6 bg-white" : "h-2 w-2 bg-white/45 hover:bg-white/75"
-                }`}
-              />
+                <button
+                  key={story.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === index}
+                  aria-label={dotLabel}
+                  onClick={() => goTo(i)}
+                  className={`rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                    i === index ? "h-2 w-6 bg-white" : "h-2 w-2 bg-white/45 hover:bg-white/75"
+                  }`}
+                />
               );
             })}
           </div>
