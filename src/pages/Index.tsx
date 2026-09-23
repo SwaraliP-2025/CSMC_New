@@ -150,7 +150,7 @@ const SocialMediaSection = () => {
   const FB_URL = "https://www.facebook.com/SmarterAurangabad";
   const IG_URL = "https://www.instagram.com/csmc_municipalcommissioner/";
   const IG_HANDLE = "csmc_municipalcommissioner";
-  const EMBED_H = 460;
+  const EMBED_H = 550;
 
   useEffect(() => {
     const el = embedRef.current;
@@ -244,7 +244,7 @@ const SocialMediaSection = () => {
             </header>
             <div ref={embedRef} className="social-embed-frame min-w-0">
               <iframe
-                src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_URL)}&tabs=timeline&width=${embedWidth}&height=${EMBED_H}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false`}
+                src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_URL)}&tabs=timeline&width=${embedWidth}&height=${EMBED_H}&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false`}
                 width={embedWidth}
                 height={EMBED_H}
                 style={{ border: "none", display: "block", width: "100%", height: `${EMBED_H}px` }}

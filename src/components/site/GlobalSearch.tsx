@@ -343,7 +343,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           }
           role="combobox"
           autoComplete="off"
-          className={`bg-transparent outline-none placeholder:text-muted-foreground min-w-0 ${
+          className={`bg-transparent outline-none placeholder:text-muted-foreground/60 min-w-0 ${
             compact ? "text-xs w-full" : "text-sm w-[220px] lg:w-[280px]"
           }`}
         />
