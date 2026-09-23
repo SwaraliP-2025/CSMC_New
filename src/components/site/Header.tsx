@@ -18,7 +18,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
 
   const isActive = item.to ? pathname === item.to : false;
   const isHome = item.to === "/";
-  const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isActive ? "bg-civic-gold text-civic-ink" : "hover:bg-civic-gold/80"}`;
+  const baseCls = `${isHome ? "px-3" : "px-4"} py-3 text-[14px] font-semibold tracking-wide text-white transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none h-full w-max ${isActive ? "bg-civic-red text-white" : "hover:bg-civic-red/80"}`;
   const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : label;
 
   if (!item.children) {
@@ -50,7 +50,7 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
         const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
         const renderLink = (child: NavItem) => {
           const childLabel = en ? child.labelEn : child.labelMr;
-          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors rounded-sm`;
+          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-civic-red hover:text-white transition-colors rounded-sm`;
           if (isExternalHref(child.to, child.external)) {
             return (
               <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -95,12 +95,12 @@ const NavItemDesktop = ({ item, label, en }: { item: NavItem; label: string; en:
                 <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                   {isExternalHref(child.to, child.external) ? (
                     <a href={child.to} target="_blank" rel="noopener noreferrer"
-                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-red hover:text-white transition-colors`}>
                       {childLabel}
                     </a>
                   ) : (
                     <Link to={child.to!}
-                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-gold hover:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-civic-red hover:text-white transition-colors`}>
                       {childLabel}
                     </Link>
                   )}
@@ -183,9 +183,16 @@ export const Header = () => {
       {/* Desktop nav */}
       <nav id="nav" className="hidden md:block bg-[#1a3a6b]">
         <div className="w-full flex items-stretch">
-          {NAV.map(item => (
-            <div key={item.labelEn} className={item.to === "/" ? "shrink-0" : "flex-1"}>
-              <NavItemDesktop item={item} label={label(item)} en={en} />
+          {NAV.map((item, index) => (
+            <div key={item.labelEn} className="flex items-stretch">
+              <div className="shrink-0">
+                <NavItemDesktop item={item} label={label(item)} en={en} />
+              </div>
+              {index < NAV.length - 1 && (
+                <div className="flex items-center px-0.5 text-white/40">
+                  |
+                </div>
+              )}
             </div>
           ))}
         </div>
