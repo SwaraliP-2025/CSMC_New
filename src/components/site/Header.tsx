@@ -372,15 +372,22 @@ export const Header = () => {
         className="hidden md:block bg-civic-blue"
       >
         <div className="w-full flex items-stretch">
-          {NAV.map(item => (
-            <div key={item.labelEn} className={item.to === "/" ? "shrink-0" : "flex-1"}>
-              <NavItemDesktop
-                item={item}
-                label={label(item)}
-                resolveLabel={label}
-                en={en}
-                lockTop={gtTarget === "hi"}
-              />
+          {NAV.map((item, index) => (
+            <div key={item.labelEn} className="flex items-stretch">
+              <div className="shrink-0">
+                <NavItemDesktop
+                  item={item}
+                  label={label(item)}
+                  resolveLabel={label}
+                  en={en}
+                  lockTop={gtTarget === "hi"}
+                />
+              </div>
+              {index < NAV.length - 1 && (
+                <div className="flex items-center px-0.5 text-white/40">
+                  |
+                </div>
+              )}
             </div>
           ))}
         </div>
