@@ -15,7 +15,7 @@ export interface NavItem {
 export const SITE_NAV: NavItem[] = [
   { labelEn: "Home", labelMr: "मुख्यपृष्ठ", to: "/" },
   {
-    labelEn: "Mahangarpalika",
+    labelEn: "Mahanagarpalika",
     labelMr: "महानगरपालिका",
     children: [
       {
@@ -46,6 +46,7 @@ export const SITE_NAV: NavItem[] = [
             to: "/public-documents",
           },
           { labelEn: "Hon'ble Mayors' List", labelMr: "मा. महापौरांची यादी", to: "/mayors-list" },
+          { labelEn: "Hon'ble Deputy Mayors' List", labelMr: "मा. उपमहापौरांची यादी", to: "/deputy-mayors-list" },
           {
             labelEn: "Hon'ble Commissioners' List",
             labelMr: "मा. आयुक्तांची यादी",
@@ -210,7 +211,7 @@ export const SITE_NAV: NavItem[] = [
       {
         labelEn: "Tenders",
         labelMr: "निविदा",
-        to: "https://mahatenders.gov.in/nicgep/app",
+        to: OFFICIAL.mahatenders,
         external: true,
       },
       { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
@@ -286,7 +287,7 @@ export const OTHER_SITE_PAGES: NavItem[] = [
   { labelEn: "FAQ", labelMr: "सामान्य प्रश्न", to: "/faq" },
   { labelEn: "Elections", labelMr: "निवडणूक", to: "/elections" },
   { labelEn: "Prabhag 2025", labelMr: "प्रभाग २०२५", to: "/prabhag-2025" },
-  { labelEn: "Tenders", labelMr: "निविदा", to: "/tenders" },
+  { labelEn: "Tenders", labelMr: "निविदा", to: OFFICIAL.mahatenders, external: true },
 ];
 
 export function isExternalHref(to?: string, external?: boolean): boolean {

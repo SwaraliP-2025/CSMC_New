@@ -2,6 +2,11 @@
  * Official government / CSMC hand-off URLs used across the prototype.
  * Prefer these redirects over inventing in-app transactions.
  */
+
+/** Exact Google Maps place URL for CSMC Main Building (Town Hall). */
+export const CSMC_OFFICE_MAPS_URL =
+  "https://www.google.com/maps/place/Aurangabad+Municipal+Corporation+Head+Office+Main+Building/@19.8900943,75.3243991,17z/data=!3m1!4b1!4m6!3m5!1s0x3bdb98112bde5f05:0x849e4965dd5af6c6!8m2!3d19.8900943!4d75.3243991!16s%2Fg%2F11fylsvsts";
+
 export const OFFICIAL = {
   propertyTax: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi",
   waterTax: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
@@ -9,13 +14,23 @@ export const OFFICIAL = {
   /** RTS dashboard scrolled to License Department (Chromium text fragment) */
   tradeLicense:
     "https://rts.chhsambhajinagarmc.org/links/dashboard#:~:text=LICENSE%20DEPARTMENT",
+  tradeLicenseNew:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTITradeLicenceNew.do",
+  tradeLicenseRenewal:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTITradeLicenceRenewal.do",
   birthCertificate: "https://rts.chhsambhajinagarmc.org/links/birth-certificate",
   deathCertificate: "https://rts.chhsambhajinagarmc.org/links/death-certificate",
+  waterConnectionNew:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtsapplication/newRTINewWaterConnectionApplication.do",
+  propertyTaxAssessment:
+    "https://aurangabadmahapalika.org/RTSservices/ws/rtiapplication/newRTIPropertyTaxRecovery.do",
   gunthewari: "https://rts.chhsambhajinagarmc.org/links/gunthewari_form_codev2",
   complaintForm: "https://aurangabadmahapalika.org/csms/complaint_form.php",
   trackComplaint: "https://chhsambhajinagarmc.org/csms/check_comp_status.php?id=250",
   citizenFeedback: "https://chhsambhajinagarmc.org/citizen-feedback-form",
-  mahatenders: "https://mahatenders.gov.in/nicgep/app",
+  /** CSMC organisation tenders on Maharashtra e-Procurement (MahaTenders). */
+  mahatenders:
+    "https://mahatenders.gov.in/nicgep/app?component=%24DirectLink&page=FrontEndTendersByOrganisation&service=direct&session=T&sp=SrjbUla7R2QopyZN%2B%2BDH9ONS0Fec7wUuNy1YFXyqSerE%3D",
   gis: "https://gis.chhsambhajinagarmc.org/ascdlcitygis/",
   imegs: "https://chhsambhajinagarmc.org/dashboard/",
   aapleSarkar: "https://aaplesarkar.mahaonline.gov.in",
@@ -39,6 +54,8 @@ export const OFFICIAL = {
   railway:
     "https://www.google.com/maps/place/Chhatrapati+Sambhajinagar+Railway+Station",
   nulm: "https://chhsambhajinagarmc.org/nulm-department",
+  /** Ramai Awas Yojana housing scheme portal */
+  ramaiAwas: "https://chhsambhajinagarmc.org/RAMAI/ws/user/login.do",
 } as const;
 
 export type ServiceEntry = {

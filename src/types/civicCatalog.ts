@@ -17,7 +17,9 @@ export type CivicCategory =
   | "department"
   | "contact"
   | "budget"
-  | "meeting-minutes";
+  | "meeting-minutes"
+  | "facility"
+  | "story";
 
 export type CivicLanguage = "en" | "mr" | "both";
 
@@ -25,11 +27,13 @@ export type DocumentStatus = "current" | "superseded" | "archived";
 
 export type SearchGroup =
   | "services"
+  | "facilities"
   | "documents"
   | "notices"
   | "circulars"
   | "departments"
-  | "faqs";
+  | "faqs"
+  | "stories";
 
 export interface DocumentVersion {
   version: string;

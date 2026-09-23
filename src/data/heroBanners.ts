@@ -3,6 +3,7 @@
  * Do not invent news; keep titles/links aligned with NoticesPopup / announcements.
  */
 import taxRebateBanner from "@/assets/banners/tax-rebate-banner.jpg";
+import { OFFICIAL } from "@/data/officialLinks";
 
 export type HeroBannerSlide = {
   id: string;
@@ -66,7 +67,7 @@ export const HERO_BANNER_SLIDES: HeroBannerSlide[] = [
     date: "10 Apr 2026",
     categoryEn: "Tenders",
     categoryMr: "निविदा",
-    link: "https://mahatenders.gov.in/nicgep/app",
+    link: OFFICIAL.mahatenders,
     external: true,
   },
   {

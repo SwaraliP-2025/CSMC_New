@@ -10,6 +10,8 @@ import {
   wmoLabel,
   rainLabel,
 } from "@/hooks/useWeatherAQI";
+import { GoogleTranslateWidget } from "@/components/site/GoogleTranslateWidget";
+import { clearGoogleTranslateCookie, readGoogleTranslateTarget } from "@/components/site/googleTranslate";
 
 let _fontSize = 100;
 
@@ -67,14 +69,14 @@ const Tip = ({
             }}
           >
             <div
-              className="bg-[#0f172a] border border-white/15 text-white/90 text-[11px]
+              className="bg-[#122440] border border-white/15 text-white/90 text-[11px]
                          font-medium rounded-lg px-3 py-2 shadow-2xl leading-snug"
               style={{ maxWidth: 340, width: "max-content" }}
             >
               {/* arrow pointing up */}
               <span
                 className="absolute -top-1.5 left-1/2 -translate-x-1/2
-                           border-4 border-transparent border-b-[#0f172a]"
+                           border-4 border-transparent border-b-[#122440]"
               />
               {tip}
             </div>
@@ -93,6 +95,17 @@ export const TopBar = () => {
   const { lang, setLang, d } = useLang();
   const { enabled: colorBlind, toggle: toggleColorBlind } = useColorBlind();
   const en = lang === "en";
+  const machineTranslationActive = readGoogleTranslateTarget() !== null;
+  const enOfficialActive = !machineTranslationActive && lang === "en";
+  const mrOfficialActive = !machineTranslationActive && lang === "mr";
+  const officialLangBtnClass = (active: boolean) =>
+    `px-1 sm:px-1.5 py-0.5 rounded transition-all text-[10px] sm:text-[11px] whitespace-nowrap ${
+      active ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"
+    }`;
+  const officialLangBtnClassPortal = (active: boolean) =>
+    `px-1.5 py-0.5 rounded transition-all text-[11px] ${
+      active ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"
+    }`;
   const [dateTime, setDateTime] = useState(new Date());
   const [fontSize, setFontSize] = useState(_fontSize);
 
@@ -198,78 +211,118 @@ export const TopBar = () => {
       <div className="container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-1 py-1.5 sm:py-2 min-w-0">
 
         {/* Mobile row 1: accessibility + language. Desktop: accessibility left, language/date via order. */}
-        <div className="flex items-center justify-between gap-2 w-full sm:w-auto sm:contents">
+        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 w-full sm:w-auto sm:contents">
 
-          {/* ── LEFT: Accessibility ── */}
-          <div className="flex items-center gap-0.5 whitespace-nowrap shrink-0">
-            <button onClick={() => applyFontSize(Math.max(80, fontSize - 10))}
+          {/* ── LEFT: Accessibility + language (Website Guide spotlight target) ── */}
+          <div
+            data-tour="a11y"
+            role="group"
+            aria-label={t(
+              `Text size and colour options. Current text size ${fontSize}%`,
+              `अक्षर आकार व रंग पर्याय. सध्याचा अक्षर आकार ${d(fontSize)}%`,
+            )}
+            className="flex items-center gap-0.5 whitespace-nowrap shrink-0 rounded-md"
+          >
+            <button
+              type="button"
+              onClick={() => applyFontSize(Math.max(80, fontSize - 10))}
+              aria-label={t(`Decrease text size (currently ${fontSize}%)`, `अक्षर लहान करा (सध्या ${d(fontSize)}%)`)}
+              aria-pressed={fontSize < 100}
               title={t("Decrease text size", "अक्षर लहान करा")}
-              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none">
+              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-sm leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold rounded-sm"
+            >
               {t("A-", "अ-")}
             </button>
-            <span className="text-white/15 mx-0.5">|</span>
-            <button onClick={() => applyFontSize(100)}
+            <span className="text-white/15 mx-0.5" aria-hidden>|</span>
+            <button
+              type="button"
+              onClick={() => applyFontSize(100)}
+              aria-label={t("Normal text size", "सामान्य आकार")}
+              aria-pressed={fontSize === 100}
               title={t("Normal text size", "सामान्य आकार")}
-              className={`px-1.5 py-0.5 transition-colors font-bold text-base leading-none ${fontSize === 100 ? "text-civic-gold" : "hover:text-civic-gold"}`}>
+              className={`px-1.5 py-0.5 transition-colors font-bold text-base leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold rounded-sm ${fontSize === 100 ? "text-civic-gold" : "hover:text-civic-gold"}`}
+            >
               {t("A", "अ")}
             </button>
-            <span className="text-white/15 mx-0.5">|</span>
-            <button onClick={() => applyFontSize(Math.min(150, fontSize + 10))}
+            <span className="text-white/15 mx-0.5" aria-hidden>|</span>
+            <button
+              type="button"
+              onClick={() => applyFontSize(Math.min(150, fontSize + 10))}
+              aria-label={t(`Increase text size (currently ${fontSize}%)`, `अक्षर मोठे करा (सध्या ${d(fontSize)}%)`)}
+              aria-pressed={fontSize > 100}
               title={t("Increase text size", "अक्षर मोठे करा")}
-              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-lg leading-none">
+              className="px-1.5 py-0.5 hover:text-civic-gold transition-colors font-bold text-lg leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold rounded-sm"
+            >
               {t("A+", "अ+")}
             </button>
-            <span className="text-white/15 mx-0.5">|</span>
+            <span className="text-white/15 mx-0.5" aria-hidden>|</span>
             <button
               type="button"
               onClick={toggleColorBlind}
               aria-pressed={colorBlind}
+              aria-label={t(
+                colorBlind ? "Disable color-blind friendly mode" : "Enable color-blind friendly mode",
+                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा" : "कलर ब्लाइंड अनुकूल मोड सुरु करा",
+              )}
               title={t(
                 colorBlind ? "Disable color-blind friendly mode" : "Enable color-blind friendly mode",
-                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा " : "कलर ब्लाइंड अनुकूल मोड सुरु करा"            )}
-              className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded transition-colors leading-none ${
+                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा " : "कलर ब्लाइंड अनुकूल मोड सुरु करा",
+              )}
+              className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded transition-colors leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold ${
                 colorBlind ? "text-civic-gold bg-white/10" : "hover:text-civic-gold"
               }`}
             >
               <Contrast className="h-3.5 w-3.5 shrink-0" aria-hidden />
               <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wide">
-                {t("Color blind", "कलर ब्लाइंड" )}
+                {t("Color blind", "कलर ब्लाइंड")}
               </span>
             </button>
           </div>
 
-          {/* ── Language + date (right of row 1 on mobile, far right on desktop) ── */}
-          <div className="flex items-center shrink-0 sm:order-3">
+          {/* ── Language + date (wraps to full width on phones so मराठी stays visible) ── */}
+          <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 w-full min-w-0 basis-full sm:basis-auto sm:w-auto sm:flex-nowrap sm:shrink-0 sm:order-3 sm:gap-1">
+            <div className="flex items-center min-w-0 max-w-[48%] min-[420px]:max-w-[9rem] sm:max-w-none sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3">
+              <GoogleTranslateWidget />
+            </div>
             <div
               ref={langSlotRef}
               data-lang-switcher=""
-              className={`flex items-center gap-0.5 sm:gap-1 sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3 ${dialogOpen ? "invisible" : ""}`}
+              data-tour="lang-switch"
+              translate="no"
+              role="group"
+              aria-label={t("Official website language", "अधिकृत संकेतस्थळ भाषा")}
+              className={`notranslate flex items-center gap-0.5 sm:gap-1 shrink-0 sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3 ${dialogOpen ? "invisible" : ""}`}
             >
               <Globe className="h-3 w-3 opacity-50 shrink-0 hidden sm:block" />
-              <button type="button" onClick={() => setLang("en")}
-                className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+              <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("en"); }}
+                className={officialLangBtnClass(enOfficialActive)}
+                aria-pressed={enOfficialActive}>
                 ENGLISH
               </button>
               <span className="opacity-20">|</span>
-              <button type="button" onClick={() => setLang("mr")}
-                className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+              <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("mr"); }}
+                className={officialLangBtnClass(mrOfficialActive)}
+                aria-pressed={mrOfficialActive}>
                 मराठी
               </button>
             </div>
             {dialogOpen && langSlot && ReactDOM.createPortal(
               <div
                 data-lang-switcher=""
-                className="fixed z-[1200] flex items-center gap-1 rounded-md bg-[#0b2d5c] px-2 py-0.5 shadow-lg border border-white/10 text-white"
+                translate="no"
+                className="notranslate fixed z-[1200] flex items-center gap-1 rounded-md bg-civic-blue px-2 py-0.5 shadow-lg border border-white/10 text-white"
                 style={{ top: langSlot.top, left: langSlot.left }}
               >
                 <Globe className="h-3 w-3 opacity-50 shrink-0" />
-                <button type="button" onClick={() => setLang("en")}
-                  className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "en" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+                <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("en"); }}
+                  className={officialLangBtnClassPortal(enOfficialActive)}
+                  aria-pressed={enOfficialActive}>
                   ENGLISH
                 </button>
                 <span className="opacity-20">|</span>
-                <button type="button" onClick={() => setLang("mr")}
-                  className={`px-1.5 py-0.5 rounded transition-all text-[11px] ${lang === "mr" ? "bg-civic-gold text-civic-ink font-bold" : "hover:text-white"}`}>
+                <button type="button" onClick={() => { clearGoogleTranslateCookie(); setLang("mr"); }}
+                  className={officialLangBtnClassPortal(mrOfficialActive)}
+                  aria-pressed={mrOfficialActive}>
                   मराठी
                 </button>
               </div>,

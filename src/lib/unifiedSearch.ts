@@ -4,12 +4,15 @@ import { localizeDigits } from "@/i18n/digits";
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
 import { groupHits, smartSearch, type SearchHit } from "@/lib/semanticSearch";
 import { prepareSearchQuery } from "@/lib/searchAliases";
+import { applyLanguageAwareRanking, suggestDidYouMean } from "@/lib/searchLanguage";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 export type { SearchHit };
+export { suggestDidYouMean };
 
 export function searchHits(query: string): SearchHit[] {
-  return smartSearch(prepareSearchQuery(query));
+  const prepared = prepareSearchQuery(query);
+  return applyLanguageAwareRanking(smartSearch(prepared), prepared);
 }
 
 export function searchCatalog(query: string): CivicRecord[] {
@@ -26,14 +29,44 @@ export function groupSearchResults(hits: SearchHit[]) {
 }
 
 export function recordHref(record: CivicRecord): { to: string; external: boolean } {
-  if ((record.category === "service" || record.category === "department" || record.category === "contact") && record.href) {
+  const navigable =
+    record.category === "service" ||
+    record.category === "department" ||
+    record.category === "contact" ||
+    record.category === "facility" ||
+    record.category === "story" ||
+    record.category === "news" ||
+    record.category === "acts-rules" ||
+    record.category === "rti" ||
+    record.category === "faq" ||
+    record.category === "budget" ||
+    record.category === "development-plan";
+  if (navigable && record.href) {
     return { to: record.href, external: !!record.external };
+  }
+  if (record.href && (record.href.startsWith("http") || record.href.startsWith("/"))) {
+    return { to: record.href, external: !!record.external || record.href.startsWith("http") };
   }
   return { to: `/digital-repository/${record.id}`, external: false };
 }
 
-export function downloadCivicRecord(record: CivicRecord) {
-  const text = [
+/** Open a generated PDF blob in a new tab (preview). Falls back to download if popups are blocked. */
+export function openPdfBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, "_blank", "noopener,noreferrer");
+  if (!win) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  window.setTimeout(() => URL.revokeObjectURL(url), 120_000);
+}
+
+function civicRecordPdfText(record: CivicRecord) {
+  return [
     "Chhatrapati Sambhajinagar Municipal Corporation",
     "Official public document",
     "",
@@ -57,8 +90,27 @@ export function downloadCivicRecord(record: CivicRecord) {
     "This PDF is generated from the CSMC Municipal Knowledge Repository.",
     `Record ID: ${record.id}`,
   ].join("\n");
+}
 
-  const blob = buildSimplePdf(text);
+export function civicRecordPdfBlob(record: CivicRecord) {
+  return buildSimplePdf(civicRecordPdfText(record));
+}
+
+/** Preview / open the document PDF in a new browser tab. */
+export function openCivicRecordPdf(record: CivicRecord) {
+  const blob = civicRecordPdfBlob(record);
+  openPdfBlob(blob, pdfFilename(record.titleEn, record.id));
+}
+
+/** Open the actual document when possible; returns false if caller should open the detail page. */
+export function tryOpenCivicDocument(record: CivicRecord): boolean {
+  if (!record.downloadable) return false;
+  openCivicRecordPdf(record);
+  return true;
+}
+
+export function downloadCivicRecord(record: CivicRecord) {
+  const blob = civicRecordPdfBlob(record);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;

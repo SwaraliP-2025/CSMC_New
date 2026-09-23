@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "deploy": "npm run build && npx gh-pages -d dist",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "import:facilities": "python scripts/import-gis-facilities.py && node scripts/extract-facility-locations.mjs"
   },
   "dependencies": {
     "@fontsource/noto-sans-devanagari": "^5.3.0",

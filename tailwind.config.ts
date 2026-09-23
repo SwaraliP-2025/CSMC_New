@@ -59,6 +59,8 @@ export default {
           red: "hsl(var(--civic-red))",
           white: "hsl(var(--civic-white))",
           ink: "hsl(var(--civic-ink))",
+          light: "hsl(var(--civic-light))",
+          "saffron-soft": "hsl(var(--civic-saffron-soft))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

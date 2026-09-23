@@ -1,22 +1,164 @@
 [
   {
     "id": "cfc-001",
-    "name": "CFC Aurangabad Road",
-    "address": "Aurangabad Road, Sambhajinagar",
-    "phone": "0240-7788990",
-    "timings": "9:30 AM - 5:30 PM",
-    "latitude": "19.8738",
-    "longitude": "75.3482",
-    "googleMapsUrl": "https://maps.google.com/?q=19.8738,75.3482"
+    "name": "CFC — Zone Office 1",
+    "address": "Town Hall",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+1+Town+Hall+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 1",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 1"
+      }
+    ]
   },
   {
     "id": "cfc-002",
-    "name": "CFC CIDCO",
-    "address": "CIDCO Sector 3, Sambhajinagar",
-    "phone": "0240-8899001",
-    "timings": "9:30 AM - 5:30 PM",
-    "latitude": "19.8687",
-    "longitude": "75.3195",
-    "googleMapsUrl": "https://maps.google.com/?q=19.8687,75.3195"
+    "name": "CFC — Zone Office 2",
+    "address": "Sillekhana",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+2+Sillekhana+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 2",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 2"
+      }
+    ]
+  },
+  {
+    "id": "cfc-003",
+    "name": "CFC — Zone Office 3",
+    "address": "Central Naka",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+3+Central+Naka+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 3",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 3"
+      }
+    ]
+  },
+  {
+    "id": "cfc-004",
+    "name": "CFC — Zone Office 4",
+    "address": "Near Saubhagya Mangal Karyalay",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+4+Near+Saubhagya+Mangal+Karyalay+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 4",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 4"
+      }
+    ]
+  },
+  {
+    "id": "cfc-005",
+    "name": "CFC — Zone Office 5 & 6",
+    "address": "Jalgaon Road",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+5+%26+6+Jalgaon+Road+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 5 & 6",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 5 & 6"
+      }
+    ]
+  },
+  {
+    "id": "cfc-006",
+    "name": "CFC — Zone Office 7",
+    "address": "Near Jawahar Colony Police Station",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+7+Near+Jawahar+Colony+Police+Station+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 7",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 7"
+      }
+    ]
+  },
+  {
+    "id": "cfc-007",
+    "name": "CFC — Zone Office 8",
+    "address": "Beed By Pass",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+8+Beed+By+Pass+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 8",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 8"
+      }
+    ]
+  },
+  {
+    "id": "cfc-008",
+    "name": "CFC — Zone Office 9",
+    "address": "Jalna Road",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+9+Jalna+Road+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 9",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 9"
+      }
+    ]
+  },
+  {
+    "id": "cfc-009",
+    "name": "CFC — Zone Office 10",
+    "address": "Raj Nagar Railway Station Road",
+    "phone": "",
+    "timings": "",
+    "latitude": "",
+    "longitude": "",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Zone+Office+10+Raj+Nagar+Railway+Station+Road+Chhatrapati+Sambhajinagar",
+    "zone": "Zone 10",
+    "details": [
+      {
+        "labelEn": "Located at",
+        "labelMr": "येथे स्थित",
+        "value": "Zone Office 10"
+      }
+    ]
   }
 ]

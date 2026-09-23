@@ -4,26 +4,21 @@ import { useLang } from "@/i18n/LanguageContext";
 import { User } from "lucide-react";
 import { useState } from "react";
 import { PhotoModal } from "@/components/site/PhotoModal";
-import amolImg from "@/assets/leadership/shri_amol_sir.png";
-
-const commissioners = [
-  { sr: 1, name: "Shri. Amol Yedage, IAS", nameMr: "श्री. अमोल येडगे, भा.प्र.से.", from: "Apr 2026", to: "Present", img: amolImg, current: true},
-  { sr: 2, name: "Shri. G Sreekanth, IAS", nameMr: "श्री. जी श्रीकांत, भा.प्र.से.", from: "Mar 2022", to: "Apr 2026", img: null, current: false},
-  { sr: 3, name: "Shri. Abhijit Chaudhari, IAS", nameMr: "श्री. अभिजित चौधरी, भा.प्र.से.", from: "Jun 2021", to: "Mar 2022", img: null, current: false },
-  { sr: 4, name: "Shri. Astik Kumar Pandey, IAS", nameMr: "श्री. आस्तिक कुमार पांडेय, भा.प्र.से.", from: "Jan 2019", to: "May 2021", img: null, current: false },
-  { sr: 5, name: "Shri. D. M. Muglikar, IAS", nameMr: "श्री. डी. एम. मुग्लीकर, भा.प्र.से.", from: "Apr 2017", to: "Dec 2018", img: null, current: false },
-  // { sr: 5, name: "Shri. Omprakash Bakoria, IAS", nameMr: "श्री. ओंप्रकाश बकोरिया, भा.प्र.से.", from: "Jan 2015", to: "Mar 2017", img: null, current: false },
-];
+import { COMMISSIONERS } from "@/data/commissioners";
 
 const Avatar = ({ src, name, size = "md" }: { src: string | null; name: string; size?: "sm" | "md" }) => {
   const cls = size === "sm"
     ? "w-12 h-12 rounded-full object-cover object-top border-2 border-civic-blue/20 shadow"
     : "w-14 h-14 rounded-full object-cover object-top border-2 border-civic-blue/20 mx-auto shadow";
   const ph = size === "sm"
-    ? "w-12 h-12 rounded-full bg-civic-blue/10 border-2 border-civic-blue/20 flex items-center justify-center"
-    : "w-14 h-14 rounded-full bg-civic-blue/10 border-2 border-civic-blue/20 flex items-center justify-center mx-auto";
+    ? "w-12 h-12 rounded-full bg-civic-gold/15 border-2 border-dashed border-civic-blue/25 flex items-center justify-center"
+    : "w-14 h-14 rounded-full bg-civic-gold/15 border-2 border-dashed border-civic-blue/25 flex items-center justify-center mx-auto";
   if (src) return <img src={src} alt={name} className={cls} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />;
-  return <div className={ph}><User className="h-6 w-6 text-civic-blue/40" /></div>;
+  return (
+    <div className={ph} title="Photo placeholder">
+      <User className="h-5 w-5 text-civic-blue/35" aria-hidden />
+    </div>
+  );
 };
 
 const CommissionersList = () => {
@@ -40,37 +35,45 @@ const CommissionersList = () => {
       />
       <section className="py-12 container max-w-5xl">
 
-        {/* Desktop table */}
         <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-civic-blue text-white">
-                <th className="px-4 py-4 text-center font-bold w-16">{en ? "Photo" : "फोटो"}</th>
-                <th className="px-4 py-4 text-left font-bold w-8">{en ? "Sr." : "क्र."}</th>
-                <th className="px-4 py-4 text-left font-bold">{en ? "Name & Designation" : "नाव व पदनाम"}</th>
-                <th className="px-4 py-4 text-center font-bold">{en ? "From" : "पासून"}</th>
-                <th className="px-4 py-4 text-center font-bold">{en ? "To" : "पर्यंत"}</th>
+                <th className="px-4 py-4 text-center font-bold w-8">{en ? "Sr." : "क्र."}</th>
+                <th className="px-4 py-4 text-left font-bold">{en ? "Hon'ble Commissioner" : "मा. आयुक्त"}</th>
+                <th className="px-4 py-4 text-center font-bold">{en ? "Working Period" : "कार्यकाल"}</th>
+                <th className="px-4 py-4 text-center font-bold w-20">{en ? "Photo" : "फोटो"}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-white">
-              {commissioners.map((c) => (
+              {COMMISSIONERS.map((c) => (
                 <tr key={c.sr} className={`hover:bg-muted/30 transition-colors ${c.current ? "bg-civic-gold/5" : ""}`}>
-                  <td className="px-4 py-4 text-center">
-                    <div className={c.img ? "cursor-zoom-in" : ""}
-                      onClick={() => c.img && setSelected({ src: c.img, name: en ? c.name : c.nameMr, role: "IAS" })}>
-                      <Avatar src={c.img} name={en ? c.name : c.nameMr} />
-                    </div>
-                  </td>
                   <td className="px-4 py-4 text-center font-bold text-muted-foreground">{d(c.sr)}</td>
                   <td className="px-4 py-4">
-                    <p className="font-bold text-civic-ink">{en ? c.name : c.nameMr}</p>
-                    {c.current && <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">{en ? "Current Commissioner" : "विद्यमान आयुक्त"}</span>}
+                    <p className="font-bold text-civic-ink">{en ? c.nameEn : c.nameMr}</p>
+                    {c.current && (
+                      <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">
+                        {en ? "Current Commissioner" : "विद्यमान आयुक्त"}
+                      </span>
+                    )}
                   </td>
-                  <td className="px-4 py-4 text-center text-muted-foreground">{d(c.from)}</td>
-                  <td className="px-4 py-4 text-center">
+                  <td className="px-4 py-4 text-center text-muted-foreground whitespace-nowrap">
+                    {d(c.from)} {en ? "to" : "ते"}{" "}
                     {c.to === "Present"
-                      ? <span className="bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full text-xs">{en ? "Present" : "विद्यमान"}</span>
-                      : <span className="text-muted-foreground">{d(c.to)}</span>}
+                      ? <span className="bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full text-xs">{en ? "Till Date" : "आजतागायत"}</span>
+                      : d(c.to)}
+                  </td>
+                  <td className="px-4 py-4 text-center">
+                    <div
+                      className={c.img ? "cursor-zoom-in" : ""}
+                      onClick={() => c.img && setSelected({
+                        src: c.img,
+                        name: en ? c.nameEn : c.nameMr,
+                        role: en ? "Hon'ble Commissioner" : "मा. आयुक्त",
+                      })}
+                    >
+                      <Avatar src={c.img} name={en ? c.nameEn : c.nameMr} />
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -78,37 +81,42 @@ const CommissionersList = () => {
           </table>
         </div>
 
-        {/* Mobile cards */}
         <div className="md:hidden flex flex-col gap-3">
-          {commissioners.map((c) => (
+          {COMMISSIONERS.map((c) => (
             <div key={c.sr} className={`rounded-2xl border border-border bg-white shadow-sm p-4 flex gap-4 items-start ${c.current ? "border-civic-gold/40 bg-civic-gold/5" : ""}`}>
-              {/* Photo */}
-              <div className={c.img ? "cursor-zoom-in shrink-0" : "shrink-0"}
-                onClick={() => c.img && setSelected({ src: c.img, name: en ? c.name : c.nameMr, role: "IAS" })}>
-                <Avatar src={c.img} name={en ? c.name : c.nameMr} size="sm" />
+              <div
+                className={c.img ? "cursor-zoom-in shrink-0" : "shrink-0"}
+                onClick={() => c.img && setSelected({
+                  src: c.img,
+                  name: en ? c.nameEn : c.nameMr,
+                  role: en ? "Hon'ble Commissioner" : "मा. आयुक्त",
+                })}
+              >
+                <Avatar src={c.img} name={en ? c.nameEn : c.nameMr} size="sm" />
               </div>
-              {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-bold text-civic-ink text-sm leading-snug">{en ? c.name : c.nameMr}</p>
+                  <p className="font-bold text-civic-ink text-sm leading-snug">{en ? c.nameEn : c.nameMr}</p>
+                  <span className="text-[10px] font-bold text-muted-foreground shrink-0">#{d(c.sr)}</span>
                 </div>
-                {c.current && <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">{en ? "Current Commissioner" : "विद्यमान आयुक्त"}</span>}
-                <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                  <span>#{d(c.sr)}</span>
-                  <span>•</span>
-                  <span>{d(c.from)}</span>
-                  <span>→</span>
-                  {c.to === "Present"
-                    ? <span className="bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">{en ? "Present" : "विद्यमान"}</span>
-                    : <span>{d(c.to)}</span>}
-                </div>
+                {c.current && (
+                  <span className="inline-block mt-1 bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[10px]">
+                    {en ? "Current Commissioner" : "विद्यमान आयुक्त"}
+                  </span>
+                )}
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {d(c.from)} {en ? "to" : "ते"}{" "}
+                  {c.to === "Present" ? (en ? "Till Date" : "आजतागायत") : d(c.to)}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
         <p className="text-xs text-muted-foreground mt-4 text-center">
-          {en ? "* Data is indicative. Official records may vary." : "* माहिती सूचक आहे. अधिकृत नोंदी भिन्न असू शकतात."}
+          {en
+            ? "* Photos will be added as official portraits become available. Official records may vary."
+            : "* अधिकृत छायाचित्रे उपलब्ध झाल्यावर जोडली जातील. अधिकृत नोंदी भिन्न असू शकतात."}
         </p>
       </section>
 

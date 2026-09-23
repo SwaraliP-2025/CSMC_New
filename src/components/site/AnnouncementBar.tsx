@@ -3,7 +3,7 @@ import { Bell, ExternalLink, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { OFFICIAL } from "@/data/officialLinks";
 
-/** Destinations/dates only — citizen-facing labels come from `t.announcements`. */
+/** Destinations/dates only — citizen-facing labels come from `t.announcements`. Dates stored as YYYY-MM-DD. */
 const DESTINATIONS: { to: string; external?: boolean; date: string }[] = [
   { to: OFFICIAL.gunthewari, external: true, date: "2026-04-10" },
   { to: "/city-alerts", date: "2026-08-14" },
@@ -11,6 +11,13 @@ const DESTINATIONS: { to: string; external?: boolean; date: string }[] = [
   { to: OFFICIAL.mahatenders, external: true, date: "2026-04-10" },
   { to: "/notices", date: "2026-08-01" },
 ];
+
+/** Display ticker dates as DD-MM-YYYY. */
+function formatTickerDate(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+  if (!m) return iso;
+  return `${m[3]}-${m[2]}-${m[1]}`;
+}
 
 export const AnnouncementBar = () => {
   const { t } = useLang();
@@ -28,7 +35,7 @@ export const AnnouncementBar = () => {
         {icon}
         <span>
           {label}
-          <span className="opacity-70 ml-1">({dest.date})</span>
+          <span className="opacity-70 ml-1">({formatTickerDate(dest.date)})</span>
         </span>
         {dest.external && <ExternalLink className="h-2.5 w-2.5 opacity-50" />}
       </>
@@ -48,7 +55,10 @@ export const AnnouncementBar = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[1100] flex h-10 bg-civic-blue overflow-hidden border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
+    <div
+      data-tour="whats-new"
+      className="fixed bottom-0 left-0 right-0 z-[1100] flex h-10 bg-civic-blue overflow-hidden border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"
+    >
       <div className="flex items-center px-6 bg-civic-gold text-civic-ink font-bold text-[10px] uppercase tracking-widest whitespace-nowrap z-10 border-r border-civic-ink/10">
         {t.announcements.label}
       </div>

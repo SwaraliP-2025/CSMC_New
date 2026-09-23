@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
+import { getStoryById } from "@/data/visualStories";
 import {
   absoluteUrl,
   DEFAULT_DESCRIPTION_EN,
@@ -59,13 +60,19 @@ export const SeoHead = () => {
   const en = lang === "en";
 
   useEffect(() => {
+    const storyId = pathname.startsWith("/stories/") ? pathname.split("/")[2] : undefined;
+    const story = storyId ? getStoryById(storyId) : undefined;
     const page = ROUTE_SEO[pathname];
-    const title = en
-      ? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_EN}`
-      : page?.titleMr ?? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_MR}`;
-    const description = en
-      ? page?.description ?? DEFAULT_DESCRIPTION_EN
-      : page?.descriptionMr ?? page?.description ?? DEFAULT_DESCRIPTION_MR;
+    const title = story
+      ? `${en ? story.titleEn : story.titleMr} | ${SITE_SHORT}`
+      : en
+        ? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_EN}`
+        : page?.titleMr ?? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_MR}`;
+    const description = story
+      ? (en ? story.shortDescriptionEn : story.shortDescriptionMr)
+      : en
+        ? page?.description ?? DEFAULT_DESCRIPTION_EN
+        : page?.descriptionMr ?? page?.description ?? DEFAULT_DESCRIPTION_MR;
     const canonical = absoluteUrl(pathname);
 
     document.title = title;
@@ -77,7 +84,7 @@ export const SeoHead = () => {
     upsertMeta("name", "application-name", `${SITE_SHORT} Official Portal`);
     upsertMeta("name", "robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
     upsertMeta("name", "googlebot", "index, follow");
-    upsertMeta("name", "theme-color", "#1a3a6b");
+    upsertMeta("name", "theme-color", "#1A3A6B");
 
     upsertMeta("property", "og:locale", en ? "en_IN" : "mr_IN");
     upsertMeta("property", "og:locale:alternate", en ? "mr_IN" : "en_IN");

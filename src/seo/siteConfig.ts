@@ -207,6 +207,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Hon'ble Mayors' List | CSMC",
     description: "List of Hon'ble Mayors of Chhatrapati Sambhajinagar Municipal Corporation.",
   },
+  "/deputy-mayors-list": {
+    path: "/deputy-mayors-list",
+    title: "Hon'ble Deputy Mayors' List | CSMC",
+    titleMr: "मा. उपमहापौरांची यादी | CSMC",
+    description: "List of Hon'ble Deputy Mayors of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या मा. उपमहापौरांची यादी.",
+  },
   "/commissioners-list": {
     path: "/commissioners-list",
     title: "Hon'ble Commissioners' List | CSMC",
@@ -226,6 +233,24 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     path: "/site-map",
     title: "Site Map | CSMC",
     description: "Site map of the official CSMC municipal corporation portal.",
+  },
+  "/gallery": {
+    path: "/gallery",
+    title: "Photo Gallery | CSMC",
+    titleMr: "छायाचित्र दालन | CSMC",
+    description:
+      "Civic programmes, meetings and public activities of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr:
+      "छत्रपती संभाजीनगर महानगरपालिकेचे नागरी कार्यक्रम, बैठका व सार्वजनिक उपक्रम.",
+  },
+  "/search": {
+    path: "/search",
+    title: "Search | CSMC",
+    titleMr: "शोध | CSMC",
+    description:
+      "Search CSMC citizen services, public facilities, notices, documents, departments and municipal information.",
+    descriptionMr:
+      "CSMC नागरिक सेवा, सार्वजनिक सुविधा, सूचना, दस्तऐवज, विभाग व महापालिका माहिती शोधा.",
   },
   "/digital-repository": {
     path: "/digital-repository",

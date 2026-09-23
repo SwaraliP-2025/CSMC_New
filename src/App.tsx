@@ -38,6 +38,7 @@ import Organization from "./pages/site/Organization.tsx";
 import DPPlan from "./pages/site/DPPlan.tsx";
 import CommissionersList from "./pages/site/CommissionersList.tsx";
 import MayorsList from "./pages/site/MayorsList.tsx";
+import DeputyMayorsList from "./pages/site/DeputyMayorsList.tsx";
 import DepartmentDetail from "./pages/site/DepartmentDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import UserManual from "./pages/site/UserManual.tsx";
@@ -48,6 +49,9 @@ import DigitalRepository from "./pages/site/DigitalRepository.tsx";
 import DocumentViewer from "./pages/site/DocumentViewer.tsx";
 import CityAlerts from "./pages/site/CityAlerts.tsx";
 import HowToReach from "./pages/site/HowToReach.tsx";
+import VisualStoryDetail from "./pages/VisualStoryDetail.tsx";
+import PhotoGallery from "./pages/site/PhotoGallery.tsx";
+import SearchResults from "./pages/site/SearchResults.tsx";
 import {
   PrivacyPolicy,
   DisclaimerPage,
@@ -103,6 +107,7 @@ const App = () => (
             <Route path="/dp-plan" element={<DPPlan />} />
             <Route path="/commissioners-list" element={<CommissionersList />} />
             <Route path="/mayors-list" element={<MayorsList />} />
+            <Route path="/deputy-mayors-list" element={<DeputyMayorsList />} />
             <Route path="/user-manual" element={<UserManual />} />
             <Route path="/prabhag-2025" element={<Prabhag2025 />} />
             <Route path="/digital-repository" element={<DigitalRepository />} />
@@ -114,6 +119,9 @@ const App = () => (
             <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
             <Route path="/website-policies" element={<WebsitePolicies />} />
             <Route path="/how-to-reach" element={<HowToReach />} />
+            <Route path="/gallery" element={<PhotoGallery />} />
+            <Route path="/search" element={<SearchResults />} />
+            <Route path="/stories/:slug" element={<VisualStoryDetail />} />
             <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

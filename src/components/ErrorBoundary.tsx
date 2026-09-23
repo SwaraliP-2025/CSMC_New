@@ -17,10 +17,10 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div style={{ padding: "2rem", textAlign: "center", fontFamily: "sans-serif" }}>
-          <h1 style={{ color: "#1a3a6b" }}>Chhatrapati Sambhajinagar Municipal Corporation</h1>
-          <p style={{ color: "#666", marginTop: "1rem" }}>
+          <h1 style={{ color: "#1A3A6B" }}>Chhatrapati Sambhajinagar Municipal Corporation</h1>
+          <p style={{ color: "#5C6570", marginTop: "1rem" }}>
             The page encountered an error. Please{" "}
-            <a href={import.meta.env.BASE_URL} style={{ color: "#1a3a6b" }}>click here to reload</a>.
+            <a href={import.meta.env.BASE_URL} style={{ color: "#1A3A6B" }}>click here to reload</a>.
           </p>
           {import.meta.env.DEV && (
             <pre style={{ marginTop: "1rem", textAlign: "left", background: "#f5f5f5", padding: "1rem", borderRadius: "8px", fontSize: "12px", overflow: "auto" }}>

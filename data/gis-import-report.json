@@ -1,0 +1,65 @@
+{
+  "categories": {
+    "schools": {
+      "sourceRows": 50,
+      "emptyRows": 0,
+      "imported": 50,
+      "withCoords": 0,
+      "withoutCoords": 50
+    },
+    "fireStations": {
+      "sourceRows": 3,
+      "emptyRows": 0,
+      "imported": 3,
+      "withCoords": 0,
+      "withoutCoords": 3
+    },
+    "policeStations": {
+      "sourceRows": 13,
+      "emptyRows": 0,
+      "imported": 13,
+      "withCoords": 0,
+      "withoutCoords": 13
+    },
+    "zoneOffices": {
+      "sourceRows": 9,
+      "emptyRows": 0,
+      "imported": 9,
+      "withCoords": 0,
+      "withoutCoords": 9
+    },
+    "hoardings": {
+      "sourceRows": 170,
+      "emptyRows": 0,
+      "imported": 170,
+      "withCoords": 168,
+      "blankAgencyNames": 28,
+      "withoutCoords": 2
+    },
+    "hospitals": {
+      "sourceRows": 464,
+      "emptyRows": 0,
+      "imported": 464,
+      "withCoords": 0,
+      "duplicateNameGroups": 13,
+      "note": "HOSP_ID is identical (10) for all rows in source; sequential ids assigned. No lat/lng columns in export.",
+      "withoutCoords": 464
+    },
+    "phcs": {
+      "imported": 0,
+      "note": "No GIS Excel supplied; dummy sample data removed."
+    },
+    "cfcs": {
+      "imported": 0,
+      "note": "No GIS Excel supplied; dummy sample data removed."
+    }
+  },
+  "coordinateSummary": {},
+  "removed": "banner-locations.json",
+  "totals": {
+    "records": 709,
+    "withCoordinates": 168,
+    "withoutCoordinates": 541,
+    "pctWithCoordinates": 23.7
+  }
+}
