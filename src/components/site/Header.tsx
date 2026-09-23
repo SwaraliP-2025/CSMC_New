@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect, useId, useRef } from "react";
+import { useState, useEffect, useId, useRef, Fragment } from "react";
 import { Menu, X, ChevronDown, Home } from "lucide-react";
 import { GlobalSearch } from "@/components/site/GlobalSearch";
 import emblem from "@/assets/cs-emblem.png";
@@ -63,7 +63,7 @@ const NavItemDesktop = ({
   const sectionActive = navSectionActive(item, pathname);
   const isSelected = isHome ? pathname === "/" : sectionActive || open;
   const selectedCls = isHome ? "csmc-nav-selected-home" : "csmc-nav-selected";
-  const baseCls = `${isHome ? "px-3" : "px-2"} py-3 text-[14px] font-bold tracking-wide csmc-nav-tab transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none ${isHome ? "h-full" : "w-full h-full"} ${isSelected ? selectedCls : ""}`;
+  const baseCls = `px-3 py-3 text-[14px] font-normal tracking-wide csmc-nav-tab transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none h-full ${isSelected ? selectedCls : ""}`;
   const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : <NavLabel text={label} lock={lockTop} />;
 
   const closeMenu = () => {
@@ -371,17 +371,27 @@ export const Header = () => {
         key={`nav-${gtTarget ?? "none"}-${en ? "en" : "mr"}`}
         className="hidden md:block"
       >
-        <div className="w-full flex items-stretch">
-          {NAV.map(item => (
-            <div key={item.labelEn} className={item.to === "/" ? "shrink-0" : "flex-1"}>
-              <NavItemDesktop
-                item={item}
-                label={label(item)}
-                resolveLabel={label}
-                en={en}
-                lockTop={gtTarget === "hi"}
-              />
-            </div>
+        <div className="w-full flex items-stretch justify-start overflow-x-auto">
+          {NAV.map((item, i) => (
+            <Fragment key={item.labelEn}>
+              {i > 0 ? (
+                <span
+                  className="flex shrink-0 items-center self-stretch px-0.5 text-white/45 text-sm select-none"
+                  aria-hidden
+                >
+                  |
+                </span>
+              ) : null}
+              <div className="shrink-0">
+                <NavItemDesktop
+                  item={item}
+                  label={label(item)}
+                  resolveLabel={label}
+                  en={en}
+                  lockTop={gtTarget === "hi"}
+                />
+              </div>
+            </Fragment>
           ))}
         </div>
       </nav>
@@ -402,7 +412,7 @@ export const Header = () => {
                     type="button"
                     onClick={() => setMobileExpanded(e => e === item.labelEn ? null : item.labelEn)}
                     aria-expanded={mobileExpanded === item.labelEn}
-                    className={`flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-semibold ${
+                    className={`flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-normal ${
                       navSectionActive(item, pathname) || mobileExpanded === item.labelEn
                         ? "csmc-nav-selected"
                         : "text-foreground"
@@ -455,8 +465,8 @@ export const Header = () => {
                   className={`block px-4 py-3 text-sm border-b border-border ${
                     navSectionActive(item, pathname)
                       ? item.to === "/"
-                        ? "csmc-nav-selected-home font-semibold"
-                        : "csmc-nav-selected font-semibold"
+                        ? "csmc-nav-selected-home font-normal"
+                        : "csmc-nav-selected font-normal"
                       : "text-foreground"
                   }`}>
                   <NavLabel text={label(item)} lock={gtTarget === "hi"} />

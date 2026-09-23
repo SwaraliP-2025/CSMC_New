@@ -417,6 +417,18 @@ body > .skiptranslate {
   color: #fff;
 }
 
+/*
+ * Navbar Devanagari — CSMCDevanagari (Noto Sans Devanagari) Regular.
+ * Lighter than Medium/Bold so labels match word-length tabs on the navy bar.
+ * English uses font-normal / Noto Sans via lang="en" rules.
+ */
+html[lang="mr"] .csmc-nav-label,
+html[lang="mr"] .csmc-nav-tab {
+  font-family: CSMCDevanagari;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
 .csmc-nav-selected,
 .csmc-nav-tab:hover:not(.csmc-nav-selected-home) {
   background-color: #f4a300;
