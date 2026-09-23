@@ -55,6 +55,7 @@ export default {
         },
         civic: {
           gold: "hsl(var(--civic-gold))",
+          "nav-orange": "hsl(var(--civic-nav-orange))",
           blue: "hsl(var(--civic-blue))",
           red: "hsl(var(--civic-red))",
           white: "hsl(var(--civic-white))",

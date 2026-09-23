@@ -51,6 +51,8 @@ All colors MUST be HSL.
 
     /* CSMC Civic Tokens */
     --civic-gold: 37 92% 56%; /* slightly brighter saffron ~#F2AD2E */
+    /* Logo lotus saffron — primary nav selected / hover (#F4A300) */
+    --civic-nav-orange: 40 100% 48%;
     --civic-blue: 216 61% 26%; /* #1A3A6B institutional navy */
     --civic-red: 0 66% 47%; /* #C62828 alerts */
     --civic-white: 0 0% 100%;
@@ -116,6 +118,7 @@ All colors MUST be HSL.
     --ring: 207 90% 32%;
 
     --civic-gold: 41 98% 48%;
+    --civic-nav-orange: 40 100% 48%; /* #F4A300 */
     --civic-blue: 207 90% 32%;
     --civic-red: 27 98% 44%;
     --civic-ink: 0 0% 12%;
@@ -408,8 +411,7 @@ body > .skiptranslate {
 }
 
 /*
- * Primary nav — navy bar (matches home icon). Hover / selected use the
- * language-switcher gold + ink palette.
+ * Primary nav — navy bar; selected / hover use logo saffron (#F4A300).
  */
 .csmc-nav-tab {
   color: #fff;
@@ -417,16 +419,20 @@ body > .skiptranslate {
 
 .csmc-nav-selected,
 .csmc-nav-tab:hover:not(.csmc-nav-selected-home) {
-  background-color: hsl(var(--civic-gold));
+  background-color: #f4a300;
   color: hsl(var(--civic-ink));
 }
 
 .csmc-nav-selected-home {
-  background-color: hsl(var(--civic-gold));
+  background-color: #f4a300;
   color: hsl(var(--civic-ink));
 }
 
 .csmc-nav-tab:focus-visible {
-  outline: 2px solid hsl(var(--civic-gold));
+  outline: 2px solid #f4a300;
   outline-offset: -2px;
+}
+
+nav[data-tour="main-nav"] {
+  background-color: hsl(var(--civic-blue));
 }
