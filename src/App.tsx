@@ -35,6 +35,7 @@ import GovtOrders from "./pages/site/GovtOrders.tsx";
 import SiteMap from "./pages/site/SiteMap.tsx";
 import ZonesWards from "./pages/site/ZonesWards.tsx";
 import Organization from "./pages/site/Organization.tsx";
+import Ncap from "./pages/site/Ncap.tsx";
 import DPPlan from "./pages/site/DPPlan.tsx";
 import CommissionersList from "./pages/site/CommissionersList.tsx";
 import MayorsList from "./pages/site/MayorsList.tsx";
@@ -104,6 +105,7 @@ const App = () => (
             <Route path="/zones-wards" element={<ZonesWards />} />
             <Route path="/know-your-corporator" element={<KnowYourCorporator />} />
             <Route path="/organization" element={<Organization />} />
+            <Route path="/ncap" element={<Ncap />} />
             <Route path="/dp-plan" element={<DPPlan />} />
             <Route path="/commissioners-list" element={<CommissionersList />} />
             <Route path="/mayors-list" element={<MayorsList />} />

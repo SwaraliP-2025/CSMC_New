@@ -43,12 +43,14 @@ const NavItemDesktop = ({
   resolveLabel,
   en,
   lockTop,
+  alignMenuEnd = false,
 }: {
   item: NavItem;
   label: string;
   resolveLabel: (item: NavItem) => string;
   en: boolean;
   lockTop?: boolean;
+  alignMenuEnd?: boolean;
 }) => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
@@ -63,7 +65,8 @@ const NavItemDesktop = ({
   const sectionActive = navSectionActive(item, pathname);
   const isSelected = isHome ? pathname === "/" : sectionActive || open;
   const selectedCls = isHome ? "csmc-nav-selected-home" : "csmc-nav-selected";
-  const baseCls = `px-3 py-3 text-[14px] font-normal tracking-wide csmc-nav-tab transition-all relative whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer select-none h-full ${isSelected ? selectedCls : ""}`;
+  const baseCls = `h-full w-full min-w-0 px-1 text-center csmc-nav-tab transition-all relative flex items-center justify-center gap-1 cursor-pointer select-none whitespace-nowrap ${isSelected ? selectedCls : ""}`;
+  const menuPos = alignMenuEnd ? "right-0 left-auto" : "left-0";
   const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : <NavLabel text={label} lock={lockTop} />;
 
   const closeMenu = () => {
@@ -120,7 +123,7 @@ const NavItemDesktop = ({
   return (
     <div
       ref={wrapRef}
-      className="relative"
+      className="relative flex h-full w-full"
       onMouseEnter={() => {
         openedByKeyboard.current = false;
         setOpen(true);
@@ -147,13 +150,13 @@ const NavItemDesktop = ({
         }}
       >
         <NavLabel text={label} lock={lockTop} />
-        <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
+        <ChevronDown className={`h-3 w-3 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
       {open && (() => {
         const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
         const renderLink = (child: NavItem) => {
           const childLabel = resolveLabel(child);
-          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-white hover:bg-[#F4A300] hover:text-civic-ink transition-colors rounded-sm focus-visible:bg-[#F4A300] focus-visible:text-civic-ink`;
+          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-[#FF8C00] hover:bg-[#FF8C00] hover:text-civic-ink transition-colors rounded-sm focus-visible:bg-[#FF8C00] focus-visible:text-civic-ink`;
           if (isExternalHref(child.to, child.external)) {
             return (
               <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -174,14 +177,14 @@ const NavItemDesktop = ({
               id={menuId}
               role="region"
               aria-label={label}
-              className="absolute top-full left-0 z-50 w-[min(96vw,900px)] bg-civic-blue shadow-2xl border-t-2 border-[#F4A300] rounded-b-lg overflow-hidden p-3"
+              className={`absolute top-full ${menuPos} z-50 w-[min(96vw,900px)] max-w-[calc(100vw-1rem)] bg-civic-blue shadow-2xl border-t-2 border-[#FF8C00] rounded-b-lg overflow-hidden p-3`}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {item.children!.map(group => {
                   const groupLabel = resolveLabel(group);
                   return (
                     <div key={group.labelEn} className="min-w-0">
-                      <div className={`px-2 py-1.5 mb-1 ${dropdownTextCls} text-[#F4A300] font-bold uppercase tracking-wider border-b border-[#F4A300]/40`}>
+                      <div className={`px-2 py-1.5 mb-1 ${dropdownTextCls} text-[#FF8C00] font-bold uppercase tracking-wider border-b border-[#FF8C00]/40`}>
                         <NavLabel text={groupLabel} />
                       </div>
                       <div className="flex flex-col">
@@ -200,7 +203,7 @@ const NavItemDesktop = ({
             id={menuId}
             role="region"
             aria-label={label}
-            className="absolute top-full left-0 z-50 min-w-[280px] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-[#F4A300] rounded-b-lg"
+            className={`absolute top-full ${menuPos} z-50 min-w-[280px] max-w-[calc(100vw-1rem)] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-[#FF8C00] rounded-b-lg`}
           >
             {item.children!.map(child => {
               const childLabel = resolveLabel(child);
@@ -208,12 +211,12 @@ const NavItemDesktop = ({
                 <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                   {isExternalHref(child.to, child.external) ? (
                     <a href={child.to} target="_blank" rel="noopener noreferrer"
-                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-[#F4A300] hover:text-civic-ink focus-visible:bg-[#F4A300] focus-visible:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-[#FF8C00] hover:bg-[#FF8C00] hover:text-civic-ink focus-visible:bg-[#FF8C00] focus-visible:text-civic-ink transition-colors`}>
                       <NavLabel text={childLabel} />
                     </a>
                   ) : (
                     <Link to={child.to!} onClick={closeMenu}
-                      className={`block px-5 py-2 ${dropdownTextCls} text-white hover:bg-[#F4A300] hover:text-civic-ink focus-visible:bg-[#F4A300] focus-visible:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-[#FF8C00] hover:bg-[#FF8C00] hover:text-civic-ink focus-visible:bg-[#FF8C00] focus-visible:text-civic-ink transition-colors`}>
                       <NavLabel text={childLabel} />
                     </Link>
                   )}
@@ -296,7 +299,7 @@ export const Header = () => {
   return (
     <div className="bg-white border-b border-border shadow-card-soft">
       {/* Row 1: Logo + actions (desktop also has search) */}
-      <div className="container py-2 md:py-3 flex items-center justify-between gap-2 md:gap-4 pl-3 sm:pl-4 md:pl-5">
+      <div className="container py-2 md:py-2 flex items-center justify-between gap-2 md:gap-4 pl-3 sm:pl-4 md:pl-5">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 md:gap-3 group min-w-0 flex-1">
           <img src={emblem} alt={en ? "CSMC emblem" : "CSMC चिन्ह"} width={80} height={80}
@@ -369,30 +372,34 @@ export const Header = () => {
         data-tour="main-nav"
         aria-label={en ? "Primary navigation" : "मुख्य नेव्हिगेशन"}
         key={`nav-${gtTarget ?? "none"}-${en ? "en" : "mr"}`}
-        className="hidden md:block"
+        className="hidden md:block h-11 max-h-11 min-h-11 shrink-0"
       >
-        <div className="w-full flex items-stretch justify-start overflow-x-auto">
-          {NAV.map((item, i) => (
+        <div className="flex h-11 w-full items-stretch">
+          {NAV.map((item, i) => {
+            const isHomeItem = item.to === "/";
+            return (
             <Fragment key={item.labelEn}>
               {i > 0 ? (
                 <span
-                  className="flex shrink-0 items-center self-stretch px-0.5 text-white/45 text-sm select-none"
+                  className="flex w-3 shrink-0 items-center justify-center self-stretch text-sm text-[#FF8C00]/55 select-none"
                   aria-hidden
                 >
                   |
                 </span>
               ) : null}
-              <div className="shrink-0">
+              <div className={isHomeItem ? "flex h-11 w-11 shrink-0" : "flex h-11 min-w-0 flex-1 items-stretch"}>
                 <NavItemDesktop
                   item={item}
                   label={label(item)}
                   resolveLabel={label}
                   en={en}
                   lockTop={gtTarget === "hi"}
+                  alignMenuEnd={i >= 4}
                 />
               </div>
             </Fragment>
-          ))}
+            );
+          })}
         </div>
       </nav>
 

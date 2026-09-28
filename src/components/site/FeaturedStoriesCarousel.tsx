@@ -225,7 +225,7 @@ export const FeaturedStoriesCarousel = () => {
 
       {count > 1 && (
         <div
-          className="absolute bottom-4 md:bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 md:gap-3"
+          className="absolute bottom-1.5 md:bottom-2 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 md:gap-3"
           onMouseEnter={() => setHoverPaused(true)}
           onMouseLeave={() => setHoverPaused(false)}
           onFocus={() => setHoverPaused(true)}

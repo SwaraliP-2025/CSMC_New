@@ -411,10 +411,26 @@ body > .skiptranslate {
 }
 
 /*
- * Primary nav — navy bar; selected / hover use logo saffron (#F4A300).
+ * Primary nav — one fixed height in every language.
+ * Dark orange labels; the brighter fill is only the selected / hover / Home state.
  */
 .csmc-nav-tab {
-  color: #fff;
+  color: #ff8c00;
+  font-size: clamp(12px, 0.85vw, 13.5px);
+  line-height: 1 !important;
+  letter-spacing: 0;
+  max-height: 2.75rem;
+  overflow: hidden;
+  white-space: nowrap !important;
+}
+
+.csmc-nav-tab .csmc-nav-label {
+  min-width: 0;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  text-wrap: nowrap;
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 
 /*
@@ -431,20 +447,23 @@ html[lang="mr"] .csmc-nav-tab {
 
 .csmc-nav-selected,
 .csmc-nav-tab:hover:not(.csmc-nav-selected-home) {
-  background-color: #f4a300;
+  background-color: #ff8c00;
   color: hsl(var(--civic-ink));
 }
 
 .csmc-nav-selected-home {
-  background-color: #f4a300;
+  background-color: #ff8c00;
   color: hsl(var(--civic-ink));
 }
 
 .csmc-nav-tab:focus-visible {
-  outline: 2px solid #f4a300;
+  outline: 2px solid #ff8c00;
   outline-offset: -2px;
 }
 
 nav[data-tour="main-nav"] {
+  height: 2.75rem;
+  min-height: 2.75rem;
+  max-height: 2.75rem;
   background-color: hsl(var(--civic-blue));
 }

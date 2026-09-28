@@ -250,5 +250,6 @@ export const NAV_TOP_LABEL_HI: Record<string, string> = {
   "Right To Information": "सूचना का अधिकार",
   "Right To Service": "सेवा का अधिकार",
   "DP Plan": "विकास योजना",
+  NCAP: "एनसीएपी",
   "Site Map": "साइट मैप",
 };

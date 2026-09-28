@@ -185,6 +185,16 @@ function buildSitePageRecords(existingIds: Set<string>): CivicRecord[] {
       keywords: ["organogram", "organization", "organisation", "संघटना"],
     },
     {
+      id: "svc-ncap",
+      category: "service",
+      titleEn: "National Clean Air Programme (NCAP)",
+      titleMr: "राष्ट्रीय स्वच्छ हवा कार्यक्रम (NCAP)",
+      descriptionEn: "NCAP document library for Chhatrapati Sambhajinagar Municipal Corporation.",
+      descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचा NCAP दस्तऐवज संग्रह.",
+      href: "/ncap",
+      keywords: ["ncap", "clean air", "एनसीएपी", "स्वच्छ हवा"],
+    },
+    {
       id: "svc-mayors-list",
       category: "service",
       titleEn: "Hon'ble Mayors' List",

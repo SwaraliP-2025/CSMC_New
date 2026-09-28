@@ -224,6 +224,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "DP Plan | CSMC",
     description: "Development Plan (DP) of Chhatrapati Sambhajinagar Municipal Corporation.",
   },
+  "/ncap": {
+    path: "/ncap",
+    title: "National Clean Air Programme (NCAP) | CSMC",
+    titleMr: "राष्ट्रीय स्वच्छ हवा कार्यक्रम (NCAP) | CSMC",
+    description: "NCAP document library of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचा राष्ट्रीय स्वच्छ हवा कार्यक्रम दस्तऐवज संग्रह.",
+  },
   "/user-manual": {
     path: "/user-manual",
     title: "User Manual | CSMC Portal",

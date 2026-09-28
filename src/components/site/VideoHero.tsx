@@ -81,7 +81,7 @@ const HeroQuickPanel = ({
   const outerClass =
     variant === "mobile"
       ? "relative z-10 mt-2 w-full max-w-md mx-auto md:hidden"
-      : "absolute z-20 right-2 sm:right-3 md:right-6 top-24 bottom-14 hidden md:flex items-center justify-end max-w-[calc(100%-0.75rem)]";
+      : "relative z-20 hidden md:flex w-max max-w-full items-start justify-end pt-3 pr-4 pb-8 md:pt-4 md:pr-6 md:pb-8";
 
   return (
     <div className={outerClass}>
@@ -143,7 +143,7 @@ export const VideoHero = () => {
   return (
     <div className="relative w-full">
       <section className="relative w-full overflow-hidden">
-        <div className="relative min-h-[28rem] sm:min-h-[34rem] md:min-h-[max(75vh,40rem)]">
+        <div className="relative flex min-h-[28rem] justify-end sm:min-h-[34rem] md:min-h-0">
           <FeaturedStoriesCarousel />
           <HeroQuickPanel en={en} variant="desktop" />
         </div>

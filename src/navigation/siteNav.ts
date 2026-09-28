@@ -257,6 +257,7 @@ export const SITE_NAV: NavItem[] = [
   { labelEn: "Right To Information", labelMr: "माहिती अधिकार कायदा", to: "/rti-act" },
   { labelEn: "Right To Service", labelMr: "सेवा हक्क कायदा", to: "/rts-act" },
   { labelEn: "DP Plan", labelMr: "डी पी प्लॅन", to: "/dp-plan" },
+  { labelEn: "NCAP", labelMr: "एनसीएपी", to: "/ncap" },
   { labelEn: "Site Map", labelMr: "साईट मॅप", to: "/site-map" },
 ];
 

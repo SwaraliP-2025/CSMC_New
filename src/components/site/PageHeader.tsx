@@ -45,6 +45,7 @@ const routeLabels: Record<string, { en: string; mr: string }> = {
   gallery: { en: "Photo Gallery", mr: "छायाचित्र दालन" },
   search: { en: "Search", mr: "शोध" },
   "public-facilities": { en: "Public Facilities", mr: "सार्वजनिक सुविधा" },
+  ncap: { en: "NCAP", mr: "एनसीएपी" },
 };
 
 function segmentLabel(seg: string, en: boolean): string {
