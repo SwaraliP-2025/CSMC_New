@@ -32,7 +32,46 @@ const Recruitment = () => {
             </Link>
           </p>
         </div>
-        <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
+        <ul className="flex flex-col gap-3 md:hidden">
+          {posts.map((p) => (
+            <li key={p.post} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
+              <div className="flex items-start gap-2">
+                <Briefcase className="h-4 w-4 text-civic-blue shrink-0 mt-0.5" aria-hidden />
+                <p className="font-semibold text-civic-ink">{en ? p.post : p.postMr}</p>
+              </div>
+              <dl className="mt-3 grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{en ? "Vacancies" : "रिक्त जागा"}</dt>
+                  <dd className="mt-1 font-bold text-civic-blue">{d(p.vacancies)}</dd>
+                </div>
+                <div>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{en ? "Last Date" : "अंतिम तारीख"}</dt>
+                  <dd className="mt-1 text-muted-foreground">{d(p.lastDate)}</dd>
+                </div>
+              </dl>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${p.status === "Open" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                  {en ? p.status : p.statusMr}
+                </span>
+                {p.status === "Open" ? (
+                  "repoId" in p && p.repoId ? (
+                    <Link
+                      to={`/digital-repository/${p.repoId}`}
+                      className="inline-flex min-h-11 items-center gap-1 text-xs font-bold text-civic-blue border border-civic-blue px-3 py-2 rounded-lg hover:bg-civic-blue hover:text-white transition-colors"
+                    >
+                      <Download className="h-3.5 w-3.5" /> {en ? "View notice" : "सूचना पहा"}
+                    </Link>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">{en ? "Apply (unavailable)" : "अर्ज (अनुपलब्ध)"}</span>
+                  )
+                ) : (
+                  <span className="text-xs text-muted-foreground">{en ? "Closed" : "बंद"}</span>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
           <table className="w-full text-sm">
             <thead className="bg-civic-blue text-white">
               <tr>

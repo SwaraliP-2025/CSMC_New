@@ -90,7 +90,35 @@ const RTSAct = () => {
               : "महाराष्ट्र लोकसेवा हक्क अधिनियम, २०१५ अंतर्गत नागरिकांना निर्धारित वेळमर्यादेत नामनिर्देशित सेवा मिळण्याचा हक्क आहे. असे न झाल्यास नागरिकाला नुकसानभरपाई मिळण्याचा अधिकार आहे."}
           </p>
         </div>
-        <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
+        <ul className="flex flex-col gap-3 md:hidden">
+          {services.map((s) => (
+            <li key={s.service} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
+              <p className="font-semibold text-civic-ink">{en ? s.service : s.serviceMr}</p>
+              <dl className="mt-3 grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{en ? "Time Limit" : "वेळमर्यादा"}</dt>
+                  <dd className="mt-1">
+                    <span className="bg-civic-blue/10 text-civic-blue font-bold px-2 py-0.5 rounded text-xs">{d(s.days)} {en ? "days" : "दिवस"}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{en ? "Fee" : "शुल्क"}</dt>
+                  <dd className="mt-1 text-muted-foreground" title={en ? s.feeNoteEn : s.feeNoteMr}>{d(en ? s.feeEn : s.feeMr)}</dd>
+                </div>
+              </dl>
+              <a
+                href={s.apply}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex min-h-11 items-center gap-1 text-xs font-bold text-civic-blue border border-civic-blue px-3 py-2 rounded-lg hover:bg-civic-blue hover:text-white transition-colors"
+              >
+                {en ? "Apply" : "अर्ज करा"}
+                <ExternalLink className="h-3 w-3" aria-hidden />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
           <table className="w-full text-sm">
             <thead className="bg-civic-blue text-white">
               <tr>

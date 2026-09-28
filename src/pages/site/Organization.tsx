@@ -1,90 +1,55 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
+import { OrganogramChart } from "@/components/site/OrganogramChart";
 import { useLang } from "@/i18n/LanguageContext";
-import organogramImg from "@/assets/organogram.png";
-
-// Save the organogram image as: src/assets/organogram.png
-// Then uncomment the import below:
-// import organogram from "@/assets/organogram.png";
+import { getPublishedOrganogram } from "@/lib/organogram";
 
 const Organization = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
-
-  const imgSrc = organogramImg;
+  const people = getPublishedOrganogram();
+  const additional = people.filter((person) =>
+    /additional commissioner/i.test(person.designation),
+  ).length;
+  const deputies = people.filter((person) =>
+    /deputy municipal commissioner/i.test(person.designation),
+  ).length;
+  const stats = [
+    { v: "1", l: en ? "Municipal Commissioner" : "महानगरपालिका आयुक्त" },
+    { v: String(additional), l: en ? "Additional Commissioners" : "अतिरिक्त आयुक्त" },
+    { v: String(deputies), l: en ? "Deputy Commissioners" : "उप आयुक्त" },
+    { v: String(people.length), l: en ? "Officers shown" : "दर्शविलेले अधिकारी" },
+  ];
 
   return (
     <Layout>
       <PageHeader
         eyebrow={en ? "Administration" : "प्रशासन"}
-        title={en ? "CSMC Organogram" : "CSMC संस्था"}
-        subtitle={en
-          ? "Organizational structure of Chhatrapati Sambhajinagar Municipal Corporation."
-          : "छत्रपती संभाजीनगर महानगरपालिकेची संस्थात्मक रचना."}
+        title={en ? "CSMC Organization Structure" : "महानगरपालिका संघटनात्मक रचना"}
+        subtitle={
+          en
+            ? "Organizational structure of Chhatrapati Sambhajinagar Municipal Corporation."
+            : "छत्रपती संभाजीनगर महानगरपालिकेची संघटनात्मक रचना."
+        }
       />
-      <section className="py-10 container">
-        <div className="bg-white border border-border rounded-2xl shadow-sm overflow-hidden">
-          {/* Header bar */}
-          <div className="bg-civic-blue px-6 py-4 flex items-center justify-between">
-            <h2 className="font-serif text-lg font-bold text-white">
-              {en ? "CSMC Organogram — Team CSMC" : "CSMC संस्था — टीम CSMC"}
+      <section className="mx-auto w-full max-w-[1760px] px-4 py-10 sm:px-6" aria-labelledby="organogram-heading">
+        <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+          <div className="bg-civic-blue px-6 py-4">
+            <h2 id="organogram-heading" className="font-serif text-lg font-bold text-white">
+              {en ? "CSMC Organization Structure" : "महानगरपालिका संघटनात्मक रचना"}
             </h2>
-            <a
-              href={imgSrc}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-bold bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg transition-colors"
-            >
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-              </svg>
-              {en ? "Preview" : "पहा"}
-            </a>
           </div>
-
-          {/* Organogram image */}
-          <div className="p-4 bg-gray-50 overflow-auto" style={{ maxHeight: "80vh" }}>
-            <img
-              src={imgSrc}
-              alt="CSMC Organogram"
-              className="rounded-xl shadow-md"
-              style={{ 
-                width: "100%",
-                minWidth: "900px",
-                height: "auto",
-              }}
-              onError={(e) => {
-                // Fallback if image not yet added
-                (e.target as HTMLImageElement).style.display = "none";
-                const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) {
-                  parent.innerHTML = `
-                    <div class="flex flex-col items-center justify-center py-20 text-muted-foreground gap-3">
-                      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="opacity-30">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-                      </svg>
-                      <p class="font-semibold text-sm">Please save the organogram image as <code class="bg-muted px-1 rounded">src/assets/organogram.png</code></p>
-                    </div>`;
-                }
-              }}
-            />
-          </div>
+          <OrganogramChart />
         </div>
 
-        {/* Quick stats below */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          {[
-            { v: "1", l: en ? "Municipal Commissioner" : "महानगरपालिका आयुक्त" },
-            { v: "2", l: en ? "Additional Commissioners" : "अतिरिक्त आयुक्त" },
-            { v: "8+", l: en ? "Deputy Commissioners" : "उपआयुक्त" },
-            { v: "12", l: en ? "Departments" : "विभाग" },
-          ].map((s, i) => (
-            <div key={i} className="bg-white border border-border rounded-xl p-4 text-center hover:shadow-sm transition-shadow">
-              <p className="font-serif text-3xl font-bold text-civic-gold">{d(s.v)}</p>
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wide mt-1">{s.l}</p>
-            </div>
+        <ul className="container mt-8 grid list-none grid-cols-2 gap-4 p-0 md:grid-cols-4">
+          {stats.map((stat) => (
+            <li key={stat.l} className="rounded-xl border border-border bg-white p-4 text-center">
+              <p className="font-serif text-3xl font-bold text-civic-gold">{d(stat.v)}</p>
+              <p className="mt-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">{stat.l}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </Layout>
   );

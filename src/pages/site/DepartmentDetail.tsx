@@ -592,6 +592,7 @@ import { Phone, Mail, MapPin, ArrowLeft, Bell, FileText } from "lucide-react";
 import { useEffect, useRef } from "react";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
+import { findOrganogramOfficerForHead, organogramTelHref } from "@/lib/organogram";
 
 interface DeptInfo {
   slug: string;
@@ -2703,6 +2704,7 @@ const DepartmentDetail = () => {
   const { lang, d } = useLang();
 
   const en = lang === "en";
+  const headName = (person: { headEn: string; headMr: string }) => (en ? person.headEn : person.headMr);
 
   const base = DEPARTMENTS.find((item) => item.slug === slug);
 
@@ -2712,6 +2714,10 @@ const DepartmentDetail = () => {
         ...(DEPT_EXTRAS[base.slug] ?? {}),
       }
     : undefined;
+
+  const officer = dept ? findOrganogramOfficerForHead(dept.headEn) : undefined;
+  const portrait = dept?.image ?? officer?.photo;
+  const mobileHref = organogramTelHref(officer?.phone);
 
   if (!dept) {
     return (
@@ -2787,23 +2793,31 @@ const DepartmentDetail = () => {
 
                 <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl shrink-0 overflow-hidden">
 
-                  {dept.image ? (
+                  {portrait ? (
                     <img
-                      src={dept.image}
-                      alt={en ? dept.headEn : dept.headMr}
-                      className="absolute left-1/2 object-cover"
-                      style={{
-                        width: dept.photoSize ?? "100%",
-                        height: dept.photoSize ?? "100%",
-                        minWidth: dept.photoSize ? "115%" : "100%",
-                        minHeight: dept.photoSize ? "115%" : "100%",
-                        top: dept.photoTop ?? "0",
-                        transform: "translateX(-50%)",
-                      }}
+                      src={portrait}
+                      alt={headName(dept)}
+                      className={
+                        dept.image
+                          ? "absolute left-1/2 object-cover"
+                          : "h-full w-full object-cover object-top"
+                      }
+                      style={
+                        dept.image
+                          ? {
+                              width: dept.photoSize ?? "100%",
+                              height: dept.photoSize ?? "100%",
+                              minWidth: dept.photoSize ? "115%" : "100%",
+                              minHeight: dept.photoSize ? "115%" : "100%",
+                              top: dept.photoTop ?? "0",
+                              transform: "translateX(-50%)",
+                            }
+                          : undefined
+                      }
                     />
                   ) : (
                     <span className="flex h-full w-full items-center justify-center text-white font-bold text-3xl md:text-4xl">
-                      {(en ? dept.headEn : dept.headMr).charAt(0)}
+                      {headName(dept).charAt(0)}
                     </span>
                   )}
 
@@ -2865,6 +2879,26 @@ const DepartmentDetail = () => {
                     </div>
                   </div>
                 )}
+
+                {officer?.phone && mobileHref ? (
+                  <div className="flex items-start gap-3 text-sm">
+                    <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
+
+                    <div>
+                      <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
+                        {en ? "Mobile" : "मोबाईल"}
+                      </p>
+
+                      <a
+                        href={mobileHref}
+                        className="inline-flex min-h-11 items-center font-semibold text-civic-ink underline-offset-2 hover:underline focus-visible:underline"
+                        aria-label={en ? `Call ${headName(dept)}` : `${headName(dept)} यांना कॉल करा`}
+                      >
+                        {d(officer.phone)}
+                      </a>
+                    </div>
+                  </div>
+                ) : null}
 
 
                 {dept.email && (

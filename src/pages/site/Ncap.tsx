@@ -197,7 +197,7 @@ function NcapViewer({ doc, onClose }: { doc: NcapDocument | null; onClose: () =>
 
   return (
     <Dialog open={Boolean(doc)} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="flex w-[calc(100%-1rem)] max-w-5xl flex-col gap-3 p-4 sm:p-5 max-h-[min(92dvh,960px)]">
+      <DialogContent className="flex w-[calc(100%-1rem)] max-w-5xl flex-col gap-3 overflow-y-auto p-4 sm:p-5 max-h-[min(92dvh,960px)]">
         <DialogHeader className="pr-8">
           <DialogTitle className="font-serif text-base sm:text-lg text-civic-blue leading-snug break-words">
             {doc?.title}
@@ -208,7 +208,7 @@ function NcapViewer({ doc, onClose }: { doc: NcapDocument | null; onClose: () =>
           <iframe
             title={en ? `Preview PDF: ${doc.title}` : `PDF पूर्वावलोकन: ${doc.title}`}
             src={url}
-            className="min-h-[60vh] w-full flex-1 rounded-lg border border-border bg-slate-50"
+            className="h-[min(52dvh,640px)] min-h-[12rem] w-full rounded-lg border border-border bg-slate-50"
           />
         ) : doc ? (
           <WordPreview url={url} title={doc.title} fallback={doc.text} failedLabel={n.previewFailed} />

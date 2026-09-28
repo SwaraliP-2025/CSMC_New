@@ -12,6 +12,7 @@ import { OFFICIAL, SERVICE_ENTRIES } from "@/data/officialLinks";
 import { SITE_NOTICES } from "@/data/siteNotices";
 import { getGalleryStories } from "@/data/visualStories";
 import { facilityCategories } from "@/lib/facilities";
+import { getPublishedOrganogram } from "@/lib/organogram";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 const FACILITY_DATASETS = Object.entries(FACILITY_LOCATION_DATASETS).map(([slug, rows]) => ({
@@ -481,6 +482,32 @@ function buildAlertRecords(existingIds: Set<string>): CivicRecord[] {
   );
 }
 
+function buildOrganogramRecords(): CivicRecord[] {
+  return getPublishedOrganogram().map((person) =>
+    stub({
+      id: `org-${person.id}`,
+      category: "department",
+      titleEn: person.name,
+      titleMr: person.nameMr?.trim() || person.name,
+      descriptionEn: person.designation,
+      descriptionMr: person.designationMr?.trim() || person.designation,
+      departmentEn: person.department,
+      departmentMr: person.departmentMr,
+      href: "/organization",
+      keywords: [
+        person.name,
+        person.nameMr,
+        person.designation,
+        person.designationMr,
+        person.department,
+        person.departmentMr,
+        "organogram",
+        "संघटना",
+      ].filter((value): value is string => Boolean(value?.trim())),
+    }),
+  );
+}
+
 let cachedIndex: CivicRecord[] | null = null;
 
 /**
@@ -517,6 +544,7 @@ export function getGlobalSearchIndex(): CivicRecord[] {
   pushAll(buildNoticeRecords(existingIds, base));
   pushAll(buildStoryRecords(existingIds));
   pushAll(buildAlertRecords(existingIds));
+  pushAll(buildOrganogramRecords());
 
   cachedIndex = [...base, ...extras];
   return cachedIndex;

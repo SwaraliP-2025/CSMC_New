@@ -412,16 +412,21 @@ body > .skiptranslate {
 
 /*
  * Primary nav — one fixed height in every language.
- * Dark orange labels; the brighter fill is only the selected / hover / Home state.
+ * Champagne-gold labels on navy; saffron fill stays the selected / hover / Home state.
  */
 .csmc-nav-tab {
-  color: #e65c00;
+  color: #D8B36A;
   font-size: clamp(12px, 0.85vw, 13.5px);
   line-height: 1 !important;
   letter-spacing: 0;
   max-height: 2.75rem;
   overflow: hidden;
   white-space: nowrap !important;
+}
+
+/* Home stays the bright saffron control, including when it is not the current page. */
+.csmc-nav-home:not(:hover):not(.csmc-nav-selected-home) {
+  color: #e65c00;
 }
 
 .csmc-nav-tab .csmc-nav-label {
@@ -457,8 +462,12 @@ html[lang="mr"] .csmc-nav-tab {
 }
 
 .csmc-nav-tab:focus-visible {
-  outline: 2px solid #e65c00;
+  outline: 2px solid #D8B36A;
   outline-offset: -2px;
+}
+
+.csmc-nav-home:focus-visible {
+  outline-color: #e65c00;
 }
 
 nav[data-tour="main-nav"] {

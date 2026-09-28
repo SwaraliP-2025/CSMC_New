@@ -92,7 +92,7 @@ const LeaderCard = ({
         : "none",
     }}
   >
-    <div className="relative mb-3 h-[9.25rem] w-[9.25rem] rounded-full border-2 border-[#D9A441] bg-white shadow-[0_2px_8px_rgba(26,26,26,0.12)] transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_5px_14px_rgba(26,26,26,0.16)] md:h-32 md:w-32">
+    <div className="relative mb-3 h-[9.25rem] w-[9.25rem] rounded-full border-[3px] border-[#D9A441] bg-white shadow-[0_2px_8px_rgba(26,26,26,0.12)] transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_5px_14px_rgba(26,26,26,0.16)] md:h-32 md:w-32">
       <div className="absolute inset-0 overflow-hidden rounded-full">
         {person.image ? (
           <img

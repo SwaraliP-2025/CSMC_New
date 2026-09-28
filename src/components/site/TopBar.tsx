@@ -208,7 +208,7 @@ export const TopBar = () => {
 
   return (
     <div className="bg-civic-ink text-white/80 text-[11px] font-medium border-b border-white/10">
-      <div className="container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-1 py-1.5 sm:py-2 min-w-0">
+      <div className="container flex max-w-full flex-col gap-y-1 py-1.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:py-2 min-w-0">
 
         {/* Mobile row 1: accessibility + language. Desktop: accessibility left, language/date via order. */}
         <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 w-full sm:w-auto sm:contents">
@@ -280,7 +280,7 @@ export const TopBar = () => {
           </div>
 
           {/* ── Language + date (wraps to full width on phones so मराठी stays visible) ── */}
-          <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 w-full min-w-0 basis-full sm:basis-auto sm:w-auto sm:flex-nowrap sm:shrink-0 sm:order-3 sm:gap-1">
+          <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 w-full min-w-0 basis-full sm:basis-auto sm:w-auto sm:max-w-full sm:order-3 sm:gap-1">
             <div className="flex items-center min-w-0 max-w-[48%] min-[420px]:max-w-[9rem] sm:max-w-none sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3">
               <GoogleTranslateWidget />
             </div>
@@ -337,7 +337,7 @@ export const TopBar = () => {
         </div>
 
         {/* Mobile row 2: weather + AQI. Desktop: sits between accessibility and language. */}
-        <div className="flex items-center justify-center sm:justify-end gap-0 w-full sm:w-auto sm:flex-1 sm:order-2 whitespace-nowrap overflow-x-auto border-t border-white/10 pt-1 sm:border-0 sm:pt-0 sm:overflow-visible">
+        <div className="flex max-w-full min-w-0 items-center justify-center gap-0 overflow-x-auto sm:w-auto sm:flex-1 sm:justify-end sm:order-2 border-t border-white/10 pt-1 sm:border-0 sm:pt-0">
 
           {loading && (
             <div className="flex items-center gap-2 opacity-40 animate-pulse text-[11px]">
