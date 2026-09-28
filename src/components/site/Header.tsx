@@ -41,16 +41,16 @@ const NavItemDesktop = ({
   item,
   label,
   resolveLabel,
-  en,
   lockTop,
   alignMenuEnd = false,
+  fitLabel = false,
 }: {
   item: NavItem;
   label: string;
   resolveLabel: (item: NavItem) => string;
-  en: boolean;
   lockTop?: boolean;
   alignMenuEnd?: boolean;
+  fitLabel?: boolean;
 }) => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
@@ -58,14 +58,14 @@ const NavItemDesktop = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const openedByKeyboard = useRef(false);
-  const dropdownTextCls = en ? "text-[12px]" : "text-[14px]";
+  const dropdownTextCls = "csmc-nav-sub";
   const hasChildren = Boolean(item.children?.length);
 
   const isHome = item.to === "/";
   const sectionActive = navSectionActive(item, pathname);
   const isSelected = isHome ? pathname === "/" : sectionActive || open;
   const selectedCls = isHome ? "csmc-nav-selected-home" : "csmc-nav-selected";
-  const baseCls = `h-full w-full min-w-0 px-1 text-center csmc-nav-tab transition-all relative flex items-center justify-center gap-1 cursor-pointer select-none whitespace-nowrap ${isHome ? "csmc-nav-home" : ""} ${isSelected ? selectedCls : ""}`;
+  const baseCls = `h-full min-w-0 text-center csmc-nav-tab transition-all relative flex items-center justify-center gap-1 cursor-pointer select-none whitespace-nowrap ${fitLabel ? "w-auto px-2.5" : "w-full px-1"} ${isHome ? "csmc-nav-home" : ""} ${isSelected ? selectedCls : ""}`;
   const menuPos = alignMenuEnd ? "right-0 left-auto" : "left-0";
   const content = isHome ? <Home className="h-4 w-4" aria-hidden /> : <NavLabel text={label} lock={lockTop} />;
 
@@ -387,14 +387,14 @@ export const Header = () => {
                   |
                 </span>
               ) : null}
-              <div className={isHomeItem ? "flex h-11 w-11 shrink-0" : "flex h-11 min-w-0 flex-1 items-stretch"}>
+              <div className={isHomeItem ? "flex h-11 w-11 shrink-0" : item.to === "/ncap" || item.to === "/rti-act" ? "flex h-11 w-auto shrink-0 items-stretch" : "flex h-11 min-w-0 flex-1 items-stretch"}>
                 <NavItemDesktop
                   item={item}
                   label={label(item)}
                   resolveLabel={label}
-                  en={en}
                   lockTop={gtTarget === "hi"}
                   alignMenuEnd={i >= 4}
+                  fitLabel={item.to === "/ncap" || item.to === "/rti-act"}
                 />
               </div>
             </Fragment>
@@ -419,7 +419,7 @@ export const Header = () => {
                     type="button"
                     onClick={() => setMobileExpanded(e => e === item.labelEn ? null : item.labelEn)}
                     aria-expanded={mobileExpanded === item.labelEn}
-                    className={`flex items-center justify-between w-full px-4 py-3 text-sm border-b border-border font-normal ${
+                    className={`flex items-center justify-between w-full px-4 py-3 text-[15px] font-medium leading-snug border-b border-border ${
                       navSectionActive(item, pathname) || mobileExpanded === item.labelEn
                         ? "csmc-nav-selected"
                         : "text-foreground"
@@ -437,12 +437,12 @@ export const Header = () => {
                           isExternalHref(sub.to, sub.external) ? (
                             <a key={sub.labelEn} href={sub.to} target="_blank" rel="noopener noreferrer"
                               onClick={() => setMobileOpen(false)}
-                              className="block px-10 py-2.5 text-sm border-b border-border text-muted-foreground">
+                              className="block px-10 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
                               <NavLabel text={label(sub)} />
                             </a>
                           ) : (
                             <Link key={sub.labelEn} to={sub.to!} onClick={() => setMobileOpen(false)}
-                              className="block px-10 py-2.5 text-sm border-b border-border text-muted-foreground">
+                              className="block px-10 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
                               <NavLabel text={label(sub)} />
                             </Link>
                           )
@@ -451,12 +451,12 @@ export const Header = () => {
                     ) : isExternalHref(child.to, child.external) ? (
                       <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer"
                         onClick={() => setMobileOpen(false)}
-                        className="block px-8 py-2.5 text-sm border-b border-border text-muted-foreground">
+                        className="block px-8 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
                         <NavLabel text={label(child)} />
                       </a>
                     ) : (
                       <Link key={child.labelEn} to={child.to!} onClick={() => setMobileOpen(false)}
-                        className="block px-8 py-2.5 text-sm border-b border-border text-muted-foreground">
+                        className="block px-8 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
                         <NavLabel text={label(child)} />
                       </Link>
                     )
@@ -464,16 +464,16 @@ export const Header = () => {
                 </>
               ) : isExternalHref(item.to, item.external) ? (
                 <a href={item.to} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm border-b border-border text-foreground">
+                  className="block px-4 py-3 text-[15px] font-medium leading-snug border-b border-border text-foreground">
                   <NavLabel text={label(item)} lock={gtTarget === "hi"} />
                 </a>
               ) : (
                 <Link to={item.to!} onClick={() => setMobileOpen(false)}
-                  className={`block px-4 py-3 text-sm border-b border-border ${
+                  className={`block px-4 py-3 text-[15px] font-medium leading-snug border-b border-border ${
                     navSectionActive(item, pathname)
                       ? item.to === "/"
-                        ? "csmc-nav-selected-home font-normal"
-                        : "csmc-nav-selected font-normal"
+                        ? "csmc-nav-selected-home"
+                        : "csmc-nav-selected"
                       : "text-foreground"
                   }`}>
                   <NavLabel text={label(item)} lock={gtTarget === "hi"} />

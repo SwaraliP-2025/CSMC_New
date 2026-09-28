@@ -30,8 +30,8 @@ export const TouristCard = ({
   return (
     <article className="group overflow-hidden rounded-2xl border border-border bg-white shadow-sm hover:shadow-elegant transition-all h-full flex flex-col">
       <Link to={`/tourist-attraction/${place.slug}`} className="block flex-1">
-        {/* Taller 4:3 frame so monuments/landmarks show more fully */}
-        <div className="overflow-hidden relative bg-slate-100 rounded-t-2xl w-full aspect-[4/3]">
+        {/* 3:2 matches the source photos, so the full image shows inside the rounded frame. */}
+        <div className="overflow-hidden relative bg-slate-100 rounded-t-2xl w-full aspect-[3/2]">
           <picture className="absolute inset-0 block h-full w-full">
             <source
               srcSet={webpSrcSet}
@@ -49,7 +49,7 @@ export const TouristCard = ({
                 target.src =
                   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23eef2ff'/%3E%3Cpath d='M100 200 L150 140 L190 180 L240 110 L300 190' stroke='%23566ee7' stroke-width='12' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='120' cy='190' r='18' fill='%23c7d2fe'/%3E%3Ccircle cx='280' cy='190' r='18' fill='%23c7d2fe'/%3E%3Crect x='140' y='90' width='120' height='80' rx='14' fill='%23c7d2fe'/%3E%3C/svg%3E";
               }}
-              className="absolute inset-0 h-full w-full object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-[1.03]"
+              className="absolute inset-0 h-full w-full object-contain object-center"
             />
           </picture>
         </div>

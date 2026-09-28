@@ -59,7 +59,7 @@ export const AnnouncementBar = () => {
       data-tour="whats-new"
       className="fixed bottom-0 left-0 right-0 z-[1100] flex h-10 bg-civic-blue overflow-hidden border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"
     >
-      <div className="flex items-center px-6 bg-civic-gold text-civic-ink font-bold text-[10px] uppercase tracking-widest whitespace-nowrap z-10 border-r border-civic-ink/10">
+      <div className="flex items-center px-6 bg-[#e65c00] text-civic-ink font-bold text-[10px] uppercase tracking-widest whitespace-nowrap z-10 border-r border-black/10">
         {t.announcements.label}
       </div>
       <div className="flex-1 overflow-hidden relative flex items-center bg-civic-blue">
