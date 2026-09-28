@@ -92,24 +92,26 @@ const LeaderCard = ({
         : "none",
     }}
   >
-    <div className="relative w-[9.25rem] h-[9.25rem] md:w-32 md:h-32 mb-3 rounded-full overflow-hidden border-[5px] md:border-4 border-white bg-white shadow-lg group-hover:border-civic-gold group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-200">
-      {person.image ? (
-        <img
-          src={person.image}
-          alt=""
-          className="absolute max-w-none"
-          style={{
-            width: person.photo.w,
-            height: person.photo.h,
-            left: person.photo.l,
-            top: person.photo.t,
-          }}
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center bg-civic-blue/10 text-civic-blue font-serif text-2xl font-bold" aria-hidden>
-          {person.nameEn.split(" ").map((n) => n[0]).join("")}
-        </div>
-      )}
+    <div className="relative mb-3 h-[9.25rem] w-[9.25rem] rounded-full border-2 border-[#D9A441] bg-white shadow-[0_2px_8px_rgba(26,26,26,0.12)] transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_5px_14px_rgba(26,26,26,0.16)] md:h-32 md:w-32">
+      <div className="absolute inset-0 overflow-hidden rounded-full">
+        {person.image ? (
+          <img
+            src={person.image}
+            alt=""
+            className="absolute max-w-none"
+            style={{
+              width: person.photo.w,
+              height: person.photo.h,
+              left: person.photo.l,
+              top: person.photo.t,
+            }}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-civic-blue/10 font-serif text-2xl font-bold text-civic-blue" aria-hidden>
+            {person.nameEn.split(" ").map((n) => n[0]).join("")}
+          </div>
+        )}
+      </div>
     </div>
     <div className="w-8 h-0.5 bg-civic-gold rounded-full mb-2 group-hover:w-14 transition-all duration-200" aria-hidden />
     <span className="text-lg md:text-xs font-bold text-civic-blue group-hover:text-civic-red transition-colors duration-150 px-1 w-full text-center h-9 md:h-5 leading-9 md:leading-5 overflow-hidden whitespace-nowrap">

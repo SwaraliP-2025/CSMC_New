@@ -15,8 +15,8 @@ export interface NavItem {
 export const SITE_NAV: NavItem[] = [
   { labelEn: "Home", labelMr: "मुख्यपृष्ठ", to: "/" },
   {
-    labelEn: "Mahanagarpalika",
-    labelMr: "महानगरपालिका",
+    labelEn: "About Us",
+    labelMr: "आमच्याबद्दल",
     children: [
       {
         labelEn: "About & Administration",

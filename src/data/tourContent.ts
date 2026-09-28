@@ -133,8 +133,8 @@ export const TOUR_STEPS: TourStepDef[] = [
       en: "Main navigation",
     },
     body: {
-      mr: "महानगरपालिका, नागरिक सेवा, प्रकाशने आणि इतर महत्त्वाच्या विभागांपर्यंत मुख्य मेनूमधून पोहोचा.",
-      en: "Use the main menu to explore the Corporation, Citizen Services, Publications and other important sections.",
+      mr: "आमच्याबद्दल, नागरिक सेवा, प्रकाशने आणि इतर महत्त्वाच्या विभागांपर्यंत मुख्य मेनूमधून पोहोचा.",
+      en: "Use the main menu to explore About Us, Citizen Services, Publications and other important sections.",
     },
   },
   {

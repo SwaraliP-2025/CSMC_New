@@ -243,7 +243,7 @@ export async function refreshGoogleTranslate(
 /** Curated Hindi for top navbar when Translate → Hindi (GT often skips legal EN titles). */
 export const NAV_TOP_LABEL_HI: Record<string, string> = {
   Home: "मुख्य पृष्ठ",
-  Mahanagarpalika: "नगर निगम",
+  "About Us": "हमारे बारे में",
   "Citizen Services": "नागरिक सेवा",
   Publications: "प्रकाशन",
   Contact: "संपर्क",

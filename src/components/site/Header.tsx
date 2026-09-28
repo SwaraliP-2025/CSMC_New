@@ -156,7 +156,7 @@ const NavItemDesktop = ({
         const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
         const renderLink = (child: NavItem) => {
           const childLabel = resolveLabel(child);
-          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-[#FF8C00] hover:bg-[#FF8C00] hover:text-civic-ink transition-colors rounded-sm focus-visible:bg-[#FF8C00] focus-visible:text-civic-ink`;
+          const cls = `block px-3 py-1.5 ${dropdownTextCls} text-[#E65C00] hover:bg-[#E65C00] hover:text-civic-ink transition-colors rounded-sm focus-visible:bg-[#E65C00] focus-visible:text-civic-ink`;
           if (isExternalHref(child.to, child.external)) {
             return (
               <a key={child.labelEn} href={child.to} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -177,14 +177,14 @@ const NavItemDesktop = ({
               id={menuId}
               role="region"
               aria-label={label}
-              className={`absolute top-full ${menuPos} z-50 w-[min(96vw,900px)] max-w-[calc(100vw-1rem)] bg-civic-blue shadow-2xl border-t-2 border-[#FF8C00] rounded-b-lg overflow-hidden p-3`}
+              className={`absolute top-full ${menuPos} z-50 w-[min(96vw,900px)] max-w-[calc(100vw-1rem)] bg-civic-blue shadow-2xl border-t-2 border-[#E65C00] rounded-b-lg overflow-hidden p-3`}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {item.children!.map(group => {
                   const groupLabel = resolveLabel(group);
                   return (
                     <div key={group.labelEn} className="min-w-0">
-                      <div className={`px-2 py-1.5 mb-1 ${dropdownTextCls} text-[#FF8C00] font-bold uppercase tracking-wider border-b border-[#FF8C00]/40`}>
+                      <div className={`px-2 py-1.5 mb-1 ${dropdownTextCls} text-[#E65C00] font-bold uppercase tracking-wider border-b border-[#E65C00]/40`}>
                         <NavLabel text={groupLabel} />
                       </div>
                       <div className="flex flex-col">
@@ -203,7 +203,7 @@ const NavItemDesktop = ({
             id={menuId}
             role="region"
             aria-label={label}
-            className={`absolute top-full ${menuPos} z-50 min-w-[280px] max-w-[calc(100vw-1rem)] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-[#FF8C00] rounded-b-lg`}
+            className={`absolute top-full ${menuPos} z-50 min-w-[280px] max-w-[calc(100vw-1rem)] max-h-[min(70vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain bg-civic-blue shadow-2xl border-t-2 border-[#E65C00] rounded-b-lg`}
           >
             {item.children!.map(child => {
               const childLabel = resolveLabel(child);
@@ -211,12 +211,12 @@ const NavItemDesktop = ({
                 <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                   {isExternalHref(child.to, child.external) ? (
                     <a href={child.to} target="_blank" rel="noopener noreferrer"
-                      className={`block px-5 py-2 ${dropdownTextCls} text-[#FF8C00] hover:bg-[#FF8C00] hover:text-civic-ink focus-visible:bg-[#FF8C00] focus-visible:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-[#E65C00] hover:bg-[#E65C00] hover:text-civic-ink focus-visible:bg-[#E65C00] focus-visible:text-civic-ink transition-colors`}>
                       <NavLabel text={childLabel} />
                     </a>
                   ) : (
                     <Link to={child.to!} onClick={closeMenu}
-                      className={`block px-5 py-2 ${dropdownTextCls} text-[#FF8C00] hover:bg-[#FF8C00] hover:text-civic-ink focus-visible:bg-[#FF8C00] focus-visible:text-civic-ink transition-colors`}>
+                      className={`block px-5 py-2 ${dropdownTextCls} text-[#E65C00] hover:bg-[#E65C00] hover:text-civic-ink focus-visible:bg-[#E65C00] focus-visible:text-civic-ink transition-colors`}>
                       <NavLabel text={childLabel} />
                     </Link>
                   )}
@@ -381,7 +381,7 @@ export const Header = () => {
             <Fragment key={item.labelEn}>
               {i > 0 ? (
                 <span
-                  className="flex w-3 shrink-0 items-center justify-center self-stretch text-sm text-[#FF8C00]/55 select-none"
+                  className="flex w-3 shrink-0 items-center justify-center self-stretch text-sm text-[#E65C00]/55 select-none"
                   aria-hidden
                 >
                   |
