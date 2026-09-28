@@ -22,9 +22,11 @@ function PersonPhoto({
   designation: string;
   large?: boolean;
 }) {
-  const size = large ? "h-28 w-28 sm:h-32 sm:w-32" : "h-[5.5rem] w-[5.5rem] sm:h-24 sm:w-24";
+  const size = large
+    ? "h-28 w-28 shrink-0 flex-[0_0_7rem] sm:h-32 sm:w-32 sm:flex-[0_0_8rem]"
+    : "h-[5.5rem] w-[5.5rem] shrink-0 flex-[0_0_5.5rem] sm:h-24 sm:w-24 sm:flex-[0_0_6rem]";
   return (
-    <div className={`${photoFrame} ${size}`}>
+    <div className={`${photoFrame} flex items-center justify-center ${size}`}>
       <div className="absolute inset-0 overflow-hidden rounded-full">
         {person.photo ? (
           <img src={person.photo} alt={`${name}, ${designation}`} className="h-full w-full object-cover object-top" />
@@ -92,8 +94,8 @@ export function OrganogramChart() {
             <ol
               className={
                 featured
-                  ? "mx-auto flex max-w-xs list-none justify-center p-0"
-                  : "flex list-none flex-wrap justify-center gap-x-3 gap-y-8 p-0 lg:gap-x-3 2xl:gap-x-5"
+                  ? "mx-auto flex max-w-xs list-none items-start justify-center p-0"
+                  : "flex list-none flex-wrap items-start justify-center gap-x-3 gap-y-8 p-0 lg:gap-x-3 2xl:gap-x-5"
               }
             >
               {group.people.map((person) => (

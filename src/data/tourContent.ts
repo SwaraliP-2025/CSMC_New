@@ -10,7 +10,7 @@ export type TourStepId =
   | "rts"
   | "notices"
   | "local"
-  | "finish";
+  | "ai-mitra";
 
 export type TourTargetId =
   | "a11y"
@@ -22,6 +22,7 @@ export type TourTargetId =
   | "rts-services"
   | "whats-new"
   | "user-manual"
+  | "ai-mitra"
   | null;
 
 export type TourStepDef = {
@@ -60,8 +61,6 @@ export const TOUR_UI = {
   close: { mr: "बंद करा", en: "Close" } as const,
   langMr: "मराठी",
   langEn: "English",
-  stepOf: (n: number, total: number, lang: TourLang) =>
-    lang === "mr" ? `पायरी ${n} / ${total}` : `Step ${n} of ${total}`,
   fab: {
     mr: "वेबसाइट मार्गदर्शक",
     en: "Website Guide",
@@ -234,17 +233,24 @@ export const TOUR_STEPS: TourStepDef[] = [
     ],
   },
   {
-    id: "finish",
-    target: null,
-    layout: "center",
+    id: "ai-mitra",
+    target: "ai-mitra",
+    layout: "spotlight",
     title: {
-      mr: "आपण तयार आहात!",
-      en: "You're all set!",
+      mr: "AI Mitra ला भेटा",
+      en: "Meet AI Mitra",
     },
     body: {
-      mr: "आता तुम्ही CSMC वेबसाइटवर सेवा, माहिती आणि नागरिक सुविधा सहज शोधू शकता.",
-      en: "You can now find services, information and civic facilities on the CSMC website with confidence.",
+      mr: "नागरिक माहिती शोधण्यासाठी मदत हवी आहे का? AI Mitra म्हणजे पृष्ठ शीर्षकावरील स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट. ठळक केलेले हिरवे बटण निवडा. ते व्हॉट्सॲप संभाषण उघडते, जिथे तुम्ही CSMC सेवा आणि माहितीसाठी मदत मागू शकता.",
+      en: "Need help finding civic information? AI Mitra is the Smart Chhatrapati Sambhajinagar WhatsApp chatbot in the page header. Select the highlighted green button to open a WhatsApp chat and ask for help with CSMC services and information.",
     },
+    links: [
+      {
+        label: { mr: "व्हॉट्सॲपवर AI Mitra उघडा", en: "Open AI Mitra on WhatsApp" },
+        to: OFFICIAL.whatsappChatbot,
+        external: true,
+      },
+    ],
   },
 ];
 

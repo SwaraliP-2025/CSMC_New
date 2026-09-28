@@ -494,7 +494,7 @@ export const SiteTourGuide = () => {
   // Live region + search demo seed
   useEffect(() => {
     if (!open) return;
-    setLiveMsg(`${TOUR_UI.stepOf(step + 1, total, L)}. ${current.title[L]}`);
+    setLiveMsg(current.title[L]);
     if (current.searchDemo) {
       setDemoQuery(current.searchDemo.query[L]);
     } else {
@@ -721,22 +721,16 @@ export const SiteTourGuide = () => {
         </div>
       )}
 
-      {/* Progress: text + dots */}
-      <div className="mt-5 flex flex-col gap-2">
-        <p className="text-xs font-semibold text-[#003366]/70" aria-hidden={false}>
-          {TOUR_UI.stepOf(step + 1, total, L)}
-        </p>
-        <div className="flex items-center gap-2" role="presentation">
-          {TOUR_STEPS.map((s, i) => (
-            <span
-              key={s.id}
-              className={`h-2 rounded-full transition-all ${
-                i === step ? "w-6 bg-[#ff9933]" : i < step ? "w-2 bg-[#003366]/45" : "w-2 bg-[#003366]/20"
-              }`}
-              title={TOUR_UI.stepOf(i + 1, total, L)}
-            />
-          ))}
-        </div>
+      {/* Progress dots follow the step list. No numeric "Step X of Y" label. */}
+      <div className="mt-5 flex items-center gap-2" role="presentation" aria-hidden="true">
+        {TOUR_STEPS.map((s, i) => (
+          <span
+            key={s.id}
+            className={`h-2 rounded-full transition-all ${
+              i === step ? "w-6 bg-[#ff9933]" : i < step ? "w-2 bg-[#003366]/45" : "w-2 bg-[#003366]/20"
+            }`}
+          />
+        ))}
       </div>
     </>
   );
@@ -801,7 +795,6 @@ export const SiteTourGuide = () => {
                 <Globe2 className="h-5 w-5 shrink-0 text-[hsl(var(--civic-gold))]" aria-hidden />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-bold tracking-wide">{TOUR_UI.guideTitle[L]}</p>
-                  <p className="text-[11px] text-white/75">{TOUR_UI.stepOf(step + 1, total, L)}</p>
                 </div>
 
                 <div

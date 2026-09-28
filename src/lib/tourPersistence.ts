@@ -1,6 +1,6 @@
 /** localStorage helpers for the Website Guide (SiteTourGuide). */
 
-export const TOUR_VERSION = "2";
+export const TOUR_VERSION = "3";
 
 export const TOUR_KEYS = {
   completed: "csmc_tour_completed",
