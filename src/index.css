@@ -424,9 +424,9 @@ body > .skiptranslate {
   white-space: nowrap !important;
 }
 
-/* Secondary level: always smaller than the top-level bar, in both languages. */
+/* Secondary level: a step under the top-level bar, in both languages. */
 .csmc-nav-sub {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.35;
 }
@@ -464,7 +464,7 @@ html[lang="mr"] .csmc-nav-tab {
 }
 
 html[lang="mr"] .csmc-nav-sub {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.3;
 }
 
