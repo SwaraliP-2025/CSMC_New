@@ -1,5 +1,12 @@
 import type { CivicRecord } from "@/types/civicCatalog";
-import { SITE_NAV, type NavItem } from "@/navigation/siteNav";
+import {
+  CITIZEN_TOOLS_PAGES,
+  HEADER_UTILITY_LINKS,
+  OTHER_SITE_PAGES,
+  POLICY_PAGES,
+  SITE_NAV,
+  type NavItem,
+} from "@/navigation/siteNav";
 
 type FlatNav = { labelEn: string; labelMr: string; to: string; external?: boolean; parents: string[] };
 
@@ -36,7 +43,13 @@ function hrefKey(href: string) {
  * Also append stub service records for nav destinations missing from the catalog.
  */
 export function enrichCatalogWithSiteNav(catalog: CivicRecord[]): CivicRecord[] {
-  const navItems = flattenNav(SITE_NAV);
+  const navItems = flattenNav([
+    ...SITE_NAV,
+    ...HEADER_UTILITY_LINKS,
+    ...CITIZEN_TOOLS_PAGES,
+    ...POLICY_PAGES,
+    ...OTHER_SITE_PAGES,
+  ]);
   const byHref = new Map<string, CivicRecord[]>();
   for (const rec of catalog) {
     if (!rec.href) continue;
@@ -95,8 +108,6 @@ export function enrichCatalogWithSiteNav(catalog: CivicRecord[]): CivicRecord[] 
           "महापालिका",
           "municipal corporation",
           "csmc",
-          "navigation",
-          "मेनू",
         ])
       ),
       relatedIds: [],

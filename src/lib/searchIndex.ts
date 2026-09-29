@@ -8,10 +8,17 @@ import { CIVIC_CATALOG } from "@/data/civicCatalog";
 import { CITY_ALERTS } from "@/data/cityAlerts";
 import { DEPARTMENT_DIRECTORY } from "@/data/departmentDirectory";
 import { FACILITY_LOCATION_DATASETS } from "@/data/facilityLocations";
+import { COMMISSIONERS } from "@/data/commissioners";
+import { DEPUTY_MAYORS } from "@/data/deputyMayors";
+import { FAQS } from "@/data/faqs";
+import { MAYORS, type MayorRecord } from "@/data/mayors";
+import { NCAP_SEARCH_META } from "@/data/ncapSearchMeta";
 import { OFFICIAL, SERVICE_ENTRIES } from "@/data/officialLinks";
+import { RTI_DOCS, RTI_OFFICERS } from "@/data/rtiPublic";
 import { SITE_NOTICES } from "@/data/siteNotices";
 import { getGalleryStories } from "@/data/visualStories";
 import { facilityCategories } from "@/lib/facilities";
+import { ncapFileUrl } from "@/lib/ncap";
 import { getPublishedOrganogram } from "@/lib/organogram";
 import type { CivicRecord } from "@/types/civicCatalog";
 
@@ -110,8 +117,7 @@ const SERVICE_ENTRY_TO_CATALOG: Record<string, string> = {
   track: "svc-track",
 };
 
-function buildSitePageRecords(existingIds: Set<string>): CivicRecord[] {
-  const pages: StubInput[] = [
+const SITE_PAGE_INPUTS: StubInput[] = [
     {
       id: "svc-gis",
       category: "service",
@@ -235,10 +241,7 @@ function buildSitePageRecords(existingIds: Set<string>): CivicRecord[] {
       href: "/initiatives",
       keywords: ["initiatives", "उपक्रम"],
     },
-  ];
-
-  return pages.filter((p) => !existingIds.has(p.id)).map(stub);
-}
+];
 
 function buildFacilityCategoryRecords(existingIds: Set<string>): CivicRecord[] {
   return facilityCategories
@@ -378,6 +381,16 @@ function buildServiceEntryRecords(existingIds: Set<string>): CivicRecord[] {
           entry.categoryMr,
           entry.purposeEn,
           entry.purposeMr,
+          ...(entry.id === "gunthewari"
+            ? [
+                "calculator",
+                "challan",
+                "gunthewari calculator",
+                "gunthewari challan calculator",
+                "गुंठेवारी चलन कॅल्क्युलेटर",
+                "कॅल्क्युलेटर",
+              ]
+            : []),
         ],
       }),
     );
@@ -482,6 +495,38 @@ function buildAlertRecords(existingIds: Set<string>): CivicRecord[] {
   );
 }
 
+/** Mayors, deputy mayors and commissioners already published as structured lists. */
+function buildOfficeholderRecords(
+  people: MayorRecord[],
+  prefix: string,
+  roleEn: string,
+  roleMr: string,
+  href: string,
+): CivicRecord[] {
+  const seen = new Set<string>();
+  const out: CivicRecord[] = [];
+  for (const person of people) {
+    const nameEn = person.nameEn.trim();
+    const nameMr = person.nameMr.trim() || nameEn;
+    const key = normTitle(`${nameEn}|${person.from}|${person.to}`);
+    if (!nameEn || seen.has(key)) continue;
+    seen.add(key);
+    out.push(
+      stub({
+        id: `${prefix}-${person.sr}`,
+        category: "contact",
+        titleEn: nameEn,
+        titleMr: nameMr,
+        descriptionEn: `${roleEn}. Term ${person.from} to ${person.to}.`,
+        descriptionMr: `${roleMr}. कार्यकाळ ${person.from} ते ${person.to}.`,
+        href,
+        keywords: [nameEn, nameMr, roleEn, roleMr],
+      }),
+    );
+  }
+  return out;
+}
+
 function buildOrganogramRecords(): CivicRecord[] {
   return getPublishedOrganogram().map((person) =>
     stub({
@@ -508,7 +553,121 @@ function buildOrganogramRecords(): CivicRecord[] {
   );
 }
 
+function destinationKey(href: string) {
+  if (href.startsWith("http")) return href.replace(/\/$/, "");
+  const [path, query] = href.split("?");
+  const base = (path || "/").replace(/\/$/, "") || "/";
+  return query ? `${base}?${query}` : base;
+}
+
+function addStub(page: StubInput, records: CivicRecord[], existingIds: Set<string>) {
+  if (existingIds.has(page.id)) return;
+  const row = stub(page);
+  existingIds.add(row.id);
+  records.push(row);
+}
+
+function upsertStub(page: StubInput, records: CivicRecord[], existingIds: Set<string>, existingHrefs: Set<string>) {
+  const key = destinationKey(page.href);
+  const found = records.find((r) => r.href && destinationKey(r.href) === key);
+  const extra = page.keywords ?? [page.titleEn, page.titleMr];
+  if (found) {
+    found.keywords = Array.from(new Set([...found.keywords, ...extra, page.titleEn, page.titleMr]));
+    return;
+  }
+  if (existingIds.has(page.id)) return;
+  const row = stub(page);
+  existingIds.add(row.id);
+  existingHrefs.add(key);
+  records.push(row);
+}
+
+function buildFaqRecords(existingTitles: Set<string>): StubInput[] {
+  return FAQS.filter((f) => !existingTitles.has(normTitle(f.q)) && !existingTitles.has(normTitle(f.qMr))).map(
+    (f, i) => ({
+      id: `faq-page-${i}-${normTitle(f.q).slice(0, 24).replace(/\s+/g, "-") || i}`,
+      category: "faq" as const,
+      titleEn: f.q,
+      titleMr: f.qMr,
+      descriptionEn: f.a,
+      descriptionMr: f.aMr,
+      href: `/faq?q=${encodeURIComponent(f.q)}`,
+      keywords: [f.q, f.qMr, "faq", "सामान्य प्रश्न"],
+    }),
+  );
+}
+
+function buildNcapDocumentRecords(): StubInput[] {
+  return NCAP_SEARCH_META.map((doc) => ({
+    id: `ncap-doc-${doc.id}`,
+    category: "policy" as const,
+    titleEn: doc.title,
+    titleMr: doc.title,
+    descriptionEn: [doc.organisation, doc.year, doc.fileType.toUpperCase(), doc.excerpt].filter(Boolean).join(" · "),
+    descriptionMr: [doc.organisation, doc.year, "NCAP", "राष्ट्रीय स्वच्छ हवा कार्यक्रम"].filter(Boolean).join(" · "),
+    departmentEn: "Environment",
+    departmentMr: "पर्यावरण",
+    href: ncapFileUrl(doc.fileName),
+    external: true,
+    publishedAt: doc.year ? `${doc.year}-01-01` : "2020-01-01",
+    keywords: [
+      doc.title,
+      doc.fileName,
+      doc.organisation ?? "",
+      doc.year ? String(doc.year) : "",
+      "ncap",
+      "clean air",
+      "एनसीएपी",
+      "स्वच्छ हवा",
+      doc.excerpt,
+    ].filter(Boolean),
+  }));
+}
+
+function buildRtiOfficerRecords(): StubInput[] {
+  return RTI_OFFICERS.map((o, i) => ({
+    id: `rti-officer-${i + 1}`,
+    category: "contact" as const,
+    titleEn: o.name,
+    titleMr: o.name,
+    descriptionEn: `${o.role}. ${o.dept}. Phone ${o.phone}.`,
+    descriptionMr: `${o.roleMr}. ${o.dept}. दूरध्वनी ${o.phone}.`,
+    departmentEn: o.dept,
+    departmentMr: o.dept,
+    href: "/rti-act",
+    keywords: [o.name, o.role, o.roleMr, o.dept, o.phone, "rti", "pio", "माहिती अधिकार", "जन माहिती अधिकारी"],
+  }));
+}
+
+const AI_MITRA_PAGE: StubInput = {
+  id: "svc-ai-mitra",
+  category: "service",
+  titleEn: "AI Mitra",
+  titleMr: "AI मित्र",
+  descriptionEn: "Smart Chhatrapati Sambhajinagar WhatsApp chatbot. The green header button opens a WhatsApp chat.",
+  descriptionMr: "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट. हिरवे शीर्षक बटण WhatsApp संवाद उघडते.",
+  href: OFFICIAL.whatsappChatbot,
+  external: true,
+  keywords: [
+    "ai mitra",
+    "ai chatbot",
+    "chatbot",
+    "whatsapp",
+    "whatsapp chatbot",
+    "ai सहाय्य",
+    "एआय मित्र",
+    "व्हॉट्सॲप चॅटबॉट",
+    "स्मार्ट छत्रपती संभाजीनगर व्हॉट्सॲप चॅटबॉट",
+  ],
+};
+
 let cachedIndex: CivicRecord[] | null = null;
+let indexVersion = 0;
+
+/** Bumps when the catalogue cache is cleared so the scorer rebuilds its copy. */
+export function getSearchIndexVersion() {
+  return indexVersion;
+}
 
 /**
  * Full searchable corpus for the website.
@@ -524,7 +683,7 @@ export function getGlobalSearchIndex(): CivicRecord[] {
     base.flatMap((r) => [normTitle(r.titleEn), normTitle(r.titleMr)].filter(Boolean)),
   );
 
-  const extras: CivicRecord[] = [];
+  const records = [...base];
   const pushAll = (rows: CivicRecord[]) => {
     for (const r of rows) {
       if (existingIds.has(r.id)) continue;
@@ -532,11 +691,13 @@ export function getGlobalSearchIndex(): CivicRecord[] {
       if (r.href) existingHrefs.add(hrefKey(r.href));
       existingTitles.add(normTitle(r.titleEn));
       existingTitles.add(normTitle(r.titleMr));
-      extras.push(r);
+      records.push(r);
     }
   };
 
-  pushAll(buildSitePageRecords(existingIds));
+  for (const page of [...SITE_PAGE_INPUTS, AI_MITRA_PAGE]) {
+    upsertStub(page, records, existingIds, existingHrefs);
+  }
   pushAll(buildFacilityCategoryRecords(existingIds));
   pushAll(buildFacilityItemRecords(existingIds));
   pushAll(buildDepartmentRecords(existingIds, existingHrefs, existingTitles));
@@ -545,8 +706,30 @@ export function getGlobalSearchIndex(): CivicRecord[] {
   pushAll(buildStoryRecords(existingIds));
   pushAll(buildAlertRecords(existingIds));
   pushAll(buildOrganogramRecords());
+  pushAll(buildOfficeholderRecords(MAYORS, "mayor", "Hon'ble Mayor", "मा. महापौर", "/mayors-list"));
+  pushAll(
+    buildOfficeholderRecords(DEPUTY_MAYORS, "deputy-mayor", "Hon'ble Deputy Mayor", "मा. उपमहापौर", "/deputy-mayors-list"),
+  );
+  pushAll(
+    buildOfficeholderRecords(
+      COMMISSIONERS,
+      "commissioner-list",
+      "Municipal Commissioner",
+      "महानगरपालिका आयुक्त",
+      "/commissioners-list",
+    ),
+  );
+  for (const page of buildFaqRecords(existingTitles)) addStub(page, records, existingIds);
+  for (const page of buildNcapDocumentRecords()) addStub(page, records, existingIds);
+  for (const page of buildRtiOfficerRecords()) addStub(page, records, existingIds);
+  for (const doc of RTI_DOCS) {
+    const id = doc.to.split("/").filter(Boolean).pop();
+    const rec = id ? records.find((r) => r.id === id) : undefined;
+    if (!rec) continue;
+    rec.keywords = Array.from(new Set([...rec.keywords, doc.title, doc.titleMr, "rti"]));
+  }
 
-  cachedIndex = [...base, ...extras];
+  cachedIndex = records;
   return cachedIndex;
 }
 
@@ -558,4 +741,5 @@ export function findSearchRecord(id: string) {
 /** Reset cache — useful in tests when data sources change. */
 export function resetSearchIndexCache() {
   cachedIndex = null;
+  indexVersion += 1;
 }

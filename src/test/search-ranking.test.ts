@@ -96,6 +96,35 @@ describe("search ranking", { timeout: 30000 }, () => {
     expect(topId("Padampura Fire Station")).toBe("fac-item-fire-stations-fire-001");
   });
 
+  it("finds site pages, departments, places, tools and documents", () => {
+    expect(topId("health")).toBe("dept-health");
+    expect(topId("town planning")).toBe("dept-tp");
+    expect(topId("accounts")).toBe("dept-page-accounts-department");
+    expect(topId("education")).toBe("dept-page-education");
+    expect(topId("garden")).toBe("dept-page-garden");
+    expect(topId("ellora")).toBe("place-ellora-caves");
+    expect(topId("ajanta")).toBe("place-ajanta-caves");
+    expect(topId("daulatabad")).toBe("place-daulatabad-fort");
+    expect(topId("organogram")).toMatch(/organization/);
+    expect(topId("privacy")).toBe("nav-privacy-policy");
+    expect(topId("AI Mitra")).toBe("svc-ai-mitra");
+    expect(topId("chatbot")).toBe("svc-ai-mitra");
+    expect(topId("gunthewari calculator")).toBe("svc-entry-gunthewari");
+    expect(topId("calculator")).toBe("svc-tax-calculator");
+    expect(["cc-health", "cc-revenue"]).toContain(topId("citizen charter"));
+    expect(topId("water")).toBe("svc-water-tax");
+    expect(topId("trade")).toBe("svc-trade");
+    const amol = searchHits("Amol Yedage");
+    expect(amol[0]?.record.titleEn).toMatch(/Amol Yedage/i);
+    expect(amol.some((hit) => hit.record.id === "org-amol-yedage")).toBe(true);
+    expect(searchHits("ncap").some((h) => h.record.href === "/ncap" || h.record.id.startsWith("ncap-doc-"))).toBe(true);
+    expect(searchHits("annual report")[0]?.record.category).toBe("annual-report");
+    expect(searchHits("dp plan").some((h) => h.record.href === "/dp-plan")).toBe(true);
+    expect(searchHits("solid waste").some((h) => h.record.href === "/departments/solid-waste-management")).toBe(true);
+    const trade = searchHits("trade").slice(0, 5).map((h) => h.record.titleEn.toLowerCase());
+    expect(trade.some((t) => t.includes("netradeep"))).toBe(false);
+  });
+
   it("does not duplicate the MahaTenders hub", () => {
     const hits = searchHits("Tenders");
     const tenderIds = [...new Set(hits.map((h) => h.record.id).filter((id) => id === "svc-tenders" || id === "svc-entry-tenders"))];

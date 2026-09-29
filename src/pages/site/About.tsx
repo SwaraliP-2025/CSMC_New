@@ -67,7 +67,7 @@ const ABOUT_COLLAGE: CollageTile[] = [
   {
     src: aboutFestival,
     altEn: "Ellora-Ajanta International Festival",
-    altMr: "एलोरा-अजिंठा आंतरराष्ट्रीय महोत्सव",
+    altMr: "वेरूळ - अजिंठा आंतरराष्ट्रीय महोत्सव",
     className: "col-span-2 md:col-span-1 md:col-start-1 md:row-start-2",
     fit: "contain",
     objectPosition: "center center",
@@ -100,9 +100,9 @@ const ABOUT_COLLAGE: CollageTile[] = [
   {
     src: aboutElloraElephants,
     altEn: "Ellora Caves — Kailasa temple elephant carvings",
-    altMr: "एलोरा लेणी — कैलास मंदिर हत्ती शिल्पे",
+    altMr: "वेरूळ",
     captionEn: "Kailasa Temple, Ellora",
-    captionMr: "कैलास मंदिर, एलोरा",
+    captionMr: "वेरूळ",
     className: "col-span-2 md:col-span-2 md:col-start-5 md:row-start-2",
     objectPosition: "center 55%",
   },
@@ -123,7 +123,7 @@ const ABOUT_COLLAGE: CollageTile[] = [
   {
     src: aboutHimroo,
     altEn: "Himroo weaving",
-    altMr: "हिमरो विणकाम",
+    altMr: "हिमरू विणकाम",
     className: "col-span-2 md:col-span-1 md:col-start-3 md:row-start-3",
     objectPosition: "center center",
   },
@@ -247,9 +247,9 @@ const About = () => {
           body: "Aurangabad Municipal Corporation was established on 8 December 1982, marking the beginning of organised municipal governance for the city — later known as the Chhatrapati Sambhajinagar Municipal Corporation (CSMC).",
         },
         {
-          year: "15 September 2023",
+          year: "24 February 2023",
           title: "Chhatrapati Sambhajinagar",
-          body: "As per the government notification dated 15 September 2023, the city and the Municipal Corporation were officially renamed ‘Chhatrapati Sambhajinagar’.",
+          body: "As per the Government of Maharashtra notification, the city of Aurangabad was renamed Chhatrapati Sambhajinagar. Following the renaming, the civic body is known as the Chhatrapati Sambhajinagar Municipal Corporation (CSMC).",
         },
       ]
     : [
@@ -284,9 +284,9 @@ const About = () => {
           body: "८ डिसेंबर १९८२ रोजी औरंगाबाद महानगरपालिकेची स्थापना झाली — शहराच्या संघटित नागरी प्रशासनाची सुरुवात; नंतर ती छत्रपती संभाजीनगर महानगरपालिका (CSMC) म्हणून ओळखली जाते.",
         },
         {
-          year: "१५ सप्टेंबर २०२३",
+          year: "२४ फेब्रुवारी २०२३",
           title: "छत्रपती संभाजीनगर",
-          body: "१५ सप्टेंबर २०२३ रोजी शासनाच्या अधिसूचनेनुसार शहर व महानगरपालिकेचे नाव अधिकृतपणे ‘छत्रपती संभाजीनगर’ असे करण्यात आले.",
+          body: "महाराष्ट्र शासन अधिसूचनेनुसार औरंगाबाद शहराचे नामकरण छत्रपती संभाजीनगर असे करण्यात आले. नामकरणानंतर महानगरपालिका छत्रपती संभाजीनगर महानगरपालिका (CSMC) म्हणून ओळखली जाते.",
         },
       ];
 
@@ -599,13 +599,13 @@ const About = () => {
               <li className="pl-4 border-l-4 border-civic-gold/50">
                 {en ? (
                   <>
-                    Following the official renaming of the city on 15th September 2023, the civic body is now known as the{" "}
-                    <strong className="text-civic-blue">Chhatrapati Sambhajinagar Municipal Corporation (CSMC).</strong>
+                    <strong className="text-civic-blue">24 February 2023</strong> — As per the Government of Maharashtra notification, the city of Aurangabad was renamed Chhatrapati Sambhajinagar. Following the renaming, the civic body is known as the{" "}
+                    <strong className="text-[#8A6820]">Chhatrapati Sambhajinagar Municipal Corporation (CSMC).</strong>
                   </>
                 ) : (
                   <>
-                    १५ सप्टेंबर २०२३ रोजी शहराचे अधिकृत नामकरण झाल्यानंतर, महानगरपालिका आता{" "}
-                    <strong className="text-civic-blue">छत्रपती संभाजीनगर महानगरपालिका (CSMC)</strong> म्हणून ओळखली जाते.
+                    <strong className="text-civic-blue">२४ फेब्रुवारी २०२३</strong> — महाराष्ट्र शासन अधिसूचनेनुसार औरंगाबाद शहराचे नामकरण छत्रपती संभाजीनगर असे करण्यात आले. नामकरणानंतर, महानगरपालिका{" "}
+                    <strong className="text-[#8A6820]">छत्रपती संभाजीनगर महानगरपालिका (CSMC)</strong> म्हणून ओळखली जाते.
                   </>
                 )}
               </li>

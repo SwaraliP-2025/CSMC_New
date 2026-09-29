@@ -7,22 +7,30 @@ import { localizeDigits } from "@/i18n/digits";
 import { CATEGORY_LABELS, SEARCH_GROUP_LABELS } from "@/data/civicLabels";
 import { formatCivicDate, groupSearchResults, recordHref, searchHits, suggestDidYouMean } from "@/lib/unifiedSearch";
 import { highlightText, type SearchHit } from "@/lib/semanticSearch";
+import {
+  normalizeVoiceTranscript,
+  pickRecognitionLang,
+  voiceDebug,
+  voiceStatusMessage,
+  type VoicePhase,
+} from "@/lib/browserVoice";
 
 const MAX_PER_GROUP = 4;
 
+type SpeechAlt = { transcript: string };
+type SpeechResult = SpeechAlt[] & { isFinal?: boolean; 0?: SpeechAlt };
 type SpeechRecognitionLike = {
   lang: string;
   continuous: boolean;
   interimResults: boolean;
+  maxAlternatives: number;
   start: () => void;
   stop: () => void;
-  onresult:
-    | ((event: {
-        results: ArrayLike<ArrayLike<{ transcript: string }> & { 0?: { transcript: string } }>;
-      }) => void)
-    | null;
-  onerror: (() => void) | null;
+  abort: () => void;
+  onresult: ((event: { results: ArrayLike<SpeechResult> }) => void) | null;
+  onerror: ((event: { error?: string }) => void) | null;
   onend: (() => void) | null;
+  onspeechend: (() => void) | null;
 };
 
 function getSpeechRecognitionCtor(): (new () => SpeechRecognitionLike) | null {
@@ -43,22 +51,30 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const en = lang === "en";
   const navigate = useNavigate();
   const listId = useId();
+  const voiceStatusId = useId();
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
-  const voiceAttemptRef = useRef(0);
+  const voiceMountedRef = useRef(true);
+  const voiceStopRequestedRef = useRef(false);
   const voiceGotResultRef = useRef(false);
+  const voiceErrorRef = useRef("");
+  const voiceSnapshotRef = useRef({ query: "", searchQuery: "" });
+  const voiceAlternateRef = useRef(false);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [pos, setPos] = useState({ top: 0, left: 0, width: 0 });
-  const [listening, setListening] = useState(false);
+  const [voicePhase, setVoicePhase] = useState<VoicePhase>("idle");
+  const [voiceNote, setVoiceNote] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const speechAvailable = !!getSpeechRecognitionCtor();
+  const voiceBusy = voicePhase === "listening" || voicePhase === "processing";
 
-  const hits = useMemo(() => (query.trim().length >= 2 ? searchHits(query) : []), [query]);
+  const hits = useMemo(() => (searchQuery.trim().length >= 2 ? searchHits(searchQuery) : []), [searchQuery]);
   const didYouMean = useMemo(
-    () => (query.trim().length >= 4 ? suggestDidYouMean(query) : null),
-    [query],
+    () => (searchQuery.trim().length >= 4 ? suggestDidYouMean(searchQuery) : null),
+    [searchQuery],
   );
   const best = useMemo(() => hits.find((h) => h.isBestAction) ?? hits[0], [hits]);
   const bilingualTwin = useMemo(() => {
@@ -91,7 +107,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     return rows;
   }, [best, bilingualTwin, grouped]);
 
-  const showPanel = open && query.trim().length >= 2;
+  const showPanel = open && searchQuery.trim().length >= 2;
 
   const resultsStatus =
     showPanel
@@ -106,7 +122,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
 
   useEffect(() => {
     setActiveIndex(-1);
-  }, [query]);
+  }, [searchQuery]);
 
   const syncPos = () => {
     const el = wrapRef.current;
@@ -142,16 +158,6 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     return () => document.removeEventListener("mousedown", onDown);
   }, [open, listId]);
 
-  useEffect(() => {
-    return () => {
-      try {
-        recognitionRef.current?.stop();
-      } catch {
-        /* ignore */
-      }
-    };
-  }, []);
-
   // Website Guide can focus search with an example query after the tour ends.
   useEffect(() => {
     const onTourSearch = (e: Event) => {
@@ -159,6 +165,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       const q = detail?.query?.trim() ?? "";
       if (q) {
         setQuery(q);
+        setSearchQuery(q);
         setOpen(true);
         requestAnimationFrame(() => {
           syncPos();
@@ -222,88 +229,156 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     }
   };
 
-  const applyTranscript = (raw: string) => {
-    const transcript = raw
-      .normalize("NFC")
-      .replace(/[\u00A0\u202F\u2007]/g, " ")
-      .replace(/[.,!?;:।]+/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    if (!transcript) return false;
-    setQuery(transcript);
+  const commitQuery = (value: string) => {
+    setQuery(value);
+    setSearchQuery(value);
     setOpen(true);
+  };
+
+  const applyTranscript = (raw: string) => {
+    const transcript = normalizeVoiceTranscript(raw);
+    if (!transcript) return false;
+    commitQuery(transcript);
     inputRef.current?.focus();
     return true;
   };
 
-  /** Prefer UI language, then the other (EN ↔ MR) so voice works bilingually. */
-  const voiceLangs = lang === "mr" ? (["mr-IN", "en-IN"] as const) : (["en-IN", "mr-IN"] as const);
+  const restoreVoiceSnapshot = () => {
+    const snap = voiceSnapshotRef.current;
+    setQuery(snap.query);
+    setSearchQuery(snap.searchQuery);
+    setOpen(snap.searchQuery.trim().length >= 2);
+  };
 
-  const startVoiceAttempt = (Ctor: new () => SpeechRecognitionLike, attempt: number) => {
-    const recognition = new Ctor();
-    recognition.lang = voiceLangs[attempt] ?? voiceLangs[0];
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.onresult = (event) => {
-      const parts: string[] = [];
-      const list = event.results;
-      for (let i = 0; i < list.length; i++) {
-        const said = list[i]?.[0]?.transcript ?? "";
-        if (said) parts.push(said);
-      }
-      if (applyTranscript(parts.join(" "))) {
-        voiceGotResultRef.current = true;
-      }
+  const releaseRecognition = () => {
+    const current = recognitionRef.current;
+    recognitionRef.current = null;
+    if (!current) return;
+    current.onresult = null;
+    current.onerror = null;
+    current.onend = null;
+    current.onspeechend = null;
+    try {
+      current.stop();
+    } catch {
+      /* already stopped */
+    }
+  };
+
+  useEffect(() => {
+    voiceMountedRef.current = true;
+    return () => {
+      voiceMountedRef.current = false;
+      releaseRecognition();
     };
-    recognition.onerror = () => {
-      // Fall through to onend for language retry; text search remains available.
-    };
-    recognition.onend = () => {
-      if (voiceGotResultRef.current) {
-        setListening(false);
-        recognitionRef.current = null;
-        return;
-      }
-      const next = attempt + 1;
-      if (next < voiceLangs.length) {
-        voiceAttemptRef.current = next;
-        try {
-          startVoiceAttempt(Ctor, next);
-        } catch {
-          setListening(false);
-          recognitionRef.current = null;
-        }
-        return;
-      }
-      setListening(false);
-      recognitionRef.current = null;
-    };
-    recognitionRef.current = recognition;
-    recognition.start();
+  }, []);
+
+  const finishVoice = (phase: VoicePhase, note: string) => {
+    if (!voiceMountedRef.current) return;
+    setVoicePhase(phase);
+    setVoiceNote(note);
   };
 
   const toggleVoice = () => {
     const Ctor = getSpeechRecognitionCtor();
-    if (!Ctor) return;
-
-    if (listening && recognitionRef.current) {
-      try {
-        recognitionRef.current.stop();
-      } catch {
-        /* ignore */
-      }
-      setListening(false);
-      recognitionRef.current = null;
+    if (!Ctor) {
+      finishVoice("error", voiceStatusMessage("not-supported", en));
       return;
     }
 
-    voiceAttemptRef.current = 0;
+    if (voiceBusy && recognitionRef.current) {
+      voiceStopRequestedRef.current = true;
+      voiceDebug({ event: "stop-requested" });
+      releaseRecognition();
+      finishVoice("idle", "");
+      return;
+    }
+
+    releaseRecognition();
+    voiceStopRequestedRef.current = false;
     voiceGotResultRef.current = false;
+    voiceErrorRef.current = "";
+    voiceSnapshotRef.current = { query, searchQuery };
+
+    const recognitionLang = pickRecognitionLang(
+      lang === "en" ? "en" : "mr",
+      typeof navigator !== "undefined" ? navigator.languages : [],
+      voiceAlternateRef.current,
+    );
+    const recognition = new Ctor();
+    recognition.lang = recognitionLang;
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = (event) => {
+      if (recognitionRef.current !== recognition || !voiceMountedRef.current) return;
+      let interim = "";
+      let finalText = "";
+      const list = event.results;
+      for (let i = 0; i < list.length; i++) {
+        const row = list[i];
+        const said = row?.[0]?.transcript ?? "";
+        if (!said) continue;
+        if (row?.isFinal) finalText = `${finalText} ${said}`.trim();
+        else interim = `${interim} ${said}`.trim();
+      }
+      const text = finalText || interim;
+      voiceDebug({ event: finalText ? "final" : "interim", lang: recognitionLang, transcript: text });
+      if (!text) return;
+      if (applyTranscript(text)) {
+        voiceGotResultRef.current = true;
+        if (finalText) {
+          voiceAlternateRef.current = false;
+          finishVoice("processing", voiceStatusMessage("processing", en));
+        }
+      }
+    };
+    recognition.onspeechend = () => {
+      if (recognitionRef.current !== recognition || !voiceMountedRef.current) return;
+      if (!voiceGotResultRef.current) finishVoice("processing", voiceStatusMessage("processing", en));
+      voiceDebug({ event: "speechend", lang: recognitionLang });
+    };
+    recognition.onerror = (event) => {
+      const code = event.error || "unknown";
+      voiceErrorRef.current = code;
+      voiceDebug({ event: "error", lang: recognitionLang, error: code });
+    };
+    recognition.onend = () => {
+      if (recognitionRef.current !== recognition) return;
+      recognitionRef.current = null;
+      voiceDebug({
+        event: "end",
+        lang: recognitionLang,
+        searched: voiceGotResultRef.current,
+        error: voiceErrorRef.current || null,
+      });
+      if (!voiceMountedRef.current) return;
+      if (voiceStopRequestedRef.current) {
+        finishVoice("idle", "");
+        return;
+      }
+      if (voiceGotResultRef.current) {
+        finishVoice("idle", "");
+        return;
+      }
+      const code = voiceErrorRef.current || "no-speech";
+      if (code === "aborted") {
+        finishVoice("idle", "");
+        return;
+      }
+      if (code === "no-speech" || code === "language-not-supported") voiceAlternateRef.current = !voiceAlternateRef.current;
+      restoreVoiceSnapshot();
+      finishVoice("error", voiceStatusMessage(code, en));
+    };
+    recognitionRef.current = recognition;
     try {
-      startVoiceAttempt(Ctor, 0);
-      setListening(true);
+      recognition.start();
+      finishVoice("listening", voiceStatusMessage("listening", en));
+      voiceDebug({ event: "start", lang: recognitionLang });
     } catch {
-      setListening(false);
+      recognitionRef.current = null;
+      finishVoice("error", voiceStatusMessage("unknown", en));
+      voiceDebug({ event: "start-failed", lang: recognitionLang });
     }
   };
 
@@ -311,7 +386,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     <>
       <div
         ref={wrapRef}
-        className={`flex items-center gap-2 border border-border rounded-full px-3 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30 ${
+        className={`relative flex items-center gap-2 border border-border rounded-full px-3 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30 ${
           compact ? "py-1 flex-1" : "py-1.5"
         }`}
       >
@@ -321,8 +396,11 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           type="search"
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value);
-            setOpen(true);
+            if (voicePhase === "error") {
+              setVoicePhase("idle");
+              setVoiceNote("");
+            }
+            commitQuery(e.target.value);
           }}
           onFocus={() => {
             setOpen(true);
@@ -353,6 +431,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             aria-label={en ? "Clear search" : "शोध साफ करा"}
             onClick={() => {
               setQuery("");
+              setSearchQuery("");
               setActiveIndex(-1);
               inputRef.current?.focus();
             }}
@@ -361,32 +440,45 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
             <X className="h-3.5 w-3.5" aria-hidden />
           </button>
         )}
-        {speechAvailable && (
-          <button
-            type="button"
-            aria-label={
-              listening
+        <button
+          type="button"
+          aria-label={
+            !speechAvailable
+              ? voiceStatusMessage("not-supported", en)
+              : voiceBusy
                 ? en
                   ? "Stop voice search"
                   : "आवाज शोध थांबवा"
                 : en
                   ? "Voice search (English or Marathi)"
                   : "आवाजाने शोधा (मराठी किंवा इंग्रजी)"
-            }
-            aria-pressed={listening}
-            onClick={toggleVoice}
-            className={`shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue ${listening ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
+          }
+          aria-pressed={voiceBusy}
+          aria-describedby={voiceNote ? voiceStatusId : undefined}
+          disabled={!speechAvailable}
+          title={voiceNote || (speechAvailable ? undefined : voiceStatusMessage("not-supported", en))}
+          onClick={toggleVoice}
+          className={`shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue disabled:opacity-40 ${voiceBusy ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
+        >
+          {voiceBusy ? (
+            <Mic className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
+          ) : (
+            <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
+          )}
+        </button>
+        {voiceNote ? (
+          <p
+            id={voiceStatusId}
+            role="status"
+            className="absolute left-0 right-0 top-full z-[2060] mt-1 rounded-lg border border-border bg-white px-3 py-1.5 text-[11px] leading-snug text-civic-blue shadow-sm"
           >
-            {listening ? (
-              <Mic className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
-            ) : (
-              <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
-            )}
-          </button>
-        )}
+            {voiceNote}
+          </p>
+        ) : null}
       </div>
 
       <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {voiceNote ? `${voiceNote} ` : ""}
         {resultsStatus}
       </p>
 
@@ -408,8 +500,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                       type="button"
                       className="font-semibold text-civic-blue underline-offset-2 hover:underline"
                       onClick={() => {
-                        setQuery(didYouMean);
-                        setOpen(true);
+                        commitQuery(didYouMean);
                         inputRef.current?.focus();
                       }}
                     >
@@ -427,7 +518,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                   <button
                     type="button"
                     className="text-xs font-bold text-civic-blue hover:underline"
-                    onClick={() => goToResultsPage(query)}
+                    onClick={() => goToResultsPage(searchQuery)}
                   >
                     {en ? "Open full search page" : "पूर्ण शोध पृष्ठ उघडा"}
                   </button>
@@ -486,16 +577,16 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                 </>
               )}
             </div>
-            {query.trim().length >= 2 && (
+            {searchQuery.trim().length >= 2 && (
               <div className="border-t border-border px-3 py-2.5 bg-slate-50/80">
                 <button
                   type="button"
                   className="w-full text-left text-xs font-bold text-civic-blue hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue rounded"
-                  onClick={() => goToResultsPage(query)}
+                  onClick={() => goToResultsPage(searchQuery)}
                 >
                   {en
-                    ? `View all results for “${query.trim()}” →`
-                    : `“${query.trim()}” साठी सर्व निकाल पहा →`}
+                    ? `View all results for “${searchQuery.trim()}” →`
+                    : `“${searchQuery.trim()}” साठी सर्व निकाल पहा →`}
                 </button>
               </div>
             )}

@@ -2,27 +2,12 @@ import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { OFFICIAL } from "@/data/officialLinks";
+import { RTI_DOCS, RTI_OFFICERS } from "@/data/rtiPublic";
 import { Link } from "react-router-dom";
 import { FileText, Download, User, Phone, ExternalLink } from "lucide-react";
 
-const officers = [
-  { role: "Public Information Officer (PIO)", roleMr: "जन माहिती अधिकारी (PIO)", name: "Shri. Rajesh Patil", dept: "General Administration", phone: "0240-2331731" },
-  { role: "Appellate Authority", roleMr: "अपीलीय प्राधिकरण", name: "Shri. Suresh Deshmukh", dept: "Administration", phone: "0240-2331732" },
-];
-
-const RTI_DOCS = [
-  {
-    title: "RTI Application Form",
-    titleMr: "RTI अर्ज नमुना",
-    to: "/digital-repository/act-rti",
-    external: false,
-  },
-  {
-    title: "First Appeal Form / Quarterly Disclosure",
-    titleMr: "प्रथम अपील / तिमाही प्रकटीकरण",
-    to: "/digital-repository/rti-q4",
-    external: false,
-  },
+const rtiDocs = [
+  ...RTI_DOCS,
   {
     title: "Online RTI Application",
     titleMr: "ऑनलाइन RTI अर्ज",
@@ -87,7 +72,7 @@ const RTIAct = () => {
 
         <h2 className="font-serif text-xl font-bold text-civic-blue mb-5">{en ? "RTI Officers" : "RTI अधिकारी"}</h2>
         <div className="grid md:grid-cols-2 gap-5 mb-10">
-          {officers.map((o, i) => (
+          {RTI_OFFICERS.map((o, i) => (
             <div key={i} className="bg-white border border-border rounded-2xl p-5 flex gap-4">
               <div className="w-12 h-12 rounded-full bg-civic-blue/10 flex items-center justify-center shrink-0">
                 <User className="h-6 w-6 text-civic-blue" />
@@ -104,7 +89,7 @@ const RTIAct = () => {
 
         <h2 className="font-serif text-xl font-bold text-civic-blue mb-5">{en ? "RTI Documents" : "RTI दस्तऐवज"}</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          {RTI_DOCS.map((d, i) => (
+          {rtiDocs.map((d, i) => (
             <div key={i} className="flex items-center justify-between bg-white border border-border rounded-xl px-4 py-3 hover:shadow-sm transition-shadow">
               <div className="flex items-center gap-3 min-w-0">
                 <FileText className="h-5 w-5 text-civic-blue shrink-0" />

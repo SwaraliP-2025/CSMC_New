@@ -333,7 +333,7 @@
 //   ].filter((p) => p.text);
 // }
 
-import { getGlobalSearchIndex } from "@/lib/searchIndex";
+import { getGlobalSearchIndex, getSearchIndexVersion } from "@/lib/searchIndex";
 import { CATEGORY_LABELS, SEARCH_GROUP_ORDER, searchGroupFor } from "@/data/civicLabels";
 import { fromDevanagariDigits } from "@/i18n/digits";
 import { expandSearchQuery } from "@/lib/searchAliases";
@@ -433,7 +433,7 @@ const INTENT: {
   },
   {
     phrases: [
-      "water bill", "water tax", "pay water", "water supply", "पाणी कर", "पाणी बिल", "पाणी",
+      "water bill", "water tax", "pay water", "पाणी कर", "पाणी बिल", "पाणीपट्टी", "पाणी",
       "वॉटर टॅक्स", "वॉटर बिल", "वॉटर",
     ],
     actionId: "svc-water-tax",
@@ -463,7 +463,7 @@ const INTENT: {
   {
     phrases: ["solid waste", "swm", "garbage", "segregation", "घनकचरा"],
     actionId: "cir-swm",
-    relatedIds: ["gr-swm", "ten-swm"],
+    relatedIds: ["gr-swm", "ten-swm", "dept-page-solid-waste-management"],
     actionEn: "Read circular",
     actionMr: "परिपत्रक वाचा",
   },
@@ -491,11 +491,6 @@ const INTENT: {
       "स्थानिक आकर्षणे",
       "आकर्षणे",
       "paryatan",
-      "ellora",
-      "ajanta",
-      "maqbara",
-      "वेरूळ",
-      "अजिंठा",
     ],
     actionId: "svc-tourism",
     relatedIds: ["svc-how-to-reach"],
@@ -815,6 +810,20 @@ function tokens(s: string) {
   return norm(s).split(" ").filter((t) => t.length >= 2 && !STOP.has(t));
 }
 
+function sameToken(a: string, b: string) {
+  if (a === b) return true;
+  if (a.length >= 4 && b.length >= 4 && (a === `${b}s` || b === `${a}s` || a === `${b}es` || b === `${a}es`)) return true;
+  return false;
+}
+
+/** 0 when every title word is the query word or its simple English plural. */
+function pluralTitleGap(title: string, query: string) {
+  const titleWords = title.split(/\s+/).filter(Boolean);
+  const queryWords = query.split(/\s+/).filter(Boolean);
+  if (!queryWords.length || titleWords.length !== queryWords.length) return -1;
+  return queryWords.every((token, index) => sameToken(titleWords[index], token)) ? 0 : -1;
+}
+
 function levenshtein(a: string, b: string) {
   if (a === b) return 0;
   if (Math.abs(a.length - b.length) > 2) return 9;
@@ -836,20 +845,22 @@ function levenshtein(a: string, b: string) {
 }
 
 function fuzzyIncludes(hay: string, needle: string) {
-  if (!needle) return false;
-  if (hay.includes(needle)) return true;
+  if (!needle || !hay) return false;
+  if (needle.includes(" ")) return hay.includes(needle);
   const words = hay.split(/\s+/).filter((w) => w.length > 0);
-  // Prefix matches only on meaningful stems — never let "to" match "tourism".
+  if (words.some((w) => w === needle)) return true;
+  // Prefix on a whole word ("bir" → "birth", "prop" → "property").
+  // Never match a token buried inside a longer word ("trade" inside "netradeep").
   if (needle.length >= 3) {
     for (const w of words) {
       if (w.length < 3) continue;
       if (w.startsWith(needle)) return true;
-      // Query starts with a catalog word only if that word is a real stem (≥4 chars).
-      if (w.length >= 4 && needle.startsWith(w)) return true;
     }
   }
   if (needle.length >= 4) {
-    return words.some((w) => w.length >= 4 && levenshtein(w, needle) <= 1);
+    return words.some(
+      (w) => w.length >= 4 && Math.abs(w.length - needle.length) <= 1 && levenshtein(w, needle) <= 1,
+    );
   }
   return false;
 }
@@ -890,11 +901,23 @@ function detectIntent(q: string) {
       const pn = norm(p);
       if (!pn) continue;
       if (n === pn) s = Math.max(s, pn.length + 8);
-      else if (n.includes(pn) || (pn.length >= 8 && n.length >= 4 && pn.includes(n))) {
+      else if (n.includes(pn)) {
         // Short Latin abbreviations must be whole tokens (rti inside certificate).
         if (/^[a-z0-9]{1,4}$/i.test(pn) && !n.split(/\s+/).includes(pn)) continue;
+        // "calculator" must not capture "gunthewari calculator".
+        if (!pn.includes(" ")) {
+          const outside = n.split(/\s+/).filter((w) => w.length >= 4 && w !== pn);
+          if (outside.length) continue;
+        }
+        s = Math.max(s, pn.length);
+      } else if (pn.length >= 8 && n.length >= 4 && pn.startsWith(n) && pn.length - n.length <= 4) {
         s = Math.max(s, pn.length);
       } else if (tokens(p).length > 0 && tokens(p).every((t) => fuzzyIncludes(n, t))) {
+        if (tokens(p).length === 1) {
+          const only = tokens(p)[0];
+          const outside = n.split(/\s+/).filter((w) => w.length >= 4 && w !== only);
+          if (outside.length) continue;
+        }
         s = Math.max(s, Math.min(12, pn.length));
       }
     }
@@ -936,9 +959,12 @@ type PreparedRecord = {
 
 let preparedCache: PreparedRecord[] | null = null;
 let preparedById: Map<string, CivicRecord> | null = null;
+let preparedVersion = -1;
 
 function getPreparedIndex(): PreparedRecord[] {
-  if (preparedCache) return preparedCache;
+  const version = getSearchIndexVersion();
+  if (preparedCache && preparedVersion === version) return preparedCache;
+  preparedVersion = version;
   preparedCache = getGlobalSearchIndex().map((r) => {
     const titleEn = norm(r.titleEn);
     const titleMr = norm(r.titleMr);
@@ -992,7 +1018,7 @@ export function smartSearch(query: string): SearchHit[] {
   const { expanded, terms: aliasTerms } = expandSearchQuery(query);
   const originalTokens = tokens(query);
   const qTokens = originalTokens.length > 0 ? originalTokens : tokens(expanded);
-  const intent = detectIntent(query) ?? detectIntent(expanded);
+  const intent = detectIntent(query);
   if (!intent && qTokens.length === 0) return [];
   const scores = new Map<string, SearchHit>();
 
@@ -1030,27 +1056,33 @@ export function smartSearch(query: string): SearchHit[] {
     const { record: r, titleEn, titleMr, title, hay, keywords } = item;
     let s = 0;
     const exactTitle = titleEn === q || titleMr === q;
+    const pluralTitle = pluralTitleGap(titleEn, q) === 0 || pluralTitleGap(titleMr, q) === 0;
+    const titleLead =
+      !q.includes(" ") &&
+      q.length >= 4 &&
+      (titleEn === q || titleMr === q || titleEn.startsWith(`${q} `) || titleMr.startsWith(`${q} `));
     if (exactTitle) s += 200;
-    else if (title.includes(q)) s += 70;
-    else if (aliasNorm.some((nt) => {
-      if (titleEn.includes(nt) || titleMr.includes(nt)) return true;
-      if (keywords.some((k) => fuzzyIncludes(k, nt) || k.includes(nt))) return true;
-      return hay.includes(nt);
-    })) s += 55;
+    else if (pluralTitle) s += 180;
+    else if (fuzzyIncludes(title, q)) s += 70;
+    else if (aliasNorm.some((nt) => fuzzyIncludes(title, nt) || keywords.some((k) => fuzzyIncludes(k, nt)))) s += 55;
     else if (qTokens.length > 0 && qTokens.every((t) => fuzzyIncludes(title, t))) s += 70;
 
     for (const t of qTokens) {
       if (t.length < 3) continue;
       if (fuzzyIncludes(title, t)) s += 18;
-      else if (keywords.some((k) => k.includes(t) || fuzzyIncludes(k, t))) s += 12;
-      else if (hay.includes(t)) s += 6;
+      else if (keywords.some((k) => fuzzyIncludes(k, t))) s += 12;
+      else if (fuzzyIncludes(hay, t)) s += 6;
     }
 
     let ocrHit: { page: number; textEn: string; textMr: string } | undefined;
     for (const page of item.ocr) {
-      if (qTokens.some((t) => t.length >= 4 && page.blob.includes(t)) || (q.length >= 4 && page.blob.includes(q))) {
+      const phrase = q.includes(" ") && q.length >= 8 && page.blob.includes(q);
+      const contentTokens = qTokens.filter((t) => t.length >= 4);
+      const strongWord =
+        contentTokens.length >= 2 && contentTokens.every((t) => fuzzyIncludes(page.blob, t));
+      if (phrase || strongWord) {
         ocrHit = page;
-        s += 40;
+        s += phrase ? 36 : 14;
         break;
       }
     }
@@ -1059,6 +1091,7 @@ export function smartSearch(query: string): SearchHit[] {
     else if (r.category === "faq") s *= 1.15;
     else if (r.downloadable && !intent) s *= 0.82;
     if (exactTitle) s += 40;
+    if (titleLead) s += 48;
 
     if (s > 0 || scores.has(r.id)) {
       const extra: Partial<SearchHit> = {};

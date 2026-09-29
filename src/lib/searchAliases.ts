@@ -4,29 +4,36 @@
  * When any term matches, the whole group is added to the query expansion.
  */
 export const SEARCH_ALIAS_GROUPS: string[][] = [
-  // Tourism / explore
+  // Tourism hub — place names are separate so "ellora" does not rank every attraction.
   [
     "tourism", "tourist", "tourists", "sightseeing", "attractions", "attraction", "heritage", "explore",
     "पर्यटन", "आकर्षणे", "स्थानिक आकर्षणे", "पर्यटन स्थळे", "वारसा", "paryatan",
     "टुरिझम", "टुरिझम्", "टूरिझम", "टूरिस्म", "टुरिस्म", "टुरिस्ट", "हेरिटेज", "एक्सप्लोर",
-    "ellora", "ajanta", "maqbara", "daulatabad", "deogiri", "वेरूळ", "अजिंठा", "मकबरा", "देवगिरी",
   ],
+  ["ellora", "ellora caves", "वेरूळ", "वेरुळ"],
+  ["ajanta", "ajanta caves", "अजिंठा"],
+  ["bibi ka maqbara", "maqbara", "bibi", "मकबरा"],
+  ["daulatabad", "daulatabad fort", "deogiri", "देवगिरी", "दौलताबाद"],
   // Property tax
   [
     "property tax", "property", "house tax", "malmatta",
-    "मालमत्ता कर", "मालमत्ता",
+    "मालमत्ता कर", "मालमत्ता", "घरपट्टी",
     "प्रॉपर्टी टॅक्स", "प्रॉपर्टी कर", "प्रॉपर्टी", "हाऊस टॅक्स", "मलमत्ता",
   ],
   // Water tax / supply
   [
-    "water tax", "water bill", "water supply", "water",
-    "पाणी कर", "पाणी बिल", "पाणी पुरवठा", "पाणी",
+    "water tax", "water bill", "water charges", "water",
+    "पाणी कर", "पाणी बिल", "पाणीपट्टी", "पाणी",
     "वॉटर टॅक्स", "वॉटर बिल", "वॉटर",
+  ],
+  [
+    "water supply",
+    "पाणी पुरवठा", "पाणीपुरवठा",
   ],
   // Birth certificate
   [
-    "birth certificate", "birth", "newborn", "janma",
-    "जन्म प्रमाणपत्र", "जन्म दाखला", "जन्म",
+    "birth certificate", "birth", "birth registration", "newborn", "janma",
+    "जन्म प्रमाणपत्र", "जन्म दाखला", "जन्म नोंदणी", "जन्म",
     "बर्थ सर्टिफिकेट", "बर्थ",
   ],
   // Death certificate
@@ -49,8 +56,8 @@ export const SEARCH_ALIAS_GROUPS: string[][] = [
   ],
   // Trade license
   [
-    "trade license", "trade licence", "business license", "licence", "license",
-    "व्यापार परवाना", "परवाना",
+    "trade license", "trade licence", "business license", "shop license", "licence", "license",
+    "व्यापार परवाना", "दुकान परवाना", "परवाना",
     "ट्रेड लायसन्स", "बिझनेस लायसन्स",
   ],
   // RTI
@@ -230,16 +237,31 @@ export const SEARCH_ALIAS_GROUPS: string[][] = [
     "सेवा", "नागरिक सेवा",
     "सर्व्हिसेस",
   ],
-  // Privacy / policies
   [
-    "privacy", "privacy policy", "disclaimer", "terms", "accessibility", "website policies",
-    "गोपनीयता", "अस्वीकरण", "अटी", "सुलभता", "धोरणे",
-    "प्रायव्हसी", "डिस्क्लेमर",
+    "privacy", "privacy policy",
+    "गोपनीयता", "गोपनीयता धोरण",
+    "प्रायव्हसी",
+  ],
+  ["disclaimer", "अस्वीकरण", "डिस्क्लेमर"],
+  ["terms", "copyright", "copyright and terms", "कॉपीराइट", "अटी"],
+  ["accessibility", "accessibility statement", "सुलभता", "सुलभता निवेदन"],
+  ["website policies", "संकेतस्थळ धोरणे"],
+  [
+    "citizen charter", "नागरिक सनद",
+  ],
+  [
+    "organogram", "organisation chart", "organization chart",
+    "organizational structure", "organisational structure", "org chart",
+    "प्रशासकीय रचना", "संघटना आकृती", "संघटना",
+  ],
+  [
+    "ai mitra", "ai chatbot", "chatbot", "whatsapp chatbot", "whatsapp",
+    "ai सहाय्य", "व्हॉट्सॲप चॅटबॉट", "एआय मित्र",
   ],
   // Gunthewari
   [
-    "gunthewari", "gunthewari challan",
-    "गुंठेवारी", "गुंठेवारी चलन",
+    "gunthewari", "gunthewari challan", "gunthewari calculator", "gunthewari challan calculator",
+    "गुंठेवारी", "गुंठेवारी चलन", "गुंठेवारी चलन कॅल्क्युलेटर",
     "गुंठेवारी चालन",
   ],
   // GIS / maps
@@ -274,14 +296,35 @@ export function prepareSearchQuery(query: string): string {
   return q || original;
 }
 
-/** Prefer whole-word match for short Latin abbreviations (avoids "rti" inside "certificate"). */
-function containsTerm(hay: string, needle: string) {
-  if (!needle || !hay) return false;
-  if (hay === needle) return true;
-  if (/^[a-z0-9]{1,4}$/i.test(needle)) {
-    return hay.split(/\s+/).some((w) => w === needle);
+/**
+ * A group matches when the query is that alias, a word in it, or a real prefix
+ * ("prop" → "property"). It does not match when the query is only buried inside
+ * a longer unrelated word ("health" inside "helpline", "trade" inside "netradeep").
+ */
+function queryHitsAlias(raw: string, terms: Set<string>, alias: string) {
+  if (!alias) return false;
+  if (raw === alias) return true;
+  const rawWords = raw.split(/\s+/).filter(Boolean);
+
+  if (alias.includes(" ")) {
+    if (raw.includes(alias)) return true;
+    if (
+      raw.length >= 4 &&
+      alias.startsWith(raw) &&
+      (alias.length === raw.length || alias[raw.length] === " ")
+    ) {
+      return true;
+    }
+    return false;
   }
-  return hay.includes(needle);
+
+  if (rawWords.some((w) => w === alias)) return true;
+  for (const t of terms) {
+    if (t.length < 4 || alias.length < 4) continue;
+    if (t === alias || alias.startsWith(t)) return true;
+    if (alias.length >= 5 && t.startsWith(alias) && t.length - alias.length <= 2) return true;
+  }
+  return false;
 }
 
 /** Expand a citizen query with cross-language synonyms (EN / MR / transliteration). */
@@ -294,18 +337,7 @@ export function expandSearchQuery(query: string): { expanded: string; terms: str
 
   for (const group of SEARCH_ALIAS_GROUPS) {
     const normalized = group.map(normAlias).filter(Boolean);
-    const hit = normalized.some((alias) => {
-      if (!alias) return false;
-      if (raw === alias) return true;
-      if (alias.length >= 3 && containsTerm(raw, alias)) return true;
-      if (raw.length >= 4 && alias.length >= raw.length && containsTerm(alias, raw)) return true;
-      for (const t of terms) {
-        if (t.length < 3) continue;
-        if (t === alias) return true;
-        if (t.length >= 5 && alias.length >= 5 && (alias.startsWith(t) || t.startsWith(alias))) return true;
-      }
-      return false;
-    });
+    const hit = normalized.some((alias) => queryHitsAlias(raw, terms, alias));
     if (hit) {
       for (const alias of normalized) terms.add(alias);
     }
