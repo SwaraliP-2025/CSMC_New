@@ -116,7 +116,7 @@ export const ORGANOGRAM_PEOPLE: OrganogramPerson[] = [
   {
     id: "santosh-wahule",
     name: "Shri Santosh Wahule",
-    nameMr: "श्री संतोष वाहुले",
+    nameMr: "श्री संतोष वाहुळे",
     designation: "Chief Accounts and Finance Officer and Encroachment Control Officer",
     photo: santoshWahulePhoto,
     designationMr: "मुख्य लेखा व वित्त अधिकारी तथा अतिक्रमण नियंत्रण अधिकारी",
