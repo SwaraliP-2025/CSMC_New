@@ -39,9 +39,9 @@ const leadership: Leader[] = [
   { nameEn: "Shri. Eknath Shinde", nameMr: "श्री. एकनाथ शिंदे", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: eknathImg, photo: { w: "103.52%", h: "93.35%", l: "-4.19%", t: "6.29%" } },
   { nameEn: "Smt. Sunetra A. Pawar", nameMr: "श्रीमती सुनेत्रा अजित पवार", roleEn: ["Hon'ble Deputy Chief Minister,", "Maharashtra"], roleMr: ["मा. उपमुख्यमंत्री,", "महाराष्ट्र राज्य"], image: suntraImg, photo: { w: "96%", h: "106.89%", l: "4.97%", t: "1.45%" } },
   { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: ["Hon'ble Minister of State,", "Urban Development Department"], roleMr: ["मा. राज्यमंत्री,", "नगरविकास विभाग"], image: madhuriImg, photo: { w: "112.83%", h: "107.12%", l: "-4.76%", t: "-5.77%" } },
-  { nameEn: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: ["Hon'ble Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महापौर,", "छत्रपती संभाजीनगर"], image: sameerImg, photo: { w: "101.08%", h: "99.68%", l: "2.96%", t: "-2.83%" } },
-  { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photo: { w: "96%", h: "90.63%", l: "1.19%", t: "-1.82%" } },
-  { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "106.49%", h: "96.59%", l: "-2.45%", t: "-0.48%" } },
+  { nameEn: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: ["Hon'ble Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महापौर,", "छत्रपती संभाजीनगर"], image: sameerImg, photo: { w: "120.4%", h: "118.7%", l: "-10.2%", t: "-4.8%" } },
+  { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photo: { w: "118%", h: "111.4%", l: "-9%", t: "-4.3%" } },
+  { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "125.8%", h: "114.3%", l: "-12.9%", t: "-2%" } },
 ];
 
 

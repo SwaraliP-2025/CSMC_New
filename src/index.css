@@ -494,3 +494,82 @@ nav[data-tour="main-nav"] {
   max-height: 2.75rem;
   background-color: hsl(var(--civic-blue));
 }
+
+/* Hero Quick Services — white at rest.
+   Hover is a warmer amber-gold, distinct from the Home control (#e65c00). */
+.csmc-hero-quick-link {
+  background-color: #ffffff;
+  color: hsl(var(--civic-ink));
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 4px 14px rgba(15, 45, 65, 0.12),
+    0 1px 0 rgba(216, 179, 106, 0.35);
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease,
+    color 0.22s ease;
+}
+
+.csmc-hero-quick-icon {
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .csmc-hero-quick-link:hover {
+    background-color: #e7a323;
+    border-color: #c98512;
+    color: #123b68;
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 18px rgba(140, 80, 10, 0.28),
+      0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .csmc-hero-quick-link:hover .csmc-hero-quick-icon {
+    background-color: #ffffff;
+    color: #123b68;
+  }
+}
+
+.csmc-hero-quick-link:focus-visible {
+  background-color: #e7a323;
+  border-color: #c98512;
+  color: #123b68;
+  outline: 2px solid #123b68;
+  outline-offset: 2px;
+}
+
+.csmc-hero-quick-link:focus-visible .csmc-hero-quick-icon {
+  background-color: #ffffff;
+  color: #123b68;
+}
+
+.csmc-hero-quick-link:active {
+  background-color: #d99518;
+  border-color: #c98512;
+  color: #123b68;
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(140, 80, 10, 0.22);
+}
+
+.csmc-hero-quick-link:active .csmc-hero-quick-icon {
+  background-color: #ffffff;
+  color: #123b68;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csmc-hero-quick-link,
+  .csmc-hero-quick-icon {
+    transition: none;
+  }
+
+  .csmc-hero-quick-link:hover,
+  .csmc-hero-quick-link:focus-visible,
+  .csmc-hero-quick-link:active {
+    transform: none;
+  }
+}

@@ -117,9 +117,11 @@ const HeroQuickPanel = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     {...(isRts ? { "data-tour": "rts-services" as const } : {})}
-                    className="flex w-full items-center gap-1.5 md:gap-2.5 bg-white/95 text-civic-ink rounded-full pl-1.5 pr-2 py-1 md:pl-3.5 md:pr-5 md:py-2 shadow-md md:shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all border border-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold"
+                    className="csmc-hero-quick-link group flex w-full items-center gap-1.5 md:gap-2.5 rounded-full pl-1.5 pr-2 py-1 md:pl-3.5 md:pr-5 md:py-2"
                   >
-                    <span className={`flex h-6 w-6 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}>
+                    <span
+                      className={`csmc-hero-quick-icon flex h-6 w-6 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}
+                    >
                       <Icon className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
                     </span>
                     <span className="text-[10px] sm:text-[11px] md:text-sm font-bold leading-snug line-clamp-2 md:line-clamp-none md:whitespace-nowrap">

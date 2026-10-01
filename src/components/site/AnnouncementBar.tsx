@@ -24,7 +24,7 @@ export const AnnouncementBar = () => {
   const labels = t.announcements.items;
 
   const itemClass =
-    "flex items-center gap-2 bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded border border-white/20 text-white text-[11px] font-medium cursor-pointer transition-colors";
+    "flex items-center gap-2 bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded border border-white/20 text-[#D8B36A] text-[11px] font-medium cursor-pointer transition-colors";
 
   const renderItem = (index: number, keySuffix: string) => {
     const dest = DESTINATIONS[index % DESTINATIONS.length];
