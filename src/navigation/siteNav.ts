@@ -39,7 +39,6 @@ export const SITE_NAV: NavItem[] = [
             labelMr: "प्रशासकीय रचना",
             to: "/organization",
           },
-          { labelEn: "Departments", labelMr: "विभाग", to: "/departments" },
           {
             labelEn: "Minutes of General Body Meeting",
             labelMr: "सर्वसाधारण सभेचे इतिवृत्त",
@@ -132,6 +131,7 @@ export const SITE_NAV: NavItem[] = [
       },
     ],
   },
+  { labelEn: "Departments", labelMr: "विभाग", to: "/departments" },
   {
     labelEn: "Citizen Services",
     labelMr: "नागरिक सेवा",

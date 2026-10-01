@@ -382,20 +382,19 @@ export const Header = () => {
             <Fragment key={item.labelEn}>
               {i > 0 ? (
                 <span
-                  className="flex w-3 shrink-0 items-center justify-center self-stretch text-sm text-[#D8B36A]/55 select-none"
+                  className="flex w-2.5 shrink-0 items-center justify-center self-stretch text-sm text-[#D8B36A]/55 select-none"
                   aria-hidden
                 >
                   |
                 </span>
               ) : null}
-              <div className={isHomeItem ? "flex h-11 w-11 shrink-0" : item.to === "/ncap" || item.to === "/rti-act" ? "flex h-11 w-auto shrink-0 items-stretch" : "flex h-11 min-w-0 flex-1 items-stretch"}>
+              <div className={isHomeItem ? "flex h-11 w-11 shrink-0" : "flex h-11 flex-1 items-stretch"}>
                 <NavItemDesktop
                   item={item}
                   label={label(item)}
                   resolveLabel={label}
                   lockTop={gtTarget === "hi"}
-                  alignMenuEnd={i >= 4}
-                  fitLabel={item.to === "/ncap" || item.to === "/rti-act"}
+                  alignMenuEnd={i >= 5}
                 />
               </div>
             </Fragment>

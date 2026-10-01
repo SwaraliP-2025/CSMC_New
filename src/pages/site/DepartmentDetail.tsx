@@ -587,12 +587,11 @@ import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { getCivicRecord } from "@/data/civicCatalog";
-import { Phone, Mail, MapPin, ArrowLeft, Bell, FileText } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Phone, Mail, MapPin, ArrowLeft, Bell } from "lucide-react";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
 import { findOrganogramOfficerForHead, organogramTelHref } from "@/lib/organogram";
+import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
 
 interface DeptInfo {
   slug: string;
@@ -615,6 +614,12 @@ interface DeptInfo {
   servicesEn?: string[];
   servicesMr?: string[];
   relatedDocIds?: string[];
+  /** Verified 2–3 sentence overview. Leave unset until the department supplies it. */
+  descriptionEn?: string;
+  descriptionMr?: string;
+  /** Verified major activities, usually 4 and at most 5. */
+  activitiesEn?: string[];
+  activitiesMr?: string[];
 }
 
 /*
@@ -639,7 +644,11 @@ const DEPT_EXTRAS: Record<
     "responsibilitiesMr" |
     "servicesEn" |
     "servicesMr" |
-    "relatedDocIds"
+    "relatedDocIds" |
+    "descriptionEn" |
+    "descriptionMr" |
+    "activitiesEn" |
+    "activitiesMr"
   >
 > = {
   /* ================= PRESERVED – DO NOT CHANGE ================= */
@@ -2624,76 +2633,229 @@ const UpdatesTicker = ({
   updates: DeptInfo["updates"];
   en: boolean;
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    let pos = 0;
-    const speed = 0.5;
-
-    const tick = () => {
-      pos += speed;
-
-      if (pos >= el.scrollHeight / 2) {
-        pos = 0;
-      }
-
-      el.scrollTop = pos;
-    };
-
-    const id = setInterval(tick, 30);
-
-    return () => clearInterval(id);
-  }, []);
-
-  const doubled = [...updates, ...updates];
-
   return (
-    <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm h-full flex flex-col">
+    <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm min-w-0 max-w-full">
       <div className="bg-civic-blue px-4 py-3 flex items-center gap-2">
         <Bell className="h-4 w-4 text-civic-gold" />
-
         <span className="text-white font-bold text-sm">
           {en ? "Latest Updates" : "ताज्या घडामोडी"}
         </span>
       </div>
 
-      <div
-        ref={ref}
-        className="flex-1 overflow-hidden"
-        style={{ maxHeight: "340px" }}
-      >
-        <div>
-          {doubled.map((u, i) => (
+      {updates.length === 0 ? (
+        <div className="px-4 py-4 text-sm text-muted-foreground">
+          {en ? "No latest updates available." : "ताज्या घडामोडी उपलब्ध नाहीत."}
+        </div>
+      ) : (
+        <div className="flex gap-3 overflow-x-auto overflow-y-hidden px-4 py-3 min-w-0">
+          {updates.map((update, index) => (
             <div
-              key={i}
-              className="px-4 py-3 border-b border-border last:border-0 hover:bg-civic-gold/5 transition-colors"
+              key={`${update.date}-${index}`}
+              className="shrink-0 w-[17.5rem] max-w-[70vw] rounded-xl border border-border px-4 py-3 hover:bg-civic-gold/5 transition-colors"
             >
-              <p className="text-xs font-bold text-civic-blue mb-0.5">
-                {u.date}
-              </p>
-
-              <p className="text-sm text-foreground leading-snug">
-                {en ? u.en : u.mr}
-              </p>
+              <p className="text-xs font-bold text-civic-blue mb-0.5">{update.date}</p>
+              <p className="text-sm text-foreground leading-snug">{en ? update.en : update.mr}</p>
             </div>
           ))}
-
-          {updates.length === 0 && (
-            <div className="px-4 py-6 text-sm text-muted-foreground">
-              {en
-                ? "No latest updates available."
-                : "ताज्या घडामोडी उपलब्ध नाहीत."}
-            </div>
-          )}
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
+
+/**
+ * Authoring limits for a department brief. Preferred ranges guide writing.
+ * The hard maximum is the only runtime safeguard. Nothing here is shown to visitors.
+ */
+const DEPARTMENT_INFO_LIMITS = {
+  en: { preferredMinChars: 550, preferredMaxChars: 900, hardMaxChars: 1600 },
+  mr: { preferredMinChars: 620, preferredMaxChars: 1200, hardMaxChars: 2000 },
+} as const;
+
+type DepartmentBrief = {
+  description: string;
+  activities: string[];
+};
+
+function departmentInformation(dept: DeptInfo, en: boolean): DepartmentBrief | null {
+  const description = (en ? dept.descriptionEn : dept.descriptionMr)?.trim() ?? "";
+  const activities = ((en ? dept.activitiesEn : dept.activitiesMr) ?? [])
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, 5);
+
+  if (!description && activities.length === 0) return null;
+
+  const max = en ? DEPARTMENT_INFO_LIMITS.en.hardMaxChars : DEPARTMENT_INFO_LIMITS.mr.hardMaxChars;
+  let nextDescription = description;
+  let nextActivities = activities;
+  const size = () => nextDescription.length + nextActivities.reduce((sum, item) => sum + item.length, 0);
+
+  while (nextActivities.length > 0 && size() > max) {
+    nextActivities = nextActivities.slice(0, -1);
+  }
+
+  if (size() > max) {
+    const cut = nextDescription.slice(0, max);
+    const space = cut.lastIndexOf(" ");
+    nextDescription = (space > 0 ? cut.slice(0, space) : cut).trim();
+  }
+
+  if (!nextDescription && nextActivities.length === 0) return null;
+  return { description: nextDescription, activities: nextActivities };
+}
+
+function DepartmentHeadCard({
+  dept,
+  en,
+  localize,
+  portrait,
+  officerPhone,
+  mobileHref,
+  stacked = false,
+}: {
+  dept: DeptInfo;
+  en: boolean;
+  localize: (value: string | number | null | undefined) => string;
+  portrait?: string;
+  officerPhone?: string;
+  mobileHref: string | null;
+  stacked?: boolean;
+}) {
+  const name = en ? dept.headEn : dept.headMr;
+  const designation = en ? dept.designationEn : dept.designationMr;
+  const departmentName = en ? dept.nameEn : dept.nameMr;
+  const showDepartment =
+    departmentName !== designation &&
+    !designation.toLowerCase().includes(departmentName.toLowerCase());
+
+  return (
+    <div className={stacked ? "min-w-0" : undefined}>
+      <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+        {en ? "Officer's Corner" : "अधिकारी कक्ष"}
+      </h3>
+    <div className={`bg-white border border-border rounded-3xl overflow-hidden shadow-sm ${stacked ? "min-w-0" : ""}`}>
+      <div
+        className={
+          stacked
+            ? "bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col items-start gap-5 text-left"
+            : "bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left"
+        }
+      >
+        <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl shrink-0 overflow-hidden">
+          {portrait ? (
+            <img
+              src={portrait}
+              alt={name}
+              className={dept.image ? "absolute left-1/2 object-cover" : "h-full w-full object-cover object-top"}
+              style={
+                dept.image
+                  ? {
+                      width: dept.photoSize ?? "100%",
+                      height: dept.photoSize ?? "100%",
+                      minWidth: dept.photoSize ? "115%" : "100%",
+                      minHeight: dept.photoSize ? "115%" : "100%",
+                      top: dept.photoTop ?? "0",
+                      transform: "translateX(-50%)",
+                    }
+                  : undefined
+              }
+            />
+          ) : (
+            <span className="flex h-full w-full items-center justify-center text-white font-bold text-3xl md:text-4xl">
+              {name.charAt(0)}
+            </span>
+          )}
+        </div>
+        <div className={stacked ? "min-w-0 w-full break-words" : undefined}>
+          <h2 className="font-serif text-lg md:text-xl font-bold text-white mb-1">{name}</h2>
+          {designation ? <p className="text-civic-gold text-sm font-semibold">{designation}</p> : null}
+          {showDepartment ? <p className="text-white/70 text-xs mt-1">{departmentName}</p> : null}
+        </div>
+      </div>
+      <div className="p-5 md:p-6 space-y-4">
+        {dept.phone ? (
+          <div className="flex items-start gap-3 text-sm">
+            <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Phone" : "दुरध्वनी"}</p>
+              <p className="font-semibold text-civic-ink">{localize(dept.phone)}</p>
+            </div>
+          </div>
+        ) : null}
+        {officerPhone && mobileHref ? (
+          <div className="flex items-start gap-3 text-sm">
+            <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Mobile" : "मोबाईल"}</p>
+              <a
+                href={mobileHref}
+                className="inline-flex min-h-11 items-center font-semibold text-civic-ink underline-offset-2 hover:underline focus-visible:underline"
+                aria-label={en ? `Call ${name}` : `${name} यांना कॉल करा`}
+              >
+                {localize(officerPhone)}
+              </a>
+            </div>
+          </div>
+        ) : null}
+        {dept.email ? (
+          <div className="flex items-start gap-3 text-sm">
+            <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Email" : "ई-मेल"}</p>
+              <p className="font-semibold text-civic-ink break-all">{dept.email}</p>
+            </div>
+          </div>
+        ) : null}
+        {(en ? dept.addressEn : dept.addressMr) ? (
+          <div className="flex items-start gap-3 text-sm">
+            <MapPin className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
+                {en ? "Office Address" : "कार्यालय पत्ता"}
+              </p>
+              <p className="font-semibold text-civic-ink leading-snug break-words">
+                {localize(en ? dept.addressEn : dept.addressMr)}
+              </p>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </div>
+    </div>
+  );
+}
+
+function DepartmentInformationCard({
+  brief,
+  en,
+}: {
+  brief: DepartmentBrief;
+  en: boolean;
+}) {
+  return (
+    <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm min-w-0">
+      <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+        {en ? "Department Information" : "विभागाची माहिती"}
+      </h3>
+      {brief.description ? (
+        <p className="text-sm text-muted-foreground leading-relaxed break-words">{brief.description}</p>
+      ) : null}
+      {brief.activities.length > 0 ? (
+        <ul
+          className={`text-sm text-muted-foreground space-y-1.5 list-disc list-inside break-words ${
+            brief.description ? "mt-4" : ""
+          }`}
+        >
+          {brief.activities.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
 
 /* ============================================================
  * DEPARTMENT DETAIL PAGE
@@ -2704,7 +2866,6 @@ const DepartmentDetail = () => {
   const { lang, d } = useLang();
 
   const en = lang === "en";
-  const headName = (person: { headEn: string; headMr: string }) => (en ? person.headEn : person.headMr);
 
   const base = DEPARTMENTS.find((item) => item.slug === slug);
 
@@ -2712,12 +2873,14 @@ const DepartmentDetail = () => {
     ? {
         ...base,
         ...(DEPT_EXTRAS[base.slug] ?? {}),
+        ...(DEPARTMENT_BRIEFS[base.slug] ?? {}),
       }
     : undefined;
 
   const officer = dept ? findOrganogramOfficerForHead(dept.headEn) : undefined;
   const portrait = dept?.image ?? officer?.photo;
   const mobileHref = organogramTelHref(officer?.phone);
+  const brief = dept ? departmentInformation(dept, en) : null;
 
   if (!dept) {
     return (
@@ -2780,169 +2943,23 @@ const DepartmentDetail = () => {
             : "सर्व विभाग"}
         </Link>
 
-        {/* Main grid: profile + updates */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="space-y-8">
+          <UpdatesTicker updates={dept.updates} en={en} />
 
-          {/* Left: Profile card */}
-          <div className="md:col-span-2 space-y-6">
-
-            <div className="bg-white border border-border rounded-3xl overflow-hidden shadow-sm">
-
-              {/* Blue header */}
-              <div className="bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-
-                <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl shrink-0 overflow-hidden">
-
-                  {portrait ? (
-                    <img
-                      src={portrait}
-                      alt={headName(dept)}
-                      className={
-                        dept.image
-                          ? "absolute left-1/2 object-cover"
-                          : "h-full w-full object-cover object-top"
-                      }
-                      style={
-                        dept.image
-                          ? {
-                              width: dept.photoSize ?? "100%",
-                              height: dept.photoSize ?? "100%",
-                              minWidth: dept.photoSize ? "115%" : "100%",
-                              minHeight: dept.photoSize ? "115%" : "100%",
-                              top: dept.photoTop ?? "0",
-                              transform: "translateX(-50%)",
-                            }
-                          : undefined
-                      }
-                    />
-                  ) : (
-                    <span className="flex h-full w-full items-center justify-center text-white font-bold text-3xl md:text-4xl">
-                      {headName(dept).charAt(0)}
-                    </span>
-                  )}
-
-                </div>
-
-                <div>
-                  <h2 className="font-serif text-lg md:text-xl font-bold text-white mb-1">
-                    {en ? dept.headEn : dept.headMr}
-                  </h2>
-
-                  {dept.designationEn || dept.designationMr ? (
-                    <p className="text-civic-gold text-sm font-semibold">
-                      {en
-                        ? dept.designationEn
-                        : dept.designationMr}
-                    </p>
-                  ) : null}
-
-                  {(en ? dept.nameEn : dept.nameMr) !==
-                    (en
-                      ? dept.designationEn
-                      : dept.designationMr) &&
-                    !(en
-                      ? dept.designationEn
-                      : dept.designationMr
-                    )
-                      .toLowerCase()
-                      .includes(
-                        (en
-                          ? dept.nameEn
-                          : dept.nameMr
-                        ).toLowerCase()
-                      ) && (
-                      <p className="text-white/70 text-xs mt-1">
-                        {en
-                          ? dept.nameEn
-                          : dept.nameMr}
-                      </p>
-                    )}
-                </div>
-              </div>
-
-
-              {/* Contact info */}
-              <div className="p-5 md:p-6 space-y-4">
-
-                {dept.phone && (
-                  <div className="flex items-start gap-3 text-sm">
-                    <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
-
-                    <div>
-                      <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
-                        {en ? "Phone" : "दुरध्वनी"}
-                      </p>
-
-                      <p className="font-semibold text-civic-ink">
-                        {d(dept.phone)}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {officer?.phone && mobileHref ? (
-                  <div className="flex items-start gap-3 text-sm">
-                    <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
-
-                    <div>
-                      <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
-                        {en ? "Mobile" : "मोबाईल"}
-                      </p>
-
-                      <a
-                        href={mobileHref}
-                        className="inline-flex min-h-11 items-center font-semibold text-civic-ink underline-offset-2 hover:underline focus-visible:underline"
-                        aria-label={en ? `Call ${headName(dept)}` : `${headName(dept)} यांना कॉल करा`}
-                      >
-                        {d(officer.phone)}
-                      </a>
-                    </div>
-                  </div>
-                ) : null}
-
-
-                {dept.email && (
-                  <div className="flex items-start gap-3 text-sm">
-                    <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
-
-                    <div>
-                      <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
-                        {en ? "Email" : "ई-मेल"}
-                      </p>
-
-                      <p className="font-semibold text-civic-ink break-all">
-                        {dept.email}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-
-                {((en ? dept.addressEn : dept.addressMr) || "") && (
-                  <div className="flex items-start gap-3 text-sm">
-                    <MapPin className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
-
-                    <div>
-                      <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
-                        {en
-                          ? "Office Address"
-                          : "कार्यालय पत्ता"}
-                      </p>
-
-                      <p className="font-semibold text-civic-ink leading-snug">
-                        {d(
-                          en
-                            ? dept.addressEn
-                            : dept.addressMr
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(300px,340px)_minmax(0,1fr)] gap-8 items-start">
+            <div className="min-w-0 w-full md:max-w-[340px]">
+              <DepartmentHeadCard
+                dept={dept}
+                en={en}
+                localize={d}
+                portrait={portrait}
+                officerPhone={officer?.phone}
+                mobileHref={mobileHref}
+                stacked
+              />
             </div>
-
+            {brief ? <DepartmentInformationCard brief={brief} en={en} /> : null}
+          </div>
 
             {/* Key Responsibilities */}
             {(
@@ -2974,94 +2991,6 @@ const DepartmentDetail = () => {
               </div>
             )}
 
-
-            {/* Services */}
-            {(
-              (
-                en
-                  ? dept.servicesEn
-                  : dept.servicesMr
-              )?.length ?? 0
-            ) > 0 && (
-              <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm">
-
-                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-                  {en
-                    ? "Services"
-                    : "सेवा"}
-                </h3>
-
-                <ul className="text-sm text-muted-foreground space-y-1.5 list-disc list-inside">
-                  {(en
-                    ? dept.servicesEn!
-                    : dept.servicesMr!
-                  ).map((item, i) => (
-                    <li key={i}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-              </div>
-            )}
-
-
-            {/* Related Documents */}
-            {(
-              dept.relatedDocIds?.filter(
-                (id) => getCivicRecord(id)
-              ).length ?? 0
-            ) > 0 && (
-              <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm">
-
-                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-                  {en
-                    ? "Related Documents"
-                    : "संबंधित दस्तऐवज"}
-                </h3>
-
-                <ul className="space-y-2">
-
-                  {dept.relatedDocIds!
-                    .map((id) => getCivicRecord(id))
-                    .filter(
-                      (
-                        r
-                      ): r is NonNullable<
-                        typeof r
-                      > => !!r
-                    )
-                    .map((rec) => (
-                      <li key={rec.id}>
-
-                        <Link
-                          to={`/digital-repository/${rec.id}`}
-                          className="flex items-center gap-2 text-sm font-semibold text-civic-blue hover:underline"
-                        >
-                          <FileText className="h-4 w-4 shrink-0" />
-
-                          {en
-                            ? rec.titleEn
-                            : rec.titleMr}
-                        </Link>
-
-                      </li>
-                    ))}
-
-                </ul>
-              </div>
-            )}
-
-          </div>
-
-
-          {/* Right: Updates ticker */}
-          <div className="md:col-span-1">
-            <UpdatesTicker
-              updates={dept.updates}
-              en={en}
-            />
-          </div>
 
         </div>
       </section>
