@@ -160,7 +160,7 @@ export const FeaturedStoriesCarousel = () => {
         ))}
       </div>
 
-      {/* Civic/event: cinematic left→right navy veil for caption readability.
+      {/* Civic/event: soft left-weighted veil so the photograph stays visible.
           Heritage: no caption overlay — image only. */}
       {!heritage && (
         <div
@@ -170,17 +170,16 @@ export const FeaturedStoriesCarousel = () => {
             background: `
               linear-gradient(
                 90deg,
-                hsl(216 55% 12% / 0.88) 0%,
-                hsl(210 42% 18% / 0.72) 22%,
-                hsl(210 38% 22% / 0.42) 42%,
-                hsl(210 38% 22% / 0.14) 58%,
-                transparent 72%
+                hsl(216 55% 12% / 0.32) 0%,
+                hsl(216 48% 14% / 0.16) 22%,
+                hsl(216 42% 16% / 0.05) 42%,
+                transparent 58%
               ),
               linear-gradient(
                 180deg,
                 transparent 0%,
-                transparent 55%,
-                hsl(216 55% 10% / 0.35) 100%
+                transparent 78%,
+                hsl(216 55% 10% / 0.10) 100%
               )
             `,
           }}
@@ -188,22 +187,23 @@ export const FeaturedStoriesCarousel = () => {
       )}
 
       {!heritage && current && (
-        <div className="relative z-10 h-full container flex flex-col justify-end md:justify-center py-7 sm:py-8 md:py-24 pb-[4.75rem] md:pb-24">
-          <div className="max-w-[min(100%,22rem)] sm:max-w-md md:max-w-lg md:pr-[min(280px,28vw)]">
+        <div className="relative z-10 h-full container max-md:!px-3 flex flex-col justify-end md:justify-center py-7 sm:py-8 md:py-24 pb-[4.75rem] md:pb-24">
+          <div className="w-full max-md:max-w-none md:max-w-lg md:pr-[min(280px,28vw)]">
             <p
               className="text-[10px] sm:text-[11px] uppercase tracking-[0.26em] font-bold text-civic-gold mb-2.5 sm:mb-3"
+              style={{ textShadow: "0 1px 3px rgba(0,0,0,0.28)" }}
             >
               {en ? current.categoryEn : current.categoryMr}
             </p>
             <h2
-              className="font-serif text-[1.25rem] sm:text-2xl md:text-3xl font-bold leading-[1.25] sm:leading-snug break-words"
-              style={{ color: HERO_CREAM }}
+              className="font-serif text-[1.25rem] sm:text-2xl md:text-3xl font-bold leading-[1.25] sm:leading-snug break-normal md:break-words"
+              style={{ color: HERO_CREAM, textShadow: "0 1px 3px rgba(0,0,0,0.28)" }}
             >
               {en ? current.titleEn : current.titleMr}
             </h2>
             <p
-              className="mt-2.5 sm:mt-3 text-[13px] sm:text-sm max-w-md leading-relaxed line-clamp-3 sm:line-clamp-4"
-              style={{ color: HERO_CREAM_SOFT }}
+              className="mt-2.5 sm:mt-3 text-[13px] sm:text-sm w-full md:max-w-md leading-relaxed line-clamp-3 sm:line-clamp-4"
+              style={{ color: HERO_CREAM_SOFT, textShadow: "0 1px 3px rgba(0,0,0,0.25)" }}
             >
               {en ? current.shortDescriptionEn : current.shortDescriptionMr}
             </p>
