@@ -1,6 +1,7 @@
 import { CIVIC_CATALOG, REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import { CATEGORY_LABELS } from "@/data/civicLabels";
 import { localizeDigits } from "@/i18n/digits";
+import { openInPagePdf } from "@/lib/pdfPreview";
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
 import { groupHits, smartSearch, type SearchHit } from "@/lib/semanticSearch";
 import { prepareSearchQuery } from "@/lib/searchAliases";
@@ -50,19 +51,16 @@ export function recordHref(record: CivicRecord): { to: string; external: boolean
   return { to: `/digital-repository/${record.id}`, external: false };
 }
 
-/** Open a generated PDF blob in a new tab (preview). Falls back to download if popups are blocked. */
-export function openPdfBlob(blob: Blob, filename: string) {
+/** Open a generated PDF blob in the in-page preview. The same blob is offered for download. */
+export function openPdfBlob(blob: Blob, filename: string, title?: string) {
   const url = URL.createObjectURL(blob);
-  const win = window.open(url, "_blank", "noopener,noreferrer");
-  if (!win) {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }
-  window.setTimeout(() => URL.revokeObjectURL(url), 120_000);
+  const name = filename.toLowerCase().endsWith(".pdf") ? filename : `${filename}.pdf`;
+  openInPagePdf({
+    url,
+    filename: name,
+    title: title?.trim() || name.replace(/\.pdf$/i, ""),
+    revoke: true,
+  });
 }
 
 function civicRecordPdfText(record: CivicRecord) {
@@ -96,10 +94,11 @@ export function civicRecordPdfBlob(record: CivicRecord) {
   return buildSimplePdf(civicRecordPdfText(record));
 }
 
-/** Preview / open the document PDF in a new browser tab. */
+/** Preview the document PDF on the current page. */
 export function openCivicRecordPdf(record: CivicRecord) {
   const blob = civicRecordPdfBlob(record);
-  openPdfBlob(blob, pdfFilename(record.titleEn, record.id));
+  const mr = typeof document !== "undefined" && document.documentElement.lang === "mr";
+  openPdfBlob(blob, pdfFilename(record.titleEn, record.id), mr ? record.titleMr : record.titleEn);
 }
 
 /** Open the actual document when possible; returns false if caller should open the detail page. */

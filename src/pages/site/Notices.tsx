@@ -58,7 +58,7 @@ const Notices = () => {
                     className="bg-civic-blue text-white hover:bg-civic-blue/90 px-4 h-12"
                     onClick={() => {
                       const { blob, name } = noticePdf(n, i);
-                      openPdfBlob(blob, name);
+                      openPdfBlob(blob, name, title);
                     }}
                   >
                     <Eye className="h-5 w-5 md:mr-2" />

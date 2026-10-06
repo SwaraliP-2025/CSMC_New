@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/i18n/LanguageContext";
 import { ColorBlindProvider } from "@/i18n/ColorBlindContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ScrollToTopOnNavigate } from "@/components/ScrollToTopOnNavigate";
+import { PdfPreviewHost } from "@/components/site/PdfPreviewHost";
 import { SeoHead } from "@/components/SeoHead";
 import Index from "./pages/Index.tsx";
 import About from "./pages/site/About.tsx";
@@ -74,6 +75,7 @@ const App = () => (
           <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "") || "/"}>
             <ScrollToTopOnNavigate />
             <SeoHead />
+            <PdfPreviewHost />
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />

@@ -93,7 +93,7 @@ function prototypePdfBlob(doc: Doc) {
 }
 
 function openPrototypePdf(doc: Doc) {
-  openPdfBlob(prototypePdfBlob(doc), pdfFilename(doc.title, `pub-doc-${doc.id}`));
+  openPdfBlob(prototypePdfBlob(doc), pdfFilename(doc.title, `pub-doc-${doc.id}`), doc.title);
 }
 
 function downloadPrototypePdf(doc: Doc) {

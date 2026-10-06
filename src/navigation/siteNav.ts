@@ -4,6 +4,12 @@
  */
 import { OFFICIAL } from "@/data/officialLinks";
 
+/** Static files in public/documents, including the GitHub Pages base path. */
+function publicDocument(file: string) {
+  const base = import.meta.env.BASE_URL || "/";
+  return `${base}documents/${file}`;
+}
+
 export interface NavItem {
   labelEn: string;
   labelMr: string;
@@ -161,6 +167,12 @@ export const SITE_NAV: NavItem[] = [
         external: true,
       },
       {
+        labelEn: "7 Star Citizen FAQs",
+        labelMr: "७ स्टार नागरिक प्रश्नोत्तरे",
+        to: publicDocument("FAQ_SevenStar.pdf"),
+        external: true,
+      },
+      {
         labelEn: "Pay Water Tax",
         labelMr: "पाणी कर भरा",
         to: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
@@ -249,6 +261,12 @@ export const SITE_NAV: NavItem[] = [
         labelEn: "Emergency Contact (Fire & Disaster)",
         labelMr: "आपत्कालीन संपर्क",
         to: "/disaster-management",
+      },
+      {
+        labelEn: "Guidelines for Disaster",
+        labelMr: "आपत्ती व्यवस्थापन मार्गदर्शक",
+        to: publicDocument("Guildelines_For_Disaster.pdf"),
+        external: true,
       },
       { labelEn: "Municipal Contact", labelMr: "महानगरपालिका संपर्क", to: "/contact" },
       { labelEn: "How to Reach", labelMr: "कसे पोहोचावे", to: "/how-to-reach" },
