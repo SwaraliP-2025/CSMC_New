@@ -155,6 +155,12 @@ export const SITE_NAV: NavItem[] = [
         external: true,
       },
       {
+        labelEn: "7 Star Citizen Application",
+        labelMr: "७ स्टार नागरिक अर्ज",
+        to: "https://aurangabadmahapalika.org/TaxCollection/pg/sevenStar/citizenForm.do",
+        external: true,
+      },
+      {
         labelEn: "Pay Water Tax",
         labelMr: "पाणी कर भरा",
         to: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
