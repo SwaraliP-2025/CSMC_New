@@ -231,6 +231,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     description: "NCAP document library of Chhatrapati Sambhajinagar Municipal Corporation.",
     descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचा राष्ट्रीय स्वच्छ हवा कार्यक्रम दस्तऐवज संग्रह.",
   },
+  "/census-2026-27": {
+    path: "/census-2026-27",
+    title: "Census 2026-27 | CSMC",
+    titleMr: "जनगणना २०२६-२७ | CSMC",
+    description: "Census 2026-27 messages and self-enumeration resources from Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचे जनगणना २०२६-२७ संदेश व स्वयं गणना साहित्य.",
+  },
   "/user-manual": {
     path: "/user-manual",
     title: "User Manual | CSMC Portal",

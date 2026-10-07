@@ -46,6 +46,7 @@ const routeLabels: Record<string, { en: string; mr: string }> = {
   search: { en: "Search", mr: "शोध" },
   "public-facilities": { en: "Public Facilities", mr: "सार्वजनिक सुविधा" },
   ncap: { en: "NCAP", mr: "राष्ट्रीय स्वच्छ हवा कार्यक्रम" },
+  "census-2026-27": { en: "Census 2026-27", mr: "जनगणना २०२६-२७" },
 };
 
 function segmentLabel(seg: string, en: boolean): string {

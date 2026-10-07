@@ -282,6 +282,7 @@ export const SITE_NAV: NavItem[] = [
   { labelEn: "Right To Service", labelMr: "सेवा हक्क कायदा", to: "/rts-act" },
   { labelEn: "DP Plan", labelMr: "डी पी प्लॅन", to: "/dp-plan" },
   { labelEn: "NCAP", labelMr: "राष्ट्रीय स्वच्छ हवा कार्यक्रम", to: "/ncap" },
+  { labelEn: "Census 2026-27", labelMr: "जनगणना २०२६-२७", to: "/census-2026-27" },
   { labelEn: "Site Map", labelMr: "साईट मॅप", to: "/site-map" },
 ];
 
