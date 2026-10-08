@@ -67,7 +67,7 @@ const DocumentViewer = () => {
       <Layout>
         <PageHeader
           title={enSite ? "Document not found" : "दस्तऐवज सापडला नाही"}
-          eyebrow={enSite ? "Municipal Knowledge Repository" : "महापालिका ज्ञान भांडार"}
+          eyebrow={enSite ? "Municipal Document Repository" : "महापालिका दस्तऐवज भांडार"}
         />
         <section className="py-16 container text-center">
           <p className="text-muted-foreground mb-4">
@@ -90,7 +90,7 @@ const DocumentViewer = () => {
   return (
     <Layout>
       <PageHeader
-        eyebrow={enSite ? "Municipal Knowledge Repository" : "महापालिका ज्ञान भांडार"}
+        eyebrow={enSite ? "Municipal Document Repository" : "महापालिका दस्तऐवज भांडार"}
         title={enSite ? record.titleEn : record.titleMr}
       />
       <section className="py-10 md:py-12 container">

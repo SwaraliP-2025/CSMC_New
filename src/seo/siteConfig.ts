@@ -172,6 +172,27 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Right to Information (RTI) | CSMC",
     description: "Right to Information Act information for CSMC — Chhatrapati Sambhajinagar Municipal Corporation.",
   },
+  "/patrika": {
+    path: "/patrika",
+    title: "Patrika | CSMC",
+    titleMr: "पत्रिका | CSMC",
+    description: "Patrika publications of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेची पत्रिका.",
+  },
+  "/samvaad": {
+    path: "/samvaad",
+    title: "Samvaad | CSMC",
+    titleMr: "संवाद | CSMC",
+    description: "Samvaad publications of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचा संवाद.",
+  },
+  "/tender-notices": {
+    path: "/tender-notices",
+    title: "Tender Notices | CSMC",
+    titleMr: "निविदा सूचना | CSMC",
+    description: "Tender notices of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या निविदा सूचना.",
+  },
   "/rts-act": {
     path: "/rts-act",
     title: "Right to Service (RTS) | CSMC",
@@ -207,6 +228,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Hon'ble Mayors' List | CSMC",
     description: "List of Hon'ble Mayors of Chhatrapati Sambhajinagar Municipal Corporation.",
   },
+  "/standing-committee-chairpersons": {
+    path: "/standing-committee-chairpersons",
+    title: "Standing Committee Chairpersons | CSMC",
+    titleMr: "स्थायी समिती सभापती | CSMC",
+    description: "Chairpersons of the Standing Committee and subject committees of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या स्थायी समिती व विषय समित्यांचे सभापती.",
+  },
   "/deputy-mayors-list": {
     path: "/deputy-mayors-list",
     title: "Hon'ble Deputy Mayors' List | CSMC",
@@ -219,6 +247,20 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Hon'ble Commissioners' List | CSMC",
     description: "List of Municipal Commissioners of CSMC.",
   },
+  "/election-insights": {
+    path: "/election-insights",
+    title: "Election Insights | CSMC",
+    titleMr: "निवडणूक माहिती | CSMC",
+    description: "Election department records, AMC election documents, maps, and the 2020 draft voter list.",
+    descriptionMr: "निवडणूक विभाग, मनपा निवडणूक दस्तऐवज, नकाशे आणि २०२० ची मसुदा मतदार यादी.",
+  },
+  "/municipal-corporation-secretaries": {
+    path: "/municipal-corporation-secretaries",
+    title: "Municipal Corporation Secretaries | CSMC",
+    titleMr: "महानगरपालिका सचिवांची यादी | CSMC",
+    description: "List of Municipal Corporation Secretaries of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या महानगरपालिका सचिवांची यादी.",
+  },
   "/dp-plan": {
     path: "/dp-plan",
     title: "DP Plan | CSMC",
@@ -230,6 +272,27 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     titleMr: "राष्ट्रीय स्वच्छ हवा कार्यक्रम (NCAP) | CSMC",
     description: "NCAP document library of Chhatrapati Sambhajinagar Municipal Corporation.",
     descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचा राष्ट्रीय स्वच्छ हवा कार्यक्रम दस्तऐवज संग्रह.",
+  },
+  "/completed-works": {
+    path: "/completed-works",
+    title: "List of Completed Works | CSMC",
+    titleMr: "पूर्ण झालेली कामे | CSMC",
+    description: "Lists of completed municipal works published by Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेने प्रकाशित केलेल्या पूर्ण झालेल्या कामांच्या याद्या.",
+  },
+  "/dastavez": {
+    path: "/dastavez",
+    title: "Dastavez | CSMC",
+    titleMr: "दस्तऐवज | CSMC",
+    description: "Municipal documents published by Chhatrapati Sambhajinagar Municipal Corporation, including the Banner Location List.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेचे दस्तऐवज, यात बॅनर स्थळांची यादी समाविष्ट आहे.",
+  },
+  "/policies-guidelines": {
+    path: "/policies-guidelines",
+    title: "Policies & Guidelines | CSMC",
+    titleMr: "धोरणे व मार्गदर्शक सूचना | CSMC",
+    description: "Municipal policies and guidelines of Chhatrapati Sambhajinagar Municipal Corporation, including the Draft Water Policy.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेची धोरणे व मार्गदर्शक सूचना, यात मसुदा जल धोरण समाविष्ट आहे.",
   },
   "/census-2026-27": {
     path: "/census-2026-27",
@@ -268,10 +331,10 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
   },
   "/digital-repository": {
     path: "/digital-repository",
-    title: "Municipal Knowledge Repository | CSMC",
-    titleMr: "महापालिका ज्ञान भांडार | CSMC",
+    title: "Municipal Document Repository | CSMC",
+    titleMr: "महापालिका दस्तऐवज भांडार | CSMC",
     description:
-      "Official knowledge library of CSMC circulars, resolutions, budgets, development plans, RTI documents and public records.",
+      "Official document library of CSMC circulars, resolutions, budgets, development plans, RTI documents and public records.",
   },
   "/city-alerts": {
     path: "/city-alerts",

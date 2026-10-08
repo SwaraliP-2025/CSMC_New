@@ -20,7 +20,10 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
+import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
+import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
 import { useLang } from "@/i18n/LanguageContext";
+import { DRAINAGE_DOCUMENTS_FOLDER, drainageDocuments } from "@/data/drainageDocuments";
 import { localizeDigits } from "@/i18n/digits";
 import { REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import {
@@ -141,7 +144,7 @@ const DigitalRepository = () => {
     <Layout>
       <PageHeader
         eyebrow={en ? "Transparency" : "पारदर्शकता"}
-        title={en ? "Municipal Knowledge Repository" : "महापालिका ज्ञान भांडार"}
+        title={en ? "Municipal Document Repository" : "महापालिका दस्तऐवज भांडार"}
         subtitle={
           en
             ? "Central digital library of all public municipal information."
@@ -155,13 +158,27 @@ const DigitalRepository = () => {
             {en ? "Official library" : "अधिकृत ग्रंथालय"}
           </p>
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-civic-blue mb-3 leading-tight">
-            {en ? "Municipal Knowledge Repository" : "महापालिका ज्ञान भांडार"}
+            {en ? "Municipal Document Repository" : "महापालिका दस्तऐवज भांडार"}
           </h1>
           <p className="text-muted-foreground leading-relaxed">
             {en
               ? "Search titles, summaries, keywords and OCR text inside circulars, resolutions, budgets, plans, RTI disclosures and other public records. Reading happens on this website; download remains optional."
               : "परिपत्रके, ठराव, अर्थसंकल्प, आराखडे, माहिती अधिकार व इतर सार्वजनिक नोंदींचे शीर्षक, सारांश, कीवर्ड व OCR मजकूर शोधा. वाचन या संकेतस्थळावर होते; डाउनलोड ऐच्छिक आहे."}
           </p>
+        </div>
+
+        <div className="min-w-0 mb-10" id="education-department">
+          <EducationDepartmentDocuments />
+        </div>
+
+        <div className="min-w-0 mb-10" id="drainage-department">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Drainage Department" : "ड्रेनेज विभाग"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={drainageDocuments}
+            folderSegments={[...DRAINAGE_DOCUMENTS_FOLDER]}
+          />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">

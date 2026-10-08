@@ -573,3 +573,15 @@ nav[data-tour="main-nav"] {
     transform: none;
   }
 }
+
+/* Tables fill the page. Every column gets the same width, so the
+   space between columns is uniform. */
+.civic-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.civic-table :is(th, td) {
+  padding: 0.5rem 0.75rem;
+  overflow-wrap: break-word;
+}

@@ -187,7 +187,7 @@ export const FeaturedStoriesCarousel = () => {
       )}
 
       {!heritage && current && (
-        <div className="relative z-10 h-full container max-md:!px-3 flex flex-col justify-end md:justify-center py-7 sm:py-8 md:py-24 pb-[4.75rem] md:pb-24">
+        <div className="relative z-10 h-full container max-md:!px-3 flex flex-col justify-end md:justify-center py-4 sm:py-6 md:py-10 pb-16 md:pb-16">
           <div className="w-full max-md:max-w-none md:max-w-lg md:pr-[min(280px,28vw)]">
             <p
               className="text-[10px] sm:text-[11px] uppercase tracking-[0.26em] font-bold text-civic-gold mb-2.5 sm:mb-3"
@@ -202,7 +202,7 @@ export const FeaturedStoriesCarousel = () => {
               {en ? current.titleEn : current.titleMr}
             </h2>
             <p
-              className="mt-2.5 sm:mt-3 text-[13px] sm:text-sm w-full md:max-w-md leading-relaxed line-clamp-3 sm:line-clamp-4"
+              className="mt-2 hidden sm:line-clamp-2 md:line-clamp-3 sm:block text-[13px] sm:text-sm w-full md:max-w-md leading-relaxed"
               style={{ color: HERO_CREAM_SOFT, textShadow: "0 1px 3px rgba(0,0,0,0.25)" }}
             >
               {en ? current.shortDescriptionEn : current.shortDescriptionMr}

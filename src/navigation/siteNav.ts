@@ -46,6 +46,11 @@ export const SITE_NAV: NavItem[] = [
             to: "/organization",
           },
           {
+            labelEn: "Municipal Corporation Secretaries",
+            labelMr: "महानगरपालिका सचिवांची यादी",
+            to: "/municipal-corporation-secretaries",
+          },
+          {
             labelEn: "Minutes of General Body Meeting",
             labelMr: "सर्वसाधारण सभेचे इतिवृत्त",
             to: "/public-documents",
@@ -88,13 +93,18 @@ export const SITE_NAV: NavItem[] = [
         labelMr: "स्थायी समिती",
         children: [
           {
+            labelEn: "Standing Committee Chairpersons",
+            labelMr: "स्थायी समिती सभापती",
+            to: "/standing-committee-chairpersons",
+          },
+          {
             labelEn: "Standing Committee Meeting Agenda",
             labelMr: "स्थायी समिती बैठक अजेंडा",
             to: "/public-documents?category=minutes&type=agenda",
           },
           {
-            labelEn: "Standing Committee Meeting Minutes",
-            labelMr: "स्थायी समिती बैठक इतिवृत्त",
+            labelEn: "Standing Committee Minutes",
+            labelMr: "स्थायी समिती इतिवृत्त",
             to: "/public-documents?category=minutes&type=minutes",
           },
           {
@@ -109,29 +119,24 @@ export const SITE_NAV: NavItem[] = [
         labelMr: "अर्थसंकल्प",
         children: [
           {
-            labelEn: "Budget Availability",
-            labelMr: "अर्थसंकल्प उपलब्धता",
-            to: "/public-documents?category=budget",
-          },
-          {
-            labelEn: "Budget in Excel Format",
-            labelMr: "एक्सेल स्वरूपात अर्थसंकल्प",
-            to: "/public-documents?category=budget&format=excel",
+            labelEn: "Budget 2026-27",
+            labelMr: "अर्थसंकल्प २०२६-२७",
+            to: "/public-documents?category=budget&year=2026-27",
           },
           {
             labelEn: "Budget 2025-26",
             labelMr: "अर्थसंकल्प २०२५-२६",
-            to: "/public-documents?category=budget&year=2025",
+            to: "/public-documents?category=budget&year=2025-26",
           },
           {
             labelEn: "Budget 2024-25",
             labelMr: "अर्थसंकल्प २०२४-२५",
-            to: "/public-documents?category=budget&year=2024",
+            to: "/public-documents?category=budget&year=2024-25",
           },
           {
-            labelEn: "Budget 2023-24",
-            labelMr: "अर्थसंकल्प २०२३-२४",
-            to: "/public-documents?category=budget&year=2023",
+            labelEn: "Older Budgets / Archive",
+            labelMr: "जुने अर्थसंकल्प / संग्रह",
+            to: "/public-documents?category=budget&year=archive",
           },
         ],
       },
@@ -226,17 +231,18 @@ export const SITE_NAV: NavItem[] = [
     labelEn: "Publications",
     labelMr: "प्रकाशने",
     children: [
+      { labelEn: "List of Completed Works", labelMr: "पूर्ण झालेली कामे", to: "/completed-works" },
+      { labelEn: "Election Insights", labelMr: "निवडणूक माहिती", to: "/election-insights" },
       {
-        labelEn: "Tenders",
-        labelMr: "निविदा",
-        to: OFFICIAL.mahatenders,
-        external: true,
+        labelEn: "Policies & Guidelines",
+        labelMr: "धोरणे व मार्गदर्शक सूचना",
+        to: "/policies-guidelines",
       },
       { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
       { labelEn: "Govt. Orders", labelMr: "शासन निर्णय", to: "/govt-orders" },
       {
-        labelEn: "Municipal Knowledge Repository",
-        labelMr: "महापालिका ज्ञान भांडार",
+        labelEn: "Municipal Document Repository",
+        labelMr: "महापालिका दस्तऐवज भांडार",
         to: "/digital-repository",
       },
       { labelEn: "Recruitment", labelMr: "भरती", to: "/recruitment" },
@@ -246,6 +252,19 @@ export const SITE_NAV: NavItem[] = [
         to: OFFICIAL.contractorRegistration,
         external: true,
       },
+    ],
+  },
+  {
+    labelEn: "Tenders",
+    labelMr: "निविदा",
+    children: [
+      {
+        labelEn: "E-Tenders",
+        labelMr: "ई-निविदा",
+        to: OFFICIAL.mahatenders,
+        external: true,
+      },
+      { labelEn: "Tender Notices", labelMr: "निविदा सूचना", to: "/tender-notices" },
     ],
   },
   {
@@ -278,7 +297,7 @@ export const SITE_NAV: NavItem[] = [
       },
     ],
   },
-  { labelEn: "Right To Information", labelMr: "माहिती अधिकार कायदा", to: "/rti-act" },
+  { labelEn: "RTI Act", labelMr: "माहिती अधिकार कायदा", to: "/rti-act" },
   { labelEn: "Right To Service", labelMr: "सेवा हक्क कायदा", to: "/rts-act" },
   { labelEn: "DP Plan", labelMr: "डी पी प्लॅन", to: "/dp-plan" },
   { labelEn: "NCAP", labelMr: "राष्ट्रीय स्वच्छ हवा कार्यक्रम", to: "/ncap" },

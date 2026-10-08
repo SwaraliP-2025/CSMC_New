@@ -553,8 +553,8 @@ const INTENT: {
   },
   {
     phrases: [
-      "knowledge repository", "digital repository", "repository",
-      "ज्ञान भांडार", "रिपॉझिटरी",
+      "knowledge repository", "municipal document repository", "digital repository", "repository",
+      "ज्ञान भांडार", "दस्तऐवज भांडार", "रिपॉझिटरी",
     ],
     actionId: "svc-repository",
     relatedIds: ["svc-public-documents"],

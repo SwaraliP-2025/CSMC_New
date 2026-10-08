@@ -1,7 +1,6 @@
 /**
  * Official RTS documents published on the CSMC RTS page.
- * Titles and dates are taken from the source PDFs. A title is repeated
- * in both languages when the file does not give a separate equivalent.
+ * English and Marathi titles are separate. Dates are taken from the source PDFs.
  */
 export type RtsDocument = {
   id: string;
@@ -25,7 +24,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
   {
     id: "rts-adhi-suchana",
     titleEn: "Adhi Suchana",
-    titleMr: "Adhi Suchana",
+    titleMr: "आधी सूचना",
     date: "2025-01-30",
     typeEn: "Gazette",
     typeMr: "राजपत्र",
@@ -34,7 +33,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
   {
     id: "rts-gazette-2025-11-20",
     titleEn: "Gazette Dt. 20-11-2025",
-    titleMr: "Gazette Dt. 20-11-2025",
+    titleMr: "राजपत्र दिनांक २०-११-२०२५",
     date: "2025-11-20",
     typeEn: "Gazette",
     typeMr: "राजपत्र",
@@ -61,7 +60,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
   {
     id: "rts-mc-office-order",
     titleEn: "Ch. Sambhajinagar M.C. Office Order",
-    titleMr: "Ch. Sambhajinagar M.C. Office Order",
+    titleMr: "छत्रपती संभाजीनगर महानगरपालिका कार्यालयीन आदेश",
     date: "2025-09-15",
     typeEn: "Office order",
     typeMr: "कार्यालयीन आदेश",
@@ -70,7 +69,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
   {
     id: "rts-gazette-2025-08-21",
     titleEn: "Maharashtra Public Service Right Act Rules Gazette 21-08-2025",
-    titleMr: "Maharashtra Public Service Right Act Rules Gazette 21-08-2025",
+    titleMr: "महाराष्ट्र लोकसेवा हक्क नियम राजपत्र २१-०८-२०२५",
     date: "2025-08-21",
     typeEn: "Gazette",
     typeMr: "राजपत्र",

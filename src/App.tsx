@@ -36,11 +36,23 @@ import GovtOrders from "./pages/site/GovtOrders.tsx";
 import SiteMap from "./pages/site/SiteMap.tsx";
 import ZonesWards from "./pages/site/ZonesWards.tsx";
 import Organization from "./pages/site/Organization.tsx";
+import MunicipalCorporationSecretaries from "./pages/site/MunicipalCorporationSecretaries.tsx";
 import Ncap from "./pages/site/Ncap.tsx";
 import Census2026 from "./pages/site/Census2026.tsx";
+import CompletedWorks from "./pages/site/CompletedWorks.tsx";
+import ElectionInsights from "./pages/site/ElectionInsights.tsx";
+import AdministrationEstablishment from "./pages/site/AdministrationEstablishment.tsx";
+import {
+  DastavezPage,
+  PatrikaPage,
+  PoliciesGuidelinesPage,
+  SamvaadPage,
+  TenderNoticesPage,
+} from "./pages/site/MunicipalDocumentList.tsx";
 import DPPlan from "./pages/site/DPPlan.tsx";
 import CommissionersList from "./pages/site/CommissionersList.tsx";
 import MayorsList from "./pages/site/MayorsList.tsx";
+import StandingCommitteeChairpersons from "./pages/site/StandingCommitteeChairpersons.tsx";
 import DeputyMayorsList from "./pages/site/DeputyMayorsList.tsx";
 import DepartmentDetail from "./pages/site/DepartmentDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -108,11 +120,23 @@ const App = () => (
             <Route path="/zones-wards" element={<ZonesWards />} />
             <Route path="/know-your-corporator" element={<KnowYourCorporator />} />
             <Route path="/organization" element={<Organization />} />
+            <Route path="/municipal-corporation-secretaries" element={<MunicipalCorporationSecretaries />} />
             <Route path="/ncap" element={<Ncap />} />
             <Route path="/census-2026-27" element={<Census2026 />} />
+            <Route path="/completed-works" element={<CompletedWorks />} />
+            <Route path="/election-insights" element={<ElectionInsights />} />
+            <Route path="/election-insights/:categoryId" element={<ElectionInsights />} />
+            <Route path="/administration-and-establishment" element={<AdministrationEstablishment />} />
+            <Route path="/administration-and-establishment/:categoryId" element={<AdministrationEstablishment />} />
+            <Route path="/dastavez" element={<DastavezPage />} />
+            <Route path="/patrika" element={<PatrikaPage />} />
+            <Route path="/samvaad" element={<SamvaadPage />} />
+            <Route path="/policies-guidelines" element={<PoliciesGuidelinesPage />} />
+            <Route path="/tender-notices" element={<TenderNoticesPage />} />
             <Route path="/dp-plan" element={<DPPlan />} />
             <Route path="/commissioners-list" element={<CommissionersList />} />
             <Route path="/mayors-list" element={<MayorsList />} />
+            <Route path="/standing-committee-chairpersons" element={<StandingCommitteeChairpersons />} />
             <Route path="/deputy-mayors-list" element={<DeputyMayorsList />} />
             <Route path="/user-manual" element={<UserManual />} />
             <Route path="/prabhag-2025" element={<Prabhag2025 />} />

@@ -588,8 +588,8 @@ const RAW_CATALOG: CivicRecord[] = [
     keywords: ["facilities", "hospital", "school", "cfc", "सुविधा", "फॅसिलिटीज", "हॉस्पिटल", "शाळा"],
   }),
   rec("svc-repository", "service", {
-    titleEn: "Municipal Knowledge Repository",
-    titleMr: "महापालिका ज्ञान भांडार",
+    titleEn: "Municipal Document Repository",
+    titleMr: "महापालिका दस्तऐवज भांडार",
     descriptionEn: "Search circulars, GRs, budgets, RTI disclosures and other civic documents.",
     descriptionMr: "परिपत्रके, शासन निर्णय, अर्थसंकल्प, माहिती अधिकार प्रकटीकरण व इतर दस्तऐवज शोधा.",
     previewEn: "Read online with AI summary, OCR extras and bookmarks.",
@@ -598,7 +598,7 @@ const RAW_CATALOG: CivicRecord[] = [
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-04-01",
     href: "/digital-repository",
-    keywords: ["repository", "knowledge", "ज्ञान भांडार", "रिपॉझिटरी", "documents"],
+    keywords: ["repository", "knowledge", "municipal document repository", "ज्ञान भांडार", "दस्तऐवज भांडार", "रिपॉझिटरी", "documents"],
   }),
   rec("svc-notices", "service", {
     titleEn: "Notices & Announcements",
@@ -797,7 +797,7 @@ const RAW_CATALOG: CivicRecord[] = [
     descriptionEn: "Browse government resolutions and circulars related to CSMC.",
     descriptionMr: "CSMC संबंधित शासन निर्णय व परिपत्रके पहा.",
     previewEn: "Search orders and open matching repository records where available.",
-    previewMr: "आदेश शोधा आणि उपलब्ध असल्यास ज्ञान भांडार नोंदी उघडा.",
+    previewMr: "आदेश शोधा आणि उपलब्ध असल्यास दस्तऐवज भांडार नोंदी उघडा.",
     departmentEn: "General Administration",
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-04-01",
@@ -1141,8 +1141,8 @@ const RAW_CATALOG: CivicRecord[] = [
     titleMr: "मुक्त डेटा व सक्रिय प्रकटीकरण धोरण",
     descriptionEn: "Policy on publishing municipal datasets and RTI Section 4 disclosures.",
     descriptionMr: "महापालिका डेटासेट व माहिती अधिकार कलम ४ प्रकटीकरण धोरण.",
-    previewEn: "Documents in the Municipal Knowledge Repository are released under this policy.",
-    previewMr: "ज्ञान भांडारातील दस्तऐवज या धोरणानुसार प्रकाशित.",
+    previewEn: "Documents in the Municipal Document Repository are released under this policy.",
+    previewMr: "दस्तऐवज भांडारातील दस्तऐवज या धोरणानुसार प्रकाशित.",
     departmentEn: "General Administration",
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2025-08-14",
@@ -1271,7 +1271,7 @@ const RAW_CATALOG: CivicRecord[] = [
     publishedAt: "2026-03-20",
     downloadable: true,
     fileSize: "5.6 MB",
-    href: "/public-documents?category=budget&year=2026",
+    href: "/public-documents?category=budget&year=2026-27",
   }),
   rec("bud-2526", "budget", {
     titleEn: "Annual Budget 2025-26 — Approved",
@@ -1285,7 +1285,7 @@ const RAW_CATALOG: CivicRecord[] = [
     publishedAt: "2025-03-22",
     downloadable: true,
     fileSize: "5.2 MB",
-    href: "/public-documents?category=budget&year=2025",
+    href: "/public-documents?category=budget&year=2025-26",
   }),
   rec("bud-2425", "budget", {
     titleEn: "Annual Budget 2024-25 — Approved",
@@ -1299,7 +1299,7 @@ const RAW_CATALOG: CivicRecord[] = [
     publishedAt: "2024-03-25",
     downloadable: true,
     fileSize: "4.8 MB",
-    href: "/public-documents?category=budget&year=2024",
+    href: "/public-documents?category=budget&year=2024-25",
   }),
 
   rec("faq-ptax", "faq", {

@@ -1,114 +1,117 @@
+import { useState } from "react";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
-import { useLang } from "@/i18n/LanguageContext";
+import { InPagePdfPreview } from "@/components/site/InPagePdfPreview";
+import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { OFFICIAL } from "@/data/officialLinks";
-import { RTI_DOCS, RTI_OFFICERS } from "@/data/rtiPublic";
-import { Link } from "react-router-dom";
-import { FileText, Download, User, Phone, ExternalLink } from "lucide-react";
+import { rtiDocumentUrl, rtiDocuments } from "@/data/rtiDocuments";
+import { useLang } from "@/i18n/LanguageContext";
+import { ExternalLink, FileText } from "lucide-react";
 
-const rtiDocs = [
-  ...RTI_DOCS,
-  {
-    title: "Online RTI Application",
-    titleMr: "ऑनलाइन RTI अर्ज",
-    to: OFFICIAL.onlineRti,
-    external: true,
-  },
-];
+const RTI_OFFICERS_FILE = "RTI_Order.pdf";
+const RTI_OFFICERS_URL = `${import.meta.env.BASE_URL}documents/${encodeURIComponent("rti")}/${encodeURIComponent("List of RTI Officers")}/${encodeURIComponent(RTI_OFFICERS_FILE)}`;
 
 const RTIAct = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
+  const [officersOpen, setOfficersOpen] = useState(false);
+  const officersTitle = en ? "RTI Officers List" : "माहिती अधिकार अधिकारी यादी";
+  const department = en ? "Department Name" : "विभागाचे नाव";
+  const yearLabel = en ? "Year" : "वर्ष";
+  const pdfLabel = "PDF";
+  const documentsLabel = en ? "Department-wise RTI Documents" : "विभागनिहाय माहिती अधिकार दस्तऐवज";
+
   return (
     <Layout>
-      <PageHeader eyebrow={en ? "Transparency" : "पारदर्शकता"} title={en ? "Right to Information Act" : "माहिती अधिकार अधिनियम"}
-        subtitle={en ? "Information under Section 4(1)(b) of the RTI Act, 2005." : "माहिती अधिकार अधिनियम, २००५ च्या कलम ४(१)(ब) अंतर्गत माहिती."} />
-      <section className="py-12 container">
-        <div className="flex flex-wrap gap-3 mb-8">
+      <PageHeader title={en ? "Right to Information Act" : "माहिती अधिकार अधिनियम"} />
+      <section className="py-8 md:py-12 container">
+        <h1 className="font-serif text-2xl md:text-3xl font-bold text-civic-blue mb-6">
+          {en ? "Right to Information Act" : "माहिती अधिकार अधिनियम"}
+        </h1>
+
+        <div className="mb-10">
           <a
             href={OFFICIAL.onlineRti}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-civic-blue text-white text-sm font-bold hover:bg-civic-blue/90 transition-colors"
           >
-            {en ? "Apply Online RTI (Aaple Sarkar)" : "ऑनलाइन RTI अर्ज (आपले सरकार)"}
+            {en ? "Apply for RTI" : "RTI साठी अर्ज करा"}
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
-          <a
-            href={OFFICIAL.samadhaan}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-civic-blue text-civic-blue text-sm font-bold hover:bg-civic-blue/5 transition-colors"
+        </div>
+
+        <div className="mb-10">
+          <h2 className="font-serif text-xl md:text-2xl font-bold text-civic-blue mb-4">{officersTitle}</h2>
+          {officersOpen && (
+            <div className="mb-4">
+              <InPagePdfPreview
+                title={officersTitle}
+                fileUrl={RTI_OFFICERS_URL}
+                onClose={() => setOfficersOpen(false)}
+                closeLabel={en ? "Close" : "बंद करा"}
+                downloadLabel={en ? "Download" : "डाउनलोड"}
+              />
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={() => setOfficersOpen(true)}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-2 hover:bg-civic-blue hover:text-white transition-colors"
           >
-            {en ? "Samadhaan / Grievance Portal" : "समाधान / तक्रार पोर्टल"}
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
+            <FileText className="h-3.5 w-3.5" aria-hidden />
+            {en ? "View PDF" : "PDF पहा"}
+          </button>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-10">
-          <div className="bg-civic-blue/5 border border-civic-blue/20 rounded-2xl p-6">
-            <h2 className="font-serif text-xl font-bold text-civic-blue mb-4">{en ? "About RTI Act" : "माहिती अधिकार अधिनियमाबद्दल"}</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-              {en ? "The Right to Information Act, 2005 empowers every citizen to seek information from public authorities. CSMC is committed to proactive disclosure and timely response to RTI applications."
-                : "माहिती अधिकार अधिनियम, २००५ प्रत्येक नागरिकाला सार्वजनिक प्राधिकरणांकडून माहिती मागण्याचा अधिकार देतो. CSMC सक्रिय प्रकटीकरण आणि RTI अर्जांना वेळेवर प्रतिसाद देण्यास वचनबद्ध आहे."}
-            </p>
-            <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-              <li>{en ? "Application fee: ₹10" : "अर्ज शुल्क: ₹१०"}</li>
-              <li>{en ? "Response time: 30 days" : "प्रतिसाद वेळ: ३० दिवस"}</li>
-              <li>{en ? "BPL applicants: Free" : "दारिद्र्यरेषेखालील अर्जदार: मोफत"}</li>
-            </ul>
-          </div>
-          <div className="bg-white border border-border rounded-2xl p-6">
-            <h2 className="font-serif text-xl font-bold text-civic-blue mb-4">{en ? "How to Apply" : "अर्ज कसा करावा"}</h2>
-            <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside leading-relaxed">
-              <li>{en ? "Write your application in Hindi, Marathi or English" : "हिंदी, मराठी किंवा इंग्रजीत अर्ज लिहा"}</li>
-              <li>{en ? "Pay ₹10 fee via DD/IPO/cash" : "DD/IPO/रोख द्वारे ₹१० शुल्क भरा"}</li>
-              <li>{en ? "Submit to the PIO at CSMC main office" : "CSMC मुख्य कार्यालयातील PIO कडे सादर करा"}</li>
-              <li>{en ? "Receive acknowledgement with application number" : "अर्ज क्रमांकासह पावती मिळवा"}</li>
-              <li>{en ? "Response within 30 days" : "३० दिवसांत प्रतिसाद"}</li>
-            </ol>
-          </div>
-        </div>
+        <h2 className="font-serif text-xl md:text-2xl font-bold text-civic-blue mb-5">{documentsLabel}</h2>
 
-        <h2 className="font-serif text-xl font-bold text-civic-blue mb-5">{en ? "RTI Officers" : "RTI अधिकारी"}</h2>
-        <div className="grid md:grid-cols-2 gap-5 mb-10">
-          {RTI_OFFICERS.map((o, i) => (
-            <div key={i} className="bg-white border border-border rounded-2xl p-5 flex gap-4">
-              <div className="w-12 h-12 rounded-full bg-civic-blue/10 flex items-center justify-center shrink-0">
-                <User className="h-6 w-6 text-civic-blue" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-civic-red uppercase tracking-wide mb-1">{en ? o.role : o.roleMr}</p>
-                <p className="font-bold text-civic-ink">{o.name}</p>
-                <p className="text-xs text-muted-foreground">{o.dept}</p>
-                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1"><Phone className="h-3 w-3" />{d(o.phone)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ul className="flex flex-col gap-3 md:hidden">
+          {rtiDocuments.map((doc) => {
+            const name = d(en ? doc.departmentName : doc.departmentNameMr);
+            const year = doc.year ? d(doc.year) : "—";
+            return (
+              <li key={doc.id} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
+                <p className="font-semibold text-civic-ink leading-snug break-words">{name}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {yearLabel}: {year}
+                </p>
+                <PdfFileActions href={rtiDocumentUrl(doc.fileName)} filename={doc.fileName} title={name} className="mt-3" />
+              </li>
+            );
+          })}
+        </ul>
 
-        <h2 className="font-serif text-xl font-bold text-civic-blue mb-5">{en ? "RTI Documents" : "RTI दस्तऐवज"}</h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {rtiDocs.map((d, i) => (
-            <div key={i} className="flex items-center justify-between bg-white border border-border rounded-xl px-4 py-3 hover:shadow-sm transition-shadow">
-              <div className="flex items-center gap-3 min-w-0">
-                <FileText className="h-5 w-5 text-civic-blue shrink-0" />
-                <span className="text-sm font-semibold text-civic-ink truncate">{en ? d.title : d.titleMr}</span>
-              </div>
-              {d.external ? (
-                <a href={d.to} target="_blank" rel="noopener noreferrer" className="text-civic-blue hover:text-civic-red transition-colors shrink-0" aria-label={en ? d.title : d.titleMr}>
-                  <Download className="h-4 w-4" />
-                </a>
-              ) : (
-                <Link to={d.to} className="text-civic-blue hover:text-civic-red transition-colors shrink-0" aria-label={en ? d.title : d.titleMr}>
-                  <Download className="h-4 w-4" />
-                </Link>
-              )}
-            </div>
-          ))}
+        <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
+          <table className="civic-table w-full text-sm" aria-label={documentsLabel}>
+            <thead className="bg-civic-blue text-white">
+              <tr>
+                <th scope="col" className="px-5 py-3 text-left font-bold">{department}</th>
+                <th scope="col" className="col-fit px-4 py-3 text-center font-bold">{yearLabel}</th>
+                <th scope="col" className="col-fit px-4 py-3 text-center font-bold">{pdfLabel}</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border bg-white">
+              {rtiDocuments.map((doc) => {
+                const name = d(en ? doc.departmentName : doc.departmentNameMr);
+                return (
+                  <tr key={doc.id} className="hover:bg-muted/30 transition-colors">
+                    <td className="px-5 py-3 font-semibold text-civic-ink">{name}</td>
+                    <td className="col-fit px-4 py-3 text-center text-muted-foreground">
+                      {doc.year ? d(doc.year) : "—"}
+                    </td>
+                    <td className="col-fit px-4 py-3 text-center">
+                      <PdfFileActions href={rtiDocumentUrl(doc.fileName)} filename={doc.fileName} title={name} className="justify-center" />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </section>
     </Layout>
   );
 };
+
 export default RTIAct;

@@ -80,8 +80,8 @@ const HeroQuickPanel = ({
 }) => {
   const outerClass =
     variant === "mobile"
-      ? "relative z-10 mt-2 w-full max-w-md mx-auto md:hidden"
-      : "relative z-20 hidden md:flex w-max max-w-full items-start justify-end pt-3 pr-4 pb-8 md:pt-4 md:pr-6 md:pb-8";
+      ? "relative z-10 mt-2 w-full max-w-md mx-auto xl:hidden"
+      : "absolute right-0 top-0 z-20 hidden xl:flex h-full max-h-full w-max max-w-[min(100%,28rem)] items-start justify-end overflow-y-auto pt-3 pr-4 pb-8 xl:pt-4 xl:pr-6 xl:pb-8";
 
   return (
     <div className={outerClass}>
@@ -105,7 +105,7 @@ const HeroQuickPanel = ({
           data-tour="quick-services"
           aria-label={en ? "Quick citizen services" : "जलद नागरिक सेवा"}
         >
-          <ul className="m-0 p-0 list-none w-full grid grid-cols-2 gap-1.5 md:flex md:flex-col md:gap-2">
+          <ul className="m-0 p-0 list-none w-full grid grid-cols-2 gap-1.5 xl:flex xl:flex-col xl:gap-2">
             {HERO_QUICK_ACTIONS.map((action) => {
               const Icon = action.icon;
               const label = en ? action.labelEn : action.labelMr;
@@ -117,14 +117,14 @@ const HeroQuickPanel = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     {...(isRts ? { "data-tour": "rts-services" as const } : {})}
-                    className="csmc-hero-quick-link group flex w-full items-center gap-1.5 md:gap-2.5 rounded-full pl-1.5 pr-2 py-1 md:pl-3.5 md:pr-5 md:py-2"
+                    className="csmc-hero-quick-link group flex w-full items-center gap-1.5 xl:gap-2.5 rounded-full pl-1.5 pr-2 py-1 xl:pl-3.5 xl:pr-5 xl:py-2"
                   >
                     <span
-                      className={`csmc-hero-quick-icon flex h-6 w-6 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}
+                      className={`csmc-hero-quick-icon flex h-6 w-6 xl:h-8 xl:w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 ${action.iconClass}`}
                     >
-                      <Icon className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden />
+                      <Icon className="h-3.5 w-3.5 xl:h-4 xl:w-4" aria-hidden />
                     </span>
-                    <span className="text-[10px] sm:text-[11px] md:text-sm font-bold leading-snug line-clamp-2 md:line-clamp-none md:whitespace-nowrap">
+                    <span className="text-[10px] sm:text-[11px] xl:text-sm font-bold leading-snug line-clamp-2 xl:line-clamp-none xl:whitespace-nowrap">
                       {label}
                     </span>
                   </a>
@@ -145,11 +145,11 @@ export const VideoHero = () => {
   return (
     <div className="relative w-full">
       <section className="relative w-full overflow-hidden">
-        <div className="relative flex min-h-[28rem] justify-end sm:min-h-[34rem] md:min-h-0">
+        <div className="relative aspect-[11/5] w-full">
           <FeaturedStoriesCarousel />
           <HeroQuickPanel en={en} variant="desktop" />
         </div>
-        <div className="md:hidden relative z-10 px-4 pb-5 pt-1 bg-civic-blue">
+        <div className="xl:hidden relative z-10 px-4 pb-5 pt-1 bg-civic-blue">
           <HeroQuickPanel en={en} variant="mobile" />
         </div>
       </section>

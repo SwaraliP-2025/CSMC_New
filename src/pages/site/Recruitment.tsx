@@ -25,8 +25,8 @@ const Recruitment = () => {
           <Calendar className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
           <p className="text-sm text-amber-800 font-medium">
             {en
-              ? "This page lists sample openings for the prototype. Live applications must use the official CSMC recruitment notice when published. A related sample notification is available in the Municipal Knowledge Repository."
-              : "हे पृष्ठ नमुना जागा दाखवते. थेट अर्ज प्रकाशित अधिकृत CSMC भरती सूचनेद्वारेच करावेत. संबंधित नमुना अधिसूचना महापालिका ज्ञान भांडारात उपलब्ध आहे."}{" "}
+              ? "This page lists sample openings for the prototype. Live applications must use the official CSMC recruitment notice when published. A related sample notification is available in the Municipal Document Repository."
+              : "हे पृष्ठ नमुना जागा दाखवते. थेट अर्ज प्रकाशित अधिकृत CSMC भरती सूचनेद्वारेच करावेत. संबंधित नमुना अधिसूचना महापालिका दस्तऐवज भांडारात उपलब्ध आहे."}{" "}
             <Link to="/digital-repository/not-recruitment" className="underline font-bold text-amber-900 hover:text-civic-blue">
               {en ? "View sample notice" : "नमुना सूचना पहा"}
             </Link>
@@ -72,31 +72,33 @@ const Recruitment = () => {
           ))}
         </ul>
         <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
-          <table className="w-full text-sm">
+          <table className="civic-table w-full text-sm">
             <thead className="bg-civic-blue text-white">
               <tr>
                 <th className="px-5 py-3 text-left font-bold">{en ? "Post" : "पद"}</th>
-                <th className="px-5 py-3 text-center font-bold">{en ? "Vacancies" : "रिक्त जागा"}</th>
-                <th className="px-5 py-3 text-center font-bold">{en ? "Last Date" : "अंतिम तारीख"}</th>
-                <th className="px-5 py-3 text-center font-bold">{en ? "Status" : "स्थिती"}</th>
-                <th className="px-5 py-3 text-center font-bold">{en ? "Apply" : "अर्ज"}</th>
+                <th className="col-fit px-4 py-3 text-center font-bold">{en ? "Vacancies" : "रिक्त जागा"}</th>
+                <th className="col-fit px-4 py-3 text-center font-bold">{en ? "Last Date" : "अंतिम तारीख"}</th>
+                <th className="col-fit px-4 py-3 text-center font-bold">{en ? "Status" : "स्थिती"}</th>
+                <th className="col-fit px-4 py-3 text-center font-bold">{en ? "Apply" : "अर्ज"}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-white">
               {posts.map((p, i) => (
                 <tr key={i} className="hover:bg-muted/30 transition-colors">
-                  <td className="px-5 py-4 font-semibold text-civic-ink flex items-center gap-2">
-                    <Briefcase className="h-4 w-4 text-civic-blue shrink-0" />
-                    {en ? p.post : p.postMr}
+                  <td className="px-5 py-4 font-semibold text-civic-ink">
+                    <span className="inline-flex items-center gap-2">
+                      <Briefcase className="h-4 w-4 text-civic-blue shrink-0" />
+                      {en ? p.post : p.postMr}
+                    </span>
                   </td>
-                  <td className="px-5 py-4 text-center font-bold text-civic-blue">{d(p.vacancies)}</td>
-                  <td className="px-5 py-4 text-center text-muted-foreground">{d(p.lastDate)}</td>
-                  <td className="px-5 py-4 text-center">
+                  <td className="col-fit px-4 py-4 text-center font-bold text-civic-blue">{d(p.vacancies)}</td>
+                  <td className="col-fit px-4 py-4 text-center text-muted-foreground">{d(p.lastDate)}</td>
+                  <td className="col-fit px-4 py-4 text-center">
                     <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${p.status === "Open" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
                       {en ? p.status : p.statusMr}
                     </span>
                   </td>
-                  <td className="px-5 py-4 text-center">
+                  <td className="col-fit px-4 py-4 text-center">
                     {p.status === "Open" ? (
                       "repoId" in p && p.repoId ? (
                         <Link

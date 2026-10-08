@@ -11,23 +11,38 @@ import {
   type DepartmentGroupMeta,
   getDepartmentGroupId,
   groupDepartmentsBySection,
+  listedDepartmentHod,
   matchesDepartmentSearch,
+  type ListedDepartmentHod,
 } from "@/data/departmentGroups";
 import { ArrowRight, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
+
+const SENIOR_OFFICER_SLUGS = new Set([
+  "municipal-commissioner",
+  "additional-commissioner-1",
+  "additional-commissioner-2",
+  "city-engineer",
+  "additional-city-engineer",
+  "chief-accounts-finance-officer",
+]);
 
 function DepartmentCard({
   dept,
   en,
   group,
   showGroupBadge,
+  hod,
 }: {
   dept: DeptInfo;
   en: boolean;
   group?: DepartmentGroupMeta;
   showGroupBadge?: boolean;
+  hod?: ListedDepartmentHod;
 }) {
   const Icon = getDepartmentIcon(dept.slug);
+  const showHod = hod !== undefined;
+  const officerFirst = !showHod && SENIOR_OFFICER_SLUGS.has(dept.slug);
   return (
     <Link
       to={`/departments/${dept.slug}`}
@@ -45,14 +60,44 @@ function DepartmentCard({
       </div>
       <div className="flex-1">
         <h3 className="font-serif text-base md:text-lg font-bold text-civic-blue mb-1 group-hover:text-civic-red transition-colors">
-          {en ? dept.nameEn : dept.nameMr}
+          {officerFirst
+            ? en
+              ? dept.headEn
+              : dept.headMr
+            : en
+              ? dept.nameEn
+              : dept.nameMr}
         </h3>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          {en ? dept.designationEn : dept.designationMr}
-        </p>
-        <p className="text-[11px] text-muted-foreground/80 mt-1.5">
-          {en ? dept.headEn : dept.headMr}
-        </p>
+        {showHod ? (
+          <div className="text-xs text-muted-foreground leading-relaxed mt-2">
+            <p className="font-semibold text-civic-blue">{en ? "Department HOD" : "विभाग प्रमुख"}</p>
+            {hod ? (
+              <>
+                <p className="mt-1">{en ? hod.nameEn : hod.nameMr}</p>
+                <p>{en ? hod.designationEn : hod.designationMr}</p>
+              </>
+            ) : (
+              <p className="mt-1">
+                {en
+                  ? "Not named in the 03.09.2026 work distribution order."
+                  : "०३.०९.२०२६ च्या कार्यवाटप आदेशात विभाग प्रमुख नमूद नाही."}
+              </p>
+            )}
+          </div>
+        ) : officerFirst ? (
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {en ? dept.designationEn : dept.designationMr}
+          </p>
+        ) : (
+          <>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              {en ? dept.designationEn : dept.designationMr}
+            </p>
+            <p className="text-[11px] text-muted-foreground/80 mt-1.5">
+              {en ? dept.headEn : dept.headMr}
+            </p>
+          </>
+        )}
       </div>
       <div className="flex items-center text-civic-blue font-bold text-xs gap-1 opacity-0 group-hover:opacity-100 transition-all">
         {en ? "View Department" : "विभाग पहा"} <ArrowRight className="h-3.5 w-3.5" />
@@ -81,13 +126,7 @@ const Departments = () => {
 
   const sections = useMemo(() => {
     const buckets = groupDepartmentsBySection(filtered);
-    const order: DepartmentGroupId[] = [
-      "independent",
-      "commissioner",
-      "ac1",
-      "ac2",
-      "technical",
-    ];
+    const order: DepartmentGroupId[] = DEPARTMENT_GROUPS.map((group) => group.id);
     return order
       .map((id) => ({ id, departments: buckets[id] }))
       .filter((s) => s.departments.length > 0);
@@ -103,8 +142,8 @@ const Departments = () => {
         title={en ? "Departments" : "विभाग"}
         subtitle={
           en
-            ? "Senior officers, wings under the Municipal Commissioner (from Commissioner Office), Additional Commissioners, and technical branches—or search by name."
-            : "वरिष्ठ अधिकारी, आयुक्त कार्यालयापासूनचे विभाग, अतिरिक्त आयुक्त व तांत्रिक शाखा—किंवा नावाने शोधा."
+            ? "Hon. Municipal Commissioner, Additional Commissioners, City Engineer, Chief Accounts & Finance Officer, and technical branches—or search by name."
+            : "मा. महानगरपालिका आयुक्त, अतिरिक्त आयुक्त, शहर अभियंता, मुख्य लेखा व वित्त अधिकारी व तांत्रिक शाखा—किंवा नावाने शोधा."
         }
       />
       <section className="py-12 md:py-16 container">
@@ -168,6 +207,7 @@ const Departments = () => {
                 en={en}
                 group={groupMetaById[getDepartmentGroupId(dept.slug)]}
                 showGroupBadge
+                hod={listedDepartmentHod(dept.slug)}
               />
             ))}
           </div>
@@ -195,6 +235,7 @@ const Departments = () => {
                         en={en}
                         group={meta}
                         showGroupBadge={false}
+                        hod={listedDepartmentHod(dept.slug)}
                       />
                     ))}
                   </div>

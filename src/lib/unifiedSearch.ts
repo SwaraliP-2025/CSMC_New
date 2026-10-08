@@ -85,7 +85,7 @@ function civicRecordPdfText(record: CivicRecord) {
     "Document",
     ...record.bodyEn,
     "",
-    "This PDF is generated from the CSMC Municipal Knowledge Repository.",
+    "This PDF is generated from the CSMC Municipal Document Repository.",
     `Record ID: ${record.id}`,
   ].join("\n");
 }

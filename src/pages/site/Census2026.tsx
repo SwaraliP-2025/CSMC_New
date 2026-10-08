@@ -46,12 +46,12 @@ const Census2026 = () => {
         </ul>
 
         <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
-          <table className="w-full text-sm" aria-label={title}>
+          <table className="civic-table w-full text-sm" aria-label={title}>
             <thead className="bg-civic-blue text-white">
               <tr>
-                <th scope="col" className="w-24 px-5 py-3 text-left font-bold">{sr}</th>
+                <th scope="col" className="col-fit px-4 py-3 text-center font-bold">{sr}</th>
                 <th scope="col" className="px-5 py-3 text-left font-bold">{name}</th>
-                <th scope="col" className="w-44 px-5 py-3 text-center font-bold">{file}</th>
+                <th scope="col" className="col-fit px-4 py-3 text-center font-bold">{file}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-white">
@@ -59,9 +59,9 @@ const Census2026 = () => {
                 const itemName = en ? item.nameEn : item.nameMr;
                 return (
                   <tr key={item.id} className="hover:bg-muted/30 transition-colors">
-                    <td className="px-5 py-3 text-muted-foreground">{d(item.id)}</td>
+                    <td className="col-fit px-4 py-3 text-center text-muted-foreground">{d(item.id)}</td>
                     <td className="px-5 py-3 font-semibold text-civic-ink" lang={en ? "en" : "mr"}>{itemName}</td>
-                    <td className="px-5 py-3 text-center">
+                    <td className="col-fit px-4 py-3 text-center">
                       <a
                         href={item.url}
                         target="_blank"

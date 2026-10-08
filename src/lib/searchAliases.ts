@@ -127,8 +127,8 @@ export const SEARCH_ALIAS_GROUPS: string[][] = [
   ],
   // Repository / documents
   [
-    "knowledge repository", "repository", "digital repository", "documents", "public documents",
-    "ज्ञान भांडार", "दस्तऐवज", "सार्वजनिक दस्तऐवज",
+    "knowledge repository", "municipal document repository", "repository", "digital repository", "documents", "public documents",
+    "ज्ञान भांडार", "दस्तऐवज भांडार", "दस्तऐवज", "सार्वजनिक दस्तऐवज",
     "रिपॉझिटरी", "डॉक्युमेंट्स",
   ],
   // Notices

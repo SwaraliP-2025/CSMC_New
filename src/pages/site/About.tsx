@@ -618,11 +618,11 @@ const About = () => {
                 {en ? "Key Facts" : "मुख्य तथ्ये"}
               </h3>
             </div>
-            <table className="w-full text-sm">
+            <table className="civic-table w-full text-sm">
               <tbody>
                 {keyFacts.map((fact, i) => (
                   <tr key={fact.label} className={i % 2 === 0 ? "bg-white" : "bg-civic-light"}>
-                    <td className="px-6 py-3.5 font-medium text-muted-foreground border-t border-border w-[48%]">
+                    <td className="col-fit px-6 py-3.5 font-medium text-muted-foreground border-t border-border">
                       {fact.label}
                     </td>
                     <td className="px-6 py-3.5 font-bold text-civic-blue border-t border-border">

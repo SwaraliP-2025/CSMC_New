@@ -4,6 +4,10 @@ export type InPagePdf = {
   title: string;
   /** Revoke the object URL when the preview closes. */
   revoke?: boolean;
+  /** 1-based page to open in the existing preview. */
+  page?: number;
+  /** Search term to run in the preview, when the document was opened from a match. */
+  query?: string;
 };
 
 const EVENT = "csmc-open-pdf";

@@ -592,6 +592,11 @@ import amolSir from "@/assets/leadership/shri_amol_sir.png";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
 import { findOrganogramOfficerForHead, organogramTelHref } from "@/lib/organogram";
 import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
+import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
+import { AdministrationEstablishmentDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
+import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
+import { CHIEF_ACCOUNTS_OFFICER_FOLDER, chiefAccountsOfficerDocuments } from "@/data/chiefAccountsOfficerDocuments";
+import { DRAINAGE_DOCUMENTS_FOLDER, drainageDocuments } from "@/data/drainageDocuments";
 
 interface DeptInfo {
   slug: string;
@@ -1962,8 +1967,8 @@ const DEPARTMENTS: DeptInfo[] = [
     nameMr: "शिक्षण विभाग",
     headEn: "Shri Ankush Pandhare",
     headMr: "श्री अंकुश पांढरे",
-    designationEn: "Deputy Municipal Commissioner",
-    designationMr: "उप आयुक्त",
+    designationEn: "Head of Education Department / Deputy Commissioner, Education Department",
+    designationMr: "शिक्षण विभाग प्रमुख / उप आयुक्त, शिक्षण विभाग",
     phone: DEPARTMENT_CONTACT_PHONE,
     email: "",
     addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar – 431001",
@@ -2960,6 +2965,34 @@ const DepartmentDetail = () => {
             </div>
             {brief ? <DepartmentInformationCard brief={brief} en={en} /> : null}
           </div>
+
+          {dept.slug === "chief-accounts-finance-officer" ? (
+            <div className="min-w-0">
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                {en ? "Officer's Corner documents" : "अधिकारी कक्षातील दस्तऐवज"}
+              </h3>
+              <DocumentArchiveBrowser
+                documents={chiefAccountsOfficerDocuments}
+                folderSegments={[CHIEF_ACCOUNTS_OFFICER_FOLDER]}
+              />
+            </div>
+          ) : null}
+
+          {dept.slug === "general-administration" ? <AdministrationEstablishmentDocuments /> : null}
+
+          {dept.slug === "education" ? <EducationDepartmentDocuments /> : null}
+
+          {dept.slug === "drainage" ? (
+            <div className="min-w-0">
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                {en ? "Related Documents" : "संबंधित दस्तऐवज"}
+              </h3>
+              <DocumentArchiveBrowser
+                documents={drainageDocuments}
+                folderSegments={[...DRAINAGE_DOCUMENTS_FOLDER]}
+              />
+            </div>
+          ) : null}
 
             {/* Key Responsibilities */}
             {(

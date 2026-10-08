@@ -36,19 +36,19 @@ const MayorsList = () => {
       <section className="py-12 container max-w-5xl">
 
         <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
-          <table className="w-full text-sm">
+          <table className="civic-table w-full text-sm">
             <thead>
               <tr className="bg-civic-blue text-white">
-                <th className="px-4 py-4 text-center font-bold w-8">{en ? "Sr." : "क्र."}</th>
+                <th className="col-fit px-4 py-4 text-center font-bold">{en ? "Sr." : "क्र."}</th>
                 <th className="px-4 py-4 text-left font-bold">{en ? "Hon'ble Mayor" : "मा. महापौर"}</th>
-                <th className="px-4 py-4 text-center font-bold">{en ? "Working Period" : "कार्यकाल"}</th>
-                <th className="px-4 py-4 text-center font-bold w-20">{en ? "Photo" : "फोटो"}</th>
+                <th className="col-fit px-4 py-4 text-center font-bold">{en ? "Working Period" : "कार्यकाल"}</th>
+                <th className="col-fit px-4 py-4 text-center font-bold">{en ? "Photo" : "फोटो"}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-white">
               {MAYORS.map((m) => (
                 <tr key={m.sr} className={`hover:bg-muted/30 transition-colors ${m.current ? "bg-civic-gold/5" : ""}`}>
-                  <td className="px-4 py-4 text-center font-bold text-muted-foreground">{d(m.sr)}</td>
+                  <td className="col-fit px-4 py-4 text-center font-bold text-muted-foreground">{d(m.sr)}</td>
                   <td className="px-4 py-4">
                     <p className="font-bold text-civic-ink">{en ? m.nameEn : m.nameMr}</p>
                     {m.current && (
@@ -57,13 +57,13 @@ const MayorsList = () => {
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-4 text-center text-muted-foreground whitespace-nowrap">
+                  <td className="col-fit px-4 py-4 text-center text-muted-foreground">
                     {d(m.from)} {en ? "to" : "ते"}{" "}
                     {m.to === "Present"
                       ? <span className="bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full text-xs">{en ? "Till Date" : "आजतागायत"}</span>
                       : d(m.to)}
                   </td>
-                  <td className="px-4 py-4 text-center">
+                  <td className="col-fit px-4 py-4 text-center">
                     <div
                       className={m.img ? "cursor-zoom-in" : ""}
                       onClick={() => m.img && setSelected({
