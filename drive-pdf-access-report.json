@@ -1,0 +1,28 @@
+{
+  "approved": 1024,
+  "candidates": 1009,
+  "verified": 1009,
+  "failed": [],
+  "unmatched": [],
+  "ambiguous": [],
+  "disagreements": [],
+  "retained": [
+    "documents/FAQ_SevenStar.pdf",
+    "documents/Guildelines_For_Disaster.pdf",
+    "documents/rts/Adhi-Suchna.pdf",
+    "documents/rts/Gazette_2.pdf",
+    "documents/rts/Gazette_Dt_20-11-2025.pdf",
+    "documents/rts/Maharashtra_Public_Service_Right_Act_Rules_Gazette_21-08-2025.pdf",
+    "documents/rts/Maharashtra_Right_to_public_services_Act_2015.pdf",
+    "documents/rts/RTS_Rules_Gazette2.pdf"
+  ],
+  "blocked": [
+    "ncap/documents/CD_1_2__CD_WASTE_TENDER_RFP.pdf",
+    "ncap/documents/CSMC_SELF_ASSESSMENT_REPORT_2025.pdf",
+    "ncap/documents/VE_4_CLEAN_FUEL_FUEL_QUALITY.pdf",
+    "ncap/documents/VE_7_2_TRAFFIC_DECONGESTION_ACTIONS_TAKEN_26,_2022.pdf",
+    "ncap/documents/VE_7_2_TRAFFIC_DECONGESTION_ACTIONS_TAKEN_26,_20221.pdf",
+    "ncap/documents/VE_8_1_Vehicle_scrapping_CSMC.pdf",
+    "ncap/documents/VE_9_1_NMT_PLAN_Abad_SMART_CITY_CYCLE_TRACKROUTES__Office_Order.pdf"
+  ]
+}

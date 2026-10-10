@@ -9,7 +9,8 @@ import {
   archiveNameMatches,
   formatArchiveBytes,
   isPdfFile,
-  publicDocumentUrl,
+  publishedDocumentUrl,
+  verifiedDriveFileId,
   sortArchiveFiles,
   type ArchiveFile,
   type ArchiveSortKey,
@@ -46,7 +47,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
   const stopRef = useRef<AbortController | null>(null);
 
   const sorted = useMemo(() => sortArchiveFiles(documents, sort), [documents, sort]);
-  const hrefFor = (file: string) => fileUrl?.(file) ?? publicDocumentUrl([...folderSegments, file]);
+  const hrefFor = (file: string) => fileUrl?.(file) ?? publishedDocumentUrl([...folderSegments, file]);
 
   const nameHaystack = (doc: ArchiveFile) => [doc.file, doc.titleEn, doc.titleMr].filter(Boolean).join(" ");
   const visible = sorted.filter((doc) => {
@@ -64,7 +65,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
     setSearching(true);
     setSearched(true);
     setHits({});
-    const pdfs = sorted.filter((doc) => isPdfFile(doc.file));
+    const pdfs = sorted.filter((doc) => isPdfFile(doc.file) && !verifiedDriveFileId(hrefFor(doc.file)));
     const next: Record<string, PdfSearchHit[]> = {};
     for (let index = 0; index < pdfs.length; index += 1) {
       if (controller.signal.aborted) break;

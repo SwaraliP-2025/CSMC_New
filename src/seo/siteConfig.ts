@@ -152,6 +152,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Departments | CSMC",
     description: "Administrative departments of Chhatrapati Sambhajinagar Municipal Corporation (CSMC).",
   },
+  "/officers-corner": {
+    path: "/officers-corner",
+    title: "Officer's Corner | CSMC",
+    titleMr: "अधिकारी कक्ष | CSMC",
+    description: "Published officers of Chhatrapati Sambhajinagar Municipal Corporation, from the organisation chart.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या संघटना आकृतीतील प्रकाशित अधिकारी.",
+  },
   "/commissioner": {
     path: "/commissioner",
     title: "Municipal Commissioner | CSMC",

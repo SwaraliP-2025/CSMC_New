@@ -4,12 +4,13 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { InPagePdfPreview } from "@/components/site/InPagePdfPreview";
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { OFFICIAL } from "@/data/officialLinks";
-import { rtiDocumentUrl, rtiDocuments } from "@/data/rtiDocuments";
+import { RTI_OFFICERS_FOLDER, RTI_FOLDER, rtiDocumentUrl, rtiDocuments } from "@/data/rtiDocuments";
+import { publishedDocumentUrl, verifiedDriveFileId } from "@/lib/archiveDocuments";
 import { useLang } from "@/i18n/LanguageContext";
 import { ExternalLink, FileText } from "lucide-react";
 
 const RTI_OFFICERS_FILE = "RTI_Order.pdf";
-const RTI_OFFICERS_URL = `${import.meta.env.BASE_URL}documents/${encodeURIComponent("rti")}/${encodeURIComponent("List of RTI Officers")}/${encodeURIComponent(RTI_OFFICERS_FILE)}`;
+const RTI_OFFICERS_URL = publishedDocumentUrl([RTI_FOLDER, RTI_OFFICERS_FOLDER, RTI_OFFICERS_FILE]);
 
 const RTIAct = () => {
   const { lang, d } = useLang();
@@ -43,25 +44,31 @@ const RTIAct = () => {
 
         <div className="mb-10">
           <h2 className="font-serif text-xl md:text-2xl font-bold text-civic-blue mb-4">{officersTitle}</h2>
-          {officersOpen && (
-            <div className="mb-4">
-              <InPagePdfPreview
-                title={officersTitle}
-                fileUrl={RTI_OFFICERS_URL}
-                onClose={() => setOfficersOpen(false)}
-                closeLabel={en ? "Close" : "बंद करा"}
-                downloadLabel={en ? "Download" : "डाउनलोड"}
-              />
-            </div>
+          {verifiedDriveFileId(RTI_OFFICERS_URL) ? (
+            <PdfFileActions href={RTI_OFFICERS_URL} filename={RTI_OFFICERS_FILE} title={officersTitle} />
+          ) : (
+            <>
+              {officersOpen && (
+                <div className="mb-4">
+                  <InPagePdfPreview
+                    title={officersTitle}
+                    fileUrl={RTI_OFFICERS_URL}
+                    onClose={() => setOfficersOpen(false)}
+                    closeLabel={en ? "Close" : "बंद करा"}
+                    downloadLabel={en ? "Download" : "डाउनलोड"}
+                  />
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={() => setOfficersOpen(true)}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-2 hover:bg-civic-blue hover:text-white transition-colors"
+              >
+                <FileText className="h-3.5 w-3.5" aria-hidden />
+                {en ? "View PDF" : "PDF पहा"}
+              </button>
+            </>
           )}
-          <button
-            type="button"
-            onClick={() => setOfficersOpen(true)}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-2 hover:bg-civic-blue hover:text-white transition-colors"
-          >
-            <FileText className="h-3.5 w-3.5" aria-hidden />
-            {en ? "View PDF" : "PDF पहा"}
-          </button>
         </div>
 
         <h2 className="font-serif text-xl md:text-2xl font-bold text-civic-blue mb-5">{documentsLabel}</h2>

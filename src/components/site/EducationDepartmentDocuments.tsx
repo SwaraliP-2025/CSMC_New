@@ -1,7 +1,7 @@
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { EDUCATION_DOCUMENTS_FOLDER, educationDocuments } from "@/data/educationDocuments";
 import { useLang } from "@/i18n/LanguageContext";
-import { publicDocumentUrl } from "@/lib/archiveDocuments";
+import { publishedDocumentUrl } from "@/lib/archiveDocuments";
 
 export function EducationDepartmentDocuments() {
   const { lang, d } = useLang();
@@ -16,7 +16,7 @@ export function EducationDepartmentDocuments() {
       <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">{title}</h3>
       <ul className="flex flex-col gap-3 md:hidden">
         {educationDocuments.map((doc) => {
-          const href = publicDocumentUrl([...EDUCATION_DOCUMENTS_FOLDER, doc.file]);
+          const href = publishedDocumentUrl([...EDUCATION_DOCUMENTS_FOLDER, doc.file]);
           return (
             <li key={doc.id} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
               <p className="font-semibold text-civic-ink leading-snug break-words">{doc.file}</p>
@@ -39,7 +39,7 @@ export function EducationDepartmentDocuments() {
           </thead>
           <tbody className="divide-y divide-border bg-white">
             {educationDocuments.map((doc) => {
-              const href = publicDocumentUrl([...EDUCATION_DOCUMENTS_FOLDER, doc.file]);
+              const href = publishedDocumentUrl([...EDUCATION_DOCUMENTS_FOLDER, doc.file]);
               return (
                 <tr key={doc.id} className="hover:bg-muted/30 transition-colors">
                   <td className="px-5 py-3 font-semibold text-civic-ink break-words">{doc.file}</td>

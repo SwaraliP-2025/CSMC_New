@@ -193,6 +193,16 @@ const SITE_PAGE_INPUTS: StubInput[] = [
       keywords: ["organogram", "organization", "organisation", "संघटना"],
     },
     {
+      id: "svc-officers-corner",
+      category: "service",
+      titleEn: "Officer's Corner",
+      titleMr: "अधिकारी कक्ष",
+      descriptionEn: "Directory of published CSMC officers from the organisation chart.",
+      descriptionMr: "संघटना आकृतीतील प्रकाशित महापालिका अधिकाऱ्यांची यादी.",
+      href: "/officers-corner",
+      keywords: ["officer", "officers corner", "अधिकारी", "अधिकारी कक्ष"],
+    },
+    {
       id: "svc-ncap",
       category: "service",
       titleEn: "National Clean Air Programme (NCAP)",

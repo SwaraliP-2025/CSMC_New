@@ -143,6 +143,7 @@ export const SITE_NAV: NavItem[] = [
     ],
   },
   { labelEn: "Departments", labelMr: "विभाग", to: "/departments" },
+  { labelEn: "Officer's Corner", labelMr: "अधिकारी कक्ष", to: "/officers-corner" },
   {
     labelEn: "Citizen Services",
     labelMr: "नागरिक सेवा",

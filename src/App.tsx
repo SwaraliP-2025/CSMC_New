@@ -12,6 +12,7 @@ import { SeoHead } from "@/components/SeoHead";
 import Index from "./pages/Index.tsx";
 import About from "./pages/site/About.tsx";
 import Departments from "./pages/site/Departments.tsx";
+import OfficersCorner from "./pages/site/OfficersCorner.tsx";
 import Services from "./pages/site/Services.tsx";
 import PublicFacilities from "./pages/PublicFacilities.tsx";
 import FacilityDetails from "./pages/FacilityDetails.tsx";
@@ -94,6 +95,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/initiatives" element={<Initiatives />} />
             <Route path="/departments" element={<Departments />} />
+            <Route path="/officers-corner" element={<OfficersCorner />} />
             <Route path="/departments/:slug" element={<DepartmentDetail />} />
             <Route path="/services" element={<Services />} />
             <Route path="/public-facilities" element={<PublicFacilities />} />

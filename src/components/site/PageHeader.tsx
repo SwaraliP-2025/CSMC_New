@@ -7,6 +7,7 @@ const routeLabels: Record<string, { en: string; mr: string }> = {
   about: { en: "About", mr: "आमच्याबद्दल" },
   initiatives: { en: "Initiatives by CSMC", mr: "CSMC चे उपक्रम" },
   departments: { en: "Departments", mr: "विभाग" },
+  "officers-corner": { en: "Officer's Corner", mr: "अधिकारी कक्ष" },
   services: { en: "Citizen Services", mr: "नागरिक सेवा" },
   notices: { en: "Notices", mr: "सूचना" },
   tenders: { en: "Tenders", mr: "निविदा" },

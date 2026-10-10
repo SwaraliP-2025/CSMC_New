@@ -33,7 +33,9 @@ import {
   standingCommitteeVolumeMinutes,
 } from "@/data/reviewedPublicDocuments";
 import { TOWN_PLANNING_DOCUMENTS_FOLDER, townPlanningDocuments } from "@/data/townPlanningDocuments";
-import { publicDocumentUrl } from "@/lib/archiveDocuments";
+import { driveHostedPdfIds } from "@/data/driveHostedPdfs";
+import { publishedDocumentUrl, publicDocumentUrl, verifiedDriveFileId } from "@/lib/archiveDocuments";
+import { isSameOriginPdfHref } from "@/lib/pdfPreview";
 
 const publicRoot = path.resolve("public");
 
@@ -439,9 +441,7 @@ describe("document mapping", () => {
     const rtiPage = readFileSync("src/pages/site/RTIAct.tsx", "utf8");
     expect(rtiPage).toContain("rtiDocuments.map");
     expect(rtiPage).toContain('const RTI_OFFICERS_FILE = "RTI_Order.pdf"');
-    expect(rtiPage).toContain('encodeURIComponent("rti")');
-    expect(rtiPage).toContain('encodeURIComponent("List of RTI Officers")');
-    expect(rtiPage).toContain("encodeURIComponent(RTI_OFFICERS_FILE)");
+    expect(rtiPage).toContain("publishedDocumentUrl([RTI_FOLDER, RTI_OFFICERS_FOLDER, RTI_OFFICERS_FILE])");
     expect(readFileSync("src/App.tsx", "utf8")).toContain('path="/rti-act"');
     expect(readFileSync("src/data/rtiPublic.ts", "utf8")).not.toContain("rti-officers-order");
   });
@@ -547,7 +547,7 @@ describe("document mapping", () => {
     expect(completedWorks).toHaveLength(11);
 
     const browser = readFileSync("src/components/site/DocumentArchiveBrowser.tsx", "utf8");
-    expect(browser).toContain("fileUrl?.(file) ?? publicDocumentUrl");
+    expect(browser).toContain("fileUrl?.(file) ?? publishedDocumentUrl");
     expect(browser).toContain("<PdfFileActions");
     expect(browser).toContain('download={doc.file}');
     const page = readFileSync("src/pages/site/Ncap.tsx", "utf8");
@@ -633,5 +633,74 @@ describe("document mapping", () => {
     expect(data.filter((row) => value(row, "category") === "census-2026-27" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(11);
     expect(repository).not.toContain('id="census-2026-27"');
     expect(data.filter((row) => value(row, "reconciliationStatus") === "held" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(1037);
+  });
+
+  it("opens approved Drive PDFs in the single-file viewer and keeps GitHub PDFs on the site", () => {
+    expect(Object.keys(driveHostedPdfIds)).toHaveLength(1009);
+    expect(publishedDocumentUrl(["FAQ_SevenStar.pdf"])).toBe(publicDocumentUrl(["FAQ_SevenStar.pdf"]));
+    expect(publishedDocumentUrl(["Guildelines_For_Disaster.pdf"])).toBe(publicDocumentUrl(["Guildelines_For_Disaster.pdf"]));
+    expect(publishedDocumentUrl(["rts", "Adhi-Suchna.pdf"])).toBe(publicDocumentUrl(["rts", "Adhi-Suchna.pdf"]));
+    expect(ncapFileUrl("CSMC_SELF_ASSESSMENT_REPORT_2025.pdf")).toContain("/ncap/documents/");
+    expect(isSameOriginPdfHref(publicDocumentUrl(["FAQ_SevenStar.pdf"]))).toBe(true);
+
+    const auditUrl = publishedDocumentUrl(["Municipal Document Repository", "Audit", "Annual_Audit_Report_of_2004-2005.pdf"]);
+    const accountsUrl = publishedDocumentUrl(["Chief Accounts Officer", "B-1_Date_Wise_list_Contractor.pdf"]);
+    expect(auditUrl).toBe("https://drive.google.com/file/d/19BfwyiKSb4xFuFsMQg_D-FVrcxJtDxHd/view");
+    expect(accountsUrl).toBe("https://drive.google.com/file/d/1I39Gbof3P4xpzD_ONAI9Ffc38WQJn08n/view");
+    expect(auditUrl).not.toContain("/folders/");
+    expect(isSameOriginPdfHref(auditUrl)).toBe(false);
+    expect(verifiedDriveFileId(auditUrl)).toBe("19BfwyiKSb4xFuFsMQg_D-FVrcxJtDxHd");
+    expect(verifiedDriveFileId("https://drive.google.com/file/d/not-a-real-id/view")).toBeNull();
+    expect(verifiedDriveFileId("https://drive.google.com/drive/folders/14tBeN4zCtY7yptkOEaeSRlR7K9ckod-V")).toBeNull();
+
+    const blockedDisposition = new Set(["HOLD", "EXCLUDE", "NEEDS_HUMAN_REVIEW", "MAPPED_PENDING_PUBLICATION_REVIEW"]);
+    const table = readFileSync("document-mapping-reconciled-draft.csv", "utf8").replace(/^\uFEFF/, "");
+    const rows: string[][] = [];
+    let row: string[] = [];
+    let cell = "";
+    let quoted = false;
+    for (let i = 0; i < table.length; i += 1) {
+      const char = table[i];
+      if (quoted) {
+        if (char === '"') {
+          if (table[i + 1] === '"') {
+            cell += '"';
+            i += 1;
+          } else quoted = false;
+        } else cell += char;
+      } else if (char === '"') quoted = true;
+      else if (char === ",") {
+        row.push(cell);
+        cell = "";
+      } else if (char === "\n") {
+        row.push(cell);
+        rows.push(row);
+        row = [];
+        cell = "";
+      } else if (char !== "\r") cell += char;
+    }
+    if (cell.length || row.length) {
+      row.push(cell);
+      rows.push(row);
+    }
+    const header = rows[0];
+    const col = Object.fromEntries(header.map((name, position) => [name, position]));
+    const value = (record: string[], key: string) => record[col[key]] ?? "";
+    const data = rows.slice(1);
+    for (const [logical, fileId] of Object.entries(driveHostedPdfIds)) {
+      const match = data.find((record) => value(record, "localPath") === logical && value(record, "reconciliationStatus") === "implemented" && value(record, "publicListingImplemented") === "yes");
+      expect(match, logical).toBeTruthy();
+      expect(blockedDisposition.has(value(match!, "publicationDisposition")), logical).toBe(false);
+      expect(value(match!, "fileName").toLowerCase().endsWith(".pdf"), logical).toBe(true);
+      expect(logical.includes("/tenders/") || logical.startsWith("ncap/") || logical.startsWith("documents/ncap/") || logical.startsWith("documents/rts/"), logical).toBe(false);
+      const mappedId = value(match!, "driveFileId");
+      if (mappedId) expect(mappedId).toBe(fileId);
+      expect(publishedDocumentUrl(logical.slice("documents/".length).split("/"))).toBe(`https://drive.google.com/file/d/${fileId}/view`);
+    }
+    for (const name of ["Copy_of_All_Sections-1.xls", "Election_empl_list_(Ward-B).xls", "Election_Format_(Ward-B_Engineers).doc"]) {
+      expect(Object.keys(driveHostedPdfIds).some((key) => key.endsWith(name))).toBe(false);
+    }
+    expect(auditDocuments.find((doc) => doc.file === "Annual_Audit_Report_of_2004-2005.pdf")?.id).toBe("audit-2004-2005");
+    expect(chiefAccountsOfficerDocuments.find((doc) => doc.file === "B-1_Date_Wise_list_Contractor.pdf")?.id).toBe("cafo-b1-date-wise-contractor");
   });
 });

@@ -69,10 +69,15 @@ describe("search coverage", { timeout: 30000 }, () => {
     const index = getGlobalSearchIndex();
     const paths = new Set(index.map((record) => (record.href ? pathOf(record.href) : "")).filter((href) => href.startsWith("/")));
     const skip = new Set(["/search", "/under-construction", "*"]);
-    const redirectTargets: Record<string, string> = { "/tenders": OFFICIAL.mahatenders.replace(/\/$/, "") };
+    // Patrika and Samvaad stay as empty publication pages and are not search destinations.
+    const emptyPublicationRoutes = new Set(["/patrika", "/samvaad"]);
+    const redirectTargets: Record<string, string> = {
+      "/tenders": OFFICIAL.mahatenders.replace(/\/$/, ""),
+      "/administration-and-establishment": "/departments/general-administration",
+    };
     const hrefs = new Set(index.map((record) => record.href?.replace(/\/$/, "")).filter(Boolean));
     const missingRoutes = ROUTES.filter((route) => {
-      if (route.includes(":") || skip.has(route) || paths.has(route)) return false;
+      if (route.includes(":") || skip.has(route) || emptyPublicationRoutes.has(route) || paths.has(route)) return false;
       const target = redirectTargets[route];
       return !target || !hrefs.has(target);
     });
@@ -91,6 +96,10 @@ describe("search coverage", { timeout: 30000 }, () => {
     for (const record of index) seen.set(record.id, (seen.get(record.id) ?? 0) + 1);
     const duplicateIds = [...seen.entries()].filter(([, count]) => count > 1).map(([id]) => id);
 
+    expect(paths.has("/dastavez")).toBe(true);
+    expect(searchHits("Banner Location List")[0]?.record.href).toBe("/dastavez");
+    expect(paths.has("/patrika")).toBe(false);
+    expect(paths.has("/samvaad")).toBe(false);
     expect(missingRoutes, missingRoutes.join(", ")).toEqual([]);
     expect(broken, broken.join(", ")).toEqual([]);
     expect(missingEnglish).toEqual([]);

@@ -618,8 +618,8 @@ const RAW_CATALOG: CivicRecord[] = [
     titleMr: "सार्वजनिक दस्तऐवज",
     descriptionEn: "Resolutions, minutes, budgets and RTI proactive disclosure documents.",
     descriptionMr: "ठराव, इतिवृत्त, अर्थसंकल्प व माहिती अधिकार सक्रिय प्रकटीकरण दस्तऐवज.",
-    previewEn: "Filter by category and download prototype sample files where listed.",
-    previewMr: "श्रेणीनुसार फिल्टर करा आणि सूचीबद्ध नमुना फाईल्स डाउनलोड करा.",
+    previewEn: "Open published standing committee minutes and budget documents by year.",
+    previewMr: "प्रकाशित स्थायी समिती इतिवृत्त आणि अर्थसंकल्प वर्षानुसार उघडा.",
     departmentEn: "General Administration",
     departmentMr: "सामान्य प्रशासन",
     publishedAt: "2026-04-01",
@@ -805,22 +805,6 @@ const RAW_CATALOG: CivicRecord[] = [
     keywords: ["govt orders", "government orders", "शासन निर्णय", "परिपत्रक"],
   }),
 
-  rec("cir-water-summer", "circular", {
-    titleEn: "Summer 2026 Ward-wise Water Supply Schedule",
-    titleMr: "उन्हाळा २०२६ प्रभागनिहाय पाणी पुरवठा वेळापत्रक",
-    descriptionEn: "Circular notifying revised water supply timings for all zones during summer 2026.",
-    descriptionMr: "उन्हाळा २०२६ दरम्यान सर्व झोनसाठी सुधारित पाणी पुरवठा वेळापत्रकाचे परिपत्रक.",
-    previewEn: "Supply will operate on an alternate-day roster in high-demand zones. Citizens are advised to store water responsibly.",
-    previewMr: "जास्त मागणी असलेल्या झोनमध्ये एक दिवसाआड पुरवठा. नागरिकांनी पाणी जबाबदारीने साठवावे.",
-    departmentEn: "Water Supply",
-    departmentMr: "पाणी पुरवठा",
-    publishedAt: "2026-03-20",
-    downloadable: true,
-    fileSize: "420 KB",
-    relatedServiceHref: "https://chhs.chhsambhajinagarmc.org/Watersupply/pg/ledger/getWaterPgApi.do",
-    relatedServiceLabelEn: "Pay Water Tax",
-    relatedServiceLabelMr: "पाणी कर भरा",
-  }),
   rec("cir-streetlight", "circular", {
     titleEn: "Street Light Maintenance Circular",
     titleMr: "पथदिवे देखभाल परिपत्रक",
@@ -848,22 +832,6 @@ const RAW_CATALOG: CivicRecord[] = [
     fileSize: "510 KB",
   }),
 
-  rec("not-tax-rebate", "notification", {
-    titleEn: "Property Tax 10% Rebate Extended till 30 May 2026",
-    titleMr: "मालमत्ता कर १०% सवलत ३० मे २०२६ पर्यंत वाढवली",
-    descriptionEn: "Official notification extending the early-payment rebate window.",
-    descriptionMr: "वेळेवर भरणा सवलत कालावधी वाढवण्याची अधिकृत अधिसूचना.",
-    previewEn: "Pay the current year’s property tax online or at facilitation centres to avail 10% rebate.",
-    previewMr: "१०% सवलतीसाठी चालू वर्षाचा मालमत्ता कर ऑनलाइन किंवा सुलभ केंद्रांवर भरा.",
-    departmentEn: "Property Tax",
-    departmentMr: "मालमत्ता कर",
-    publishedAt: "2026-04-22",
-    downloadable: true,
-    fileSize: "190 KB",
-    relatedServiceHref: "https://chhsambhajinagarmc.org/TaxCollection/pg/property/getPropertyPgWebApi",
-    relatedServiceLabelEn: "Pay Property Tax",
-    relatedServiceLabelMr: "मालमत्ता कर भरा",
-  }),
   rec("not-dp-revision", "notification", {
     titleEn: "Development Plan Revision — Public Notice",
     titleMr: "विकास आराखडा सुधारणा — सार्वजनिक सूचना",
@@ -897,19 +865,6 @@ const RAW_CATALOG: CivicRecord[] = [
     relatedServiceLabelMr: "भरती",
   }),
 
-  rec("gr-tax-rebate", "government-resolution", {
-    titleEn: "Property Tax Rebate Scheme 2026-27",
-    titleMr: "मालमत्ता कर सवलत योजना २०२६-२७",
-    descriptionEn: "Government Resolution approving the 10% early-payment rebate.",
-    descriptionMr: "१०% वेळेवर भरणा सवलत मंजूर करणारा शासन निर्णय.",
-    previewEn: "GR No. GR/2026/001. Applicable to current-year dues paid within the notified window.",
-    previewMr: "श.नि. क्र. GR/2026/001. अधिसूचित कालावधीत भरलेल्या चालू वर्षाच्या थकबाकीस लागू.",
-    departmentEn: "Revenue",
-    departmentMr: "महसूल",
-    publishedAt: "2026-04-01",
-    downloadable: true,
-    fileSize: "860 KB",
-  }),
   rec("gr-swm", "government-resolution", {
     titleEn: "Solid Waste Management Guidelines",
     titleMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे",
@@ -1458,22 +1413,6 @@ const RAW_CATALOG: CivicRecord[] = [
 ];
 
 const VERSION_HISTORY: Record<string, CivicRecord["versions"]> = {
-  "gr-tax-rebate": [
-    {
-      version: "2.0",
-      publishedAt: "2026-04-01",
-      status: "current",
-      notesEn: "Rebate window extended till 30 May 2026.",
-      notesMr: "सवलत कालावधी ३० मे २०२६ पर्यंत वाढवला.",
-    },
-    {
-      version: "1.0",
-      publishedAt: "2026-03-01",
-      status: "superseded",
-      notesEn: "Original rebate scheme for FY 2026-27.",
-      notesMr: "आर्थिक वर्ष २०२६-२७ ची मूळ सवलत योजना.",
-    },
-  ],
   "byl-dcr": [
     {
       version: "2.1",
@@ -1518,15 +1457,15 @@ const VERSION_HISTORY: Record<string, CivicRecord["versions"]> = {
 };
 
 const RELATED_FORCE: Record<string, string[]> = {
-  "svc-property-tax": ["faq-ptax", "dept-ptax", "not-tax-rebate", "gr-tax-rebate", "cc-revenue"],
-  "faq-ptax": ["svc-property-tax", "dept-ptax", "not-tax-rebate"],
+  "svc-property-tax": ["faq-ptax", "dept-ptax", "cc-revenue"],
+  "faq-ptax": ["svc-property-tax", "dept-ptax"],
   "svc-birth": ["faq-birth", "dept-health", "act-rts", "cc-health"],
   "faq-birth": ["svc-birth", "dept-health"],
   "svc-grievance": ["faq-hours", "dept-health"],
   "svc-building": ["byl-dcr", "dp-2025", "not-dp-revision", "dept-tp", "cc-revenue", "byl-parking"],
   "byl-dcr": ["svc-building", "dp-2025", "con-fire", "cc-revenue", "not-dp-revision", "dept-tp", "byl-parking"],
   "dp-2025": ["byl-dcr", "svc-building", "not-dp-revision", "dept-tp", "dp-report"],
-  "svc-water-tax": ["cir-water-summer", "dept-drainage", "faq-hours"],
+  "svc-water-tax": ["dept-drainage", "faq-hours"],
   "svc-tourism": ["svc-how-to-reach", "place-ellora-caves", "place-ajanta-caves", "place-bibi-ka-maqbara"],
   "svc-how-to-reach": ["svc-tourism"],
   "svc-corporator": ["svc-zones-wards", "svc-prabhag"],

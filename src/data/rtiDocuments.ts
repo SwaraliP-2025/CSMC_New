@@ -1,4 +1,4 @@
-import type { ArchiveFile } from "@/lib/archiveDocuments";
+import { publishedDocumentUrl, type ArchiveFile } from "@/lib/archiveDocuments";
 
 export type RtiDocument = {
   id: string;
@@ -16,10 +16,8 @@ export const RTI_DEPARTMENT_FOLDER = "Department-wise RTI Documents";
 export const RTI_OFFICERS_FOLDER = "List of RTI Officers";
 export const RTI_OFFICERS_FILE = "RTI_Order.pdf";
 
-const RTI_BASE = `${import.meta.env.BASE_URL}documents/${encodeURIComponent(RTI_FOLDER)}/${encodeURIComponent(RTI_DEPARTMENT_FOLDER)}/`;
-
 export function rtiDocumentUrl(fileName: string) {
-  return `${RTI_BASE}${encodeURIComponent(fileName)}`;
+  return publishedDocumentUrl([RTI_FOLDER, RTI_DEPARTMENT_FOLDER, fileName]);
 }
 
 function doc(

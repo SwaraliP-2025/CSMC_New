@@ -35,6 +35,13 @@ const Notices = () => {
     <Layout>
       <PageHeader eyebrow={en ? "Press & PR" : "प्रसिद्धी"} title={t.notices.title} subtitle={en ? "Official announcements, circulars and notices." : "अधिकृत घोषणा, परिपत्रके व सूचना."} />
       <section className="py-16 container">
+        {SITE_NOTICES.length === 0 ? (
+          <div className="py-16 text-center border border-dashed border-border rounded-2xl bg-white">
+            <p className="font-semibold text-civic-ink">
+              {en ? "No current notices or announcements available." : "सध्या सूचना किंवा घोषणा उपलब्ध नाहीत."}
+            </p>
+          </div>
+        ) : null}
         <div className="space-y-6">
           {SITE_NOTICES.map((n, i) => {
             const title = en ? n.titleEn : n.titleMr;

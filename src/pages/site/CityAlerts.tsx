@@ -218,9 +218,13 @@ const CityAlerts = () => {
             : "पूर्ण झालेले इशारे आपोआप संग्रहित होतात. जुनी कामे शोधण्यासाठी सर्च वापरा."}
         </p>
         <div className="grid md:grid-cols-2 gap-4">
-          {completed.map((alert) => (
-            <AlertCard key={alert.id} alert={alert} en={en} />
-          ))}
+          {completed.length === 0 ? (
+            <p className="text-sm text-muted-foreground">{en ? "None at this time." : "सध्या काही नाही."}</p>
+          ) : (
+            completed.map((alert) => (
+              <AlertCard key={alert.id} alert={alert} en={en} />
+            ))
+          )}
         </div>
       </section>
     </Layout>

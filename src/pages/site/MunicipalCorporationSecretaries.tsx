@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { FileText } from "lucide-react";
 import { InPagePdfPreview } from "@/components/site/InPagePdfPreview";
+import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { SECRETARIES_FILE, SECRETARIES_FOLDER } from "@/data/municipalSecretaries";
+import { publishedDocumentUrl, verifiedDriveFileId } from "@/lib/archiveDocuments";
 
-const SECRETARIES_URL = `${import.meta.env.BASE_URL}documents/${encodeURIComponent(SECRETARIES_FOLDER)}/${encodeURIComponent(SECRETARIES_FILE)}`;
+const SECRETARIES_URL = publishedDocumentUrl([SECRETARIES_FOLDER, SECRETARIES_FILE]);
 
 const MunicipalCorporationSecretaries = () => {
   const { lang } = useLang();
@@ -19,7 +21,9 @@ const MunicipalCorporationSecretaries = () => {
       <PageHeader eyebrow={en ? "About Us" : "आमच्याबद्दल"} title={title} />
       <section className="py-8 md:py-12 container">
         <h1 className="font-serif text-2xl md:text-3xl font-bold text-civic-blue mb-6">{title}</h1>
-        {open && (
+        {verifiedDriveFileId(SECRETARIES_URL) ? (
+          <PdfFileActions href={SECRETARIES_URL} filename={SECRETARIES_FILE} title={title} />
+        ) : open && (
           <div className="mb-4">
             <InPagePdfPreview
               title={title}
@@ -30,7 +34,7 @@ const MunicipalCorporationSecretaries = () => {
             />
           </div>
         )}
-        {!open && (
+        {!verifiedDriveFileId(SECRETARIES_URL) && !open && (
           <button
             type="button"
             onClick={() => setOpen(true)}

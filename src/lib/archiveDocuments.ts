@@ -1,3 +1,7 @@
+import { driveHostedPdfIds } from "@/data/driveHostedPdfs";
+
+const verifiedDriveIds = new Set(Object.values(driveHostedPdfIds));
+
 export type ArchiveSortKey =
   | "name-asc"
   | "name-desc"
@@ -29,6 +33,41 @@ export function archiveDisplayName(file: string) {
 export function publicDocumentUrl(segments: string[]) {
   const base = import.meta.env.BASE_URL || "/";
   return `${base}documents/${segments.map((segment) => encodeURIComponent(segment)).join("/")}`;
+}
+
+/** Google's own viewer for one verified file. Not a folder link. */
+export function driveFileViewUrl(fileId: string) {
+  return `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/view`;
+}
+
+/**
+ * Direct file bytes. Not used as a site download link: Chrome warns when an
+ * HTTP page starts that download, and the response cannot be read in PDF.js.
+ */
+export function driveFileDownloadUrl(fileId: string) {
+  return `https://drive.usercontent.google.com/download?id=${encodeURIComponent(fileId)}&export=download&confirm=t`;
+}
+
+/**
+ * Site path for PDFs already hosted on GitHub Pages.
+ * Approved Drive PDFs open in Google's single-file viewer.
+ */
+export function publishedDocumentUrl(segments: string[]) {
+  const fileId = driveHostedPdfIds[["documents", ...segments].join("/")];
+  return fileId ? driveFileViewUrl(fileId) : publicDocumentUrl(segments);
+}
+
+/** File ID only when it is one of the verified map values. Other Drive links are ignored. */
+export function verifiedDriveFileId(href: string) {
+  try {
+    const url = new URL(href);
+    if (url.origin !== "https://drive.google.com") return null;
+    const match = url.pathname.match(/^\/file\/d\/([^/]+)\/view$/);
+    const fileId = match?.[1] ? decodeURIComponent(match[1]) : "";
+    return fileId && verifiedDriveIds.has(fileId) ? fileId : null;
+  } catch {
+    return null;
+  }
 }
 
 export function formatArchiveBytes(bytes: number) {

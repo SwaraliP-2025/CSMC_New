@@ -89,8 +89,8 @@ describe("search ranking", { timeout: 30000 }, () => {
   });
 
   it("indexes page notices, schemes and distinct service titles", () => {
-    expect(topId("water supply schedule")).toBe("site-notice-water-schedule");
-    expect(topId("पाणी पुरवठा वेळापत्रक")).toBe("site-notice-water-schedule");
+    expect(topId("water supply schedule")).toBe("svc-water-tax");
+    expect(topId("पाणी पुरवठा वेळापत्रक")).toBe("svc-water-tax");
     expect(topId("Ramai Awas Yojana")).toBe("svc-ramai");
     expect(topId("Pet Licence")).toBe("svc-entry-pet");
     expect(topId("Padampura Fire Station")).toBe("fac-item-fire-stations-fire-001");

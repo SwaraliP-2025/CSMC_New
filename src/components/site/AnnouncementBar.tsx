@@ -3,13 +3,11 @@ import { Bell, ExternalLink, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { OFFICIAL } from "@/data/officialLinks";
 
-/** Destinations/dates only — citizen-facing labels come from `t.announcements`. Dates stored as YYYY-MM-DD. */
-const DESTINATIONS: { to: string; external?: boolean; date: string }[] = [
-  { to: OFFICIAL.gunthewari, external: true, date: "2026-04-10" },
-  { to: "/city-alerts", date: "2026-08-14" },
-  { to: "/digital-repository/not-tax-rebate", date: "2026-04-22" },
-  { to: OFFICIAL.mahatenders, external: true, date: "2026-04-10" },
-  { to: "/notices", date: "2026-08-01" },
+/** Destinations only — citizen-facing labels come from `t.announcements`. */
+const DESTINATIONS: { to: string; external?: boolean; date?: string }[] = [
+  { to: OFFICIAL.gunthewari, external: true },
+  { to: "/city-alerts" },
+  { to: "/notices" },
 ];
 
 /** Display ticker dates as DD-MM-YYYY. */
@@ -35,7 +33,7 @@ export const AnnouncementBar = () => {
         {icon}
         <span>
           {label}
-          <span className="opacity-70 ml-1">({formatTickerDate(dest.date)})</span>
+          {dest.date ? <span className="opacity-70 ml-1">({formatTickerDate(dest.date)})</span> : null}
         </span>
         {dest.external && <ExternalLink className="h-2.5 w-2.5 opacity-50" />}
       </>

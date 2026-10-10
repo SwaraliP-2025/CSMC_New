@@ -1,4 +1,4 @@
-import type { ArchiveFile } from "@/lib/archiveDocuments";
+import { publishedDocumentUrl, type ArchiveFile } from "@/lib/archiveDocuments";
 
 export type MunicipalDocument = {
   id: string;
@@ -10,8 +10,7 @@ export type MunicipalDocument = {
 };
 
 export function municipalDocumentUrl(doc: Pick<MunicipalDocument, "folder" | "file">) {
-  const base = import.meta.env.BASE_URL || "/";
-  return `${base}documents/${encodeURIComponent(doc.folder)}/${encodeURIComponent(doc.file)}`;
+  return publishedDocumentUrl([doc.folder, doc.file]);
 }
 
 /** public/documents/municipal-documents/ */

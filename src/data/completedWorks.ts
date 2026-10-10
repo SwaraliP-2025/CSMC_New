@@ -1,3 +1,5 @@
+import { publishedDocumentUrl } from "@/lib/archiveDocuments";
+
 export type CompletedWork = {
   id: string;
   titleEn: string;
@@ -10,10 +12,8 @@ export type CompletedWork = {
 
 const FOLDER = "List of Completed Works";
 
-const COMPLETED_WORKS_BASE = `${import.meta.env.BASE_URL}documents/${encodeURIComponent(FOLDER)}/`;
-
 export function completedWorkUrl(file: string) {
-  return `${COMPLETED_WORKS_BASE}${encodeURIComponent(file)}`;
+  return publishedDocumentUrl([FOLDER, file]);
 }
 
 /**

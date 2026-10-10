@@ -6,7 +6,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const orders = [
-  { no: "GR/2026/001", title: "Property Tax Rebate Scheme 2026-27", titleMr: "मालमत्ता कर सवलत योजना २०२६-२७", date: "1 Apr 2026", dept: "Revenue", deptMr: "महसूल", repoId: "gr-tax-rebate" },
   { no: "GR/2026/002", title: "Solid Waste Management Guidelines", titleMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे", date: "15 Mar 2026", dept: "SWM", deptMr: "घनकचरा", repoId: "gr-swm" },
   { no: "GR/2026/003", title: "Water Supply Regulation Order", titleMr: "पाणी पुरवठा नियमन आदेश", date: "10 Mar 2026", dept: "Water Supply", deptMr: "पाणी पुरवठा", repoId: "gr-water-reg" },
   { no: "GR/2026/004", title: "Building Permission Fee Revision", titleMr: "बांधकाम परवानगी शुल्क सुधारणा", date: "1 Mar 2026", dept: "Town Planning", deptMr: "नगर रचना", repoId: "gr-bldg-fee" },

@@ -1,3 +1,5 @@
+import { publishedDocumentUrl } from "@/lib/archiveDocuments";
+
 export type StandingCommitteeMinute = {
   id: string;
   file: string;
@@ -14,8 +16,7 @@ const FOLDER = "standing-committee";
 
 /** Verified minutes only. Needs Review and Duplicate Review stay off this list. */
 export function standingCommitteeMinuteUrl(doc: Pick<StandingCommitteeMinute, "year" | "file">) {
-  const base = import.meta.env.BASE_URL || "/";
-  return `${base}documents/${encodeURIComponent(FOLDER)}/${encodeURIComponent(String(doc.year))}/${encodeURIComponent(doc.file)}`;
+  return publishedDocumentUrl([FOLDER, String(doc.year), doc.file]);
 }
 
 const MINUTES: StandingCommitteeMinute[] = [

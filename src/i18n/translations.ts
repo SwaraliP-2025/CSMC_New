@@ -90,8 +90,6 @@ export const translations = {
       items: [
         "Gunthewari Challan Calculator",
         "Live City Alerts & Public Advisory",
-        "Property tax 10% rebate notice",
-        "SWM Phase II e-tender live",
         "Latest municipal notices",
       ],
     },
@@ -262,8 +260,6 @@ export const translations = {
       items: [
         "गुंठेवारी चलन कॅल्क्युलेटर",
         "थेट शहर इशारे व सार्वजनिक सल्ला",
-        "मालमत्ता कर १०% सवलत सूचना",
-        "घनकचरा प्रकल्प टप्पा-२ ई-निविदा",
         "ताज्या महापालिका सूचना",
       ],
     },
