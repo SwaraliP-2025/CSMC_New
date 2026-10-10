@@ -1,4 +1,4 @@
-import { spawnSync } from "node:child_process";
+import { execSync, spawnSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,6 +6,7 @@ import * as esbuild from "esbuild";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = path.join(root, "dist-release");
+const pages = process.argv.includes("--pages");
 
 const built = spawnSync("npx", ["vite", "build", "--outDir", "dist-release", "--emptyOutDir"], {
   cwd: root,
@@ -98,13 +99,27 @@ copyTree(publicDir, outDir, (name) => name === "documents" || name === "ncap");
 copyTree(path.join(publicDir, "ncap"), path.join(outDir, "ncap"), (name) => name === "documents");
 
 let copied = 0;
-for (const rel of allow) {
-  const source = path.join(publicDir, rel);
-  if (!existsSync(source)) throw new Error("Approved file is missing: " + rel);
-  const target = path.join(outDir, rel);
-  mkdirSync(path.dirname(target), { recursive: true });
-  cpSync(source, target);
-  copied++;
+if (pages) {
+  const tracked = execSync("git ls-files -z -- public/documents public/ncap/documents", {
+    cwd: root,
+    encoding: "utf8",
+  }).split("\0").filter(Boolean);
+  for (const gitPath of tracked) {
+    const rel = gitPath.replaceAll("\\", "/").replace(/^public\//, "");
+    const target = path.join(outDir, rel);
+    mkdirSync(path.dirname(target), { recursive: true });
+    cpSync(path.join(root, gitPath), target);
+    copied++;
+  }
+} else {
+  for (const rel of allow) {
+    const source = path.join(publicDir, rel);
+    if (!existsSync(source)) throw new Error("Approved file is missing: " + rel);
+    const target = path.join(outDir, rel);
+    mkdirSync(path.dirname(target), { recursive: true });
+    cpSync(source, target);
+    copied++;
+  }
 }
 
 function walk(dir, found) {
@@ -118,8 +133,8 @@ function walk(dir, found) {
 const present = [];
 walk(path.join(outDir, "documents"), present);
 walk(path.join(outDir, "ncap", "documents"), present);
-const extra = present.filter((rel) => !allow.has(rel));
-const missing = [...allow].filter((rel) => !present.includes(rel));
+const extra = pages ? [] : present.filter((rel) => !allow.has(rel));
+const missing = pages ? [] : [...allow].filter((rel) => !present.includes(rel));
 if (extra.length || missing.length) {
   console.error(JSON.stringify({ extra: extra.slice(0, 20), missing: missing.slice(0, 20), extraCount: extra.length, missingCount: missing.length }, null, 2));
   rmSync(outDir, { recursive: true, force: true });
@@ -134,4 +149,4 @@ if (leaked.length) {
   process.exit(1);
 }
 
-console.log("Filtered release: " + copied + " approved documents, " + present.length + " document files in dist-release.");
+console.log((pages ? "Pages release: " : "Filtered release: ") + copied + " document files copied, " + present.length + " document files in dist-release.");
