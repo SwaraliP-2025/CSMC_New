@@ -54,7 +54,7 @@
 //     responsibilitiesMr: ["महसूल व कर देखरेख", "नागरिक सेवा", "तक्रार निवारण समन्वय"],
 //     servicesEn: ["Revenue drives", "Grievance camps"],
 //     servicesMr: ["महसूल मोहिमा", "तक्रार शिबिरे"],
-//     relatedDocIds: ["not-tax-rebate", "bud-2526"],
+//     relatedDocIds: ["bud-2526"],
 //   },
 //   health: {
 //     responsibilitiesEn: ["Public health services", "Vaccination and epidemic control", "Municipal dispensaries"],
@@ -75,7 +75,7 @@
 //     responsibilitiesMr: ["गटार जाळे देखभाल", "STP संचालन", "पूर्व-मान्सून नाला सफाई"],
 //     servicesEn: ["Drain cleaning requests", "STP information"],
 //     servicesMr: ["नाला सफाई विनंत्या", "STP माहिती"],
-//     relatedDocIds: ["dept-drainage", "cir-water-summer"],
+//     relatedDocIds: ["dept-drainage"],
 //   },
 //   garden: {
 //     responsibilitiesEn: ["Public gardens and parks", "Tree plantation drives", "Green cover maintenance"],
@@ -96,14 +96,14 @@
 //     responsibilitiesMr: ["मालमत्ता मूल्यांकन", "कर संकलन व सवलती", "मालमत्ता कर सुधारणा"],
 //     servicesEn: ["Online property tax payment", "Assessment enquiry"],
 //     servicesMr: ["ऑनलाइन मालमत्ता कर भरणे", "मूल्यांकन चौकशी"],
-//     relatedDocIds: ["dept-ptax", "not-tax-rebate", "faq-ptax"],
+//     relatedDocIds: ["dept-ptax", "faq-ptax"],
 //   },
 //   "water-tax": {
 //     responsibilitiesEn: ["Water billing", "New connections", "Supply schedule coordination"],
 //     responsibilitiesMr: ["पाणी बिलिंग", "नवीन जोडण्या", "पुरवठा वेळापत्रक समन्वय"],
 //     servicesEn: ["Online water tax payment", "New connection guidance"],
 //     servicesMr: ["ऑनलाइन पाणी कर भरणे", "नवीन जोडणी मार्गदर्शन"],
-//     relatedDocIds: ["cir-water-summer"],
+//     relatedDocIds: [],
 //   },
 //   "town-planning": {
 //     responsibilitiesEn: ["Building permissions", "Development plan implementation", "Layout approvals"],
@@ -593,10 +593,29 @@ import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
 import { findOrganogramOfficerForHead, organogramTelHref } from "@/lib/organogram";
 import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
-import { AdministrationEstablishmentDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
+import { AdministrationEstablishmentDocuments, FireCadreDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
 import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
 import { CHIEF_ACCOUNTS_OFFICER_FOLDER, chiefAccountsOfficerDocuments } from "@/data/chiefAccountsOfficerDocuments";
 import { DRAINAGE_DOCUMENTS_FOLDER, drainageDocuments } from "@/data/drainageDocuments";
+import {
+  TOWN_PLANNING_DOCUMENTS_FOLDER,
+  townPlanningDocuments,
+  townPlanningDriveDocuments,
+} from "@/data/townPlanningDocuments";
+import {
+  AUDIT_DOCUMENTS_FOLDER,
+  ELECTRICAL_DOCUMENTS_FOLDER,
+  FIRE_INFORMATION_FOLDER,
+  LIBRARY_DOCUMENTS_FOLDER,
+  MECHANICAL_DOCUMENTS_FOLDER,
+  NULM_DOCUMENTS_FOLDER,
+  auditDocuments,
+  electricalPublicDocuments,
+  fireInformationDocuments,
+  libraryDocuments,
+  mechanicalPublicDocuments,
+  nulmDocuments,
+} from "@/data/reviewedPublicDocuments";
 
 interface DeptInfo {
   slug: string;
@@ -721,7 +740,7 @@ const DEPT_EXTRAS: Record<
       "महसूल मोहिमा",
       "तक्रार शिबिरे",
     ],
-    relatedDocIds: ["not-tax-rebate", "bud-2526"],
+    relatedDocIds: ["bud-2526"],
   },
 
   /* ================= UPDATED DEPARTMENTS ================= */
@@ -1011,7 +1030,7 @@ const DEPT_EXTRAS: Record<
       "पाणीपट्टी सेवा",
       "कर संबंधित सहाय्य",
     ],
-    relatedDocIds: ["not-tax-rebate", "faq-ptax"],
+    relatedDocIds: ["faq-ptax"],
   },
 
   "market-license": {
@@ -2980,6 +2999,33 @@ const DepartmentDetail = () => {
 
           {dept.slug === "general-administration" ? <AdministrationEstablishmentDocuments /> : null}
 
+          {dept.slug === "fire-disaster-management" ? (
+            <div className="min-w-0 space-y-8">
+              <FireCadreDocuments />
+              <DocumentArchiveBrowser documents={fireInformationDocuments} folderSegments={[...FIRE_INFORMATION_FOLDER]} />
+            </div>
+          ) : null}
+
+          {dept.slug === "audit-department" ? (
+            <DocumentArchiveBrowser documents={auditDocuments} folderSegments={[...AUDIT_DOCUMENTS_FOLDER]} />
+          ) : null}
+
+          {dept.slug === "electrical" ? (
+            <DocumentArchiveBrowser documents={electricalPublicDocuments} folderSegments={[...ELECTRICAL_DOCUMENTS_FOLDER]} />
+          ) : null}
+
+          {dept.slug === "library" ? (
+            <DocumentArchiveBrowser documents={libraryDocuments} folderSegments={[...LIBRARY_DOCUMENTS_FOLDER]} />
+          ) : null}
+
+          {dept.slug === "nulm" ? (
+            <DocumentArchiveBrowser documents={nulmDocuments} folderSegments={[...NULM_DOCUMENTS_FOLDER]} />
+          ) : null}
+
+          {dept.slug === "mechanical-vehicles" ? (
+            <DocumentArchiveBrowser documents={mechanicalPublicDocuments} folderSegments={[...MECHANICAL_DOCUMENTS_FOLDER]} />
+          ) : null}
+
           {dept.slug === "education" ? <EducationDepartmentDocuments /> : null}
 
           {dept.slug === "drainage" ? (
@@ -2990,6 +3036,40 @@ const DepartmentDetail = () => {
               <DocumentArchiveBrowser
                 documents={drainageDocuments}
                 folderSegments={[...DRAINAGE_DOCUMENTS_FOLDER]}
+              />
+            </div>
+          ) : null}
+
+          {dept.slug === "town-planning-department" ? (
+            <div className="min-w-0">
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                {en ? "Town Planning Department" : "नगररचना विभाग"}
+              </h3>
+              <ul className="space-y-3 mb-6">
+                {townPlanningDriveDocuments.map((doc) => (
+                  <li key={doc.id} className="rounded-2xl border border-border bg-white p-4">
+                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div className="min-w-0">
+                        <p className="font-medium text-civic-ink break-words">
+                          {en ? doc.titleEn : doc.titleMr}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">Google Drive</p>
+                      </div>
+                      <a
+                        href={doc.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-civic-blue underline shrink-0"
+                      >
+                        {en ? "Open" : "उघडा"}
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <DocumentArchiveBrowser
+                documents={townPlanningDocuments.filter((doc) => !doc.externalUrl)}
+                folderSegments={[...TOWN_PLANNING_DOCUMENTS_FOLDER]}
               />
             </div>
           ) : null}

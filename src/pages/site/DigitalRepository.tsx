@@ -21,9 +21,39 @@ import {
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
+import { AdministrationEstablishmentDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
+import { DISASTER_GUIDELINES_DOCUMENT, SEVEN_STAR_FAQ_DOCUMENT } from "@/data/citizenRepositoryDocuments";
+import { BUDGET_FOLDER, budgetDocumentsFor, budgetYearSections } from "@/data/budgetDocuments";
+import { ELECTION_INSIGHTS_ROOT, electionInsightCategories } from "@/data/electionInsights";
+import { standingCommitteeMinutes, standingCommitteeYears } from "@/data/standingCommitteeMinutes";
+import { chiefAccountsOfficerDocuments, CHIEF_ACCOUNTS_OFFICER_FOLDER } from "@/data/chiefAccountsOfficerDocuments";
+import { dastavezDocuments, municipalArchiveFiles, policyDocuments } from "@/data/municipalDocuments";
+import { MUNICIPAL_SECRETARIES_DOCUMENT, SECRETARIES_FOLDER } from "@/data/municipalSecretaries";
+import { RTI_DEPARTMENT_FOLDER, RTI_FOLDER, RTI_OFFICERS_FOLDER, RTI_OFFICERS_ORDER, rtiArchiveDocuments } from "@/data/rtiDocuments";
+import { rtsArchiveDocuments, RTS_FOLDER } from "@/data/rtsDocuments";
 import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
 import { useLang } from "@/i18n/LanguageContext";
+import { completedWorks } from "@/data/completedWorks";
+import { ncapArchiveDocuments } from "@/data/ncapSearchMeta";
+import { ncapFileUrl } from "@/lib/ncap";
 import { DRAINAGE_DOCUMENTS_FOLDER, drainageDocuments } from "@/data/drainageDocuments";
+import { TOWN_PLANNING_DOCUMENTS_FOLDER, townPlanningDocuments } from "@/data/townPlanningDocuments";
+import {
+  AUDIT_DOCUMENTS_FOLDER,
+  ELECTRICAL_DOCUMENTS_FOLDER,
+  FIRE_INFORMATION_FOLDER,
+  LIBRARY_DOCUMENTS_FOLDER,
+  MECHANICAL_DOCUMENTS_FOLDER,
+  NULM_DOCUMENTS_FOLDER,
+  STANDING_COMMITTEE_VOLUME_FOLDER,
+  auditDocuments,
+  electricalPublicDocuments,
+  fireInformationDocuments,
+  libraryDocuments,
+  mechanicalPublicDocuments,
+  nulmDocuments,
+  standingCommitteeVolumeMinutes,
+} from "@/data/reviewedPublicDocuments";
 import { localizeDigits } from "@/i18n/digits";
 import { REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import {
@@ -171,6 +201,16 @@ const DigitalRepository = () => {
           <EducationDepartmentDocuments />
         </div>
 
+        <div className="min-w-0 mb-10" id="town-planning-department">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Town Planning Department" : "नगररचना विभाग"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={townPlanningDocuments}
+            folderSegments={[...TOWN_PLANNING_DOCUMENTS_FOLDER]}
+          />
+        </div>
+
         <div className="min-w-0 mb-10" id="drainage-department">
           <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
             {en ? "Drainage Department" : "ड्रेनेज विभाग"}
@@ -178,6 +218,217 @@ const DigitalRepository = () => {
           <DocumentArchiveBrowser
             documents={drainageDocuments}
             folderSegments={[...DRAINAGE_DOCUMENTS_FOLDER]}
+          />
+        </div>
+
+        <div className="min-w-0 mb-10" id="administration-and-establishment">
+          <AdministrationEstablishmentDocuments />
+        </div>
+
+        <div className="min-w-0 mb-10" id="citizen-services">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "7 Star Citizen FAQs" : "७ स्टार नागरिक प्रश्नोत्तरे"}
+          </h2>
+          <DocumentArchiveBrowser documents={[SEVEN_STAR_FAQ_DOCUMENT]} folderSegments={[]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="guidelines-for-disaster">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Guidelines for Disaster" : "आपत्ती व्यवस्थापन मार्गदर्शक"}
+          </h2>
+          <DocumentArchiveBrowser documents={[DISASTER_GUIDELINES_DOCUMENT]} folderSegments={[]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="dastavez">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Dastavez" : "दस्तऐवज"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={municipalArchiveFiles(dastavezDocuments)}
+            folderSegments={[dastavezDocuments[0].folder]}
+          />
+        </div>
+
+        <div className="min-w-0 mb-10" id="policies-guidelines">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Policies & Guidelines" : "धोरणे व मार्गदर्शक सूचना"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={municipalArchiveFiles(policyDocuments)}
+            folderSegments={[policyDocuments[0].folder]}
+          />
+        </div>
+
+        <div className="min-w-0 mb-10" id="municipal-secretaries">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Municipal Corporation Secretaries" : "महानगरपालिका सचिवांची यादी"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={[MUNICIPAL_SECRETARIES_DOCUMENT]}
+            folderSegments={[SECRETARIES_FOLDER]}
+          />
+        </div>
+
+        <div className="min-w-0 mb-10" id="rts">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Right to Service" : "सेवा हक्क"}
+          </h2>
+          <DocumentArchiveBrowser documents={rtsArchiveDocuments} folderSegments={[RTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="chief-accounts-finance-officer">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Chief Accounts & Finance Officer" : "मुख्य लेखा व वित्त अधिकारी"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={chiefAccountsOfficerDocuments}
+            folderSegments={[CHIEF_ACCOUNTS_OFFICER_FOLDER]}
+          />
+        </div>
+
+        <div className="min-w-0 mb-10" id="budget">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Budget" : "अर्थसंकल्प"}
+          </h2>
+          {budgetYearSections.filter((section) => budgetDocumentsFor(section.id).length > 0).map((section) => (
+            <div key={section.id} className="mb-8">
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                {en ? section.titleEn : section.titleMr}
+              </h3>
+              <DocumentArchiveBrowser
+                documents={budgetDocumentsFor(section.id)}
+                folderSegments={[BUDGET_FOLDER, section.id]}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="min-w-0 mb-10" id="standing-committee">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Standing Committee Minutes" : "स्थायी समिती इतिवृत्त"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={standingCommitteeVolumeMinutes}
+            folderSegments={["standing-committee", STANDING_COMMITTEE_VOLUME_FOLDER]}
+            initialSort="date-oldest"
+          />
+          {standingCommitteeYears.map((year) => {
+            const documents = standingCommitteeMinutes
+              .filter((doc) => doc.year === year)
+              .map((doc) => ({ id: doc.id, file: doc.file, bytes: doc.bytes, date: doc.date }));
+            return (
+              <div key={year} className="mb-8">
+                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">{d(year)}</h3>
+                <DocumentArchiveBrowser
+                  documents={documents}
+                  folderSegments={["standing-committee", String(year)]}
+                  initialSort="date-oldest"
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="min-w-0 mb-10" id="election-insights">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Election Insights" : "निवडणूक माहिती"}
+          </h2>
+          {electionInsightCategories.filter((category) => category.files.length > 0).map((category) => (
+            <div key={category.id} className="mb-8">
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                {en ? category.titleEn : category.titleMr}
+              </h3>
+              <DocumentArchiveBrowser
+                documents={category.files}
+                folderSegments={[ELECTION_INSIGHTS_ROOT, category.folder]}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="min-w-0 mb-10" id="rti">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Right to Information" : "माहिती अधिकार"}
+          </h2>
+          <div className="mb-8">
+            <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+              {en ? "Department-wise RTI Documents" : "विभागनिहाय माहिती अधिकार दस्तऐवज"}
+            </h3>
+            <DocumentArchiveBrowser
+              documents={rtiArchiveDocuments()}
+              folderSegments={[RTI_FOLDER, RTI_DEPARTMENT_FOLDER]}
+            />
+          </div>
+          <div className="mb-8">
+            <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+              {en ? "RTI Officers List" : "माहिती अधिकार अधिकारी यादी"}
+            </h3>
+            <DocumentArchiveBrowser
+              documents={[RTI_OFFICERS_ORDER]}
+              folderSegments={[RTI_FOLDER, RTI_OFFICERS_FOLDER]}
+            />
+          </div>
+        </div>
+
+        <div className="min-w-0 mb-10" id="completed-works">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "List of Completed Works" : "पूर्ण झालेली कामे"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={completedWorks}
+            folderSegments={["List of Completed Works"]}
+          />
+        </div>
+
+        <div className="min-w-0 mb-10" id="audit-department">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Audit Department" : "लेखापरीक्षण विभाग"}
+          </h2>
+          <DocumentArchiveBrowser documents={auditDocuments} folderSegments={[...AUDIT_DOCUMENTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="electrical-department">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Electrical Department" : "विद्युत विभाग"}
+          </h2>
+          <DocumentArchiveBrowser documents={electricalPublicDocuments} folderSegments={[...ELECTRICAL_DOCUMENTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="library-department">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Library" : "वाचनालय"}
+          </h2>
+          <DocumentArchiveBrowser documents={libraryDocuments} folderSegments={[...LIBRARY_DOCUMENTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="nulm">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "NULM" : "राष्ट्रीय नागरी उपजीविका अभियान"}
+          </h2>
+          <DocumentArchiveBrowser documents={nulmDocuments} folderSegments={[...NULM_DOCUMENTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="fire-brigade-information">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Fire and emergency services" : "अग्निशमन व आणीबाणी सेवा"}
+          </h2>
+          <DocumentArchiveBrowser documents={fireInformationDocuments} folderSegments={[...FIRE_INFORMATION_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="mechanical-department">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Mechanical Department" : "यांत्रिकी विभाग"}
+          </h2>
+          <DocumentArchiveBrowser documents={mechanicalPublicDocuments} folderSegments={[...MECHANICAL_DOCUMENTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="ncap">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "National Clean Air Programme (NCAP)" : "राष्ट्रीय स्वच्छ हवा कार्यक्रम (NCAP)"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={ncapArchiveDocuments()}
+            fileUrl={ncapFileUrl}
           />
         </div>
 

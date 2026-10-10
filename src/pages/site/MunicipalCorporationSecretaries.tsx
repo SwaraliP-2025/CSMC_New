@@ -4,9 +4,9 @@ import { InPagePdfPreview } from "@/components/site/InPagePdfPreview";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
+import { SECRETARIES_FILE, SECRETARIES_FOLDER } from "@/data/municipalSecretaries";
 
-const SECRETARIES_FILE = "Municipal_Corporation_Secretary_List_2026.pdf";
-const SECRETARIES_URL = `${import.meta.env.BASE_URL}documents/${encodeURIComponent("List of Municipal Corporation Secretaries")}/${encodeURIComponent(SECRETARIES_FILE)}`;
+const SECRETARIES_URL = `${import.meta.env.BASE_URL}documents/${encodeURIComponent(SECRETARIES_FOLDER)}/${encodeURIComponent(SECRETARIES_FILE)}`;
 
 const MunicipalCorporationSecretaries = () => {
   const { lang } = useLang();

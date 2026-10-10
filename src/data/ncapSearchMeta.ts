@@ -1,4 +1,7 @@
+import type { ArchiveFile } from "@/lib/archiveDocuments";
+
 /** Titles and short excerpts derived from public/data/ncap-documents.json. Full text stays on the NCAP page. */
+
 export type NcapSearchMeta = {
   id: string;
   title: string;
@@ -6,6 +9,7 @@ export type NcapSearchMeta = {
   organisation: string | null;
   year: number | null;
   fileType: "pdf" | "docx";
+  bytes: number;
   excerpt: string;
 };
 
@@ -17,6 +21,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": "Aurangabad Municipal Corporation",
     "year": null,
     "fileType": "docx",
+    "bytes": 2582063,
     "excerpt": "ANNEX 2: CITY SOLID WASTE ACTION PLAN (CSWAP)° (As referred in Chapter 2 and 6) ULB’s City Profile: (demographic and waste generation details) 1 Name of ULB : A"
   },
   {
@@ -26,6 +31,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": "Aurangabad Smart City Development Corporation Ltd.",
     "year": 2020,
     "fileType": "pdf",
+    "bytes": 3236603,
     "excerpt": "ffi ASCDCL AuranAabad Smart City Development Corporation ttd. snirmn r.n€ foA We qftRilr fuFrk, CIN No. : U93090MH2019SGC286039 5n. q;. a(rsfim(rfr/ 2020 I z g "
   },
   {
@@ -35,6 +41,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": "Aurangabad Municipal Corporation",
     "year": 2021,
     "fileType": "pdf",
+    "bytes": 1142599,
     "excerpt": "1 Aurangabad Municipal Corporation, Aurangabad Request for Proposal Tender for Collection of Construction and Demolition Waste generated within AMC Limit and Es"
   },
   {
@@ -44,6 +51,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": "Office of the Assistant Commissioner of Police (Traffic), Aurangabad City",
     "year": null,
     "fileType": "pdf",
+    "bytes": 599197,
     "excerpt": "office of the Asistant Commissioner of Police (Trafic), Aurangabad City (FA9M HTS FHNT, HTarATI, TAI Ts, 3MMATE TE) 7. o?¥o-??¥o4 Y6 email- acptraf.abad@mahapol"
   },
   {
@@ -53,6 +61,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": null,
     "year": null,
     "fileType": "pdf",
+    "bytes": 3740128,
     "excerpt": ""
   },
   {
@@ -62,6 +71,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": null,
     "year": null,
     "fileType": "pdf",
+    "bytes": 131979,
     "excerpt": ""
   },
   {
@@ -71,6 +81,7 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": null,
     "year": null,
     "fileType": "pdf",
+    "bytes": 498160,
     "excerpt": ""
   },
   {
@@ -80,6 +91,15 @@ export const NCAP_SEARCH_META: NcapSearchMeta[] = [
     "organisation": "Office of the Assistant Commissioner of Police (Traffic), Aurangabad City",
     "year": null,
     "fileType": "pdf",
+    "bytes": 599197,
     "excerpt": "office of the Asistant Commissioner of Police (Trafic), Aurangabad City (FA9M HTS FHNT, HTarATI, TAI Ts, 3MMATE TE) 7. o?¥o-??¥o4 Y6 email- acptraf.abad@mahapol"
   }
 ];
+
+export function ncapArchiveDocuments(): ArchiveFile[] {
+  return NCAP_SEARCH_META.map((doc) => ({
+    id: doc.id,
+    file: doc.fileName,
+    bytes: doc.bytes,
+  }));
+}

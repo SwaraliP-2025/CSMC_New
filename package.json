@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:release": "node scripts/build-filtered-release.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist",
+    "deploy": "npm run build:release && npx gh-pages -d dist-release",
     "test": "vitest run",
     "test:watch": "vitest",
     "import:facilities": "python scripts/import-gis-facilities.py && node scripts/extract-facility-locations.mjs"

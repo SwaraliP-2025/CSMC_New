@@ -3,43 +3,14 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
 import { BUDGET_FOLDER, budgetDocumentsFor, budgetYearFromParam, budgetYearSections, type BudgetYearId } from "@/data/budgetDocuments";
 import { standingCommitteeMinutes, standingCommitteeYears } from "@/data/standingCommitteeMinutes";
+import { STANDING_COMMITTEE_VOLUME_FOLDER, standingCommitteeVolumeMinutes } from "@/data/reviewedPublicDocuments";
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { FileText, Download, Search, Filter, ExternalLink, Eye } from "lucide-react";
-import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
-import { openPdfBlob } from "@/lib/unifiedSearch";
+import { useSearchParams } from "react-router-dom";
+import { Filter } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 
 type DocCategory = "all" | "resolutions" | "minutes" | "rti" | "budget" | "tenders";
-type DocFormat = "pdf" | "excel";
 type DocType = "agenda" | "minutes" | "attendance";
-
-interface Doc {
-  id: number;
-  title: string;
-  category: Exclude<DocCategory, "all">;
-  date: string;
-  size: string;
-  year: number; // FY start year for budgets (e.g. 2025 => 2025-26)
-  format?: DocFormat;
-  type?: DocType;
-  /** Optional digital-repository record id for cross-link */
-  repoId?: string;
-}
-
-const DOCS: Doc[] = [
-  { id: 1,  title: "General Body Resolution — March 2026",                  category: "resolutions", date: "28 Mar 2026", size: "1.2 MB", year: 2026 },
-  { id: 2,  title: "General Body Resolution — February 2026",               category: "resolutions", date: "25 Feb 2026", size: "980 KB", year: 2026 },
-  { id: 19, title: "Standing Committee Meeting Agenda — April 2026",        category: "minutes",     date: "14 Apr 2026", size: "820 KB", year: 2026, type: "agenda", repoId: "mm-sc-agenda" },
-  { id: 20, title: "Standing Committee Meeting Agenda — March 2026",        category: "minutes",     date: "11 Mar 2026", size: "760 KB", year: 2026, type: "agenda" },
-  { id: 21, title: "Standing Committee Meeting Attendance — April 2026",    category: "minutes",     date: "15 Apr 2026", size: "410 KB", year: 2026, type: "attendance" },
-  { id: 22, title: "Standing Committee Meeting Attendance — March 2026",    category: "minutes",     date: "12 Mar 2026", size: "390 KB", year: 2026, type: "attendance" },
-  { id: 6,  title: "RTI Disclosure — Quarterly Report Q4 2025-26",          category: "rti",         date: "1 Apr 2026",  size: "3.4 MB", year: 2026, repoId: "rti-q4" },
-  { id: 7,  title: "RTI Disclosure — Quarterly Report Q3 2025-26",          category: "rti",         date: "1 Jan 2026",  size: "3.1 MB", year: 2026, repoId: "rti-q3" },
-  { id: 16, title: "Tender Notice — SWM Phase II (NIT No. CSMC/SWM/2026/01)", category: "tenders",   date: "10 Apr 2026", size: "890 KB", year: 2026 },
-  { id: 17, title: "Tender Notice — Road Resurfacing Zone 4-6",             category: "tenders",     date: "5 Apr 2026",  size: "760 KB", year: 2026 },
-  { id: 18, title: "General Body Resolution — January 2026",                category: "resolutions", date: "28 Jan 2026", size: "1.1 MB", year: 2026 },
-];
 
 const CATEGORY_LABELS: Record<DocCategory, string> = {
   all: "All Documents",
@@ -50,86 +21,27 @@ const CATEGORY_LABELS: Record<DocCategory, string> = {
   tenders: "Tender Notices",
 };
 
-const CATEGORY_COLORS: Record<Exclude<DocCategory, "all">, string> = {
-  resolutions: "bg-blue-100 text-blue-700",
-  minutes:     "bg-purple-100 text-purple-700",
-  rti:         "bg-green-100 text-green-700",
-  budget:      "bg-amber-100 text-amber-700",
-  tenders:     "bg-red-100 text-red-700",
-};
-
 const isDocCategory = (v: string | null): v is DocCategory =>
   !!v && ["all", "resolutions", "minutes", "rti", "budget", "tenders"].includes(v);
-
-function prototypePdfBlob(doc: Doc) {
-  const text = [
-    "Chhatrapati Sambhajinagar Municipal Corporation",
-    "Prototype sample PDF — not an official gazette copy",
-    "",
-    doc.title,
-    "",
-    `Category: ${CATEGORY_LABELS[doc.category]}`,
-    `Listed date: ${doc.date}`,
-    `Listed size: ${doc.size}`,
-    `Year: ${doc.year}`,
-    doc.format ? `Format label: ${doc.format}` : "",
-    doc.type ? `Type: ${doc.type}` : "",
-    "",
-    "This file is generated in-browser for portal prototype demonstration only.",
-    "Official signed copies are published through CSMC channels when available.",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  return buildSimplePdf(text);
-}
-
-function openPrototypePdf(doc: Doc) {
-  openPdfBlob(prototypePdfBlob(doc), pdfFilename(doc.title, `pub-doc-${doc.id}`), doc.title);
-}
-
-function downloadPrototypePdf(doc: Doc) {
-  const blob = prototypePdfBlob(doc);
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = pdfFilename(doc.title, `pub-doc-${doc.id}`);
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
 
 const PublicDocuments = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
   const [searchParams, setSearchParams] = useSearchParams();
   const [category, setCategory] = useState<DocCategory>("all");
-  const [search, setSearch] = useState("");
   const [yearFilter, setYearFilter] = useState<number | null>(null);
-  const [formatFilter, setFormatFilter] = useState<DocFormat | null>(null);
   const [typeFilter, setTypeFilter] = useState<DocType | null>(null);
   const [budgetYear, setBudgetYear] = useState<BudgetYearId | null>(null);
 
   useEffect(() => {
     const cat = searchParams.get("category");
     const year = searchParams.get("year");
-    const format = searchParams.get("format");
     const type = searchParams.get("type");
     if (isDocCategory(cat)) setCategory(cat);
     setYearFilter(year && /^\d{4}$/.test(year) ? Number(year) : null);
     setBudgetYear(budgetYearFromParam(year));
-    setFormatFilter(format === "excel" || format === "pdf" ? format : null);
     setTypeFilter(type === "agenda" || type === "minutes" || type === "attendance" ? type : null);
   }, [searchParams]);
-
-  const filtered = DOCS.filter(doc =>
-    (category === "all" || doc.category === category) &&
-    (yearFilter === null || doc.year === yearFilter) &&
-    (formatFilter === null || doc.format === formatFilter) &&
-    (typeFilter === null || doc.type === typeFilter) &&
-    doc.title.toLowerCase().includes(search.toLowerCase())
-  );
 
   const showMinutesArchive = category === "minutes" && (typeFilter === null || typeFilter === "minutes");
   const minutesOnly = typeFilter === "minutes";
@@ -158,35 +70,11 @@ const PublicDocuments = () => {
         }
       />
       <section className="py-16 container">
-        {!archiveOnly && (
-        <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 mb-6">
-          {en ? (
-            <>
-              Files listed here are <strong>prototype samples</strong> for demonstration. Download generates a labelled
-              &quot;Prototype sample PDF&quot;. Where a matching record exists, use the repository link for the Municipal Document Repository entry.
-            </>
-          ) : (
-            <>
-              येथे सूचीबद्ध फाईल्स <strong>नमुना आवृत्तीसाठी</strong> आहेत. डाउनलोड केल्यास &quot;Prototype sample PDF&quot; तयार होते.
-              जुळणारी नोंद असल्यास दस्तऐवज भांडार दुवा वापरा.
-            </>
-          )}
-        </p>
-        )}
-
-        {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
-          {!archiveOnly && (
-          <div className="flex items-center gap-2 border border-border rounded-xl px-4 py-2.5 bg-white flex-1 focus-within:ring-2 focus-within:ring-civic-blue/30">
-            <Search className="h-4 w-4 text-muted-foreground shrink-0" />
-            <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              placeholder={en ? "Search documents..." : "दस्तऐवज शोधा..."} className="text-sm bg-transparent outline-none flex-1" />
-          </div>
-          )}
           <div className="flex items-center gap-2 flex-wrap">
             <Filter className="h-4 w-4 text-muted-foreground" />
             {(Object.keys(CATEGORY_LABELS) as DocCategory[]).map(c => (
-              <button key={c} onClick={() => { setCategory(c); setYearFilter(null); setBudgetYear(null); setFormatFilter(null); setTypeFilter(null); }}
+              <button key={c} onClick={() => { setCategory(c); setYearFilter(null); setBudgetYear(null); setTypeFilter(null); }}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${category === c ? "bg-civic-blue text-white border-civic-blue" : "border-border text-muted-foreground hover:border-civic-blue hover:text-civic-blue"}`}>
                 {CATEGORY_LABELS[c]}
               </button>
@@ -212,6 +100,14 @@ const PublicDocuments = () => {
               key={selectedMinuteYear}
               documents={minuteDocuments}
               folderSegments={["standing-committee", String(selectedMinuteYear)]}
+              initialSort="date-oldest"
+            />
+            <h3 className="font-serif text-lg font-bold text-civic-blue mt-8 mb-3">
+              {en ? "Date-range minute volumes" : "कालावधीनुसार इतिवृत्त खंड"}
+            </h3>
+            <DocumentArchiveBrowser
+              documents={standingCommitteeVolumeMinutes}
+              folderSegments={["standing-committee", STANDING_COMMITTEE_VOLUME_FOLDER]}
               initialSort="date-oldest"
             />
           </div>
@@ -278,60 +174,17 @@ const PublicDocuments = () => {
           </div>
         )}
 
-        {/* Document list */}
         {!archiveOnly && (
-        <div className="divide-y divide-border border border-border rounded-2xl overflow-hidden bg-white shadow-sm">
-          {filtered.length === 0 && !showMinutesArchive && (
-            <div className="py-16 text-center text-muted-foreground">No documents found.</div>
-          )}
-          {filtered.map(doc => (
-            <div key={doc.id} className="flex items-center gap-4 px-6 py-4 hover:bg-muted/30 transition-colors group">
-              <div className="h-10 w-10 rounded-xl bg-civic-blue/10 flex items-center justify-center shrink-0 group-hover:bg-civic-blue group-hover:text-white transition-all">
-                <FileText className="h-5 w-5 text-civic-blue group-hover:text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-civic-ink truncate">{d(doc.title)}</p>
-                <div className="flex items-center gap-2 mt-1 flex-wrap">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${CATEGORY_COLORS[doc.category]}`}>
-                    {CATEGORY_LABELS[doc.category]}
-                  </span>
-                  <span className="text-xs text-muted-foreground">{d(doc.date)}</span>
-                  <span className="text-xs text-muted-foreground">• {d(doc.size)}</span>
-                  {doc.repoId && (
-                    <Link
-                      to={`/digital-repository/${doc.repoId}`}
-                      className="text-[10px] font-bold text-civic-blue hover:underline inline-flex items-center gap-0.5"
-                    >
-                      Repository <ExternalLink className="h-2.5 w-2.5" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => openPrototypePdf(doc)}
-                  title={en ? "Preview document" : "दस्तऐवज पूर्वावलोकन"}
-                  className="flex items-center gap-1.5 text-xs font-bold text-white bg-civic-blue hover:bg-civic-blue/90 px-3 py-1.5 rounded-lg transition-all"
-                >
-                  <Eye className="h-3.5 w-3.5" /> {en ? "Preview" : "पहा"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => downloadPrototypePdf(doc)}
-                  title={en ? "Download sample PDF" : "नमुना PDF डाउनलोड"}
-                  className="flex items-center gap-1.5 text-xs font-bold text-civic-blue hover:text-white hover:bg-civic-blue px-3 py-1.5 rounded-lg border border-civic-blue transition-all"
-                >
-                  <Download className="h-3.5 w-3.5" /> {doc.format === "excel" ? (en ? "Excel" : "एक्सेल") : "PDF"}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+          <div className="py-16 text-center text-muted-foreground border border-border rounded-2xl bg-white">
+            {en
+              ? "No published files are listed in this category. Standing committee minutes and budget documents are available under those categories."
+              : "या प्रकारात प्रकाशित फाईल्स नाहीत. स्थायी समितीची इतिवृत्ते आणि अर्थसंकल्प त्या प्रकारांत उपलब्ध आहेत."}
+          </div>
         )}
         <p className="text-xs text-muted-foreground mt-4 text-center">
-          Documents are published as per Section 4(1)(b) of the Right to Information Act, 2005.
-          {!archiveOnly && " Prototype sample downloads are for demonstration only."}
+          {en
+            ? "Documents are published as per Section 4(1)(b) of the Right to Information Act, 2005."
+            : "दस्तऐवज माहितीचा अधिकार अधिनियम, २००५ च्या कलम ४(१)(ब) नुसार प्रकाशित केले जातात."}
         </p>
       </section>
     </Layout>

@@ -19,7 +19,9 @@ import { searchPdf, type PdfSearchHit, type PdfSearchProgress } from "@/lib/pdfS
 type Props = {
   documents: ArchiveFile[];
   /** Folder segments under public/documents, without the file name. */
-  folderSegments: string[];
+  folderSegments?: string[];
+  /** Resolves a filename when the file is not under public/documents. */
+  fileUrl?: (file: string) => string;
   initialSort?: ArchiveSortKey;
 };
 
@@ -32,7 +34,7 @@ const SORTS: { key: ArchiveSortKey; en: string; mr: string }[] = [
   { key: "size-smallest", en: "File size smallest–largest", mr: "आकार लहान–मोठा" },
 ];
 
-export function DocumentArchiveBrowser({ documents, folderSegments, initialSort = "name-asc" }: Props) {
+export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl, initialSort = "name-asc" }: Props) {
   const { lang, d } = useLang();
   const en = lang === "en";
   const [sort, setSort] = useState<ArchiveSortKey>(initialSort);
@@ -44,7 +46,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments, initialSort 
   const stopRef = useRef<AbortController | null>(null);
 
   const sorted = useMemo(() => sortArchiveFiles(documents, sort), [documents, sort]);
-  const hrefFor = (file: string) => publicDocumentUrl([...folderSegments, file]);
+  const hrefFor = (file: string) => fileUrl?.(file) ?? publicDocumentUrl([...folderSegments, file]);
 
   const nameHaystack = (doc: ArchiveFile) => [doc.file, doc.titleEn, doc.titleMr].filter(Boolean).join(" ");
   const visible = sorted.filter((doc) => {

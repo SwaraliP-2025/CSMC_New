@@ -1,3 +1,5 @@
+import type { ArchiveFile } from "@/lib/archiveDocuments";
+
 /**
  * Official RTS documents published on the CSMC RTS page.
  * English and Marathi titles are separate. Dates are taken from the source PDFs.
@@ -12,9 +14,11 @@ export type RtsDocument = {
   typeMr?: string;
   /** Path under the Vite public folder, without a leading slash. */
   file: string;
+  bytes: number;
 };
 
-const RTS_FILE_BASE = `${import.meta.env.BASE_URL}documents/rts/`;
+export const RTS_FOLDER = "rts";
+const RTS_FILE_BASE = `${import.meta.env.BASE_URL}documents/${RTS_FOLDER}/`;
 
 export function rtsDocumentUrl(file: string) {
   return `${RTS_FILE_BASE}${file}`;
@@ -29,6 +33,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
     typeEn: "Gazette",
     typeMr: "राजपत्र",
     file: "Adhi-Suchna.pdf",
+    bytes: 6654507,
   },
   {
     id: "rts-gazette-2025-11-20",
@@ -38,6 +43,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
     typeEn: "Gazette",
     typeMr: "राजपत्र",
     file: "Gazette_Dt_20-11-2025.pdf",
+    bytes: 558629,
   },
   {
     id: "rts-act-2015",
@@ -47,6 +53,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
     typeEn: "Act",
     typeMr: "अधिनियम",
     file: "Maharashtra_Right_to_public_services_Act_2015.pdf",
+    bytes: 268783,
   },
   {
     id: "rts-rules-2016",
@@ -56,6 +63,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
     typeEn: "Rules",
     typeMr: "नियम",
     file: "RTS_Rules_Gazette2.pdf",
+    bytes: 174904,
   },
   {
     id: "rts-mc-office-order",
@@ -65,6 +73,7 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
     typeEn: "Office order",
     typeMr: "कार्यालयीन आदेश",
     file: "Gazette_2.pdf",
+    bytes: 2795360,
   },
   {
     id: "rts-gazette-2025-08-21",
@@ -74,8 +83,19 @@ export const RTS_DOCUMENTS: RtsDocument[] = [
     typeEn: "Gazette",
     typeMr: "राजपत्र",
     file: "Maharashtra_Public_Service_Right_Act_Rules_Gazette_21-08-2025.pdf",
+    bytes: 288322,
   },
 ];
+
+/** Same six RTS records, shaped for the repository browser. */
+export const rtsArchiveDocuments: ArchiveFile[] = RTS_DOCUMENTS.map((doc) => ({
+  id: doc.id,
+  file: doc.file,
+  bytes: doc.bytes,
+  date: doc.date,
+  titleEn: doc.titleEn,
+  titleMr: doc.titleMr,
+}));
 
 /** Official list of notified services, as linked from the CSMC RTS page. */
 export const RTS_NOTIFIED_SERVICES_URL =

@@ -1,5 +1,8 @@
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
-import { administrationEstablishmentEntries } from "@/data/administrationEstablishmentDocuments";
+import {
+  administrationEstablishmentCategory,
+  administrationEstablishmentEntries,
+} from "@/data/administrationEstablishmentDocuments";
 import { useLang } from "@/i18n/LanguageContext";
 
 export function AdministrationEstablishmentDocuments() {
@@ -26,6 +29,23 @@ export function AdministrationEstablishmentDocuments() {
           <DocumentArchiveBrowser documents={category.files} folderSegments={category.folderSegments} />
         </div>
       ))}
+    </div>
+  );
+}
+
+/** The Fire cadre list already published under Administration and Establishment. */
+export function FireCadreDocuments() {
+  const category = administrationEstablishmentCategory("fire");
+  const { lang } = useLang();
+  const en = lang === "en";
+  if (!category) return null;
+
+  return (
+    <div className="min-w-0" id="fire">
+      <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+        {en ? "Fire cadre documents" : "अग्निशमन संवर्ग दस्तऐवज"}
+      </h3>
+      <DocumentArchiveBrowser documents={category.files} folderSegments={category.folderSegments} />
     </div>
   );
 }

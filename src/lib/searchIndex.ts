@@ -16,6 +16,7 @@ import { NCAP_SEARCH_META } from "@/data/ncapSearchMeta";
 import { OFFICIAL, SERVICE_ENTRIES } from "@/data/officialLinks";
 import { RTI_DOCS, RTI_OFFICERS } from "@/data/rtiPublic";
 import { SITE_NOTICES } from "@/data/siteNotices";
+import { dastavezDocuments } from "@/data/municipalDocuments";
 import { getGalleryStories } from "@/data/visualStories";
 import { facilityCategories } from "@/lib/facilities";
 import { ncapFileUrl } from "@/lib/ncap";
@@ -624,6 +625,19 @@ function buildNcapDocumentRecords(): StubInput[] {
   }));
 }
 
+function buildDastavezRecords(): StubInput[] {
+  return dastavezDocuments.map((doc) => ({
+    id: `dastavez-${doc.id}`,
+    category: "policy" as const,
+    titleEn: doc.titleEn,
+    titleMr: doc.titleMr,
+    descriptionEn: `Published on the Dastavez page. File: ${doc.file}.`,
+    descriptionMr: `दस्तऐवज पृष्ठावर प्रकाशित. फाइल: ${doc.file}.`,
+    href: "/dastavez",
+    keywords: ["dastavez", "दस्तऐवज", doc.titleEn, doc.titleMr, doc.file, "banner", "बॅनर"],
+  }));
+}
+
 function buildRtiOfficerRecords(): StubInput[] {
   return RTI_OFFICERS.map((o, i) => ({
     id: `rti-officer-${i + 1}`,
@@ -720,6 +734,7 @@ export function getGlobalSearchIndex(): CivicRecord[] {
     ),
   );
   for (const page of buildFaqRecords(existingTitles)) addStub(page, records, existingIds);
+  for (const page of buildDastavezRecords()) addStub(page, records, existingIds);
   for (const page of buildNcapDocumentRecords()) addStub(page, records, existingIds);
   for (const page of buildRtiOfficerRecords()) addStub(page, records, existingIds);
   for (const doc of RTI_DOCS) {

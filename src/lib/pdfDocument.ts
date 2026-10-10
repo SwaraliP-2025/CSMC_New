@@ -1,11 +1,21 @@
 let pdfjsPromise: Promise<typeof import("pdfjs-dist")> | null = null;
 const openDocs = new Map<string, Promise<import("pdfjs-dist").PDFDocumentProxy>>();
 
-/** Same document, whether the caller used a relative path or a full URL. */
+/** Same document for equivalent relative and absolute URLs. Query identity is kept; fragments are not. */
 export function pdfResourceKey(url: string) {
   try {
     const base = typeof window !== "undefined" ? window.location.href : "http://localhost/";
-    return decodeURIComponent(new URL(url, base).pathname);
+    const parsed = new URL(url, base);
+    const path = decodeURIComponent(parsed.pathname);
+    const params = [...parsed.searchParams.entries()].sort((left, right) => {
+      const byName = left[0].localeCompare(right[0]);
+      return byName === 0 ? left[1].localeCompare(right[1]) : byName;
+    });
+    if (params.length === 0) return path;
+    const query = params
+      .map(([name, value]) => `${encodeURIComponent(name)}=${encodeURIComponent(value)}`)
+      .join("&");
+    return `${path}?${query}`;
   } catch {
     return url.split("#")[0];
   }

@@ -6,6 +6,8 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   base: "/CSMC_New/", // GitHub repo name
+  // The filtered release build copies an approved subset after Vite finishes.
+  publicDir: process.env.CSMC_FILTER_PUBLIC === "1" ? false : "public",
   server: {
     host: "::",
     port: 8080,
