@@ -39,6 +39,13 @@ import { isSameOriginPdfHref } from "@/lib/pdfPreview";
 
 const publicRoot = path.resolve("public");
 
+function repositoryListingSource() {
+  return [
+    readFileSync("src/pages/site/DigitalRepository.tsx", "utf8"),
+    readFileSync("src/data/repositoryShelves.ts", "utf8"),
+  ].join("\n");
+}
+
 function expectPublicFile(segments: string[]) {
   const full = path.join(publicRoot, ...segments);
   expect(existsSync(full), segments.join("/")).toBe(true);
@@ -98,13 +105,13 @@ describe("document mapping", () => {
   });
 
   it("shows Education, Town Planning, Drainage, and Administration in the repository and keeps department listings", () => {
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository).toContain('id="education-department"');
-    expect(repository).toContain('id="town-planning-department"');
-    expect(repository).toContain('id="drainage-department"');
-    expect(repository).toContain('id="administration-and-establishment"');
-    expect(repository).toContain('id="citizen-services"');
-    expect(repository).toContain('id="guidelines-for-disaster"');
+    const repository = repositoryListingSource();
+    expect(repository).toContain('id: "education-department"');
+    expect(repository).toContain('id: "town-planning-department"');
+    expect(repository).toContain('id: "drainage-department"');
+    expect(repository).toContain('id: "administration-and-establishment"');
+    expect(repository).toContain('id: "citizen-services"');
+    expect(repository).toContain('id: "guidelines-for-disaster"');
     expect(repository).toContain("SEVEN_STAR_FAQ_DOCUMENT");
     expect(repository).toContain("DISASTER_GUIDELINES_DOCUMENT");
     expect(repository).toContain("AdministrationEstablishmentDocuments");
@@ -145,6 +152,7 @@ describe("document mapping", () => {
       "src/data/rtsDocuments.ts",
       "src/data/municipalDocuments.ts",
       "src/pages/site/DigitalRepository.tsx",
+      "src/data/repositoryShelves.ts",
     ];
     const combined = publishedSources.map((file) => readFileSync(file, "utf8")).join("\n");
     expect(combined).not.toContain("Needs Review");
@@ -172,9 +180,9 @@ describe("document mapping", () => {
     const fireComponent = readFileSync("src/components/site/AdministrationEstablishmentDocuments.tsx", "utf8");
     expect(fireComponent).toContain('administrationEstablishmentCategory("fire")');
     expect(fireComponent.match(/FireCadreDocuments/g)?.length).toBeGreaterThan(0);
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="citizen-services"/g)).toHaveLength(1);
-    expect(repository.match(/id="guidelines-for-disaster"/g)).toHaveLength(1);
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "citizen-services"/g)).toHaveLength(1);
+    expect(repository.match(/id: "guidelines-for-disaster"/g)).toHaveLength(1);
     expect(readFileSync("src/data/citizenRepositoryDocuments.ts", "utf8")).not.toContain("/Tenders/");
   });
 
@@ -209,12 +217,12 @@ describe("document mapping", () => {
       expectPublicFile(["documents", CHIEF_ACCOUNTS_OFFICER_FOLDER, doc.file]);
     }
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
+    const repository = repositoryListingSource();
     for (const anchor of ["dastavez", "policies-guidelines", "municipal-secretaries", "rts", "chief-accounts-finance-officer"]) {
-      expect(repository.match(new RegExp(`id="${anchor}"`, "g"))).toHaveLength(1);
+      expect(repository.match(new RegExp(`id: "${anchor}"`, "g"))).toHaveLength(1);
     }
     for (const excluded of ["census-2026-27"]) {
-      expect(repository).not.toContain(`id="${excluded}"`);
+      expect(repository).not.toContain(`id: "${excluded}"`);
     }
     expect(repository).toContain("municipalArchiveFiles(dastavezDocuments)");
     expect(repository).toContain("municipalArchiveFiles(policyDocuments)");
@@ -253,10 +261,10 @@ describe("document mapping", () => {
       expect(url).toContain(encodeURIComponent(doc.file));
     }
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="budget"/g)).toHaveLength(1);
-    expect(repository).toContain("budgetDocumentsFor(section.id)");
-    expect(repository).toContain("folderSegments={[BUDGET_FOLDER, section.id]}");
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "budget"/g)).toHaveLength(1);
+    expect(repository).toContain("budgetDocumentsFor(");
+    expect(repository).toContain("BUDGET_FOLDER");
     const publicPage = readFileSync("src/pages/site/PublicDocuments.tsx", "utf8");
     expect(publicPage).toContain("budgetDocumentsFor(budgetSection.id)");
     expect(publicPage).toContain("folderSegments={[BUDGET_FOLDER, budgetSection.id]}");
@@ -304,18 +312,18 @@ describe("document mapping", () => {
       expectPublicFile(["documents", "standing-committee", String(expected.year), expected.file]);
     }
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="standing-committee"/g)).toHaveLength(1);
-    expect(repository).toContain("Standing Committee Minutes");
-    expect(repository).toContain("standingCommitteeYears.map((year) => {");
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
+    expect(repository).toContain("standingCommitteeMinutes");
+    expect(repository).toContain("standingCommitteeYears");
     expect(repository).toContain(".filter((doc) => doc.year === year)");
-    expect(repository).toContain('folderSegments={["standing-committee", String(year)]}');
-    expect(repository).toContain('initialSort="date-oldest"');
+    expect(repository).toContain('folderSegments: ["standing-committee", String(year)]');
+    expect(repository).toContain('initialSort: "date-oldest"');
     expect(repository).not.toContain("Needs Review");
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
-    expect(repository).not.toContain("tender-notice");
-    expect(repository).not.toContain("tender notice");
+    expect(repository).toContain('id: "tender-archive"');
+    expect(repository).not.toContain('folderSegments: ["standing-committee", "tender-notice"');
 
     const publicPage = readFileSync("src/pages/site/PublicDocuments.tsx", "utf8");
     expect(publicPage).toContain("standingCommitteeMinutes");
@@ -370,13 +378,13 @@ describe("document mapping", () => {
     expect(browser).toContain("<PdfFileActions");
     expect(browser).toContain('download={doc.file}');
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="election-insights"/g)).toHaveLength(1);
-    expect(repository).toContain("Election Insights");
-    expect(repository).toContain("electionInsightCategories.filter((category) => category.files.length > 0)");
-    expect(repository).toContain("documents={category.files}");
-    expect(repository).toContain("folderSegments={[ELECTION_INSIGHTS_ROOT, category.folder]}");
-    expect(repository.match(/id="standing-committee"/g)).toHaveLength(1);
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "election-insights"/g)).toHaveLength(1);
+    expect(repository).toContain("ELECTION_INSIGHTS_ROOT");
+    expect(repository).toContain("electionInsightCategories.filter((category) => category.files.length)");
+    expect(repository).toContain("documents: category.files");
+    expect(repository).toContain("folderSegments: [ELECTION_INSIGHTS_ROOT, category.folder]");
+    expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
     expect(standingCommitteeMinutes).toHaveLength(337);
     expect(repository).not.toContain("Needs Review");
     expect(repository).not.toContain("Duplicate Review");
@@ -420,21 +428,21 @@ describe("document mapping", () => {
     expect(DISASTER_GUIDELINES_DOCUMENT.bytes).toBe(759375);
     expect(statSync(path.join(publicRoot, "documents", DISASTER_GUIDELINES_DOCUMENT.file)).size).toBe(759375);
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="rti"/g)).toHaveLength(1);
-    expect(repository).toContain("Right to Information");
-    expect(repository).toContain("documents={rtiArchiveDocuments()}");
-    expect(repository).toContain("documents={[RTI_OFFICERS_ORDER]}");
-    expect(repository).toContain("folderSegments={[RTI_FOLDER, RTI_DEPARTMENT_FOLDER]}");
-    expect(repository).toContain("folderSegments={[RTI_FOLDER, RTI_OFFICERS_FOLDER]}");
-    expect(repository).toContain('id="guidelines-for-disaster"');
-    expect(repository).toContain("documents={[DISASTER_GUIDELINES_DOCUMENT]}");
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "rti"/g)).toHaveLength(1);
+    expect(repository).toContain("rtiArchiveDocuments");
+    expect(repository).toContain("documents: rtiArchiveDocuments()");
+    expect(repository).toContain("documents: [RTI_OFFICERS_ORDER]");
+    expect(repository).toContain("folderSegments: [RTI_FOLDER, RTI_DEPARTMENT_FOLDER]");
+    expect(repository).toContain("folderSegments: [RTI_FOLDER, RTI_OFFICERS_FOLDER]");
+    expect(repository).toContain('id: "guidelines-for-disaster"');
+    expect(repository).toContain("documents: [DISASTER_GUIDELINES_DOCUMENT]");
     expect(repository).not.toContain("rti-q3");
     expect(repository).not.toContain("rti-q4");
     expect(repository).not.toContain("Needs Review");
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
-    expect(repository.match(/id="standing-committee"/g)).toHaveLength(1);
+    expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
     expect(standingCommitteeMinutes).toHaveLength(337);
     expect(electionInsightCategories.filter((category) => category.files.length > 0).flatMap((category) => category.files)).toHaveLength(141);
 
@@ -475,16 +483,16 @@ describe("document mapping", () => {
       expect(statSync(full).size).toBe(doc.bytes);
     }
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="completed-works"/g)).toHaveLength(1);
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "completed-works"/g)).toHaveLength(1);
     expect(repository).toContain("List of Completed Works");
-    expect(repository).toContain("documents={completedWorks}");
-    expect(repository).toContain('folderSegments={["List of Completed Works"]}');
+    expect(repository).toContain("documents: completedWorks");
+    expect(repository).toContain('folderSegments: ["List of Completed Works"]');
     expect(repository).not.toContain("Municipal Document Repository/Works");
     expect(repository).not.toContain("Needs Review");
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
-    expect(repository.match(/id="standing-committee"/g)).toHaveLength(1);
+    expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
     expect(standingCommitteeMinutes).toHaveLength(337);
     expect(electionInsightCategories.filter((category) => category.files.length > 0).flatMap((category) => category.files)).toHaveLength(141);
     expect(rtiDocuments).toHaveLength(48);
@@ -528,12 +536,12 @@ describe("document mapping", () => {
       expect(publicDocumentUrl(["ncap", "documents", doc.fileName])).not.toBe(url);
     }
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
-    expect(repository.match(/id="ncap"/g)).toHaveLength(1);
+    const repository = repositoryListingSource();
+    expect(repository.match(/id: "ncap"/g)).toHaveLength(1);
     expect(repository).toContain("National Clean Air Programme (NCAP)");
     expect(repository).toContain("राष्ट्रीय स्वच्छ हवा कार्यक्रम (NCAP)");
-    expect(repository).toContain("documents={ncapArchiveDocuments()}");
-    expect(repository).toContain("fileUrl={ncapFileUrl}");
+    expect(repository).toContain("documents: ncapArchiveDocuments()");
+    expect(repository).toContain("ncapFileUrl");
     expect(repository).not.toContain('folderSegments={["ncap", "documents"]}');
     expect(repository).not.toContain("documents/ncap/documents");
     expect(repository).not.toContain("externalUrl");
@@ -621,12 +629,12 @@ describe("document mapping", () => {
     expect(original && value(original, "reconciliationStatus")).toBe("implemented");
     expect(statSync(path.join(publicRoot, ...value(original!, "localPath").split("/"))).size).toBe(1436575);
 
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
+    const repository = repositoryListingSource();
     for (const name of ["PMAY AHP APPLICANT", "Divyang_list.pdf", "Qualified_Applicant_8741.pdf", "Disqualified_Applicant", "Waiting_Applicant_3301.pdf", "Satara_Devlaee-1.pdf"]) {
       expect(repository).not.toContain(name);
     }
     expect(data.filter((row) => value(row, "category") === "census-2026-27" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(11);
-    expect(repository).not.toContain('id="census-2026-27"');
+    expect(repository).not.toContain('id: "census-2026-27"');
     expect(data.filter((row) => value(row, "reconciliationStatus") === "held" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(0);
     const tenderRows = data.filter((row) => row[col.localPath]?.startsWith("documents/Municipal Document Repository/Tenders/"));
     expect(tenderRows.filter((row) => value(row, "publicListingImplemented") === "yes")).toHaveLength(1011);

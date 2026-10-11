@@ -1,21 +1,23 @@
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { EDUCATION_DOCUMENTS_FOLDER, educationDocuments } from "@/data/educationDocuments";
 import { useLang } from "@/i18n/LanguageContext";
-import { publishedDocumentUrl } from "@/lib/archiveDocuments";
+import { archiveNameMatches, publishedDocumentUrl } from "@/lib/archiveDocuments";
 
-export function EducationDepartmentDocuments() {
+export function EducationDepartmentDocuments({ query = "" }: { query?: string }) {
   const { lang, d } = useLang();
   const en = lang === "en";
   const nameLabel = en ? "Name" : "नाव";
   const yearLabel = en ? "Year" : "वर्ष";
   const pdfLabel = "PDF";
   const title = en ? "Education Department" : "शिक्षण विभाग";
+  const documents = educationDocuments.filter((doc) => archiveNameMatches(doc.file, query));
+  if (!documents.length) return null;
 
   return (
     <div className="min-w-0">
       <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">{title}</h3>
       <ul className="flex flex-col gap-3 md:hidden">
-        {educationDocuments.map((doc) => {
+        {documents.map((doc) => {
           const href = publishedDocumentUrl([...EDUCATION_DOCUMENTS_FOLDER, doc.file]);
           return (
             <li key={doc.id} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
@@ -38,7 +40,7 @@ export function EducationDepartmentDocuments() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border bg-white">
-            {educationDocuments.map((doc) => {
+            {documents.map((doc) => {
               const href = publishedDocumentUrl([...EDUCATION_DOCUMENTS_FOLDER, doc.file]);
               return (
                 <tr key={doc.id} className="hover:bg-muted/30 transition-colors">

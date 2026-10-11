@@ -13,7 +13,6 @@ import {
   FolderOpen,
   LayoutGrid,
   List,
-  Loader2,
   Search,
   Share2,
   Sparkles,
@@ -22,42 +21,12 @@ import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
 import { AdministrationEstablishmentDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
-import { DISASTER_GUIDELINES_DOCUMENT, SEVEN_STAR_FAQ_DOCUMENT } from "@/data/citizenRepositoryDocuments";
-import { BUDGET_FOLDER, budgetDocumentsFor, budgetYearSections } from "@/data/budgetDocuments";
-import { ELECTION_INSIGHTS_ROOT, electionInsightCategories } from "@/data/electionInsights";
-import { standingCommitteeMinutes, standingCommitteeYears } from "@/data/standingCommitteeMinutes";
-import { chiefAccountsOfficerDocuments, CHIEF_ACCOUNTS_OFFICER_FOLDER } from "@/data/chiefAccountsOfficerDocuments";
-import { dastavezDocuments, municipalArchiveFiles, policyDocuments } from "@/data/municipalDocuments";
-import { MUNICIPAL_SECRETARIES_DOCUMENT, SECRETARIES_FOLDER } from "@/data/municipalSecretaries";
-import { RTI_DEPARTMENT_FOLDER, RTI_FOLDER, RTI_OFFICERS_FOLDER, RTI_OFFICERS_ORDER, rtiArchiveDocuments } from "@/data/rtiDocuments";
-import { rtsArchiveDocuments, RTS_FOLDER } from "@/data/rtsDocuments";
 import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
 import { useLang } from "@/i18n/LanguageContext";
-import { completedWorks } from "@/data/completedWorks";
-import { ncapArchiveDocuments } from "@/data/ncapSearchMeta";
 import { ncapFileUrl } from "@/lib/ncap";
-import { DRAINAGE_DOCUMENTS_FOLDER, drainageDocuments } from "@/data/drainageDocuments";
-import { TOWN_PLANNING_DOCUMENTS_FOLDER, townPlanningDocuments } from "@/data/townPlanningDocuments";
-import {
-  AUDIT_DOCUMENTS_FOLDER,
-  ELECTRICAL_DOCUMENTS_FOLDER,
-  FIRE_INFORMATION_FOLDER,
-  LIBRARY_DOCUMENTS_FOLDER,
-  MECHANICAL_DOCUMENTS_FOLDER,
-  NULM_DOCUMENTS_FOLDER,
-  STANDING_COMMITTEE_VOLUME_FOLDER,
-  auditDocuments,
-  electricalPublicDocuments,
-  fireInformationDocuments,
-  libraryDocuments,
-  mechanicalPublicDocuments,
-  nulmDocuments,
-  standingCommitteeVolumeMinutes,
-} from "@/data/reviewedPublicDocuments";
-import { mergedOfficialGroups } from "@/data/officialVerifiedDocuments";
-import { officialLinkedGroups, officialLinkedSections, tenderArchiveGroups } from "@/data/officialLinkedDocuments";
-import { officialAnnouncementFolder, officialSiteNoticeDocuments, officialStandingCommitteeDocuments, officialStandingCommitteeFolder, officialTenderNoticeDocuments } from "@/data/officialPublicAdditions";
 import { localizeDigits } from "@/i18n/digits";
+import { repositoryShelves } from "@/data/repositoryShelves";
+import { archiveNameMatches, type ArchiveFile } from "@/lib/archiveDocuments";
 import { REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import {
   CATEGORY_LABELS,
@@ -75,37 +44,6 @@ type SortKey = "newest" | "oldest" | "title";
 const isRepoCategory = (v: string | null): v is CivicCategory =>
   !!v && (REPOSITORY_CATEGORIES as string[]).includes(v);
 
-const LINKED_DEPARTMENT_NAMES: Record<string, { en: string; mr: string }> = {
-  "audit-department": { en: "Audit Department", mr: "लेखापरीक्षण विभाग" },
-  drainage: { en: "Drainage Department", mr: "मलनिःसारण विभाग" },
-  "election-census": { en: "Election Department", mr: "निवडणूक विभाग" },
-  electrical: { en: "Electrical Department", mr: "विद्युत विभाग" },
-  garden: { en: "Garden Department", mr: "उद्यान विभाग" },
-  "general-administration": { en: "General Administration Department", mr: "सामान्य प्रशासन विभाग" },
-  health: { en: "Health Department", mr: "आरोग्य विभाग" },
-  "municipal-secretary-department": { en: "Municipal Secretary Department", mr: "नगरसचिव विभाग" },
-  "property-management": { en: "Property Management Department", mr: "मालमत्ता व्यवस्थापन विभाग" },
-  tax: { en: "Tax Department", mr: "कर विभाग" },
-  "town-planning-department": { en: "Town Planning Department", mr: "नगररचना विभाग" },
-};
-
-const OFFICIAL_GROUP_HEADINGS: Record<string, { en: string; mr: string }> = {
-  "city-engineer": { en: "City Engineer", mr: "शहर अभियंता" },
-  garden: { en: "Garden Department", mr: "उद्यान विभाग" },
-  health: { en: "Health Department", mr: "आरोग्य विभाग" },
-  labour: { en: "Labour Department", mr: "कामगार विभाग" },
-  "municipal-secretary-department": { en: "Municipal Secretary", mr: "महानगरपालिका सचिव" },
-  pmay: { en: "PMAY", mr: "प्रधानमंत्री आवास योजना" },
-  "ramai-housing": { en: "Ramai Awas Yojana", mr: "रमाई आवास योजना" },
-  "solid-waste-management": { en: "Solid Waste Management", mr: "घनकचरा व्यवस्थापन" },
-  tax: { en: "Tax Assessment and Collection", mr: "कर निर्धारण व संकलन" },
-  "tourism-development": { en: "Tourism Department", mr: "पर्यटन विभाग" },
-  "water-supply-distribution": { en: "Water Supply", mr: "पाणीपुरवठा" },
-  electrical: { en: "Electrical Department", mr: "विद्युत विभाग" },
-  "fire-disaster-management": { en: "Fire and emergency services", mr: "अग्निशमन व आणीबाणी सेवा" },
-  "social-development": { en: "Social Development", mr: "समाज विकास" },
-};
-
 const DigitalRepository = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
@@ -118,7 +56,6 @@ const DigitalRepository = () => {
   const [language, setLanguage] = useState<CivicLanguage | "all">("all");
   const [sort, setSort] = useState<SortKey>("newest");
   const [view, setView] = useState<"cards" | "table">("cards");
-  const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -127,12 +64,6 @@ const DigitalRepository = () => {
     const q = params.get("q");
     if (q) setSearch(q);
   }, [params]);
-
-  useEffect(() => {
-    setLoading(true);
-    const t = window.setTimeout(() => setLoading(false), 280);
-    return () => window.clearTimeout(t);
-  }, [category, search, department, year, status, language, sort]);
 
   const departments = useMemo(
     () => [...new Set(REPOSITORY_DOCUMENTS.map((d) => d.departmentEn))].sort(),
@@ -198,6 +129,26 @@ const DigitalRepository = () => {
     return map;
   }, []);
 
+  const shelves = useMemo(() => repositoryShelves(), []);
+  const archiveCounts = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const shelf of shelves) {
+      map[shelf.category] = shelf.sections.reduce((sum, section) => sum + section.documents.length, 0);
+    }
+    return map;
+  }, [shelves]);
+  const archiveTotal = useMemo(
+    () => Object.values(archiveCounts).reduce((sum, count) => sum + count, 0),
+    [archiveCounts],
+  );
+  const documentsInCategory = (c: CivicCategory) => (counts[c] ?? 0) + (archiveCounts[c] ?? 0);
+
+  const visibleArchive = (documents: ArchiveFile[]) => {
+    const q = search.trim();
+    if (q.length < 2) return documents;
+    return documents.filter((doc) => archiveNameMatches([doc.file, doc.titleEn, doc.titleMr].filter(Boolean).join(" "), q));
+  };
+
   const onCopy = async (id: string) => {
     await copyLink(documentPermalink(id));
     setCopiedId(id);
@@ -231,308 +182,11 @@ const DigitalRepository = () => {
           </p>
         </div>
 
-        <div className="min-w-0 mb-10" id="education-department">
-          <EducationDepartmentDocuments />
-        </div>
-
-        <div className="min-w-0 mb-10" id="town-planning-department">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Town Planning Department" : "नगररचना विभाग"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={townPlanningDocuments}
-            folderSegments={[...TOWN_PLANNING_DOCUMENTS_FOLDER]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="drainage-department">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Drainage Department" : "ड्रेनेज विभाग"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={drainageDocuments}
-            folderSegments={[...DRAINAGE_DOCUMENTS_FOLDER]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="administration-and-establishment">
-          <AdministrationEstablishmentDocuments />
-        </div>
-
-        <div className="min-w-0 mb-10" id="citizen-services">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "7 Star Citizen FAQs" : "७ स्टार नागरिक प्रश्नोत्तरे"}
-          </h2>
-          <DocumentArchiveBrowser documents={[SEVEN_STAR_FAQ_DOCUMENT]} folderSegments={[]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="guidelines-for-disaster">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Guidelines for Disaster" : "आपत्ती व्यवस्थापन मार्गदर्शक"}
-          </h2>
-          <DocumentArchiveBrowser documents={[DISASTER_GUIDELINES_DOCUMENT]} folderSegments={[]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="dastavez">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Dastavez" : "दस्तऐवज"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={municipalArchiveFiles(dastavezDocuments)}
-            folderSegments={[dastavezDocuments[0].folder]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="policies-guidelines">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Policies & Guidelines" : "धोरणे व मार्गदर्शक सूचना"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={municipalArchiveFiles(policyDocuments)}
-            folderSegments={[policyDocuments[0].folder]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="municipal-secretaries">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Municipal Corporation Secretaries" : "महानगरपालिका सचिवांची यादी"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={[MUNICIPAL_SECRETARIES_DOCUMENT]}
-            folderSegments={[SECRETARIES_FOLDER]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="rts">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Right to Service" : "सेवा हक्क"}
-          </h2>
-          <DocumentArchiveBrowser documents={rtsArchiveDocuments} folderSegments={[RTS_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="chief-accounts-finance-officer">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Chief Accounts & Finance Officer" : "मुख्य लेखा व वित्त अधिकारी"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={chiefAccountsOfficerDocuments}
-            folderSegments={[CHIEF_ACCOUNTS_OFFICER_FOLDER]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="budget">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Budget" : "अर्थसंकल्प"}
-          </h2>
-          {budgetYearSections.filter((section) => budgetDocumentsFor(section.id).length > 0).map((section) => (
-            <div key={section.id} className="mb-8">
-              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-                {en ? section.titleEn : section.titleMr}
-              </h3>
-              <DocumentArchiveBrowser
-                documents={budgetDocumentsFor(section.id)}
-                folderSegments={[BUDGET_FOLDER, section.id]}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="min-w-0 mb-10" id="standing-committee">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Standing Committee Minutes" : "स्थायी समिती इतिवृत्त"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={standingCommitteeVolumeMinutes}
-            folderSegments={["standing-committee", STANDING_COMMITTEE_VOLUME_FOLDER]}
-            initialSort="date-oldest"
-          />
-          <DocumentArchiveBrowser
-            documents={officialStandingCommitteeDocuments}
-            folderSegments={officialStandingCommitteeFolder}
-            initialSort="date-oldest"
-          />
-          {standingCommitteeYears.map((year) => {
-            const documents = standingCommitteeMinutes
-              .filter((doc) => doc.year === year)
-              .map((doc) => ({ id: doc.id, file: doc.file, bytes: doc.bytes, date: doc.date }));
-            return (
-              <div key={year} className="mb-8">
-                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">{d(year)}</h3>
-                <DocumentArchiveBrowser
-                  documents={documents}
-                  folderSegments={["standing-committee", String(year)]}
-                  initialSort="date-oldest"
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="min-w-0 mb-10" id="election-insights">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Election Insights" : "निवडणूक माहिती"}
-          </h2>
-          {electionInsightCategories.filter((category) => category.files.length > 0).map((category) => (
-            <div key={category.id} className="mb-8">
-              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-                {en ? category.titleEn : category.titleMr}
-              </h3>
-              <DocumentArchiveBrowser
-                documents={category.files}
-                folderSegments={[ELECTION_INSIGHTS_ROOT, category.folder]}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="min-w-0 mb-10" id="rti">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Right to Information" : "माहिती अधिकार"}
-          </h2>
-          <div className="mb-8">
-            <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-              {en ? "Department-wise RTI Documents" : "विभागनिहाय माहिती अधिकार दस्तऐवज"}
-            </h3>
-            <DocumentArchiveBrowser
-              documents={rtiArchiveDocuments()}
-              folderSegments={[RTI_FOLDER, RTI_DEPARTMENT_FOLDER]}
-            />
-          </div>
-          <div className="mb-8">
-            <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-              {en ? "RTI Officers List" : "माहिती अधिकार अधिकारी यादी"}
-            </h3>
-            <DocumentArchiveBrowser
-              documents={[RTI_OFFICERS_ORDER]}
-              folderSegments={[RTI_FOLDER, RTI_OFFICERS_FOLDER]}
-            />
-          </div>
-        </div>
-
-        <div className="min-w-0 mb-10" id="completed-works">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "List of Completed Works" : "पूर्ण झालेली कामे"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={completedWorks}
-            folderSegments={["List of Completed Works"]}
-          />
-        </div>
-
-        <div className="min-w-0 mb-10" id="audit-department">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Audit Department" : "लेखापरीक्षण विभाग"}
-          </h2>
-          <DocumentArchiveBrowser documents={auditDocuments} folderSegments={[...AUDIT_DOCUMENTS_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="electrical-department">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Electrical Department" : "विद्युत विभाग"}
-          </h2>
-          <DocumentArchiveBrowser documents={electricalPublicDocuments} folderSegments={[...ELECTRICAL_DOCUMENTS_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="library-department">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Library" : "वाचनालय"}
-          </h2>
-          <DocumentArchiveBrowser documents={libraryDocuments} folderSegments={[...LIBRARY_DOCUMENTS_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="nulm">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "NULM" : "राष्ट्रीय नागरी उपजीविका अभियान"}
-          </h2>
-          <DocumentArchiveBrowser documents={nulmDocuments} folderSegments={[...NULM_DOCUMENTS_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="fire-brigade-information">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Fire and emergency services" : "अग्निशमन व आणीबाणी सेवा"}
-          </h2>
-          <DocumentArchiveBrowser documents={fireInformationDocuments} folderSegments={[...FIRE_INFORMATION_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="mechanical-department">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Mechanical Department" : "यांत्रिकी विभाग"}
-          </h2>
-          <DocumentArchiveBrowser documents={mechanicalPublicDocuments} folderSegments={[...MECHANICAL_DOCUMENTS_FOLDER]} />
-        </div>
-
-        <div className="min-w-0 mb-10" id="official-announcements">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Public notices" : "सार्वजनिक सूचना"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={[...officialTenderNoticeDocuments, ...officialSiteNoticeDocuments]}
-            folderSegments={[...officialAnnouncementFolder]}
-          />
-        </div>
-
-        {mergedOfficialGroups().map((group) => {
-          const heading = OFFICIAL_GROUP_HEADINGS[group.slug];
-          return (
-            <div className="min-w-0 mb-10" id={`official-${group.slug}`} key={group.slug}>
-              <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-                {en ? heading.en : heading.mr}
-              </h2>
-              <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
-            </div>
-          );
-        })}
-
-        {officialLinkedSections.map((section) => (
-          <div className="min-w-0 mb-10" id={`official-linked-${section.id}`} key={section.id}>
-            <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-              {en ? section.headingEn : section.headingMr}
-            </h2>
-            <DocumentArchiveBrowser documents={section.documents} />
-          </div>
-        ))}
-
-        {officialLinkedGroups.map((group) => {
-          const department = LINKED_DEPARTMENT_NAMES[group.slug];
-          const heading = en ? group.headingEn : group.headingMr;
-          const title = department && heading !== (en ? department.en : department.mr)
-            ? `${en ? department.en : department.mr}: ${heading}`
-            : heading;
-          return (
-            <div className="min-w-0 mb-10" id={`official-linked-${group.slug}-${group.headingEn.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} key={`${group.slug}-${group.headingEn}`}>
-              <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{title}</h2>
-              <DocumentArchiveBrowser documents={group.documents} />
-            </div>
-          );
-        })}
-
-        <div className="min-w-0 mb-10" id="tender-archive">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "Tender archive" : "निविदा संग्रह"}
-          </h2>
-          {tenderArchiveGroups.map((group) => (
-            <div className="min-w-0 mb-6" key={group.headingEn}>
-              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">{en ? group.headingEn : group.headingMr}</h3>
-              <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
-            </div>
-          ))}
-        </div>
-
-        <div className="min-w-0 mb-10" id="ncap">
-          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
-            {en ? "National Clean Air Programme (NCAP)" : "राष्ट्रीय स्वच्छ हवा कार्यक्रम (NCAP)"}
-          </h2>
-          <DocumentArchiveBrowser
-            documents={ncapArchiveDocuments()}
-            fileUrl={ncapFileUrl}
-          />
-        </div>
-
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           <SummaryCard
             icon={FileText}
             label={en ? "Total Documents" : "एकूण दस्तऐवज"}
-            value={d(REPOSITORY_DOCUMENTS.length)}
+            value={d(REPOSITORY_DOCUMENTS.length + archiveTotal)}
           />
           <SummaryCard
             icon={FolderOpen}
@@ -565,7 +219,7 @@ const DigitalRepository = () => {
                 : "border-border text-muted-foreground hover:border-civic-blue hover:text-civic-blue"
             }`}
           >
-            {en ? "All" : "सर्व"} ({d(REPOSITORY_DOCUMENTS.length)})
+            {en ? "All" : "सर्व"} ({d(REPOSITORY_DOCUMENTS.length + archiveTotal)})
           </button>
           {REPOSITORY_CATEGORIES.map((c) => (
             <button
@@ -578,7 +232,7 @@ const DigitalRepository = () => {
                   : "border-border text-muted-foreground hover:border-civic-blue hover:text-civic-blue"
               }`}
             >
-              {en ? CATEGORY_LABELS[c].en : CATEGORY_LABELS[c].mr} ({d(counts[c] ?? 0)})
+              {en ? CATEGORY_LABELS[c].en : CATEGORY_LABELS[c].mr} ({d(documentsInCategory(c))})
             </button>
           ))}
         </div>
@@ -604,9 +258,9 @@ const DigitalRepository = () => {
             className="text-sm border border-border rounded-xl px-3 py-2.5 bg-white"
           >
             <option value="all">{en ? "All departments" : "सर्व विभाग"}</option>
-            {departments.map((d) => (
-              <option key={d} value={d}>
-                {d}
+            {departments.map((name) => (
+              <option key={name} value={name}>
+                {name}
               </option>
             ))}
           </select>
@@ -674,12 +328,81 @@ const DigitalRepository = () => {
           </div>
         </div>
 
-        {loading ? (
-          <div className="py-20 text-center text-muted-foreground flex flex-col items-center gap-3">
-            <Loader2 className="h-6 w-6 animate-spin text-civic-blue" />
-            <span className="text-sm">{en ? "Loading documents…" : "दस्तऐवज लोड होत आहेत…"}</span>
-          </div>
-        ) : filtered.length === 0 ? (
+        {REPOSITORY_CATEGORIES.filter((item) => category === "all" || category === item).map((item) => {
+          const shelf = shelves.find((entry) => entry.category === item);
+          const sections = (shelf?.sections ?? []).filter((section) => visibleArchive(section.documents).length > 0);
+          const catalog = filtered.filter((doc) => doc.category === item);
+          if (!sections.length && !catalog.length) return null;
+          return (
+            <section key={item} id={`repository-${item}`} className="mb-12 scroll-mt-24">
+              <h2 className="font-serif text-2xl font-bold text-civic-blue mb-4">
+                {en ? CATEGORY_LABELS[item].en : CATEGORY_LABELS[item].mr}
+              </h2>
+              {sections.map((section) => {
+                const documents = visibleArchive(section.documents);
+                if (section.presentation === "education") {
+                  return (
+                    <div key={section.id} id={section.id} className="min-w-0 mb-8">
+                      <EducationDepartmentDocuments query={search} />
+                    </div>
+                  );
+                }
+                if (section.presentation === "administration") {
+                  return (
+                    <div key={section.id} id={section.id} className="min-w-0 mb-8">
+                      <AdministrationEstablishmentDocuments query={search} />
+                    </div>
+                  );
+                }
+                return (
+                  <div key={section.id} id={section.id} className="min-w-0 mb-8">
+                    <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                      {en ? section.titleEn : section.titleMr}
+                    </h3>
+                    <DocumentArchiveBrowser
+                      documents={documents}
+                      folderSegments={section.folderSegments}
+                      fileUrl={section.presentation === "ncap" ? ncapFileUrl : undefined}
+                      initialSort={section.initialSort}
+                    />
+                  </div>
+                );
+              })}
+              {catalog.length > 0 && view === "cards" ? (
+                <div className="grid gap-2.5">
+                  {catalog.map((doc) => (
+                    <DocCard
+                      key={doc.id}
+                      doc={doc}
+                      en={en}
+                      hit={ocrHits.get(doc.id)}
+                      copied={copiedId === doc.id}
+                      onCopy={() => onCopy(doc.id)}
+                    />
+                  ))}
+                </div>
+              ) : null}
+              {catalog.length > 0 && view === "table" ? (
+                <div className="divide-y divide-border border border-border rounded-2xl overflow-hidden bg-white shadow-sm">
+                  {catalog.map((doc) => (
+                    <TableDocRow
+                      key={doc.id}
+                      doc={doc}
+                      en={en}
+                      ocrPage={ocrHits.get(doc.id)?.ocrPage}
+                    />
+                  ))}
+                </div>
+              ) : null}
+            </section>
+          );
+        })}
+        {REPOSITORY_CATEGORIES.every((item) => {
+          if (category !== "all" && category !== item) return true;
+          const shelf = shelves.find((entry) => entry.category === item);
+          const sections = (shelf?.sections ?? []).filter((section) => visibleArchive(section.documents).length > 0);
+          return sections.length === 0 && filtered.every((doc) => doc.category !== item);
+        }) ? (
           <div className="py-20 text-center border border-dashed border-border rounded-2xl bg-white">
             <FileText className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
             <p className="font-semibold text-civic-ink">
@@ -689,31 +412,7 @@ const DigitalRepository = () => {
               {en ? "Try another category, year or search term." : "दुसरा वर्ग, वर्ष किंवा शोध शब्द वापरा."}
             </p>
           </div>
-        ) : view === "cards" ? (
-          <div className="grid gap-2.5">
-            {filtered.map((doc) => (
-              <DocCard
-                key={doc.id}
-                doc={doc}
-                en={en}
-                hit={ocrHits.get(doc.id)}
-                copied={copiedId === doc.id}
-                onCopy={() => onCopy(doc.id)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="divide-y divide-border border border-border rounded-2xl overflow-hidden bg-white shadow-sm">
-            {filtered.map((doc) => (
-              <TableDocRow
-                key={doc.id}
-                doc={doc}
-                en={en}
-                ocrPage={ocrHits.get(doc.id)?.ocrPage}
-              />
-            ))}
-          </div>
-        )}
+        ) : null}
       </section>
     </Layout>
   );
@@ -1040,3 +739,4 @@ function SummaryCard({
 }
 
 export default DigitalRepository;
+

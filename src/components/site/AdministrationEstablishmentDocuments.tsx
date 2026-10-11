@@ -4,17 +4,25 @@ import {
   administrationEstablishmentEntries,
 } from "@/data/administrationEstablishmentDocuments";
 import { useLang } from "@/i18n/LanguageContext";
+import { archiveNameMatches } from "@/lib/archiveDocuments";
 
-export function AdministrationEstablishmentDocuments() {
+export function AdministrationEstablishmentDocuments({ query = "" }: { query?: string }) {
   const { lang, d } = useLang();
   const en = lang === "en";
+  const entries = administrationEstablishmentEntries
+    .map((category) => ({
+      ...category,
+      files: category.files.filter((file) => archiveNameMatches([file.file, file.titleEn, file.titleMr].filter(Boolean).join(" "), query)),
+    }))
+    .filter((category) => category.files.length);
+  if (!entries.length) return null;
 
   return (
     <div className="min-w-0 space-y-8">
       <h3 className="font-serif text-lg font-bold text-civic-blue">
         {en ? "Administration and Establishment" : "प्रशासन व आस्थापना"}
       </h3>
-      {administrationEstablishmentEntries.map((category) => (
+      {entries.map((category) => (
         <div key={category.id} id={category.id} className="min-w-0 scroll-mt-24">
           <h4 className="font-serif text-base font-bold text-civic-blue mb-3">
             {category.id === "general-administration-documents"

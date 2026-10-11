@@ -6,15 +6,23 @@ import { officialAnnouncementFolder, officialPublicAdditions, officialSiteNotice
 import { MECHANICAL_DOCUMENTS_FOLDER, mechanicalPublicDocuments } from "@/data/reviewedPublicDocuments";
 import { driveHostedPdfIds } from "@/data/driveHostedPdfs";
 import { officialLinkedGroups, officialLinkedSections, tenderArchiveGroups } from "@/data/officialLinkedDocuments";
+import { repositoryShelves } from "@/data/repositoryShelves";
 import { publishedDocumentUrl } from "@/lib/archiveDocuments";
 import { DEPARTMENTS } from "@/pages/site/DepartmentDetail";
 
 const publicRoot = path.resolve("public");
 
+function repositoryListingSource() {
+  return [
+    readFileSync("src/pages/site/DigitalRepository.tsx", "utf8"),
+    readFileSync("src/data/repositoryShelves.ts", "utf8"),
+  ].join("\n");
+}
+
 describe("official document audit listings", () => {
   it("lists every verified official document once, on its section and in the repository", () => {
     const department = readFileSync("src/pages/site/DepartmentDetail.tsx", "utf8");
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
+    const repository = repositoryListingSource();
     const publicPage = readFileSync("src/pages/site/PublicDocuments.tsx", "utf8");
     expect(department).toContain("mergedOfficialGroups");
     expect(repository).toContain("mergedOfficialGroups");
@@ -63,7 +71,7 @@ describe("official document audit listings", () => {
       expect(existsSync(path.join(publicRoot, ...logical.split("/"))), logical).toBe(true);
       expect(publishedDocumentUrl(segments)).toBe(`https://drive.google.com/file/d/${driveHostedPdfIds[logical]}/view`);
     }
-    expect(readFileSync("src/pages/site/DigitalRepository.tsx", "utf8")).toContain("official-announcements");
+    expect(repositoryListingSource()).toContain("official-announcements");
     expect(readFileSync("src/pages/site/Notices.tsx", "utf8")).toContain("officialSiteNoticeDocuments");
     expect(readFileSync("src/pages/site/MunicipalDocumentList.tsx", "utf8")).toContain("officialTenderNoticeDocuments");
   });
@@ -92,7 +100,7 @@ describe("official document audit listings", () => {
     expect(officialLinkedGroups.some((group) => group.slug === "health" && group.documents.some((doc) => doc.file === "Medical_Officer_List.PDF"))).toBe(true);
 
     const department = readFileSync("src/pages/site/DepartmentDetail.tsx", "utf8");
-    const repository = readFileSync("src/pages/site/DigitalRepository.tsx", "utf8");
+    const repository = repositoryListingSource();
     expect(department).toContain("officialLinkedGroups");
     expect(repository).toContain("officialLinkedGroups");
     expect(repository).toContain("officialLinkedSections");
@@ -110,6 +118,20 @@ describe("official document audit listings", () => {
       expect(publishedDocumentUrl([...group.folder, doc.file])).toBe(`https://drive.google.com/file/d/${driveHostedPdfIds[logical]}/view`);
     }
     expect(readFileSync("src/pages/site/MunicipalDocumentList.tsx", "utf8")).toContain("tenderArchiveGroups");
-    expect(readFileSync("src/pages/site/DigitalRepository.tsx", "utf8")).toContain("tenderArchiveGroups");
+    expect(repositoryListingSource()).toContain("tenderArchiveGroups");
+  });
+
+  it("keeps every repository archive document in exactly one category", () => {
+    const ids = repositoryShelves().flatMap((shelf) => shelf.sections.flatMap((section) => section.documents.map((doc) => doc.id)));
+    expect(new Set(ids).size).toBe(ids.length);
+    const linked = [...officialLinkedGroups, ...officialLinkedSections].flatMap((group) => group.documents.map((doc) => doc.id));
+    const tenders = tenderArchiveGroups.flatMap((group) => group.documents.map((doc) => doc.id));
+    const official = mergedOfficialGroups().flatMap((group) => group.documents.map((doc) => doc.id));
+    for (const id of [...linked, ...tenders, ...official, ...officialSiteNoticeDocuments.map((doc) => doc.id), ...officialTenderNoticeDocuments.map((doc) => doc.id), ...officialStandingCommitteeDocuments.map((doc) => doc.id)]) {
+      expect(ids, id).toContain(id);
+    }
+    expect(ids.filter((id) => tenders.includes(id))).toHaveLength(1008);
+    expect(repositoryListingSource()).toContain('id: "tender-archive"');
+    expect(repositoryListingSource()).toContain("repository-${item}");
   });
 });
