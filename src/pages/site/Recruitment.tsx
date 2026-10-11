@@ -10,7 +10,7 @@ const posts = [
   { post: "Tax Inspector", postMr: "कर निरीक्षक", vacancies: 15, lastDate: "20 May 2026", status: "Closed", statusMr: "बंद" },
   { post: "Clerk (Grade III)", postMr: "लिपिक (श्रेणी III)", vacancies: 30, lastDate: "15 Jun 2026", status: "Open", statusMr: "खुली" },
   { post: "Electrician", postMr: "विद्युत तंत्रज्ञ", vacancies: 6, lastDate: "10 Jun 2026", status: "Open", statusMr: "खुली" },
-  { post: "Sanitation Worker", postMr: "स्वच्छता कर्मचारी", vacancies: 50, lastDate: "5 Jun 2026", status: "Open", statusMr: "खुली", repoId: "not-recruitment" },
+  { post: "Sanitation Worker", postMr: "स्वच्छता कर्मचारी", vacancies: 50, lastDate: "5 Jun 2026", status: "Open", statusMr: "खुली" },
 ];
 
 const Recruitment = () => {
@@ -25,11 +25,8 @@ const Recruitment = () => {
           <Calendar className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
           <p className="text-sm text-amber-800 font-medium">
             {en
-              ? "This page lists sample openings for the prototype. Live applications must use the official CSMC recruitment notice when published. A related sample notification is available in the Municipal Document Repository."
-              : "हे पृष्ठ नमुना जागा दाखवते. थेट अर्ज प्रकाशित अधिकृत CSMC भरती सूचनेद्वारेच करावेत. संबंधित नमुना अधिसूचना महापालिका दस्तऐवज भांडारात उपलब्ध आहे."}{" "}
-            <Link to="/digital-repository/not-recruitment" className="underline font-bold text-amber-900 hover:text-civic-blue">
-              {en ? "View sample notice" : "नमुना सूचना पहा"}
-            </Link>
+              ? "This page lists sample openings for the prototype. Live applications must use the official CSMC recruitment notice when published."
+              : "हे पृष्ठ नमुना जागा दाखवते. थेट अर्ज प्रकाशित अधिकृत CSMC भरती सूचनेद्वारेच करावेत."}
           </p>
         </div>
         <ul className="flex flex-col gap-3 md:hidden">

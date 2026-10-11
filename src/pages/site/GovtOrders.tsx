@@ -5,13 +5,15 @@ import { FileText, Download, Search } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const orders = [
-  { no: "GR/2026/002", title: "Solid Waste Management Guidelines", titleMr: "घनकचरा व्यवस्थापन मार्गदर्शक तत्त्वे", date: "15 Mar 2026", dept: "SWM", deptMr: "घनकचरा", repoId: "gr-swm" },
-  { no: "GR/2026/003", title: "Water Supply Regulation Order", titleMr: "पाणी पुरवठा नियमन आदेश", date: "10 Mar 2026", dept: "Water Supply", deptMr: "पाणी पुरवठा", repoId: "gr-water-reg" },
-  { no: "GR/2026/004", title: "Building Permission Fee Revision", titleMr: "बांधकाम परवानगी शुल्क सुधारणा", date: "1 Mar 2026", dept: "Town Planning", deptMr: "नगर रचना", repoId: "gr-bldg-fee" },
-  { no: "GR/2025/045", title: "Street Light Maintenance Circular", titleMr: "पथदिवे देखभाल परिपत्रक", date: "20 Dec 2025", dept: "Electrical", deptMr: "विद्युत", repoId: "cir-streetlight" },
-  { no: "GR/2025/044", title: "Health Camp Organization Guidelines", titleMr: "आरोग्य शिबिर आयोजन मार्गदर्शक तत्त्वे", date: "15 Dec 2025", dept: "Health", deptMr: "आरोग्य" },
-];
+const orders: {
+  no: string;
+  title: string;
+  titleMr: string;
+  date: string;
+  dept: string;
+  deptMr: string;
+  repoId?: string;
+}[] = [];
 
 const GovtOrders = () => {
   const { lang, d } = useLang();
@@ -32,6 +34,11 @@ const GovtOrders = () => {
             className="text-sm bg-transparent outline-none flex-1" />
         </div>
         <div className="divide-y divide-border border border-border rounded-2xl overflow-hidden bg-white shadow-sm">
+          {filtered.length === 0 ? (
+            <p className="px-5 py-8 text-sm text-muted-foreground text-center">
+              {en ? "No government resolutions are published on this page." : "या पृष्ठावर शासन निर्णय प्रकाशित नाहीत."}
+            </p>
+          ) : null}
           {filtered.map((o, i) => (
             <div key={i} className="flex items-center gap-4 px-5 py-4 hover:bg-muted/30 transition-colors group">
               <div className="w-10 h-10 rounded-xl bg-civic-blue/10 flex items-center justify-center shrink-0 group-hover:bg-civic-blue transition-colors">

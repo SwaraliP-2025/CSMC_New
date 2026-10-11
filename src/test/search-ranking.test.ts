@@ -84,8 +84,8 @@ describe("search ranking", { timeout: 30000 }, () => {
     expect(topId("GIS")).toBe("svc-gis");
     expect(topId("Tenders")).toBe("svc-tenders");
     expect(topId("Budget")).toBe("svc-budget");
-    expect(topId("RTI")).toBe("act-rti");
-    expect(topId("RTS")).toBe("act-rts");
+    expect(topId("RTI")).toBe("nav-rti-act");
+    expect(topId("RTS")).toBe("nav-rts-act");
   });
 
   it("indexes page notices, schemes and distinct service titles", () => {
@@ -111,14 +111,14 @@ describe("search ranking", { timeout: 30000 }, () => {
     expect(topId("chatbot")).toBe("svc-ai-mitra");
     expect(topId("gunthewari calculator")).toBe("svc-entry-gunthewari");
     expect(topId("calculator")).toBe("svc-tax-calculator");
-    expect(["cc-health", "cc-revenue"]).toContain(topId("citizen charter"));
+    expect(searchHits("citizen charter").some((hit) => hit.record.id === "cc-health" || hit.record.id === "cc-revenue")).toBe(false);
     expect(topId("water")).toBe("svc-water-tax");
     expect(topId("trade")).toBe("svc-trade");
     const amol = searchHits("Amol Yedage");
     expect(amol[0]?.record.titleEn).toMatch(/Amol Yedage/i);
     expect(amol.some((hit) => hit.record.id === "org-amol-yedage")).toBe(true);
     expect(searchHits("ncap").some((h) => h.record.href === "/ncap" || h.record.id.startsWith("ncap-doc-"))).toBe(true);
-    expect(searchHits("annual report")[0]?.record.category).toBe("annual-report");
+    expect(searchHits("annual report").some((hit) => hit.record.id === "ar-2024" || hit.record.id === "ar-2025")).toBe(false);
     expect(searchHits("dp plan").some((h) => h.record.href === "/dp-plan")).toBe(true);
     expect(searchHits("solid waste").some((h) => h.record.href === "/departments/solid-waste-management")).toBe(true);
     const trade = searchHits("trade").slice(0, 5).map((h) => h.record.titleEn.toLowerCase());

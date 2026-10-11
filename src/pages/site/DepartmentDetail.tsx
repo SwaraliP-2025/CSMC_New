@@ -698,7 +698,7 @@ const DEPT_EXTRAS: Record<
       "आयुक्त कार्यालय पत्रव्यवहार",
       "प्रशासकीय मंजुरी",
     ],
-    relatedDocIds: ["bud-2627", "act-rti"],
+    relatedDocIds: [],
   },
 
   "additional-commissioner-1": {
@@ -720,7 +720,7 @@ const DEPT_EXTRAS: Record<
       "कामे मंजुरी अनुवर्ती",
       "प्रकल्प स्थिती आढावा",
     ],
-    relatedDocIds: ["mm-sc-apr"],
+    relatedDocIds: [],
   },
 
   "additional-commissioner-2": {
@@ -742,7 +742,7 @@ const DEPT_EXTRAS: Record<
       "महसूल मोहिमा",
       "तक्रार शिबिरे",
     ],
-    relatedDocIds: ["bud-2526"],
+    relatedDocIds: [],
   },
 
   /* ================= UPDATED DEPARTMENTS ================= */

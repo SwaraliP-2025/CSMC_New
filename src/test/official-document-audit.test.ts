@@ -9,6 +9,40 @@ import { officialLinkedGroups, officialLinkedSections, tenderArchiveGroups } fro
 import { repositoryShelves } from "@/data/repositoryShelves";
 import { publishedDocumentUrl } from "@/lib/archiveDocuments";
 import { DEPARTMENTS } from "@/pages/site/DepartmentDetail";
+import { CIVIC_CATALOG, REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
+
+const FABRICATED_REPOSITORY_IDS = [
+  "cir-streetlight",
+  "cir-swm",
+  "not-dp-revision",
+  "not-recruitment",
+  "gr-swm",
+  "gr-water-reg",
+  "gr-bldg-fee",
+  "cr-gb-mar",
+  "cr-gb-feb",
+  "ten-swm",
+  "ten-roads",
+  "cc-health",
+  "cc-revenue",
+  "byl-dcr",
+  "byl-parking",
+  "dp-2025",
+  "dp-report",
+  "ar-2025",
+  "ar-2024",
+  "pol-open-data",
+  "pol-inclusion",
+  "act-rti",
+  "act-rts",
+  "rti-q4",
+  "rti-q3",
+  "mm-sc-apr",
+  "mm-sc-agenda",
+  "bud-2627",
+  "bud-2526",
+  "bud-2425",
+];
 
 const publicRoot = path.resolve("public");
 
@@ -133,5 +167,17 @@ describe("official document audit listings", () => {
     expect(ids.filter((id) => tenders.includes(id))).toHaveLength(1008);
     expect(repositoryListingSource()).toContain('id: "tender-archive"');
     expect(repositoryListingSource()).toContain("repository-${item}");
+  });
+
+  it("omits fabricated catalog documents from repository listings", () => {
+    expect(REPOSITORY_DOCUMENTS).toEqual([]);
+    for (const id of FABRICATED_REPOSITORY_IDS) {
+      expect(CIVIC_CATALOG.some((record) => record.id === id), id).toBe(false);
+    }
+    const archiveIds = repositoryShelves().flatMap((shelf) =>
+      shelf.sections.flatMap((section) => section.documents.map((doc) => doc.id)),
+    );
+    for (const id of FABRICATED_REPOSITORY_IDS) expect(archiveIds, id).not.toContain(id);
+    expect(new Set(archiveIds).size).toBe(archiveIds.length);
   });
 });

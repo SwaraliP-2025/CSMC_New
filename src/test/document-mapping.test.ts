@@ -270,12 +270,12 @@ describe("document mapping", () => {
     expect(publicPage).toContain("folderSegments={[BUDGET_FOLDER, budgetSection.id]}");
     expect(publicPage).toContain('setSearchParams({ category: "budget", year: section.id })');
     const catalog = readFileSync("src/data/civicCatalog.ts", "utf8");
-    expect(catalog).toContain('rec("bud-2627"');
-    expect(catalog).toContain('fileSize: "5.6 MB"');
-    expect(catalog).toContain('rec("bud-2526"');
-    expect(catalog).toContain('fileSize: "5.2 MB"');
-    expect(catalog).toContain('rec("bud-2425"');
-    expect(catalog).toContain('fileSize: "4.8 MB"');
+    expect(catalog).not.toContain('rec("bud-2627"');
+    expect(catalog).not.toContain('fileSize: "5.6 MB"');
+    expect(catalog).not.toContain('rec("bud-2526"');
+    expect(catalog).not.toContain('fileSize: "5.2 MB"');
+    expect(catalog).not.toContain('rec("bud-2425"');
+    expect(catalog).not.toContain('fileSize: "4.8 MB"');
     expect(readFileSync("src/lib/searchIndex.ts", "utf8")).toContain('href: "/public-documents?category=budget"');
   });
 

@@ -16,17 +16,4 @@ export const RTI_OFFICERS = [
   },
 ] as const;
 
-export const RTI_DOCS = [
-  {
-    title: "RTI Application Form",
-    titleMr: "RTI अर्ज नमुना",
-    to: "/digital-repository/act-rti",
-    external: false,
-  },
-  {
-    title: "First Appeal Form / Quarterly Disclosure",
-    titleMr: "प्रथम अपील / तिमाही प्रकटीकरण",
-    to: "/digital-repository/rti-q4",
-    external: false,
-  },
-] as const;
+export const RTI_DOCS: { title: string; titleMr: string; to: string; external: boolean }[] = [];

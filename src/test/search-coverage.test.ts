@@ -36,8 +36,8 @@ describe("search coverage", { timeout: 30000 }, () => {
     expect(topId("Police Station")).toBe("fac-police-stations");
     expect(topId("Zone Office")).toBe("fac-zone-offices");
     expect(searchHits("NCAP")[0]?.record.href).toBe("/ncap");
-    expect(topId("RTI")).toBe("act-rti");
-    expect(["cc-health", "cc-revenue"]).toContain(topId("Citizen Charter"));
+    expect(topId("RTI")).toBe("nav-rti-act");
+    expect(searchHits("Citizen Charter").some((hit) => hit.record.id === "cc-health" || hit.record.id === "cc-revenue")).toBe(false);
     expect(topId("AI Mitra")).toBe("svc-ai-mitra");
     expect(topId("Privacy Policy")).toBe("nav-privacy-policy");
     expect(topId("Accessibility")).toMatch(/accessibility/);
