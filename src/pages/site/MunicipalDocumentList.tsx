@@ -7,6 +7,9 @@ import {
   policyDocuments,
   type MunicipalDocument,
 } from "@/data/municipalDocuments";
+import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
+import { officialAnnouncementFolder, officialTenderNoticeDocuments } from "@/data/officialPublicAdditions";
+import { tenderArchiveGroups } from "@/data/officialLinkedDocuments";
 import { useLang } from "@/i18n/LanguageContext";
 
 function DocumentListPage({
@@ -107,6 +110,24 @@ export const SamvaadPage = () => (
   <DocumentListPage titleEn="Samvaad" titleMr="संवाद" documents={[]} />
 );
 
-export const TenderNoticesPage = () => (
-  <DocumentListPage titleEn="Tender Notices" titleMr="निविदा सूचना" documents={[]} />
-);
+export const TenderNoticesPage = () => {
+  const { lang } = useLang();
+  const en = lang === "en";
+  return (
+    <Layout>
+      <PageHeader title={en ? "Tender Notices" : "निविदा सूचना"} />
+      <section className="py-8 md:py-12 container">
+        <h1 className="font-serif text-2xl md:text-3xl font-bold text-civic-blue mb-6">
+          {en ? "Tender Notices" : "निविदा सूचना"}
+        </h1>
+        <DocumentArchiveBrowser documents={officialTenderNoticeDocuments} folderSegments={[...officialAnnouncementFolder]} />
+        {tenderArchiveGroups.map((group) => (
+          <div className="min-w-0 mt-10" key={group.headingEn}>
+            <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{en ? group.headingEn : group.headingMr}</h2>
+            <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+          </div>
+        ))}
+      </section>
+    </Layout>
+  );
+};

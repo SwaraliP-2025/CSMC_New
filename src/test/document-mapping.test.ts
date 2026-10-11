@@ -597,26 +597,21 @@ describe("document mapping", () => {
     const col = Object.fromEntries(header.map((name, position) => [name, position]));
     const value = (row: string[], key: string) => row[col[key]] ?? "";
     expect(data).toHaveLength(2322);
-    expect(data.filter((row) => value(row, "reconciliationStatus") === "implemented")).toHaveLength(1033);
+    expect(data.filter((row) => value(row, "reconciliationStatus") === "implemented")).toHaveLength(2135);
     expect(data.filter((row) => value(row, "reconciliationStatus") === "proposed")).toHaveLength(0);
-    expect(data.filter((row) => value(row, "publicListingImplemented") === "yes")).toHaveLength(1033);
+    expect(data.filter((row) => value(row, "publicListingImplemented") === "yes")).toHaveLength(2135);
     expect(data.filter((row) => value(row, "publicationDisposition") === "READY_FOR_CROSS_LISTING")).toHaveLength(0);
-    expect(data.filter((row) => value(row, "publicationDisposition") === "MAPPED_PENDING_PUBLICATION_REVIEW")).toHaveLength(72);
-    expect(data.filter((row) => value(row, "publicationDisposition") === "HOLD")).toHaveLength(1062);
-    expect(data.filter((row) => value(row, "publicationDisposition") === "EXCLUDE")).toHaveLength(150);
-    expect(data.filter((row) => value(row, "publicationDisposition") === "NEEDS_HUMAN_REVIEW")).toHaveLength(5);
+    expect(data.filter((row) => value(row, "publicationDisposition") === "MAPPED_PENDING_PUBLICATION_REVIEW")).toHaveLength(0);
+    expect(data.filter((row) => value(row, "publicationDisposition") === "HOLD")).toHaveLength(11);
+    expect(data.filter((row) => value(row, "publicationDisposition") === "EXCLUDE")).toHaveLength(176);
+    expect(data.filter((row) => value(row, "publicationDisposition") === "NEEDS_HUMAN_REVIEW")).toHaveLength(0);
 
-    const pendingMinutes = data.filter((row) => row[col.localPath]?.includes("/standing-committee/Needs Review/") && value(row, "publicationDisposition") === "MAPPED_PENDING_PUBLICATION_REVIEW");
-    expect(pendingMinutes).toHaveLength(1);
-    expect(pendingMinutes[0] && value(pendingMinutes[0], "fileName")).toBe("15-_16_03_15_KP.pdf");
+    const publishedMinute = data.find((row) => value(row, "fileName") === "15-_16_03_15_KP.pdf");
+    expect(publishedMinute && value(publishedMinute, "publicListingImplemented")).toBe("yes");
+    expect(publishedMinute && value(publishedMinute, "publicationDisposition")).toBe("");
     const minutesSource = readFileSync("src/data/standingCommitteeMinutes.ts", "utf8");
-    for (const row of pendingMinutes) {
-      const full = path.join(publicRoot, ...value(row, "localPath").split("/"));
-      expect(statSync(full).size).toBe(Number(value(row, "fileSizeBytes")));
-      expect(value(row, "intendedRepositorySection")).toBe("standing-committee");
-      expect(value(row, "publicListingImplemented")).toBe("no");
-      expect(minutesSource).not.toContain(value(row, "fileName"));
-    }
+    expect(minutesSource).not.toContain("15-_16_03_15_KP.pdf");
+    expect(readFileSync("src/data/officialPublicAdditions.ts", "utf8")).toContain("15-_16_03_15_KP.pdf");
     expect(data.filter((row) => row[col.localPath]?.includes("/standing-committee/Needs Review/") && value(row, "publicationDisposition") === "EXCLUDE")).toHaveLength(7);
 
     const copy = data.find((row) => value(row, "fileName") === "Copy_of_annual_audit_report_of_2018-2019.pdf");
@@ -632,11 +627,17 @@ describe("document mapping", () => {
     }
     expect(data.filter((row) => value(row, "category") === "census-2026-27" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(11);
     expect(repository).not.toContain('id="census-2026-27"');
-    expect(data.filter((row) => value(row, "reconciliationStatus") === "held" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(1037);
+    expect(data.filter((row) => value(row, "reconciliationStatus") === "held" && value(row, "publicationDisposition") === "HOLD")).toHaveLength(0);
+    const tenderRows = data.filter((row) => row[col.localPath]?.startsWith("documents/Municipal Document Repository/Tenders/"));
+    expect(tenderRows.filter((row) => value(row, "publicListingImplemented") === "yes")).toHaveLength(1011);
+    expect(tenderRows.filter((row) => value(row, "publicationDisposition") === "EXCLUDE")).toHaveLength(26);
+    for (const tender of tenderRows.filter((row) => value(row, "publicListingImplemented") === "yes")) {
+      expect(driveHostedPdfIds[value(tender, "localPath") as keyof typeof driveHostedPdfIds]).toBe(value(tender, "driveFileId"));
+    }
   });
 
   it("opens approved Drive PDFs in the single-file viewer and keeps GitHub PDFs on the site", () => {
-    expect(Object.keys(driveHostedPdfIds)).toHaveLength(1009);
+    expect(Object.keys(driveHostedPdfIds)).toHaveLength(2111);
     expect(publishedDocumentUrl(["FAQ_SevenStar.pdf"])).toBe(publicDocumentUrl(["FAQ_SevenStar.pdf"]));
     expect(publishedDocumentUrl(["Guildelines_For_Disaster.pdf"])).toBe(publicDocumentUrl(["Guildelines_For_Disaster.pdf"]));
     expect(publishedDocumentUrl(["rts", "Adhi-Suchna.pdf"])).toBe(publicDocumentUrl(["rts", "Adhi-Suchna.pdf"]));

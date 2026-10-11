@@ -587,10 +587,10 @@ import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { Phone, Mail, MapPin, ArrowLeft, Bell } from "lucide-react";
+import { Mail, MapPin, ArrowLeft, Bell } from "lucide-react";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
-import { findOrganogramOfficerForHead, organogramTelHref } from "@/lib/organogram";
+import { findOrganogramOfficerForHead } from "@/lib/organogram";
 import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
 import { AdministrationEstablishmentDocuments, FireCadreDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
@@ -616,6 +616,8 @@ import {
   mechanicalPublicDocuments,
   nulmDocuments,
 } from "@/data/reviewedPublicDocuments";
+import { mergedOfficialGroups } from "@/data/officialVerifiedDocuments";
+import { officialLinkedGroups } from "@/data/officialLinkedDocuments";
 
 interface DeptInfo {
   slug: string;
@@ -2735,16 +2737,12 @@ function DepartmentHeadCard({
   en,
   localize,
   portrait,
-  officerPhone,
-  mobileHref,
   stacked = false,
 }: {
   dept: DeptInfo;
   en: boolean;
   localize: (value: string | number | null | undefined) => string;
   portrait?: string;
-  officerPhone?: string;
-  mobileHref: string | null;
   stacked?: boolean;
 }) {
   const name = en ? dept.headEn : dept.headMr;
@@ -2799,30 +2797,6 @@ function DepartmentHeadCard({
         </div>
       </div>
       <div className="p-5 md:p-6 space-y-4">
-        {dept.phone ? (
-          <div className="flex items-start gap-3 text-sm">
-            <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
-            <div className="min-w-0">
-              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Phone" : "दुरध्वनी"}</p>
-              <p className="font-semibold text-civic-ink">{localize(dept.phone)}</p>
-            </div>
-          </div>
-        ) : null}
-        {officerPhone && mobileHref ? (
-          <div className="flex items-start gap-3 text-sm">
-            <Phone className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
-            <div className="min-w-0">
-              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Mobile" : "मोबाईल"}</p>
-              <a
-                href={mobileHref}
-                className="inline-flex min-h-11 items-center font-semibold text-civic-ink underline-offset-2 hover:underline focus-visible:underline"
-                aria-label={en ? `Call ${name}` : `${name} यांना कॉल करा`}
-              >
-                {localize(officerPhone)}
-              </a>
-            </div>
-          </div>
-        ) : null}
         {dept.email ? (
           <div className="flex items-start gap-3 text-sm">
             <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
@@ -2903,7 +2877,6 @@ const DepartmentDetail = () => {
 
   const officer = dept ? findOrganogramOfficerForHead(dept.headEn) : undefined;
   const portrait = dept?.image ?? officer?.photo;
-  const mobileHref = organogramTelHref(officer?.phone);
   const brief = dept ? departmentInformation(dept, en) : null;
 
   if (!dept) {
@@ -2977,8 +2950,6 @@ const DepartmentDetail = () => {
                 en={en}
                 localize={d}
                 portrait={portrait}
-                officerPhone={officer?.phone}
-                mobileHref={mobileHref}
                 stacked
               />
             </div>
@@ -3039,6 +3010,28 @@ const DepartmentDetail = () => {
               />
             </div>
           ) : null}
+
+          {mergedOfficialGroups()
+            .filter((group) => group.slug === dept.slug)
+            .map((group) => (
+              <div className="min-w-0" key={group.folder.join("/")}>
+                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                  {en ? "Related Documents" : "संबंधित दस्तऐवज"}
+                </h3>
+                <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+              </div>
+            ))}
+
+          {officialLinkedGroups
+            .filter((group) => group.slug === dept.slug)
+            .map((group) => (
+              <div className="min-w-0" key={group.headingEn}>
+                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                  {en ? group.headingEn : group.headingMr}
+                </h3>
+                <DocumentArchiveBrowser documents={group.documents} />
+              </div>
+            ))}
 
           {dept.slug === "town-planning-department" ? (
             <div className="min-w-0">

@@ -3,7 +3,12 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { Calendar, Download, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
+import { officialAnnouncementFolder, officialSiteNoticeDocuments } from "@/data/officialPublicAdditions";
 import { SITE_NOTICES } from "@/data/siteNotices";
+import { officialLinkedSections } from "@/data/officialLinkedDocuments";
+
+const publicNotices = officialLinkedSections.find((section) => section.id === "public-notices");
 import { buildSimplePdf, pdfFilename } from "@/lib/simplePdf";
 import { openPdfBlob } from "@/lib/unifiedSearch";
 
@@ -35,7 +40,14 @@ const Notices = () => {
     <Layout>
       <PageHeader eyebrow={en ? "Press & PR" : "प्रसिद्धी"} title={t.notices.title} subtitle={en ? "Official announcements, circulars and notices." : "अधिकृत घोषणा, परिपत्रके व सूचना."} />
       <section className="py-16 container">
-        {SITE_NOTICES.length === 0 ? (
+        <DocumentArchiveBrowser documents={officialSiteNoticeDocuments} folderSegments={[...officialAnnouncementFolder]} />
+        {publicNotices ? (
+          <div className="mt-8">
+            <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{en ? publicNotices.headingEn : publicNotices.headingMr}</h2>
+            <DocumentArchiveBrowser documents={publicNotices.documents} />
+          </div>
+        ) : null}
+        {SITE_NOTICES.length === 0 && officialSiteNoticeDocuments.length === 0 && !publicNotices ? (
           <div className="py-16 text-center border border-dashed border-border rounded-2xl bg-white">
             <p className="font-semibold text-civic-ink">
               {en ? "No current notices or announcements available." : "सध्या सूचना किंवा घोषणा उपलब्ध नाहीत."}

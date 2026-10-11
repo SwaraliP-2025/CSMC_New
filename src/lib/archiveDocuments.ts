@@ -40,6 +40,11 @@ export function driveFileViewUrl(fileId: string) {
   return `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/view`;
 }
 
+/** Embeddable preview. The /view URL sends X-Frame-Options: SAMEORIGIN and cannot be iframed. */
+export function driveFilePreviewUrl(fileId: string) {
+  return `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview`;
+}
+
 /**
  * Direct file bytes. Not used as a site download link: Chrome warns when an
  * HTTP page starts that download, and the response cannot be read in PDF.js.

@@ -8,11 +8,10 @@ import {
   organogramDisplayDepartment,
   organogramDisplayDesignation,
   organogramDisplayName,
-  organogramTelHref,
   type OrganogramPerson,
 } from "@/lib/organogram";
 import { DEPARTMENTS, type DeptInfo } from "./DepartmentDetail";
-import { Building2, Mail, MapPin, Phone, UserRound } from "lucide-react";
+import { Building2, Mail, MapPin, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function departmentsForOfficer(person: OrganogramPerson): DeptInfo[] {
@@ -32,7 +31,7 @@ function unique(values: string[]): string[] {
 }
 
 const OfficersCorner = () => {
-  const { lang, d } = useLang();
+  const { lang } = useLang();
   const en = lang === "en";
   const officers = getPublishedOrganogram();
 
@@ -43,8 +42,8 @@ const OfficersCorner = () => {
         title={en ? "Officer's Corner" : "अधिकारी कक्ष"}
         subtitle={
           en
-            ? "Officers already published on the CSMC organisation chart. Names, posts and contact details are shown only where that chart or the department page already records them."
-            : "संघटना आकृतीवर आधीच प्रकाशित असलेले अधिकारी. नाव, पद आणि संपर्क तपशील तेव्हाच दाखवले आहेत, जेव्हा ती नोंद आकृतीवर किंवा विभाग पृष्ठावर आधीच आहे."
+            ? "Officers already published on the CSMC organisation chart. Names, posts, email and office address are shown only where that chart or the department page already records them."
+            : "संघटना आकृतीवर आधीच प्रकाशित असलेले अधिकारी. नाव, पद, ई-मेल आणि कार्यालय पत्ता तेव्हाच दाखवले आहेत, जेव्हा ती नोंद आकृतीवर किंवा विभाग पृष्ठावर आधीच आहे."
         }
       />
       <section className="container py-8 md:py-10">
@@ -53,8 +52,8 @@ const OfficersCorner = () => {
         </h1>
         <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
           {en
-            ? "Officers already published on the CSMC organisation chart. Names, posts and contact details appear only where that chart or a department page already records them. Department documents stay on the department page and in the Municipal Document Repository."
-            : "संघटना आकृतीवर आधीच प्रकाशित असलेले अधिकारी. नाव, पद आणि संपर्क तपशील तेव्हाच दाखवले आहेत, जेव्हा ती नोंद आकृतीवर किंवा विभाग पृष्ठावर आधीच आहे. विभागीय दस्तऐवज विभाग पृष्ठावर आणि महापालिका दस्तऐवज भंडारातच राहतात."}{" "}
+            ? "Officers already published on the CSMC organisation chart. Names, posts, email and office address appear only where that chart or a department page already records them. Telephone numbers are not shown. Department documents stay on the department page and in the Municipal Document Repository."
+            : "संघटना आकृतीवर आधीच प्रकाशित असलेले अधिकारी. नाव, पद, ई-मेल आणि कार्यालय पत्ता तेव्हाच दाखवले आहेत, जेव्हा ती नोंद आकृतीवर किंवा विभाग पृष्ठावर आधीच आहे. दूरध्वनी क्रमांक दाखवले जात नाहीत. विभागीय दस्तऐवज विभाग पृष्ठावर आणि महापालिका दस्तऐवज भंडारातच राहतात."}{" "}
           <Link to="/organization" className="font-semibold text-civic-blue hover:underline">
             {en ? "Organisation chart" : "संघटना आकृती"}
           </Link>
@@ -65,8 +64,6 @@ const OfficersCorner = () => {
             const name = organogramDisplayName(person, en);
             const designation = organogramDisplayDesignation(person, en);
             const office = organogramDisplayDepartment(person, en);
-            const phone = person.phone?.trim();
-            const tel = organogramTelHref(phone);
             const emails = unique(posts.map((dept) => dept.email));
             const addresses = unique(posts.map((dept) => (en ? dept.addressEn : dept.addressMr)));
             const duties = posts
@@ -99,16 +96,6 @@ const OfficersCorner = () => {
                       <p className="mt-1 text-sm font-semibold text-civic-blue">{designation}</p>
                       {office ? <p className="mt-1 text-sm text-muted-foreground">{office}</p> : null}
                       <ul className="mt-3 space-y-1.5 text-sm text-civic-ink">
-                        {phone ? (
-                          <li className="flex items-start gap-2">
-                            <Phone className="mt-0.5 h-4 w-4 shrink-0 text-civic-blue" aria-hidden />
-                            {tel ? (
-                              <a href={tel} className="hover:text-civic-blue hover:underline">{d(phone)}</a>
-                            ) : (
-                              <span>{d(phone)}</span>
-                            )}
-                          </li>
-                        ) : null}
                         {emails.map((email) => (
                           <li key={email} className="flex items-start gap-2 break-all">
                             <Mail className="mt-0.5 h-4 w-4 shrink-0 text-civic-blue" aria-hidden />

@@ -25,7 +25,7 @@ export const auditDocuments: ArchiveFile[] = [
 
 export const ELECTRICAL_DOCUMENTS_FOLDER = ["Municipal Document Repository", "Electrical Department"] as const;
 
-/** Rate schedules and the work-done list whose first pages identify them. Scanned ward parts stay off this list. */
+/** Rate schedules and the work-done list whose first pages identify them. */
 export const electricalPublicDocuments: ArchiveFile[] = [
   { id: "electrical-csr-2017-18", file: "CSR_17-18-1.pdf", bytes: 1372000 },
   { id: "electrical-csr-2018-19", file: "PWD_Electrical_csr18-19_14_9_2018.pdf", bytes: 3316692 },
@@ -58,6 +58,8 @@ export const mechanicalPublicDocuments: ArchiveFile[] = [
   { id: "mechanical-276-vehicles-2017-05-20", file: "List_of_276_Vehicles_Dt__20_5_2017.pdf", bytes: 307409 },
   { id: "mechanical-water-works-2009-2015", file: "Water_Work_Mechanical_2009_to_2015.pdf", bytes: 98947 },
   { id: "mechanical-water-works-2009-10-2015-16", file: "Water_Work_Mechanical_2009-10_To_2015-16.pdf", bytes: 47946 },
+  { id: "official-mechanical-vehicles-auto-list-pdf", file: "Auto_list.pdf", bytes: 57163, titleEn: "Auto list" },
+  { id: "official-mechanical-vehicles-mechinical-89-dt-21-02-2025-pdf", file: "Mechinical_89_dt_21_02_2025.pdf", bytes: 6482450, titleEn: "Mechanical 89 dated 21.02.2025" },
 ];
 
 /**

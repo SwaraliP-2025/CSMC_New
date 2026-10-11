@@ -1,0 +1,1388 @@
+{
+  "officialMissing": 571,
+  "officialLinked": 397,
+  "officialBroken": [
+    {
+      "href": "https://chhsambhajinagarmc.org/Account_Clerk../assets/300/2026/03/mediafiles/Account_Clerk.pdf",
+      "label": "Account_Clerk",
+      "page": "https://chhsambhajinagarmc.org/establishment-1",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/06-May-88%20GB.pdf",
+      "label": "06-May-88 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/05-April-88To%2005-May-88%20GB.pdf",
+      "label": "05-April-88To 05-May-88 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/11-May-90%20To%2011-Dec-90%20GB.pdf",
+      "label": "11-May-90 To 11-Dec-90 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/03-01-91%20To%2011-04-91.pdf",
+      "label": "03-01-91 To 11-04-91.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/26-Dec-91%20To%2031-Dec-91%20GB.pdf",
+      "label": "26-Dec-91 To 31-Dec-91 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/20-Nov-91%20To%2019-Dec-91%20GB.pdf",
+      "label": "20-Nov-91 To 19-Dec-91 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/20-April-91%20To%2028-Oct-91GB.pdf",
+      "label": "20-April-91 To 28-Oct-91GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/13.12.019%20GB--39.pdf",
+      "label": "13.12.019 GB--39.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/19.11.2019%20GB--38.pdf",
+      "label": "19.11.2019 GB--38.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/18.07.2019%20GB--33.pdf",
+      "label": "18.07.2019 GB--33.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/19.12.019%20GB-39%20Budget%20Tahakub.pdf",
+      "label": "19.12.019 GB-39 Budget Tahakub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/04.03.2020%20GB-_Ka.Pa.Kra.45_.pdf",
+      "label": "04.03.2020 GB-_Ka.Pa.Kra.45_.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/18.02.2020%20GB--44.pdf",
+      "label": "18.02.2020 GB--44.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/18.02.2020%20GB--38.pdf",
+      "label": "18.02.2020 GB--38.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/11.06.2018%20GB-ARTHSANKALPIY%20Vishesh%20Sabha_Ka.Pa.Kra.11_.pdf",
+      "label": "11.06.2018 GB-ARTHSANKALPIY Vishesh Sabha_Ka.Pa.Kra.11_.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/09.02.2018%20_ka.p.no.04_%20final%20ittiwratta.pdf",
+      "label": "09.02.2018 _ka.p.no.04_ final ittiwratta.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/34-21.12.09%20Dt%2009.12.09%20&%20Dt.19.12.09%20chi%20Tahakub%20Vishesh%20Sabha%2002.pdf",
+      "label": "34-21.12.09 Dt 09.12.09 & Dt.19.12.09 chi Tahakub Vishesh Sabha 02.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/35-21.12.2009%20Dt.19.12.09%20chi%20Tahakub%20Sabha.pdf",
+      "label": "35-21.12.2009 Dt.19.12.09 chi Tahakub Sabha.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/04.09.2010%20tahkub%20morning%2020.12.2010%20GB.pdf",
+      "label": "04.09.2010 tahkub morning 20.12.2010 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/16.10.2010%20Budget%20GB.pdf",
+      "label": "16.10.2010 Budget GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/20.12.2010Rojhichi%20Morning18.01.2011.pdf",
+      "label": "20.12.2010Rojhichi Morning18.01.2011.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/18.01.2011%20GB.pdf",
+      "label": "18.01.2011 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/17.02.2011%20GB.pdf",
+      "label": "17.02.2011 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/3-3-2011%20GB---Jakat.pdf",
+      "label": "3-3-2011 GB---Jakat.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/31-3-2011%20GB.pdf",
+      "label": "31-3-2011 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/26.04.2011%20dt.20.04.2011%20tahkub%20Gb.pdf",
+      "label": "26.04.2011 dt.20.04.2011 tahkub Gb.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/30.5.2011%20Jakat%20GB.pdf",
+      "label": "30.5.2011 Jakat GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/18-5-2011%20GB-I.pdf",
+      "label": "18-5-2011 GB-I.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/08-07-2011%20dt.07.06.2011%20tahkub%20Gb.pdf",
+      "label": "08-07-2011 dt.07.06.2011 tahkub Gb.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/01-Mayor%20&%20Dy.Mayor%20Election-2015%2029.04.2015.pdf",
+      "label": "01-Mayor & Dy.Mayor Election-2015 29.04.2015.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/15-3-2016--GB--15---2.pdf",
+      "label": "15-3-2016--GB--15---2.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/20-4-2016-17%20--GB--Buget.pdf",
+      "label": "20-4-2016-17 --GB--Buget.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/A%2007.02.2014%20GB%20-22.pdf",
+      "label": "A 07.02.2014 GB -22.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/B%205.3.2014GB-23.pdf",
+      "label": "B 5.3.2014GB-23.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/C%2020-03-2014--GB--24.pdf",
+      "label": "C 20-03-2014--GB--24.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/D%2019-04-2014--GB--25t.pdf",
+      "label": "D 19-04-2014--GB--25t.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/E%2030.04.2014-V-S%20GB.pdf",
+      "label": "E 30.04.2014-V-S GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/F%2020-05-2014%20GB--23%20Bujet%20Takub.pdf",
+      "label": "F 20-05-2014 GB--23 Bujet Takub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/G%2020-05-2014-GB-27.pdf",
+      "label": "G 20-05-2014-GB-27.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/H%2017-06-2014.pdf",
+      "label": "H 17-06-2014.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/I%2010-07-2014-GB-29.pdf",
+      "label": "I 10-07-2014-GB-29.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/30-%2011-08-2014%20G%20B.pdf",
+      "label": "30- 11-08-2014 G B.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/32-16.10.2014%20GB%20--32.pdf",
+      "label": "32-16.10.2014 GB --32.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/34-20-12-2014--GB-34%20Tahkub.pdf",
+      "label": "34-20-12-2014--GB-34 Tahkub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/34-22-12-2014-gb-20-12-14%20tahkub.pdf",
+      "label": "34-22-12-2014-gb-20-12-14 tahkub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/34-20-1-2015%20GB.pdf",
+      "label": "34-20-1-2015 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/36-20-01-2015%20GB.pdf",
+      "label": "36-20-01-2015 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/11-07-2016%20GB--24.pdf",
+      "label": "11-07-2016 GB--24.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/19.7.2011%20GB.pdf",
+      "label": "19.7.2011 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/18-8-2011gb%20tahakub.pdf",
+      "label": "18-8-2011gb tahakub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/10.20-GB.19.12.2013%20chi%20tahkub%20sabha%20GB.%2031.12.2013.pdf",
+      "label": "10.20-GB.19.12.2013 chi tahkub sabha GB. 31.12.2013.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/9.19.12.2013%20GB.pdf",
+      "label": "9.19.12.2013 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/8.19.11.2013%20GB.pdf",
+      "label": "8.19.11.2013 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/7.18.10.2013-18-%20GB.pdf",
+      "label": "7.18.10.2013-18- GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/6.26.09.2013%20GB-17.pdf",
+      "label": "6.26.09.2013 GB-17.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/5.19.09.20132%20GB.pdf",
+      "label": "5.19.09.20132 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/3.4-7-2013%20GB--15t.pdf",
+      "label": "3.4-7-2013 GB--15t.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/1.06.06.2013%20--GB--13.pdf",
+      "label": "1.06.06.2013 --GB--13.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/20.05.2013%20--%20GB--12.pdf",
+      "label": "20.05.2013 -- GB--12.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/09.28.03.2013%20Budgetary%20GB.pdf",
+      "label": "09.28.03.2013 Budgetary GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/07.27.02.2013%20GB.pdf",
+      "label": "07.27.02.2013 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/06.11.02.2013%20GB.pdf",
+      "label": "06.11.02.2013 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/02-%2019.11.2012%20GB.pdf",
+      "label": "02- 19.11.2012 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/01.29-10-2012%20Election%20Meeting.pdf",
+      "label": "01.29-10-2012 Election Meeting.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/04.01.2011%20GB..pdf",
+      "label": "04.01.2011 GB..pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/49.18.10.2012%20GB.pdf",
+      "label": "49.18.10.2012 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/48-18.10.2012%20GB%20Dt.%2027.09.12%20Tahkub.pdf",
+      "label": "48-18.10.2012 GB Dt. 27.09.12 Tahkub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/42.09-05-2012%20GB.pdf",
+      "label": "42.09-05-2012 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/41-30.04.2012%20GB.pdf",
+      "label": "41-30.04.2012 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/39.7-4-2012%20GB.pdf",
+      "label": "39.7-4-2012 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/38.31-3-2012%20GB--%20Baget%20saba.pdf",
+      "label": "38.31-3-2012 GB-- Baget saba.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/38.4-4-2012%20gb--Bajet.pdf",
+      "label": "38.4-4-2012 gb--Bajet.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/36-1-3-2012%20GB.pdf",
+      "label": "36-1-3-2012 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/33.18-2-12%20GB--11-1-12%20Tahakub.pdf",
+      "label": "33.18-2-12 GB--11-1-12 Tahakub.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/31-15-11-2011--GB--bajet%202.pdf",
+      "label": "31-15-11-2011--GB--bajet 2.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/30-%2015.11.2011.pdf",
+      "label": "30- 15.11.2011.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/28.18.10.2011%20GB.pdf",
+      "label": "28.18.10.2011 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/38-20-2-15%20GB.pdf",
+      "label": "38-20-2-15 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/47%20--04-09-2012%20Visesh%20sabha%20GB.pdf",
+      "label": "47 --04-09-2012 Visesh sabha GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/30.04.2013%20V-S%20GB.pdf",
+      "label": "30.04.2013 V-S GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/GB-45-29-7-2017%20Dharmik.pdf",
+      "label": "GB-45-29-7-2017 Dharmik.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/GB%2019.11.2015.pdf",
+      "label": "GB 19.11.2015.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/GB%2020.11.2015.pdf",
+      "label": "GB 20.11.2015.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/GB-%2046-18-09.2017.pdf",
+      "label": "GB- 46-18-09.2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/09.02.2018%20_ka.p.no.06_.pdf",
+      "label": "09.02.2018 _ka.p.no.06_.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/27.08.018%20GB-Samantar%20Vishesh%20Sabha_Ka.Pa.Kra.17_.pdf",
+      "label": "27.08.018 GB-Samantar Vishesh Sabha_Ka.Pa.Kra.17_.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/11.09.2018%20GB-19.pdf",
+      "label": "11.09.2018 GB-19.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/13-06-2019-GB-32%20GB.pdf",
+      "label": "13-06-2019-GB-32 GB.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/07.01.2020%20GB-42.pdf",
+      "label": "07.01.2020 GB-42.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/06.02.2020%20GB--43.pdf",
+      "label": "06.02.2020 GB--43.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/04.09.2018%20GB--17.pdf",
+      "label": "04.09.2018 GB--17.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/23--30.06.2016%20Samantar.pdf",
+      "label": "23--30.06.2016 Samantar.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/08/generalbodymeeting/27.02.2020%20GB--45.pdf",
+      "label": "27.02.2020 GB--45.pdf",
+      "page": "https://chhsambhajinagarmc.org/fe2d010308a6b3799a3d9c728ee74244",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/11/mediafiles/Antar_Jilla_Badali.pdf",
+      "label": "Antar_Jilla_Badali.pdf",
+      "page": "https://chhsambhajinagarmc.org/education-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2025/01/mediafiles/CSR_19-20_(_5_%)_16_07_19.pdf",
+      "label": "CSR_19-20.pdf",
+      "page": "https://chhsambhajinagarmc.org/light-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/..../assets/300/2026/08/mediafiles/JAHIR_SUCHANA.pdf",
+      "label": "JAHIR_SUCHANA.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/....../assets/300/2026/07/mediafiles/Chhanani_Samiti_Ahwal.pdf",
+      "label": "Scrutiny Committee Report",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2026/07/mediafiles/Shudhi_Patrak.pdf",
+      "label": "Shudhi_Patrak.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2025/05/mediafiles/NULM_PPT_for_csmc_website_24_03_2025__.pdf",
+      "label": "NULM PPT",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2025/01/mediafiles/Street_Vendor_Voter_List_Chhatrapati_Sambhajinagar_Municipal_Corporation.pdf",
+      "label": "Street_Vendor_Voter_List.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Amezon-DTP-2-7-10-2016.pdf",
+      "label": "Amezon-DTP-1-7-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Amezon-DTP-3-7-10-2016.pdf",
+      "label": "Amezon-DTP-3-7-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/B)_NULM_GR_201409051138346525.pdf",
+      "label": "B) NULM GR_201409051138346525.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Amezon-Tally-7-10-2016.pdf",
+      "label": "Amezon-Tally-7-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Arya-Ass__Counseller-1-15-12-2016.pdf",
+      "label": "Arya-Ass. Counseller-1-15-12-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Arya-Ass__Counseller-3-15-12-2016.pdf",
+      "label": "Arya-Ass. Counseller-3-15-12-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Arya-Asss__Counseller-2-15-12-2016.pdf",
+      "label": "Arya-Asss. Counseller-2-15-12-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/CV_Can_Soft_Solutuion-Acc-2-7-10-2016.pdf",
+      "label": "CV Can Soft Solutuion-Acc-2-7-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Fabz_Info-BPO3_-07-10-2016.pdf",
+      "label": "Fabz Info-BPO3 -07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Fabz_Info-BPO5_-07-10-2016.pdf",
+      "label": "Fabz Info-BPO5 -07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Fair_Services-DTP1-4-2-2017.pdf",
+      "label": "Fair Services-DTP1-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Gauri_Bahuudeshiye-Garment_1-15-12-2016.pdf",
+      "label": "Gauri Bahuudeshiye-Garment 1-15-12-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Gauri_Bahuudeshiye-Garment_2-15-12-2016.pdf",
+      "label": "Gauri Bahuudeshiye-Garment 2-15-12-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Indian_I_security-Security_Guird_07-10-2016.pdf",
+      "label": "Indian I security-Security Guird 07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Indian_I_security-Security_Guird-2-_07-10-2016.pdf",
+      "label": "Indian I security-Security Guird-2- 07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Krishna_Vocational-Aurvedic_SPA-16-1-2017.pdf",
+      "label": "Krishna Vocational-Aurvedic SPA-16-1-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Maharshi_Parashar-Garment-1-07-10-2016.pdf",
+      "label": "Maharshi Parashar-Garment-1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Mansi-Beauty3-07-10-2016.pdf",
+      "label": "Mansi-Beauty3-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Mansi-Beauty4-07-10-2016.pdf",
+      "label": "Mansi-Beauty4-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Param_Skill-Acc1-4-2-2017.pdf",
+      "label": "Param Skill-Acc1-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Param_Skill-Acc2-4-2-2017_.pdf",
+      "label": "Param Skill-Acc2-4-2-2017..pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Beauty1-07-10-2016.pdf",
+      "label": "Soft-Concept-Tech-Beauty1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Beauty1-07-10-20161.pdf",
+      "label": "Soft-Concept-Tech-Beauty1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Tally_1-07-10-2016.pdf",
+      "label": "Soft-Concept-Tech-Tally 1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Tally_2-07-10-2016.pdf",
+      "label": "Soft-Concept-Tech-Tally 2-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Tally_3-07-10-2016.pdf",
+      "label": "Soft-Concept-Tech-Tally 3-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Tally_4-07-10-2016.pdf",
+      "label": "Soft-Concept-Tech-Tally 4-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Sundarya-Beauty2-4-2-2017.pdf",
+      "label": "Sundarya-Beauty2-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Swabhiman_Kaushaly_Vikas_Kendra-Beauty1-4-2-2017.pdf",
+      "label": "Swabhiman Kaushaly Vikas Kendra-Beauty1-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Swabhiman_Kaushaly_Vikas_Kendra-Beauty2-4-2-2017.pdf",
+      "label": "Swabhiman Kaushaly Vikas Kendra-Beauty2-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Swabhiman_Kaushaly_Vikas_Kendra-DTP-4-2-2017.pdf",
+      "label": "Swabhiman Kaushaly Vikas Kendra-DTP-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Swabhiman_Kaushaly_Vikas_Kendra-Tally-4-2-2017.pdf",
+      "label": "Swabhiman Kaushaly Vikas Kendra-Tally-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Taaj_Coaching-Medical_Nursing_2-07-10-2016_.pdf",
+      "label": "Taaj Coaching-Medical Nursing 2-07-10-2016..pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/CV_can-Acc-3-7-10-2016.pdf",
+      "label": "CV can-Acc-3-7-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/CVcan_Solution-DTP1-07-10-2016.pdf",
+      "label": "CVcan Solution-DTP1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/CVcan_Solution-Hardware-0-10-2016.pdf",
+      "label": "CVcan Solution-Hardware-0-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/CVcan-Acc1-7-10-2016.pdf",
+      "label": "CVcan-Acc1-7-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Cyber_Mall_IT-DTP1-07-10-2016.pdf",
+      "label": "Cyber Mall IT-DTP1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Cyber_Mall_IT-DTP2-07-10-2016.pdf",
+      "label": "Cyber Mall IT-DTP2-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Cyber_Mall-DTP3-12-15-2016.pdf",
+      "label": "Cyber Mall-DTP3-12-15-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Fabz_Info-BPO1_-07-10-2016.pdf",
+      "label": "Fabz Info-BPO1 -07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Fabz_Info-BPO2_-07-10-2016.pdf",
+      "label": "Fabz Info-BPO2 -07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Krishna_Vocational-Aurvedic_SPA-16-1-20171.pdf",
+      "label": "Krishna Vocational-Aurvedic SPA-16-1-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Maharshi_Parashar-Garment-2-07-10-2016.pdf",
+      "label": "Maharshi Parashar-Garment-2-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Maharshi_Parashar-Garment-3-07-10-2016.pdf",
+      "label": "Maharshi Parashar-Garment-3-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Maharshi_Parashar-Garment-4-07-10-2016.pdf",
+      "label": "Maharshi Parashar-Garment-4-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Mansi-Beauty1-07-10-2016.pdf",
+      "label": "Mansi-Beauty1-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Sai_Swairojgar_sanstha-Beauty_1-16-01-2017.pdf",
+      "label": "Sai Swairojgar sanstha-Beauty 1-16-01-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Sai_Swairojgar_sanstha-Beauty_2-16-01-2017.pdf",
+      "label": "Sai Swairojgar sanstha-Beauty 2-16-01-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Sai_Swairojgar_sanstha-Beauty_3-16-01-2017.pdf",
+      "label": "Sai Swairojgar sanstha-Beauty 3-16-01-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Sai_Swairojgar-Beauty-4-04-2-20171.pdf",
+      "label": "Sai Swairojgar-Beauty-4-04-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Soft-Concept-Tech-Beauty_2-07-10-20161.pdf",
+      "label": "Soft-Concept-Tech-Beauty 2-07-10-2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Sundarya-Beauty1-4-2-20171.pdf",
+      "label": "Sundarya-Beauty1-4-2-2017.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/C)_ESTP-Guidelines1.pdf",
+      "label": "C) ESTP-Guidelines.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/D)_ESTP_user_manual-new1.pdf",
+      "label": "D) ESTP_user_manual-new.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/E)ESTP_PHASE_1_AMC.pdf",
+      "label": "E)ESTP PHASE 1 AMC.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/F)ESTP_PHASE2_AMC.pdf",
+      "label": "F)ESTP PHASE2 AMC.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/G)ESTP_PHASE3_AMC.pdf",
+      "label": "G)ESTP PHASE3 AMC.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/H)reminder_letar_nulm.pdf",
+      "label": "H)reminder letar nulm.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 400,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Asia_Group_Mahila_mandal.pdf",
+      "label": "Asia Group Mahila mandal.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Expression_of_Intrest_Shelter_for_Urban_Homeless_19_05_2016.pdf",
+      "label": "Expression of Intrest Shelter for Urban Homeless 19.05.2016.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Indus_academy.pdf",
+      "label": "Indus academy.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/03/mediafiles/Orain_Education_Pvt_Ltd.pdf",
+      "label": "Orain Education Pvt Ltd.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/........../assets/300/2022/04/mediafiles/AMC_Hawkers_Policy.pdf",
+      "label": "AMC_Hawkers_Policy.pdf",
+      "page": "https://chhsambhajinagarmc.org/nulm-department",
+      "status": 404,
+      "type": "text/html; charset=UTF-8"
+    }
+  ],
+  "officialDuplicate": [
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2024/08/mediafiles/Additional_Commissioner-1.pdf",
+      "bytes": 2362355,
+      "publishedAs": [
+        "documents/rti/Department-wise RTI Documents/Guildelines_For_Disaster.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2026/09/mediafiles/Possessing_the_qualifications_for_a_Group_C_post_for_the_purpose_of_appointment_on_compassionate_grounds_.pdf",
+      "bytes": 315152,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Administration and Establishment Department/General Administration Documents/Possessing_the_qualifications_for_a_Group_C_post_for_th.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2026/09/mediafiles/Waiting_list_for_appointment_to_Group-D_posts_on_compassionate_grounds_.pdf",
+      "bytes": 328961,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Administration and Establishment Department/General Administration Documents/Waiting_list_for_appointment_to_Group-D_posts_on_compas.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2026/03/mediafiles/Choef_Garden_Officer.pdf",
+      "bytes": 65883,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Administration and Establishment Department/Administration/Chief_Garden_Officer.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2026/03/mediafiles/Sanitor_Officer.pdf",
+      "bytes": 70348,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Administration and Establishment Department/Administration/Sanitation_Officer.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2026/03/mediafiles/Sanitor_Inspector.pdf",
+      "bytes": 119372,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Administration and Establishment Department/Administration/Sanitation_Inspector.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/03/mediafiles/Guildelines_For_Disaster_(1).PDF",
+      "bytes": 759375,
+      "publishedAs": [
+        "documents/Guildelines_For_Disaster.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/03/mediafiles/STP_035_MLD_4518_078-108_21.pdf",
+      "bytes": 11488951,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Drainage/STP_035_MLD_4518_078-108_2.pdf"
+      ]
+    },
+    {
+      "href": "https://chhsambhajinagarmc.org/assets/300/2022/03/mediafiles/Photoes_2st_RA.pdf",
+      "bytes": 9764079,
+      "publishedAs": [
+        "documents/Municipal Document Repository/Drainage/Photoes_2nd_RA.pdf"
+      ]
+    }
+  ],
+  "officialUnassigned": [],
+  "heldPdfRows": 1027,
+  "tenderUnique": 1008,
+  "tenderPublished": 1008,
+  "tenderDuplicates": [
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2025/EST_12_01_2025.pdf",
+      "of": "documents/standing-committee/2025/EST_12_01_2025.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2025/EST-1_Dt_03_07_2026.pdf",
+      "of": "documents/standing-committee/2026/EST-1_Dt_03_07_2026.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2025/Municipal_Corporation_-_Improved_Voter_List_Program_26-11-2025.pdf",
+      "of": "documents/standing-committee/2025/Municipal_Corporation_-_Improved_Voter_List_Program_26-11-2025.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2024/EST_12_01_2025.pdf",
+      "of": "documents/standing-committee/2025/EST_12_01_2025.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2024/EST-1_Dt_03_07_2026.pdf",
+      "of": "documents/standing-committee/2026/EST-1_Dt_03_07_2026.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2024/Health_464_dt__20_02_20241.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/tender-notice-2024/Health_464_dt__20_02_2024.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender-notice-2024/Municipal_Corporation_-_Improved_Voter_List_Program_26-11-2025.pdf",
+      "of": "documents/standing-committee/2025/Municipal_Corporation_-_Improved_Voter_List_Program_26-11-2025.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/tender 2023/SWM_491_dt_06_10_2023.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/tender 2023/swm_426_dt_07_09_2023.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/2022/Health_2406_dt__16_09_2022.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/2022/Health_2406_dt__16_09_2022 (1).pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/2020/HEALTH_1253_DT_24_07_2020.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/2020/HEALTH_1253_DT_24_07_2020 (1).pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/2020/Health_570_dt__04_02_2020.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/2020/Health_570_dt__04_02_2020 (1).pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/E-Tender_06_dt_06_01_20201.PDF",
+      "of": "documents/Municipal Document Repository/Tenders/2020/E-Tender_06_dt_06_01_2020.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/E-Tender_549_30_01_20171.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/E-Tender_549_30_01_2017.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/E-Tender_550_30_01_20171.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/E-Tender_550_30_01_2017.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/EST_12_01_2025.pdf",
+      "of": "documents/standing-committee/2025/EST_12_01_2025.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/EST-1_Dt_03_07_2026.pdf",
+      "of": "documents/standing-committee/2026/EST-1_Dt_03_07_2026.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/Health_30_dt__02_01_20201.PDF",
+      "of": "documents/Municipal Document Repository/Tenders/2020/Health_30_dt__02_01_2020.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/Health_NUHM_324_dt_30_10_20181.pdf",
+      "of": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/Health_NUHM_324_dt_30_10_2018.pdf"
+    },
+    {
+      "path": "documents/Municipal Document Repository/Tenders/Tender 2018-2019/Municipal_Corporation_-_Improved_Voter_List_Program_26-11-2025.pdf",
+      "of": "documents/standing-committee/2025/Municipal_Corporation_-_Improved_Voter_List_Program_26-11-2025.pdf"
+    }
+  ],
+  "tenderNoAccess": [],
+  "tenderUnreadable": [],
+  "census": [
+    {
+      "id": 1,
+      "url": "https://drive.google.com/file/d/19mOLNXKJmiIq3dXx-f79OXthuHTlULj1/view",
+      "fileId": "19mOLNXKJmiIq3dXx-f79OXthuHTlULj1",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 2,
+      "url": "https://drive.google.com/file/d/1ZDc1jPawdsgNyoxtc9cUgEzcZFPe5x86/view",
+      "fileId": "1ZDc1jPawdsgNyoxtc9cUgEzcZFPe5x86",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 3,
+      "url": "https://drive.google.com/file/d/1ChscyKw7Seoq17RRmuNwMhlAzJec2kzh/view",
+      "fileId": "1ChscyKw7Seoq17RRmuNwMhlAzJec2kzh",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 4,
+      "url": "https://drive.google.com/file/d/1Om8gJj2fmJG2K7BLubwdKNT5sTfi9UHk/view",
+      "fileId": "1Om8gJj2fmJG2K7BLubwdKNT5sTfi9UHk",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 5,
+      "url": "https://drive.google.com/file/d/1pnerx-LxmBMVX8MURYB35iSd9BjMdb13/view",
+      "fileId": "1pnerx-LxmBMVX8MURYB35iSd9BjMdb13",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 6,
+      "url": "https://drive.google.com/file/d/1UQRrkoEtCEgaGWkozRMIWPAZH5oeymvO/view",
+      "fileId": "1UQRrkoEtCEgaGWkozRMIWPAZH5oeymvO",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 7,
+      "url": "https://drive.google.com/file/d/1pL82bS8ZAXs9-S_AJbgZDHHw4HRUn91q/view",
+      "fileId": "1pL82bS8ZAXs9-S_AJbgZDHHw4HRUn91q",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 8,
+      "url": "https://drive.google.com/file/d/1FRZAOrCYR_c40kVw4mUeWq16Sm5cXYcz/view",
+      "fileId": "1FRZAOrCYR_c40kVw4mUeWq16Sm5cXYcz",
+      "ok": false,
+      "reason": "503 <html"
+    },
+    {
+      "id": 9,
+      "url": "https://drive.google.com/file/d/1hSaXR_GJ9_tgINONbDCGSs_vNVju2pFt/view",
+      "fileId": "1hSaXR_GJ9_tgINONbDCGSs_vNVju2pFt",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    },
+    {
+      "id": 10,
+      "url": "https://drive.google.com/drive/folders/1OQCJd9LXkJ5khqjIvCbmq0aIVVZ7ZF7V",
+      "ok": false,
+      "reason": "folder link, not a single PDF"
+    },
+    {
+      "id": 11,
+      "url": "https://drive.google.com/file/d/1YA-jajeuzmqpCX61tr7_cJabOI_L5cLe/view",
+      "fileId": "1YA-jajeuzmqpCX61tr7_cJabOI_L5cLe",
+      "ok": false,
+      "reason": "200 \u0000\u0000\u0000\u0018f"
+    }
+  ]
+}

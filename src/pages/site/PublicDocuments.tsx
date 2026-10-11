@@ -4,6 +4,8 @@ import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser
 import { BUDGET_FOLDER, budgetDocumentsFor, budgetYearFromParam, budgetYearSections, type BudgetYearId } from "@/data/budgetDocuments";
 import { standingCommitteeMinutes, standingCommitteeYears } from "@/data/standingCommitteeMinutes";
 import { STANDING_COMMITTEE_VOLUME_FOLDER, standingCommitteeVolumeMinutes } from "@/data/reviewedPublicDocuments";
+import { officialStandingCommitteeDocuments, officialStandingCommitteeFolder } from "@/data/officialPublicAdditions";
+import { officialLinkedSections, tenderArchiveGroups } from "@/data/officialLinkedDocuments";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Filter } from "lucide-react";
@@ -46,7 +48,10 @@ const PublicDocuments = () => {
   const showMinutesArchive = category === "minutes" && (typeFilter === null || typeFilter === "minutes");
   const minutesOnly = typeFilter === "minutes";
   const showBudgetArchive = category === "budget";
-  const archiveOnly = minutesOnly || showBudgetArchive;
+  const showResolutionsArchive = category === "resolutions";
+  const showTenderArchive = category === "tenders";
+  const generalBody = officialLinkedSections.find((section) => section.id === "general-body");
+  const archiveOnly = minutesOnly || showBudgetArchive || showResolutionsArchive || showTenderArchive;
   const selectedMinuteYear = yearFilter && standingCommitteeYears.includes(yearFilter)
     ? yearFilter
     : standingCommitteeYears[standingCommitteeYears.length - 1];
@@ -82,6 +87,24 @@ const PublicDocuments = () => {
           </div>
         </div>
 
+        {showResolutionsArchive && generalBody ? (
+          <div className="mb-8">
+            <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{en ? generalBody.headingEn : generalBody.headingMr}</h2>
+            <DocumentArchiveBrowser documents={generalBody.documents} />
+          </div>
+        ) : null}
+
+        {showTenderArchive && (
+          <div className="mb-8">
+            {tenderArchiveGroups.map((group) => (
+              <div className="mb-8" key={group.headingEn}>
+                <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{en ? group.headingEn : group.headingMr}</h2>
+                <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+              </div>
+            ))}
+          </div>
+        )}
+
         {showMinutesArchive && (
           <div className="mb-8">
             <div className="flex flex-wrap gap-2 mb-4">
@@ -108,6 +131,11 @@ const PublicDocuments = () => {
             <DocumentArchiveBrowser
               documents={standingCommitteeVolumeMinutes}
               folderSegments={["standing-committee", STANDING_COMMITTEE_VOLUME_FOLDER]}
+              initialSort="date-oldest"
+            />
+            <DocumentArchiveBrowser
+              documents={officialStandingCommitteeDocuments}
+              folderSegments={officialStandingCommitteeFolder}
               initialSort="date-oldest"
             />
           </div>

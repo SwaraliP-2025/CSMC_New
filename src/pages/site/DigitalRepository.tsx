@@ -54,6 +54,9 @@ import {
   nulmDocuments,
   standingCommitteeVolumeMinutes,
 } from "@/data/reviewedPublicDocuments";
+import { mergedOfficialGroups } from "@/data/officialVerifiedDocuments";
+import { officialLinkedGroups, officialLinkedSections, tenderArchiveGroups } from "@/data/officialLinkedDocuments";
+import { officialAnnouncementFolder, officialSiteNoticeDocuments, officialStandingCommitteeDocuments, officialStandingCommitteeFolder, officialTenderNoticeDocuments } from "@/data/officialPublicAdditions";
 import { localizeDigits } from "@/i18n/digits";
 import { REPOSITORY_DOCUMENTS } from "@/data/civicCatalog";
 import {
@@ -71,6 +74,37 @@ type SortKey = "newest" | "oldest" | "title";
 
 const isRepoCategory = (v: string | null): v is CivicCategory =>
   !!v && (REPOSITORY_CATEGORIES as string[]).includes(v);
+
+const LINKED_DEPARTMENT_NAMES: Record<string, { en: string; mr: string }> = {
+  "audit-department": { en: "Audit Department", mr: "लेखापरीक्षण विभाग" },
+  drainage: { en: "Drainage Department", mr: "मलनिःसारण विभाग" },
+  "election-census": { en: "Election Department", mr: "निवडणूक विभाग" },
+  electrical: { en: "Electrical Department", mr: "विद्युत विभाग" },
+  garden: { en: "Garden Department", mr: "उद्यान विभाग" },
+  "general-administration": { en: "General Administration Department", mr: "सामान्य प्रशासन विभाग" },
+  health: { en: "Health Department", mr: "आरोग्य विभाग" },
+  "municipal-secretary-department": { en: "Municipal Secretary Department", mr: "नगरसचिव विभाग" },
+  "property-management": { en: "Property Management Department", mr: "मालमत्ता व्यवस्थापन विभाग" },
+  tax: { en: "Tax Department", mr: "कर विभाग" },
+  "town-planning-department": { en: "Town Planning Department", mr: "नगररचना विभाग" },
+};
+
+const OFFICIAL_GROUP_HEADINGS: Record<string, { en: string; mr: string }> = {
+  "city-engineer": { en: "City Engineer", mr: "शहर अभियंता" },
+  garden: { en: "Garden Department", mr: "उद्यान विभाग" },
+  health: { en: "Health Department", mr: "आरोग्य विभाग" },
+  labour: { en: "Labour Department", mr: "कामगार विभाग" },
+  "municipal-secretary-department": { en: "Municipal Secretary", mr: "महानगरपालिका सचिव" },
+  pmay: { en: "PMAY", mr: "प्रधानमंत्री आवास योजना" },
+  "ramai-housing": { en: "Ramai Awas Yojana", mr: "रमाई आवास योजना" },
+  "solid-waste-management": { en: "Solid Waste Management", mr: "घनकचरा व्यवस्थापन" },
+  tax: { en: "Tax Assessment and Collection", mr: "कर निर्धारण व संकलन" },
+  "tourism-development": { en: "Tourism Department", mr: "पर्यटन विभाग" },
+  "water-supply-distribution": { en: "Water Supply", mr: "पाणीपुरवठा" },
+  electrical: { en: "Electrical Department", mr: "विद्युत विभाग" },
+  "fire-disaster-management": { en: "Fire and emergency services", mr: "अग्निशमन व आणीबाणी सेवा" },
+  "social-development": { en: "Social Development", mr: "समाज विकास" },
+};
 
 const DigitalRepository = () => {
   const { lang, d } = useLang();
@@ -312,6 +346,11 @@ const DigitalRepository = () => {
             folderSegments={["standing-committee", STANDING_COMMITTEE_VOLUME_FOLDER]}
             initialSort="date-oldest"
           />
+          <DocumentArchiveBrowser
+            documents={officialStandingCommitteeDocuments}
+            folderSegments={officialStandingCommitteeFolder}
+            initialSort="date-oldest"
+          />
           {standingCommitteeYears.map((year) => {
             const documents = standingCommitteeMinutes
               .filter((doc) => doc.year === year)
@@ -420,6 +459,63 @@ const DigitalRepository = () => {
             {en ? "Mechanical Department" : "यांत्रिकी विभाग"}
           </h2>
           <DocumentArchiveBrowser documents={mechanicalPublicDocuments} folderSegments={[...MECHANICAL_DOCUMENTS_FOLDER]} />
+        </div>
+
+        <div className="min-w-0 mb-10" id="official-announcements">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Public notices" : "सार्वजनिक सूचना"}
+          </h2>
+          <DocumentArchiveBrowser
+            documents={[...officialTenderNoticeDocuments, ...officialSiteNoticeDocuments]}
+            folderSegments={[...officialAnnouncementFolder]}
+          />
+        </div>
+
+        {mergedOfficialGroups().map((group) => {
+          const heading = OFFICIAL_GROUP_HEADINGS[group.slug];
+          return (
+            <div className="min-w-0 mb-10" id={`official-${group.slug}`} key={group.slug}>
+              <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+                {en ? heading.en : heading.mr}
+              </h2>
+              <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+            </div>
+          );
+        })}
+
+        {officialLinkedSections.map((section) => (
+          <div className="min-w-0 mb-10" id={`official-linked-${section.id}`} key={section.id}>
+            <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+              {en ? section.headingEn : section.headingMr}
+            </h2>
+            <DocumentArchiveBrowser documents={section.documents} />
+          </div>
+        ))}
+
+        {officialLinkedGroups.map((group) => {
+          const department = LINKED_DEPARTMENT_NAMES[group.slug];
+          const heading = en ? group.headingEn : group.headingMr;
+          const title = department && heading !== (en ? department.en : department.mr)
+            ? `${en ? department.en : department.mr}: ${heading}`
+            : heading;
+          return (
+            <div className="min-w-0 mb-10" id={`official-linked-${group.slug}-${group.headingEn.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} key={`${group.slug}-${group.headingEn}`}>
+              <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{title}</h2>
+              <DocumentArchiveBrowser documents={group.documents} />
+            </div>
+          );
+        })}
+
+        <div className="min-w-0 mb-10" id="tender-archive">
+          <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">
+            {en ? "Tender archive" : "निविदा संग्रह"}
+          </h2>
+          {tenderArchiveGroups.map((group) => (
+            <div className="min-w-0 mb-6" key={group.headingEn}>
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">{en ? group.headingEn : group.headingMr}</h3>
+              <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+            </div>
+          ))}
         </div>
 
         <div className="min-w-0 mb-10" id="ncap">
