@@ -34,11 +34,10 @@ import {
 import { mergedOfficialGroups } from "@/data/officialVerifiedDocuments";
 import { officialLinkedGroups, officialLinkedSections, tenderArchiveGroups } from "@/data/officialLinkedDocuments";
 import {
-  officialAnnouncementFolder,
-  officialSiteNoticeDocuments,
+  GAD_ORDERS_FOLDER,
+  gadOrdersDocuments,
   officialStandingCommitteeDocuments,
   officialStandingCommitteeFolder,
-  officialTenderNoticeDocuments,
 } from "@/data/officialPublicAdditions";
 
 export type RepositorySection = {
@@ -358,18 +357,11 @@ export function repositoryShelves(): RepositoryShelf[] {
     folderSegments: [...MECHANICAL_DOCUMENTS_FOLDER],
   });
   add(shelves, "notification", {
-    id: "official-announcements",
-    titleEn: "Public notices",
-    titleMr: "सार्वजनिक सूचना",
-    documents: officialSiteNoticeDocuments,
-    folderSegments: [...officialAnnouncementFolder],
-  });
-  add(shelves, "tender", {
-    id: "official-tender-notices",
-    titleEn: "Tender notices",
-    titleMr: "निविदा सूचना",
-    documents: officialTenderNoticeDocuments,
-    folderSegments: [...officialAnnouncementFolder],
+    id: "gad-orders-and-circulars",
+    titleEn: "GAD Orders and Circulars",
+    titleMr: "सामान्य प्रशासन — आदेश व परिपत्रके",
+    documents: gadOrdersDocuments,
+    folderSegments: [...GAD_ORDERS_FOLDER],
   });
 
   for (const group of mergedOfficialGroups()) {

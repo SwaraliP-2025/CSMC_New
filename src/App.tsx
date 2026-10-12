@@ -42,6 +42,7 @@ import Ncap from "./pages/site/Ncap.tsx";
 import Census2026 from "./pages/site/Census2026.tsx";
 import CompletedWorks from "./pages/site/CompletedWorks.tsx";
 import ElectionInsights from "./pages/site/ElectionInsights.tsx";
+import GadOrders from "./pages/site/GadOrders.tsx";
 import AdministrationEstablishment from "./pages/site/AdministrationEstablishment.tsx";
 import {
   DastavezPage,
@@ -118,6 +119,7 @@ const App = () => (
             <Route path="/disaster-management" element={<DisasterManagement />} />
             <Route path="/elections" element={<Elections />} />
             <Route path="/govt-orders" element={<GovtOrders />} />
+            <Route path="/gad-orders" element={<GadOrders />} />
             <Route path="/site-map" element={<SiteMap />} />
             <Route path="/zones-wards" element={<ZonesWards />} />
             <Route path="/know-your-corporator" element={<KnowYourCorporator />} />

@@ -22,6 +22,7 @@ import { SEVEN_STAR_FAQ_DOCUMENT, DISASTER_GUIDELINES_DOCUMENT } from "./src/dat
 import { BUDGET_FOLDER, budgetDocumentsFor, budgetYearSections } from "./src/data/budgetDocuments.ts";
 import { ELECTION_INSIGHTS_ROOT, electionInsightCategories } from "./src/data/electionInsights.ts";
 import { standingCommitteeMinutes } from "./src/data/standingCommitteeMinutes.ts";
+import { GAD_ORDERS_FOLDER, gadOrdersDocuments } from "./src/data/officialPublicAdditions.ts";
 import { chiefAccountsOfficerDocuments, CHIEF_ACCOUNTS_OFFICER_FOLDER } from "./src/data/chiefAccountsOfficerDocuments.ts";
 import { dastavezDocuments, policyDocuments } from "./src/data/municipalDocuments.ts";
 import { MUNICIPAL_SECRETARIES_DOCUMENT, SECRETARIES_FOLDER } from "./src/data/municipalSecretaries.ts";
@@ -48,6 +49,7 @@ for (const doc of rtsArchiveDocuments) local([RTS_FOLDER], doc.file);
 for (const doc of chiefAccountsOfficerDocuments) local([CHIEF_ACCOUNTS_OFFICER_FOLDER], doc.file);
 for (const section of budgetYearSections) for (const doc of budgetDocumentsFor(section.id)) local([BUDGET_FOLDER, section.id], doc.file);
 for (const doc of standingCommitteeMinutes) local(["standing-committee", String(doc.year)], doc.file);
+for (const doc of gadOrdersDocuments) local([...GAD_ORDERS_FOLDER], doc.file);
 for (const category of electionInsightCategories) if (category.files.length) for (const doc of category.files) local([ELECTION_INSIGHTS_ROOT, category.folder], doc.file);
 for (const doc of rtiArchiveDocuments()) local([RTI_FOLDER, RTI_DEPARTMENT_FOLDER], doc.file);
 local([RTI_FOLDER, RTI_OFFICERS_FOLDER], RTI_OFFICERS_ORDER.file);

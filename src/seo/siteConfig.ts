@@ -215,6 +215,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Government Orders | CSMC",
     description: "Government orders and circulars related to CSMC.",
   },
+  "/gad-orders": {
+    path: "/gad-orders",
+    title: "GAD Orders and Circulars | CSMC",
+    titleMr: "सामान्य प्रशासन — आदेश व परिपत्रके | CSMC",
+    description: "Orders and circulars of the General Administration Department of Chhatrapati Sambhajinagar Municipal Corporation.",
+    descriptionMr: "छत्रपती संभाजीनगर महानगरपालिकेच्या सामान्य प्रशासन विभागाचे आदेश व परिपत्रके.",
+  },
   "/disaster-management": {
     path: "/disaster-management",
     title: "Emergency Contact — Fire & Disaster | CSMC",

@@ -242,6 +242,11 @@ export const SITE_NAV: NavItem[] = [
       { labelEn: "Notices", labelMr: "सूचना", to: "/notices" },
       { labelEn: "Govt. Orders", labelMr: "शासन निर्णय", to: "/govt-orders" },
       {
+        labelEn: "GAD Orders and Circulars",
+        labelMr: "सामान्य प्रशासन — आदेश व परिपत्रके",
+        to: "/gad-orders",
+      },
+      {
         labelEn: "Municipal Document Repository",
         labelMr: "महापालिका दस्तऐवज भांडार",
         to: "/digital-repository",

@@ -32,6 +32,7 @@ const routeLabels: Record<string, { en: string; mr: string }> = {
   elections: { en: "Elections", mr: "निवडणुका" },
   "disaster-management": { en: "Disaster Management", mr: "आपत्ती व्यवस्थापन" },
   "govt-orders": { en: "Govt. Orders", mr: "शासन निर्णय" },
+  "gad-orders": { en: "GAD Orders and Circulars", mr: "सामान्य प्रशासन — आदेश व परिपत्रके" },
   "site-map": { en: "Site Map", mr: "साइटमॅप" },
   "dp-plan": { en: "DP Plan", mr: "विकास आराखडा" },
   "under-construction": { en: "Under Construction", mr: "कार्यप्रगतीत" },

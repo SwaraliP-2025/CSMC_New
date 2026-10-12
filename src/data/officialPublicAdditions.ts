@@ -127,11 +127,44 @@ export const officialStandingCommitteeDocuments: ArchiveFile[] = [
 /** One copy of each sitewide official notice. Identical files in other folders stay unpublished. */
 export const officialAnnouncementFolder = ["Municipal Document Repository", "Tenders", "tender-notice-2025"] as const;
 
+/**
+ * Local folder for GAD Orders and Circulars.
+ * A PDF placed in this folder is published only after it is added to `gadOrdersDocuments`.
+ */
+export const GAD_ORDERS_FOLDER = ["GAD Orders and Circulars"] as const;
+
 export const officialTenderNoticeDocuments: ArchiveFile[] = [
-  { id: "official-tender-project-manager-jahirat-pdf", file: "Project_Manager-Jahirat.pdf", bytes: 1423860, titleEn: "Project Manager Jahirat" },
+  {
+    id: "official-tender-project-manager-jahirat-pdf",
+    file: "Project_Manager-Jahirat.pdf",
+    bytes: 1423860,
+    date: "2026-09-02",
+    titleEn: "Project Manager Jahirat",
+    titleMr: "प्रकल्प व्यवस्थापक जाहिरात",
+  },
 ];
 
 export const officialSiteNoticeDocuments: ArchiveFile[] = [
-  { id: "official-notice-shree-ganesh-utsav-2026-pdf", file: "ShreeGaneshUtsav2026.pdf", bytes: 9513364, titleEn: "Shree Ganesh Utsav 2026" },
-  { id: "official-notice-street-vendors-election-suchana-pdf", file: "Street_Vendors_Election_Suchana.pdf", bytes: 878041, titleEn: "Street Vendors Election Suchana" },
+  {
+    id: "official-notice-shree-ganesh-utsav-2026-pdf",
+    file: "ShreeGaneshUtsav2026.pdf",
+    bytes: 9513364,
+    date: "2026-09-02",
+    titleEn: "Shree Ganesh Utsav 2026",
+    titleMr: "श्री गणेश उत्सव २०२६",
+  },
+  {
+    id: "official-notice-street-vendors-election-suchana-pdf",
+    file: "Street_Vendors_Election_Suchana.pdf",
+    bytes: 878041,
+    date: "2026-06-30",
+    titleEn: "Street Vendors Election Suchana",
+    titleMr: "पथविक्रेते निवडणूक सूचना",
+  },
+];
+
+/** Same records as the notices above, listed once under GAD Orders and Circulars. */
+export const gadOrdersDocuments: ArchiveFile[] = [
+  ...officialTenderNoticeDocuments,
+  ...officialSiteNoticeDocuments,
 ];
