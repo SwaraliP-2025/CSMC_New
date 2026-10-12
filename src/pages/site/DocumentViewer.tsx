@@ -8,8 +8,6 @@ import {
   Eye,
   FileText,
   Languages,
-  Share2,
-  Sparkles,
   Users,
 } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
@@ -24,13 +22,11 @@ import {
   officialDocumentId,
 } from "@/data/civicLabels";
 import {
-  documentPermalink,
   downloadCivicRecord,
   formatCivicDate,
   openCivicRecordPdf,
   recordHref,
 } from "@/lib/unifiedSearch";
-import { shareLink } from "@/lib/bookmarks";
 import type { CivicRecord } from "@/types/civicCatalog";
 
 const DocumentViewer = () => {
@@ -40,11 +36,9 @@ const DocumentViewer = () => {
   const navigate = useNavigate();
   const record = getCivicRecord(id);
   const [viewEn, setViewEn] = useState(enSite);
-  const [simple, setSimple] = useState(false);
 
   useEffect(() => {
     setViewEn(enSite);
-    setSimple(false);
   }, [enSite, id]);
 
   const related = useMemo(
@@ -82,8 +76,6 @@ const DocumentViewer = () => {
   }
 
   const en = viewEn;
-  /** AI copy always follows the site language the citizen selected. */
-  const aiEn = enSite;
   const digits = (value: string | number | null | undefined) => localizeDigits(value, en ? "en" : "mr");
   const docId = officialDocumentId(record.id, record.year);
 
@@ -152,53 +144,12 @@ const DocumentViewer = () => {
                 )}
                 <button
                   type="button"
-                  onClick={() => shareLink(en ? record.titleEn : record.titleMr, documentPermalink(record.id))}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
-                >
-                  <Share2 className="h-3.5 w-3.5" />
-                  {en ? "Share" : "शेअर"}
-                </button>
-                <button
-                  type="button"
                   onClick={() => setViewEn((v) => !v)}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-all"
                 >
                   <Languages className="h-3.5 w-3.5" />
                   {viewEn ? "मराठीत वाचा" : "Read in English"}
                 </button>
-              </div>
-
-              <div className="rounded-xl border border-civic-gold/40 bg-civic-gold/10 p-5 mb-5">
-                <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-2 flex items-center gap-1">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  {aiEn ? "AI summary" : "एआय सारांश"}
-                  <button
-                    type="button"
-                    onClick={() => setSimple((v) => !v)}
-                    className="ml-auto font-medium text-muted-foreground normal-case tracking-normal hover:text-civic-blue"
-                  >
-                    {simple ? (aiEn ? "Detailed" : "सविस्तर") : aiEn ? "Simpler" : "सोपे"}
-                  </button>
-                </p>
-                <p className="text-sm text-foreground/85 leading-relaxed">
-                  {simple
-                    ? aiEn
-                      ? record.simpleEn
-                      : record.simpleMr
-                    : aiEn
-                      ? record.summaryEn
-                      : record.summaryMr}
-                </p>
-                {!simple && (aiEn ? record.highlightsEn : record.highlightsMr).length > 0 && (
-                  <ul className="mt-3 space-y-1">
-                    {(aiEn ? record.highlightsEn : record.highlightsMr).slice(0, 3).map((h) => (
-                      <li key={h} className="text-xs text-muted-foreground flex gap-2">
-                        <span className="text-civic-gold font-bold">•</span>
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </div>
 
               <article className="bg-civic-light border border-border rounded-xl p-6 md:p-8 mb-5">
@@ -263,23 +214,6 @@ const DocumentViewer = () => {
                   <p className="text-sm text-foreground/80">{en ? record.applicableEn : record.applicableMr}</p>
                 </div>
               </details>
-
-              {record.aiFaqs.length > 0 && (
-                <div className="rounded-xl border border-border p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-3 flex items-center gap-1">
-                    <Sparkles className="h-3.5 w-3.5" />
-                    {aiEn ? "AI generated FAQs" : "एआय सामान्य प्रश्न"}
-                  </p>
-                  <dl className="space-y-3">
-                    {record.aiFaqs.map((faq) => (
-                      <div key={faq.qEn}>
-                        <dt className="text-sm font-semibold text-civic-ink">{aiEn ? faq.qEn : faq.qMr}</dt>
-                        <dd className="text-sm text-muted-foreground mt-0.5">{aiEn ? faq.aEn : faq.aMr}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              )}
             </div>
           </div>
 

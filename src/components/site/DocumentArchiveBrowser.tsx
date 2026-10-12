@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
+import { DocumentListingCard, documentActionClass, fileKindLabel } from "@/components/site/DocumentListingCard";
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { useLang } from "@/i18n/LanguageContext";
 import { openInPagePdf } from "@/lib/pdfPreview";
@@ -173,65 +174,73 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
                 : doc.titleMr ?? doc.titleEn ?? archiveDisplayName(doc.file)
               : archiveDisplayName(doc.file);
             const matches = hits[doc.id] ?? [];
+            const source = doc.externalUrl
+              ? /^https:\/\/(chhsambhajinagarmc|aurangabadmahapalika)\.org\//.test(doc.externalUrl)
+                ? en
+                  ? "Official CSMC website"
+                  : "अधिकृत मनपा संकेतस्थळ"
+                : "Google Drive"
+              : doc.date
+                ? formatCivicDate(doc.date, en)
+                : en
+                  ? "Date not stated"
+                  : "दिनांक दिलेला नाही";
             return (
-              <li key={doc.id} className="rounded-2xl border border-border bg-white p-4">
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <div className="min-w-0">
-                    <p className="font-medium text-civic-ink break-words">{label}</p>
-                    {doc.externalUrl ? null : (
-                      <p className="text-xs text-muted-foreground mt-1 break-all">{doc.file}</p>
-                    )}
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {doc.externalUrl
-                        ? /^https:\/\/(chhsambhajinagarmc|aurangabadmahapalika)\.org\//.test(doc.externalUrl)
-                          ? en
-                            ? "Official CSMC website"
-                            : "अधिकृत मनपा संकेतस्थळ"
-                          : "Google Drive"
-                        : doc.date
-                          ? formatCivicDate(doc.date, en)
-                          : en
-                            ? "Date not stated"
-                            : "दिनांक दिलेला नाही"}
-                      {doc.externalUrl ? "" : ` · ${d(formatArchiveBytes(doc.bytes))}`}
-                    </p>
-                    {matches.length > 0 ? (
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {matches.map((hit) => (
-                          <button
-                            key={hit.page}
-                            type="button"
-                            className="text-xs font-bold text-civic-blue underline"
-                            onClick={() => openInPagePdf({ url, filename: doc.file, title: label, page: hit.page, query: query.trim() })}
-                          >
-                            {en
-                              ? `Page ${d(hit.page)} — ${d(hit.count)} ${hit.count === 1 ? "match" : "matches"}`
-                              : `पृष्ठ ${d(hit.page)} — ${d(hit.count)} जुळण्या`}
-                          </button>
-                        ))}
-                      </div>
-                    ) : null}
-                    {matches[0]?.snippet ? <p className="text-sm text-civic-ink/80 mt-2">{matches[0].snippet}</p> : null}
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2 shrink-0">
-                    {doc.externalUrl ? (
+              <li key={doc.id}>
+                <DocumentListingCard
+                  title={label}
+                  kind={doc.externalUrl ? fileKindLabel(doc.externalUrl) : fileKindLabel(doc.file)}
+                  description={
+                    doc.externalUrl ? null : <p className="break-all">{doc.file}</p>
+                  }
+                  meta={
+                    <>
+                      <p>
+                        {source}
+                        {doc.externalUrl ? "" : ` · ${d(formatArchiveBytes(doc.bytes))}`}
+                      </p>
+                      {matches.length > 0 ? (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {matches.map((hit) => (
+                            <button
+                              key={hit.page}
+                              type="button"
+                              className="text-xs font-bold text-civic-blue underline"
+                              onClick={() => openInPagePdf({ url, filename: doc.file, title: label, page: hit.page, query: query.trim() })}
+                            >
+                              {en
+                                ? `Page ${d(hit.page)} — ${d(hit.count)} ${hit.count === 1 ? "match" : "matches"}`
+                                : `पृष्ठ ${d(hit.page)} — ${d(hit.count)} जुळण्या`}
+                            </button>
+                          ))}
+                        </div>
+                      ) : null}
+                      {matches[0]?.snippet ? <p className="text-sm text-civic-ink/80 mt-2">{matches[0].snippet}</p> : null}
+                    </>
+                  }
+                  actions={
+                    doc.externalUrl ? (
                       <a
                         href={doc.externalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-medium text-civic-blue underline"
+                        className={`${documentActionClass} text-civic-blue border border-civic-blue hover:bg-civic-blue hover:text-white`}
                       >
                         {en ? "Open" : "उघडा"}
                       </a>
                     ) : pdf ? (
                       <PdfFileActions href={url} filename={doc.file} title={label} />
                     ) : (
-                      <a href={url} download={doc.file} className="text-sm font-medium text-civic-blue underline">
+                      <a
+                        href={url}
+                        download={doc.file}
+                        className={`${documentActionClass} text-civic-ink border border-border hover:border-civic-blue hover:text-civic-blue`}
+                      >
                         {en ? "Download" : "डाउनलोड"}
                       </a>
-                    )}
-                  </div>
-                </div>
+                    )
+                  }
+                />
               </li>
             );
           })}

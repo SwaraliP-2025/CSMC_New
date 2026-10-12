@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FileText } from "lucide-react";
+import { DocumentListingCard } from "@/components/site/DocumentListingCard";
 import { InPagePdfPreview } from "@/components/site/InPagePdfPreview";
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { Layout } from "@/components/site/Layout";
@@ -21,10 +22,25 @@ const MunicipalCorporationSecretaries = () => {
       <PageHeader eyebrow={en ? "About Us" : "आमच्याबद्दल"} title={title} />
       <section className="py-8 md:py-12 container">
         <h1 className="font-serif text-2xl md:text-3xl font-bold text-civic-blue mb-6">{title}</h1>
-        {verifiedDriveFileId(SECRETARIES_URL) ? (
-          <PdfFileActions href={SECRETARIES_URL} filename={SECRETARIES_FILE} title={title} />
-        ) : open && (
-          <div className="mb-4">
+        <DocumentListingCard
+          title={title}
+          actions={
+            verifiedDriveFileId(SECRETARIES_URL) ? (
+              <PdfFileActions href={SECRETARIES_URL} filename={SECRETARIES_FILE} title={title} />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="inline-flex min-h-11 md:min-h-0 items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-2 md:py-1.5 hover:bg-civic-blue hover:text-white transition-colors"
+              >
+                <FileText className="h-3.5 w-3.5" aria-hidden />
+                {en ? "View PDF" : "PDF पहा"}
+              </button>
+            )
+          }
+        />
+        {!verifiedDriveFileId(SECRETARIES_URL) && open && (
+          <div className="mt-4">
             <InPagePdfPreview
               title={title}
               fileUrl={SECRETARIES_URL}
@@ -33,16 +49,6 @@ const MunicipalCorporationSecretaries = () => {
               downloadLabel={en ? "Download" : "डाउनलोड"}
             />
           </div>
-        )}
-        {!verifiedDriveFileId(SECRETARIES_URL) && !open && (
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-2 hover:bg-civic-blue hover:text-white transition-colors"
-          >
-            <FileText className="h-3.5 w-3.5" aria-hidden />
-            {en ? "View PDF" : "PDF पहा"}
-          </button>
         )}
       </section>
     </Layout>

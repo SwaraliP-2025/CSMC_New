@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Download, Eye, FileText, FileType, Search } from "lucide-react";
+import { Download, Eye, Search } from "lucide-react";
+import { DocumentListingCard, documentActionClass, fileKindLabel as badgeKind } from "@/components/site/DocumentListingCard";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import {
@@ -144,48 +145,35 @@ function NcapRow({
   ].filter(Boolean);
 
   return (
-    <article className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-4 sm:flex-row sm:items-center sm:gap-4">
-      <button
-        type="button"
-        onClick={onOpen}
-        className="flex min-w-0 flex-1 items-start gap-3 text-left rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
-        aria-label={en ? `Preview ${kindEn}: ${doc.title}` : `${kind} पूर्वावलोकन: ${doc.title}`}
-      >
-        <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-civic-blue/10 text-civic-blue">
-          {doc.fileType === "pdf" ? (
-            <FileText className="h-5 w-5" aria-hidden />
-          ) : (
-            <FileType className="h-5 w-5" aria-hidden />
-          )}
-        </span>
-        <span className="min-w-0">
-          <span className="block font-semibold text-civic-blue leading-snug break-words">{doc.title}</span>
-          <span className="mt-1 block text-xs text-muted-foreground leading-relaxed break-words">
-            {meta.join(" · ")}
-          </span>
-        </span>
-      </button>
-      <div className="flex shrink-0 gap-2 sm:flex-col lg:flex-row">
-        <button
-          type="button"
-          onClick={onOpen}
-          className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-civic-blue px-3 py-2 text-xs font-semibold text-civic-blue hover:bg-civic-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
-          aria-label={en ? `Preview ${kindEn}: ${doc.title}` : `${kind} पूर्वावलोकन: ${doc.title}`}
-        >
-          <Eye className="h-3.5 w-3.5" aria-hidden />
-          {n.preview}
-        </button>
-        <a
-          href={url}
-          download={doc.fileName}
-          className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-civic-blue px-3 py-2 text-xs font-semibold text-white hover:bg-civic-blue/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
-          aria-label={en ? `Download ${kindEn}: ${doc.title}` : `${kind} डाउनलोड: ${doc.title}`}
-        >
-          <Download className="h-3.5 w-3.5" aria-hidden />
-          {n.download}
-        </a>
-      </div>
-    </article>
+    <DocumentListingCard
+      title={doc.title}
+      kind={badgeKind(doc.fileName)}
+      meta={meta.join(" · ")}
+      onOpen={onOpen}
+      openLabel={en ? `Preview ${kindEn}: ${doc.title}` : `${kind} पूर्वावलोकन: ${doc.title}`}
+      actions={
+        <>
+          <button
+            type="button"
+            onClick={onOpen}
+            className={`${documentActionClass} text-civic-blue border border-civic-blue hover:bg-civic-blue hover:text-white`}
+            aria-label={en ? `Preview ${kindEn}: ${doc.title}` : `${kind} पूर्वावलोकन: ${doc.title}`}
+          >
+            <Eye className="h-3.5 w-3.5" aria-hidden />
+            {n.preview}
+          </button>
+          <a
+            href={url}
+            download={doc.fileName}
+            className={`${documentActionClass} text-civic-ink border border-border hover:border-civic-blue hover:text-civic-blue`}
+            aria-label={en ? `Download ${kindEn}: ${doc.title}` : `${kind} डाउनलोड: ${doc.title}`}
+          >
+            <Download className="h-3.5 w-3.5" aria-hidden />
+            {n.download}
+          </a>
+        </>
+      }
+    />
   );
 }
 

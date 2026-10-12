@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
+import { DocumentListingCard, documentActionClass } from "@/components/site/DocumentListingCard";
 import { InPagePdfPreview } from "@/components/site/InPagePdfPreview";
 import { useLang } from "@/i18n/LanguageContext";
 import { OFFICIAL } from "@/data/officialLinks";
@@ -14,7 +15,6 @@ import {
   CheckCircle2,
   Download,
   ExternalLink,
-  FileText,
   Scale,
 } from "lucide-react";
 
@@ -212,69 +212,41 @@ const RTSAct = () => {
             </div>
           )}
 
-          <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <ul className="flex flex-col gap-3">
             {RTS_DOCUMENTS.map((doc) => {
               const title = en ? doc.titleEn : doc.titleMr;
               const type = en ? doc.typeEn : doc.typeMr;
               const fileUrl = rtsDocumentUrl(doc.file);
+              const meta = [type, doc.date ? formatCivicDate(doc.date, en) : ""].filter(Boolean).join(" · ");
 
               return (
-                <li
-                  key={doc.id}
-                  className="bg-white border border-border rounded-2xl p-4 flex flex-col gap-3"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-civic-blue/10 flex items-center justify-center shrink-0">
-                      <FileText className="h-5 w-5 text-civic-blue" />
-                    </div>
-
-                    <div className="min-w-0">
-                      <button
-                        type="button"
-                        onClick={() => setOpenDocId(doc.id)}
-                        className="text-left text-sm font-semibold text-civic-ink hover:text-civic-blue transition-colors"
-                      >
-                        {title}
-                      </button>
-
-                      <p className="text-xs text-muted-foreground mt-1 break-all">
-                        {doc.file}
-                      </p>
-
-                      <div className="flex flex-wrap items-center gap-2 mt-2">
-                        {type && (
-                          <span className="text-[10px] font-bold uppercase tracking-wide text-civic-blue bg-civic-blue/10 px-2 py-0.5 rounded-full">
-                            {type}
-                          </span>
-                        )}
-
-                        {doc.date && (
-                          <span className="text-xs text-muted-foreground">
-                            {formatCivicDate(doc.date, en)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-auto flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setOpenDocId(doc.id)}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue/90 transition-colors"
-                    >
-                      {en ? "View document" : "कागदपत्र पहा"}
-                    </button>
-
-                    <a
-                      href={fileUrl}
-                      download
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-3 py-1.5 hover:bg-civic-blue hover:text-white transition-colors"
-                    >
-                      <Download className="h-3.5 w-3.5" />
-                      {en ? "Download" : "डाउनलोड"}
-                    </a>
-                  </div>
+                <li key={doc.id}>
+                  <DocumentListingCard
+                    title={title}
+                    description={<p className="break-all">{doc.file}</p>}
+                    meta={meta}
+                    onOpen={() => setOpenDocId(doc.id)}
+                    openLabel={en ? `View document: ${title}` : `कागदपत्र पहा: ${title}`}
+                    actions={
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setOpenDocId(doc.id)}
+                          className={`${documentActionClass} text-civic-blue border border-civic-blue hover:bg-civic-blue hover:text-white`}
+                        >
+                          {en ? "View document" : "कागदपत्र पहा"}
+                        </button>
+                        <a
+                          href={fileUrl}
+                          download
+                          className={`${documentActionClass} text-civic-ink border border-border hover:border-civic-blue hover:text-civic-blue`}
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                          {en ? "Download" : "डाउनलोड"}
+                        </a>
+                      </>
+                    }
+                  />
                 </li>
               );
             })}

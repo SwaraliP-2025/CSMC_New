@@ -593,6 +593,7 @@ import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
 import { findOrganogramOfficerForHead } from "@/lib/organogram";
 import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
+import { DocumentListingCard, documentActionClass } from "@/components/site/DocumentListingCard";
 import { AdministrationEstablishmentDocuments, FireCadreDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
 import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
 import { CHIEF_ACCOUNTS_OFFICER_FOLDER, chiefAccountsOfficerDocuments } from "@/data/chiefAccountsOfficerDocuments";
@@ -3040,23 +3041,22 @@ const DepartmentDetail = () => {
               </h3>
               <ul className="space-y-3 mb-6">
                 {townPlanningDriveDocuments.map((doc) => (
-                  <li key={doc.id} className="rounded-2xl border border-border bg-white p-4">
-                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="min-w-0">
-                        <p className="font-medium text-civic-ink break-words">
-                          {en ? doc.titleEn : doc.titleMr}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">Google Drive</p>
-                      </div>
-                      <a
-                        href={doc.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-medium text-civic-blue underline shrink-0"
-                      >
-                        {en ? "Open" : "उघडा"}
-                      </a>
-                    </div>
+                  <li key={doc.id}>
+                    <DocumentListingCard
+                      kind="DOC"
+                      title={en ? doc.titleEn : doc.titleMr}
+                      meta="Google Drive"
+                      actions={
+                        <a
+                          href={doc.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${documentActionClass} text-civic-blue border border-civic-blue hover:bg-civic-blue hover:text-white`}
+                        >
+                          {en ? "Open" : "उघडा"}
+                        </a>
+                      }
+                    />
                   </li>
                 ))}
               </ul>

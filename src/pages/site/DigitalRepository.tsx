@@ -2,11 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowUpDown,
-  BookOpen,
   Building2,
-  Check,
   Clock,
-  Copy,
   Download,
   Eye,
   FileText,
@@ -14,11 +11,11 @@ import {
   LayoutGrid,
   List,
   Search,
-  Share2,
   Sparkles,
 } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
+import { DocumentListingCard, documentActionClass } from "@/components/site/DocumentListingCard";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
 import { AdministrationEstablishmentDocuments } from "@/components/site/AdministrationEstablishmentDocuments";
 import { EducationDepartmentDocuments } from "@/components/site/EducationDepartmentDocuments";
@@ -34,8 +31,7 @@ import {
   LANGUAGE_LABELS,
   REPOSITORY_CATEGORIES,
 } from "@/data/civicLabels";
-import { documentPermalink, downloadCivicRecord, formatCivicDate, openCivicRecordPdf, searchRepository, tryOpenCivicDocument } from "@/lib/unifiedSearch";
-import { copyLink, shareLink } from "@/lib/bookmarks";
+import { downloadCivicRecord, formatCivicDate, openCivicRecordPdf, searchRepository, tryOpenCivicDocument } from "@/lib/unifiedSearch";
 import { highlightText, type SearchHit } from "@/lib/semanticSearch";
 import type { CivicCategory, CivicLanguage, CivicRecord, DocumentStatus } from "@/types/civicCatalog";
 
@@ -56,7 +52,6 @@ const DigitalRepository = () => {
   const [language, setLanguage] = useState<CivicLanguage | "all">("all");
   const [sort, setSort] = useState<SortKey>("newest");
   const [view, setView] = useState<"cards" | "table">("cards");
-  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
     const cat = params.get("category");
@@ -147,12 +142,6 @@ const DigitalRepository = () => {
     const q = search.trim();
     if (q.length < 2) return documents;
     return documents.filter((doc) => archiveNameMatches([doc.file, doc.titleEn, doc.titleMr].filter(Boolean).join(" "), q));
-  };
-
-  const onCopy = async (id: string) => {
-    await copyLink(documentPermalink(id));
-    setCopiedId(id);
-    window.setTimeout(() => setCopiedId(null), 1600);
   };
 
   return (
@@ -376,8 +365,6 @@ const DigitalRepository = () => {
                       doc={doc}
                       en={en}
                       hit={ocrHits.get(doc.id)}
-                      copied={copiedId === doc.id}
-                      onCopy={() => onCopy(doc.id)}
                     />
                   ))}
                 </div>
@@ -428,7 +415,6 @@ function TableDocRow({
   ocrPage?: number;
 }) {
   const navigate = useNavigate();
-  const [showAi, setShowAi] = useState(false);
   const docHref = `/digital-repository/${doc.id}`;
 
   const openDoc = () => {
@@ -463,38 +449,7 @@ function TableDocRow({
             {ocrPage ? <span>p.{localizeDigits(ocrPage, en ? "en" : "mr")}</span> : null}
           </div>
         </div>
-        <button
-          type="button"
-          aria-expanded={showAi}
-          onClick={() => setShowAi((v) => !v)}
-          className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg transition-all shrink-0 ${
-            showAi ? "bg-civic-gold text-civic-ink" : "text-white bg-civic-blue hover:bg-civic-blue/90"
-          }`}
-        >
-          <Sparkles className="h-3.5 w-3.5" /> {en ? "AI Summary" : "एआय सारांश"}
-        </button>
       </div>
-      {showAi && (
-        <div className="px-4 sm:px-5 pb-4">
-          <div className="rounded-xl border border-civic-gold/45 bg-civic-gold/10 px-4 py-3">
-            <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue mb-1.5 flex items-center gap-1">
-              <Sparkles className="h-3.5 w-3.5" />
-              {en ? "AI summary" : "एआय सारांश"}
-            </p>
-            <p className="text-sm text-foreground/85 leading-relaxed">
-              {en ? doc.summaryEn : doc.summaryMr}
-            </p>
-            <button
-              type="button"
-              onClick={openDoc}
-              className="inline-flex items-center gap-1 mt-2.5 text-xs font-bold text-civic-blue hover:underline"
-            >
-              <BookOpen className="h-3.5 w-3.5" />
-              {en ? "Open document" : "दस्तऐवज उघडा"}
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -503,17 +458,11 @@ function DocCard({
   doc,
   en,
   hit,
-  copied,
-  onCopy,
 }: {
   doc: CivicRecord;
   en: boolean;
   hit?: SearchHit;
-  copied: boolean;
-  onCopy: () => void;
 }) {
-  const [showAi, setShowAi] = useState(false);
-  const [simpleAi, setSimpleAi] = useState(false);
   const navigate = useNavigate();
   const digits = (value: string | number) => localizeDigits(value, en ? "en" : "mr");
   const snippet = en ? hit?.snippetEn : hit?.snippetMr;
@@ -521,197 +470,101 @@ function DocCard({
   const openDoc = () => {
     if (!tryOpenCivicDocument(doc)) navigate(docHref);
   };
-  const summaryText = simpleAi
-    ? en
-      ? doc.simpleEn
-      : doc.simpleMr
-    : en
-      ? doc.summaryEn
-      : doc.summaryMr;
-  const highlights = en ? doc.highlightsEn : doc.highlightsMr;
 
   return (
-    <article className="group bg-white border border-border rounded-xl overflow-hidden hover:shadow-elegant hover:border-civic-blue/25 transition-all flex">
-      <button
-        type="button"
-        onClick={openDoc}
-        className="relative w-14 sm:w-16 shrink-0 bg-gradient-to-b from-[#f6f2ea] to-[#eee8dc] border-r border-[#e4dccb] flex flex-col items-center justify-center gap-1 hover:from-[#efe8dc] hover:to-[#e5dcc8] transition-colors"
-        aria-label={en ? `Open ${doc.titleEn}` : `${doc.titleMr} उघडा`}
-      >
-        <span className="absolute left-1.5 top-3 bottom-3 w-0.5 rounded-full bg-civic-gold/80" />
-        <FileText className="h-5 w-5 text-civic-blue" />
-        <span className="text-[9px] font-bold tracking-[0.14em] text-civic-blue/70">
-          {doc.downloadable ? "PDF" : "DOC"}
-        </span>
-      </button>
-      <div className="flex-1 min-w-0 p-3.5 sm:px-4 sm:py-3.5 flex flex-col gap-3">
-        <div className="flex flex-col sm:flex-row sm:items-start gap-3">
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-1.5 mb-1">
-              <span className="text-[10px] font-bold uppercase tracking-wide text-white bg-civic-blue px-1.5 py-0.5 rounded">
-                {en ? "Official" : "अधिकृत"}
-              </span>
-              <span
-                className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                  doc.status === "current"
-                    ? "bg-green-100 text-green-700"
-                    : doc.status === "archived"
-                      ? "bg-muted text-muted-foreground"
-                      : "bg-amber-100 text-amber-800"
-                }`}
-              >
-                {en ? DOCUMENT_STATUS_LABELS[doc.status].en : DOCUMENT_STATUS_LABELS[doc.status].mr}
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-wide text-civic-red">
-                {en ? CATEGORY_LABELS[doc.category].en : CATEGORY_LABELS[doc.category].mr}
-              </span>
-            </div>
-            <button type="button" onClick={openDoc} className="block group/title text-left w-full">
-              <h3 className="font-serif text-[15px] font-bold text-civic-blue leading-snug line-clamp-2 group-hover/title:underline underline-offset-2 decoration-civic-gold/80">
-                {en ? doc.titleEn : doc.titleMr}
-              </h3>
-            </button>
-            {snippet ? (
-              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                {highlightText(snippet, hit?.highlight).map((part, i) =>
-                  part.mark ? (
-                    <mark key={i} className="bg-civic-gold/50 text-civic-ink rounded-sm px-0.5">
-                      {part.text}
-                    </mark>
-                  ) : (
-                    <span key={i}>{part.text}</span>
-                  )
-                )}
-                {hit?.ocrPage ? <span className="text-civic-blue font-semibold"> · p.{digits(hit.ocrPage)}</span> : null}
-              </p>
-            ) : (
-              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                {en ? doc.descriptionEn : doc.descriptionMr}
-              </p>
-            )}
-            <p className="text-[11px] text-muted-foreground mt-1.5 truncate">
-              {en ? doc.departmentEn : doc.departmentMr}
-              {" · "}
-              {en ? LANGUAGE_LABELS[doc.language].en : LANGUAGE_LABELS[doc.language].mr}
-              {doc.fileSize ? ` · ${digits(doc.fileSize)}` : ""}
-              {" · "}
-              {en ? "Published" : "प्रकाशित"} {formatCivicDate(doc.publishedAt, en)}
-              {" · "}
-              {en ? "Updated" : "अद्यतन"} {formatCivicDate(doc.updatedAt, en)}
-              {" · "}
-              <Clock className="inline h-3 w-3 mb-0.5" />{" "}
-              {en ? `${digits(doc.readingMinutes)} min` : `${digits(doc.readingMinutes)} मि.`}
-            </p>
-          </div>
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:shrink-0">
-            <button
-              type="button"
-              aria-expanded={showAi}
-              onClick={() => setShowAi((v) => !v)}
-              className={`inline-flex items-center gap-1 text-xs font-bold rounded-lg px-3 py-1.5 transition-colors ${
-                showAi
-                  ? "bg-civic-gold text-civic-ink"
-                  : "text-white bg-civic-blue hover:bg-civic-blue/90"
+    <DocumentListingCard
+      title={en ? doc.titleEn : doc.titleMr}
+      kind={doc.downloadable ? "PDF" : "DOC"}
+      onOpen={openDoc}
+      openLabel={en ? `Open ${doc.titleEn}` : `${doc.titleMr} उघडा`}
+      description={
+        <>
+          <div className="flex flex-wrap items-center gap-1.5 mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-wide text-white bg-civic-blue px-1.5 py-0.5 rounded">
+              {en ? "Official" : "अधिकृत"}
+            </span>
+            <span
+              className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                doc.status === "current"
+                  ? "bg-green-100 text-green-700"
+                  : doc.status === "archived"
+                    ? "bg-muted text-muted-foreground"
+                    : "bg-amber-100 text-amber-800"
               }`}
             >
-              <Sparkles className="h-3.5 w-3.5" /> {en ? "AI Summary" : "एआय सारांश"}
-            </button>
-            {doc.downloadable && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => openCivicRecordPdf(doc)}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-2.5 py-1.5 hover:bg-civic-blue hover:text-white"
-                >
-                  <Eye className="h-3.5 w-3.5" /> {en ? "Preview" : "पहा"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => downloadCivicRecord(doc)}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-muted-foreground border border-border rounded-lg px-2.5 py-1.5 hover:border-civic-blue hover:text-civic-blue"
-                >
-                  <Download className="h-3.5 w-3.5" /> {en ? "Download" : "डाउनलोड"}
-                </button>
-              </>
-            )}
+              {en ? DOCUMENT_STATUS_LABELS[doc.status].en : DOCUMENT_STATUS_LABELS[doc.status].mr}
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wide text-civic-red">
+              {en ? CATEGORY_LABELS[doc.category].en : CATEGORY_LABELS[doc.category].mr}
+            </span>
+          </div>
+          {snippet ? (
+            <p className="line-clamp-2">
+              {highlightText(snippet, hit?.highlight).map((part, i) =>
+                part.mark ? (
+                  <mark key={i} className="bg-civic-gold/50 text-civic-ink rounded-sm px-0.5">
+                    {part.text}
+                  </mark>
+                ) : (
+                  <span key={i}>{part.text}</span>
+                ),
+              )}
+              {hit?.ocrPage ? <span className="text-civic-blue font-semibold"> · p.{digits(hit.ocrPage)}</span> : null}
+            </p>
+          ) : (
+            <p className="line-clamp-2">{en ? doc.descriptionEn : doc.descriptionMr}</p>
+          )}
+        </>
+      }
+      meta={
+        <>
+          {en ? doc.departmentEn : doc.departmentMr}
+          {" · "}
+          {en ? LANGUAGE_LABELS[doc.language].en : LANGUAGE_LABELS[doc.language].mr}
+          {doc.fileSize ? ` · ${digits(doc.fileSize)}` : ""}
+          {" · "}
+          {en ? "Published" : "प्रकाशित"} {formatCivicDate(doc.publishedAt, en)}
+          {" · "}
+          {en ? "Updated" : "अद्यतन"} {formatCivicDate(doc.updatedAt, en)}
+          {" · "}
+          <Clock className="inline h-3 w-3 mb-0.5" />{" "}
+          {en ? `${digits(doc.readingMinutes)} min` : `${digits(doc.readingMinutes)} मि.`}
+        </>
+      }
+      actions={
+        doc.downloadable ? (
+          <>
             <button
               type="button"
-              aria-label={en ? "Share" : "शेअर"}
-              onClick={() => shareLink(en ? doc.titleEn : doc.titleMr, documentPermalink(doc.id))}
-              className="p-1.5 rounded-lg border border-border text-muted-foreground hover:text-civic-blue hover:border-civic-blue"
+              onClick={() => openCivicRecordPdf(doc)}
+              className={`${documentActionClass} text-civic-blue border border-civic-blue hover:bg-civic-blue hover:text-white`}
             >
-              <Share2 className="h-3.5 w-3.5" />
+              <Eye className="h-3.5 w-3.5" /> {en ? "Preview" : "पहा"}
             </button>
             <button
               type="button"
-              aria-label={en ? "Copy link" : "दुवा कॉपी करा"}
-              onClick={onCopy}
-              className="p-1.5 rounded-lg border border-border text-muted-foreground hover:text-civic-blue hover:border-civic-blue"
+              onClick={() => downloadCivicRecord(doc)}
+              className={`${documentActionClass} text-civic-ink border border-border hover:border-civic-blue hover:text-civic-blue`}
             >
-              {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+              <Download className="h-3.5 w-3.5" /> {en ? "Download" : "डाउनलोड"}
             </button>
-          </div>
-        </div>
-
-        {showAi && (
-          <div className="rounded-xl border border-civic-gold/45 bg-civic-gold/10 px-4 py-3.5">
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-civic-blue flex items-center gap-1">
-                <Sparkles className="h-3.5 w-3.5" />
-                {en ? "AI summary — no full read needed" : "एआय सारांश — संपूर्ण वाचन आवश्यक नाही"}
-              </p>
-              <button
-                type="button"
-                onClick={() => setSimpleAi((v) => !v)}
-                className="ml-auto text-[10px] font-bold text-civic-blue hover:underline"
-              >
-                {simpleAi
-                  ? en
-                    ? "Show detailed summary"
-                    : "सविस्तर सारांश दाखवा"
-                  : en
-                    ? "Explain simply"
-                    : "सोप्या भाषेत"}
-              </button>
-            </div>
-            <p className="text-sm text-foreground/85 leading-relaxed">{summaryText}</p>
-            {!simpleAi && highlights.length > 0 && (
-              <ul className="mt-2.5 space-y-1">
-                {highlights.slice(0, 3).map((h) => (
-                  <li key={h} className="text-xs text-muted-foreground flex gap-2">
-                    <span className="text-civic-gold font-bold shrink-0">•</span>
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={openDoc}
-                className="inline-flex items-center gap-1 text-xs font-bold text-civic-blue border border-civic-blue rounded-lg px-2.5 py-1.5 hover:bg-civic-blue hover:text-white"
-              >
-                <BookOpen className="h-3.5 w-3.5" />
-                {en ? "Open document" : "दस्तऐवज उघडा"}
-              </button>
-              <Link
-                to={docHref}
-                className="inline-flex items-center gap-1 text-xs font-bold text-muted-foreground border border-border rounded-lg px-2.5 py-1.5 hover:border-civic-blue hover:text-civic-blue"
-              >
-                {en ? "Details" : "तपशील"}
-              </Link>
-              <button
-                type="button"
-                onClick={() => setShowAi(false)}
-                className="text-xs font-semibold text-muted-foreground hover:text-civic-ink px-2 py-1.5"
-              >
-                {en ? "Hide summary" : "सारांश लपवा"}
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </article>
+            <Link
+              to={docHref}
+              className={`${documentActionClass} text-civic-ink border border-border hover:border-civic-blue hover:text-civic-blue`}
+            >
+              {en ? "Details" : "तपशील"}
+            </Link>
+          </>
+        ) : (
+          <Link
+            to={docHref}
+            className={`${documentActionClass} text-civic-blue border border-civic-blue hover:bg-civic-blue hover:text-white`}
+          >
+            {en ? "Details" : "तपशील"}
+          </Link>
+        )
+      }
+    />
   );
 }
 
