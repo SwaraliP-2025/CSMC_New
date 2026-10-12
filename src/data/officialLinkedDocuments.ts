@@ -4486,8 +4486,8 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
       "Tenders",
       "tender 2023"
     ],
-    "headingEn": "Tenders 2023",
-    "headingMr": "निविदा 2023",
+    "headingEn": "Tender notices 2023",
+    "headingMr": "निविदा सूचना 2023",
     "documents": [
       {
         "id": "tender-tender-2023-container-library-pdf",
@@ -4839,8 +4839,8 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
       "Tenders",
       "2022"
     ],
-    "headingEn": "Tenders 2022",
-    "headingMr": "निविदा 2022",
+    "headingEn": "Tender notices 2022",
+    "headingMr": "निविदा सूचना 2022",
     "documents": [
       {
         "id": "tender-2022-ce-305-dt-15-12-2022-pdf",
@@ -5516,8 +5516,8 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
       "Tenders",
       "2020"
     ],
-    "headingEn": "Tenders 2020",
-    "headingMr": "निविदा 2020",
+    "headingEn": "Tender notices 2020",
+    "headingMr": "निविदा सूचना 2020",
     "documents": [
       {
         "id": "tender-2020-09-16-2020-16-48-01-pdf",
@@ -6997,8 +6997,8 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
       "Tenders",
       "Tender 2018-2019"
     ],
-    "headingEn": "Tenders 2018-2019",
-    "headingMr": "निविदा 2018-2019",
+    "headingEn": "Tender notices 2018-2019",
+    "headingMr": "निविदा सूचना 2018-2019",
     "documents": [
       {
         "id": "tender-tender-2018-2019-115-20-07-2017-pdf",

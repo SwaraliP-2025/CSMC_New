@@ -77,11 +77,11 @@ export const translations = {
       title: "Serving the citizens with transparency and care",
       body:
         "Chhatrapati Sambhajinagar is a city where centuries of heritage meet modern aspiration. Our administration is committed to delivering responsive, technology-driven civic services that make daily life simpler for every resident. Together, we are shaping a model city — clean, inclusive and ready for tomorrow.",
-      name: "Shri Amol Yedge, IAS",
+      name: "Shri Amol Yedage, I.A.S",
       role: "Municipal Commissioner & Administrator",
     },
     commissioner: {
-      name: "Shri Amol Yedage, IAS",
+      name: "Shri Amol Yedage, I.A.S",
       nameMarathi: "श्री. अमोल येडगे, भा.प्र.से.",
     },
     notices: { title: "Latest Notices & Announcements", view: "View all" },
@@ -251,7 +251,7 @@ export const translations = {
       role: "महानगरपालिका आयुक्त व प्रशासक",
     },
     commissioner: {
-      name: "Shri Amol Yedage, IAS",
+      name: "Shri Amol Yedage, I.A.S",
       nameMarathi: "श्री. अमोल येडगे, भा.प्र.से.",
     },
     notices: { title: "ताज्या सूचना व घोषणा", view: "सर्व पहा" },

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
 import { getStoryById } from "@/data/visualStories";
+import { tenderNoticeFolder } from "@/data/tenderNoticeFolders";
 import {
   absoluteUrl,
   DEFAULT_DESCRIPTION_EN,
@@ -62,17 +63,25 @@ export const SeoHead = () => {
   useEffect(() => {
     const storyId = pathname.startsWith("/stories/") ? pathname.split("/")[2] : undefined;
     const story = storyId ? getStoryById(storyId) : undefined;
+    const tenderYear = pathname.startsWith("/tender-notices/") ? pathname.split("/")[2] : undefined;
+    const tenderFolder = tenderYear ? tenderNoticeFolder(decodeURIComponent(tenderYear)) : undefined;
     const page = ROUTE_SEO[pathname];
     const title = story
       ? `${en ? story.titleEn : story.titleMr} | ${SITE_SHORT}`
-      : en
-        ? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_EN}`
-        : page?.titleMr ?? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_MR}`;
+      : tenderFolder
+        ? `${en ? tenderFolder.headingEn : tenderFolder.headingMr} | ${SITE_SHORT}`
+        : en
+          ? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_EN}`
+          : page?.titleMr ?? page?.title ?? `${SITE_SHORT} | ${SITE_NAME_MR}`;
     const description = story
       ? (en ? story.shortDescriptionEn : story.shortDescriptionMr)
-      : en
-        ? page?.description ?? DEFAULT_DESCRIPTION_EN
-        : page?.descriptionMr ?? page?.description ?? DEFAULT_DESCRIPTION_MR;
+      : tenderFolder
+        ? en
+          ? `${tenderFolder.headingEn} of Chhatrapati Sambhajinagar Municipal Corporation.`
+          : `छत्रपती संभाजीनगर महानगरपालिकेच्या ${tenderFolder.headingMr}.`
+        : en
+          ? page?.description ?? DEFAULT_DESCRIPTION_EN
+          : page?.descriptionMr ?? page?.description ?? DEFAULT_DESCRIPTION_MR;
     const canonical = absoluteUrl(pathname);
 
     document.title = title;

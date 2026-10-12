@@ -1,3 +1,5 @@
+import { Link, Navigate, useParams } from "react-router-dom";
+import { FolderOpen } from "lucide-react";
 import { DocumentListingCard } from "@/components/site/DocumentListingCard";
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { Layout } from "@/components/site/Layout";
@@ -9,8 +11,7 @@ import {
   type MunicipalDocument,
 } from "@/data/municipalDocuments";
 import { DocumentArchiveBrowser } from "@/components/site/DocumentArchiveBrowser";
-import { officialAnnouncementFolder, officialTenderNoticeDocuments } from "@/data/officialPublicAdditions";
-import { tenderArchiveGroups } from "@/data/officialLinkedDocuments";
+import { tenderNoticeFolder, tenderNoticeFolders } from "@/data/tenderNoticeFolders";
 import { useLang } from "@/i18n/LanguageContext";
 
 function DocumentListPage({
@@ -80,23 +81,59 @@ export const SamvaadPage = () => (
   <DocumentListPage titleEn="Samvaad" titleMr="संवाद" documents={[]} />
 );
 
+const folderLinkClass =
+  "flex w-full min-w-0 items-center gap-3 rounded-2xl border border-border bg-white px-4 py-4 text-left transition-colors hover:border-civic-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue sm:gap-4 sm:px-5";
+
 export const TenderNoticesPage = () => {
-  const { lang } = useLang();
+  const { year } = useParams();
+  const { lang, d } = useLang();
   const en = lang === "en";
+  const folders = tenderNoticeFolders();
+  const selected = year ? tenderNoticeFolder(year) : undefined;
+
+  if (year && !selected) return <Navigate to="/tender-notices" replace />;
+
+  const title = selected
+    ? en
+      ? selected.headingEn
+      : selected.headingMr
+    : en
+      ? "Tender Notices"
+      : "निविदा सूचना";
+
   return (
     <Layout>
-      <PageHeader title={en ? "Tender Notices" : "निविदा सूचना"} />
-      <section className="py-8 md:py-12 container">
-        <h1 className="font-serif text-2xl md:text-3xl font-bold text-civic-blue mb-6">
-          {en ? "Tender Notices" : "निविदा सूचना"}
-        </h1>
-        <DocumentArchiveBrowser documents={officialTenderNoticeDocuments} folderSegments={[...officialAnnouncementFolder]} />
-        {tenderArchiveGroups.map((group) => (
-          <div className="min-w-0 mt-10" key={group.headingEn}>
-            <h2 className="font-serif text-xl font-bold text-civic-blue mb-3">{en ? group.headingEn : group.headingMr}</h2>
-            <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+      <PageHeader title={title} />
+      <section className="container py-8 md:py-12">
+        <h1 className="mb-6 font-serif text-2xl font-bold text-civic-blue md:text-3xl">{title}</h1>
+        {selected ? (
+          <>
+            <Link to="/tender-notices" className="mb-6 inline-flex text-sm font-semibold text-civic-blue underline">
+              {en ? "All tender notices" : "सर्व निविदा सूचना"}
+            </Link>
+            <DocumentArchiveBrowser documents={selected.documents} folderSegments={selected.folder} />
+          </>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {folders.map((folder) => {
+              const label = en ? folder.headingEn : folder.headingMr;
+              const count = en
+                ? `${folder.documents.length} documents`
+                : `${d(folder.documents.length)} दस्तऐवज`;
+              return (
+                <Link key={folder.slug} to={`/tender-notices/${folder.slug}`} className={folderLinkClass}>
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-civic-blue/8 text-civic-blue">
+                    <FolderOpen className="h-5 w-5" aria-hidden />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-serif text-lg font-bold leading-snug text-civic-blue">{label}</span>
+                    <span className="mt-0.5 block text-sm text-muted-foreground">{count}</span>
+                  </span>
+                </Link>
+              );
+            })}
           </div>
-        ))}
+        )}
       </section>
     </Layout>
   );

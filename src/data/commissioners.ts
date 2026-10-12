@@ -53,5 +53,5 @@ export const COMMISSIONERS: MayorRecord[] = [
   { sr: 28, nameEn: "Astik Kumar Pandey (IAS)", nameMr: "आस्तिक कुमार पांडेय (भा.प्र.से.)", from: "09.12.2019", to: "31.07.2022", img: pandeyImg },
   { sr: 29, nameEn: "Abhijeet Choudhary (IAS)", nameMr: "अभिजीत चौधरी (भा.प्र.से.)", from: "01.08.2022", to: "21.04.2023", img: choudharyImg },
   { sr: 30, nameEn: "G. Shreekanth (IAS)", nameMr: "जी. श्रीकांत (भा.प्र.से.)", from: "03.05.2023", to: "04.04.2026", img: shreekanthImg },
-  { sr: 31, nameEn: "Amol Yedage (IAS)", nameMr: "अमोल येडगे (भा.प्र.से.)", from: "04.04.2026", to: "Present", img: amolImg, current: true },
+  { sr: 31, nameEn: "Amol Yedage (I.A.S)", nameMr: "अमोल येडगे (भा.प्र.से.)", from: "04.04.2026", to: "Present", img: amolImg, current: true },
 ];

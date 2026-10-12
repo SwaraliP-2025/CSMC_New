@@ -1,9 +1,8 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
-import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
 import { useLang } from "@/i18n/LanguageContext";
 import {
-  findOrganogramOfficerForHead,
+  departmentsForOrganogramOfficer,
   getPublishedOrganogram,
   organogramDisplayDepartment,
   organogramDisplayDesignation,
@@ -15,7 +14,7 @@ import { Building2, Mail, MapPin, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function departmentsForOfficer(person: OrganogramPerson): DeptInfo[] {
-  return DEPARTMENTS.filter((dept) => findOrganogramOfficerForHead(dept.headEn)?.id === person.id);
+  return departmentsForOrganogramOfficer(person, DEPARTMENTS);
 }
 
 function unique(values: string[]): string[] {
@@ -25,6 +24,30 @@ function unique(values: string[]): string[] {
     const text = value.trim();
     if (!text || seen.has(text)) continue;
     seen.add(text);
+    out.push(text);
+  }
+  return out;
+}
+
+/** Same office written with a different dash or spacing counts as one address. */
+function addressKey(value: string): string {
+  return value
+    .replace(/\s+/g, " ")
+    .replace(/[–—−]/g, "-")
+    .replace(/,\s*([0-9०-९]{6})\s*$/g, "-$1")
+    .replace(/\s*-\s*/g, "-")
+    .trim()
+    .toLowerCase();
+}
+
+function uniqueAddresses(values: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const value of values) {
+    const text = value.trim();
+    const key = addressKey(text);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
     out.push(text);
   }
   return out;
@@ -42,8 +65,8 @@ const OfficersCorner = () => {
         title={en ? "Officer's Corner" : "अधिकारी कक्ष"}
         subtitle={
           en
-            ? "Officers already published on the CSMC organisation chart. Names, posts, email and office address are shown only where that chart or the department page already records them."
-            : "संघटना आकृतीवर आधीच प्रकाशित असलेले अधिकारी. नाव, पद, ई-मेल आणि कार्यालय पत्ता तेव्हाच दाखवले आहेत, जेव्हा ती नोंद आकृतीवर किंवा विभाग पृष्ठावर आधीच आहे."
+            ? "Municipal officers, their designations, and the official contact details recorded for each office."
+            : "महानगरपालिकेचे अधिकारी, त्यांची पदनामे आणि प्रत्येक कार्यालयासाठी नोंदवलेले अधिकृत संपर्क तपशील."
         }
       />
       <section className="container py-8 md:py-10">
@@ -52,8 +75,8 @@ const OfficersCorner = () => {
         </h1>
         <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
           {en
-            ? "Officers already published on the CSMC organisation chart. Names, posts, email and office address appear only where that chart or a department page already records them. Telephone numbers are not shown. Department documents stay on the department page and in the Municipal Document Repository."
-            : "संघटना आकृतीवर आधीच प्रकाशित असलेले अधिकारी. नाव, पद, ई-मेल आणि कार्यालय पत्ता तेव्हाच दाखवले आहेत, जेव्हा ती नोंद आकृतीवर किंवा विभाग पृष्ठावर आधीच आहे. दूरध्वनी क्रमांक दाखवले जात नाहीत. विभागीय दस्तऐवज विभाग पृष्ठावर आणि महापालिका दस्तऐवज भंडारातच राहतात."}{" "}
+            ? "This section presents the officers of the Chhatrapati Sambhajinagar Municipal Corporation, with their designations and the official email address and office address recorded for each post, so that citizens can identify the relevant office."
+            : "या विभागात छत्रपती संभाजीनगर महानगरपालिकेचे अधिकारी, त्यांची पदनामे आणि प्रत्येक पदासाठी नोंदवलेला अधिकृत ई-मेल व कार्यालय पत्ता दिला आहे, जेणेकरून नागरिकांना संबंधित कार्यालय ओळखता येईल."}{" "}
           <Link to="/organization" className="font-semibold text-civic-blue hover:underline">
             {en ? "Organisation chart" : "संघटना आकृती"}
           </Link>
@@ -65,20 +88,13 @@ const OfficersCorner = () => {
             const designation = organogramDisplayDesignation(person, en);
             const office = organogramDisplayDepartment(person, en);
             const emails = unique(posts.map((dept) => dept.email));
-            const addresses = unique(posts.map((dept) => (en ? dept.addressEn : dept.addressMr)));
-            const duties = posts
-              .map((dept) => {
-                const brief = DEPARTMENT_BRIEFS[dept.slug];
-                const items = en
-                  ? brief?.activitiesEn ?? dept.activitiesEn ?? dept.responsibilitiesEn ?? []
-                  : brief?.activitiesMr ?? dept.activitiesMr ?? dept.responsibilitiesMr ?? [];
-                return { dept, items };
-              })
-              .filter((entry) => entry.items.length > 0);
+            const addresses = uniqueAddresses(posts.map((dept) => (en ? dept.addressEn : dept.addressMr)));
+            const primary = posts[0];
+            const primaryName = primary ? (en ? primary.nameEn : primary.nameMr) : "";
 
             return (
               <li key={person.id}>
-                <article className="grid gap-5 rounded-2xl border border-border bg-white p-4 shadow-sm md:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] md:p-6">
+                <article className="rounded-2xl border border-border bg-white p-4 shadow-sm md:p-6">
                   <div className="flex gap-4">
                     {person.photo ? (
                       <img
@@ -92,8 +108,22 @@ const OfficersCorner = () => {
                       </div>
                     )}
                     <div className="min-w-0">
-                      <h2 className="font-serif text-lg font-bold leading-snug text-civic-ink">{name}</h2>
-                      <p className="mt-1 text-sm font-semibold text-civic-blue">{designation}</p>
+                      <h2 className="font-serif text-lg font-bold leading-snug text-civic-ink">
+                        {primary ? (
+                          <Link
+                            to={`/departments/${primary.slug}`}
+                            aria-label={en ? `${name}, ${primaryName}` : `${name}, ${primaryName}`}
+                            className="rounded-sm hover:text-civic-blue hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold"
+                          >
+                            {name}
+                          </Link>
+                        ) : (
+                          name
+                        )}
+                      </h2>
+                      <p className="mt-1 inline-block max-w-full cursor-default rounded-sm px-1.5 py-0.5 -mx-1.5 text-sm font-semibold text-civic-blue transition-colors hover:bg-civic-blue hover:text-white">
+                        {designation}
+                      </p>
                       {office ? <p className="mt-1 text-sm text-muted-foreground">{office}</p> : null}
                       <ul className="mt-3 space-y-1.5 text-sm text-civic-ink">
                         {emails.map((email) => (
@@ -115,7 +145,7 @@ const OfficersCorner = () => {
                             <li key={dept.slug}>
                               <Link
                                 to={`/departments/${dept.slug}`}
-                                className="inline-flex items-center gap-1.5 rounded-lg border border-civic-blue px-2.5 py-1 text-xs font-bold text-civic-blue hover:bg-civic-blue hover:text-white"
+                                className="inline-flex items-center gap-1.5 rounded-lg border border-civic-blue px-2.5 py-1 text-xs font-bold text-civic-blue transition-colors hover:bg-civic-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold"
                               >
                                 <Building2 className="h-3.5 w-3.5" aria-hidden />
                                 {en ? dept.nameEn : dept.nameMr}
@@ -125,33 +155,6 @@ const OfficersCorner = () => {
                         </ul>
                       ) : null}
                     </div>
-                  </div>
-                  <div className="border-t border-border pt-4 md:border-l md:border-t-0 md:pl-6 md:pt-0">
-                    <h3 className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                      {en ? "Roles and responsibilities" : "कार्य व जबाबदाऱ्या"}
-                    </h3>
-                    {duties.length > 0 ? (
-                      <div className="mt-3 space-y-4">
-                        {duties.map(({ dept, items }) => (
-                          <div key={dept.slug}>
-                            {posts.length > 1 ? (
-                              <p className="text-sm font-semibold text-civic-ink">{en ? dept.nameEn : dept.nameMr}</p>
-                            ) : null}
-                            <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-civic-ink">
-                              {items.map((item) => (
-                                <li key={item}>{item}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                        {en
-                          ? "A separate duties note is not published for this post. The designation above is the published record."
-                          : "या पदासाठी स्वतंत्र कार्यटीप प्रकाशित नाही. वरील पदनाम ही प्रकाशित नोंद आहे."}
-                      </p>
-                    )}
                   </div>
                 </article>
               </li>

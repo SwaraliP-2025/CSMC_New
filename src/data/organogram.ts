@@ -72,10 +72,10 @@ const confirmed = {
 export const ORGANOGRAM_PEOPLE: OrganogramPerson[] = [
   {
     id: "amol-yedage",
-    name: "Shri Amol Yedage, IAS",
+    name: "Shri Amol Yedage, I.A.S",
     nameMr: "श्री अमोल येडगे, भा.प्र.से.",
     designation: "Hon. Municipal Commissioner",
-    designationMr: "आयुक्त",
+    designationMr: "मा. महानगरपालिका आयुक्त",
     photo: amolYedagePhoto,
     level: 1,
     order: 1,

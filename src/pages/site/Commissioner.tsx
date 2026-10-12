@@ -26,7 +26,7 @@ const Commissioner = () => {
             <div className="bg-white border border-border rounded-3xl overflow-hidden shadow-sm">
               <div className="bg-gradient-to-br from-civic-blue to-civic-blue/80 p-8 flex flex-col items-center text-center">
                 <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white/30 shadow-xl mb-4">
-                  <img src={amolSir} alt="Shri Amol Yedage" className="w-full h-full object-cover" />
+                  <img src={amolSir} alt={en ? "Shri Amol Yedage, I.A.S" : "श्री. अमोल येडगे, भा.प्र.से."} className="w-full h-full object-cover" />
                 </div>
                 <h2 className="font-serif text-xl font-bold text-white mb-1">{en ? t.commissioner.name : t.commissioner.nameMarathi}</h2>
                 <p className="text-civic-gold text-sm font-semibold">
@@ -45,7 +45,9 @@ const Commissioner = () => {
                   <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
                   <div>
                     <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wide mb-0.5">{en ? "Email" : "ईमेल"}</p>
-                    <p className="font-semibold text-civic-ink break-all">commissioner@csmc.gov.in</p>
+                    <a href="mailto:commissioner@chhsambhajinagarmc.org" className="font-semibold text-civic-ink break-all hover:text-civic-blue hover:underline">
+                      commissioner@chhsambhajinagarmc.org
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 text-sm">

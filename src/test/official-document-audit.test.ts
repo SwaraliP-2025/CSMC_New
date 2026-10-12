@@ -105,9 +105,10 @@ describe("official document audit listings", () => {
       expect(existsSync(path.join(publicRoot, ...logical.split("/"))), logical).toBe(true);
       expect(publishedDocumentUrl(segments)).toBe(`https://drive.google.com/file/d/${driveHostedPdfIds[logical]}/view`);
     }
-    expect(repositoryListingSource()).toContain("official-announcements");
+    expect(repositoryListingSource()).toContain("gad-orders-and-circulars");
     expect(readFileSync("src/pages/site/Notices.tsx", "utf8")).toContain("officialSiteNoticeDocuments");
-    expect(readFileSync("src/pages/site/MunicipalDocumentList.tsx", "utf8")).toContain("officialTenderNoticeDocuments");
+    expect(readFileSync("src/pages/site/MunicipalDocumentList.tsx", "utf8")).not.toContain("officialTenderNoticeDocuments");
+    expect(readFileSync("src/pages/site/GadOrders.tsx", "utf8")).toContain("gadOrdersDocuments");
   });
 
   it("links official PDFs that have no local copy to their working official URL", () => {
@@ -151,7 +152,8 @@ describe("official document audit listings", () => {
       expect(driveHostedPdfIds[logical], logical).toBeTruthy();
       expect(publishedDocumentUrl([...group.folder, doc.file])).toBe(`https://drive.google.com/file/d/${driveHostedPdfIds[logical]}/view`);
     }
-    expect(readFileSync("src/pages/site/MunicipalDocumentList.tsx", "utf8")).toContain("tenderArchiveGroups");
+    expect(readFileSync("src/pages/site/MunicipalDocumentList.tsx", "utf8")).toContain("tenderNoticeFolders");
+    expect(readFileSync("src/App.tsx", "utf8")).toContain('path="/tender-notices/:year"');
     expect(repositoryListingSource()).toContain("tenderArchiveGroups");
   });
 
