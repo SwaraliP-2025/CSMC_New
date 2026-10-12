@@ -40,11 +40,6 @@ export function driveFileViewUrl(fileId: string) {
   return `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/view`;
 }
 
-/** Embeddable preview. The /view URL sends X-Frame-Options: SAMEORIGIN and cannot be iframed. */
-export function driveFilePreviewUrl(fileId: string) {
-  return `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview`;
-}
-
 /**
  * Direct file bytes. Not used as a site download link: Chrome warns when an
  * HTTP page starts that download, and the response cannot be read in PDF.js.
@@ -55,20 +50,30 @@ export function driveFileDownloadUrl(fileId: string) {
 
 /**
  * Site path for PDFs already hosted on GitHub Pages.
- * Approved Drive PDFs open in Google's single-file viewer.
+ * Approved Drive PDFs use Google's own file page.
  */
 export function publishedDocumentUrl(segments: string[]) {
   const fileId = driveHostedPdfIds[["documents", ...segments].join("/")];
   return fileId ? driveFileViewUrl(fileId) : publicDocumentUrl(segments);
 }
 
+function driveIdFromUrl(url: URL) {
+  if (url.origin === "https://drive.google.com") {
+    const file = url.pathname.match(/^\/file\/d\/([^/]+)\/(?:view|preview)$/);
+    if (file?.[1]) return decodeURIComponent(file[1]);
+    if (url.pathname === "/open" || url.pathname === "/uc") return url.searchParams.get("id") ?? "";
+    return "";
+  }
+  if (url.origin === "https://drive.usercontent.google.com" && url.pathname === "/download") {
+    return url.searchParams.get("id") ?? "";
+  }
+  return "";
+}
+
 /** File ID only when it is one of the verified map values. Other Drive links are ignored. */
 export function verifiedDriveFileId(href: string) {
   try {
-    const url = new URL(href);
-    if (url.origin !== "https://drive.google.com") return null;
-    const match = url.pathname.match(/^\/file\/d\/([^/]+)\/view$/);
-    const fileId = match?.[1] ? decodeURIComponent(match[1]) : "";
+    const fileId = driveIdFromUrl(new URL(href));
     return fileId && verifiedDriveIds.has(fileId) ? fileId : null;
   } catch {
     return null;

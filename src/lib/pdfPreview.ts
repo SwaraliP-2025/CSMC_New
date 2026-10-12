@@ -1,3 +1,5 @@
+import { driveFileViewUrl, verifiedDriveFileId } from "@/lib/archiveDocuments";
+
 export type InPagePdf = {
   url: string;
   filename: string;
@@ -13,6 +15,11 @@ export type InPagePdf = {
 const EVENT = "csmc-open-pdf";
 
 export function openInPagePdf(doc: InPagePdf) {
+  const driveId = verifiedDriveFileId(doc.url);
+  if (driveId) {
+    window.open(driveFileViewUrl(driveId), "_blank", "noopener,noreferrer");
+    return;
+  }
   window.dispatchEvent(new CustomEvent<InPagePdf>(EVENT, { detail: doc }));
 }
 

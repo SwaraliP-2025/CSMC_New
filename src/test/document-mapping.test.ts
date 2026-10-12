@@ -659,7 +659,10 @@ describe("document mapping", () => {
     expect(auditUrl).not.toContain("/folders/");
     expect(isSameOriginPdfHref(auditUrl)).toBe(false);
     expect(verifiedDriveFileId(auditUrl)).toBe("19BfwyiKSb4xFuFsMQg_D-FVrcxJtDxHd");
+    expect(verifiedDriveFileId(auditUrl.replace(/\/view$/, "/preview"))).toBe("19BfwyiKSb4xFuFsMQg_D-FVrcxJtDxHd");
+    expect(verifiedDriveFileId("https://drive.usercontent.google.com/download?id=19BfwyiKSb4xFuFsMQg_D-FVrcxJtDxHd&export=download")).toBe("19BfwyiKSb4xFuFsMQg_D-FVrcxJtDxHd");
     expect(verifiedDriveFileId("https://drive.google.com/file/d/not-a-real-id/view")).toBeNull();
+    expect(verifiedDriveFileId("https://drive.google.com/file/d/not-a-real-id/preview")).toBeNull();
     expect(verifiedDriveFileId("https://drive.google.com/drive/folders/14tBeN4zCtY7yptkOEaeSRlR7K9ckod-V")).toBeNull();
 
     const blockedDisposition = new Set(["HOLD", "EXCLUDE", "NEEDS_HUMAN_REVIEW", "MAPPED_PENDING_PUBLICATION_REVIEW"]);
