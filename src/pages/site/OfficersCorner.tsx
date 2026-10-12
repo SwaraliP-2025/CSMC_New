@@ -9,12 +9,30 @@ import {
   organogramDisplayName,
   type OrganogramPerson,
 } from "@/lib/organogram";
+import { getDepartmentGroupId, type DepartmentGroupId } from "@/data/departmentGroups";
 import { DEPARTMENTS, type DeptInfo } from "./DepartmentDetail";
 import { Building2, Mail, MapPin, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 
+/** Officers whose department chips stay off this page. Their name links and assignments remain. */
+const HIDE_DEPARTMENT_CHIPS = new Set(["amol-yedage", "ranjit-patil", "kalpita-pimple"]);
+
+/** Work-distribution sections these officers control. Their chips are hidden on this page. */
+const CHARGE_GROUPS: Partial<Record<string, DepartmentGroupId>> = {
+  "amol-yedage": "commissioner",
+  "ranjit-patil": "ac1",
+  "kalpita-pimple": "ac2",
+};
+
 function departmentsForOfficer(person: OrganogramPerson): DeptInfo[] {
-  return departmentsForOrganogramOfficer(person, DEPARTMENTS);
+  const headed = departmentsForOrganogramOfficer(person, DEPARTMENTS);
+  const groupId = CHARGE_GROUPS[person.id];
+  if (!groupId) return headed;
+  const seen = new Set(headed.map((dept) => dept.slug));
+  const charged = DEPARTMENTS.filter(
+    (dept) => getDepartmentGroupId(dept.slug) === groupId && !seen.has(dept.slug),
+  );
+  return [...headed, ...charged];
 }
 
 function unique(values: string[]): string[] {
@@ -29,13 +47,17 @@ function unique(values: string[]): string[] {
   return out;
 }
 
-/** Same office written with a different dash or spacing counts as one address. */
+const DEVANAGARI_DIGITS = "०१२३४५६७८९";
+
+/** Same office written with a different dash, spacing, or PIN digits counts as one address. */
 function addressKey(value: string): string {
-  return value
+  const folded = value.replace(/[०-९]/g, (digit) => String(DEVANAGARI_DIGITS.indexOf(digit)));
+  return folded
     .replace(/\s+/g, " ")
     .replace(/[–—−]/g, "-")
-    .replace(/,\s*([0-9०-९]{6})\s*$/g, "-$1")
+    .replace(/,\s*([0-9]{6})\s*$/g, "-$1")
     .replace(/\s*-\s*/g, "-")
+    .replace(/\s*,\s*/g, ",")
     .trim()
     .toLowerCase();
 }
@@ -88,8 +110,11 @@ const OfficersCorner = () => {
             const designation = organogramDisplayDesignation(person, en);
             const office = organogramDisplayDepartment(person, en);
             const emails = unique(posts.map((dept) => dept.email));
-            const addresses = uniqueAddresses(posts.map((dept) => (en ? dept.addressEn : dept.addressMr)));
-            const primary = posts[0];
+            const primaryPost = posts[0];
+            const addresses = uniqueAddresses(
+              primaryPost ? [en ? primaryPost.addressEn : primaryPost.addressMr] : [],
+            );
+            const primary = departmentsForOrganogramOfficer(person, DEPARTMENTS)[0];
             const primaryName = primary ? (en ? primary.nameEn : primary.nameMr) : "";
 
             return (
@@ -139,8 +164,8 @@ const OfficersCorner = () => {
                           </li>
                         ))}
                       </ul>
-                      {posts.length > 0 ? (
-                        <ul className="mt-3 flex list-none flex-wrap gap-2 p-0">
+                      {posts.length > 0 && !HIDE_DEPARTMENT_CHIPS.has(person.id) ? (
+                        <ul className="mt-3 flex w-full list-none flex-wrap gap-2 p-0">
                           {posts.map((dept) => (
                             <li key={dept.slug}>
                               <Link
