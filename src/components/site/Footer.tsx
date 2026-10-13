@@ -151,7 +151,7 @@ export const Footer = () => {
 
         <div className="space-y-6">
           <div>
-            <div className="flex gap-3 mb-2">
+            <div className="flex flex-wrap gap-3 mb-2">
               <a href={OFFICIAL.smartNagarikAppStore} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border border-white/20 hover:border-civic-gold rounded-xl px-3 py-2 transition-colors">
                 <AppleIcon />
                 <div className="leading-tight">

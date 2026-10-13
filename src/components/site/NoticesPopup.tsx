@@ -7,6 +7,13 @@ import bannerImg from "@/assets/banners/tax-rebate-banner.jpg";
 import { isTourDoneForPromos } from "@/lib/tourPersistence";
 
 const BANNER_SRC = bannerImg;
+
+/**
+ * Homepage campaign popup. Set a new id and update BannerPopup
+ * (image, alt text, and link) when a dated notice should auto-show.
+ * null keeps that popup code available without showing the expired campaign.
+ */
+export const ACTIVE_BANNER_ID: string | null = null;
 const NOTICES = HERO_BANNER_SLIDES.map((s) => ({
   id: s.id,
   title: s.titleEn,
@@ -158,16 +165,18 @@ export const NoticesPopup = ({ open, onClose }: { open: boolean; onClose: () => 
           </button>
         </div>
 
-        <div className="shrink-0 border-b border-border">
-          <img
-            src={BANNER_SRC}
-            alt={en ? "CSMC notice banner" : "CSMC सूचना बॅनर"}
-            className="w-full object-cover max-h-40"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
-        </div>
+        {ACTIVE_BANNER_ID ? (
+          <div className="shrink-0 border-b border-border">
+            <img
+              src={BANNER_SRC}
+              alt={en ? "CSMC notice banner" : "CSMC सूचना बॅनर"}
+              className="w-full object-cover max-h-40"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = "none";
+              }}
+            />
+          </div>
+        ) : null}
 
         <div className="overflow-y-auto flex-1 divide-y divide-border">
           {NOTICES.map((n) => (
@@ -224,13 +233,15 @@ export const useNoticesPopup = () => {
   const [noticesOpen, setNoticesOpen] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("banner_shown")) return;
+    if (!ACTIVE_BANNER_ID) return;
+    const storageKey = `banner_shown:${ACTIVE_BANNER_ID}`;
+    if (localStorage.getItem(storageKey)) return;
 
     const tryShow = () => {
-      if (localStorage.getItem("banner_shown")) return true;
+      if (localStorage.getItem(storageKey)) return true;
       if (!isTourDoneForPromos()) return false;
       setBannerOpen(true);
-      localStorage.setItem("banner_shown", "1");
+      localStorage.setItem(storageKey, "1");
       return true;
     };
 

@@ -356,18 +356,17 @@ body > .skiptranslate {
 .google-translate-widget {
   position: relative;
   width: 100%;
-  max-width: min(42vw, 7.25rem);
-}
-
-@media (min-width: 400px) {
-  .google-translate-widget {
-    max-width: min(44vw, 8rem);
-  }
+  max-width: none;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 @media (min-width: 640px) {
   .google-translate-widget {
-    max-width: 10.5rem;
+    width: auto;
+    flex: 0 1 auto;
+    /* Longest closed label is about 11rem, plus the chevron. */
+    max-width: 14rem;
   }
 }
 
@@ -402,6 +401,12 @@ body > .skiptranslate {
 .csmc-translate-select:focus-visible {
   outline: 2px solid hsl(var(--civic-gold));
   outline-offset: 2px;
+}
+
+.csmc-translate-select,
+.csmc-translate-select option {
+  direction: ltr;
+  text-align: left;
 }
 
 .csmc-translate-select option {

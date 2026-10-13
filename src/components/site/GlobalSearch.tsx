@@ -387,10 +387,10 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       <div
         ref={wrapRef}
         className={`relative flex items-center gap-2 border border-border rounded-full px-3 bg-white shadow-sm focus-within:ring-2 focus-within:ring-civic-blue/30 ${
-          compact ? "py-1 flex-1" : "py-1.5"
+          compact ? "min-h-11 py-2 w-full" : "py-1.5"
         }`}
       >
-        <Search className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"} text-muted-foreground shrink-0`} aria-hidden />
+        <Search className="h-4 w-4 text-muted-foreground shrink-0" aria-hidden />
         <input
           ref={inputRef}
           type="search"
@@ -422,7 +422,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           role="combobox"
           autoComplete="off"
           className={`bg-transparent outline-none placeholder:text-muted-foreground/35 min-w-0 ${
-            compact ? "text-xs w-full" : "text-sm w-[220px] lg:w-[280px]"
+            compact ? "text-sm w-full" : "text-sm w-[220px] lg:w-[280px]"
           }`}
         />
         {query && (
@@ -461,9 +461,9 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           className={`shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue disabled:opacity-40 ${voiceBusy ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
         >
           {voiceBusy ? (
-            <Mic className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
+            <Mic className="h-4 w-4" aria-hidden />
           ) : (
-            <MicOff className={`${compact ? "h-3.5 w-3.5" : "h-4 w-4"}`} aria-hidden />
+            <MicOff className="h-4 w-4" aria-hidden />
           )}
         </button>
         {voiceNote ? (

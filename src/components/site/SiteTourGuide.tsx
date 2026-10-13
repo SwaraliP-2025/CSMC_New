@@ -31,7 +31,7 @@ const SPOT_PAD = 6;
 const VIEW_PAD = 20;
 const CARD_GAP = 14;
 const TICKER_SAFE = 52; // keep clear of bottom announcement bar
-const MOBILE_MQ = "(max-width: 767px)";
+const MOBILE_MQ = "(max-width: 1365px)";
 
 type SpotRect = { top: number; left: number; width: number; height: number };
 type CardPlacement = { top: number; left: number; width: number; maxHeight: number };

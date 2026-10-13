@@ -137,19 +137,19 @@ export const VisitCsmc = () => {
                 allowFullScreen
               />
 
-              <div className="pointer-events-none absolute left-3 top-3 right-3 z-[2] sm:right-auto sm:max-w-[260px]">
-                <div className="pointer-events-auto rounded-xl bg-white shadow-lg border border-border/80 p-3">
-                  <p className="text-[13px] font-bold text-civic-ink leading-snug">
+              <div className="pointer-events-none absolute left-2 top-2 z-[2] max-w-[calc(100%-2.5rem)] sm:max-w-[220px]">
+                <div className="pointer-events-auto rounded-lg bg-white shadow-lg border border-border/80 px-2.5 py-1.5">
+                  <p className="text-[13px] font-bold text-civic-ink leading-snug break-words">
                     {en
                       ? "Chhatrapati Sambhajinagar Municipal Corporation"
                       : "छत्रपती संभाजीनगर महानगरपालिका"}
                   </p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground leading-snug">
+                  <p className="mt-0.5 text-[11px] text-muted-foreground leading-snug break-words">
                     {en
                       ? "Town Hall, behind Head Post Office, 431001"
                       : "टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, ४३१००१"}
                   </p>
-                  <div className="mt-1.5 flex items-center gap-1.5">
+                  <div className="mt-1 flex items-center gap-1.5">
                     <span className="text-xs font-bold text-civic-ink">{ratingLabel}</span>
                     <span className="flex items-center gap-px" aria-hidden>
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -169,7 +169,7 @@ export const VisitCsmc = () => {
                         : `Google Maps रेटिंग ${ratingLabel} पैकी ५`}
                     </span>
                   </div>
-                  <div className="mt-2.5 flex items-center gap-2">
+                  <div className="mt-1.5 flex items-center gap-2">
                     <a
                       href={CSMC_OFFICE_MAPS_URL}
                       target="_blank"

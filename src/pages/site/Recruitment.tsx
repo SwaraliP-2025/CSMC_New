@@ -1,35 +1,35 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { Download, Calendar, Briefcase } from "lucide-react";
+import { Download, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const posts = [
-  { post: "Junior Engineer (Civil)", postMr: "कनिष्ठ अभियंता (स्थापत्य)", vacancies: 12, lastDate: "30 May 2026", status: "Open", statusMr: "खुली" },
-  { post: "Health Inspector", postMr: "आरोग्य निरीक्षक", vacancies: 8, lastDate: "25 May 2026", status: "Open", statusMr: "खुली" },
-  { post: "Tax Inspector", postMr: "कर निरीक्षक", vacancies: 15, lastDate: "20 May 2026", status: "Closed", statusMr: "बंद" },
-  { post: "Clerk (Grade III)", postMr: "लिपिक (श्रेणी III)", vacancies: 30, lastDate: "15 Jun 2026", status: "Open", statusMr: "खुली" },
-  { post: "Electrician", postMr: "विद्युत तंत्रज्ञ", vacancies: 6, lastDate: "10 Jun 2026", status: "Open", statusMr: "खुली" },
-  { post: "Sanitation Worker", postMr: "स्वच्छता कर्मचारी", vacancies: 50, lastDate: "5 Jun 2026", status: "Open", statusMr: "खुली" },
-];
+type RecruitmentPost = {
+  post: string;
+  postMr: string;
+  vacancies: number;
+  lastDate: string;
+  status: "Open" | "Closed";
+  statusMr: string;
+  repoId?: string;
+};
+
+const posts: RecruitmentPost[] = [];
 
 const Recruitment = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
   return (
     <Layout>
-      <PageHeader eyebrow={en ? "Career" : "करिअर"} title={en ? "Recruitment" : "भरती पृष्ठ"}
+      <PageHeader eyebrow={en ? "Career" : "नोकरी"} title={en ? "Recruitment" : "भरती"}
         subtitle={en ? "Current job openings at Chhatrapati Sambhajinagar Municipal Corporation." : "छत्रपती संभाजीनगर महानगरपालिकेतील सध्याच्या रिक्त जागा."} />
       <section className="py-12 container">
-        <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 mb-8 flex items-start gap-3">
-          <Calendar className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-          <p className="text-sm text-amber-800 font-medium">
-            {en
-              ? "This page lists sample openings for the prototype. Live applications must use the official CSMC recruitment notice when published."
-              : "हे पृष्ठ नमुना जागा दाखवते. थेट अर्ज प्रकाशित अधिकृत CSMC भरती सूचनेद्वारेच करावेत."}
-          </p>
-        </div>
         <ul className="flex flex-col gap-3 md:hidden">
+          {posts.length === 0 ? (
+            <li className="rounded-2xl border border-border bg-white p-4 text-center text-sm text-muted-foreground">
+              {en ? "No openings are listed." : "सध्या कोणतीही रिक्त जागा यादीत नाही."}
+            </li>
+          ) : null}
           {posts.map((p) => (
             <li key={p.post} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
               <div className="flex items-start gap-2">
@@ -80,6 +80,13 @@ const Recruitment = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-white">
+              {posts.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-5 py-8 text-center text-muted-foreground">
+                    {en ? "No openings are listed." : "सध्या कोणतीही रिक्त जागा यादीत नाही."}
+                  </td>
+                </tr>
+              ) : null}
               {posts.map((p, i) => (
                 <tr key={i} className="hover:bg-muted/30 transition-colors">
                   <td className="px-5 py-4 font-semibold text-civic-ink">

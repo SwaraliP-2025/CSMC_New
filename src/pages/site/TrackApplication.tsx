@@ -11,28 +11,80 @@ type Status = "in_review" | "approved" | "dispatched" | "rejected" | "pending";
 
 interface ApplicationResult {
   id: string;
-  type: string;
+  typeEn: string;
+  typeMr: string;
   applicant: string;
   submitted: string;
   status: Status;
   lastUpdated: string;
-  remarks: string;
+  remarksEn: string;
+  remarksMr: string;
 }
 
 const MOCK_DATA: Record<string, ApplicationResult> = {
-  "CSMC-2026-00123": { id: "CSMC-2026-00123", type: "Birth Certificate", applicant: "Rahul Sharma", submitted: "10 Apr 2026", status: "dispatched", lastUpdated: "22 Apr 2026", remarks: "Certificate dispatched via Speed Post. Tracking: SP123456789IN" },
-  "CSMC-2026-00456": { id: "CSMC-2026-00456", type: "Building Permission", applicant: "Priya Patil", submitted: "15 Apr 2026", status: "in_review", lastUpdated: "23 Apr 2026", remarks: "Under review by Town Planning department. Expected decision within 7 working days." },
-  "CSMC-2026-00789": { id: "CSMC-2026-00789", type: "Trade License", applicant: "Suresh Jadhav", submitted: "5 Apr 2026", status: "approved", lastUpdated: "20 Apr 2026", remarks: "Approved. Please visit Zone 3 office to collect your license." },
-  "CSMC-2026-00321": { id: "CSMC-2026-00321", type: "Water Connection", applicant: "Meena Kulkarni", submitted: "18 Apr 2026", status: "pending", lastUpdated: "18 Apr 2026", remarks: "Application received. Awaiting field inspection scheduling." },
-  "CSMC-2026-00654": { id: "CSMC-2026-00654", type: "Property Tax Correction", applicant: "Anil Deshmukh", submitted: "2 Apr 2026", status: "rejected", lastUpdated: "19 Apr 2026", remarks: "Rejected due to incomplete documentation. Please resubmit with property card copy." },
+  "CSMC-2026-00123": {
+    id: "CSMC-2026-00123",
+    typeEn: "Birth Certificate",
+    typeMr: "जन्म दाखला",
+    applicant: "Rahul Sharma",
+    submitted: "10 Apr 2026",
+    status: "dispatched",
+    lastUpdated: "22 Apr 2026",
+    remarksEn: "Certificate dispatched via Speed Post. Tracking: SP123456789IN",
+    remarksMr: "दाखला स्पीड पोस्टने पाठवण्यात आला आहे. ट्रॅकिंग क्रमांक: SP123456789IN",
+  },
+  "CSMC-2026-00456": {
+    id: "CSMC-2026-00456",
+    typeEn: "Building Permission",
+    typeMr: "बांधकाम परवानगी",
+    applicant: "Priya Patil",
+    submitted: "15 Apr 2026",
+    status: "in_review",
+    lastUpdated: "23 Apr 2026",
+    remarksEn: "Under review by Town Planning department. Expected decision within 7 working days.",
+    remarksMr: "नगररचना विभाग तपासणी करत आहे. 7 कामकाजाच्या दिवसांत निर्णय अपेक्षित आहे.",
+  },
+  "CSMC-2026-00789": {
+    id: "CSMC-2026-00789",
+    typeEn: "Trade License",
+    typeMr: "व्यापार परवाना",
+    applicant: "Suresh Jadhav",
+    submitted: "5 Apr 2026",
+    status: "approved",
+    lastUpdated: "20 Apr 2026",
+    remarksEn: "Approved. Please visit Zone 3 office to collect your license.",
+    remarksMr: "मंजूर झाले आहे. परवाना मिळवण्यासाठी झोन 3 कार्यालयात भेट द्या.",
+  },
+  "CSMC-2026-00321": {
+    id: "CSMC-2026-00321",
+    typeEn: "Water Connection",
+    typeMr: "पाणी जोडणी",
+    applicant: "Meena Kulkarni",
+    submitted: "18 Apr 2026",
+    status: "pending",
+    lastUpdated: "18 Apr 2026",
+    remarksEn: "Application received. Awaiting field inspection scheduling.",
+    remarksMr: "अर्ज प्राप्त झाला आहे. क्षेत्रीय तपासणीची वेळ निश्चित होणे बाकी आहे.",
+  },
+  "CSMC-2026-00654": {
+    id: "CSMC-2026-00654",
+    typeEn: "Property Tax Correction",
+    typeMr: "मालमत्ता कर दुरुस्ती",
+    applicant: "Anil Deshmukh",
+    submitted: "2 Apr 2026",
+    status: "rejected",
+    lastUpdated: "19 Apr 2026",
+    remarksEn: "Rejected due to incomplete documentation. Please resubmit with property card copy.",
+    remarksMr: "कागदपत्रे अपूर्ण असल्याने अर्ज नामंजूर झाला आहे. मालमत्ता पत्रकाची प्रत जोडून पुन्हा सादर करा.",
+  },
 };
 
-const statusConfig: Record<Status, { label: string; color: string; bg: string; Icon: React.ElementType }> = {
-  pending:   { label: "Pending",   color: "text-yellow-700", bg: "bg-yellow-50 border-yellow-200",  Icon: Clock },
-  in_review: { label: "In Review", color: "text-blue-700",   bg: "bg-blue-50 border-blue-200",      Icon: FileText },
-  approved:  { label: "Approved",  color: "text-green-700",  bg: "bg-green-50 border-green-200",    Icon: CheckCircle2 },
-  dispatched:{ label: "Dispatched",color: "text-purple-700", bg: "bg-purple-50 border-purple-200",  Icon: Truck },
-  rejected:  { label: "Rejected",  color: "text-red-700",    bg: "bg-red-50 border-red-200",        Icon: XCircle },
+const statusConfig: Record<Status, { labelEn: string; labelMr: string; color: string; bg: string; Icon: React.ElementType }> = {
+  pending:    { labelEn: "Pending",    labelMr: "प्रलंबित",   color: "text-yellow-700", bg: "bg-yellow-50 border-yellow-200",  Icon: Clock },
+  in_review:  { labelEn: "In Review",  labelMr: "तपासणीत",   color: "text-blue-700",   bg: "bg-blue-50 border-blue-200",      Icon: FileText },
+  approved:   { labelEn: "Approved",   labelMr: "मंजूर",     color: "text-green-700",  bg: "bg-green-50 border-green-200",    Icon: CheckCircle2 },
+  dispatched: { labelEn: "Dispatched", labelMr: "पाठवले",    color: "text-purple-700", bg: "bg-purple-50 border-purple-200",  Icon: Truck },
+  rejected:   { labelEn: "Rejected",   labelMr: "नामंजूर",   color: "text-red-700",    bg: "bg-red-50 border-red-200",        Icon: XCircle },
 };
 
 const steps: Status[] = ["pending", "in_review", "approved", "dispatched"];
@@ -78,17 +130,17 @@ const TrackApplication = () => {
           </a>
         </div>
 
-        <div className="flex gap-3 mb-10">
+        <div className="mb-10 flex flex-col gap-3 min-[360px]:flex-row">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             placeholder={en ? "e.g. CSMC-2026-00123" : `उदा. ${d("CSMC-2026-00123")}`}
-            className="flex-1 border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue/30"
+            className="min-h-11 w-full min-w-0 flex-1 rounded-xl border border-border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-civic-blue/30 min-[360px]:w-auto"
             aria-label={en ? "Application ID" : "अर्ज आयडी"}
           />
-          <Button onClick={handleSearch} className="bg-civic-blue text-white hover:bg-civic-blue/90 px-6 rounded-xl">
+          <Button onClick={handleSearch} className="min-h-11 w-full shrink-0 rounded-xl bg-civic-blue px-6 text-white hover:bg-civic-blue/90 min-[360px]:w-auto">
             <Search className="h-4 w-4 mr-2" /> {en ? "Track" : "शोधा"}
           </Button>
         </div>
@@ -115,15 +167,15 @@ const TrackApplication = () => {
             <div className={`flex items-center gap-3 px-6 py-4 border-b ${cfg.bg}`}>
               <cfg.Icon className={`h-6 w-6 ${cfg.color}`} />
               <div>
-                <p className={`font-bold text-base ${cfg.color}`}>{cfg.label}</p>
-                <p className="text-xs text-muted-foreground">Last updated: {d(result.lastUpdated)}</p>
+                <p className={`font-bold text-base ${cfg.color}`}>{en ? cfg.labelEn : cfg.labelMr}</p>
+                <p className="text-xs text-muted-foreground">{en ? "Last updated:" : "शेवटचे अद्यतन:"} {d(result.lastUpdated)}</p>
               </div>
             </div>
             <div className="px-6 py-5 grid grid-cols-2 gap-4 text-sm">
-              <div><p className="text-muted-foreground text-xs mb-1">Application ID</p><p className="font-mono font-bold">{d(result.id)}</p></div>
-              <div><p className="text-muted-foreground text-xs mb-1">Service Type</p><p className="font-semibold">{result.type}</p></div>
-              <div><p className="text-muted-foreground text-xs mb-1">Applicant</p><p className="font-semibold">{result.applicant}</p></div>
-              <div><p className="text-muted-foreground text-xs mb-1">Submitted On</p><p className="font-semibold">{d(result.submitted)}</p></div>
+              <div><p className="text-muted-foreground text-xs mb-1">{en ? "Application ID" : "अर्ज आयडी"}</p><p className="font-mono font-bold break-words">{d(result.id)}</p></div>
+              <div><p className="text-muted-foreground text-xs mb-1">{en ? "Service Type" : "सेवा प्रकार"}</p><p className="font-semibold break-words">{en ? result.typeEn : result.typeMr}</p></div>
+              <div><p className="text-muted-foreground text-xs mb-1">{en ? "Applicant" : "अर्जदार"}</p><p className="font-semibold break-words">{result.applicant}</p></div>
+              <div><p className="text-muted-foreground text-xs mb-1">{en ? "Submitted On" : "सादर दिनांक"}</p><p className="font-semibold break-words">{d(result.submitted)}</p></div>
             </div>
             {result.status !== "rejected" && (
               <div className="px-6 pb-5">
@@ -137,7 +189,7 @@ const TrackApplication = () => {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 text-xs font-bold transition-all ${done ? "bg-civic-blue border-civic-blue text-white" : "border-border text-muted-foreground"}`}>
                             {d(i + 1)}
                           </div>
-                          <span className={`text-[10px] mt-1 font-semibold ${done ? "text-civic-blue" : "text-muted-foreground"}`}>{sc.label}</span>
+                          <span className={`text-[10px] mt-1 text-center font-semibold leading-tight ${done ? "text-civic-blue" : "text-muted-foreground"}`}>{en ? sc.labelEn : sc.labelMr}</span>
                         </div>
                         {i < steps.length - 1 && <div className={`flex-1 h-0.5 mb-4 mx-1 ${i < stepIndex ? "bg-civic-blue" : "bg-border"}`} />}
                       </div>
@@ -147,8 +199,8 @@ const TrackApplication = () => {
               </div>
             )}
             <div className="px-6 pb-6">
-              <p className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">Remarks</p>
-              <p className="text-sm text-foreground/80 bg-muted/40 rounded-lg px-4 py-3">{d(result.remarks)}</p>
+              <p className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">{en ? "Remarks" : "शेरा"}</p>
+              <p className="text-sm text-foreground/80 bg-muted/40 rounded-lg px-4 py-3 break-words">{d(en ? result.remarksEn : result.remarksMr)}</p>
             </div>
           </div>
         )}

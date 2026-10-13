@@ -334,35 +334,37 @@ export const Header = () => {
         <Link
           to="/user-manual"
           data-tour="user-manual"
-          className="hidden md:inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap"
+          className="hidden min-[1366px]:inline-flex px-3 py-1.5 rounded-full text-xs font-bold border-2 border-civic-blue text-civic-blue hover:bg-civic-blue hover:text-white transition-colors whitespace-nowrap"
         >
           {en ? "User Manual" : "वापरकर्ता नियमावली"}
         </Link>
-        <div className="hidden md:block" data-tour="global-search">
+        <div className="hidden min-[1366px]:block" data-tour="global-search">
           <GlobalSearch />
         </div>
       </div>
 
-      {/* Row 2 (mobile only): hamburger + User Policy + search */}
-      <div className="md:hidden border-t border-border/50 px-3 py-2 flex items-center gap-2">
-        <Button size="icon" variant="ghost"
-          ref={mobileMenuBtnRef}
-          className="shrink-0 h-9 w-9 text-civic-blue"
-          data-tour="mobile-menu-btn"
-          onClick={() => setMobileOpen(o => !o)}
-          aria-label={mobileOpen ? (en ? "Close menu" : "मेनू बंद करा") : (en ? "Open menu" : "मेनू उघडा")}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-primary-nav">
-          {mobileOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
-        </Button>
-        <Link
-          to="/user-manual"
-          data-tour="user-manual"
-          className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold border-2 border-civic-blue text-civic-blue whitespace-nowrap"
-        >
-          {en ? "User Policy" : "वापरकर्ता नियमावली"}
-        </Link>
-        <div className="flex-1 min-w-0" data-tour="global-search">
+      {/* Compact header until the desktop labels fit without widening the page. */}
+      <div className="min-[1366px]:hidden border-t border-border/50 py-2 pl-3 pr-8 sm:pl-4 md:pl-5 flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <Button size="icon" variant="ghost"
+            ref={mobileMenuBtnRef}
+            className="shrink-0 h-9 w-9 text-civic-blue"
+            data-tour="mobile-menu-btn"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? (en ? "Close menu" : "मेनू बंद करा") : (en ? "Open menu" : "मेनू उघडा")}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-primary-nav">
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+          </Button>
+          <Link
+            to="/user-manual"
+            data-tour="user-manual"
+            className="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold border-2 border-civic-blue text-civic-blue whitespace-nowrap"
+          >
+            {en ? "User Policy" : "वापरकर्ता नियमावली"}
+          </Link>
+        </div>
+        <div className="min-w-0" data-tour="global-search">
           <GlobalSearch compact />
         </div>
       </div>
@@ -373,7 +375,7 @@ export const Header = () => {
         data-tour="main-nav"
         aria-label={en ? "Primary navigation" : "मुख्य नेव्हिगेशन"}
         key={`nav-${gtTarget ?? "none"}-${en ? "en" : "mr"}`}
-        className="hidden md:block h-11 max-h-11 min-h-11 shrink-0"
+        className="hidden min-[1366px]:block h-11 max-h-11 min-h-11 shrink-0"
       >
         <div className="flex h-11 w-full items-stretch">
           {NAV.map((item, i) => {
@@ -409,7 +411,7 @@ export const Header = () => {
           id="mobile-primary-nav"
           data-tour="mobile-nav"
           aria-label={en ? "Mobile navigation" : "मोबाइल नेव्हिगेशन"}
-          className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto"
+          className="min-[1366px]:hidden border-t border-border bg-card max-h-[calc(100dvh-21rem)] overflow-y-auto overscroll-contain pb-14"
         >
           {NAV.map(item => (
             <div key={item.labelEn}>

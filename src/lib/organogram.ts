@@ -64,6 +64,14 @@ function officerNameKey(name: string): string {
     .trim();
 }
 
+/** Department pages whose recorded head is this organogram officer, in department-list order. */
+export function departmentsForOrganogramOfficer<T extends { headEn: string }>(
+  person: OrganogramPerson,
+  departments: readonly T[],
+): T[] {
+  return departments.filter((dept) => findOrganogramOfficerForHead(dept.headEn)?.id === person.id);
+}
+
 /** Match a department head to the published organogram record, including known spelling differences. */
 export function findOrganogramOfficerForHead(headEn: string): OrganogramPerson | undefined {
   const key = officerNameKey(headEn);

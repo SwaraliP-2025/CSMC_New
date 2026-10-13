@@ -9,6 +9,9 @@ import {
   TOURIST_TRANSLATE_LANGUAGES,
 } from "@/components/site/googleTranslate";
 
+/** Native pickers right-align these scripts unless the option is an LTR run. */
+const RTL_OPTION = new Set(["ar", "he", "fa", "ur"]);
+
 /**
  * Free Google Website Translator for inbound tourists (JA, KO, ZH, etc.).
  * Official EN / Marathi copy is controlled separately via LanguageContext.
@@ -49,23 +52,29 @@ export const GoogleTranslateWidget = () => {
 
   const clearLabel =
     lang === "mr" ? "मूळ भाषा (काढा)" : "Original (clear)";
+  const selectLabel = lang === "mr" ? "भाषा निवडा" : "Select Language";
+  const widgetTitle =
+    lang === "mr"
+      ? "आंतरराष्ट्रीय अभ्यागतांसाठी पृष्ठ भाषांतरित करा"
+      : "Translate page for international visitors";
 
   return (
     <div
-      className="google-translate-widget notranslate flex items-center gap-1 shrink-0"
-      title="Translate page for international visitors"
+      className="google-translate-widget notranslate flex items-center gap-1 min-w-0"
+      title={widgetTitle}
     >
       <Globe className="h-3 w-3 opacity-60 shrink-0 text-white/90" aria-hidden />
       <select
         value={selectValue}
         onChange={(e) => applyTranslation(e.target.value)}
-        aria-label="Select Language"
+        aria-label={selectLabel}
+        dir="ltr"
         className="csmc-translate-select"
       >
-        <option value="">{clearLabel}</option>
+        <option value="" dir="ltr">{clearLabel}</option>
         {TOURIST_TRANSLATE_LANGUAGES.map(({ code, label }) => (
-          <option key={code} value={code}>
-            {label}
+          <option key={code} value={code} dir="ltr">
+            {RTL_OPTION.has(code) ? `\u200E${label}` : label}
           </option>
         ))}
       </select>

@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLang } from "@/i18n/LanguageContext";
 import type { OrganogramPerson } from "@/data/organogram";
 import { PhotoModal } from "@/components/site/PhotoModal";
+import { DEPARTMENTS } from "@/pages/site/DepartmentDetail";
 import {
+  departmentsForOrganogramOfficer,
   getOrganogramGroups,
   organogramDisplayDepartment,
   organogramDisplayDesignation,
@@ -27,7 +30,7 @@ function PersonPhoto({ person, large }: { person: OrganogramPerson; large?: bool
             className="flex h-full w-full items-center justify-center bg-civic-blue/[0.06] font-serif text-lg font-bold text-civic-blue"
             aria-hidden
           >
-            {organogramInitials(name)}
+            {organogramInitials(person.name)}
           </span>
         )}
       </div>
@@ -50,13 +53,30 @@ function PersonCard({
   const designation = organogramDisplayDesignation(person, en);
   const department = organogramDisplayDepartment(person, en);
   const canOpen = Boolean(person.photo);
+  const primary = departmentsForOrganogramOfficer(person, DEPARTMENTS)[0];
+  const primaryName = primary ? (en ? primary.nameEn : primary.nameMr) : "";
+  const nameClass = `mt-3 font-bold text-civic-blue leading-snug ${large ? "text-base" : "text-sm"}`;
 
-  const body = (
+  const nameEl = (
+    <h3 className={nameClass}>
+      {primary ? (
+        <Link
+          to={`/departments/${primary.slug}`}
+          aria-label={en ? `${name}, ${primaryName}` : `${name}, ${primaryName}`}
+          className="rounded-sm hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold"
+          onClick={(event) => event.stopPropagation()}
+        >
+          {name}
+        </Link>
+      ) : (
+        name
+      )}
+    </h3>
+  );
+
+  const details = (
     <>
-      <PersonPhoto person={person} large={large} />
-      <h3 className={`mt-3 font-bold text-civic-blue leading-snug ${large ? "text-base" : "text-sm"}`}>
-        {name}
-      </h3>
+      {nameEl}
       <p className="mt-1 text-xs leading-snug text-muted-foreground [overflow-wrap:anywhere]">{designation}</p>
       {department ? <p className="mt-1 text-[11px] leading-snug text-civic-blue/80 [overflow-wrap:anywhere]">{department}</p> : null}
     </>
@@ -65,21 +85,24 @@ function PersonCard({
   if (!canOpen) {
     return (
       <article className="group flex h-full flex-col items-center text-center" lang={en ? "en" : "mr"}>
-        {body}
+        <PersonPhoto person={person} large={large} />
+        {details}
       </article>
     );
   }
 
   return (
-    <button
-      type="button"
-      lang={en ? "en" : "mr"}
-      className="group flex h-full w-full cursor-zoom-in flex-col items-center border-0 bg-transparent p-0 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-civic-blue rounded-xl"
-      aria-label={en ? `View photo of ${name}` : `${name} यांचे छायाचित्र पहा`}
-      onClick={() => onOpen(person)}
-    >
-      {body}
-    </button>
+    <article className="group flex h-full w-full flex-col items-center text-center" lang={en ? "en" : "mr"}>
+      <button
+        type="button"
+        className="cursor-zoom-in border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-civic-blue rounded-full"
+        aria-label={en ? `View photo of ${name}` : `${name} यांचे छायाचित्र पहा`}
+        onClick={() => onOpen(person)}
+      >
+        <PersonPhoto person={person} large={large} />
+      </button>
+      {details}
+    </article>
   );
 }
 

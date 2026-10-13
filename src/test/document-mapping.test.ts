@@ -279,10 +279,10 @@ describe("document mapping", () => {
     expect(readFileSync("src/lib/searchIndex.ts", "utf8")).toContain('href: "/public-documents?category=budget"');
   });
 
-  it("cross-lists the 337 public standing committee minutes by year without copying them", () => {
-    expect(standingCommitteeMinutes).toHaveLength(337);
+  it("cross-lists the 341 public standing committee minutes by year without copying them", () => {
+    expect(standingCommitteeMinutes).toHaveLength(341);
     const ids = standingCommitteeMinutes.map((doc) => doc.id);
-    expect(new Set(ids).size).toBe(337);
+    expect(new Set(ids).size).toBe(341);
     const covered = standingCommitteeYears.flatMap((year) =>
       standingCommitteeMinutes.filter((doc) => doc.year === year).map((doc) => doc.id),
     );
@@ -385,7 +385,7 @@ describe("document mapping", () => {
     expect(repository).toContain("documents: category.files");
     expect(repository).toContain("folderSegments: [ELECTION_INSIGHTS_ROOT, category.folder]");
     expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
-    expect(standingCommitteeMinutes).toHaveLength(337);
+    expect(standingCommitteeMinutes).toHaveLength(341);
     expect(repository).not.toContain("Needs Review");
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
@@ -443,7 +443,7 @@ describe("document mapping", () => {
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
     expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
-    expect(standingCommitteeMinutes).toHaveLength(337);
+    expect(standingCommitteeMinutes).toHaveLength(341);
     expect(electionInsightCategories.filter((category) => category.files.length > 0).flatMap((category) => category.files)).toHaveLength(141);
 
     const rtiPage = readFileSync("src/pages/site/RTIAct.tsx", "utf8");
@@ -493,7 +493,7 @@ describe("document mapping", () => {
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
     expect(repository.match(/id: "standing-committee"/g)).toHaveLength(1);
-    expect(standingCommitteeMinutes).toHaveLength(337);
+    expect(standingCommitteeMinutes).toHaveLength(341);
     expect(electionInsightCategories.filter((category) => category.files.length > 0).flatMap((category) => category.files)).toHaveLength(141);
     expect(rtiDocuments).toHaveLength(48);
     expect(RTI_OFFICERS_ORDER.id).toBe("rti-officers-order");
@@ -548,7 +548,7 @@ describe("document mapping", () => {
     expect(repository).not.toContain("Needs Review");
     expect(repository).not.toContain("Duplicate Review");
     expect(repository).not.toContain("/Tenders/");
-    expect(standingCommitteeMinutes).toHaveLength(337);
+    expect(standingCommitteeMinutes).toHaveLength(341);
     expect(electionInsightCategories.filter((category) => category.files.length > 0).flatMap((category) => category.files)).toHaveLength(141);
     expect(rtiDocuments).toHaveLength(48);
     expect(RTI_OFFICERS_ORDER.id).toBe("rti-officers-order");

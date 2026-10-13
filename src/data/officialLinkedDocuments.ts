@@ -2952,1009 +2952,1327 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
       "Tenders",
       "tender-notice-2025"
     ],
-    "headingEn": "Tender notices 2025",
-    "headingMr": "निविदा सूचना 2025",
+    "headingEn": "Tender notices 2025-26",
+    "headingMr": "निविदा सूचना 2025-26",
     "documents": [
       {
         "id": "tender-tender-notice-2025-1-swiming-pool-software-darpatrak-pdf",
         "file": "1_Swiming_Pool_software_Darpatrak.pdf",
         "bytes": 651131,
+        "department": "Swimming pool Dept.",
         "titleEn": "1 Swiming Pool software Darpatrak"
       },
       {
         "id": "tender-tender-notice-2025-2-maharana-pratap-jayant-darpatrak-pdf",
         "file": "2_Maharana_Pratap_Jayant_Darpatrak.pdf",
         "bytes": 462377,
+        "department": "Garden Department",
         "titleEn": "2 Maharana Pratap Jayant Darpatrak"
       },
       {
         "id": "tender-tender-notice-2025-bhandar-1-pdf",
         "file": "Bhandar-1.pdf",
         "bytes": 638816,
+        "department": "Store Department",
         "titleEn": "Bhandar-1"
       },
       {
         "id": "tender-tender-notice-2025-bhandar-3-pdf",
         "file": "Bhandar-3.pdf",
         "bytes": 495828,
+        "department": "Store Department",
         "titleEn": "Bhandar-3"
       },
       {
         "id": "tender-tender-notice-2025-bhandr-2-pdf",
         "file": "bhandr-2.pdf",
         "bytes": 1043779,
+        "department": "Store Department",
         "titleEn": "bhandr-2"
       },
       {
         "id": "tender-tender-notice-2025-chh-shivaji-maharaj-puran-vastu-sanghralay-darpatrk-suchna-pdf",
         "file": "Chh_Shivaji_Maharaj_Puran_Vastu_Sanghralay_Darpatrk_Suchna.pdf",
         "bytes": 589366,
+        "department": "Garden Department",
         "titleEn": "Chh Shivaji Maharaj Puran Vastu Sanghralay Darpatrk Suchna"
       },
       {
         "id": "tender-tender-notice-2025-city-engineer-dept-394-dt-03-02-2025-pdf",
         "file": "City_Engineer_Dept__394_dt_03_02_2025.pdf",
         "bytes": 701398,
+        "date": "2025-02-03",
+        "department": "City Engineer Department",
         "titleEn": "City Engineer Dept 394 dt 03 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-cultural-31-dt-27-08-2026-pdf",
         "file": "Cultural_31_dt_27_08_2026.pdf",
         "bytes": 1172039,
+        "date": "2026-08-27",
+        "department": "Cultural Department",
         "titleEn": "Cultural 31 dt 27 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-cultural-310-dt-27-08-2026-pdf",
         "file": "Cultural_310_Dt_27_08_2026.pdf",
         "bytes": 1018271,
+        "date": "2026-08-27",
+        "department": "Cultural Department",
         "titleEn": "Cultural 310 Dt 27 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-cultural-312-dt-27-08-2026-pdf",
         "file": "Cultural_312_dt_27_08_2026.pdf",
         "bytes": 873418,
+        "date": "2026-08-27",
+        "department": "Cultural Department",
         "titleEn": "Cultural 312 dt 27 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-cultural-313-dt-27-08-2026-pdf",
         "file": "Cultural_313_Dt__27_08_2026.pdf",
         "bytes": 664894,
+        "date": "2026-08-27",
+        "department": "Cultural Department",
         "titleEn": "Cultural 313 Dt 27 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-cultural-dept-286-dt-05-08-2026-pdf",
         "file": "Cultural_Dept_286_dt_05_08_2026.pdf",
         "bytes": 1076610,
+        "date": "2026-08-05",
+        "department": "Cultural Department",
         "titleEn": "Cultural Dept 286 dt 05 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-cultural-dept-287-dt-05-08-2026-pdf",
         "file": "Cultural_Dept_287_dt_05_08_2026.pdf",
         "bytes": 1076616,
+        "date": "2026-08-05",
+        "department": "Cultural Department",
         "titleEn": "Cultural Dept 287 dt 05 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-105-dt-24-07-2026-pdf",
         "file": "E-Tender_105_Dt_24_07_2026.pdf",
         "bytes": 572311,
+        "date": "2026-07-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 105 Dt 24 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-106-dt-30-07-2026-pdf",
         "file": "E-Tender_106_Dt_30_07_2026.pdf",
         "bytes": 816135,
+        "date": "2026-07-30",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 106 Dt 30 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-109-dt-16-07-2025-pdf",
         "file": "E-Tender_109_dt_16_07_2025.pdf",
         "bytes": 414059,
+        "date": "2025-07-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 109 dt 16 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-124-dt-21-07-2025-pdf",
         "file": "E-Tender_124_dt_21_07_2025.pdf",
         "bytes": 551444,
+        "date": "2025-07-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 124 dt 21 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-131-dt-12-08-2026-pdf",
         "file": "E-Tender_131_Dt_12_08_2026.pdf",
         "bytes": 759690,
+        "date": "2026-08-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 131 Dt 12 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-131-dt-20-08-2026-pdf",
         "file": "E-Tender_131_dt_20_08_2026.pdf",
         "bytes": 744419,
+        "date": "2026-08-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 131 dt 20 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-132-dt-27-08-2026-pdf",
         "file": "E-Tender_132_dt__27_08_2026.pdf",
         "bytes": 1201843,
+        "date": "2026-08-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 132 dt 27 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-133-dt-27-08-2026-pdf",
         "file": "E-Tender_133_dt_27_08_2026.pdf",
         "bytes": 835096,
+        "date": "2026-08-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 133 dt 27 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-136-dt-07-08-2026-pdf",
         "file": "E-Tender_136_dt__07_08_2026.pdf",
         "bytes": 506664,
+        "date": "2026-08-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 136 dt 07 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-136-dt-05-09-2026-pdf",
         "file": "E-Tender_136_Dt_05_09_2026.pdf",
         "bytes": 504359,
+        "date": "2026-09-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 136 Dt 05 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-137-dt-08-09-2026-pdf",
         "file": "E-Tender_137_dt_08_09_2026.pdf",
         "bytes": 2072548,
+        "date": "2026-09-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 137 dt 08 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-138dt-09-09-2026-pdf",
         "file": "E-Tender_138Dt_09_09_2026.pdf",
         "bytes": 761121,
+        "date": "2026-09-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 138Dt 09 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-141-dt-18-09-2026-pdf",
         "file": "E-Tender_141_dt_18_09_2026.pdf",
         "bytes": 1366423,
+        "date": "2026-09-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 141 dt 18 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-148-dt-29-07-2025-pdf",
         "file": "E-Tender_148_dt__29_07_2025.pdf",
         "bytes": 422015,
+        "date": "2025-07-29",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 148 dt 29 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-165-dt-04-08-2025-pdf",
         "file": "E-Tender_165_dt_04_08_2025.pdf",
         "bytes": 151966,
+        "date": "2025-08-04",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 165 dt 04 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-1679-dt-21-07-2025-pdf",
         "file": "E-Tender_1679_dt_21_07_2025.pdf",
         "bytes": 2312887,
+        "date": "2025-07-21",
+        "department": "Health Department",
         "titleEn": "E-Tender 1679 dt 21 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-20-dt-20-04-2026-pdf",
         "file": "E-Tender_20_dt_20_04_2026.pdf",
         "bytes": 274847,
+        "date": "2026-04-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 20 dt 20 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-214-dt-20-08-2025-pdf",
         "file": "E-Tender_214_dt_20_08_2025.pdf",
         "bytes": 621912,
+        "date": "2025-08-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 214 dt 20 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-220-dt-22-08-2025-pdf",
         "file": "E-Tender_220_dt_22_08_2025.pdf",
         "bytes": 538759,
+        "date": "2025-08-22",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 220 dt 22 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-227-dt-26-08-2025-pdf",
         "file": "E-Tender_227_dt_26_08_2025.pdf",
         "bytes": 443340,
+        "date": "2025-08-26",
+        "department": "Health Department",
         "titleEn": "E-Tender 227 dt 26 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-236-dt-03-09-2025-pdf",
         "file": "E-Tender_236_dt_03_09_2025.pdf",
         "bytes": 480375,
+        "date": "2025-09-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 236 dt 03 09 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-242-dt-04-09-2025-pdf",
         "file": "E-Tender_242_dt_04_09_2025.pdf",
         "bytes": 494193,
+        "date": "2025-09-04",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 242 dt 04 09 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-246-dt-12-09-2025-pdf",
         "file": "E-Tender_246_dt_12_09_2025.pdf",
         "bytes": 743059,
+        "date": "2025-09-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 246 dt 12 09 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-256-dt-18-09-2025-pdf",
         "file": "E-Tender_256_dt_18_09_2025.pdf",
         "bytes": 1037981,
+        "date": "2025-09-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 256 dt 18 09 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-29-dt-27-04-2026-pdf",
         "file": "E-Tender_29_dt_27_04_2026.pdf",
         "bytes": 224352,
+        "date": "2026-04-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 29 dt 27 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-362-dt-07-11-2025-pdf",
         "file": "E-Tender_362_dt_07_11_2025.pdf",
         "bytes": 731180,
+        "date": "2025-11-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 362 dt 07 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-378-dt-14-11-2025-pdf",
         "file": "E-Tender_378_dt_14_11_2025.pdf",
         "bytes": 617426,
+        "date": "2025-11-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 378 dt 14 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-413-dt-20-11-2025-pdf",
         "file": "E-Tender_413_dt_20_11_2025.pdf",
         "bytes": 504653,
+        "date": "2025-11-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 413 dt 20 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-431-dt-28-11-2025-pdf",
         "file": "E-Tender_431_dt_28_11_2025.pdf",
         "bytes": 510009,
+        "date": "2025-11-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 431 dt 28 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-439-dt-02-12-2025-pdf",
         "file": "E-Tender_439_dt_02_12_2025.pdf",
         "bytes": 434561,
+        "date": "2025-12-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 439 dt 02 12 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-444-dt-03-01-2025-pdf",
         "file": "E-Tender_444_dt_03_01_2025.pdf",
         "bytes": 140498,
+        "date": "2025-01-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 444 dt 03 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-463-dt-14-01-2025-pdf",
         "file": "E-Tender_463_dt_14_01_2025.pdf",
         "bytes": 834945,
+        "date": "2025-01-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 463 dt 14 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-471-dt-24-01-2025-pdf",
         "file": "E-Tender_471_dt_24_01_2025.pdf",
         "bytes": 675977,
+        "date": "2025-01-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 471 dt 24 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-485-dt-03-02-2025-pdf",
         "file": "E-Tender_485_dt_03_02_2025.pdf",
         "bytes": 507020,
+        "date": "2025-02-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 485 dt 03 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-493-dt-06-02-2025-pdf",
         "file": "E-Tender_493_dt_06_02_2025.pdf",
         "bytes": 439915,
+        "date": "2025-02-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 493 dt 06 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-516-dt-14-02-2025-pdf",
         "file": "E-Tender_516_dt_14_02_2025.pdf",
         "bytes": 777725,
+        "date": "2025-02-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 516 dt 14 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-539-dt-27-02-2026-pdf",
         "file": "E-Tender_539_dt_27_02_2026.pdf",
         "bytes": 533153,
+        "date": "2026-02-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 539 dt 27 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-541-dt-05-03-2025-pdf",
         "file": "E-Tender_541_dt_05_03_2025.pdf",
         "bytes": 685100,
+        "date": "2025-03-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 541 dt 05 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-546-06-03-2026-pdf",
         "file": "E-Tender_546_06_03_2026.pdf",
         "bytes": 172603,
+        "date": "2026-03-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 546 06 03 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-561-dt-18-03-2025-pdf",
         "file": "E-Tender_561_dt__18_03_2025.pdf",
         "bytes": 495465,
+        "date": "2025-03-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 561 dt 18 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-57-dt-03-06-2025-pdf",
         "file": "E-Tender_57_dt_03_06_2025.pdf",
         "bytes": 255119,
+        "date": "2025-06-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 57 dt 03 06 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-76-dt-10-07-2026-pdf",
         "file": "E-Tender_76_dt_10_07_2026.pdf",
         "bytes": 583965,
+        "date": "2026-07-10",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 76 dt 10 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-78-dt-20-06-2025-pdf",
         "file": "E-Tender_78_dt_20_06_2025.pdf",
         "bytes": 156296,
+        "date": "2025-06-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 78 dt 20 06 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-79-dt-24-06-2025-pdf",
         "file": "E-Tender_79_dt__24_06_2025.pdf",
         "bytes": 601394,
+        "date": "2025-06-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 79 dt 24 06 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-89-dt-17-07-2026-pdf",
         "file": "E-Tender_89_dt_17_07_2026.pdf",
         "bytes": 884126,
+        "date": "2026-07-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 89 dt 17 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-92-dt-03-07-2025-pdf",
         "file": "E-Tender_92_dt_03_07_2025.pdf",
         "bytes": 634989,
+        "date": "2025-07-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 92 dt 03 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-94-dt-07-07-2025-pdf",
         "file": "E-Tender_94_dt_07_07_2025.pdf",
         "bytes": 321674,
+        "date": "2025-07-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 94 dt 07 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-e-tender-98-dt-23-07-2026-pdf",
         "file": "E-Tender_98_dt_23_07_2026.pdf",
         "bytes": 802137,
+        "date": "2026-07-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 98 dt 23 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-ee-road-letter-02-pdf",
         "file": "EE_Road_Letter_02.pdf",
         "bytes": 402415,
+        "department": "Executive Engineer (Road)",
         "titleEn": "EE Road Letter 02"
       },
       {
         "id": "tender-tender-notice-2025-executive-engineer-136-dt-17-02-2025-pdf",
         "file": "Executive_Engineer_136_dt__17_02_2025.pdf",
         "bytes": 526506,
+        "date": "2025-02-17",
+        "department": "Executive Engineer (Road)",
         "titleEn": "Executive Engineer 136 dt 17 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-garden-251-dt-14-07-2026-pdf",
         "file": "Garden_251_Dt_14_07_2026.pdf",
         "bytes": 428760,
+        "date": "2026-07-14",
+        "department": "Garden Departement",
         "titleEn": "Garden 251 Dt 14 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-garden-311-dt-29-07-2026-pdf",
         "file": "GARDEN_311_Dt_29_07_2026.pdf",
         "bytes": 369152,
+        "date": "2026-07-29",
+        "department": "Health Department",
         "titleEn": "GARDEN 311 Dt 29 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-garden-478-dt-11-09-2026-pdf",
         "file": "Garden_478_dt_11_09_2026.pdf",
         "bytes": 313822,
+        "date": "2026-09-11",
+        "department": "Garden Department",
         "titleEn": "Garden 478 dt 11 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-garden-479-dt-11-09-2026-pdf",
         "file": "Garden_479_dt_11_09_2026.pdf",
         "bytes": 414144,
+        "date": "2026-09-11",
+        "department": "Garden Department",
         "titleEn": "Garden 479 dt 11 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-garden-715-dt-14-12-2025-pdf",
         "file": "Garden_715_dt_14_12_2025.pdf",
         "bytes": 728941,
+        "date": "2025-12-14",
+        "department": "Garden Department",
         "titleEn": "Garden 715 dt 14 12 2025"
       },
       {
         "id": "tender-tender-notice-2025-garden-716-dt-06-01-2025-pdf",
         "file": "Garden_716_dt_06_01_2025.pdf",
         "bytes": 1231409,
+        "date": "2025-01-06",
+        "department": "Garden Department",
         "titleEn": "Garden 716 dt 06 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-garden-797-dt-27-01-2026-pdf",
         "file": "Garden_797_dt_27_01_2026.pdf",
         "bytes": 751760,
+        "date": "2026-01-27",
+        "department": "Garden Department",
         "titleEn": "Garden 797 dt 27 01 2026"
       },
       {
         "id": "tender-tender-notice-2025-garden-824-dt-05-02-2026-pdf",
         "file": "Garden_824_dt_05_02_2026.pdf",
         "bytes": 279761,
+        "date": "2026-02-05",
+        "department": "Garden Department",
         "titleEn": "Garden 824 dt 05 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-garden-lilav-14-07-2026-pdf",
         "file": "Garden_Lilav-14_07_2026.pdf",
         "bytes": 463707,
+        "date": "2026-07-14",
+        "department": "Garden Department",
         "titleEn": "Garden Lilav-14 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-003-dt-01-01-2025-pdf",
         "file": "Health_003_dt__01_01_2025.pdf",
         "bytes": 2382147,
+        "date": "2025-01-01",
+        "department": "Health Department",
         "titleEn": "Health 003 dt 01 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-15-dt-08-04-2026-pdf",
         "file": "Health_15_dt_08_04_2026.pdf",
         "bytes": 853193,
+        "date": "2026-04-08",
+        "department": "Health Department",
         "titleEn": "Health 15 dt 08 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-1576-dt-07-07-2025-pdf",
         "file": "Health_1576_dt_07_07_2025.pdf",
         "bytes": 540709,
+        "date": "2025-07-07",
+        "department": "Health Department",
         "titleEn": "Health 1576 dt 07 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-1645-dt-14-07-20252-pdf",
         "file": "Health_1645_dt_14_07_20252.pdf",
         "bytes": 2723701,
+        "department": "Health Department",
         "titleEn": "Health 1645 dt 14 07 20252"
       },
       {
         "id": "tender-tender-notice-2025-health-1727-dt-24-07-2025-pdf",
         "file": "Health_1727_dt_24_07_2025.pdf",
         "bytes": 4013779,
+        "date": "2025-07-24",
+        "department": "Health Department",
         "titleEn": "Health 1727 dt 24 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-1753-dt-29-07-2025-pdf",
         "file": "Health_1753_dt_29_07_2025.pdf",
         "bytes": 762779,
+        "date": "2025-07-29",
+        "department": "Health Department",
         "titleEn": "Health 1753 dt 29 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-1754-dt-30-07-2025-pdf",
         "file": "Health_1754_dt_30_07_2025.pdf",
         "bytes": 2192845,
+        "date": "2025-07-30",
+        "department": "Health Department",
         "titleEn": "Health 1754 dt 30 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-179-dt-18-06-2026-pdf",
         "file": "Health_179_dt_18_06_2026.pdf",
         "bytes": 756796,
+        "date": "2026-06-18",
+        "department": "Health Department",
         "titleEn": "Health 179 dt 18 06 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-180-dt-09-01-2025-pdf",
         "file": "Health_180_dt_09_01_2025.pdf",
         "bytes": 641638,
+        "date": "2025-01-09",
+        "department": "Health Department",
         "titleEn": "Health 180 dt 09 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-190-dt-15-01-2025-pdf",
         "file": "Health_190_dt_15_01_2025.pdf",
         "bytes": 804423,
+        "date": "2025-01-15",
+        "department": "Health Department",
         "titleEn": "Health 190 dt 15 01 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-1927-dt-18-08-2028-pdf",
         "file": "Health_1927_dt_18_08_2028.pdf",
         "bytes": 2518542,
+        "date": "2028-08-18",
+        "department": "Health Department",
         "titleEn": "Health 1927 dt 18 08 2028"
       },
       {
         "id": "tender-tender-notice-2025-health-2212-dt-07-09-2026-pdf",
         "file": "Health_2212_Dt_07_09_2026.pdf",
         "bytes": 727991,
+        "date": "2026-09-07",
+        "department": "Health Department",
         "titleEn": "Health 2212 Dt 07 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-265-dt-14-02-2025-pdf",
         "file": "Health_265_dt_14_02_2025.pdf",
         "bytes": 1102336,
+        "date": "2025-02-14",
+        "department": "Health Department",
         "titleEn": "Health 265 dt 14 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-2763-dt-27-11-2025-pdf",
         "file": "Health_2763_dt_27_11_2025.pdf",
         "bytes": 676215,
+        "date": "2025-11-27",
+        "department": "Health Department",
         "titleEn": "Health 2763 dt 27 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-2917-dt-12-12-2025-pdf",
         "file": "Health_2917_dt_12_12_2025.pdf",
         "bytes": 5144484,
+        "date": "2025-12-12",
+        "department": "Health Department",
         "titleEn": "Health 2917 dt 12 12 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-293-dt-28-02-2025-pdf",
         "file": "Health_293_dt_28_02_2025.pdf",
         "bytes": 1065730,
+        "date": "2025-02-28",
+        "department": "Health Department",
         "titleEn": "Health 293 dt 28 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-307-dr-21-07-2025-pdf",
         "file": "Health_307_dr_21_07_2025.pdf",
         "bytes": 291513,
+        "date": "2025-07-21",
+        "department": "Health Department",
         "titleEn": "Health 307 dr 21 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-315-dt-12-02-2026-pdf",
         "file": "Health_315_dt_12_02_2026.pdf",
         "bytes": 2046098,
+        "date": "2026-02-12",
+        "department": "Health Department",
         "titleEn": "Health 315 dt 12 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-337-dt-20-07-2026-pdf",
         "file": "Health_337_dt_20_07_2026.pdf",
         "bytes": 523081,
+        "date": "2026-07-20",
+        "department": "Health Department Shudhipatrak",
         "titleEn": "Health 337 dt 20 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-350-dt-09-02-2026-pdf",
         "file": "Health_350_dt_09_02_2026.pdf",
         "bytes": 675445,
+        "date": "2026-02-09",
+        "department": "Health Department",
         "titleEn": "Health 350 dt 09 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-350-dt-28-07-2026-pdf",
         "file": "Health_350_dt_28_07_2026.pdf",
         "bytes": 5557158,
+        "date": "2026-07-28",
+        "department": "Health Department",
         "titleEn": "Health 350 dt 28 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-373-dt-25-08-2025-pdf",
         "file": "Health_373_dt_25_08_2025.pdf",
         "bytes": 731678,
+        "date": "2025-08-25",
+        "department": "Health Department",
         "titleEn": "Health 373 dt 25 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-374-dt-25-08-2025-pdf",
         "file": "Health_374_dt_25_08_2025.pdf",
         "bytes": 1230471,
+        "date": "2025-08-25",
+        "department": "Health Department",
         "titleEn": "Health 374 dt 25 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-422-dt-20-02-2026-pdf",
         "file": "Health_422_dt_20_02_2026.pdf",
         "bytes": 645384,
+        "date": "2026-02-20",
+        "department": "Health Department",
         "titleEn": "Health 422 dt 20 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-485-dt-27-02-2026-pdf",
         "file": "Health_485_dt_27_02_2026.pdf",
         "bytes": 1130643,
+        "date": "2026-02-27",
+        "department": "Health Department",
         "titleEn": "Health 485 dt 27 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-50-dt-23-04-20261-pdf",
         "file": "Health_50_dt_23_04_20261.pdf",
         "bytes": 586021,
+        "department": "Health Department",
         "titleEn": "Health 50 dt 23 04 20261"
       },
       {
         "id": "tender-tender-notice-2025-health-521-07-03-2025-pdf",
         "file": "Health_521_07_03_2025.pdf",
         "bytes": 2005009,
+        "date": "2025-03-07",
+        "department": "Health Department",
         "titleEn": "Health 521 07 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-523-07-03-2025-pdf",
         "file": "Health_523_07_03_2025.pdf",
         "bytes": 3377451,
+        "date": "2025-03-07",
+        "department": "Health Department",
         "titleEn": "Health 523 07 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-574-dt-13-03-2025-pdf",
         "file": "Health_574_dt_13_03_2025.pdf",
         "bytes": 1886433,
+        "date": "2025-03-13",
+        "department": "Health Department",
         "titleEn": "Health 574 dt 13 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-675-dt-29-03-2025-pdf",
         "file": "Health_675_dt_29_03_2025.pdf",
         "bytes": 964346,
+        "date": "2025-03-29",
+        "department": "Health Department",
         "titleEn": "Health 675 dt 29 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-68-dt-24-03-2025-pdf",
         "file": "Health_68_dt_24_03_2025.pdf",
         "bytes": 947677,
+        "date": "2025-03-24",
+        "department": "Health Department",
         "titleEn": "Health 68 dt 24 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-701-dt-25-03-2025-pdf",
         "file": "Health_701_dt__25_03_2025.pdf",
         "bytes": 3925198,
+        "date": "2025-03-25",
+        "department": "Health Department",
         "titleEn": "Health 701 dt 25 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-730-dt-26-03-2025-pdf",
         "file": "Health_730_dt_26_03_2025.pdf",
         "bytes": 1411881,
+        "date": "2025-03-26",
+        "department": "Health Department",
         "titleEn": "Health 730 dt 26 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-health-796-dt-07-04-2026-pdf",
         "file": "Health_796_dt_07_04_2026.pdf",
         "bytes": 3230663,
+        "date": "2026-04-07",
+        "department": "Health Department",
         "titleEn": "Health 796 dt 07 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-817-dt-29-01-2026-pdf",
         "file": "Health_817_dt_29_01_2026.pdf",
         "bytes": 644383,
+        "date": "2026-01-29",
+        "department": "Health Department",
         "titleEn": "Health 817 dt 29 01 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-894-dt-23-02-2026-pdf",
         "file": "Health_894_dt_23_02_2026.pdf",
         "bytes": 6194392,
+        "date": "2026-02-23",
+        "department": "Health Department",
         "titleEn": "Health 894 dt 23 02 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-926-04-03-2026-pdf",
         "file": "Health_926_04_03_2026.pdf",
         "bytes": 199062,
+        "date": "2026-03-04",
+        "department": "Health Department",
         "titleEn": "Health 926 04 03 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-nuhm-233-dt-09-07-2026-pdf",
         "file": "Health_NUHM_233_Dt_09_07_2026.pdf",
         "bytes": 1090089,
+        "date": "2026-07-09",
+        "department": "Health Department",
         "titleEn": "Health NUHM 233 Dt 09 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-nuhm-325-dt-15-07-2026-pdf",
         "file": "Health_NUHM_325_Dt_15_07_2026.pdf",
         "bytes": 872455,
+        "date": "2026-07-15",
+        "department": "Health Department",
         "titleEn": "Health NUHM 325 Dt 15 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-health-pcpndt-2543-dt-30-10-2025-pdf",
         "file": "Health_PCPNDT_2543_dt__30_10_2025.pdf",
         "bytes": 2320392,
+        "date": "2025-10-30",
+        "department": "Health Department",
         "titleEn": "Health PCPNDT 2543 dt 30 10 2025"
       },
       {
         "id": "tender-tender-notice-2025-krida-sahitya-darpatrak-pdf",
         "file": "krida_sahitya_darpatrak.pdf",
         "bytes": 999100,
+        "department": "Sports Department",
         "titleEn": "krida sahitya darpatrak"
       },
       {
         "id": "tender-tender-notice-2025-nit-11-09-2026-pdf",
         "file": "NIT-11_09_2026.pdf",
         "bytes": 1422093,
+        "department": "E-Tender Department",
         "titleEn": "NIT-11 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-quotation-notice-disaster-managemen-unit-csmc-pdf",
         "file": "Quotation_Notice_Disaster_Managemen_Unit_CSMC.pdf",
         "bytes": 211691,
+        "department": "Disaster Managemen Unit",
         "titleEn": "Quotation Notice Disaster Managemen Unit CSMC"
       },
       {
         "id": "tender-tender-notice-2025-siddhart-jaltaran-talaw-pdf",
         "file": "siddhart_jaltaran_talaw.pdf",
         "bytes": 1364555,
+        "department": "Siddharth Swimming Pool",
         "titleEn": "siddhart jaltaran talaw"
       },
       {
         "id": "tender-tender-notice-2025-sidharth-jaltaran-pdf",
         "file": "sidharth_jaltaran.pdf",
         "bytes": 648808,
+        "department": "Siddharth Swimming Pool",
         "titleEn": "sidharth jaltaran"
       },
       {
         "id": "tender-tender-notice-2025-sport-64-dt-06-7-2026-pdf",
         "file": "Sport_64_Dt_06_7_2026.pdf",
         "bytes": 987198,
+        "date": "2026-07-06",
+        "department": "Sports Department",
         "titleEn": "Sport 64 Dt 06 7 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-01-dt-04-04-2026-pdf",
         "file": "Store_01_Dt_04_04_2026.pdf",
         "bytes": 407232,
+        "date": "2026-04-04",
+        "department": "Store Department",
         "titleEn": "Store 01 Dt 04 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-02-dt-08-04-2026-pdf",
         "file": "Store_02_Dt_08_04_2026.pdf",
         "bytes": 151343,
+        "date": "2026-04-08",
+        "department": "Store Department",
         "titleEn": "Store 02 Dt 08 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-03-dt-08-04-2026-pdf",
         "file": "Store_03_dt_08_04_2026.pdf",
         "bytes": 534276,
+        "date": "2026-04-08",
+        "department": "Store Department",
         "titleEn": "Store 03 dt 08 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-04-dt-08-04-2026-pdf",
         "file": "Store_04_dt_08_04_2026.pdf",
         "bytes": 565137,
+        "date": "2026-04-08",
+        "department": "Store Department",
         "titleEn": "Store 04 dt 08 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-06-dt-21-04-2026-pdf",
         "file": "Store_06_dt_21_04_2026.pdf",
         "bytes": 5574946,
+        "date": "2026-04-21",
+        "department": "Store Department",
         "titleEn": "Store 06 dt 21 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-07-dt-21-04-2026-pdf",
         "file": "Store_07_dt_21_04_2026.pdf",
         "bytes": 644139,
+        "date": "2026-04-21",
+        "department": "Store Department",
         "titleEn": "Store 07 dt 21 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-08-dt-21-04-2026-pdf",
         "file": "Store_08_dt_21_04_2026.pdf",
         "bytes": 624275,
+        "date": "2026-04-21",
+        "department": "Store Department",
         "titleEn": "Store 08 dt 21 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-09-dt-22-04-2026-pdf",
         "file": "Store_09_dt_22_04_2026.pdf",
         "bytes": 641828,
+        "date": "2026-04-22",
+        "department": "Store Department",
         "titleEn": "Store 09 dt 22 04 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-126-dt-27-02-2025-pdf",
         "file": "Store_126_dt_27_02_2025.pdf",
         "bytes": 520677,
+        "date": "2025-02-27",
+        "department": "Store Department",
         "titleEn": "Store 126 dt 27 02 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-136-dt-07-03-2025-pdf",
         "file": "Store_136_dt_07_03_2025.pdf",
         "bytes": 512948,
+        "date": "2025-03-07",
+        "department": "Store Department",
         "titleEn": "Store 136 dt 07 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-14-dt-13-05-2026-pdf",
         "file": "Store_14_dt_13_05_2026.pdf",
         "bytes": 503168,
+        "date": "2026-05-13",
+        "department": "Store Department",
         "titleEn": "Store 14 dt 13 05 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-140-dt-12-03-2025-pdf",
         "file": "Store_140_dt_12_03_2025.pdf",
         "bytes": 682132,
+        "date": "2025-03-12",
+        "department": "Store Department",
         "titleEn": "Store 140 dt 12 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-145-dt-25-03-2025-pdf",
         "file": "Store_145_dt_25_03_2025.pdf",
         "bytes": 387340,
+        "date": "2025-03-25",
+        "department": "Store Department",
         "titleEn": "Store 145 dt 25 03 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-15-dt-28-05-2025-pdf",
         "file": "Store_15_dt_28_05_2025.pdf",
         "bytes": 122173,
+        "date": "2025-05-28",
+        "department": "Store Department",
         "titleEn": "Store 15 dt 28 05 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-20-dt-19-06-2025-pdf",
         "file": "store_20_dt_19_06_2025.pdf",
         "bytes": 286545,
+        "date": "2025-06-19",
+        "department": "Store Department",
         "titleEn": "store 20 dt 19 06 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-29-dt-06-07-2026-pdf",
         "file": "Store_29_Dt_06_07_2026.pdf",
         "bytes": 2065437,
+        "date": "2026-07-06",
+        "department": "Store Department",
         "titleEn": "Store 29 Dt 06 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-29-dt-23-07-2025-pdf",
         "file": "Store_29_dt_23_07_2025.pdf",
         "bytes": 914178,
+        "date": "2025-07-23",
+        "department": "Store Department",
         "titleEn": "Store 29 dt 23 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-30-dt-23-07-2025-pdf",
         "file": "Store_30_dt__23_07_2025.pdf",
         "bytes": 914178,
+        "date": "2025-07-23",
+        "department": "Store Department",
         "titleEn": "Store 30 dt 23 07 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-31-dt-06-07-2026-pdf",
         "file": "Store_31_Dt_06_07_2026.pdf",
         "bytes": 790731,
+        "date": "2026-07-06",
+        "department": "Store Department",
         "titleEn": "Store 31 Dt 06 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-32-dt-06-07-2026-pdf",
         "file": "Store_32_Dt_06_07_2026.pdf",
         "bytes": 577521,
+        "date": "2026-07-06",
+        "department": "Store Department",
         "titleEn": "Store 32 Dt 06 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-32-dt-19-08-2025-pdf",
         "file": "Store_32_dt_19_08_2025.pdf",
         "bytes": 587920,
+        "date": "2025-08-19",
+        "department": "Health Department",
         "titleEn": "Store 32 dt 19 08 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-34-dt-07-07-2026-pdf",
         "file": "Store_34_dt_07_07_2026.pdf",
         "bytes": 375182,
+        "date": "2026-07-07",
+        "department": "Store Department",
         "titleEn": "Store 34 dt 07 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-35-dt-09-07-2026-pdf",
         "file": "Store_35_dt_09_07_2026.pdf",
         "bytes": 704152,
+        "date": "2026-07-09",
+        "department": "Store Department",
         "titleEn": "Store 35 dt 09 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-38-dt-10-07-2026-pdf",
         "file": "Store_38_Dt_10_07_2026.pdf",
         "bytes": 288712,
+        "date": "2026-07-10",
+        "department": "Store Department",
         "titleEn": "Store 38 Dt 10 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-42-dt-08-10-2025-pdf",
         "file": "Store_42_dt_08_10_2025.pdf",
         "bytes": 530252,
+        "date": "2025-10-08",
+        "department": "Store Department",
         "titleEn": "Store 42 dt 08 10 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-43-dt-09-10-2025-pdf",
         "file": "Store_43_dt_09_10_2025.pdf",
         "bytes": 1901618,
+        "date": "2025-10-09",
+        "department": "Store Department",
         "titleEn": "Store 43 dt 09 10 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-44-dt-20-07-2026-pdf",
         "file": "Store_44_dt__20_07_2026.pdf",
         "bytes": 713237,
+        "date": "2026-07-20",
+        "department": "Store Department",
         "titleEn": "Store 44 dt 20 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-44-dt-14-10-2025-pdf",
         "file": "Store_44_dt_14_10_2025.pdf",
         "bytes": 1345824,
+        "date": "2025-10-14",
+        "department": "Store Department",
         "titleEn": "Store 44 dt 14 10 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-45-dt-21-07-2026-pdf",
         "file": "Store_45_dt_21_07_2026.pdf",
         "bytes": 753500,
+        "date": "2026-07-21",
+        "department": "Store Department",
         "titleEn": "Store 45 dt 21 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-49-dt-24-07-2026-pdf",
         "file": "Store_49_Dt_24_07_2026.pdf",
         "bytes": 732765,
+        "date": "2026-07-24",
+        "department": "Store Department",
         "titleEn": "Store 49 Dt 24 07 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-50-dt-24-7-2026-pdf",
         "file": "Store_50_Dt_24_7_2026.pdf",
         "bytes": 578633,
+        "date": "2026-07-24",
+        "department": "Store Department",
         "titleEn": "Store 50 Dt 24 7 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-51-dt-29-10-2025-pdf",
         "file": "Store_51_dt_29_10_2025.pdf",
         "bytes": 1027875,
+        "date": "2025-10-29",
+        "department": "Store Department",
         "titleEn": "Store 51 dt 29 10 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-51-dt-30-10-2025-pdf",
         "file": "Store_51_dt_30_10_2025.pdf",
         "bytes": 562280,
+        "date": "2025-10-30",
+        "department": "Store Department",
         "titleEn": "Store 51 dt 30 10 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-55-dt-04-11-2025-pdf",
         "file": "Store_55_dt_04_11_2025.pdf",
         "bytes": 646748,
+        "date": "2025-11-04",
+        "department": "Store Department",
         "titleEn": "Store 55 dt 04 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-59-dt-17-08-2026-pdf",
         "file": "Store_59_dt_17_08_2026.pdf",
         "bytes": 647341,
+        "date": "2026-08-17",
+        "department": "Store Department",
         "titleEn": "Store 59 dt 17 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-61-dt-20-11-2025-pdf",
         "file": "Store_61_dt_20_11_2025.pdf",
         "bytes": 2354089,
+        "date": "2025-11-20",
+        "department": "Store Department",
         "titleEn": "Store 61 dt 20 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-65-dt-01-09-2026-pdf",
         "file": "Store_65_dt_01_09_2026.pdf",
         "bytes": 585697,
+        "date": "2026-09-01",
+        "department": "Store Department",
         "titleEn": "Store 65 dt 01 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-65-dt-24-11-2025-pdf",
         "file": "Store_65_dt_24_11_2025.pdf",
         "bytes": 1938673,
+        "date": "2025-11-24",
+        "department": "Store Department",
         "titleEn": "Store 65 dt 24 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-66-dt-25-11-2025-pdf",
         "file": "Store_66_dt_25_11_2025.pdf",
         "bytes": 2895841,
+        "date": "2025-11-25",
+        "department": "Store Department",
         "titleEn": "Store 66 dt 25 11 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-68-dt-10-09-2026-pdf",
         "file": "Store_68_dt_10_09_2026.pdf",
         "bytes": 901167,
+        "date": "2026-09-10",
+        "department": "Store Department",
         "titleEn": "Store 68 dt 10 09 2026"
       },
       {
         "id": "tender-tender-notice-2025-store-69-dt-05-12-2025-pdf",
         "file": "Store_69_dt_05_12_2025.pdf",
         "bytes": 811095,
+        "date": "2025-12-05",
+        "department": "Store Department",
         "titleEn": "Store 69 dt 05 12 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-72-dt-09-12-2025-pdf",
         "file": "Store_72_dt_09_12_2025.pdf",
         "bytes": 545290,
+        "date": "2025-12-09",
+        "department": "Store Department",
         "titleEn": "Store 72 dt 09 12 2025"
       },
       {
         "id": "tender-tender-notice-2025-store-75-dt-12-12-2025-pdf",
         "file": "Store_75_dt_12_12_2025.pdf",
         "bytes": 778407,
+        "date": "2025-12-12",
+        "department": "Store Department",
         "titleEn": "Store 75 dt 12 12 2025"
       },
       {
         "id": "tender-tender-notice-2025-swimming-53-dt-25-06-2026-pdf",
         "file": "Swimming_53_dt_25_06_2026.pdf",
         "bytes": 533294,
+        "date": "2026-06-25",
+        "department": "Swimming Pool Dept",
         "titleEn": "Swimming 53 dt 25 06 2026"
       },
       {
         "id": "tender-tender-notice-2025-swimming-pool-28-dt-22-05-2026-pdf",
         "file": "Swimming_Pool_28_dt_22_05_2026.pdf",
         "bytes": 772854,
+        "date": "2026-05-22",
+        "department": "Swimming pool Dept.",
         "titleEn": "Swimming Pool 28 dt 22 05 2026"
       },
       {
         "id": "tender-tender-notice-2025-swimming-pool-software-pdf",
         "file": "swimming_pool_software.pdf",
         "bytes": 582319,
+        "department": "Swimming Pool",
         "titleEn": "swimming pool software"
       },
       {
         "id": "tender-tender-notice-2025-syp-cough-mixture-tender-notice-pdf",
         "file": "Syp_Cough_Mixture_Tender_Notice.pdf",
         "bytes": 902210,
+        "department": "E-Tender Department",
         "titleEn": "Syp Cough Mixture Tender Notice"
       },
       {
         "id": "tender-tender-notice-2025-tourism-104-dt-19-08-2026-pdf",
         "file": "Tourism_104_dt_19_08_2026.pdf",
         "bytes": 226813,
+        "date": "2026-08-19",
+        "department": "Tourism Department",
         "titleEn": "Tourism 104 dt 19 08 2026"
       },
       {
         "id": "tender-tender-notice-2025-tourism-84-dt-23-07-2026-pdf",
         "file": "Tourism_84_Dt_23_07_2026.pdf",
         "bytes": 473040,
+        "date": "2026-07-23",
+        "department": "Tourism Department",
         "titleEn": "Tourism 84 Dt 23 07 2026"
       }
     ]
@@ -3972,510 +4290,679 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-notice-2024-dmc-6-15-dt-07-03-2024-pdf",
         "file": "DMC-6_15_dt__07_03_2024.pdf",
         "bytes": 51436,
+        "date": "2024-03-07",
+        "department": "Mahila Bal Kalyan Department",
         "titleEn": "DMC-6 15 dt 07 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-dmc-6-16-dt-08-03-2024-pdf",
         "file": "DMC-6_16_DT_08_03_2024.pdf",
         "bytes": 52027,
+        "date": "2024-03-08",
+        "department": "Mahila Bal Kalyan Department",
         "titleEn": "DMC-6 16 DT 08 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-07-dt-21-06-2024-pdf",
         "file": "E-Tender_07_dt__21_06_2024.pdf",
         "bytes": 232696,
+        "date": "2024-06-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 07 dt 21 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-107-dt-07-08-2024-pdf",
         "file": "E-Tender_107_dt_07_08_2024.pdf",
         "bytes": 197961,
+        "date": "2024-08-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 107 dt 07 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-110-dt-09-08-2024-pdf",
         "file": "E-Tender_110_dt__09_08_2024.pdf",
         "bytes": 237715,
+        "date": "2024-08-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 110 dt 09 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-125-dt-16-08-2024-pdf",
         "file": "E-Tender_125_dt_16_08_2024.pdf",
         "bytes": 645284,
+        "date": "2024-08-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 125 dt 16 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-1323-dt-15-01-2024-pdf",
         "file": "E-Tender_1323_dt__15_01_2024.pdf",
         "bytes": 35886,
+        "date": "2024-01-15",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1323 dt 15 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-1332-dt-19-01-2024-pdf",
         "file": "E-Tender_1332_dt__19_01_2024.pdf",
         "bytes": 58585,
+        "date": "2024-01-19",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1332 dt 19 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-1379-dt-16-02-2024-pdf",
         "file": "E-Tender_1379_dt__16_02_2024.pdf",
         "bytes": 56204,
+        "date": "2024-02-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1379 dt 16 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-1383-dt-17-02-2024-pdf",
         "file": "E-Tender_1383_dt__17_02_2024.pdf",
         "bytes": 58859,
+        "date": "2024-02-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1383 dt 17 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-1392-dt-26-02-2024-pdf",
         "file": "E-Tender_1392_dt__26_02_2024.pdf",
         "bytes": 69385,
+        "date": "2024-02-26",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1392 dt 26 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-1403-dt-01-03-2024-pdf",
         "file": "E-Tender_1403_dt__01_03_2024.pdf",
         "bytes": 89945,
+        "date": "2024-03-01",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1403 dt 01 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-168-dt-30-08-2024-pdf",
         "file": "E-Tender_168_dt_30_08_2024.pdf",
         "bytes": 441136,
+        "date": "2024-08-30",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 168 dt 30 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-17-dt-28-06-2024-pdf",
         "file": "E-Tender_17_dt__28_06_2024.pdf",
         "bytes": 1917182,
+        "date": "2024-06-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 17 dt 28 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-180-dt-06-09-2024-pdf",
         "file": "E-Tender_180_dt__06_09_2024.pdf",
         "bytes": 1371415,
+        "date": "2024-09-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 180 dt 06 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-206-dt-24-09-2024-pdf",
         "file": "E-Tender_206_dt_24_09_2024.pdf",
         "bytes": 319899,
+        "date": "2024-09-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 206 dt 24 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-302-dt-01-10-2024-pdf",
         "file": "E-Tender_302_dt_01_10_2024.pdf",
         "bytes": 230503,
+        "date": "2024-10-01",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 302 dt 01 10 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-335-dt-08-10-2024-pdf",
         "file": "E-Tender_335_dt_08_10_2024.pdf",
         "bytes": 1484583,
+        "date": "2024-10-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 335 dt 08 10 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-340-dt-09-10-2024-pdf",
         "file": "E-Tender_340_dt__09_10_2024.pdf",
         "bytes": 353484,
+        "date": "2024-10-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 340 dt 09 10 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-36-dt-09-07-2024-pdf",
         "file": "E-Tender_36_dt_09_07_2024.pdf",
         "bytes": 131455,
+        "date": "2024-07-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 36 dt 09 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-377-dt-04-12-2024-pdf",
         "file": "E-Tender_377_dt_04_12_2024.pdf",
         "bytes": 588762,
+        "date": "2024-12-04",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 377 dt 04 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-428-dt-26-12-2024-pdf",
         "file": "E-Tender_428_dt_26_12_2024.pdf",
         "bytes": 463142,
+        "date": "2024-12-26",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 428 dt 26 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-45-dt-17-07-2024-pdf",
         "file": "E-Tender_45_dt__17_07_2024.pdf",
         "bytes": 479558,
+        "date": "2024-07-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 45 dt 17 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-53-dt-09-09-2024-pdf",
         "file": "E-Tender_53_dt_09_09_2024.pdf",
         "bytes": 148577,
+        "date": "2024-09-09",
+        "department": "Store Department",
         "titleEn": "E-Tender 53 dt 09 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-65-dt-26-07-2024-pdf",
         "file": "E-Tender_65_dt_26_07_2024.pdf",
         "bytes": 264328,
+        "date": "2024-07-26",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 65 dt 26 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-e-tender-95-dt-02-08-2024-pdf",
         "file": "E-Tender_95_dt__02_08_2024.pdf",
         "bytes": 722903,
+        "date": "2024-08-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 95 dt 02 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-ee-mech-135-dt-24-07-2024-pdf",
         "file": "EE_Mech__135_dt_24_07_2024.pdf",
         "bytes": 926485,
+        "date": "2024-07-24",
+        "department": "Executive Engineer Mechanical Dept.",
         "titleEn": "EE Mech 135 dt 24 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-ee-road-117-dt-26-11-2024-pdf",
         "file": "EE_Road_117_dt_26_11_2024.pdf",
         "bytes": 247501,
+        "date": "2024-11-26",
+        "department": "Executive Engineer Roads",
         "titleEn": "EE Road 117 dt 26 11 2024"
       },
       {
         "id": "tender-tender-notice-2024-executive-engineer-mechanical-pdf",
         "file": "Executive_Engineer_Mechanical.pdf",
         "bytes": 1696068,
+        "department": "Executive Engineer Mechanical",
         "titleEn": "Executive Engineer Mechanical"
       },
       {
         "id": "tender-tender-notice-2024-garden-1099-dt-25-01-2024-pdf",
         "file": "Garden_1099_dt__25_01_2024.pdf",
         "bytes": 499271,
+        "date": "2024-01-25",
+        "department": "Garden Department",
         "titleEn": "Garden 1099 dt 25 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-120-dt-12-01-2024-pdf",
         "file": "Health_120_dt__12_01_2024.pdf",
         "bytes": 70972,
+        "date": "2024-01-12",
+        "department": "Health Department",
         "titleEn": "Health 120 dt 12 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-183-dt-23-01-2024-pdf",
         "file": "Health_183_dt__23_01_2024.pdf",
         "bytes": 66420,
+        "date": "2024-01-23",
+        "department": "Health Department",
         "titleEn": "Health 183 dt 23 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-1909-dt-23-07-2024-pdf",
         "file": "Health_1909_dt_23_07_2024.pdf",
         "bytes": 719116,
+        "date": "2024-07-23",
+        "department": "Health Department",
         "titleEn": "Health 1909 dt 23 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-1911-dt-23-07-2024-pdf",
         "file": "Health_1911_dt__23_07_2024.pdf",
         "bytes": 700637,
+        "date": "2024-07-23",
+        "department": "Health Department",
         "titleEn": "Health 1911 dt 23 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-221-dt-25-01-2024-pdf",
         "file": "Health_221_dt__25_01_2024.pdf",
         "bytes": 425460,
+        "date": "2024-01-25",
+        "department": "Health Department",
         "titleEn": "Health 221 dt 25 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-229-dt-19-06-2024-pdf",
         "file": "Health_229_dt__19_06_2024.pdf",
         "bytes": 600687,
+        "date": "2024-06-19",
+        "department": "Health Department",
         "titleEn": "Health 229 dt 19 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-230-dt-19-06-2024-pdf",
         "file": "Health_230_dt_19_06_2024.pdf",
         "bytes": 598891,
+        "date": "2024-06-19",
+        "department": "Health Department",
         "titleEn": "Health 230 dt 19 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2427-d-t-26-08-2024-pdf",
         "file": "health_2427_d_t_26_08_2024.pdf",
         "bytes": 278028,
+        "date": "2024-08-26",
+        "department": "Health Department",
         "titleEn": "health 2427 d t 26 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2430-d-t-26-08-2024-pdf",
         "file": "health_2430_d_t_26_08_2024.pdf",
         "bytes": 278169,
+        "date": "2024-08-26",
+        "department": "Health Department",
         "titleEn": "health 2430 d t 26 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2446-d-t-27-08-2024-pdf",
         "file": "health_2446_d_t_27_08_2024.pdf",
         "bytes": 679149,
+        "date": "2024-08-27",
+        "department": "Health Department",
         "titleEn": "health 2446 d t 27 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2628-dt-18-09-2024-pdf",
         "file": "Health_2628_dt_18_09_2024.pdf",
         "bytes": 881046,
+        "date": "2024-09-18",
+        "department": "Health Department",
         "titleEn": "Health 2628 dt 18 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2684-dt-25-09-2024-pdf",
         "file": "Health_2684_dt_25_09_2024.pdf",
         "bytes": 359739,
+        "date": "2024-09-25",
+        "department": "Health Department",
         "titleEn": "Health 2684 dt 25 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2746-dt-30-09-2024-pdf",
         "file": "Health_2746_dt_30_09_2024.pdf",
         "bytes": 2988466,
+        "date": "2024-09-30",
+        "department": "Health Department",
         "titleEn": "Health 2746 dt 30 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2765-dt-01-10-2024-pdf",
         "file": "Health_2765_dt_01_10_2024.pdf",
         "bytes": 1385383,
+        "date": "2024-10-01",
+        "department": "Health Department",
         "titleEn": "Health 2765 dt 01 10 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-281-dt-02-02-2024-pdf",
         "file": "Health_281_dt__02_02_2024.pdf",
         "bytes": 81622,
+        "date": "2024-02-02",
+        "department": "Health Department",
         "titleEn": "Health 281 dt 02 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2858-dt-09-10-2024-pdf",
         "file": "Health_2858_dt_09_10_2024.pdf",
         "bytes": 1168740,
+        "date": "2024-10-09",
+        "department": "Health Departement",
         "titleEn": "Health 2858 dt 09 10 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-2921-dt-14-10-2024-pdf",
         "file": "Health_2921_dt_14_10_2024.pdf",
         "bytes": 2538073,
+        "date": "2024-10-14",
+        "department": "Health Departement",
         "titleEn": "Health 2921 dt 14 10 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-3272-dt-03-12-2024-pdf",
         "file": "Health_3272_dt_03_12_2024.pdf",
         "bytes": 733446,
+        "date": "2024-12-03",
+        "department": "Health Department",
         "titleEn": "Health 3272 dt 03 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-3280-dt-03-12-2024-pdf",
         "file": "Health_3280_dt_03_12_2024.pdf",
         "bytes": 1505094,
+        "date": "2024-12-03",
+        "department": "Health Department",
         "titleEn": "Health 3280 dt 03 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-3404-dt-26-12-2024-pdf",
         "file": "Health_3404_dt_26_12_2024.pdf",
         "bytes": 710422,
+        "date": "2024-12-26",
+        "department": "Health Department",
         "titleEn": "Health 3404 dt 26 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-378-12-02-2024-pdf",
         "file": "Health_378_12_02_2024.pdf",
         "bytes": 1843080,
+        "date": "2024-02-12",
+        "department": "Health Department",
         "titleEn": "Health 378 12 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-461-dt-20-02-2024-pdf",
         "file": "Health_461_dt__20_02_2024.pdf",
         "bytes": 6546251,
+        "date": "2024-02-20",
+        "department": "Health Department",
         "titleEn": "Health 461 dt 20 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-464-dt-20-02-2024-pdf",
         "file": "Health_464_dt__20_02_2024.pdf",
         "bytes": 461160,
+        "date": "2024-02-20",
+        "department": "Health Department",
         "titleEn": "Health 464 dt 20 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-580-dt-04-03-2024-pdf",
         "file": "Health_580_dt_04_03_2024.pdf",
         "bytes": 78426,
+        "date": "2024-03-04",
+        "department": "Health Department",
         "titleEn": "Health 580 dt 04 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-81-07-03-2024-pdf",
         "file": "Health_81_07_03_2024.pdf",
         "bytes": 1431954,
+        "date": "2024-03-07",
+        "department": "Health Department",
         "titleEn": "Health 81 07 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-health-84-dt-09-01-2024-pdf",
         "file": "Health_84_dt__09_01_2024.pdf",
         "bytes": 438254,
+        "date": "2024-01-09",
+        "department": "Health Department",
         "titleEn": "Health 84 dt 09 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-health168-d-t-19-01-2024-pdf",
         "file": "health168_d_t__19_01_2024.pdf",
         "bytes": 441069,
+        "date": "2024-01-19",
+        "department": "Health Department",
         "titleEn": "health168 d t 19 01 2024"
       },
       {
         "id": "tender-tender-notice-2024-heath-628-dt-11-03-2024-pdf",
         "file": "Heath_628_dt_11_03_2024.pdf",
         "bytes": 423352,
+        "date": "2024-03-11",
+        "department": "Health Department",
         "titleEn": "Heath 628 dt 11 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-shuddhipatrak-health-1947-dt-29-07-2024-pdf",
         "file": "Shuddhipatrak_Health_1947_dt_29_07_2024.pdf",
         "bytes": 394190,
+        "date": "2024-07-29",
+        "department": "Health Department",
         "titleEn": "Shuddhipatrak Health 1947 dt 29 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-105-dt-14-02-2024-pdf",
         "file": "Store_105_dt__14_02_2024.pdf",
         "bytes": 47848,
+        "date": "2024-02-14",
+        "department": "Store Department",
         "titleEn": "Store 105 dt 14 02 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-105-dt-31-12-2024-pdf",
         "file": "Store_105_dt_31_12_2024.pdf",
         "bytes": 276360,
+        "date": "2024-12-31",
+        "department": "Store Department",
         "titleEn": "Store 105 dt 31 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-17-dt-07-06-2024-pdf",
         "file": "Store_17_dt_07_06_2024.pdf",
         "bytes": 651864,
+        "date": "2024-06-07",
+        "department": "Store Department",
         "titleEn": "Store 17 dt 07 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-18-dt-07-06-2024-pdf",
         "file": "Store_18_dt_07_06_2024.pdf",
         "bytes": 652417,
+        "date": "2024-06-07",
+        "department": "Store Department",
         "titleEn": "Store 18 dt 07 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-21-dt-18-06-2024-pdf",
         "file": "Store_21_dt__18_06_2024.pdf",
         "bytes": 759620,
+        "date": "2024-06-18",
+        "department": "Store Department",
         "titleEn": "Store 21 dt 18 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-22-dt-25-06-2024-pdf",
         "file": "Store_22_dt__25_06_2024.pdf",
         "bytes": 915539,
+        "date": "2024-06-25",
+        "department": "Store Department",
         "titleEn": "Store 22 dt 25 06 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-28-dt-04-07-2024-pdf",
         "file": "Store_28_dt_04_07_2024.pdf",
         "bytes": 1268006,
+        "date": "2024-07-04",
+        "department": "Store Department",
         "titleEn": "Store 28 dt 04 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-32-dt-08-07-2024-pdf",
         "file": "Store_32_dt__08_07_2024.pdf",
         "bytes": 540054,
+        "date": "2024-07-08",
+        "department": "Store Department",
         "titleEn": "Store 32 dt 08 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-37-dt-22-07-2024-pdf",
         "file": "Store_37_dt_22_07_2024.pdf",
         "bytes": 519634,
+        "date": "2024-07-22",
+        "department": "Store Department",
         "titleEn": "Store 37 dt 22 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-39-dt-26-07-2024-pdf",
         "file": "Store_39_dt_26_07_2024.pdf",
         "bytes": 384613,
+        "date": "2024-07-26",
+        "department": "Store Department",
         "titleEn": "Store 39 dt 26 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-42-dt-31-07-2024-pdf",
         "file": "store_42_dt_31_07_2024.pdf",
         "bytes": 475708,
+        "date": "2024-07-31",
+        "department": "Store Department",
         "titleEn": "store 42 dt 31 07 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-46-dt-05-08-2024-pdf",
         "file": "Store_46_dt_05_08_2024.pdf",
         "bytes": 271505,
+        "date": "2024-08-05",
+        "department": "Store Department",
         "titleEn": "Store 46 dt 05 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-47-dt-09-08-2024-pdf",
         "file": "Store_47_dt_09_08_2024.pdf",
         "bytes": 852329,
+        "date": "2024-08-09",
+        "department": "Store Department",
         "titleEn": "Store 47 dt 09 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-48-dt-09-08-2024-pdf",
         "file": "Store_48_dt_09_08_2024.pdf",
         "bytes": 572889,
+        "date": "2024-08-09",
+        "department": "Store Department",
         "titleEn": "Store 48 dt 09 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-49-dt-09-08-2024-pdf",
         "file": "Store_49_dt_09_08_2024.pdf",
         "bytes": 956613,
+        "date": "2024-08-09",
+        "department": "Store Department",
         "titleEn": "Store 49 dt 09 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-51-dt-21-08-2024-pdf",
         "file": "Store_51__dt_21_08_2024.pdf",
         "bytes": 1167626,
+        "date": "2024-08-21",
+        "department": "Store Department",
         "titleEn": "Store 51 dt 21 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-52-d-t-27-08-2024-pdf",
         "file": "STORE_52_D_T_27_08_2024.pdf",
         "bytes": 143980,
+        "date": "2024-08-27",
+        "department": "Store Department",
         "titleEn": "STORE 52 D T 27 08 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-57-dt-24-09-2024-pdf",
         "file": "Store_57_dt_24_09_2024.pdf",
         "bytes": 353133,
+        "date": "2024-09-24",
+        "department": "Store Department",
         "titleEn": "Store 57 dt 24 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-62-dt-28-09-2024-pdf",
         "file": "Store_62_dt_28_09_2024.pdf",
         "bytes": 539819,
+        "date": "2024-09-28",
+        "department": "Store Department",
         "titleEn": "Store 62 dt 28 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-63-dt-28-09-2024-pdf",
         "file": "Store_63_dt_28_09_2024.pdf",
         "bytes": 3253312,
+        "date": "2024-09-28",
+        "department": "Store Department",
         "titleEn": "Store 63 dt 28 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-64-dt-28-09-2024-pdf",
         "file": "Store_64_dt_28_09_2024.pdf",
         "bytes": 580840,
+        "date": "2024-09-28",
+        "department": "Store Department",
         "titleEn": "Store 64 dt 28 09 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-89-dt-02-12-2024-pdf",
         "file": "Store_89_dt_02_12_2024.pdf",
         "bytes": 556415,
+        "date": "2024-12-02",
+        "department": "Store Department",
         "titleEn": "Store 89 dt 02 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-store-98-dt-16-12-2024-pdf",
         "file": "Store_98_dt_16_12_2024.pdf",
         "bytes": 250984,
+        "date": "2024-12-16",
+        "department": "Store Department",
         "titleEn": "Store 98 dt 16 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-swamming-pool-18-dt-15-03-2024-pdf",
         "file": "Swamming_pool_18_dt_15_03_2024.pdf",
         "bytes": 164603,
+        "date": "2024-03-15",
+        "department": "Swamming Pool Dept.",
         "titleEn": "Swamming pool 18 dt 15 03 2024"
       },
       {
         "id": "tender-tender-notice-2024-swiming-107-dt-11-12-2024-pdf",
         "file": "swiming_107_dt_11_12_2024.pdf",
         "bytes": 433086,
+        "date": "2024-12-11",
+        "department": "Swimming pool Department",
         "titleEn": "swiming 107 dt 11 12 2024"
       },
       {
         "id": "tender-tender-notice-2024-swimming-pool-80-dt-18-09-2024-pdf",
         "file": "Swimming_pool_80_dt_18_09_2024.pdf",
         "bytes": 222840,
+        "date": "2024-09-18",
+        "department": "Sidharth Swimming Pool",
         "titleEn": "Swimming pool 80 dt 18 09 2024"
       }
     ]
@@ -4505,330 +4992,434 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2023-e-tender-10199-dt-13-10-2023-pdf",
         "file": "E-Tender_10199_dt__13_10_2023.pdf",
         "bytes": 57775,
+        "date": "2023-10-13",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 10199 dt 13 10 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1047-dt-27-09-2023-pdf",
         "file": "E-Tender_1047_dt__27_09_2023.pdf",
         "bytes": 53292,
+        "date": "2023-09-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1047 dt 27 09 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1074-dt-06-10-2023-pdf",
         "file": "E-Tender_1074_dt_06_10_2023.pdf",
         "bytes": 63553,
+        "date": "2023-10-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1074 dt 06 10 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1111-dt-17-10-2023-pdf",
         "file": "E-Tender_1111_dt__17_10_2023.pdf",
         "bytes": 57763,
+        "date": "2023-10-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1111 dt 17 10 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1153-dt-31-10-2023-pdf",
         "file": "E-Tender_1153_dt__31_10_2023.pdf",
         "bytes": 45679,
+        "date": "2023-10-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1153 dt 31 10 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1171-dt-03-11-2023-pdf",
         "file": "E-Tender_1171_dt__03_11_2023.pdf",
         "bytes": 55126,
+        "date": "2023-11-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1171 dt 03 11 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1189-dt-09-11-2023-pdf",
         "file": "E-Tender_1189_dt_09_11_2023.pdf",
         "bytes": 50486,
+        "date": "2023-11-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1189 dt 09 11 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1191-dt-17-11-2023-pdf",
         "file": "E-Tender_1191_dt__17_11_2023.pdf",
         "bytes": 54410,
+        "date": "2023-11-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1191 dt 17 11 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1208-dt-24-11-2023-pdf",
         "file": "E-Tender_1208_dt__24_11_2023.pdf",
         "bytes": 25919,
+        "date": "2023-11-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1208 dt 24 11 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-1259-dt-15-12-2023-pdf",
         "file": "E-Tender_1259_dt__15_12_2023.pdf",
         "bytes": 38827,
+        "date": "2023-12-15",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 1259 dt 15 12 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-794-dt-11-08-2023-pdf",
         "file": "E-Tender_794_dt__11_08_2023.pdf",
         "bytes": 63381,
+        "date": "2023-08-11",
         "titleEn": "E-Tender 794 dt 11 08 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-806-dt-14-08-2023-pdf",
         "file": "E-Tender_806_dt_14_08_2023.pdf",
         "bytes": 865777,
+        "date": "2023-08-14",
         "titleEn": "E-Tender 806 dt 14 08 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-873-dt-23-08-2023-pdf",
         "file": "E-Tender_873_dt__23_08_2023.pdf",
         "bytes": 59797,
+        "date": "2023-08-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 873 dt 23 08 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-903-dt-29-08-2023-pdf",
         "file": "E-Tender_903_dt__29_08_2023.pdf",
         "bytes": 47156,
+        "date": "2023-08-29",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 903 dt 29 08 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-962-dt-08-09-2023-pdf",
         "file": "E-Tender_962_dt__08_09_2023.pdf",
         "bytes": 64872,
+        "date": "2023-09-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 962 dt 08 09 2023"
       },
       {
         "id": "tender-tender-2023-e-tender-995-dt-14-09-2023-pdf",
         "file": "E-Tender_995_dt__14_09_2023.pdf",
         "bytes": 44795,
+        "date": "2023-09-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 995 dt 14 09 2023"
       },
       {
         "id": "tender-tender-2023-ee-roads-44-dt-04-09-2023-pdf",
         "file": "EE_Roads_44_dt_04_09_2023.pdf",
         "bytes": 284557,
+        "date": "2023-09-04",
+        "department": "Executive Engineer (Roads) Dept.",
         "titleEn": "EE Roads 44 dt 04 09 2023"
       },
       {
         "id": "tender-tender-2023-ee-roads-45-dt-04-09-2023-pdf",
         "file": "EE_Roads_45_dt_04_09_2023.pdf",
         "bytes": 313605,
+        "date": "2023-09-04",
+        "department": "Executive Engineer (Roads) Dept.",
         "titleEn": "EE Roads 45 dt 04 09 2023"
       },
       {
         "id": "tender-tender-2023-ee-roads-46-dt-04-09-2023-pdf",
         "file": "EE_Roads_46_dt_04_09_2023_.pdf",
         "bytes": 308755,
+        "date": "2023-09-04",
+        "department": "Executive Engineer (Roads) Dept.",
         "titleEn": "EE Roads 46 dt 04 09 2023"
       },
       {
         "id": "tender-tender-2023-expression-of-interest-vehicle-track-1-pdf",
         "file": "Expression_of_Interest_vehicle_track-1.pdf",
         "bytes": 150294,
+        "department": "Solid Waste Management Dept",
         "titleEn": "Expression of Interest vehicle track-1"
       },
       {
         "id": "tender-tender-2023-garden-696-dt-31-08-2023-pdf",
         "file": "Garden_696_dt__31_08_2023_.pdf",
         "bytes": 792165,
+        "date": "2023-08-31",
+        "department": "Garden Departement",
         "titleEn": "Garden 696 dt 31 08 2023"
       },
       {
         "id": "tender-tender-2023-garden-697-dt-31-08-2023-pdf",
         "file": "Garden_697_dt__31_08_2023.pdf",
         "bytes": 797583,
+        "date": "2023-08-31",
+        "department": "Garden Departement",
         "titleEn": "Garden 697 dt 31 08 2023"
       },
       {
         "id": "tender-tender-2023-health-1993-dt-17-082023-pdf",
         "file": "Health_1993_dt_17_082023.pdf",
         "bytes": 1164057,
+        "date": "2023-08-17",
         "titleEn": "Health 1993 dt 17 082023"
       },
       {
         "id": "tender-tender-2023-health-2082date30-08-2023-pdf",
         "file": "Health_2082date30_08_2023.pdf",
         "bytes": 70542,
+        "date": "2023-08-30",
+        "department": "Health Departement",
         "titleEn": "Health 2082date30 08 2023"
       },
       {
         "id": "tender-tender-2023-health-2321-dt-26-09-2023-pdf",
         "file": "Health_2321_dt__26_09_2023.pdf",
         "bytes": 135526,
+        "date": "2023-09-26",
+        "department": "Health Department",
         "titleEn": "Health 2321 dt 26 09 2023"
       },
       {
         "id": "tender-tender-2023-health-2323-dt-26-09-2023-pdf",
         "file": "Health_2323_dt__26_09_2023.pdf",
         "bytes": 142473,
+        "date": "2023-09-26",
+        "department": "Health Department",
         "titleEn": "Health 2323 dt 26 09 2023"
       },
       {
         "id": "tender-tender-2023-health-2332-dt-27-09-2023-pdf",
         "file": "Health_2332_dt__27_09_2023.pdf",
         "bytes": 151447,
+        "date": "2023-09-27",
+        "department": "Health Department",
         "titleEn": "Health 2332 dt 27 09 2023"
       },
       {
         "id": "tender-tender-2023-health-2413-dt-10-10-2023-pdf",
         "file": "Health_2413_dt__10_10_2023.pdf",
         "bytes": 51962,
+        "date": "2023-10-10",
+        "department": "Health Department",
         "titleEn": "Health 2413 dt 10 10 2023"
       },
       {
         "id": "tender-tender-2023-health-2824-dt-05-12-2023-pdf",
         "file": "Health_2824_dt_05_12_2023.pdf",
         "bytes": 1609458,
+        "date": "2023-12-05",
+        "department": "Health Department",
         "titleEn": "Health 2824 dt 05 12 2023"
       },
       {
         "id": "tender-tender-2023-health-2846-dt-07-12-2023-pdf",
         "file": "Health_2846_dt__07_12_2023.pdf",
         "bytes": 74852,
+        "date": "2023-12-07",
+        "department": "Health Department",
         "titleEn": "Health 2846 dt 07 12 2023"
       },
       {
         "id": "tender-tender-2023-health-425-dt-22-08-2023-pdf",
         "file": "Health_425_dt__22_08_2023.pdf",
         "bytes": 60101,
+        "date": "2023-08-22",
+        "department": "Health Department",
         "titleEn": "Health 425 dt 22 08 2023"
       },
       {
         "id": "tender-tender-2023-health-469-dt-20-09-2023-pdf",
         "file": "Health_469_dt__20_09_2023.pdf",
         "bytes": 52474,
+        "date": "2023-09-20",
+        "department": "Health Department",
         "titleEn": "Health 469 dt 20 09 2023"
       },
       {
         "id": "tender-tender-2023-health-540-dt-16-11-2023-pdf",
         "file": "Health_540_dt__16_11_2023.pdf",
         "bytes": 54960,
+        "date": "2023-11-16",
+        "department": "Health Department",
         "titleEn": "Health 540 dt 16 11 2023"
       },
       {
         "id": "tender-tender-2023-sport-215-dt-08-08-2023-pdf",
         "file": "Sport_215_dt__08_08_2023.pdf",
         "bytes": 212080,
+        "date": "2023-08-08",
         "titleEn": "Sport 215 dt 08 08 2023"
       },
       {
         "id": "tender-tender-2023-sport-268-dt-15-09-2023-pdf",
         "file": "Sport_268_dt__15_09_2023.pdf",
         "bytes": 291072,
+        "date": "2023-09-15",
+        "department": "Sport Department",
         "titleEn": "Sport 268 dt 15 09 2023"
       },
       {
         "id": "tender-tender-2023-store-47-dt-05-09-2023-pdf",
         "file": "Store_47_dt__05_09_2023.pdf",
         "bytes": 49661,
+        "date": "2023-09-05",
+        "department": "Store Department",
         "titleEn": "Store 47 dt 05 09 2023"
       },
       {
         "id": "tender-tender-2023-store-48-dt-05-09-2023-pdf",
         "file": "Store_48_dt__05_09_2023.pdf",
         "bytes": 45170,
+        "date": "2023-09-05",
+        "department": "Store Department",
         "titleEn": "Store 48 dt 05 09 2023"
       },
       {
         "id": "tender-tender-2023-store-50-dt-07-09-2023-pdf",
         "file": "store_50_dt_07_09__2023.pdf",
         "bytes": 240224,
+        "date": "2023-09-07",
+        "department": "Store Department",
         "titleEn": "store 50 dt 07 09 2023"
       },
       {
         "id": "tender-tender-2023-store-58-dt-26-09-2023-pdf",
         "file": "Store_58_dt__26_09_2023.pdf",
         "bytes": 49081,
+        "date": "2023-09-26",
+        "department": "Store Department",
         "titleEn": "Store 58 dt 26 09 2023"
       },
       {
         "id": "tender-tender-2023-store-62-dt-06-10-2023-pdf",
         "file": "Store_62_dt__06_10_2023.pdf",
         "bytes": 48185,
+        "date": "2023-10-06",
+        "department": "Store Department",
         "titleEn": "Store 62 dt 06 10 2023"
       },
       {
         "id": "tender-tender-2023-store-63-dt-06-10-203-pdf",
         "file": "Store_63_dt__06_10_203.pdf",
         "bytes": 48854,
+        "department": "Store Department",
         "titleEn": "Store 63 dt 06 10 203"
       },
       {
         "id": "tender-tender-2023-store-65-dt-11-10-2023-pdf",
         "file": "Store_65_dt__11_10_2023.pdf",
         "bytes": 47773,
+        "date": "2023-10-11",
+        "department": "Store Department",
         "titleEn": "Store 65 dt 11 10 2023"
       },
       {
         "id": "tender-tender-2023-store-69-dt-23-10-2023-pdf",
         "file": "Store_69_dt__23_10_2023.pdf",
         "bytes": 275873,
+        "date": "2023-10-23",
+        "department": "Store Department",
         "titleEn": "Store 69 dt 23 10 2023"
       },
       {
         "id": "tender-tender-2023-store-72-dt-16-11-2023-pdf",
         "file": "Store_72_dt__16_11_2023.pdf",
         "bytes": 43988,
+        "date": "2023-11-16",
+        "department": "Store Department",
         "titleEn": "Store 72 dt 16 11 2023"
       },
       {
         "id": "tender-tender-2023-store-78-dt-24-11-2023-pdf",
         "file": "Store_78_dt__24_11_2023.pdf",
         "bytes": 47403,
+        "date": "2023-11-24",
+        "department": "Store Department",
         "titleEn": "Store 78 dt 24 11 2023"
       },
       {
         "id": "tender-tender-2023-store-82-dt-13-12-2023-pdf",
         "file": "Store_82_dt__13_12_2023.pdf",
         "bytes": 45709,
+        "date": "2023-12-13",
+        "department": "Store Department",
         "titleEn": "Store 82 dt 13 12 2023"
       },
       {
         "id": "tender-tender-2023-store-83-dt-13-12-2023-pdf",
         "file": "Store_83_dt__13_12_2023.pdf",
         "bytes": 50584,
+        "date": "2023-12-13",
+        "department": "Store Department",
         "titleEn": "Store 83 dt 13 12 2023"
       },
       {
         "id": "tender-tender-2023-store-84-dt-15-12-2023-pdf",
         "file": "Store_84_dt__15_12_2023.pdf",
         "bytes": 54856,
+        "date": "2023-12-15",
+        "department": "Store Department",
         "titleEn": "Store 84 dt 15 12 2023"
       },
       {
         "id": "tender-tender-2023-store-87-dt-01-01-2024-pdf",
         "file": "Store_87_dt__01_01_2024.pdf",
         "bytes": 44343,
+        "date": "2024-01-01",
+        "department": "Store Department",
         "titleEn": "Store 87 dt 01 01 2024"
       },
       {
         "id": "tender-tender-2023-sudharna-patrak-01-dt-05-09-2023-pdf",
         "file": "Sudharna_Patrak_01_dt__05_09_2023.pdf",
         "bytes": 502227,
+        "date": "2023-09-05",
+        "department": "Executive Engineer (Roads) Dept.",
         "titleEn": "Sudharna Patrak 01 dt 05 09 2023"
       },
       {
         "id": "tender-tender-2023-sudharna-patrak-02-dt-05-09-2023-pdf",
         "file": "Sudharna_Patrak_02_dt__05_09_2023.pdf",
         "bytes": 441771,
+        "date": "2023-09-05",
+        "department": "Executive Engineer (Roads) Dept.",
         "titleEn": "Sudharna Patrak 02 dt 05 09 2023"
       },
       {
         "id": "tender-tender-2023-sudharna-patrak-03-dt-05-09-2023-pdf",
         "file": "Sudharna_Patrak_03_dt__05_09_2023.pdf",
         "bytes": 467547,
+        "date": "2023-09-05",
+        "department": "Executive Engineer (Roads) Dept.",
         "titleEn": "Sudharna Patrak 03 dt 05 09 2023"
       },
       {
         "id": "tender-tender-2023-swm-426-dt-07-09-2023-pdf",
         "file": "swm_426_dt_07_09_2023.pdf",
         "bytes": 1615890,
+        "date": "2023-09-07",
+        "department": "Solid Waste Management Dept.",
         "titleEn": "swm 426 dt 07 09 2023"
       },
       {
         "id": "tender-tender-2023-swm-482-dt-04-10-2023-pdf",
         "file": "SWM_482_DT__04_10_2023.pdf",
         "bytes": 250659,
+        "date": "2023-10-04",
+        "department": "Solid Waste Management Dept",
         "titleEn": "SWM 482 DT 04 10 2023"
       },
       {
         "id": "tender-tender-2023-swm-dt-26-09-2023-pdf",
         "file": "SWM_dt_26_09_2023.pdf",
         "bytes": 1297186,
+        "date": "2023-09-26",
+        "department": "Solid Waste Management Dept",
         "titleEn": "SWM dt 26 09 2023"
       }
     ]
@@ -4846,666 +5437,884 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-2022-ce-305-dt-15-12-2022-pdf",
         "file": "CE_305_dt__15_12_2022.pdf",
         "bytes": 186515,
+        "date": "2022-12-15",
+        "department": "CE Department",
         "titleEn": "CE 305 dt 15 12 2022"
       },
       {
         "id": "tender-2022-dy-engr-zone-07-101-dt-28-06-2022-pdf",
         "file": "Dy_Engr_Zone_07_101_dt__28_06_2022.pdf",
         "bytes": 42355,
+        "date": "2022-06-28",
+        "department": "zone 7",
         "titleEn": "Dy Engr Zone 07 101 dt 28 06 2022"
       },
       {
         "id": "tender-2022-e-tender-12-dt-11-01-2022-pdf",
         "file": "E-Tender_12_dt__11_01_2022.pdf",
         "bytes": 22847,
+        "date": "2022-01-11",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 12 dt 11 01 2022"
       },
       {
         "id": "tender-2022-e-tender-132-dt-07-04-2022-pdf",
         "file": "E-Tender_132_dt__07_04_2022.pdf",
         "bytes": 44762,
+        "date": "2022-04-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 132 dt 07 04 2022"
       },
       {
         "id": "tender-2022-e-tender-141-dt-13-4-2202-pdf",
         "file": "E-Tender_141_dt__13_4_2202.pdf",
         "bytes": 34341,
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 141 dt 13 4 2202"
       },
       {
         "id": "tender-2022-e-tender-153-dt-06-05-2022-pdf",
         "file": "E-Tender_153_dt__06_05_2022.pdf",
         "bytes": 25138,
+        "date": "2022-05-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 153 dt 06 05 2022"
       },
       {
         "id": "tender-2022-e-tender-157-dt-12-05-2022-pdf",
         "file": "E-Tender_157_dt__12_05_2022.pdf",
         "bytes": 36225,
+        "date": "2022-05-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 157 dt 12 05 2022"
       },
       {
         "id": "tender-2022-e-tender-157-dt-22-02-2022-pdf",
         "file": "E-Tender_157_dt__22_02_2022.pdf",
         "bytes": 47804,
+        "date": "2022-02-22",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 157 dt 22 02 2022"
       },
       {
         "id": "tender-2022-e-tender-161-dt-20-05-2022-pdf",
         "file": "E-Tender_161_dt__20_05_2022.pdf",
         "bytes": 63639,
+        "date": "2022-05-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 161 dt 20 05 2022"
       },
       {
         "id": "tender-2022-e-tender-170-dt-27-05-2022-pdf",
         "file": "E-Tender_170_dt__27_05_2022.pdf",
         "bytes": 34932,
+        "date": "2022-05-30",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 170 dt 27 05 2022"
       },
       {
         "id": "tender-2022-e-tender-179-dt-03-06-2022-pdf",
         "file": "E-Tender_179_dt__03_06_2022.pdf",
         "bytes": 44167,
+        "date": "2022-06-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 179 dt 03 06 2022"
       },
       {
         "id": "tender-2022-e-tender-187-dt-14-06-2022-pdf",
         "file": "E-Tender_187_dt__14_06_2022.pdf",
         "bytes": 46089,
+        "date": "2022-06-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 187 dt 14 06 2022"
       },
       {
         "id": "tender-2022-e-tender-19-dt-14-01-2022-pdf",
         "file": "E-Tender_19_dt__14_01_2022.pdf",
         "bytes": 65610,
+        "date": "2022-01-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 19 dt 14 01 2022"
       },
       {
         "id": "tender-2022-e-tender-194-dt-17-06-2022-pdf",
         "file": "E-Tender_194_dt__17_06_2022.pdf",
         "bytes": 31535,
+        "date": "2022-06-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 194 dt 17 06 2022"
       },
       {
         "id": "tender-2022-e-tender-208-dt-24-06-2022-pdf",
         "file": "E-Tender_208_dt__24_06_2022.pdf",
         "bytes": 81522,
+        "date": "2022-06-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 208 dt 24 06 2022"
       },
       {
         "id": "tender-2022-e-tender-209-dt-27-06-2022-pdf",
         "file": "E-Tender_209_dt__27_06_2022.pdf",
         "bytes": 35818,
+        "date": "2022-06-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 209 dt 27 06 2022"
       },
       {
         "id": "tender-2022-e-tender-217-dt-01-07-2022-pdf",
         "file": "E-Tender_217_dt__01_07_2022.pdf",
         "bytes": 102829,
+        "date": "2022-07-01",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 217 dt 01 07 2022"
       },
       {
         "id": "tender-2022-e-tender-226-dt-05-07-2022-pdf",
         "file": "E-Tender_226_dt__05_07_2022.pdf",
         "bytes": 51321,
+        "date": "2022-07-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 226 dt 05 07 2022"
       },
       {
         "id": "tender-2022-e-tender-230-dt-28-01-2022-pdf",
         "file": "E-Tender_230_dt__28_01_2022.pdf",
         "bytes": 33088,
+        "date": "2022-01-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 230 dt 28 01 2022"
       },
       {
         "id": "tender-2022-e-tender-232-dt-08-07-2022-pdf",
         "file": "E-Tender_232_dt__08_07_2022.pdf",
         "bytes": 47968,
+        "date": "2022-07-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 232 dt 08 07 2022"
       },
       {
         "id": "tender-2022-e-tender-234-dt-12-07-2022-pdf",
         "file": "E-Tender_234_dt__12_07_2022.pdf",
         "bytes": 40747,
+        "date": "2022-07-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 234 dt 12 07 2022"
       },
       {
         "id": "tender-2022-e-tender-242-dt-15-07-2022-pdf",
         "file": "E-Tender_242_dt__15_07_2022.pdf",
         "bytes": 76836,
+        "date": "2022-07-15",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 242 dt 15 07 2022"
       },
       {
         "id": "tender-2022-e-tender-249-dt-19-07-2022-pdf",
         "file": "E-Tender_249_dt__19_07_2022.pdf",
         "bytes": 62439,
+        "date": "2022-07-19",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 249 dt 19 07 2022"
       },
       {
         "id": "tender-2022-e-tender-262-dt-22-07-2022-pdf",
         "file": "E-Tender_262_dt__22_07_2022.pdf",
         "bytes": 63700,
+        "date": "2022-07-22",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 262 dt 22 07 2022"
       },
       {
         "id": "tender-2022-e-tender-271-dt-26-07-2022-pdf",
         "file": "E-Tender_271_dt__26_07_2022.pdf",
         "bytes": 87465,
+        "date": "2022-07-26",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 271 dt 26 07 2022"
       },
       {
         "id": "tender-2022-e-tender-287-dt-29-07-2022-pdf",
         "file": "E-Tender_287_dt_29_07_2022.pdf",
         "bytes": 81269,
+        "date": "2022-07-29",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 287 dt 29 07 2022"
       },
       {
         "id": "tender-2022-e-tender-289-dt-02-08-2022-pdf",
         "file": "E-Tender_289_dt__02_08_2022.pdf",
         "bytes": 399252,
+        "date": "2022-08-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 289 dt 02 08 2022"
       },
       {
         "id": "tender-2022-e-tender-31-dt-25-01-2022-pdf",
         "file": "E-Tender_31_dt__25_01_2022.pdf",
         "bytes": 25447,
+        "date": "2022-01-25",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 31 dt 25 01 2022"
       },
       {
         "id": "tender-2022-e-tender-311-dt-05-08-2022-pdf",
         "file": "E-Tender_311_dt__05_08_2022.pdf",
         "bytes": 458449,
+        "date": "2022-08-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 311 dt 05 08 2022"
       },
       {
         "id": "tender-2022-e-tender-312-dt-08-08-2022-pdf",
         "file": "E-Tender_312_dt__08_08_2022.pdf",
         "bytes": 29362,
+        "date": "2022-08-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 312 dt 08 08 2022"
       },
       {
         "id": "tender-2022-e-tender-317-dt-12-08-2022-pdf",
         "file": "E-Tender_317_dt__12_08_2022.pdf",
         "bytes": 319779,
+        "date": "2022-08-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 317 dt 12 08 2022"
       },
       {
         "id": "tender-2022-e-tender-337-dt-18-08-2022-pdf",
         "file": "E-Tender_337_dt__18_08_2022.pdf",
         "bytes": 69665,
+        "date": "2022-08-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 337 dt 18 08 2022"
       },
       {
         "id": "tender-2022-e-tender-34-dt-28-01-2022-pdf",
         "file": "E-Tender_34_dt__28_01_2022.pdf",
         "bytes": 109985,
+        "date": "2022-01-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 34 dt 28 01 2022"
       },
       {
         "id": "tender-2022-e-tender-42-dt-04-02-2022-pdf",
         "file": "E-Tender_42_dt__04_02_2022.pdf",
         "bytes": 31291,
+        "date": "2022-02-04",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 42 dt 04 02 2022"
       },
       {
         "id": "tender-2022-e-tender-448-dt-02-09-2022-pdf",
         "file": "E-Tender_448_dt__02_09_2022.pdf",
         "bytes": 113185,
+        "date": "2022-09-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 448 dt 02 09 2022"
       },
       {
         "id": "tender-2022-e-tender-485-dt-07-09-2022-pdf",
         "file": "E-Tender_485_dt__07_09_2022.pdf",
         "bytes": 74403,
+        "date": "2022-09-07",
         "titleEn": "E-Tender 485 dt 07 09 2022"
       },
       {
         "id": "tender-2022-e-tender-548-dt-16-09-2022-pdf",
         "file": "E-Tender_548_dt__16_09_2022.pdf",
         "bytes": 63689,
+        "date": "2022-09-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 548 dt 16 09 2022"
       },
       {
         "id": "tender-2022-e-tender-56-dt-11-02-2022-pdf",
         "file": "E-Tender_56_dt__11_02_2022.pdf",
         "bytes": 57847,
+        "date": "2022-02-11",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 56 dt 11 02 2022"
       },
       {
         "id": "tender-2022-e-tender-606-dt-23-09-2022-pdf",
         "file": "E-Tender_606_dt__23_09_2022.pdf",
         "bytes": 60913,
+        "date": "2022-09-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 606 dt 23 09 2022"
       },
       {
         "id": "tender-2022-e-tender-65-dt-18-02-2022-pdf",
         "file": "E-Tender_65_dt__18_02_2022.pdf",
         "bytes": 44333,
+        "date": "2022-02-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 65 dt 18 02 2022"
       },
       {
         "id": "tender-2022-e-tender-651-dt-30-09-2022-pdf",
         "file": "E-Tender_651_dt__30_09_2022.pdf",
         "bytes": 53248,
+        "date": "2022-09-30",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 651 dt 30 09 2022"
       },
       {
         "id": "tender-2022-e-tender-784-dt-21-11-2022-pdf",
         "file": "E-Tender_784_dt__21_11_2022.pdf",
         "bytes": 50339,
+        "date": "2022-11-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 784 dt 21 11 2022"
       },
       {
         "id": "tender-2022-e-tender-81-dt-25-02-2022-pdf",
         "file": "E-Tender_81_dt__25_02_2022.pdf",
         "bytes": 41872,
+        "date": "2022-02-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 81 dt 25 02 2022"
       },
       {
         "id": "tender-2022-e-tender-815-dt-28-11-2022-pdf",
         "file": "E-Tender_815_dt__28_11_2022.pdf",
         "bytes": 51631,
+        "date": "2022-11-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 815 dt 28 11 2022"
       },
       {
         "id": "tender-2022-e-tender-833-dt-02-12-2022-pdf",
         "file": "E-Tender_833_dt__02_12_2022.pdf",
         "bytes": 61387,
+        "date": "2022-12-02",
+        "department": "E-Tender Deparment",
         "titleEn": "E-Tender 833 dt 02 12 2022"
       },
       {
         "id": "tender-2022-e-tender-844-dt-07-12-2022-pdf",
         "file": "E-Tender_844_dt__07_12_2022.pdf",
         "bytes": 79245,
+        "date": "2022-12-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 844 dt 07 12 2022"
       },
       {
         "id": "tender-2022-e-tender-851-dt-09-12-2022-pdf",
         "file": "E-Tender_851_dt__09_12_2022.pdf",
         "bytes": 82949,
+        "date": "2022-12-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 851 dt 09 12 2022"
       },
       {
         "id": "tender-2022-e-tender-856-dt-13-12-2022-pdf",
         "file": "E-Tender_856_dt__13_12_2022.pdf",
         "bytes": 126819,
+        "date": "2022-12-13",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 856 dt 13 12 2022"
       },
       {
         "id": "tender-2022-e-tender-867-dt-16-12-2022-pdf",
         "file": "E-Tender_867_dt__16_12_2022.pdf",
         "bytes": 134763,
+        "date": "2022-12-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 867 dt 16 12 2022"
       },
       {
         "id": "tender-2022-e-tender-874-dt-19-12-2022-pdf",
         "file": "E-Tender_874_dt__19_12_2022.pdf",
         "bytes": 50651,
+        "date": "2022-12-19",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 874 dt 19 12 2022"
       },
       {
         "id": "tender-2022-e-tender-887-dt-21-12-2022-pdf",
         "file": "E-Tender_887_dt__21_12_2022.pdf",
         "bytes": 135844,
+        "date": "2022-12-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 887 dt 21 12 2022"
       },
       {
         "id": "tender-2022-e-tender-906-dt-26-12-2022-pdf",
         "file": "E-Tender_906_dt__26_12_2022.pdf",
         "bytes": 140669,
+        "date": "2022-12-26",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 906 dt 26 12 2022"
       },
       {
         "id": "tender-2022-e-tender-933-dt-29-12-2022-pdf",
         "file": "E-Tender_933_dt__29_12_2022.pdf",
         "bytes": 149140,
+        "date": "2022-12-29",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 933 dt 29 12 2022"
       },
       {
         "id": "tender-2022-est-2-650-dt-08-06-2022-pdf",
         "file": "EST-2_650_dt__08_06_2022.pdf",
         "bytes": 308644,
+        "date": "2022-06-08",
+        "department": "EST-2 Department",
         "titleEn": "EST-2 650 dt 08 06 2022"
       },
       {
         "id": "tender-2022-health-1023-dt-20-04-2022-pdf",
         "file": "Health_1023_dt__20_04_2022.pdf",
         "bytes": 27243,
+        "date": "2022-04-20",
+        "department": "Health Deapartment",
         "titleEn": "Health 1023 dt 20 04 2022"
       },
       {
         "id": "tender-2022-health-126-dt-14-01-2022-pdf",
         "file": "Health_126_dt__14_01_2022.pdf",
         "bytes": 32712,
+        "date": "2022-01-17",
+        "department": "Health Deapartment",
         "titleEn": "Health 126 dt 14 01 2022"
       },
       {
         "id": "tender-2022-health-133-dt-14-01-2022-pdf",
         "file": "Health_133_dt__14_01_2022.pdf",
         "bytes": 31782,
+        "date": "2022-01-17",
+        "department": "Health Deapartment",
         "titleEn": "Health 133 dt 14 01 2022"
       },
       {
         "id": "tender-2022-health-1380-dt-30-05-2022-pdf",
         "file": "Health_1380_dt__30_05_2022.pdf",
         "bytes": 76563,
+        "date": "2022-05-30",
+        "department": "Health Department",
         "titleEn": "Health 1380 dt 30 05 2022"
       },
       {
         "id": "tender-2022-health-1715-dt-01-07-2022-pdf",
         "file": "Health_1715_dt__01_07_2022.pdf",
         "bytes": 476929,
+        "date": "2022-07-01",
+        "department": "Health Department",
         "titleEn": "Health 1715 dt 01 07 2022"
       },
       {
         "id": "tender-2022-health-1717-dt-01-07-2022-pdf",
         "file": "Health_1717_dt__01_07_2022.pdf",
         "bytes": 467448,
+        "date": "2022-07-01",
+        "department": "Health Department",
         "titleEn": "Health 1717 dt 01 07 2022"
       },
       {
         "id": "tender-2022-health-1866-dt-15-07-2022-pdf",
         "file": "Health_1866_dt__15_07_2022.pdf",
         "bytes": 91113,
+        "date": "2022-07-15",
+        "department": "Health Department",
         "titleEn": "Health 1866 dt 15 07 2022"
       },
       {
         "id": "tender-2022-health-1869-dt-15-07-2022-pdf",
         "file": "Health_1869_dt__15_07_2022.pdf",
         "bytes": 93546,
+        "date": "2022-07-15",
+        "department": "Health Department",
         "titleEn": "Health 1869 dt 15 07 2022"
       },
       {
         "id": "tender-2022-health-1902-dt-20-07-2022-pdf",
         "file": "Health_1902_dt__20_07_2022.pdf",
         "bytes": 84241,
+        "date": "2022-07-20",
+        "department": "Health Department",
         "titleEn": "Health 1902 dt 20 07 2022"
       },
       {
         "id": "tender-2022-health-194-dt-25-01-2022-pdf",
         "file": "Health_194_dt__25_01_2022.pdf",
         "bytes": 412817,
+        "date": "2022-01-27",
+        "department": "Health Deapartment",
         "titleEn": "Health 194 dt 25 01 2022"
       },
       {
         "id": "tender-2022-health-196-dt-25-01-2022-pdf",
         "file": "Health_196_dt__25_01_2022.pdf",
         "bytes": 408575,
+        "date": "2022-01-27",
+        "department": "Health Deapartment",
         "titleEn": "Health 196 dt 25 01 2022"
       },
       {
         "id": "tender-2022-health-199-dt-25-01-2022-pdf",
         "file": "Health_199_dt__25_01_2022.pdf",
         "bytes": 92161,
+        "date": "2022-01-27",
+        "department": "Health Deapartment",
         "titleEn": "Health 199 dt 25 01 2022"
       },
       {
         "id": "tender-2022-health-203-dt-21-12-2022-pdf",
         "file": "Health_203_dt__21_12_2022.pdf",
         "bytes": 60187,
+        "date": "2022-12-21",
+        "department": "Health Department",
         "titleEn": "Health 203 dt 21 12 2022"
       },
       {
         "id": "tender-2022-health-204-dt-21-12-2022-pdf",
         "file": "Health_204_dt__21_12_2022.pdf",
         "bytes": 58774,
+        "date": "2022-12-21",
+        "department": "Health Department",
         "titleEn": "Health 204 dt 21 12 2022"
       },
       {
         "id": "tender-2022-health-2052-dt-05-08-2022-pdf",
         "file": "Health_2052_dt__05_08_2022.pdf",
         "bytes": 482933,
+        "date": "2022-08-05",
+        "department": "Health Department",
         "titleEn": "Health 2052 dt 05 08 2022"
       },
       {
         "id": "tender-2022-health-2291-dt-07-09-2022-pdf",
         "file": "Health_2291_dt__07_09_2022.pdf",
         "bytes": 79629,
+        "date": "2022-09-07",
+        "department": "Health Department",
         "titleEn": "Health 2291 dt 07 09 2022"
       },
       {
         "id": "tender-2022-health-2397-dt-16-09-2022-pdf",
         "file": "Health_2397_dt__16_09_2022.pdf",
         "bytes": 32647,
+        "date": "2022-09-16",
+        "department": "Health Department",
         "titleEn": "Health 2397 dt 16 09 2022"
       },
       {
         "id": "tender-2022-health-2406-dt-16-09-2022-1-pdf",
         "file": "Health_2406_dt__16_09_2022 (1).pdf",
         "bytes": 221027,
+        "date": "2022-09-16",
+        "department": "Health Department",
         "titleEn": "Health 2406 dt 16 09 2022 (1)"
       },
       {
         "id": "tender-2022-health-2463-dt-23-09-2022-pdf",
         "file": "Health_2463_dt__23_09_2022.pdf",
         "bytes": 66156,
+        "date": "2022-09-23",
+        "department": "Health Department",
         "titleEn": "Health 2463 dt 23 09 2022"
       },
       {
         "id": "tender-2022-health-2559-dt-03-10-2022-pdf",
         "file": "Health_2559_dt__03_10_2022.pdf",
         "bytes": 409565,
+        "date": "2022-10-03",
+        "department": "Health Department",
         "titleEn": "Health 2559 dt 03 10 2022"
       },
       {
         "id": "tender-2022-health-2560-dt-03-10-2022-pdf",
         "file": "Health_2560_dt__03_10_2022.pdf",
         "bytes": 249643,
+        "date": "2022-10-03",
+        "department": "Health Department",
         "titleEn": "Health 2560 dt 03 10 2022"
       },
       {
         "id": "tender-2022-health-2975-dt-22-11-2022-pdf",
         "file": "Health_2975_dt__22_11_2022.pdf",
         "bytes": 146385,
+        "date": "2022-11-22",
+        "department": "Health Department",
         "titleEn": "Health 2975 dt 22 11 2022"
       },
       {
         "id": "tender-2022-health-3004-dt-24-11-2022-compressed-1-1-pdf",
         "file": "Health_3004_dt__24_11_2022_compressed_(1)1.pdf",
         "bytes": 5621163,
+        "date": "2022-11-24",
+        "department": "Health Department",
         "titleEn": "Health 3004 dt 24 11 2022 compressed (1)1"
       },
       {
         "id": "tender-2022-health-3111-dt-07-12-2022-pdf",
         "file": "Health_3111_dt__07_12_2022.pdf",
         "bytes": 216552,
+        "date": "2022-12-07",
+        "department": "Health Department",
         "titleEn": "Health 3111 dt 07 12 2022"
       },
       {
         "id": "tender-2022-health-3276-dt-27-12-2022-pdf",
         "file": "Health_3276_dt__27_12_2022.pdf",
         "bytes": 79433,
+        "date": "2022-12-27",
+        "department": "Health Department",
         "titleEn": "Health 3276 dt 27 12 2022"
       },
       {
         "id": "tender-2022-health-341-dt-08-02-2022-pdf",
         "file": "Health_341_dt__08_02_2022.pdf",
         "bytes": 27810,
+        "date": "2022-02-11",
+        "department": "Health Deapartment",
         "titleEn": "Health 341 dt 08 02 2022"
       },
       {
         "id": "tender-2022-health-3969-dt-15-12-2022-pdf",
         "file": "Health_3969_dt__15_12_2022.pdf",
         "bytes": 152340,
+        "date": "2022-12-15",
+        "department": "Health Department",
         "titleEn": "Health 3969 dt 15 12 2022"
       },
       {
         "id": "tender-2022-health-89-dt-11-01-2022-pdf",
         "file": "Health_89_dt__11_01_2022.pdf",
         "bytes": 333292,
+        "date": "2022-01-11",
+        "department": "Health Deapartment",
         "titleEn": "Health 89 dt 11 01 2022"
       },
       {
         "id": "tender-2022-heath-2404-dt-16-09-2022-pdf",
         "file": "Heath_2404_dt__16_09_2022.pdf",
         "bytes": 440103,
+        "date": "2022-09-16",
+        "department": "Health Department",
         "titleEn": "Heath 2404 dt 16 09 2022"
       },
       {
         "id": "tender-2022-heatlh-2488-dt-26-09-2022-pdf",
         "file": "Heatlh_2488_dt__26_09_2022.pdf",
         "bytes": 654375,
+        "date": "2022-09-26",
+        "department": "Health Department",
         "titleEn": "Heatlh 2488 dt 26 09 2022"
       },
       {
         "id": "tender-2022-store-114-dt-22-11-2022-pdf",
         "file": "Store_114_dt__22_11_2022.pdf",
         "bytes": 115512,
+        "department": "Store Department",
         "titleEn": "Store 114 dt 22 11 2022"
       },
       {
         "id": "tender-2022-store-118-dt-29-11-2022-pdf",
         "file": "Store_118_dt__29_11_2022.pdf",
         "bytes": 49096,
+        "date": "2022-11-29",
+        "department": "Store Department",
         "titleEn": "Store 118 dt 29 11 2022"
       },
       {
         "id": "tender-2022-store-119-dt-30-11-2022-pdf",
         "file": "Store_119_dt__30_11_2022.pdf",
         "bytes": 45959,
+        "date": "2022-11-30",
+        "department": "Store Department",
         "titleEn": "Store 119 dt 30 11 2022"
       },
       {
         "id": "tender-2022-store-120-dt-30-11-2022-pdf",
         "file": "Store_120_dt__30_11_2022.pdf",
         "bytes": 42000,
+        "date": "2022-11-30",
+        "department": "Store Department",
         "titleEn": "Store 120 dt 30 11 2022"
       },
       {
         "id": "tender-2022-store-121-dt-30-11-2022-pdf",
         "file": "Store_121_dt__30_11_2022.pdf",
         "bytes": 42949,
+        "date": "2022-11-30",
+        "department": "Store Department",
         "titleEn": "Store 121 dt 30 11 2022"
       },
       {
         "id": "tender-2022-store-122-dt-30-11-2022-pdf",
         "file": "Store_122_dt__30_11_2022.pdf",
         "bytes": 43835,
+        "date": "2022-11-30",
+        "department": "Store Department",
         "titleEn": "Store 122 dt 30 11 2022"
       },
       {
         "id": "tender-2022-store-123-dt-02-12-2022-pdf",
         "file": "Store_123_dt__02_12_2022.pdf",
         "bytes": 45939,
+        "date": "2022-12-02",
+        "department": "Store Department",
         "titleEn": "Store 123 dt 02 12 2022"
       },
       {
         "id": "tender-2022-store-124-dt-07-12-2022-pdf",
         "file": "Store_124_dt__07_12_2022.pdf",
         "bytes": 59641,
+        "date": "2022-12-07",
+        "department": "Store Department",
         "titleEn": "Store 124 dt 07 12 2022"
       },
       {
         "id": "tender-2022-store-14-dt-05-05-2022-pdf",
         "file": "Store_14_dt__05_05_2022.pdf",
         "bytes": 49897,
+        "date": "2022-05-05",
+        "department": "Strore Deapartment",
         "titleEn": "Store 14 dt 05 05 2022"
       },
       {
         "id": "tender-2022-store-146-dt-10-01-2022-pdf",
         "file": "Store_146_dt_10_01_2022.pdf",
         "bytes": 38942,
+        "date": "2022-01-10",
+        "department": "Store Department",
         "titleEn": "Store 146 dt 10 01 2022"
       },
       {
         "id": "tender-2022-store-15-dt-05-05-2022-pdf",
         "file": "Store_15_dt__05_05_2022.pdf",
         "bytes": 38563,
+        "date": "2022-05-05",
+        "department": "Strore Deapartment",
         "titleEn": "Store 15 dt 05 05 2022"
       },
       {
         "id": "tender-2022-store-161-dt-03-03-2022-pdf",
         "file": "Store_161_dt__03_03_2022.pdf",
         "bytes": 206696,
+        "date": "2022-03-03",
+        "department": "Store Department",
         "titleEn": "Store 161 dt 03 03 2022"
       },
       {
         "id": "tender-2022-store-162-dt-03-03-2022-pdf",
         "file": "Store_162_dt__03_03_2022.pdf",
         "bytes": 46668,
+        "date": "2022-03-03",
+        "department": "Store Department",
         "titleEn": "Store 162 dt 03 03 2022"
       },
       {
         "id": "tender-2022-store-32-dt-01-06-2022-pdf",
         "file": "Store_32_dt__01_06_2022.pdf",
         "bytes": 2433599,
+        "date": "2022-06-01",
+        "department": "Store Department",
         "titleEn": "Store 32 dt 01 06 2022"
       },
       {
         "id": "tender-2022-store-33-dt-14-06-2022-pdf",
         "file": "Store_33_dt__14_06_2022.pdf",
         "bytes": 42561,
+        "date": "2022-06-14",
+        "department": "Store Department",
         "titleEn": "Store 33 dt 14 06 2022"
       },
       {
         "id": "tender-2022-store-34-dt-14-06-2022-pdf",
         "file": "Store_34_dt__14_06_2022.pdf",
         "bytes": 206327,
+        "date": "2022-06-14",
+        "department": "Store Department",
         "titleEn": "Store 34 dt 14 06 2022"
       },
       {
         "id": "tender-2022-store-38-dt-17-06-2022-pdf",
         "file": "Store_38_dt__17_06_2022.pdf",
         "bytes": 45248,
+        "date": "2022-06-17",
+        "department": "Store Department",
         "titleEn": "Store 38 dt 17 06 2022"
       },
       {
         "id": "tender-2022-store-39-dt-17-06-2022-pdf",
         "file": "Store_39_dt__17_06_2022.pdf",
         "bytes": 43533,
+        "date": "2022-06-17",
+        "department": "Store Department",
         "titleEn": "Store 39 dt 17 06 2022"
       },
       {
         "id": "tender-2022-store-44-dt-29-06-2022-pdf",
         "file": "Store_44_dt__29_06_2022.pdf",
         "bytes": 223188,
+        "date": "2022-06-29",
+        "department": "Store Department",
         "titleEn": "Store 44 dt 29 06 2022"
       },
       {
         "id": "tender-2022-store-51-dt-14-07-2022-pdf",
         "file": "Store_51_dt__14_07_2022.pdf",
         "bytes": 50094,
+        "date": "2022-07-14",
+        "department": "Store Department",
         "titleEn": "Store 51 dt 14 07 2022"
       },
       {
         "id": "tender-2022-store-56-dt-26-07-2022-pdf",
         "file": "Store_56_dt__26_07_2022.pdf",
         "bytes": 41421,
+        "date": "2022-07-26",
+        "department": "Store Department",
         "titleEn": "Store 56 dt 26 07 2022"
       },
       {
         "id": "tender-2022-store-78dt-06-09-2022-pdf",
         "file": "Store_78dt__06_09_2022.pdf",
         "bytes": 406763,
+        "date": "2022-09-06",
         "titleEn": "Store 78dt 06 09 2022"
       },
       {
         "id": "tender-2022-store-84-dt-16-09-2022-pdf",
         "file": "store_84_dt__16_09_2022.pdf",
         "bytes": 291801,
+        "date": "2022-09-16",
+        "department": "Store Department",
         "titleEn": "store 84 dt 16 09 2022"
       },
       {
         "id": "tender-2022-store-85-dt-19-09-2022-pdf",
         "file": "Store_85_dt__19_09_2022.pdf",
         "bytes": 45315,
+        "date": "2022-09-19",
+        "department": "Store Department",
         "titleEn": "Store 85 dt 19 09 2022"
       },
       {
         "id": "tender-2022-store-89-dt-29-09-2022-pdf",
         "file": "Store_89_dt__29_09_2022.pdf",
         "bytes": 47726,
+        "date": "2022-09-29",
+        "department": "Store Department",
         "titleEn": "Store 89 dt 29 09 2022"
       },
       {
         "id": "tender-2022-strore-62-dt-05-08-2022-pdf",
         "file": "Strore_62_dt__05_08_2022.pdf",
         "bytes": 536794,
+        "date": "2022-08-05",
+        "department": "Store Department",
         "titleEn": "Strore 62 dt 05 08 2022"
       },
       {
         "id": "tender-2022-strore-7-dt-21-04-2022-pdf",
         "file": "Strore_7_dt__21_04_2022.pdf",
         "bytes": 414174,
+        "date": "2022-04-21",
+        "department": "Strore Deapartment",
         "titleEn": "Strore 7 dt 21 04 2022"
       }
     ]
@@ -5523,1470 +6332,1959 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-2020-09-16-2020-16-48-01-pdf",
         "file": "09-16-2020_16_48_01.pdf",
         "bytes": 331672,
+        "date": "2020-09-16",
         "titleEn": "09-16-2020 16 48 01"
       },
       {
         "id": "tender-2020-ce-85-dt-10-06-2020-pdf",
         "file": "CE_85_DT_10_06_2020.pdf",
         "bytes": 509771,
+        "date": "2020-06-10",
+        "department": "CITY ENGINEER",
         "titleEn": "CE 85 DT 10 06 2020"
       },
       {
         "id": "tender-2020-comp-147-dt-16-12-2020-pdf",
         "file": "comp__147_dt__16_12_2020.pdf",
         "bytes": 68073,
+        "date": "2020-12-16",
+        "department": "Computer Section",
         "titleEn": "comp 147 dt 16 12 2020"
       },
       {
         "id": "tender-2020-comp-143-dt-10-12-2020-pdf",
         "file": "Comp_143_dt__10_12_2020.pdf",
         "bytes": 72415,
+        "date": "2020-12-10",
+        "department": "Computer Section",
         "titleEn": "Comp 143 dt 10 12 2020"
       },
       {
         "id": "tender-2020-comp-18-dt-22-02-2021-pdf",
         "file": "comp_18_dt__22_02_2021.pdf",
         "bytes": 43232,
+        "date": "2021-02-22",
+        "department": "Computer Section",
         "titleEn": "comp 18 dt 22 02 2021"
       },
       {
         "id": "tender-2020-comp-26-dt-24-01-20201-pdf",
         "file": "Comp_26_dt__24_01_20201.pdf",
         "bytes": 46177,
+        "date": "2020-01-24",
+        "department": "Computer Section",
         "titleEn": "Comp 26 dt 24 01 20201"
       },
       {
         "id": "tender-2020-computer-80-dt-09-03-2020-pdf",
         "file": "Computer_80_Dt__09_03_2020.pdf",
         "bytes": 831103,
+        "date": "2020-03-09",
+        "department": "Computer",
         "titleEn": "Computer 80 Dt 09 03 2020"
       },
       {
         "id": "tender-2020-dchc-1743-dt-12-10-2020-pdf",
         "file": "DCHC_1743_DT__12_10_2020.pdf",
         "bytes": 103980,
+        "date": "2020-10-12",
+        "department": "Health Department",
         "titleEn": "DCHC 1743 DT 12 10 2020"
       },
       {
         "id": "tender-2020-document-139-pdf",
         "file": "Document_139.pdf",
         "bytes": 385593,
+        "date": "2021-03-10",
+        "department": "Health",
         "titleEn": "Document 139"
       },
       {
         "id": "tender-2020-dy-eng-331-dt-05-02-2020-pdf",
         "file": "Dy_Eng_331_dt__05_02_2020.pdf",
         "bytes": 73332,
+        "date": "2020-02-06",
+        "department": "शासन अनुदान प्रकल्प विभाग",
         "titleEn": "Dy Eng 331 dt 05 02 2020"
       },
       {
         "id": "tender-2020-dy-eng-zone-04-193-dt-09-09-2021-pdf",
         "file": "dy_eng_zone_04-193_dt_09_09_2021.pdf",
         "bytes": 62160,
+        "date": "2021-09-09",
+        "department": "deputy engineer zone 04",
         "titleEn": "dy eng zone 04-193 dt 09 09 2021"
       },
       {
         "id": "tender-2020-e-tender-06-dt-06-01-2020-pdf",
         "file": "E-Tender_06_dt_06_01_2020.pdf",
         "bytes": 27090,
+        "date": "2020-01-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 06 dt 06 01 2020"
       },
       {
         "id": "tender-2020-e-tender-107-dt-27-04-2021-pdf",
         "file": "E-Tender_107_dt__27_04_2021.pdf",
         "bytes": 30321,
+        "date": "2021-04-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 107 dt 27 04 2021"
       },
       {
         "id": "tender-2020-e-tender-109-dt-12-06-2020-pdf",
         "file": "E-TENDER_109_DT_12_06_2020.pdf",
         "bytes": 456557,
+        "date": "2020-06-15",
+        "department": "E-TENDER/",
         "titleEn": "E-TENDER 109 DT 12 06 2020"
       },
       {
         "id": "tender-2020-e-tender-117-dt-05-05-2021-pdf",
         "file": "E-Tender_117_dt_05_05_2021.pdf",
         "bytes": 31517,
+        "date": "2021-05-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 117 dt 05 05 2021"
       },
       {
         "id": "tender-2020-e-tender-119-dt-30-06-2020-pdf",
         "file": "E-Tender_119_dt__30_06_2020.pdf",
         "bytes": 34039,
+        "date": "2020-06-30",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 119 dt 30 06 2020"
       },
       {
         "id": "tender-2020-e-tender-122-dt-07-07-2020-pdf",
         "file": "E-TENDER_122_DT_07_07_2020.pdf",
         "bytes": 764893,
+        "date": "2020-07-07",
+        "department": "E-TENDER",
         "titleEn": "E-TENDER 122 DT 07 07 2020"
       },
       {
         "id": "tender-2020-e-tender-125-dt-17-05-2021-pdf",
         "file": "E-TENDER_125_dt_17_05_2021.pdf",
         "bytes": 25508,
+        "date": "2021-05-17",
+        "department": "E-Tender Department",
         "titleEn": "E-TENDER 125 dt 17 05 2021"
       },
       {
         "id": "tender-2020-e-tender-131-dt-21-05-2021-pdf",
         "file": "E-Tender_131_dt__21_05_2021.pdf",
         "bytes": 28883,
+        "date": "2021-05-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 131 dt 21 05 2021"
       },
       {
         "id": "tender-2020-e-tender-132-dt-20-07-2020-pdf",
         "file": "E-Tender_132_Dt_20_07_2020.pdf",
         "bytes": 487330,
+        "date": "2020-07-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 132 Dt 20 07 2020"
       },
       {
         "id": "tender-2020-e-tender-136-dt-28-05-2021-pdf",
         "file": "E-Tender_136_dt__28_05_2021.pdf",
         "bytes": 30940,
+        "date": "2021-06-01",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 136 dt 28 05 2021"
       },
       {
         "id": "tender-2020-e-tender-141-dt-28-07-2020-pdf",
         "file": "E-TENDER_141_DT_28_07_2020.pdf",
         "bytes": 465561,
+        "date": "2020-07-28",
+        "department": "E-TENDER",
         "titleEn": "E-TENDER 141 DT 28 07 2020"
       },
       {
         "id": "tender-2020-e-tender-142-dt-04-06-2021-pdf",
         "file": "E-Tender_142_dt__04_06_2021.pdf",
         "bytes": 29512,
+        "date": "2021-06-04",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 142 dt 04 06 2021"
       },
       {
         "id": "tender-2020-e-tender-143-dt-31-07-2020-pdf",
         "file": "E-Tender_143_dt_31_07_2020.pdf",
         "bytes": 28177,
+        "date": "2020-07-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 143 dt 31 07 2020"
       },
       {
         "id": "tender-2020-e-tender-144-dt-11-06-2021-pdf",
         "file": "E-Tender_144_dt__11_06_2021.pdf",
         "bytes": 47925,
+        "date": "2021-06-11",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 144 dt 11 06 2021"
       },
       {
         "id": "tender-2020-e-tender-149-dt-05-08-2020-pdf",
         "file": "E-Tender_149_dt__05_08_2020.pdf",
         "bytes": 33810,
+        "date": "2020-08-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 149 dt 05 08 2020"
       },
       {
         "id": "tender-2020-e-tender-15-dt-14-01-2020-pdf",
         "file": "E-Tender_15_dt__14_01_2020.pdf",
         "bytes": 40846,
+        "date": "2020-01-13",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 15 dt 14 01 2020"
       },
       {
         "id": "tender-2020-e-tender-152-dt-19-06-2021-pdf",
         "file": "E-Tender_152_dt_19_06_2021.pdf",
         "bytes": 28937,
+        "date": "2021-06-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 152 dt 19 06 2021"
       },
       {
         "id": "tender-2020-e-tender-154-dt-07-08-2020-pdf",
         "file": "E-Tender_154_dt__07_08_2020.pdf",
         "bytes": 27199,
+        "date": "2020-08-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 154 dt 07 08 2020"
       },
       {
         "id": "tender-2020-e-tender-157-dt-12-08-2020-pdf",
         "file": "E-Tender_157_dt__12_08_2020.pdf",
         "bytes": 33125,
+        "date": "2020-08-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 157 dt 12 08 2020"
       },
       {
         "id": "tender-2020-e-tender-163-dt-25-06-2021-pdf",
         "file": "E-Tender_163_dt__25_06_2021.pdf",
         "bytes": 38241,
+        "date": "2021-06-25",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 163 dt 25 06 2021"
       },
       {
         "id": "tender-2020-e-tender-166-dt-29-06-2021-pdf",
         "file": "E-Tender_166_dt_29_06_2021.pdf",
         "bytes": 33969,
+        "date": "2021-06-29",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 166 dt 29 06 2021"
       },
       {
         "id": "tender-2020-e-tender-173-dt-02-04-2021-pdf",
         "file": "E-Tender_173_dt_02_04_2021.pdf",
         "bytes": 44294,
+        "date": "2021-07-05",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 173 dt 02 04 2021"
       },
       {
         "id": "tender-2020-e-tender-177-dt-25-08-2020-pdf",
         "file": "E-Tender_177_dt__25_08_2020.pdf",
         "bytes": 27903,
+        "date": "2020-08-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 177 dt 25 08 2020"
       },
       {
         "id": "tender-2020-e-tender-181-dt-28-08-2020-pdf",
         "file": "E-Tender_181_dt__28_08_2020.pdf",
         "bytes": 12792,
+        "date": "2020-08-31",
+        "department": "E-tender department",
         "titleEn": "E-Tender 181 dt 28 08 2020"
       },
       {
         "id": "tender-2020-e-tender-184-dt-12-07-2021-pdf",
         "file": "E-Tender_184_dt_12_07_2021.pdf",
         "bytes": 42217,
+        "date": "2021-07-13",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 184 dt 12 07 2021"
       },
       {
         "id": "tender-2020-e-tender-189-dt-04-09-2020-pdf",
         "file": "E-TENDER_189_DT__04_09_2020.pdf",
         "bytes": 36009,
+        "date": "2020-09-04",
+        "department": "E-Tender Department",
         "titleEn": "E-TENDER 189 DT 04 09 2020"
       },
       {
         "id": "tender-2020-e-tender-19-01-2021-pdf",
         "file": "E-Tender_19_01_2021.pdf",
         "bytes": 28393,
+        "date": "2021-01-19",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 19 01 2021"
       },
       {
         "id": "tender-2020-e-tender-192-dt-16-07-2021-pdf",
         "file": "E-Tender_192_dt__16_07_2021.pdf",
         "bytes": 30437,
+        "date": "2021-07-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 192 dt 16 07 2021"
       },
       {
         "id": "tender-2020-e-tender-202-dt-23-07-2021-pdf",
         "file": "E-Tender_202_dt__23_07_2021.pdf",
         "bytes": 34572,
+        "date": "2021-07-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 202 dt 23 07 2021"
       },
       {
         "id": "tender-2020-e-tender-211-dt-25-09-2020-pdf",
         "file": "E-Tender_211_dt__25_09_2020.pdf",
         "bytes": 19142,
+        "date": "2020-09-25",
+        "department": "E-Tender department",
         "titleEn": "E-Tender 211 dt 25 09 2020"
       },
       {
         "id": "tender-2020-e-tender-215-dt-30-07-2021-pdf",
         "file": "e-Tender_215_dt__30_07_2021.pdf",
         "bytes": 34094,
+        "date": "2021-08-02",
+        "department": "E-Tender Department",
         "titleEn": "e-Tender 215 dt 30 07 2021"
       },
       {
         "id": "tender-2020-e-tender-228-dt-06-08-2021-pdf",
         "file": "E-Tender_228_dt_06_08_2021.pdf",
         "bytes": 63928,
+        "date": "2021-08-06",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 228 dt 06 08 2021"
       },
       {
         "id": "tender-2020-e-tender-234-dt-22-10-2020-pdf",
         "file": "E-Tender_234_dt_22_10_2020.pdf",
         "bytes": 29201,
+        "date": "2020-10-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 234 dt 22 10 2020"
       },
       {
         "id": "tender-2020-e-tender-237-dt-10-08-2021-pdf",
         "file": "E-Tender_237_dt_10_08_2021.pdf",
         "bytes": 35830,
+        "date": "2021-08-11",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 237 dt 10 08 2021"
       },
       {
         "id": "tender-2020-e-tender-238-dt-27-10-2020-pdf",
         "file": "E-Tender_238_dt__27_10_2020.pdf",
         "bytes": 31633,
+        "date": "2020-10-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 238 dt 27 10 2020"
       },
       {
         "id": "tender-2020-e-tender-248-dt-18-08-2021-pdf",
         "file": "E-Tender_248_dt__18_08_2021.pdf",
         "bytes": 86445,
+        "date": "2021-08-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 248 dt 18 08 2021"
       },
       {
         "id": "tender-2020-e-tender-25-dt-28-01-2021-pdf",
         "file": "E-Tender_25_dt__28_01_2021.pdf",
         "bytes": 48449,
+        "date": "2021-01-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 25 dt 28 01 2021"
       },
       {
         "id": "tender-2020-e-tender-250-dt-20-08-2021-pdf",
         "file": "E-Tender_250_dt__20_08_2021.pdf",
         "bytes": 46560,
+        "date": "2021-08-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 250 dt 20 08 2021"
       },
       {
         "id": "tender-2020-e-tender-261-dt-24-08-2021-pdf",
         "file": "E-Tender_261_dt__24_08_2021.pdf",
         "bytes": 51255,
+        "date": "2021-08-25",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 261 dt 24 08 2021"
       },
       {
         "id": "tender-2020-e-tender-265-dt-07-12-2020-pdf",
         "file": "E-Tender_265_dt__07_12_2020.pdf",
         "bytes": 32624,
+        "date": "2020-12-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 265 dt 07 12 2020"
       },
       {
         "id": "tender-2020-e-tender-268-dt-11-12-2020-pdf",
         "file": "E-Tender_268_dt_11_12_2020.pdf",
         "bytes": 48267,
+        "date": "2020-12-11",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 268 dt 11 12 2020"
       },
       {
         "id": "tender-2020-e-tender-280-dt-24-12-2020-pdf",
         "file": "E-Tender_280_dt__24_12_2020.pdf",
         "bytes": 29484,
+        "date": "2020-12-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 280 dt 24 12 2020"
       },
       {
         "id": "tender-2020-e-tender-287-dt-31-12-2020-pdf",
         "file": "E-Tender_287_dt__31_12_2020.pdf",
         "bytes": 26766,
+        "date": "2021-01-01",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 287 dt 31 12 2020"
       },
       {
         "id": "tender-2020-e-tender-305-dt-31-08-2021-pdf",
         "file": "E-Tender_305_dt__31_08_2021.pdf",
         "bytes": 42007,
+        "date": "2021-08-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 305 dt 31 08 2021"
       },
       {
         "id": "tender-2020-e-tender-314-dt-03-09-2021-pdf",
         "file": "E-Tender_314_dt__03_09_2021.pdf",
         "bytes": 27332,
+        "date": "2021-09-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 314 dt 03 09 2021"
       },
       {
         "id": "tender-2020-e-tender-332-dt-09-09-2021-pdf",
         "file": "E-Tender_332_dt__09_09_2021.pdf",
         "bytes": 32802,
+        "date": "2021-09-09",
+        "department": "E-Tender department",
         "titleEn": "E-Tender 332 dt 09 09 2021"
       },
       {
         "id": "tender-2020-e-tender-354-dt-16-09-2021-pdf",
         "file": "E-Tender_354_dt__16_09_2021.pdf",
         "bytes": 49743,
+        "date": "2021-09-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 354 dt 16 09 2021"
       },
       {
         "id": "tender-2020-e-tender-36-dt-27-01-2020-pdf",
         "file": "E-Tender_36_dt__27_01_2020.pdf",
         "bytes": 32764,
+        "date": "2020-01-28",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 36 dt 27 01 2020"
       },
       {
         "id": "tender-2020-e-tender-365-dt-24-09-2021-pdf",
         "file": "E-Tender_365_dt__24_09_2021.pdf",
         "bytes": 40559,
+        "date": "2021-09-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 365 dt 24 09 2021"
       },
       {
         "id": "tender-2020-e-tender-372-dt-04-10-2021-pdf",
         "file": "E-tender_372_dt__04_10_2021.pdf",
         "bytes": 63622,
+        "date": "2021-10-08",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 372 dt 04 10 2021"
       },
       {
         "id": "tender-2020-e-tender-3796-dt-18-11-2021-pdf",
         "file": "E-Tender_3796_dt__18_11_2021.pdf",
         "bytes": 516131,
+        "date": "2021-11-18",
+        "department": "Health Department",
         "titleEn": "E-Tender 3796 dt 18 11 2021"
       },
       {
         "id": "tender-2020-e-tender-395-dt-13-10-2021-pdf",
         "file": "E-Tender_395_dt__13_10_2021_.pdf",
         "bytes": 47247,
+        "date": "2021-10-13",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 395 dt 13 10 2021"
       },
       {
         "id": "tender-2020-e-tender-41-dt-09-02-2021-pdf",
         "file": "E-Tender_41_dt__09_02_2021.pdf",
         "bytes": 27501,
+        "date": "2021-02-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 41 dt 09 02 2021"
       },
       {
         "id": "tender-2020-e-tender-416-dt-21-10-2021-pdf",
         "file": "E-Tender_416_dt__21_10_2021.pdf",
         "bytes": 29204,
+        "date": "2021-10-29",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 416 dt 21 10 2021"
       },
       {
         "id": "tender-2020-e-tender-421-dt-03-11-2021-pdf",
         "file": "E-Tender_421_dt__03_11_2021.pdf",
         "bytes": 32937,
+        "date": "2021-11-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 421 dt 03 11 2021"
       },
       {
         "id": "tender-2020-e-tender-432-dt-12-11-2021-pdf",
         "file": "E-Tender_432_dt__12_11_2021.pdf",
         "bytes": 41479,
+        "date": "2021-11-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 432 dt 12 11 2021"
       },
       {
         "id": "tender-2020-e-tender-445-dt-18-11-2021-pdf",
         "file": "E-Tender_445_dt_18_11_2021.pdf",
         "bytes": 42423,
+        "date": "2021-11-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 445 dt 18 11 2021"
       },
       {
         "id": "tender-2020-e-tender-460-dt-26-11-2021-pdf",
         "file": "E-Tender_460_dt__26_11_2021.pdf",
         "bytes": 31138,
+        "date": "2021-11-26",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 460 dt 26 11 2021"
       },
       {
         "id": "tender-2020-e-tender-471-dt-03-12-2021-pdf",
         "file": "E-Tender_471_dt__03_12_2021.pdf",
         "bytes": 30157,
+        "date": "2021-12-03",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 471 dt 03 12 2021"
       },
       {
         "id": "tender-2020-e-tender-479-dt-10-12-2021-pdf",
         "file": "E-Tender_479_dt__10_12_2021.pdf",
         "bytes": 42929,
+        "date": "2021-12-10",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 479 dt 10 12 2021"
       },
       {
         "id": "tender-2020-e-tender-485-dt-15-12-2021-pdf",
         "file": "E-Tender_485_dt__15_12_2021.pdf",
         "bytes": 88651,
+        "date": "2021-12-15",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 485 dt 15 12 2021"
       },
       {
         "id": "tender-2020-e-tender-488-dt-20-12-2021-pdf",
         "file": "E-Tender_488_dt_20_12_2021.pdf",
         "bytes": 49815,
+        "date": "2021-12-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 488 dt 20 12 2021"
       },
       {
         "id": "tender-2020-e-tender-495-dt-23-12-2021-pdf",
         "file": "E-Tender_495_dt_23_12_2021.pdf",
         "bytes": 24801,
+        "date": "2021-12-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 495 dt 23 12 2021"
       },
       {
         "id": "tender-2020-e-tender-50-dt-03-02-2020-pdf",
         "file": "E-Tender_50_dt__03_02_2020.pdf",
         "bytes": 35284,
+        "date": "2020-02-03",
+        "department": "E-Tender",
         "titleEn": "E-Tender 50 dt 03 02 2020"
       },
       {
         "id": "tender-2020-e-tender-509-dt-31-12-2021-pdf",
         "file": "E-Tender_509_dt_31_12_2021.pdf",
         "bytes": 29414,
+        "date": "2021-12-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 509 dt 31 12 2021"
       },
       {
         "id": "tender-2020-e-tender-54-dt-10-02-2020-pdf",
         "file": "E-Tender_54_dt__10_02_2020.pdf",
         "bytes": 21838,
+        "date": "2020-02-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 54 dt 10 02 2020"
       },
       {
         "id": "tender-2020-e-tender-54-dt-18-02-2021-pdf",
         "file": "E-Tender_54_dt_18_02_2021.pdf",
         "bytes": 34300,
+        "date": "2021-02-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 54 dt 18 02 2021"
       },
       {
         "id": "tender-2020-e-tender-63-dt-17-02-2020-pdf",
         "file": "E-Tender_63_dt__17_02_2020.pdf",
         "bytes": 22655,
+        "date": "2020-02-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 63 dt 17 02 2020"
       },
       {
         "id": "tender-2020-e-tender-66-dt-24-02-2020-pdf",
         "file": "E-Tender_66_dt__24_02_2020.pdf",
         "bytes": 21446,
+        "date": "2020-02-24",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 66 dt 24 02 2020"
       },
       {
         "id": "tender-2020-e-tender-69-dt-26-02-2020-pdf",
         "file": "E-Tender_69_dt__26_02_2020.pdf",
         "bytes": 47752,
+        "date": "2020-02-28",
+        "department": "E-Tender",
         "titleEn": "E-Tender 69 dt 26 02 2020"
       },
       {
         "id": "tender-2020-e-tender-73-dt-08-03-2021-pdf",
         "file": "E-Tender_73_Dt_08_03_2021.pdf",
         "bytes": 508559,
+        "date": "2021-03-08",
+        "department": "E-Tender",
         "titleEn": "E-Tender 73 Dt 08 03 2021"
       },
       {
         "id": "tender-2020-e-tender-79-dt-09-03-2020-pdf",
         "file": "E-Tender_79_Dt_09_03_2020.pdf",
         "bytes": 590752,
+        "date": "2020-03-09",
+        "department": "E-TENDER",
         "titleEn": "E-Tender 79 Dt 09 03 2020"
       },
       {
         "id": "tender-2020-e-tender-82-dt-13-03-2020-pdf",
         "file": "E-tender_82_dt_13_03_2020.pdf",
         "bytes": 19527,
+        "date": "2020-03-13",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 82 dt 13 03 2020"
       },
       {
         "id": "tender-2020-e-tender-83-dt-17-03-2021-pdf",
         "file": "E-Tender_83_dt__17_03_2021.pdf",
         "bytes": 29931,
+        "date": "2021-03-17",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 83 dt 17 03 2021"
       },
       {
         "id": "tender-2020-e-tender-92-dt-13-05-2020-pdf",
         "file": "E-Tender_92_dt__13_05_2020.pdf",
         "bytes": 20102,
+        "date": "2020-05-21",
+        "department": "E-Tender department",
         "titleEn": "E-Tender 92 dt 13 05 2020"
       },
       {
         "id": "tender-2020-e-tender-95-dt-20-05-2020-pdf",
         "file": "E-Tender_95_dt_20_05_2020.pdf",
         "bytes": 26341,
+        "date": "2020-05-21",
+        "department": "E-Tender department",
         "titleEn": "E-Tender 95 dt 20 05 2020"
       },
       {
         "id": "tender-2020-e-tender-99-dt-12-04-2021-pdf",
         "file": "E-Tender_99_dt__12_04_2021.pdf",
         "bytes": 30093,
+        "date": "2021-04-12",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 99 dt 12 04 2021"
       },
       {
         "id": "tender-2020-e-tender-99-dt-28-05-2020-pdf",
         "file": "E-Tender_99_dt__28_05_2020.pdf",
         "bytes": 610457,
+        "date": "2020-05-28",
+        "department": "E-TENDER",
         "titleEn": "E-Tender 99 dt 28 05 2020"
       },
       {
         "id": "tender-2020-ee-water-281-dt-20-01-2021-pdf",
         "file": "EE_water_281_dt__20_01_2021.pdf",
         "bytes": 76899,
+        "date": "2021-01-20",
+        "department": "Executive Engineer (water Supply)",
         "titleEn": "EE water 281 dt 20 01 2021"
       },
       {
         "id": "tender-2020-ee-ww-287-dt-27-01-2021-pdf",
         "file": "EE_WW_287_dt__27_01_2021.pdf",
         "bytes": 76747,
+        "date": "2021-01-27",
+        "department": "Executive Engineer (water Supply)",
         "titleEn": "EE WW 287 dt 27 01 2021"
       },
       {
         "id": "tender-2020-ee-ww-137-dt-20-10-2020-pdf",
         "file": "EE_WW-137_dt_20_10_2020.pdf",
         "bytes": 94724,
+        "date": "2020-10-27",
+        "department": "Executive Engineer (w.w.)",
         "titleEn": "EE WW-137 dt 20 10 2020"
       },
       {
         "id": "tender-2020-garden-109-dt-15-02-2020-pdf",
         "file": "GARDEN_109_DT_15_02_2020.pdf",
         "bytes": 550610,
+        "date": "2020-02-18",
+        "department": "E-Tender Department",
         "titleEn": "GARDEN 109 DT 15 02 2020"
       },
       {
         "id": "tender-2020-health-01-dt-27-01-2020-bhavsingpura-pdf",
         "file": "Health_01_dt__27_01_2020_bhavsingpura.pdf",
         "bytes": 52173,
+        "date": "2020-01-28",
+        "department": "Health Department",
         "titleEn": "Health 01 dt 27 01 2020 bhavsingpura"
       },
       {
         "id": "tender-2020-health-01-dt-27-01-2020-ganesh-colony-pdf",
         "file": "Health_01_dt__27_01_2020_ganesh_colony.pdf",
         "bytes": 45552,
+        "date": "2020-01-28",
+        "department": "Health Department",
         "titleEn": "Health 01 dt 27 01 2020 ganesh colony"
       },
       {
         "id": "tender-2020-health-01-dt-27-01-2020-sadat-nagar-pdf",
         "file": "Health_01_dt__27_01_2020_sadat_nagar.pdf",
         "bytes": 47451,
+        "date": "2020-01-28",
+        "department": "Health Department",
         "titleEn": "Health 01 dt 27 01 2020 sadat nagar"
       },
       {
         "id": "tender-2020-health-07-dt-10-12-2020-pdf",
         "file": "Health_07_dt__10_12_2020.pdf",
         "bytes": 51557,
+        "date": "2020-12-10",
+        "department": "Health Department",
         "titleEn": "Health 07 dt 10 12 2020"
       },
       {
         "id": "tender-2020-health-1028-dt-15-06-2020-pdf",
         "file": "HEALTH_1028_DT_15_06_2020.pdf",
         "bytes": 590362,
+        "date": "2020-06-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1028 DT 15 06 2020"
       },
       {
         "id": "tender-2020-health-1029-dt-15-06-2020-pdf",
         "file": "HEALTH_1029_DT_15_06_2020.pdf",
         "bytes": 556390,
+        "date": "2020-06-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1029 DT 15 06 2020"
       },
       {
         "id": "tender-2020-health-1068-dt-24-06-2020-pdf",
         "file": "HEALTH_1068_DT_24_06_2020.pdf",
         "bytes": 651605,
+        "date": "2020-06-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1068 DT 24 06 2020"
       },
       {
         "id": "tender-2020-health-1072-dt-24-06-2020-pdf",
         "file": "HEALTH_1072_DT_24_06_2020.pdf",
         "bytes": 591380,
+        "date": "2020-06-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1072 DT 24 06 2020"
       },
       {
         "id": "tender-2020-health-1073-dt-24-06-2020-pdf",
         "file": "HEALTH_1073_DT_24_06_2020.pdf",
         "bytes": 617043,
+        "date": "2020-06-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1073 DT 24 06 2020"
       },
       {
         "id": "tender-2020-health-1110-dt-01-07-2020-pdf",
         "file": "HEALTH_1110_DT_01_07_2020.pdf",
         "bytes": 630411,
+        "date": "2020-07-01",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1110 DT 01 07 2020"
       },
       {
         "id": "tender-2020-health-1111-dt-01-07-2020-pdf",
         "file": "HEALTH_1111_DT_01_07_2020.pdf",
         "bytes": 628233,
+        "date": "2020-07-01",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1111 DT 01 07 2020"
       },
       {
         "id": "tender-2020-health-1112-dt-01-07-2020-pdf",
         "file": "HEALTH_1112_DT_01_07_2020.pdf",
         "bytes": 614506,
+        "date": "2020-07-01",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1112 DT 01 07 2020"
       },
       {
         "id": "tender-2020-health-1113-dt-01-07-2020-pdf",
         "file": "HEALTH_1113_DT_01_07_2020.pdf",
         "bytes": 611813,
+        "date": "2020-07-01",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1113 DT 01 07 2020"
       },
       {
         "id": "tender-2020-health-1118-dt-02-07-2020-pdf",
         "file": "HEALTH_1118_DT_02_07_2020.pdf",
         "bytes": 570636,
+        "date": "2020-07-02",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1118 DT 02 07 2020"
       },
       {
         "id": "tender-2020-health-1120-dt-02-07-2020-pdf",
         "file": "HEALTH_1120_DT_02_07_2020.pdf",
         "bytes": 554928,
+        "date": "2020-07-02",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1120 DT 02 07 2020"
       },
       {
         "id": "tender-2020-health-1130-dt-03-07-2020-pdf",
         "file": "HEALTH_1130_DT_03_07_2020.pdf",
         "bytes": 605028,
+        "date": "2020-07-03",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1130 DT 03 07 2020"
       },
       {
         "id": "tender-2020-health-115-dt-11-02-2020-pdf",
         "file": "Health_115_dt__11_02_2020.pdf",
         "bytes": 59343,
+        "date": "2020-02-12",
+        "department": "Health Department",
         "titleEn": "Health 115 dt 11 02 2020"
       },
       {
         "id": "tender-2020-health-116-dt-11-02-2020-pdf",
         "file": "Health_116_dt__11_02_2020.pdf",
         "bytes": 62677,
+        "date": "2020-02-12",
+        "department": "Health Department",
         "titleEn": "Health 116 dt 11 02 2020"
       },
       {
         "id": "tender-2020-health-1182-dt-13-07-2020-pdf",
         "file": "HEALTH_1182_DT_13_07_2020.pdf",
         "bytes": 569108,
+        "date": "2020-07-13",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1182 DT 13 07 2020"
       },
       {
         "id": "tender-2020-health-1210-dt-16-07-2020-pdf",
         "file": "Health_1210_dt_16_07_2020.pdf",
         "bytes": 37427,
+        "date": "2020-07-16",
+        "department": "Health Department",
         "titleEn": "Health 1210 dt 16 07 2020"
       },
       {
         "id": "tender-2020-health-1218-dt-20-07-2020-pdf",
         "file": "HEALTH_1218_DT_20_07_2020.pdf",
         "bytes": 49164,
+        "date": "2020-07-20",
+        "department": "Health Department",
         "titleEn": "HEALTH 1218 DT 20 07 2020"
       },
       {
         "id": "tender-2020-health-1219-dt-20-07-2020-pdf",
         "file": "HEALTH_1219_DT__20_07_2020.pdf",
         "bytes": 49348,
+        "date": "2020-07-20",
+        "department": "Health Department",
         "titleEn": "HEALTH 1219 DT 20 07 2020"
       },
       {
         "id": "tender-2020-health-1220-dt-20-07-2020-pdf",
         "file": "HEALTH_1220_DT__20_07_2020.pdf",
         "bytes": 52554,
+        "date": "2020-07-20",
+        "department": "Health Department",
         "titleEn": "HEALTH 1220 DT 20 07 2020"
       },
       {
         "id": "tender-2020-health-1253-dt-24-07-2020-1-pdf",
         "file": "HEALTH_1253_DT_24_07_2020 (1).pdf",
         "bytes": 602729,
+        "date": "2020-07-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1253 DT 24 07 2020 (1)"
       },
       {
         "id": "tender-2020-health-1255-dt-24-07-2020-pdf",
         "file": "HEALTH_1255_DT_24_07_2020.pdf",
         "bytes": 708773,
+        "date": "2020-07-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1255 DT 24 07 2020"
       },
       {
         "id": "tender-2020-health-1256-dt-24-07-2020-pdf",
         "file": "HEALTH_1256_DT_24_07_2020.pdf",
         "bytes": 1153444,
+        "date": "2020-07-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1256 DT 24 07 2020"
       },
       {
         "id": "tender-2020-health-1257-dt-24-07-2020-pdf",
         "file": "HEALTH_1257_DT_24_07_2020.pdf",
         "bytes": 564292,
+        "date": "2020-07-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1257 DT 24 07 2020"
       },
       {
         "id": "tender-2020-health-1258-dt-24-07-2020-pdf",
         "file": "HEALTH_1258_DT_24_07_2020.pdf",
         "bytes": 578694,
+        "date": "2020-07-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1258 DT 24 07 2020"
       },
       {
         "id": "tender-2020-health-1259-dt-24-07-2020-pdf",
         "file": "HEALTH_1259_DT_24_07_2020.pdf",
         "bytes": 593545,
+        "date": "2020-07-24",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1259 DT 24 07 2020"
       },
       {
         "id": "tender-2020-health-1283-dt-28-07-2020-pdf",
         "file": "Health_1283_dt__28_07_2020.pdf",
         "bytes": 20889,
+        "date": "2020-07-29",
+        "department": "E-Tender department",
         "titleEn": "Health 1283 dt 28 07 2020"
       },
       {
         "id": "tender-2020-health-13-dt-17-03-2021-pdf",
         "file": "Health_13_dt__17_03_2021.pdf",
         "bytes": 67116,
+        "date": "2021-03-17",
+        "department": "Health Department",
         "titleEn": "Health 13 dt 17 03 2021"
       },
       {
         "id": "tender-2020-health-1301-dt-31-07-2020-pdf",
         "file": "Health_1301_dt_31_07_2020.pdf",
         "bytes": 40255,
+        "date": "2020-07-31",
+        "department": "Health Department",
         "titleEn": "Health 1301 dt 31 07 2020"
       },
       {
         "id": "tender-2020-health-1302-dt-31-07-2020-pdf",
         "file": "Health_1302_dt_31_07_2020.pdf",
         "bytes": 49960,
+        "date": "2020-07-31",
+        "department": "Health Department",
         "titleEn": "Health 1302 dt 31 07 2020"
       },
       {
         "id": "tender-2020-health-1303-dt-31-07-2020-pdf",
         "file": "Health_1303_dt_31_07_2020.pdf",
         "bytes": 55932,
+        "date": "2020-07-31",
+        "department": "Health Department",
         "titleEn": "Health 1303 dt 31 07 2020"
       },
       {
         "id": "tender-2020-health-1334-dt-05-08-2020-pdf",
         "file": "Health_1334_dt_05_08_2020.pdf",
         "bytes": 80498,
+        "date": "2020-08-05",
+        "department": "Health Department",
         "titleEn": "Health 1334 dt 05 08 2020"
       },
       {
         "id": "tender-2020-health-134-dt-15-01-2021-pdf",
         "file": "Health_134_dt__15_01_2021.pdf",
         "bytes": 58757,
+        "date": "2021-01-15",
+        "department": "Health Department",
         "titleEn": "Health 134 dt 15 01 2021"
       },
       {
         "id": "tender-2020-health-136-dt-15-01-2021-pdf",
         "file": "Health_136_dt__15_01_2021.pdf",
         "bytes": 56250,
+        "date": "2021-01-15",
+        "department": "Health Department",
         "titleEn": "Health 136 dt 15 01 2021"
       },
       {
         "id": "tender-2020-health-1401-dt-10-08-2020-pdf",
         "file": "Health_1401_dt__10_08_2020.pdf",
         "bytes": 58294,
+        "date": "2020-08-10",
+        "department": "Health Department",
         "titleEn": "Health 1401 dt 10 08 2020"
       },
       {
         "id": "tender-2020-health-1403-dt-10-08-2020-pdf",
         "file": "health_1403_dt__10_08_2020.pdf",
         "bytes": 53898,
+        "date": "2020-08-10",
+        "department": "Health Department",
         "titleEn": "health 1403 dt 10 08 2020"
       },
       {
         "id": "tender-2020-health-1418-dt-12-08-2020-pdf",
         "file": "HEALTH_1418_DT_12_08_2020.pdf",
         "bytes": 700271,
+        "date": "2020-08-14",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1418 DT 12 08 2020"
       },
       {
         "id": "tender-2020-health-1419-dt-12-08-2020-pdf",
         "file": "HEALTH_1419_DT_12_08_2020.pdf",
         "bytes": 582050,
+        "date": "2020-08-13",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1419 DT 12 08 2020"
       },
       {
         "id": "tender-2020-health-1421-dt-13-08-2020-pdf",
         "file": "HEALTH_1421_DT_13_08_2020.pdf",
         "bytes": 601540,
+        "date": "2020-08-13",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1421 DT 13 08 2020"
       },
       {
         "id": "tender-2020-health-1429-dt-14-08-2020-pdf",
         "file": "Health_1429_dt__14_08_2020.pdf",
         "bytes": 49744,
+        "date": "2020-08-14",
+        "department": "Health Department",
         "titleEn": "Health 1429 dt 14 08 2020"
       },
       {
         "id": "tender-2020-health-1448-dt-19-08-2020-pdf",
         "file": "Health_1448_dt__19_08_2020.pdf",
         "bytes": 68724,
+        "date": "2020-08-19",
+        "department": "Health Department",
         "titleEn": "Health 1448 dt 19 08 2020"
       },
       {
         "id": "tender-2020-health-1449-dt-19-08-2020-pdf",
         "file": "Health_1449_dt__19_08_2020.pdf",
         "bytes": 82135,
+        "date": "2020-08-19",
+        "department": "Health Department",
         "titleEn": "Health 1449 dt 19 08 2020"
       },
       {
         "id": "tender-2020-health-1500-dt-01-09-2020-pdf",
         "file": "HEALTH_1500_DT_01_09_2020.pdf",
         "bytes": 552970,
+        "date": "2020-09-01",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1500 DT 01 09 2020"
       },
       {
         "id": "tender-2020-health-1501-dt-01-09-2020-pdf",
         "file": "HEALTH_1501_DT_01_09_2020.pdf",
         "bytes": 590348,
+        "date": "2020-09-01",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1501 DT 01 09 2020"
       },
       {
         "id": "tender-2020-health-1506-dt-02-09-2020-pdf",
         "file": "Health_1506_dt__02_09_2020.pdf",
         "bytes": 38234,
+        "date": "2020-09-02",
+        "department": "Health department",
         "titleEn": "Health 1506 dt 02 09 2020"
       },
       {
         "id": "tender-2020-health-1507-dt-02-09-2020-pdf",
         "file": "Health_1507_dt__02_09_2020.pdf",
         "bytes": 45089,
+        "date": "2020-09-02",
+        "department": "Health department",
         "titleEn": "Health 1507 dt 02 09 2020"
       },
       {
         "id": "tender-2020-health-1508-dt-02-09-2020-pdf",
         "file": "Health_1508_dt__02_09_2020.pdf",
         "bytes": 50438,
+        "date": "2020-09-02",
+        "department": "Health department",
         "titleEn": "Health 1508 dt 02 09 2020"
       },
       {
         "id": "tender-2020-health-1541-dt-07-09-2020-pdf",
         "file": "Health_1541_dt__07_09_2020.pdf",
         "bytes": 43572,
+        "date": "2020-09-07",
+        "department": "Health Department",
         "titleEn": "Health 1541 dt 07 09 2020"
       },
       {
         "id": "tender-2020-health-1558-dt-11092020-pdf",
         "file": "HEALTH_1558_DT_11092020.pdf",
         "bytes": 675755,
+        "date": "2020-09-11",
+        "department": "HEALTH",
         "titleEn": "HEALTH 1558 DT 11092020"
       },
       {
         "id": "tender-2020-health-1566-dt-14-09-2020-pdf",
         "file": "health_1566_dt__14_09_2020.pdf",
         "bytes": 30360,
+        "date": "2020-09-14",
+        "department": "Health department",
         "titleEn": "health 1566 dt 14 09 2020"
       },
       {
         "id": "tender-2020-health-1602-dt-21-09-2020-pdf",
         "file": "Health_1602_dt_21_09_2020.pdf",
         "bytes": 52014,
+        "date": "2020-09-21",
+        "department": "Health Department",
         "titleEn": "Health 1602 dt 21 09 2020"
       },
       {
         "id": "tender-2020-health-1726-dt-08-10-2020-pdf",
         "file": "Health_1726_dt_08_10_2020.pdf",
         "bytes": 46657,
+        "date": "2020-10-08",
+        "department": "Health Department",
         "titleEn": "Health 1726 dt 08 10 2020"
       },
       {
         "id": "tender-2020-health-1754-dt-13-10-2020-pdf",
         "file": "Health_1754_dt__13_10_2020.pdf",
         "bytes": 52433,
+        "date": "2020-10-13",
+        "department": "Health Department",
         "titleEn": "Health 1754 dt 13 10 2020"
       },
       {
         "id": "tender-2020-health-1775-dt-19-10-2020-pdf",
         "file": "Health_1775_dt__19_10_2020.pdf",
         "bytes": 64009,
+        "date": "2020-10-19",
+        "department": "Health Department",
         "titleEn": "Health 1775 dt 19 10 2020"
       },
       {
         "id": "tender-2020-health-1838-dt-28-10-2020-pdf",
         "file": "health_1838_dt_28_10_2020.pdf",
         "bytes": 52140,
+        "date": "2020-10-28",
+        "department": "Health Department",
         "titleEn": "health 1838 dt 28 10 2020"
       },
       {
         "id": "tender-2020-health-1840-dt-28-10-2020-pdf",
         "file": "Health_1840_dt__28_10_2020.pdf",
         "bytes": 60865,
+        "date": "2020-10-28",
+        "department": "Health Department",
         "titleEn": "Health 1840 dt 28 10 2020"
       },
       {
         "id": "tender-2020-health-19-dt-27-01-2021-pdf",
         "file": "Health_19_dt__27_01_2021.pdf",
         "bytes": 77450,
+        "date": "2021-01-28",
+        "department": "Health Department",
         "titleEn": "Health 19 dt 27 01 2021"
       },
       {
         "id": "tender-2020-health-1928-dt-18-11-2020-pdf",
         "file": "Health_1928_dt__18_11_2020.pdf",
         "bytes": 53394,
+        "date": "2020-11-18",
+        "department": "Health Department",
         "titleEn": "Health 1928 dt 18 11 2020"
       },
       {
         "id": "tender-2020-health-218-dt-01-10-2020-pdf",
         "file": "Health_218_dt__01_10_2020.pdf",
         "bytes": 25628,
+        "date": "2020-10-05",
+        "department": "Health Department",
         "titleEn": "Health 218 dt 01 10 2020"
       },
       {
         "id": "tender-2020-health-2197-dt-01-06-2021-pdf",
         "file": "Health_2197_dt__01_06_2021.pdf",
         "bytes": 45184,
+        "date": "2021-06-01",
+        "department": "E-Tender Department",
         "titleEn": "Health 2197 dt 01 06 2021"
       },
       {
         "id": "tender-2020-health-2198-dt-01-06-2021-pdf",
         "file": "Health_2198_dt__01_06_2021.pdf",
         "bytes": 48620,
+        "date": "2021-06-01",
+        "department": "E-Tender Department",
         "titleEn": "Health 2198 dt 01 06 2021"
       },
       {
         "id": "tender-2020-health-246-dt-25-01-2021-pdf",
         "file": "Health_246_dt__25_01_2021.pdf",
         "bytes": 50540,
+        "date": "2021-01-25",
+        "department": "Health Department",
         "titleEn": "Health 246 dt 25 01 2021"
       },
       {
         "id": "tender-2020-health-30-dt-02-01-2020-pdf",
         "file": "Health_30_dt__02_01_2020.pdf",
         "bytes": 1073931,
+        "date": "2020-01-03",
+        "department": "Health Department",
         "titleEn": "Health 30 dt 02 01 2020"
       },
       {
         "id": "tender-2020-health-318-dt-20-02-2020-pdf",
         "file": "Health_318_dt__20_02_2020.pdf",
         "bytes": 28634,
+        "date": "2020-02-20",
+        "department": "Health Department",
         "titleEn": "Health 318 dt 20 02 2020"
       },
       {
         "id": "tender-2020-health-3392-dt-24-09-2021-pdf",
         "file": "Health_3392_dt__24_09_2021.pdf",
         "bytes": 396785,
+        "date": "2021-09-24",
+        "department": "Health Department",
         "titleEn": "Health 3392 dt 24 09 2021"
       },
       {
         "id": "tender-2020-health-3396-dt-24-09-2021-pdf",
         "file": "Health_3396_dt__24_09_2021.pdf",
         "bytes": 56072,
+        "date": "2021-09-24",
+        "department": "Health Department",
         "titleEn": "Health 3396 dt 24 09 2021"
       },
       {
         "id": "tender-2020-health-350-dt-28-02-2020-pdf",
         "file": "Health_350_dt__28_02_2020.pdf",
         "bytes": 41422,
+        "date": "2020-02-28",
+        "department": "Health Department",
         "titleEn": "Health 350 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-351-dt-28-02-2020-pdf",
         "file": "Health_351_dt__28_02_2020.pdf",
         "bytes": 43943,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 351 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-352-dt-28-02-2020-pdf",
         "file": "Health_352_dt__28_02_2020.pdf",
         "bytes": 47538,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 352 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-353-dt-28-02-2020-pdf",
         "file": "Health_353_dt__28_02_2020.pdf",
         "bytes": 45840,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 353 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-354-dt-28-02-2020-pdf",
         "file": "Health_354_dt__28_02_2020.pdf",
         "bytes": 44243,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 354 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-355-dt-28-02-2020-pdf",
         "file": "Health_355_dt__28_02_2020.pdf",
         "bytes": 45382,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 355 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-356-dt-28-02-2020-pdf",
         "file": "Health_356_dt__28_02_2020.pdf",
         "bytes": 38072,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 356 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-357-dt-28-02-2020-pdf",
         "file": "Health_357_dt__28_02_2020.pdf",
         "bytes": 35679,
+        "date": "2020-02-28",
+        "department": "Health",
         "titleEn": "Health 357 dt 28 02 2020"
       },
       {
         "id": "tender-2020-health-3642-dt-26-10-2021-pdf",
         "file": "Health_3642_dt_26_10_2021.pdf",
         "bytes": 230640,
+        "date": "2021-10-27",
+        "department": "Health Department",
         "titleEn": "Health 3642 dt 26 10 2021"
       },
       {
         "id": "tender-2020-health-376-dt-03-03-2020-pdf",
         "file": "Health_376_dt__03_03_2020.pdf",
         "bytes": 50233,
+        "date": "2020-03-03",
+        "department": "Health Department",
         "titleEn": "Health 376 dt 03 03 2020"
       },
       {
         "id": "tender-2020-health-38-dt-15-01-2020-pdf",
         "file": "Health_38_dt__15_01_2020.pdf",
         "bytes": 103659,
+        "date": "2020-01-15",
+        "department": "Health Department",
         "titleEn": "Health 38 dt 15 01 2020"
       },
       {
         "id": "tender-2020-health-3873-dt-25-11-2021-pdf",
         "file": "Health_3873_dt_25_11_2021.pdf",
         "bytes": 472602,
+        "date": "2021-11-25",
+        "department": "Health Department",
         "titleEn": "Health 3873 dt 25 11 2021"
       },
       {
         "id": "tender-2020-health-39-dt-09-01-2020-pdf",
         "file": "Health_39_dt__09_01_2020.pdf",
         "bytes": 27001,
+        "date": "2020-01-09",
+        "department": "Health Department",
         "titleEn": "Health 39 dt 09 01 2020"
       },
       {
         "id": "tender-2020-health-410-dt-09-03-2020-pdf",
         "file": "Health_410_Dt_09_03_2020.pdf",
         "bytes": 658061,
+        "date": "2020-03-09",
+        "department": "HEALTH",
         "titleEn": "Health 410 Dt 09 03 2020"
       },
       {
         "id": "tender-2020-health-411-dt-09-03-2020-pdf",
         "file": "Health_411_Dt_09_03_2020.pdf",
         "bytes": 660321,
+        "date": "2020-03-09",
+        "department": "HEALTH",
         "titleEn": "Health 411 Dt 09 03 2020"
       },
       {
         "id": "tender-2020-health-412-dt-09-03-2020-pdf",
         "file": "Health_412_Dt_09_03_2020.pdf",
         "bytes": 666735,
+        "date": "2020-03-09",
+        "department": "HEALTH",
         "titleEn": "Health 412 Dt 09 03 2020"
       },
       {
         "id": "tender-2020-health-439-dt-22-02-2021-pdf",
         "file": "Health_439_dt__22_02_2021.pdf",
         "bytes": 54367,
+        "date": "2021-02-22",
+        "department": "Health Department",
         "titleEn": "Health 439 dt 22 02 2021"
       },
       {
         "id": "tender-2020-health-44-dt-31-08-2021-pdf",
         "file": "Health_44_dt__31_08_2021.pdf",
         "bytes": 78854,
+        "date": "2021-08-31",
+        "department": "Health Department",
         "titleEn": "Health 44 dt 31 08 2021"
       },
       {
         "id": "tender-2020-health-502-dt-26-02-2021-pdf",
         "file": "Health_502_dt__26_02_2021.pdf",
         "bytes": 42908,
+        "date": "2021-02-26",
+        "department": "Health Department",
         "titleEn": "Health 502 dt 26 02 2021"
       },
       {
         "id": "tender-2020-health-505-dt-26-03-2020-pdf",
         "file": "Health_505_dt__26_03_2020.pdf",
         "bytes": 26269,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 505 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-506-dt-26-03-2020-pdf",
         "file": "Health_506_dt__26_03_2020.pdf",
         "bytes": 26902,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 506 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-507-dt-26-03-2020-pdf",
         "file": "Health_507_dt__26_03_2020.pdf",
         "bytes": 23597,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 507 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-508-dt-26-03-2020-pdf",
         "file": "Health_508_dt__26_03_2020.pdf",
         "bytes": 25233,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 508 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-509-dt-26-03-2020-pdf",
         "file": "Health_509_dt__26_03_2020.pdf",
         "bytes": 25993,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 509 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-510-dt-26-03-2020-pdf",
         "file": "Health_510_dt__26_03_2020.pdf",
         "bytes": 29277,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 510 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-511-dt-26-03-2020-pdf",
         "file": "Health_511_dt__26_03_2020.pdf",
         "bytes": 25677,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 511 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-512-dt-26-03-2020-pdf",
         "file": "Health_512_dt__26_03_2020.pdf",
         "bytes": 24108,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 512 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-513-dt-26-03-2020-pdf",
         "file": "Health_513_dt__26_03_2020.pdf",
         "bytes": 25953,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 513 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-514-dt-26-03-2020-pdf",
         "file": "Health_514_dt__26_03_2020.pdf",
         "bytes": 30054,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 514 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-515-dt-26-03-2020-pdf",
         "file": "Health_515_dt__26_03_2020.pdf",
         "bytes": 26817,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 515 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-516-dt-07-02-2020-pdf",
         "file": "Health_516_dt__07_02_2020.pdf",
         "bytes": 42692,
+        "date": "2020-02-12",
+        "department": "Health Department",
         "titleEn": "Health 516 dt 07 02 2020"
       },
       {
         "id": "tender-2020-health-516-dt-26-03-2020-pdf",
         "file": "Health_516_dt__26_03_2020.pdf",
         "bytes": 28097,
+        "date": "2020-03-26",
+        "department": "Health Department",
         "titleEn": "Health 516 dt 26 03 2020"
       },
       {
         "id": "tender-2020-health-52-dt-10-01-2020-pdf",
         "file": "Health_52_dt__10_01_2020.pdf",
         "bytes": 33415,
+        "date": "2020-01-13",
+        "department": "Health Department",
         "titleEn": "Health 52 dt 10 01 2020"
       },
       {
         "id": "tender-2020-health-528-dt-14-01-2020-pdf",
         "file": "Health_528_dt__14_01_2020.pdf",
         "bytes": 80171,
+        "date": "2020-01-15",
+        "department": "Health Department",
         "titleEn": "Health 528 dt 14 01 2020"
       },
       {
         "id": "tender-2020-health-545-dt-08-03-2021-pdf",
         "file": "Health_545_dt__08_03_2021.pdf",
         "bytes": 59343,
+        "date": "2021-03-09",
+        "department": "Health Department",
         "titleEn": "Health 545 dt 08 03 2021"
       },
       {
         "id": "tender-2020-health-570-dt-04-02-2020-1-pdf",
         "file": "Health_570_dt__04_02_2020 (1).pdf",
         "bytes": 50186,
+        "date": "2020-02-06",
+        "department": "Health Department",
         "titleEn": "Health 570 dt 04 02 2020 (1)"
       },
       {
         "id": "tender-2020-health-59-dt-27-01-2020-pdf",
         "file": "Health_59_dt_27_01_2020.pdf",
         "bytes": 40466,
+        "date": "2020-01-28",
+        "department": "Health Department",
         "titleEn": "Health 59 dt 27 01 2020"
       },
       {
         "id": "tender-2020-health-609-dt-16-03-2021-pdf",
         "file": "Health_609_dt__16_03_2021.pdf",
         "bytes": 50635,
+        "date": "2021-03-16",
+        "department": "Health Department",
         "titleEn": "Health 609 dt 16 03 2021"
       },
       {
         "id": "tender-2020-health-639-dt-15-04-2020-pdf",
         "file": "HEALTH_639_DT_15_04_2020.pdf",
         "bytes": 1057244,
+        "date": "2020-04-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 639 DT 15 04 2020"
       },
       {
         "id": "tender-2020-health-64-dt-07-01-2020-pdf",
         "file": "Health_64_dt__07_01_2020.pdf",
         "bytes": 52658,
+        "date": "2021-01-07",
+        "department": "Health Department",
         "titleEn": "Health 64 dt 07 01 2020"
       },
       {
         "id": "tender-2020-health-640-dt-15-04-2020-pdf",
         "file": "HEALTH_640_DT_15_04_2020.pdf",
         "bytes": 1049515,
+        "date": "2020-04-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 640 DT 15 04 2020"
       },
       {
         "id": "tender-2020-health-641-dt-15-04-2020-pdf",
         "file": "HEALTH_641_DT_15_04_2020.pdf",
         "bytes": 1122418,
+        "date": "2020-04-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 641 DT 15 04 2020"
       },
       {
         "id": "tender-2020-health-65-dt-07-01-2020-pdf",
         "file": "Health_65_dt__07_01_2020.pdf",
         "bytes": 54010,
+        "date": "2021-01-07",
+        "department": "Health Department",
         "titleEn": "Health 65 dt 07 01 2020"
       },
       {
         "id": "tender-2020-health-652-dt-16-04-2020-pdf",
         "file": "HEALTH_652_DT_16_04_2020.pdf",
         "bytes": 1307976,
+        "date": "2020-04-16",
+        "department": "HEALTH",
         "titleEn": "HEALTH 652 DT 16 04 2020"
       },
       {
         "id": "tender-2020-health-654-dt-16-04-2020-pdf",
         "file": "HEALTH_654_DT_16_04_2020.pdf",
         "bytes": 965512,
+        "date": "2020-04-16",
+        "department": "HEALTH",
         "titleEn": "HEALTH 654 DT 16 04 2020"
       },
       {
         "id": "tender-2020-health-66-dt-07-01-2020-pdf",
         "file": "Health_66_dt__07_01_2020.pdf",
         "bytes": 47824,
+        "date": "2021-01-07",
+        "department": "Health Department",
         "titleEn": "Health 66 dt 07 01 2020"
       },
       {
         "id": "tender-2020-health-665-dt-17-04-2020-pdf",
         "file": "HEALTH_665_DT_17_04_2020.pdf",
         "bytes": 1023506,
+        "date": "2020-04-17",
+        "department": "HEALTH",
         "titleEn": "HEALTH 665 DT 17 04 2020"
       },
       {
         "id": "tender-2020-health-676-dt-22-03-2021-pdf",
         "file": "Health_676_dt__22_03_2021.pdf",
         "bytes": 59422,
+        "date": "2021-03-22",
+        "department": "Health Department",
         "titleEn": "Health 676 dt 22 03 2021"
       },
       {
         "id": "tender-2020-health-697-dt-21-04-2020-pdf",
         "file": "HEALTH_697_DT_21_04_2020.pdf",
         "bytes": 2119691,
+        "date": "2020-04-21",
+        "department": "HEALTH",
         "titleEn": "HEALTH 697 DT 21 04 2020"
       },
       {
         "id": "tender-2020-health-698-dt-21-04-2020-pdf",
         "file": "HEALTH_698_DT_21_04_2020.pdf",
         "bytes": 1052715,
+        "date": "2020-04-21",
+        "department": "HEALTH",
         "titleEn": "HEALTH 698 DT 21 04 2020"
       },
       {
         "id": "tender-2020-health-699-dt-21-04-2020-pdf",
         "file": "HEALTH_699_DT_21_04_2020.pdf",
         "bytes": 1084030,
+        "date": "2020-04-21",
+        "department": "HEALTH",
         "titleEn": "HEALTH 699 DT 21 04 2020"
       },
       {
         "id": "tender-2020-health-728-dt-26-03-2021-pdf",
         "file": "Health_728_dt__26_03_2021.pdf",
         "bytes": 31157,
+        "date": "2021-03-26",
+        "department": "Health Department",
         "titleEn": "Health 728 dt 26 03 2021"
       },
       {
         "id": "tender-2020-health-76-dt-27-01-2020-pdf",
         "file": "Health_76_dt__27_01_2020.pdf",
         "bytes": 39245,
+        "date": "2020-01-28",
+        "department": "Health Department",
         "titleEn": "Health 76 dt 27 01 2020"
       },
       {
         "id": "tender-2020-health-762-dt-29-04-2020-pdf",
         "file": "HEALTH_762_DT_29_04_2020.pdf",
         "bytes": 664256,
+        "date": "2020-04-29",
+        "department": "HEALTH",
         "titleEn": "HEALTH 762 DT 29 04 2020"
       },
       {
         "id": "tender-2020-health-808-dt-04-05-2020-pdf",
         "file": "Health_808_Dt__04_05_2020.pdf",
         "bytes": 563707,
+        "date": "2020-05-04",
+        "department": "HEALTH",
         "titleEn": "Health 808 Dt 04 05 2020"
       },
       {
         "id": "tender-2020-health-809-dt-04-05-2020-pdf",
         "file": "Health_809_Dt__04_05_2020.pdf",
         "bytes": 410119,
+        "date": "2020-05-04",
+        "department": "HEALTH",
         "titleEn": "Health 809 Dt 04 05 2020"
       },
       {
         "id": "tender-2020-health-811-dt-04-05-2020-pdf",
         "file": "Health_811_Dt__04_05_2020.pdf",
         "bytes": 272735,
+        "date": "2020-05-04",
+        "department": "HEALTH",
         "titleEn": "Health 811 Dt 04 05 2020"
       },
       {
         "id": "tender-2020-health-812-dt-11052020-pdf",
         "file": "HEALTH_812_DT_11052020.pdf",
         "bytes": 857727,
+        "date": "2020-05-11",
+        "department": "HEALTH",
         "titleEn": "HEALTH 812 DT 11052020"
       },
       {
         "id": "tender-2020-health-813-dt-11052020-pdf",
         "file": "HEALTH_813_DT_11052020.pdf",
         "bytes": 982490,
+        "date": "2020-05-11",
+        "department": "HEALTH",
         "titleEn": "HEALTH 813 DT 11052020"
       },
       {
         "id": "tender-2020-health-814-dt-11052020-pdf",
         "file": "HEALTH_814_DT_11052020.pdf",
         "bytes": 975099,
+        "date": "2020-05-11",
+        "department": "HEALTH",
         "titleEn": "HEALTH 814 DT 11052020"
       },
       {
         "id": "tender-2020-health-815-dt-11052020-pdf",
         "file": "HEALTH_815_DT_11052020.pdf",
         "bytes": 940161,
+        "date": "2020-05-11",
+        "department": "HEALTH",
         "titleEn": "HEALTH 815 DT 11052020"
       },
       {
         "id": "tender-2020-health-816-dt-12052020-pdf",
         "file": "HEALTH_816_DT_12052020.pdf",
         "bytes": 881519,
+        "date": "2020-05-12",
+        "department": "HEALTH",
         "titleEn": "HEALTH 816 DT 12052020"
       },
       {
         "id": "tender-2020-health-821-dt-05-05-2020-pdf",
         "file": "Health_821_Dt_05_05_2020.pdf",
         "bytes": 591701,
+        "date": "2020-05-05",
+        "department": "HEALTH",
         "titleEn": "Health 821 Dt 05 05 2020"
       },
       {
         "id": "tender-2020-health-822-dt-05-05-2020-pdf",
         "file": "Health_822_Dt_05_05_2020.pdf",
         "bytes": 591500,
+        "date": "2020-05-05",
+        "department": "HEALTH",
         "titleEn": "Health 822 Dt 05 05 2020"
       },
       {
         "id": "tender-2020-health-840-dt-14052020-pdf",
         "file": "HEALTH_840_DT_14052020.pdf",
         "bytes": 830990,
+        "date": "2020-05-14",
+        "department": "HEALTH",
         "titleEn": "HEALTH 840 DT 14052020"
       },
       {
         "id": "tender-2020-health-845-dt-08-05-2020-pdf",
         "file": "Health_845_Dt_08_05_2020.pdf",
         "bytes": 646801,
+        "date": "2020-05-08",
+        "department": "HEALTH",
         "titleEn": "Health 845 Dt 08 05 2020"
       },
       {
         "id": "tender-2020-health-846-dt-15052020-pdf",
         "file": "HEALTH_846_DT_15052020.pdf",
         "bytes": 780600,
+        "date": "2020-05-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 846 DT 15052020"
       },
       {
         "id": "tender-2020-health-853-dt-08-05-2020-pdf",
         "file": "Health_853_Dt_08_05_2020.pdf",
         "bytes": 613444,
+        "date": "2020-05-08",
+        "department": "HEALTH",
         "titleEn": "Health 853 Dt 08 05 2020"
       },
       {
         "id": "tender-2020-health-855-dt-15052020-pdf",
         "file": "HEALTH_855_DT_15052020.pdf",
         "bytes": 943162,
+        "date": "2020-05-15",
+        "department": "HEALTH",
         "titleEn": "HEALTH 855 DT 15052020"
       },
       {
         "id": "tender-2020-health-857-a-dt-20-04-2021-pdf",
         "file": "Health_857_A_DT_20_04_2021.pdf",
         "bytes": 354267,
+        "date": "2021-04-20",
+        "department": "Health Department",
         "titleEn": "Health 857 A DT 20 04 2021"
       },
       {
         "id": "tender-2020-health-857-dt-08-05-2020-pdf",
         "file": "Health_857_Dt_08_05_2020.pdf",
         "bytes": 689207,
+        "date": "2020-05-08",
+        "department": "HEALTH",
         "titleEn": "Health 857 Dt 08 05 2020"
       },
       {
         "id": "tender-2020-health-978-dt04062020-pdf",
         "file": "HEALTH_978_DT04062020.pdf",
         "bytes": 666098,
+        "date": "2020-06-04",
+        "department": "HEALTH",
         "titleEn": "HEALTH 978 DT04062020"
       },
       {
         "id": "tender-2020-health-979-dt04062020-pdf",
         "file": "HEALTH_979_DT04062020.pdf",
         "bytes": 595735,
+        "date": "2020-06-04",
+        "department": "HEALTH",
         "titleEn": "HEALTH 979 DT04062020"
       },
       {
         "id": "tender-2020-health-986-dt06062020-pdf",
         "file": "HEALTH_986_DT06062020.pdf",
         "bytes": 721754,
+        "date": "2020-06-06",
+        "department": "HEALTH",
         "titleEn": "HEALTH 986 DT06062020"
       },
       {
         "id": "tender-2020-health967dt03062020-pdf",
         "file": "HEALTH967DT03062020.pdf",
         "bytes": 352228,
+        "date": "2020-06-03",
+        "department": "HEALTH",
         "titleEn": "HEALTH967DT03062020"
       },
       {
         "id": "tender-2020-light-182-dt-06-05-2020-pdf",
         "file": "Light_182_Dt_06_05_2020.pdf",
         "bytes": 334067,
+        "date": "2020-05-08",
+        "department": "Light",
         "titleEn": "Light 182 Dt 06 05 2020"
       },
       {
         "id": "tender-2020-new-doc-2020-04-11-16-36-34-pdf",
         "file": "New_Doc_2020-04-11_16_36_34.pdf",
         "bytes": 967778,
+        "date": "2020-04-11",
+        "department": "Health",
         "titleEn": "New Doc 2020-04-11 16 36 34"
       },
       {
         "id": "tender-2020-pp-1043-dt-27-07-2020-pdf",
         "file": "PP_1043_DT_27_07_2020.pdf",
         "bytes": 1632735,
+        "date": "2020-07-27",
+        "department": "Water Works",
         "titleEn": "PP 1043 DT 27 07 2020"
       },
       {
         "id": "tender-2020-store-101-dt-26-10-2021-pdf",
         "file": "Store_101_dt__26_10_2021.pdf",
         "bytes": 40850,
+        "date": "2021-10-26",
+        "department": "Store Department",
         "titleEn": "Store 101 dt 26 10 2021"
       },
       {
         "id": "tender-2020-store-139-dt-30-12-2021-pdf",
         "file": "Store_139_dt__30_12_2021.pdf",
         "bytes": 808506,
+        "date": "2021-12-30",
+        "department": "Store Department",
         "titleEn": "Store 139 dt 30 12 2021"
       },
       {
         "id": "tender-2020-ward-eng-g-02-dt-05-05-2020-pdf",
         "file": "WARD_ENG_G_02_DT_05_05_2020.pdf",
         "bytes": 3413602,
+        "date": "2020-05-05",
+        "department": "WARD ENGINEER",
         "titleEn": "WARD ENG G 02 DT 05 05 2020"
       },
       {
         "id": "tender-2020-water-2-dt-04-08-2020-pdf",
         "file": "water_2_dt__04_08_2020.pdf",
         "bytes": 112185,
+        "date": "2020-08-05",
+        "department": "Water Works",
         "titleEn": "water 2 dt 04 08 2020"
       },
       {
         "id": "tender-2020-zoo-272-dt-28-04-2020-pdf",
         "file": "ZOO_272_DT_28_04_2020.pdf",
         "bytes": 562821,
+        "date": "2020-04-28",
+        "department": "ZOO",
         "titleEn": "ZOO 272 DT 28 04 2020"
       }
     ]
@@ -7004,474 +8302,617 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-115-20-07-2017-pdf",
         "file": "115_20_07_2017.PDF",
         "bytes": 169707,
+        "date": "2017-07-25",
         "titleEn": "115 20 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-1253-pdf",
         "file": "1253.pdf",
         "bytes": 36394,
+        "date": "2018-11-01",
+        "department": "Health Dept",
         "titleEn": "Tender 1253"
       },
       {
         "id": "tender-tender-2018-2019-213-15-07-2017-pdf",
         "file": "213_15_07_2017.PDF",
         "bytes": 112945,
+        "date": "2017-07-18",
         "titleEn": "213 15 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-292-27-07-2018-pdf",
         "file": "292_27_07_2018.PDF",
         "bytes": 11395786,
+        "date": "2018-07-27",
+        "department": "Health NUHM",
         "titleEn": "292 27 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-346-24-07-2017-pdf",
         "file": "346_24_07_2017.PDF",
         "bytes": 316393,
+        "date": "2017-07-24",
         "titleEn": "346 24 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-395-21-08-2017-pdf",
         "file": "395_21_08_2017.PDF",
         "bytes": 2401108,
+        "date": "2017-08-22",
         "titleEn": "395 21 08 2017"
       },
       {
         "id": "tender-tender-2018-2019-448-pdf",
         "file": "448.pdf",
         "bytes": 68538,
+        "date": "2018-11-01",
+        "department": "कार्यकारी अभियंता",
         "titleEn": "Tender 448"
       },
       {
         "id": "tender-tender-2018-2019-592-19-12-2017-pdf",
         "file": "592_19_12_2017.PDF",
         "bytes": 1882900,
+        "date": "2017-12-19",
+        "department": "Zone 4",
         "titleEn": "592 19 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-988-14-12-2017-pdf",
         "file": "988_14_12_2017.PDF",
         "bytes": 373592,
+        "date": "2017-12-14",
+        "department": "Health NHM",
         "titleEn": "988 14 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-ascdcl-rfp-for-bus-shelters-vol-i-pdf",
         "file": "ASCDCL_RFP_for_Bus_Shelters_Vol_I.pdf",
         "bytes": 1211158,
+        "date": "2019-01-22",
+        "department": "Smart CITY",
         "titleEn": "ASCDCL RFP for Bus Shelters Vol I"
       },
       {
         "id": "tender-tender-2018-2019-ascdcl-rfp-for-bus-shelters-vol-ii-pdf",
         "file": "ASCDCL_RFP_for_Bus_Shelters_Vol_II.pdf",
         "bytes": 1713876,
+        "date": "2019-01-22",
+        "department": "Smart City",
         "titleEn": "ASCDCL RFP for Bus Shelters Vol II"
       },
       {
         "id": "tender-tender-2018-2019-comp-254-dt-26-12-2019-pdf",
         "file": "comp_254_dt__26_12_2019.pdf",
         "bytes": 63848,
+        "date": "2019-12-26",
+        "department": "Computer Section",
         "titleEn": "comp 254 dt 26 12 2019"
       },
       {
         "id": "tender-tender-2018-2019-comp-53-dt-13-03-2019-pdf",
         "file": "Comp_53_dt__13_03_2019.pdf",
         "bytes": 76955,
+        "date": "2019-03-13",
+        "department": "Computer Section",
         "titleEn": "Comp 53 dt 13 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-comp-54-dt-13-03-2019-pdf",
         "file": "Comp_54_dt__13_03_2019.pdf",
         "bytes": 99349,
+        "date": "2019-03-13",
+        "department": "Computer section",
         "titleEn": "Comp 54 dt 13 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-computer-104-dt-25-06-2019-pdf",
         "file": "Computer_104_Dt_25_06_2019.PDF",
         "bytes": 49820,
+        "date": "2019-06-25",
+        "department": "Computer Section",
         "titleEn": "Computer 104 Dt 25 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-computer-107-dt-26-06-2019-pdf",
         "file": "Computer_107_Dt__26_06_2019.PDF",
         "bytes": 50762,
+        "date": "2019-06-26",
+        "department": "Computer Section",
         "titleEn": "Computer 107 Dt 26 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-computer-116-dt-06-07-2019-pdf",
         "file": "Computer_116_DT_06_07_2019.PDF",
         "bytes": 838840,
+        "date": "2019-07-06",
+        "department": "COMPUTER SECTIOM",
         "titleEn": "Computer 116 DT 06 07 2019"
       },
       {
         "id": "tender-tender-2018-2019-computer-131-02-06-2018-pdf",
         "file": "Computer_131_02_06_2018.PDF",
         "bytes": 1221377,
+        "date": "2018-06-02",
+        "department": "Computer Section",
         "titleEn": "Computer 131 02 06 2018"
       },
       {
         "id": "tender-tender-2018-2019-computer-139-12-06-2018-pdf",
         "file": "Computer_139_12_06_2018_.PDF",
         "bytes": 882468,
+        "date": "2018-06-12",
+        "department": "Computer Section",
         "titleEn": "Computer 139 12 06 2018"
       },
       {
         "id": "tender-tender-2018-2019-computer-148-dt28-08-2018-pdf",
         "file": "Computer_148_dt28_08_2018.pdf",
         "bytes": 167702,
+        "date": "2018-08-28",
+        "department": "Computer Section",
         "titleEn": "Computer 148 dt28 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-computer-166-05-07-2017-pdf",
         "file": "Computer_166_05_07_2017.PDF",
         "bytes": 143104,
+        "date": "2017-07-05",
         "titleEn": "Computer 166 05 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-computer-207-18-09-17-pdf",
         "file": "Computer_207_18_09_17.pdf",
         "bytes": 702199,
+        "date": "2017-09-18",
         "titleEn": "Computer 207 18 09 17"
       },
       {
         "id": "tender-tender-2018-2019-computer-215-06-10-2017-pdf",
         "file": "Computer_215_06_10_2017.PDF",
         "bytes": 992632,
+        "date": "2017-10-06",
         "titleEn": "Computer 215 06 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-computer-223-17-10-2017-pdf",
         "file": "Computer_223_17_10_2017.PDF",
         "bytes": 957896,
+        "date": "2017-10-17",
         "titleEn": "Computer 223 17 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-computer-257-dt-15-11-2018-pdf",
         "file": "Computer_257_dt__15_11_2018.PDF",
         "bytes": 76967,
+        "date": "2018-11-15",
+        "department": "Computer Section",
         "titleEn": "Computer 257 dt 15 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-computer-92-dt-01-06-2019-pdf",
         "file": "Computer_92_Dt_01_06_2019.pdf",
         "bytes": 1929996,
+        "date": "2019-06-01",
+        "department": "Computer Section",
         "titleEn": "Computer 92 Dt 01 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-dept-eng-425-dt-20-11-2018-pdf",
         "file": "dept_eng_425_dt__20_11_2018.PDF",
         "bytes": 89493,
+        "date": "2018-11-20",
+        "department": "Executive Eng. Department",
         "titleEn": "dept eng 425 dt 20 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-dy-eng-161-31-07-2018-pdf",
         "file": "Dy__Eng_161_31_07_2018.PDF",
         "bytes": 1507368,
+        "date": "2018-08-31",
+        "department": "Water Works",
         "titleEn": "Dy Eng 161 31 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-dy-e-495-09-01-2018-pdf",
         "file": "DY_E_495_09_01_2018.PDF",
         "bytes": 1554333,
+        "date": "2018-01-10",
+        "department": "DY.ENGINEER",
         "titleEn": "DY E 495 09 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-dy-eng-432-16-12-2017-pdf",
         "file": "Dy_Eng_432_16_12_2017.PDF",
         "bytes": 1278065,
+        "date": "2017-12-18",
+        "department": "Executive Engineer",
         "titleEn": "Dy Eng 432 16 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-dy-eng-05-dt-15-07-2019-pdf",
         "file": "dy_eng-05_dt__15_07_2019.pdf",
         "bytes": 64169,
+        "date": "2019-07-16",
+        "department": "Dy. Engineer Zone 05",
         "titleEn": "dy eng-05 dt 15 07 2019"
       },
       {
         "id": "tender-tender-2018-2019-dye-462-28-12-2017-pdf",
         "file": "DYE_462_28_12_2017.PDF",
         "bytes": 1228697,
+        "date": "2018-01-08",
+        "department": "DY.ENGINEER",
         "titleEn": "DYE 462 28 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-08-08-11-2017-pdf",
         "file": "E-Tender_08_08_11_2017.PDF",
         "bytes": 53115,
+        "date": "2017-11-10",
+        "department": "E-Tender",
         "titleEn": "E-Tender 08 08 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-09-08-11-2017-pdf",
         "file": "E-Tender_09_08_11_2017.PDF",
         "bytes": 52244,
+        "date": "2017-11-10",
+        "department": "E-Tender",
         "titleEn": "E-Tender 09 08 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-1-03-11-2017-pdf",
         "file": "E-Tender_1_03_11_2017.PDF",
         "bytes": 435487,
+        "date": "2017-11-03",
+        "department": "E-Tender",
         "titleEn": "E-Tender 1 03 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-10-08-11-2017-pdf",
         "file": "E-Tender_10_08_11_2017.PDF",
         "bytes": 51720,
+        "date": "2017-11-10",
+        "department": "E-Tender",
         "titleEn": "E-Tender 10 08 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-100-08-05-2018-pdf",
         "file": "E-Tender_100_08_05_2018.PDF",
         "bytes": 47196,
+        "date": "2018-05-08",
+        "department": "E-Tender",
         "titleEn": "E-Tender 100 08 05 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-100-14-07-2017-pdf",
         "file": "E-Tender_100_14_07_2017.PDF",
         "bytes": 77376,
+        "date": "2017-07-17",
         "titleEn": "E-Tender 100 14 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-101-14-07-2017-pdf",
         "file": "E-Tender_101_14_07_2017.PDF",
         "bytes": 68857,
+        "date": "2017-07-17",
         "titleEn": "E-Tender 101 14 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-101-18-05-2018-pdf",
         "file": "E-Tender_101_18_05_2018.PDF",
         "bytes": 1141046,
+        "date": "2018-05-18",
+        "department": "E-Tender",
         "titleEn": "E-Tender 101 18 05 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-102-22-05-2018-pdf",
         "file": "E-Tender_102_22_05_2018.PDF",
         "bytes": 948970,
+        "date": "2018-05-22",
+        "department": "E-Tender",
         "titleEn": "E-Tender 102 22 05 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-106-14-07-2017-pdf",
         "file": "E-Tender_106_14_07_2017.PDF",
         "bytes": 84596,
+        "date": "2017-07-17",
         "titleEn": "E-Tender 106 14 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-107-08-06-2018-pdf",
         "file": "E-Tender_107_08_06_2018.PDF",
         "bytes": 1325368,
+        "date": "2018-06-11",
+        "department": "E-Tender",
         "titleEn": "E-Tender 107 08 06 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-11-16-11-2017-pdf",
         "file": "E-Tender_11_16_11_2017.PDF",
         "bytes": 58042,
+        "date": "2017-11-16",
+        "department": "Zone 6",
         "titleEn": "E-Tender 11 16 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-110-02-07-2018-pdf",
         "file": "E-Tender_110_02_07_2018.PDF",
         "bytes": 1027906,
+        "date": "2018-07-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 110 02 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-115-21-07-2018-pdf",
         "file": "E-Tender_115_21_07_2018.PDF",
         "bytes": 1719320,
+        "date": "2018-07-21",
+        "department": "E-Tender",
         "titleEn": "E-Tender 115 21 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-116-25-07-2018-pdf",
         "file": "E-Tender_116_25_07_2018.PDF",
         "bytes": 800759,
+        "date": "2018-07-25",
+        "department": "E-Tender",
         "titleEn": "E-Tender 116 25 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-118-31-07-2018-pdf",
         "file": "E-Tender_118_31_07_2018.PDF",
         "bytes": 1143195,
+        "date": "2018-08-31",
+        "department": "E-Tender",
         "titleEn": "E-Tender 118 31 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-12-16-11-2017-pdf",
         "file": "E-Tender_12_16_11_2017.PDF",
         "bytes": 59057,
+        "date": "2017-11-16",
+        "department": "Zone 6",
         "titleEn": "E-Tender 12 16 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-121-06-08-2018-pdf",
         "file": "E-Tender_121_06_08_2018.PDF",
         "bytes": 677949,
+        "date": "2018-08-06",
+        "department": "E-Tender",
         "titleEn": "E-Tender 121 06 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-122-09-08-2018-pdf",
         "file": "E-Tender_122_09_08_2018.pdf",
         "bytes": 19313,
+        "date": "2018-08-09",
+        "department": "E-Tender",
         "titleEn": "E-Tender 122 09 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-123-14-08-2018-pdf",
         "file": "E-Tender_123_14_08_2018.PDF",
         "bytes": 929292,
+        "date": "2018-08-14",
+        "department": "E-Tender",
         "titleEn": "E-Tender 123 14 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-124-dt-20-08-2018-pdf",
         "file": "E-Tender_124_dt__20_08_2018.pdf",
         "bytes": 18628,
+        "date": "2018-08-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 124 dt 20 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-125-dt-28-08-2015-pdf",
         "file": "E-Tender_125_dt_28_08_2015.pdf",
         "bytes": 107790,
+        "date": "2018-08-28",
+        "department": "E-Tender",
         "titleEn": "E-Tender 125 dt 28 08 2015"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-127-dt-06-07-2018-pdf",
         "file": "E-Tender_127_dt_06_07_2018.PDF",
         "bytes": 21468,
+        "date": "2018-09-06",
+        "department": "E-Tender",
         "titleEn": "E-Tender 127 dt 06 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-129-dt-19-09-20181-pdf",
         "file": "E-tender_129_dt_19_09_20181.PDF",
         "bytes": 20512,
+        "date": "2018-09-19",
+        "department": "Etender deparment",
         "titleEn": "E-tender 129 dt 19 09 20181"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-13-16-11-2017-pdf",
         "file": "E-Tender_13_16_11_2017.PDF",
         "bytes": 115208,
+        "date": "2017-11-16",
+        "department": "Zone 6",
         "titleEn": "E-Tender 13 16 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-130-dt-18-09-2018-pdf",
         "file": "E-Tender_130_dt__18_09_2018.pdf",
         "bytes": 19966,
+        "date": "2018-09-18",
+        "department": "E-Tender",
         "titleEn": "E-Tender 130 dt 18 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-136-dt-27-09-2018-pdf",
         "file": "E-Tender_136_dt_27_09_2018.PDF",
         "bytes": 26775,
+        "date": "2018-09-27",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 136 dt 27 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-137-27-07-2017-pdf",
         "file": "E-Tender_137_27_07_2017.PDF",
         "bytes": 86220,
+        "date": "2017-07-27",
         "titleEn": "E-Tender 137 27 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-139-dt-20-11-2018-pdf",
         "file": "E-tender_139_dt__20_11_2018.PDF",
         "bytes": 69299,
+        "date": "2018-11-20",
+        "department": "E-Tender Departmenrt",
         "titleEn": "E-tender 139 dt 20 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-140-dt-22-11-2018-pdf",
         "file": "E-Tender_140_dt_22_11_2018.PDF",
         "bytes": 50430,
+        "date": "2018-11-22",
+        "department": "E-tender Department",
         "titleEn": "E-Tender 140 dt 22 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-141-dt-29-11-2018-pdf",
         "file": "E-tender_141_dt_29_11_2018.pdf",
         "bytes": 224641,
+        "date": "2018-11-29",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 141 dt 29 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-145-dt-07-12-2018-pdf",
         "file": "E-Tender_145_dt__07_12_2018.PDF",
         "bytes": 45170,
+        "date": "2018-12-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 145 dt 07 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-15-18-11-2017-pdf",
         "file": "E-Tender_15__18_11_2017.PDF",
         "bytes": 51662,
+        "date": "2017-11-18",
+        "department": "E-Tender",
         "titleEn": "E-Tender 15 18 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-15-18-11-2017-pdf-2",
         "file": "E-Tender_15_18_11_2017.PDF",
         "bytes": 52741,
+        "date": "2017-11-18",
+        "department": "E-Tender",
         "titleEn": "E-Tender 15 18 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-152-dt-15-12-2018-pdf",
         "file": "E-tender_152_dt__15_12_2018.PDF",
         "bytes": 131064,
+        "date": "2018-12-15",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 152 dt 15 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-16-21-11-2017-pdf",
         "file": "E-Tender_16_21_11_2017.PDF",
         "bytes": 104619,
+        "date": "2017-11-22",
+        "department": "E-Tender",
         "titleEn": "E-Tender 16 21 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-161-dt-19-12-2018-pdf",
         "file": "E-Tender_161_dt__19_12_2018.PDF",
         "bytes": 97418,
+        "date": "2018-12-21",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 161 dt 19 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-166-dt-31-12-2018-pdf",
         "file": "E-Tender_166_dt_31_12_2018.pdf",
         "bytes": 299356,
+        "date": "2018-12-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 166 dt 31 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-178-dt-05-01-2019-pdf",
         "file": "E-tender_178_dt__05_01_2019.pdf",
         "bytes": 321414,
+        "date": "2019-01-05",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 178 dt 05 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-18-21-11-2017-pdf",
         "file": "E-Tender_18_21_11_2017.PDF",
         "bytes": 53076,
+        "date": "2017-11-21",
+        "department": "E-Tender",
         "titleEn": "E-Tender 18 21 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-182-02-08-17-pdf",
         "file": "E-Tender_182_02_08_17.PDF",
         "bytes": 706326,
+        "date": "2017-08-02",
         "titleEn": "E-Tender 182 02 08 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-183-02-08-17-pdf",
         "file": "E-Tender_183_02_08_17.PDF",
         "bytes": 625728,
+        "date": "2017-08-02",
         "titleEn": "E-Tender 183 02 08 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-184-02-08-17-pdf",
         "file": "E-Tender_184_02_08_17.PDF",
         "bytes": 642349,
+        "date": "2017-08-02",
         "titleEn": "E-Tender 184 02 08 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-19-21-11-2017-pdf",
         "file": "E-Tender_19_21_11_2017.PDF",
         "bytes": 51087,
+        "date": "2017-11-21",
+        "department": "E-Tender",
         "titleEn": "E-Tender 19 21 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-196-dt-11-01-2019-pdf",
         "file": "E-tender_196_dt__11_01_2019.pdf",
         "bytes": 210586,
+        "date": "2019-01-11",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 196 dt 11 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-2-03-11-2017-pdf",
         "file": "E-Tender_2_03_11_2017.PDF",
         "bytes": 276161,
+        "date": "2017-11-03",
+        "department": "E-Tender",
         "titleEn": "E-Tender 2 03 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-20-21-11-2017-pdf",
         "file": "E-Tender_20_21_11_2017.PDF",
         "bytes": 57163,
+        "date": "2017-11-21",
+        "department": "E-Tender",
         "titleEn": "E-Tender 20 21 11 2017"
       },
       {
@@ -7484,462 +8925,590 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-21-21-11-2017-pdf",
         "file": "E-Tender_21_21_11_2017.PDF",
         "bytes": 53508,
+        "date": "2017-11-21",
+        "department": "E-Tender",
         "titleEn": "E-Tender 21 21 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-220-09-08-17-pdf",
         "file": "E-Tender_220_09_08_17.PDF",
         "bytes": 529865,
+        "date": "2017-08-09",
         "titleEn": "E-Tender 220 09 08 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-222-dt-23-01-2019-pdf",
         "file": "E-Tender_222_dt__23_01_2019.pdf",
         "bytes": 307592,
+        "date": "2019-01-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 222 dt 23 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-241-16-08-17-pdf",
         "file": "E-Tender_241_16_08_17.PDF",
         "bytes": 577659,
+        "date": "2017-08-16",
         "titleEn": "E-Tender 241 16 08 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-250-dt-02-02-2019-pdf",
         "file": "E-Tender_250_dt__02_02_2019.pdf",
         "bytes": 602448,
+        "date": "2019-02-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 250 dt 02 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-26-06-12-2017-pdf",
         "file": "E-Tender_26_06_12_2017.PDF",
         "bytes": 608772,
+        "date": "2017-12-06",
+        "department": "E-Tender",
         "titleEn": "E-Tender 26 06 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-260-dt-07-02-2019-pdf",
         "file": "E-Tender_260_dt__07_02_2019.pdf",
         "bytes": 445793,
+        "date": "2019-02-07",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 260 dt 07 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-261-21-08-2017-pdf",
         "file": "E-Tender_261_21_08_2017.PDF",
         "bytes": 569178,
+        "date": "2017-08-21",
         "titleEn": "E-Tender 261 21 08 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-262-21-08-2017-pdf",
         "file": "E-Tender_262_21_08_2017.PDF",
         "bytes": 598942,
+        "date": "2017-08-21",
         "titleEn": "E-Tender 262 21 08 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-263-21-08-2017-pdf",
         "file": "E-Tender_263_21_08_2017.PDF",
         "bytes": 531247,
+        "date": "2017-08-21",
         "titleEn": "E-Tender 263 21 08 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-264-21-08-2017-pdf",
         "file": "E-Tender_264_21_08_2017.PDF",
         "bytes": 550361,
+        "date": "2017-08-21",
         "titleEn": "E-Tender 264 21 08 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-273-dt-14-02-2019-pdf",
         "file": "E-Tender_273_dt__14_02_2019.pdf",
         "bytes": 44251,
+        "date": "2019-02-14",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 273 dt 14 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-289-dt-20-02-2019-pdf",
         "file": "E-Tender_289_dt__20_02_2019.pdf",
         "bytes": 599057,
+        "date": "2019-02-20",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 289 dt 20 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-29-12-12-2017-pdf",
         "file": "E-Tender_29_12_12_2017.PDF",
         "bytes": 595453,
+        "date": "2017-12-12",
+        "department": "E-Tender",
         "titleEn": "E-Tender 29 12 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-3-03-11-2017-pdf",
         "file": "E-Tender_3_03_11_2017.PDF",
         "bytes": 443909,
+        "date": "2017-11-03",
+        "department": "E-Tender",
         "titleEn": "E-Tender 3 03 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-30-12-12-2017-pdf",
         "file": "E-Tender_30_12_12_2017.PDF",
         "bytes": 623770,
+        "date": "2017-12-12",
+        "department": "E-Tender",
         "titleEn": "E-Tender 30 12 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-31-13-12-2017-pdf",
         "file": "E-Tender_31_13_12_2017.PDF",
         "bytes": 650460,
+        "date": "2017-12-13",
+        "department": "E-Tender",
         "titleEn": "E-Tender 31 13 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-316-04-09-17-pdf",
         "file": "E-Tender_316_04_09_17.pdf",
         "bytes": 1485240,
+        "date": "2017-09-04",
         "titleEn": "E-Tender 316 04 09 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-317-04-09-17-pdf",
         "file": "E-Tender_317_04_09_17.pdf",
         "bytes": 1402190,
+        "date": "2017-09-04",
         "titleEn": "E-Tender 317 04 09 17"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-33-14-12-2017-pdf",
         "file": "E-Tender_33_14_12_2017.PDF",
         "bytes": 670300,
+        "date": "2017-12-14",
+        "department": "E-Tender",
         "titleEn": "E-Tender 33 14 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-337-dt-02-03-2019-pdf",
         "file": "E-tender_337_dt__02_03_2019.pdf",
         "bytes": 304434,
+        "date": "2019-03-02",
+        "department": "E-Tender department",
         "titleEn": "E-tender 337 dt 02 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-34-19-12-2017-pdf",
         "file": "E-Tender_34_19_12_2017.PDF",
         "bytes": 669827,
+        "date": "2017-12-19",
+        "department": "E-Tender",
         "titleEn": "E-Tender 34 19 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-35-28-12-2017-pdf",
         "file": "E-Tender_35_28_12_2017.PDF",
         "bytes": 560544,
+        "date": "2017-12-28",
+        "department": "E-Tender",
         "titleEn": "E-Tender 35 28 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-357-dt-08-03-2019-pdf",
         "file": "E-Tender_357_dt__08_03_2019.pdf",
         "bytes": 177218,
+        "date": "2019-03-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 357 dt 08 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-36-28-12-2017-pdf",
         "file": "E-Tender_36_28_12_2017.PDF",
         "bytes": 570294,
+        "date": "2017-12-29",
+        "department": "E-Tender",
         "titleEn": "E-Tender 36 28 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-389-dt-03-06-2019-pdf",
         "file": "E-Tender_389_Dt_03_06_2019.PDF",
         "bytes": 221055,
+        "date": "2019-06-03",
+        "department": "E-Tender",
         "titleEn": "E-Tender 389 Dt 03 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-40-16-01-2018-pdf",
         "file": "E-Tender_40_16_01_2018.PDF",
         "bytes": 612539,
+        "date": "2018-01-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 40 16 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-403-20-09-2017-pdf",
         "file": "E-Tender_403_20_09_2017.pdf",
         "bytes": 905432,
+        "date": "2017-09-21",
         "titleEn": "E-Tender 403 20 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-404-dt-18-06-2019-pdf",
         "file": "E-Tender_404_dt__18_06_2019.PDF",
         "bytes": 37793,
+        "date": "2019-06-18",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 404 dt 18 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-41-16-01-2018-pdf",
         "file": "E-Tender_41_16_01_2018.PDF",
         "bytes": 656899,
+        "date": "2018-01-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 41 16 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-415-26-09-2017-pdf",
         "file": "E-Tender_415_26_09_2017.PDF",
         "bytes": 632804,
+        "date": "2017-09-26",
         "titleEn": "E-Tender 415 26 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-416-29-092017-pdf",
         "file": "E-Tender_416_29_092017.PDF",
         "bytes": 716767,
+        "date": "2017-09-29",
         "titleEn": "E-Tender 416 29 092017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-417-29-092017-pdf",
         "file": "E-Tender_417_29_092017.PDF",
         "bytes": 755512,
+        "date": "2017-09-29",
         "titleEn": "E-Tender 417 29 092017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-42-19-01-2018-pdf",
         "file": "E-Tender_42_19_01_2018.PDF",
         "bytes": 787531,
+        "date": "2018-01-19",
+        "department": "E-Tender",
         "titleEn": "E-Tender 42 19 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-421-11-10-2017-pdf",
         "file": "E-Tender_421_11_10_2017.PDF",
         "bytes": 569446,
+        "date": "2017-10-11",
         "titleEn": "E-Tender 421 11 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-422-11-10-2017-pdf",
         "file": "E-Tender_422_11_10_2017.PDF",
         "bytes": 665384,
+        "date": "2017-10-11",
         "titleEn": "E-Tender 422 11 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-423-11-10-2017-pdf",
         "file": "E-Tender_423_11_10_2017.PDF",
         "bytes": 553359,
+        "date": "2017-10-11",
         "titleEn": "E-Tender 423 11 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-424-18-10-2017-pdf",
         "file": "E-Tender_424_18_10_2017.PDF",
         "bytes": 546991,
+        "date": "2017-10-18",
         "titleEn": "E-Tender 424 18 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-43-19-01-2018-pdf",
         "file": "E-Tender_43_19_01_2018.PDF",
         "bytes": 763125,
+        "date": "2018-01-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 43 19 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-435-dt-02-07-2019-pdf",
         "file": "E-Tender_435_dt__02_07_2019.pdf",
         "bytes": 48270,
+        "date": "2019-07-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 435 dt 02 07 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-44-22-02-2017-pdf",
         "file": "E-Tender_44_22_02_2017.PDF",
         "bytes": 1119057,
+        "date": "2017-02-22",
         "titleEn": "E-Tender 44 22 02 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-44-24-01-2018-pdf",
         "file": "E-Tender_44_24_01_2018.PDF",
         "bytes": 704610,
+        "date": "2018-01-24",
+        "department": "E-Tender",
         "titleEn": "E-Tender 44 24 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-444-dt-09-07-2019-pdf",
         "file": "E-Tender_444_DT_09_07_2019.PDF",
         "bytes": 1430067,
+        "date": "2019-07-09",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 444 DT 09 07 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-45-24-01-2018-pdf",
         "file": "E-Tender_45_24_01_2018.PDF",
         "bytes": 708333,
+        "date": "2018-01-24",
+        "department": "E-Tender",
         "titleEn": "E-Tender 45 24 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-46-24-01-2018-pdf",
         "file": "E-Tender_46_24_01_2018.PDF",
         "bytes": 755767,
+        "date": "2018-01-24",
+        "department": "E-Tender",
         "titleEn": "E-Tender 46 24 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-47-01-02-2018-pdf",
         "file": "E-Tender_47_01_02_2018.PDF",
         "bytes": 479732,
+        "date": "2018-02-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 47 01 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-48-01-02-2018-pdf",
         "file": "E-Tender_48_01_02_2018.PDF",
         "bytes": 432476,
+        "date": "2018-02-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 48 01 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-482-05-01-2017-pdf",
         "file": "E-Tender_482_05_01_2017.pdf",
         "bytes": 1266970,
+        "date": "2017-01-05",
         "titleEn": "E-Tender 482 05 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-483-05-01-2017-pdf",
         "file": "E-Tender_483_05_01_2017.pdf",
         "bytes": 1129750,
+        "date": "2017-01-05",
         "titleEn": "E-Tender 483 05 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-484-05-01-2017-pdf",
         "file": "E-Tender_484_05_01_2017.pdf",
         "bytes": 883035,
+        "date": "2017-01-05",
         "titleEn": "E-Tender 484 05 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-487-dt-31-08-19-pdf",
         "file": "E-Tender_487_Dt_31_08_19.PDF",
         "bytes": 1482996,
+        "date": "2019-08-31",
+        "department": "E-TENDER",
         "titleEn": "E-Tender 487 Dt 31 08 19"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-50-02-02-2018-pdf",
         "file": "E-Tender_50_02_02_2018.PDF",
         "bytes": 379431,
+        "date": "2018-02-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 50 02 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-51-02-02-2018-pdf",
         "file": "E-Tender_51_02_02_2018.PDF",
         "bytes": 421559,
+        "date": "2018-02-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 51 02 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-516-18-01-2017-pdf",
         "file": "E-Tender_516_18_01_2017.pdf",
         "bytes": 467316,
+        "date": "2017-01-18",
         "titleEn": "E-Tender 516 18 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-52-02-02-2018-pdf",
         "file": "E-Tender_52_02_02_2018.PDF",
         "bytes": 366606,
+        "date": "2018-02-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 52 02 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-527-dt-16-09-2019-pdf",
         "file": "E-Tender_527_dt_16_09_2019.PDF",
         "bytes": 49208,
+        "date": "2019-09-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 527 dt 16 09 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-54-08-10-2018-pdf",
         "file": "E-Tender_54_08_10_2018.PDF",
         "bytes": 688211,
+        "date": "2018-02-08",
+        "department": "E-Tender",
         "titleEn": "E-Tender 54 08 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-547-30-01-2017-pdf",
         "file": "E-Tender_547_30_01_2017.pdf",
         "bytes": 1742527,
+        "date": "2017-01-30",
         "titleEn": "E-Tender 547 30 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-548-30-01-2017-pdf",
         "file": "E-Tender_548_30_01_2017.pdf",
         "bytes": 1802796,
+        "date": "2017-01-30",
         "titleEn": "E-Tender 548 30 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-549-30-01-2017-pdf",
         "file": "E-Tender_549_30_01_2017.pdf",
         "bytes": 1999236,
+        "date": "2017-01-30",
         "titleEn": "E-Tender 549 30 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-550-30-01-2017-pdf",
         "file": "E-Tender_550_30_01_2017.pdf",
         "bytes": 2106340,
+        "date": "2017-01-30",
         "titleEn": "E-Tender 550 30 01 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-552-dt-20-09-2019-pdf",
         "file": "E-Tender_552_dt__20_09_2019.pdf",
         "bytes": 39144,
+        "date": "2019-09-20",
+        "department": "E-",
         "titleEn": "E-Tender 552 dt 20 09 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-566-dt-02-11-2019-pdf",
         "file": "E-Tender_566_dt__02_11_2019.pdf",
         "bytes": 125006,
+        "date": "2019-11-02",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 566 dt 02 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-58-15-02-2018-pdf",
         "file": "E-Tender_58_15_02_2018.PDF",
         "bytes": 773590,
+        "date": "2018-02-15",
+        "department": "E-Tender",
         "titleEn": "E-Tender 58 15 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-585-dt-08-11-2019-pdf",
         "file": "E-Tender_585_dt__08_11_2019.pdf",
         "bytes": 21341,
+        "date": "2019-11-08",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 585 dt 08 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-589-dt-11-11-2019-pdf",
         "file": "E-Tender_589_dt_11_11_2019.pdf",
         "bytes": 19866,
+        "date": "2019-11-11",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 589 dt 11 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-59-15-02-2018-pdf",
         "file": "E-Tender_59_15_02_2018.PDF",
         "bytes": 678825,
+        "date": "2018-02-15",
+        "department": "E-Tender",
         "titleEn": "E-Tender 59 15 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-595-dt-16-11-2019-pdf",
         "file": "E-Tender_595_dt_16_11_2019.pdf",
         "bytes": 35053,
+        "date": "2019-11-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 595 dt 16 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-60-15-02-2018-pdf",
         "file": "E-Tender_60_15_02_2018.PDF",
         "bytes": 744542,
+        "date": "2018-02-15",
+        "department": "E-Tender",
         "titleEn": "E-Tender 60 15 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-61-16-02-2018-pdf",
         "file": "E-Tender_61_16_02_2018.PDF",
         "bytes": 699576,
+        "date": "2018-02-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 61 16 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-610-dt-22-11-2019-pdf",
         "file": "E-Tender_610_dt__22_11_2019.pdf",
         "bytes": 49644,
+        "date": "2019-11-22",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 610 dt 22 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-615-21-02-2017-pdf",
         "file": "E-Tender_615_21_02_2017.PDF",
         "bytes": 956113,
+        "date": "2017-02-21",
         "titleEn": "E-Tender 615 21 02 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-62-16-02-2018-pdf",
         "file": "E-Tender_62_16_02_2018.PDF",
         "bytes": 706511,
+        "date": "2018-02-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 62 16 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-628-dt-30-11-2019-pdf",
         "file": "E-Tender_628_dt__30_11_2019.pdf",
         "bytes": 47344,
+        "date": "2019-11-30",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 628 dt 30 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-63-16-02-2018-pdf",
         "file": "E-Tender_63_16_02_2018.PDF",
         "bytes": 663989,
+        "date": "2018-02-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 63 16 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-64-16-02-2018-pdf",
         "file": "E-Tender_64_16_02_2018.PDF",
         "bytes": 697929,
+        "date": "2018-02-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 64 16 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-641-dt-09-12-2019-pdf",
         "file": "E-tender_641_dt__09_12_2019.pdf",
         "bytes": 49151,
+        "date": "2019-12-09",
+        "department": "E-Tender Department",
         "titleEn": "E-tender 641 dt 09 12 2019"
       },
       {
@@ -7964,12 +9533,15 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-65-16-02-2018-pdf",
         "file": "E-Tender_65_16_02_2018.PDF",
         "bytes": 720754,
+        "date": "2018-02-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 65 16 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-65-20-06-2017-pdf",
         "file": "E-Tender_65_20_06_2017.PDF",
         "bytes": 78967,
+        "date": "2017-06-20",
         "titleEn": "E-Tender 65 20 06 2017"
       },
       {
@@ -7988,6 +9560,8 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-656-dt-16-12-2019-pdf",
         "file": "E-Tender_656_dt__16_12_2019.pdf",
         "bytes": 46245,
+        "date": "2019-12-16",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 656 dt 16 12 2019"
       },
       {
@@ -8000,24 +9574,32 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-66-19-02-2018-pdf",
         "file": "E-Tender_66_19_02_2018.PDF",
         "bytes": 652767,
+        "date": "2018-02-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 66 19 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-663-dt-23-12-2019-pdf",
         "file": "E-Tender_663_dt__23_12_2019.pdf",
         "bytes": 73195,
+        "date": "2019-12-23",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 663 dt 23 12 2019"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-67-19-02-2018-pdf",
         "file": "E-Tender_67_19_02_2018.PDF",
         "bytes": 622484,
+        "date": "2018-02-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 67 19 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-673-dt-30-12-2019-pdf",
         "file": "E-Tender_673_dt__30_12_2019.pdf",
         "bytes": 29343,
+        "date": "2019-12-31",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender 673 dt 30 12 2019"
       },
       {
@@ -8036,6 +9618,8 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-68-20-02-2018-pdf",
         "file": "E-Tender_68_20_02_2018.PDF",
         "bytes": 635268,
+        "date": "2018-02-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 68 20 02 2018"
       },
       {
@@ -8048,24 +9632,32 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-69-20-02-2018-pdf",
         "file": "E-Tender_69_20_02_2018.PDF",
         "bytes": 654524,
+        "date": "2018-02-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 69 20 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-70-20-02-2018-pdf",
         "file": "E-Tender_70_20_02_2018.PDF",
         "bytes": 698390,
+        "date": "2018-02-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 70 20 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-71-20-02-2018-pdf",
         "file": "E-Tender_71_20_02_2018.PDF",
         "bytes": 722487,
+        "date": "2018-02-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 71 20 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-72-22-02-2018-pdf",
         "file": "E-Tender_72_22_02_2018.PDF",
         "bytes": 591985,
+        "date": "2018-02-22",
+        "department": "E-Tender",
         "titleEn": "E-Tender 72 22 02 2018"
       },
       {
@@ -8084,666 +9676,871 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-e-tender-73-22-02-2018-pdf",
         "file": "E-Tender_73_22_02_2018.PDF",
         "bytes": 592645,
+        "date": "2018-02-22",
+        "department": "E-Tender",
         "titleEn": "E-Tender 73 22 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-74-22-02-2018-pdf",
         "file": "E-Tender_74_22_02_2018.PDF",
         "bytes": 416446,
+        "date": "2018-02-22",
+        "department": "E-Tender",
         "titleEn": "E-Tender 74 22 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-74-29-06-2017-pdf",
         "file": "E-Tender_74_29_06_2017.PDF",
         "bytes": 77451,
+        "date": "2017-06-29",
         "titleEn": "E-Tender 74 29 06 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-75-26-02-2018-pdf",
         "file": "E-Tender_75_26_02_2018.PDF",
         "bytes": 726379,
+        "date": "2018-02-26",
+        "department": "E-Tender",
         "titleEn": "E-Tender 75 26 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-75-29-06-2017-pdf",
         "file": "E-Tender_75_29_06_2017.PDF",
         "bytes": 75226,
+        "date": "2017-06-29",
         "titleEn": "E-Tender 75 29 06 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-76-28-02-2018-pdf",
         "file": "E-Tender_76_28_02_2018.PDF",
         "bytes": 590157,
+        "date": "2018-03-28",
+        "department": "E-Tender",
         "titleEn": "E-Tender 76 28 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-78-01-03-2018-pdf",
         "file": "E-Tender_78_01_03_2018.PDF",
         "bytes": 961893,
+        "date": "2018-03-01",
+        "department": "E-Tender",
         "titleEn": "E-Tender 78 01 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-79-01-07-2017-pdf",
         "file": "E-Tender_79_01_07_2017.PDF",
         "bytes": 136546,
+        "date": "2017-07-01",
         "titleEn": "E-Tender 79 01 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-79-03-07-2017-pdf",
         "file": "E-Tender_79_03_07_2017.PDF",
         "bytes": 76988,
+        "date": "2017-07-03",
         "titleEn": "E-Tender 79 03 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-79-12-03-2018-pdf",
         "file": "E-Tender_79_12_03_2018.PDF",
         "bytes": 1172800,
+        "date": "2018-03-12",
+        "department": "E-Tender",
         "titleEn": "E-Tender 79 12 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-80-01-07-2017-pdf",
         "file": "E-Tender_80_01_07_2017.PDF",
         "bytes": 96823,
+        "date": "2017-07-01",
         "titleEn": "E-Tender 80 01 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-80-14-03-2018-pdf",
         "file": "E-Tender_80_14_03_2018.PDF",
         "bytes": 831589,
+        "date": "2018-03-14",
+        "department": "E-Tender",
         "titleEn": "E-Tender 80 14 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-81-22-03-2018-pdf",
         "file": "E-Tender_81_22_03_2018.PDF",
         "bytes": 582133,
+        "date": "2018-03-22",
+        "department": "E-Tender",
         "titleEn": "E-Tender 81 22 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-83-22-03-2018-pdf",
         "file": "E-Tender_83_22_03_2018.PDF",
         "bytes": 1367291,
+        "date": "2018-03-23",
+        "department": "E-Tender",
         "titleEn": "E-Tender 83 22 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-84-23-03-2018-pdf",
         "file": "E-Tender_84_23_03_2018.PDF",
         "bytes": 788663,
+        "date": "2018-03-23",
+        "department": "E-Tender",
         "titleEn": "E-Tender 84 23 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-85-27-03-2018-pdf",
         "file": "E-Tender_85_27_03_2018.PDF",
         "bytes": 736120,
+        "date": "2018-03-27",
+        "department": "E-Tender",
         "titleEn": "E-Tender 85 27 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-86-02-04-2018-pdf",
         "file": "E-Tender_86_02_04_2018.PDF",
         "bytes": 886046,
+        "date": "2018-04-02",
+        "department": "E-Tender",
         "titleEn": "E-Tender 86 02 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-89-04-04-2018-pdf",
         "file": "E-Tender_89_04_04_2018.PDF",
         "bytes": 718145,
+        "date": "2018-04-04",
+        "department": "E-Tender",
         "titleEn": "E-Tender 89 04 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-91-06-04-2018-pdf",
         "file": "E-Tender_91_06_04_2018.PDF",
         "bytes": 952511,
+        "date": "2018-04-06",
+        "department": "E-Tender",
         "titleEn": "E-Tender 91 06 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-93-11-04-2018-pdf",
         "file": "E-Tender_93_11_04_2018.PDF",
         "bytes": 784383,
+        "date": "2018-04-11",
+        "department": "E-Tender",
         "titleEn": "E-Tender 93 11 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-96-16-004-2018-pdf",
         "file": "E-Tender_96_16_004_2018.PDF",
         "bytes": 835912,
+        "date": "2018-04-16",
+        "department": "E-Tender",
         "titleEn": "E-Tender 96 16 004 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-97-20-04-2018-pdf",
         "file": "E-Tender_97_20_04_2018.PDF",
         "bytes": 714627,
+        "date": "2018-04-20",
+        "department": "E-Tender",
         "titleEn": "E-Tender 97 20 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-98-23-04-2018-pdf",
         "file": "E-Tender_98_23_04_2018.PDF",
         "bytes": 781975,
+        "date": "2018-04-23",
+        "department": "E-Tender",
         "titleEn": "E-Tender 98 23 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-99-27-04-2018-pdf",
         "file": "E-Tender_99_27_04_2018.PDF",
         "bytes": 888846,
+        "date": "2018-04-27",
+        "department": "E-Tender",
         "titleEn": "E-Tender 99 27 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-128-dt-14-09-2018-pdf",
         "file": "E-tender-128_dt_14_09_2018.pdf",
         "bytes": 18211,
+        "date": "2018-09-14",
+        "department": "E Tender",
         "titleEn": "E-tender-128 dt 14 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tender-2018-134-dt-25-09-2018-pdf",
         "file": "E-Tender-2018-134_dt__25_09_2018.PDF",
         "bytes": 18274,
+        "date": "2018-09-25",
+        "department": "E-Tender Department",
         "titleEn": "E-Tender-2018-134 dt 25 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tendor138-dt-15-11-2018-pdf",
         "file": "E-Tendor138_DT__15_11_2018.PDF",
         "bytes": 55446,
+        "date": "2018-11-15",
+        "department": "Health Department",
         "titleEn": "E-Tendor138 DT 15 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-e-tenter-404-18-09-2017-pdf",
         "file": "E-Tenter_404_18_09_2017.pdf",
         "bytes": 490905,
+        "date": "2017-09-20",
         "titleEn": "E-Tenter 404 18 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tenter-405-18-09-2017-pdf",
         "file": "E-Tenter_405_18_09_2017.pdf",
         "bytes": 267196,
+        "date": "2017-09-20",
         "titleEn": "E-Tenter 405 18 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tenter-413-25-09-2017-pdf",
         "file": "E-Tenter_413_25_09_2017.PDF",
         "bytes": 777960,
+        "date": "2017-09-25",
         "titleEn": "E-Tenter 413 25 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-tenter-414-25-09-2017-pdf",
         "file": "E-Tenter_414_25_09_2017.PDF",
         "bytes": 838584,
+        "date": "2017-09-25",
         "titleEn": "E-Tenter 414 25 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-e-terder-143-dt-03-12-2018-pdf",
         "file": "E-terder_143_dt_03_12_2018.pdf",
         "bytes": 242751,
+        "date": "2018-12-03",
         "titleEn": "E-terder 143 dt 03 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-ee-406-30-11-2017-pdf",
         "file": "EE_406_30_11_2017.PDF",
         "bytes": 1169920,
+        "date": "2017-11-30",
+        "department": "Dy Engineers",
         "titleEn": "EE 406 30 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-ee-pp-100-21-06-2017-pdf",
         "file": "EE_PP_100_21_06_2017.PDF",
         "bytes": 355473,
+        "date": "2017-06-21",
         "titleEn": "EE PP 100 21 06 2017"
       },
       {
         "id": "tender-tender-2018-2019-ee-pp-253-16-10-2017-pdf",
         "file": "EE_PP_253_16_10_2017.PDF",
         "bytes": 1183745,
+        "date": "2017-10-16",
         "titleEn": "EE PP 253 16 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-ee-pp-289-07-11-2017-pdf",
         "file": "EE_PP_289_07_11_2017.PDF",
         "bytes": 1743726,
+        "date": "2017-11-07",
+        "department": "Water Department",
         "titleEn": "EE PP 289 07 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-ee-water-354-dt-07-09-2018-pdf",
         "file": "EE_Water_354_dt__07_09_2018.PDF",
         "bytes": 60214,
+        "date": "2018-09-11",
+        "department": "EE Water Supply",
         "titleEn": "EE Water 354 dt 07 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-ee-water-355-dt-07-09-2018-pdf",
         "file": "EE_Water_355_dt_07_09_2018.PDF",
         "bytes": 59807,
+        "date": "2018-09-11",
+        "department": "EE Water Supply",
         "titleEn": "EE Water 355 dt 07 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-ee-ww-673-dt-03-01-2019-pdf",
         "file": "EE_WW_673_dt__03_01_2019.pdf",
         "bytes": 185774,
+        "date": "2019-01-05",
+        "department": "Water works Department",
         "titleEn": "EE WW 673 dt 03 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-eeww-431-dt-3-10-2018-pdf",
         "file": "EEww-431_dt__3_10_2018.pdf",
         "bytes": 152924,
+        "date": "2018-10-03",
+        "department": "Executive Eng.(Water Works)",
         "titleEn": "EEww-431 dt 3 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-est-1-1334-dt-05-10-2018-pdf",
         "file": "EST-1-1334_dt_05_10_2018.PDF",
         "bytes": 25525,
+        "date": "2018-10-05",
+        "department": "EST-1 Department",
         "titleEn": "EST-1-1334 dt 05 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-estate-240-dt-12-12-2019-pdf",
         "file": "Estate_240_DT__12_12_2019.pdf",
         "bytes": 152767,
+        "date": "2019-12-12",
+        "department": "Estate Department",
         "titleEn": "Estate 240 DT 12 12 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-09-dt-03-01-2019-pdf",
         "file": "Garden_09_dt_03_01_2019.pdf",
         "bytes": 142057,
+        "date": "2019-01-04",
+        "department": "Garden Department",
         "titleEn": "Garden 09 dt 03 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-33-dt-15-01-2019-pdf",
         "file": "Garden_33_dt__15_01_2019.pdf",
         "bytes": 161601,
+        "date": "2019-01-15",
         "titleEn": "Garden 33 dt 15 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-540-dt-06-08-2018-pdf",
         "file": "Garden_540_Dt_06_08_2018.pdf",
         "bytes": 645564,
+        "date": "2018-08-08",
+        "department": "Garden Department",
         "titleEn": "Garden 540 Dt 06 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-58-dt-01-02-2019-pdf",
         "file": "Garden_58_Dt__01_02_2019.PDF",
         "bytes": 725125,
+        "date": "2019-02-05",
+        "department": "Garden",
         "titleEn": "Garden 58 Dt 01 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-598-28-08-2018-pdf",
         "file": "Garden_598_28_08_2018.pdf",
         "bytes": 65922,
+        "date": "2018-08-28",
+        "department": "Garden Department",
         "titleEn": "Garden 598 28 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-598-dt-26-11-2019-pdf",
         "file": "Garden_598_dt__26_11_2019.pdf",
         "bytes": 56909,
+        "date": "2019-11-26",
+        "department": "Garden Department",
         "titleEn": "Garden 598 dt 26 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-599-dt-28-08-2018-pdf",
         "file": "Garden_599_dt__28_08_2018.pdf",
         "bytes": 46673,
+        "date": "2018-08-28",
+        "department": "Garden Department",
         "titleEn": "Garden 599 dt 28 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-599-dt-26-11-2019-pdf",
         "file": "Garden_599_dt_26_11_2019.pdf",
         "bytes": 58384,
+        "date": "2019-11-26",
+        "department": "Garden Department",
         "titleEn": "Garden 599 dt 26 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-600-dt-26-11-2019-pdf",
         "file": "Garden_600_dt__26_11_2019.pdf",
         "bytes": 60295,
+        "date": "2019-11-26",
+        "department": "Garden Department",
         "titleEn": "Garden 600 dt 26 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-garden-603-dt-30-08-2018-pdf",
         "file": "Garden_603_dt_30_08_2018.pdf",
         "bytes": 35919,
+        "date": "2018-08-30",
+        "department": "Garden Department",
         "titleEn": "Garden 603 dt 30 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-607-dt-31-08-2018-pdf",
         "file": "Garden_607_dt__31_08_2018.pdf",
         "bytes": 152351,
+        "date": "2018-08-31",
+        "department": "Garden Department",
         "titleEn": "Garden 607 dt 31 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-635-dt-07-09-2018-pdf",
         "file": "Garden_635_dt_07_09_2018.PDF",
         "bytes": 43496,
+        "date": "2018-09-11",
+        "department": "Garden Department",
         "titleEn": "Garden 635 dt 07 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-658-dt-15-09-2018-pdf",
         "file": "Garden_658_dt_15_09_2018.pdf",
         "bytes": 54246,
+        "date": "2018-09-18",
+        "department": "Garden Department",
         "titleEn": "Garden 658 dt 15 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-698-dt-28-09-2018-pdf",
         "file": "Garden_698_dt__28_09_2018.PDF",
         "bytes": 51940,
+        "date": "2018-10-10",
+        "department": "Garden Department",
         "titleEn": "Garden 698 dt 28 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-707-dt-029-09-2018-pdf",
         "file": "Garden_707_dt_029_09_2018.PDF",
         "bytes": 48400,
+        "date": "2018-10-01",
+        "department": "Garden Department",
         "titleEn": "Garden 707 dt 029 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-708-dt-29-09-2018-pdf",
         "file": "Garden_708_dt_29_09_2018.PDF",
         "bytes": 49314,
+        "date": "2018-10-01",
+        "department": "Garden Department",
         "titleEn": "Garden 708 dt 29 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-766-dt-20-10-2018-pdf",
         "file": "Garden_766_dt__20_10_2018.PDF",
         "bytes": 46809,
+        "date": "2018-10-22",
+        "department": "Garden Department",
         "titleEn": "Garden 766 dt 20 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-771-dt-23-10-2018-pdf",
         "file": "Garden_771_dt_23_10_2018.PDF",
         "bytes": 48505,
+        "date": "2018-10-23",
+        "department": "Garden Department",
         "titleEn": "Garden 771 dt 23 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-garden-786-dt-31-10-2018-pdf",
         "file": "Garden_786_dt__31_10_2018.PDF",
         "bytes": 41310,
+        "date": "2018-11-01",
+        "department": "Garden Department",
         "titleEn": "Garden 786 dt 31 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1167-dt-10-05-2019-pdf",
         "file": "Health_1167_dt__10_05_2019.PDF",
         "bytes": 90087,
+        "date": "2019-05-10",
+        "department": "Health Department",
         "titleEn": "Health 1167 dt 10 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1168-dt-10-05-2019-pdf",
         "file": "Health_1168_dt__10_05_2019.PDF",
         "bytes": 59567,
+        "date": "2019-05-10",
+        "department": "Health Department",
         "titleEn": "Health 1168 dt 10 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1169-dt-10-05-2019-pdf",
         "file": "Health_1169_dt__10_05_2019.PDF",
         "bytes": 58436,
+        "date": "2019-05-10",
+        "department": "Health Department",
         "titleEn": "Health 1169 dt 10 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1170-dt-10-05-2019-pdf",
         "file": "Health_1170_dt__10_05_2019.PDF",
         "bytes": 54205,
+        "date": "2019-05-10",
+        "department": "Health Department",
         "titleEn": "Health 1170 dt 10 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1171-dt-10-05-2019-pdf",
         "file": "Health_1171_dt__10_05_2019.PDF",
         "bytes": 68542,
+        "date": "2019-05-10",
+        "department": "Health Department",
         "titleEn": "Health 1171 dt 10 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1172-dt-10-05-2019-pdf",
         "file": "Health_1172_dt__10_05_2019.PDF",
         "bytes": 69049,
+        "date": "2019-05-10",
+        "department": "Health Department",
         "titleEn": "Health 1172 dt 10 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1200-dt-14-05-2019-pdf",
         "file": "Health_1200_dt__14_05_2019.PDF",
         "bytes": 71528,
+        "date": "2019-05-14",
+        "department": "Health Department",
         "titleEn": "Health 1200 dt 14 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1201-dt-14-05-2019-pdf",
         "file": "Health_1201_dt__14_05_2019.PDF",
         "bytes": 52793,
+        "date": "2019-05-14",
+        "department": "Health Department",
         "titleEn": "Health 1201 dt 14 05 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1257-dt-28-08-2018-pdf",
         "file": "Health_1257_dt_28_08_2018.pdf",
         "bytes": 164719,
+        "date": "2018-08-28",
+        "department": "Health Section",
         "titleEn": "Health 1257 dt 28 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1316-dt-10-06-2019-pdf",
         "file": "Health_1316_dt__10_06_2019.PDF",
         "bytes": 46560,
+        "date": "2019-06-10",
+        "department": "Health Department",
         "titleEn": "Health 1316 dt 10 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1332-dt-06-09-2018-pdf",
         "file": "Health_1332_dt__06_09_2018.pdf",
         "bytes": 67917,
+        "date": "2018-09-06",
+        "department": "Health Department",
         "titleEn": "Health 1332 dt 06 09 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1335-12-09-2017-pdf",
         "file": "Health_1335_12_09_2017.PDF",
         "bytes": 1079117,
+        "date": "2017-09-13",
         "titleEn": "Health 1335 12 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-1336-12-09-2017-pdf",
         "file": "Health_1336_12_09_2017.PDF",
         "bytes": 951075,
+        "date": "2017-09-13",
         "titleEn": "Health 1336 12 09 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-1356-dt-15-06-2019-pdf",
         "file": "Health_1356_Dt_15_06_2019.PDF",
         "bytes": 2475893,
+        "date": "2019-06-15",
+        "department": "Health",
         "titleEn": "Health 1356 Dt 15 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-142-dt-29-01-2019-pdf",
         "file": "Health_142_dt__29_01_2019.pdf",
         "bytes": 134286,
+        "date": "2019-01-21",
+        "department": "Health Department",
         "titleEn": "Health 142 dt 29 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1464-dt-04-07-2019-pdf",
         "file": "Health_1464_dt__04_07_2019.pdf",
         "bytes": 73844,
+        "date": "2019-07-04",
+        "department": "Health Department",
         "titleEn": "Health 1464 dt 04 07 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-1484-07-10-2017-pdf",
         "file": "Health_1484_07_10_2017.PDF",
         "bytes": 931552,
+        "date": "2017-10-07",
         "titleEn": "Health 1484 07 10 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-1516-dt-08-10-2018-pdf",
         "file": "health_1516_dt__08_10_2018.PDF",
         "bytes": 48020,
+        "date": "2018-10-09",
+        "department": "Health Department",
         "titleEn": "health 1516 dt 08 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1662-dt-13-11-2018-pdf",
         "file": "Health_1662_dt_13_11_2018.PDF",
         "bytes": 59616,
+        "date": "2018-11-14",
+        "department": "Health Department",
         "titleEn": "Health 1662 dt 13 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1663-dt-13-11-2018-pdf",
         "file": "Health_1663_dt_13_11_2018.PDF",
         "bytes": 79298,
+        "date": "2018-11-14",
+        "department": "Health Dapartment",
         "titleEn": "Health 1663 dt 13 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1684-dt-19-11-2018-pdf",
         "file": "Health_1684_dt__19_11_2018.PDF",
         "bytes": 55866,
+        "date": "2018-11-20",
+        "department": "Health Department",
         "titleEn": "Health 1684 dt 19 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1687-dt-19-11-2018-pdf",
         "file": "Health_1687_dt__19_11_2018.PDF",
         "bytes": 47646,
+        "date": "2018-11-20",
+        "department": "Health Department",
         "titleEn": "Health 1687 dt 19 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-1779-dt-29-08-2019-pdf",
         "file": "Health_1779_Dt_29_08_2019.PDF",
         "bytes": 6452298,
+        "date": "2019-08-29",
+        "department": "HEALTH",
         "titleEn": "Health 1779 Dt 29 08 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-251-22-02-2018-pdf",
         "file": "Health_251_22_02_2018.PDF",
         "bytes": 4093905,
+        "date": "2018-02-22",
+        "department": "Health Section",
         "titleEn": "Health 251 22 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-254-22-02-2018-pdf",
         "file": "Health_254_22_02_2018.PDF",
         "bytes": 1402425,
+        "date": "2018-02-22",
+        "department": "Health Section",
         "titleEn": "Health 254 22 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-255-22-02-2018-pdf",
         "file": "Health_255_22_02_2018.PDF",
         "bytes": 3923456,
+        "date": "2018-02-22",
+        "department": "Health Section",
         "titleEn": "Health 255 22 02 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-26-dt-14-12-2018-pdf",
         "file": "Health_26_dt__14_12_2018.PDF",
         "bytes": 184462,
+        "date": "2018-12-14",
+        "department": "Health Department",
         "titleEn": "Health 26 dt 14 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-276-dt-17-07-2018-pdf",
         "file": "Health_276_Dt_17_07_2018.PDF",
         "bytes": 139154,
+        "date": "2018-07-18",
+        "department": "Health NUHM",
         "titleEn": "Health 276 Dt 17 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-29-dt-04-11-2019-pdf",
         "file": "Health_29_dt__04_11_2019.pdf",
         "bytes": 56433,
+        "date": "2019-11-05",
+        "department": "Health Department",
         "titleEn": "Health 29 dt 04 11 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-3-dt-04-01-2019-pdf",
         "file": "Health_3_dt__04_01_2019.pdf",
         "bytes": 499919,
+        "date": "2019-01-04",
+        "department": "Health Department",
         "titleEn": "Health 3 dt 04 01 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-317-dt-21-08-2018-pdf",
         "file": "Health_317_dt_21_08_2018.pdf",
         "bytes": 195455,
+        "date": "2018-08-21",
+        "department": "Health NHM",
         "titleEn": "Health 317 dt 21 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-320-dt-21-08-2018-pdf",
         "file": "Health_320_dt_21_08_2018.pdf",
         "bytes": 170084,
+        "date": "2018-08-21",
+        "department": "Health NHM",
         "titleEn": "Health 320 dt 21 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-322-dt-29-10-2018-pdf",
         "file": "Health_322_dt__29_10_2018.PDF",
         "bytes": 76020,
+        "date": "2018-10-29",
+        "department": "Health Department",
         "titleEn": "Health 322 dt 29 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-327-dt-05-11-2018-pdf",
         "file": "health_327_dt_05_11_2018.PDF",
         "bytes": 68210,
+        "date": "2018-11-05",
+        "department": "Health Department",
         "titleEn": "health 327 dt 05 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-328-dt-05-11-2018-pdf",
         "file": "Health_328_dt__05_11_2018.PDF",
         "bytes": 70297,
+        "date": "2018-11-05",
+        "department": "Health Department",
         "titleEn": "Health 328 dt 05 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-382-20-03-2018-pdf",
         "file": "Health_382_20_03_2018.PDF",
         "bytes": 1023574,
+        "date": "2018-03-20",
+        "department": "Health Section",
         "titleEn": "Health 382 20 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-427-28-03-2018-pdf",
         "file": "Health_427_28_03_2018.PDF",
         "bytes": 891380,
+        "date": "2018-03-28",
+        "department": "Health Section",
         "titleEn": "Health 427 28 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-457-03-04-2018-pdf",
         "file": "Health_457_03_04_2018.PDF",
         "bytes": 1279319,
+        "date": "2018-04-03",
+        "department": "Health Section",
         "titleEn": "Health 457 03 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-465-04-04-2018-pdf",
         "file": "Health_465_04_04_2018.PDF",
         "bytes": 1138644,
+        "date": "2018-04-04",
+        "department": "Health Section",
         "titleEn": "Health 465 04 04 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-478-dt-07-12-2019-pdf",
         "file": "Health_478_dt__07_12_2019.pdf",
         "bytes": 67364,
+        "date": "2019-12-07",
+        "department": "Health Department",
         "titleEn": "Health 478 dt 07 12 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-503-23-06-17-pdf",
         "file": "Health_503_23_06_17.PDF",
         "bytes": 112081,
+        "date": "2017-06-23",
         "titleEn": "Health 503 23 06 17"
       },
       {
         "id": "tender-tender-2018-2019-health-51-dt-07-03-2019-pdf",
         "file": "Health_51_Dt_07_03_2019.PDF",
         "bytes": 144435,
+        "date": "2019-03-08",
+        "department": "Health Department",
         "titleEn": "Health 51 Dt 07 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-555-dt-27-12-2019-pdf",
         "file": "Health_555_dt__27_12_2019.pdf",
         "bytes": 61767,
+        "date": "2019-12-27",
+        "department": "Health Department",
         "titleEn": "Health 555 dt 27 12 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-61-dt-06-03-2019-pdf",
         "file": "Health_61_dt__06_03_2019.pdf",
         "bytes": 56132,
+        "date": "2019-03-07",
+        "department": "HEALTH NUM",
         "titleEn": "Health 61 dt 06 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-63-dt-06-03-2019-pdf",
         "file": "Health_63_dt__06_03_2019.pdf",
         "bytes": 36308,
+        "date": "2019-03-07",
+        "department": "HEALTH NUHM",
         "titleEn": "Health 63 dt 06 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-726-18-05-2018-pdf",
         "file": "Health_726_18_05_2018.PDF",
         "bytes": 1008154,
+        "date": "2018-05-18",
+        "department": "Health Section",
         "titleEn": "Health 726 18 05 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-85-dt-07-03-2019-pdf",
         "file": "Health_85_dt__07_03_2019.pdf",
         "bytes": 90274,
+        "date": "2019-03-08",
+        "department": "Health Department",
         "titleEn": "Health 85 dt 07 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-9-dt-08-03-2019-pdf",
         "file": "Health_9_dt__08_03_2019.pdf",
         "bytes": 85775,
+        "date": "2019-03-08",
+        "department": "Health Department",
         "titleEn": "Health 9 dt 08 03 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-903-22-06-2018-pdf",
         "file": "Health_903_22_06_2018.PDF",
         "bytes": 883354,
+        "date": "2018-06-22",
+        "department": "Health Section",
         "titleEn": "Health 903 22 06 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-92-dt-21-01-2019-pdf",
         "file": "Health_92_dt_21_01_2019.pdf",
         "bytes": 1097575,
+        "date": "2019-01-23",
+        "department": "Health Department",
         "titleEn": "Health 92 dt 21 01 2019"
       },
       {
@@ -8756,306 +10553,400 @@ export const tenderArchiveGroups: TenderArchiveGroup[] = [
         "id": "tender-tender-2018-2019-health-nhm-1004-27-12-2017-pdf",
         "file": "Health_NHM_1004_27_12_2017.PDF",
         "bytes": 1979426,
+        "date": "2017-12-29",
+        "department": "Health NHM",
         "titleEn": "Health NHM 1004 27 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-1006-27-12-2017-pdf",
         "file": "Health_NHM_1006_27_12_2017.PDF",
         "bytes": 998402,
+        "date": "2017-12-29",
+        "department": "Health NHM",
         "titleEn": "Health NHM 1006 27 12 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-103-20-03-2018-pdf",
         "file": "Health_NHM_103_20_03_2018.PDF",
         "bytes": 1543056,
+        "date": "2018-03-20",
+        "department": "Health NHM",
         "titleEn": "Health NHM 103 20 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-19-06-01-2018-pdf",
         "file": "HEALTH_NHM_19_06_01_2018.PDF",
         "bytes": 2481325,
+        "date": "2018-01-08",
+        "department": "Health NHM",
         "titleEn": "HEALTH NHM 19 06 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-232-07-06-2018-pdf",
         "file": "Health_NHM_232_07_06_2018.PDF",
         "bytes": 4001260,
+        "date": "2018-06-07",
+        "department": "Health NHM",
         "titleEn": "Health NHM 232 07 06 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-237-06-07-2018-pdf",
         "file": "Health_NHM_237_06_07_2018.PDF",
         "bytes": 5326817,
+        "date": "2018-07-06",
+        "department": "Health NHM",
         "titleEn": "Health NHM 237 06 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-31-12-01-2018-pdf",
         "file": "Health_NHM_31_12_01_2018.PDF",
         "bytes": 6023566,
+        "date": "2018-01-12",
+        "department": "Health NHM",
         "titleEn": "Health NHM 31 12 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-312-13-08-2018-pdf",
         "file": "Health_NHM_312_13_08_2018.pdf",
         "bytes": 224475,
+        "date": "2018-08-13",
+        "department": "Health NHM",
         "titleEn": "Health NHM 312 13 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-517-04-07-2017-pdf",
         "file": "Health_NHM_517_04_07_2017.PDF",
         "bytes": 166595,
+        "date": "2017-07-06",
         "titleEn": "Health NHM 517 04 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-520-07-07-2017-pdf",
         "file": "Health_NHM_520_07_07_2017.PDF",
         "bytes": 179303,
+        "date": "2017-07-07",
         "titleEn": "Health NHM 520 07 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-521-07-07-2017-pdf",
         "file": "Health_NHM_521_07_07_2017.PDF",
         "bytes": 179297,
+        "date": "2017-07-07",
         "titleEn": "Health NHM 521 07 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-534-12-07-2017-pdf",
         "file": "Health_NHM_534_12_07_2017.PDF",
         "bytes": 124388,
+        "date": "2017-07-12",
         "titleEn": "Health NHM 534 12 07 2017"
       },
       {
         "id": "tender-tender-2018-2019-health-nhm-56-25-01-2018-pdf",
         "file": "Health_NHM_56_25_01_2018.PDF",
         "bytes": 884019,
+        "date": "2018-01-25",
+        "department": "Health NHM",
         "titleEn": "Health NHM 56 25 01 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-10-dt-04-06-2019-pdf",
         "file": "Health_NUHM_10_Dt_04_06_2019.PDF",
         "bytes": 14338988,
+        "date": "2019-06-04",
+        "department": "HEALTH NUHM",
         "titleEn": "Health NUHM 10 Dt 04 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-10-dt-06-06-2019-pdf",
         "file": "Health_NUHM_10_Dt_06_06_2019.PDF",
         "bytes": 15567245,
+        "date": "2019-06-06",
+        "department": "HEALTH NUHM",
         "titleEn": "Health NUHM 10 Dt 06 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-1163-dt-06-08-2018-pdf",
         "file": "Health_NUHM_1163_Dt_06_08_2018.PDF",
         "bytes": 2069483,
+        "date": "2018-08-06",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 1163 Dt 06 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-161-dt-04-06-2019-pdf",
         "file": "Health_NUHM_161_Dt_04_06_2019.PDF",
         "bytes": 4892027,
+        "date": "2019-06-04",
+        "department": "HEALTH NUHM",
         "titleEn": "Health NUHM 161 Dt 04 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-184-20-03-2018-pdf",
         "file": "Health_NUHM_184_20_03_2018.PDF",
         "bytes": 2994456,
+        "date": "2018-03-21",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 184 20 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-185-26-03-2018-pdf",
         "file": "Health_NUHM_185_26_03_2018.PDF",
         "bytes": 2897344,
+        "date": "2018-03-26",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 185 26 03 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-19-dt-30-08-19-pdf",
         "file": "Health_NUHM_19_Dt_30_08_19.pdf",
         "bytes": 3025499,
+        "date": "2019-08-30",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 19 Dt 30 08 19"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-225-18-05-2018-pdf",
         "file": "Health_NUHM_225_18_05_2018.PDF",
         "bytes": 3222760,
+        "date": "2018-05-18",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 225 18 05 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-24-dt-11-02-2019-pdf",
         "file": "Health_NUHM_24_dt__11_02_2019.pdf",
         "bytes": 249996,
+        "date": "2019-02-11",
+        "department": "Health Department",
         "titleEn": "Health NUHM 24 dt 11 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-26-dt-30-08-19-pdf",
         "file": "Health_NUHM_26_Dt_30_08_19.pdf",
         "bytes": 3005825,
+        "date": "2019-08-30",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 26 Dt 30 08 19"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-297-06-08-2018-pdf",
         "file": "Health_NUHM_297_06_08_2018.PDF",
         "bytes": 3520555,
+        "date": "2018-08-07",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 297 06 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-324-dt-30-10-2018-pdf",
         "file": "Health_NUHM_324_dt_30_10_2018.pdf",
         "bytes": 506059,
+        "date": "2018-10-30",
+        "department": "Health Department",
         "titleEn": "Health NUHM 324 dt 30 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-356-dt-04-12-2018-pdf",
         "file": "Health_NUHM_356_dt__04_12_2018.PDF",
         "bytes": 87480,
+        "date": "2018-12-04",
+        "department": "Health Department",
         "titleEn": "Health NUHM 356 dt 04 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-40-dt-30-08-19-pdf",
         "file": "Health_NUHM_40_Dt_30_08_19.pdf",
         "bytes": 2908520,
+        "date": "2019-08-30",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 40 Dt 30 08 19"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-59-dt-06-06-2019-pdf",
         "file": "Health_NUHM_59_Dt_06_06_2019.PDF",
         "bytes": 1399392,
+        "date": "2019-06-06",
+        "department": "HEALTH NUHM",
         "titleEn": "Health NUHM 59 Dt 06 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-66-dt-30-08-19-pdf",
         "file": "Health_NUHM_66_Dt_30_08_19.pdf",
         "bytes": 2863736,
+        "date": "2019-08-30",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 66 Dt 30 08 19"
       },
       {
         "id": "tender-tender-2018-2019-health-nuhm-97-dt-30-08-19-pdf",
         "file": "Health_NUHM_97_Dt_30_08_19.pdf",
         "bytes": 3006344,
+        "date": "2019-08-30",
+        "department": "Health NUHM",
         "titleEn": "Health NUHM 97 Dt 30 08 19"
       },
       {
         "id": "tender-tender-2018-2019-health-tb-08-dt-04-02-2019-pdf",
         "file": "Health_TB_08_dt__04_02_2019.pdf",
         "bytes": 299073,
+        "date": "2019-02-04",
+        "department": "Health Department",
         "titleEn": "Health TB 08 dt 04 02 2019"
       },
       {
         "id": "tender-tender-2018-2019-healthnuhm-333-dt-15-11-2018-pdf",
         "file": "HealthNUHM_333_dt_15_11_2018.PDF",
         "bytes": 71955,
+        "date": "2018-11-15",
+        "department": "Health Department",
         "titleEn": "HealthNUHM 333 dt 15 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-light-531-31-07-2018-pdf",
         "file": "Light_531_31_07_2018.PDF",
         "bytes": 1416273,
+        "date": "2018-08-01",
+        "department": "Light Section",
         "titleEn": "Light 531 31 07 2018"
       },
       {
         "id": "tender-tender-2018-2019-light-565-13-08-2018-pdf",
         "file": "Light_565_13_08_2018.pdf",
         "bytes": 41992,
+        "date": "2018-08-13",
+        "department": "Light Section",
         "titleEn": "Light 565 13 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-light-572-14-08-2018-pdf",
         "file": "light-572_14_08_2018.pdf",
         "bytes": 139115,
+        "date": "2018-08-16",
+        "department": "Light Section",
         "titleEn": "light-572 14 08 2018"
       },
       {
         "id": "tender-tender-2018-2019-mech-2368-dt-10-10-2018-pdf",
         "file": "Mech_2368_dt_10_10_2018.PDF",
         "bytes": 17961,
+        "date": "2018-10-12",
+        "department": "Mechanics Department",
         "titleEn": "Mech 2368 dt 10 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-nhm-728-01-11-2017-pdf",
         "file": "NHM_728_01_11_2017.PDF",
         "bytes": 1906856,
+        "date": "2017-11-02",
+        "department": "NHM HEALTH",
         "titleEn": "NHM 728 01 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-nhm-956-16-11-2017-pdf",
         "file": "NHM_956_16_11_2017.PDF",
         "bytes": 946154,
+        "date": "2017-11-16",
+        "department": "Health NHM",
         "titleEn": "NHM 956 16 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-nuhm-106-dt-24-11-2018-pdf",
         "file": "NUHM_106_dt__24_11_2018.pdf",
         "bytes": 328353,
+        "date": "2018-11-27",
+        "department": "Health Department",
         "titleEn": "NUHM 106 dt 24 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-nuhm-15-dt-13-06-2019-pdf",
         "file": "NUHM_15_Dt_13_06_2019.PDF",
         "bytes": 12675370,
+        "date": "2019-06-13",
+        "department": "HEALTH NUHM",
         "titleEn": "NUHM 15 Dt 13 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-nuhm-24-3-dt-24-11-2018-pdf",
         "file": "NUHM_24-3_dt__24_11_2018.pdf",
         "bytes": 376248,
+        "date": "2018-11-27",
+        "department": "Health Department",
         "titleEn": "NUHM 24-3 dt 24 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-nuhm-40-dt-24-11-2018-pdf",
         "file": "NUHM_40_dt__24_11_2018.pdf",
         "bytes": 303436,
+        "date": "2018-11-27",
+        "department": "Health Department",
         "titleEn": "NUHM 40 dt 24 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-nuhm-8-dt-11-06-2019-pdf",
         "file": "NUHM_8_Dt_11_06_2019.PDF",
         "bytes": 14711094,
+        "date": "2019-06-11",
+        "department": "HEALTH NUHM",
         "titleEn": "NUHM 8 Dt 11 06 2019"
       },
       {
         "id": "tender-tender-2018-2019-printing-quotation-115-30-06-17-pdf",
         "file": "PRINTING_QUOTATION_115_30_06_17.pdf",
         "bytes": 2465323,
+        "date": "2017-07-03",
         "titleEn": "PRINTING QUOTATION 115 30 06 17"
       },
       {
         "id": "tender-tender-2018-2019-quatation-notice-accounts-325-14-08-17-pdf",
         "file": "Quatation_Notice_Accounts_325_14_08_17.PDF",
         "bytes": 844391,
+        "date": "2017-08-14",
         "titleEn": "Quatation Notice Accounts 325 14 08 17"
       },
       {
         "id": "tender-tender-2018-2019-ratelist-for-lan-port-19-06-2017-pdf",
         "file": "Ratelist_For_Lan_Port_19_06_2017.PDF",
         "bytes": 116776,
+        "date": "2017-06-19",
         "titleEn": "Ratelist For Lan Port 19 06 2017"
       },
       {
         "id": "tender-tender-2018-2019-smartcity-23-dt-14-11-2018-pdf",
         "file": "SmartCity_23_dt_14_11_2018.PDF",
         "bytes": 162310,
+        "date": "2018-11-19",
+        "department": "Smart City",
         "titleEn": "SmartCity 23 dt 14 11 2018"
       },
       {
         "id": "tender-tender-2018-2019-ward-a-309-dt-03-12-2018-pdf",
         "file": "Ward-A_309_dt__03_12_2018.PDF",
         "bytes": 157808,
+        "date": "2018-12-04",
+        "department": "Ward A",
         "titleEn": "Ward-A 309 dt 03 12 2018"
       },
       {
         "id": "tender-tender-2018-2019-ww-zone-1-2-9-429-dt-01-10-2018-pdf",
         "file": "ww_zone_1_2_9_429_dt_01_10_2018.PDF",
         "bytes": 706570,
+        "date": "2018-10-01",
+        "department": "JE/ww/zone 1,2,9 department",
         "titleEn": "ww zone 1 2 9 429 dt 01 10 2018"
       },
       {
         "id": "tender-tender-2018-2019-zone-4-518-07-11-2017-pdf",
         "file": "Zone_4_518_07_11_2017.PDF",
         "bytes": 2070698,
+        "date": "2017-11-07",
+        "department": "Zone 4",
         "titleEn": "Zone 4 518 07 11 2017"
       },
       {
         "id": "tender-tender-2018-2019-zone-4-480-11-10-2017-pdf",
         "file": "Zone-4_480_11_10_2017.PDF",
         "bytes": 3491257,
+        "date": "2017-10-11",
         "titleEn": "Zone-4 480 11 10 2017"
       }
     ]

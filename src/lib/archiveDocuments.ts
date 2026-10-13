@@ -16,6 +16,8 @@ export type ArchiveFile = {
   bytes: number;
   /** ISO date only when a reliable date is known. */
   date?: string;
+  /** Department name copied from the official CSMC listing. */
+  department?: string;
   /** External resource. The file is not stored in this site. */
   externalUrl?: string;
   titleEn?: string;
@@ -78,6 +80,12 @@ export function verifiedDriveFileId(href: string) {
   } catch {
     return null;
   }
+}
+
+/** DD/MM/YYYY for a verified ISO tender date. */
+export function formatTenderDate(iso: string) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  return match ? `${match[3]}/${match[2]}/${match[1]}` : "";
 }
 
 export function formatArchiveBytes(bytes: number) {

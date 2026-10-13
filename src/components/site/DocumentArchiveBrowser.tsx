@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
-import { DocumentListingCard, documentActionClass, fileKindLabel } from "@/components/site/DocumentListingCard";
+import { DocumentListingCard, documentActionClass, documentColumnGridClass, fileKindLabel } from "@/components/site/DocumentListingCard";
 import { PdfFileActions } from "@/components/site/PdfFileActions";
 import { useLang } from "@/i18n/LanguageContext";
 import { openInPagePdf } from "@/lib/pdfPreview";
@@ -10,6 +10,7 @@ import {
   archiveNameMatches,
   formatArchiveBytes,
   isPdfFile,
+  formatTenderDate,
   publishedDocumentUrl,
   verifiedDriveFileId,
   sortArchiveFiles,
@@ -25,6 +26,8 @@ type Props = {
   /** Resolves a filename when the file is not under public/documents. */
   fileUrl?: (file: string) => string;
   initialSort?: ArchiveSortKey;
+  /** Tender notices: name, date, department, and PDF action in aligned card columns. */
+  alignedCards?: boolean;
 };
 
 const SORTS: { key: ArchiveSortKey; en: string; mr: string }[] = [
@@ -36,7 +39,7 @@ const SORTS: { key: ArchiveSortKey; en: string; mr: string }[] = [
   { key: "size-smallest", en: "File size smallest–largest", mr: "आकार लहान–मोठा" },
 ];
 
-export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl, initialSort = "name-asc" }: Props) {
+export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl, initialSort = "name-asc", alignedCards = false }: Props) {
   const { lang, d } = useLang();
   const en = lang === "en";
   const [sort, setSort] = useState<ArchiveSortKey>(initialSort);
@@ -103,8 +106,8 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end mb-4">
         <label className="flex-1 text-sm">
           <span className="block text-muted-foreground mb-1">{en ? "Search / OCR" : "शोध / ओसीआर"}</span>
-          <span className="flex items-center gap-2 rounded-xl border border-border bg-white px-3 py-2">
-            <Search className="h-4 w-4 text-muted-foreground" aria-hidden />
+          <span className="flex min-h-11 items-center gap-2 rounded-xl border border-border bg-white px-3 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-civic-blue">
+            <Search className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
             <input
               value={query}
               onChange={(event) => {
@@ -117,7 +120,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
                   void runSearch();
                 }
               }}
-              className="w-full bg-transparent outline-none"
+              className="min-h-11 w-full bg-transparent text-base outline-none"
               placeholder={en ? "Name or keyword" : "नाव किंवा शब्द"}
             />
           </span>
@@ -164,6 +167,18 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
               : "या शोधाशी जुळणारे दस्तऐवज नाहीत."}
         </p>
       ) : (
+        <>
+        {alignedCards ? (
+          <div className="mb-2 hidden md:flex">
+            <div className="w-14 shrink-0 sm:w-16" aria-hidden />
+            <div className={`${documentColumnGridClass} px-4 text-xs font-bold leading-tight text-civic-blue/70`}>
+              <span className="flex items-center">{en ? "Name" : "नाव"}</span>
+              <span className="flex items-center border-l border-border pl-3">{en ? "Date" : "दिनांक"}</span>
+              <span className="flex items-center border-l border-border pl-3">{en ? "Department Name" : "विभागाचे नाव"}</span>
+              <span className="flex items-center justify-end border-l border-border pl-3">PDF</span>
+            </div>
+          </div>
+        ) : null}
         <ul className="space-y-3">
           {visible.map((doc) => {
             const url = doc.externalUrl ?? hrefFor(doc.file);
@@ -190,15 +205,19 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
                 <DocumentListingCard
                   title={label}
                   kind={doc.externalUrl ? fileKindLabel(doc.externalUrl) : fileKindLabel(doc.file)}
+                  columns={alignedCards ? { date: doc.date && formatTenderDate(doc.date) ? d(formatTenderDate(doc.date)) : undefined, department: doc.department } : undefined}
                   description={
-                    doc.externalUrl ? null : <p className="break-all">{doc.file}</p>
+                    alignedCards || doc.externalUrl ? null : <p className="break-all">{doc.file}</p>
                   }
                   meta={
+                    alignedCards && matches.length === 0 ? undefined : (
                     <>
-                      <p>
-                        {source}
-                        {doc.externalUrl ? "" : ` · ${d(formatArchiveBytes(doc.bytes))}`}
-                      </p>
+                      {alignedCards ? null : (
+                        <p>
+                          {source}
+                          {doc.externalUrl ? "" : ` · ${d(formatArchiveBytes(doc.bytes))}`}
+                        </p>
+                      )}
                       {matches.length > 0 ? (
                         <div className="mt-2 flex flex-wrap gap-2">
                           {matches.map((hit) => (
@@ -217,6 +236,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
                       ) : null}
                       {matches[0]?.snippet ? <p className="text-sm text-civic-ink/80 mt-2">{matches[0].snippet}</p> : null}
                     </>
+                    )
                   }
                   actions={
                     doc.externalUrl ? (
@@ -245,6 +265,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
             );
           })}
         </ul>
+        </>
       )}
     </div>
   );

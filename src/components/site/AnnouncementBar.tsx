@@ -22,7 +22,7 @@ export const AnnouncementBar = () => {
   const labels = t.announcements.items;
 
   const itemClass =
-    "flex items-center gap-2 bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded border border-white/20 text-[#D8B36A] text-[11px] font-medium cursor-pointer transition-colors";
+    "flex items-center gap-2 bg-white/10 px-2.5 py-1 rounded border border-white/20 text-[#D8B36A] text-[11px] font-medium cursor-pointer transition-colors hover:bg-[#e65c00] hover:text-civic-ink hover:border-[#e65c00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D8B36A]";
 
   const renderItem = (index: number, keySuffix: string) => {
     const dest = DESTINATIONS[index % DESTINATIONS.length];
@@ -61,7 +61,10 @@ export const AnnouncementBar = () => {
         {t.announcements.label}
       </div>
       <div className="flex-1 overflow-hidden relative flex items-center bg-civic-blue">
-        <div className="flex items-center gap-4 px-4 animate-marquee-fast whitespace-nowrap motion-reduce:animate-none">
+        <div
+          className="flex items-center gap-4 px-4 animate-marquee-fast whitespace-nowrap motion-reduce:animate-none"
+          style={{ animationDuration: "7s" }}
+        >
           {DESTINATIONS.map((_, index) => renderItem(index, `a-${index}`))}
           {DESTINATIONS.map((_, index) => renderItem(index, `b-${index}`))}
         </div>

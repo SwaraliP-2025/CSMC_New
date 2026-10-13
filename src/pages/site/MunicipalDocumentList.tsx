@@ -111,7 +111,7 @@ export const TenderNoticesPage = () => {
             <Link to="/tender-notices" className="mb-6 inline-flex text-sm font-semibold text-civic-blue underline">
               {en ? "All tender notices" : "सर्व निविदा सूचना"}
             </Link>
-            <DocumentArchiveBrowser documents={selected.documents} folderSegments={selected.folder} />
+            <DocumentArchiveBrowser documents={selected.documents} folderSegments={selected.folder} alignedCards />
           </>
         ) : (
           <div className="flex flex-col gap-3">

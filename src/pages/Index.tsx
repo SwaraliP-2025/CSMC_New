@@ -41,7 +41,7 @@ const leadership: Leader[] = [
   { nameEn: "Smt. Madhuri Misal", nameMr: "श्रीमती माधुरी मिसाळ", roleEn: ["Hon'ble Minister of State,", "Urban Development Department"], roleMr: ["मा. राज्यमंत्री,", "नगरविकास विभाग"], image: madhuriImg, photo: { w: "112.83%", h: "107.12%", l: "-4.76%", t: "-5.77%" } },
   { nameEn: "Shri. Sameer Rajurkar", nameMr: "श्री. समीर राजूरकर", roleEn: ["Hon'ble Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महापौर,", "छत्रपती संभाजीनगर"], image: sameerImg, photo: { w: "120.4%", h: "118.7%", l: "-10.2%", t: "-4.8%" } },
   { nameEn: "Shri. Rajendra Janjal", nameMr: "श्री. राजेंद्र  जंजाळ", roleEn: ["Hon'ble Deputy Mayor,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. उपमहापौर,", "छत्रपती संभाजीनगर"], image: rajuImg, photo: { w: "118%", h: "111.4%", l: "-9%", t: "-4.3%" } },
-  { nameEn: "Shri. Amol Yedage", nameMr: "श्री. अमोल येडगे", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "125.8%", h: "114.3%", l: "-12.9%", t: "-2%" } },
+  { nameEn: "Shri. Amol Yedage, I.A.S", nameMr: "श्री. अमोल येडगे, भा.प्र.से.", roleEn: ["Hon'ble Municipal Commissioner,", "Chhatrapati Sambhajinagar"], roleMr: ["मा. महानगरपालिका आयुक्त,", "छत्रपती संभाजीनगर"], image: amolImg, photo: { w: "125.8%", h: "114.3%", l: "-12.9%", t: "-2%" } },
 ];
 
 
@@ -92,7 +92,7 @@ const LeaderCard = ({
         : "none",
     }}
   >
-    <div className="relative mb-3 h-[9.25rem] w-[9.25rem] rounded-full border-[3px] border-[#D9A441] bg-white shadow-[0_2px_8px_rgba(26,26,26,0.12)] transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_5px_14px_rgba(26,26,26,0.16)] md:h-32 md:w-32">
+    <div className="relative mb-3 aspect-square h-[9.25rem] w-[9.25rem] rounded-full border-[3px] border-[#D9A441] bg-white shadow-[0_2px_8px_rgba(26,26,26,0.12)] transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_5px_14px_rgba(26,26,26,0.16)] md:h-auto md:w-[min(100%,8rem)]">
       <div className="absolute inset-0 overflow-hidden rounded-full">
         {person.image ? (
           <img

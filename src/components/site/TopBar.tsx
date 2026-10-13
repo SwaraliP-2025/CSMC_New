@@ -208,7 +208,7 @@ export const TopBar = () => {
 
   return (
     <div className="bg-civic-ink text-white/80 text-[11px] font-medium border-b border-white/10">
-      <div className="container flex max-w-full flex-col gap-y-1 py-1.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:py-2 min-w-0">
+      <div className="container flex max-w-full flex-col gap-y-1 py-1.5 pl-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-3 sm:py-2 sm:pl-4 md:pl-5 min-w-0">
 
         {/* Mobile row 1: accessibility + language. Desktop: accessibility left, language/date via order. */}
         <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 w-full sm:w-auto sm:contents">
@@ -262,11 +262,11 @@ export const TopBar = () => {
               aria-pressed={colorBlind}
               aria-label={t(
                 colorBlind ? "Disable color-blind friendly mode" : "Enable color-blind friendly mode",
-                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा" : "कलर ब्लाइंड अनुकूल मोड सुरु करा",
+                colorBlind ? "रंगांधळेपणा-अनुकूल मोड बंद करा" : "रंगांधळेपणा-अनुकूल मोड सुरू करा",
               )}
               title={t(
                 colorBlind ? "Disable color-blind friendly mode" : "Enable color-blind friendly mode",
-                colorBlind ? "कलर ब्लाइंड अनुकूल मोड बंद करा " : "कलर ब्लाइंड अनुकूल मोड सुरु करा",
+                colorBlind ? "रंगांधळेपणा-अनुकूल मोड बंद करा" : "रंगांधळेपणा-अनुकूल मोड सुरू करा",
               )}
               className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded transition-colors leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-gold ${
                 colorBlind ? "text-civic-gold bg-white/10" : "hover:text-civic-gold"
@@ -274,14 +274,14 @@ export const TopBar = () => {
             >
               <Contrast className="h-3.5 w-3.5 shrink-0" aria-hidden />
               <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wide">
-                {t("Color blind", "कलर ब्लाइंड")}
+                {t("Color blind", "रंगांधळे")}
               </span>
             </button>
           </div>
 
           {/* ── Language + date (wraps to full width on phones so मराठी stays visible) ── */}
-          <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-1 w-full min-w-0 basis-full sm:basis-auto sm:w-auto sm:max-w-full sm:order-3 sm:gap-1">
-            <div className="flex items-center min-w-0 max-w-[48%] min-[420px]:max-w-[9rem] sm:max-w-none sm:border-l sm:border-white/15 sm:ml-2 sm:pl-3">
+          <div className="flex flex-wrap items-center justify-start gap-x-2 gap-y-1 w-full min-w-0 basis-full sm:basis-auto sm:w-auto sm:max-w-full sm:order-3 sm:justify-end sm:gap-1">
+            <div className="flex items-center min-w-0 flex-1 sm:flex-none">
               <GoogleTranslateWidget />
             </div>
             <div
@@ -337,7 +337,7 @@ export const TopBar = () => {
         </div>
 
         {/* Mobile row 2: weather + AQI. Desktop: sits between accessibility and language. */}
-        <div className="flex max-w-full min-w-0 items-center justify-center gap-0 overflow-x-auto sm:w-auto sm:flex-1 sm:justify-end sm:order-2 border-t border-white/10 pt-1 sm:border-0 sm:pt-0">
+        <div className="flex w-full max-w-full min-w-0 items-center justify-start gap-0 overflow-x-auto sm:w-auto sm:flex-1 sm:justify-end sm:order-2 border-t border-white/10 pt-1 sm:border-0 sm:pt-0">
 
           {loading && (
             <div className="flex items-center gap-2 opacity-40 animate-pulse text-[11px]">

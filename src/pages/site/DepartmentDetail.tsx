@@ -146,7 +146,7 @@
 //   {
 //     slug: "municipal-commissioner",
 //     nameEn: "Municipal Commissioner", nameMr: "महानगरपालिका आयुक्त",
-//     headEn: "Shri Amol Yedage, IAS", headMr: "श्री. अमोल येडगे, भा.प्र.से.",
+//     headEn: "Shri Amol Yedage, I.A.S", headMr: "श्री. अमोल येडगे, भा.प्र.से.",
 //     designationEn: "Municipal Commissioner & Administrator", designationMr: "महानगरपालिका आयुक्त",
 //     phone: DEPARTMENT_CONTACT_PHONE, email: "commissioner@csmc.gov.in",
 //     addressEn: "CSMC Main Building, Town Hall, Behind Head Post Office, Chhatrapati Sambhajinagar – 431001",
@@ -1733,12 +1733,12 @@ const DEPARTMENTS: DeptInfo[] = [
     slug: "municipal-commissioner",
     nameEn: "Municipal Commissioner",
     nameMr: "महानगरपालिका आयुक्त",
-    headEn: "Shri Amol Yedage, IAS",
+    headEn: "Shri Amol Yedage, I.A.S",
     headMr: "श्री. अमोल येडगे, भा.प्र.से.",
     designationEn: "Municipal Commissioner & Administrator",
     designationMr: "महानगरपालिका आयुक्त",
     phone: DEPARTMENT_CONTACT_PHONE,
-    email: "commissioner@csmc.gov.in",
+    email: "commissioner@chhsambhajinagarmc.org",
     addressEn: "CSMC Main Building, Town Hall, Behind Head Post Office, Chhatrapati Sambhajinagar – 431001",
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, हेड पोस्ट ऑफिसच्या मागे, छत्रपती संभाजीनगर, महाराष्ट्र, भारत, ४३१००१ ",
     image: amolSir,
@@ -1772,7 +1772,7 @@ const DEPARTMENTS: DeptInfo[] = [
     designationEn: "Additional Municipal Commissioner - I",
     designationMr: "अतिरिक्त महानगरपालिका आयुक्त - १",
     phone: DEPARTMENT_CONTACT_PHONE,
-    email: "addlcomm1@csmc.gov.in",
+    email: "acomm1@chhsambhajinagarmc.org",
     addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar – 431001",
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
     updates: [
@@ -1798,7 +1798,7 @@ const DEPARTMENTS: DeptInfo[] = [
     designationEn: "Additional Municipal Commissioner - II",
     designationMr: "अतिरिक्त महानगरपालिका आयुक्त - 2",
     phone: DEPARTMENT_CONTACT_PHONE,
-    email: "addlcomm2@csmc.gov.in",
+    email: "acomm2@chhsambhajinagarmc.org",
     addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar – 431001",
     addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
     updates: [
@@ -2803,7 +2803,7 @@ function DepartmentHeadCard({
             <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
             <div className="min-w-0">
               <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Email" : "ई-मेल"}</p>
-              <p className="font-semibold text-civic-ink break-all">{dept.email}</p>
+              <a href={`mailto:${dept.email}`} className="font-semibold text-civic-ink break-all hover:text-civic-blue hover:underline">{dept.email}</a>
             </div>
           </div>
         ) : null}
@@ -3066,37 +3066,6 @@ const DepartmentDetail = () => {
               />
             </div>
           ) : null}
-
-            {/* Key Responsibilities */}
-            {(
-              (
-                en
-                  ? dept.responsibilitiesEn
-                  : dept.responsibilitiesMr
-              )?.length ?? 0
-            ) > 0 && (
-              <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm">
-
-                <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
-                  {en
-                    ? "Key Responsibilities"
-                    : "मुख्य जबाबदाऱ्या"}
-                </h3>
-
-                <ul className="text-sm text-muted-foreground space-y-1.5 list-disc list-inside">
-                  {(en
-                    ? dept.responsibilitiesEn!
-                    : dept.responsibilitiesMr!
-                  ).map((item, i) => (
-                    <li key={i}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-              </div>
-            )}
-
 
         </div>
       </section>

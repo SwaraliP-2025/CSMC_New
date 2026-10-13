@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 import { FileText } from "lucide-react";
 
+/** Same four tracks as the tender header: name, date, department, PDF action. */
+export const documentColumnGridClass =
+  "grid min-w-0 flex-1 grid-cols-1 gap-2 md:grid-cols-[minmax(0,1fr)_7.5rem_11.5rem_12.5rem] md:items-stretch md:gap-x-3 lg:grid-cols-[minmax(0,1.4fr)_8.75rem_13rem_12.5rem] lg:gap-x-4";
+
+const columnRule = "md:border-l md:border-border md:pl-3";
+
 /** Shared document row: cream icon panel, amber accent, navy title, actions on the right. */
 export function DocumentListingCard({
   title,
@@ -10,6 +16,7 @@ export function DocumentListingCard({
   actions,
   onOpen,
   openLabel,
+  columns,
 }: {
   title: string;
   meta?: ReactNode;
@@ -18,6 +25,8 @@ export function DocumentListingCard({
   actions?: ReactNode;
   onOpen?: () => void;
   openLabel?: string;
+  /** Tender notices: name, date, department, and the existing PDF action in aligned tracks. */
+  columns?: { date?: ReactNode; department?: ReactNode };
 }) {
   const panel =
     "relative w-14 sm:w-16 shrink-0 self-stretch bg-gradient-to-b from-[#f6f2ea] to-[#eee8dc] border-r border-[#e4dccb] flex flex-col items-center justify-center gap-1";
@@ -45,14 +54,29 @@ export function DocumentListingCard({
           {mark}
         </div>
       )}
-      <div className="flex-1 min-w-0 p-3.5 sm:px-4 sm:py-3.5 flex flex-col gap-3 lg:flex-row lg:items-center">
-        <div className="flex-1 min-w-0">
-          <h3 className="font-serif text-[15px] font-bold text-civic-blue leading-snug break-words">{title}</h3>
-          {description ? <div className="text-xs text-muted-foreground mt-1">{description}</div> : null}
-          {meta ? <div className="text-[11px] text-muted-foreground mt-1.5 break-words">{meta}</div> : null}
+      {columns ? (
+        <div className={`${documentColumnGridClass} p-3.5 sm:px-4 sm:py-3.5`}>
+          <div className="flex min-w-0 items-center">
+            <div className="min-w-0">
+              <h3 className="font-serif text-[15px] font-bold leading-snug text-civic-blue break-words">{title}</h3>
+              {description ? <div className="mt-1 text-xs text-muted-foreground">{description}</div> : null}
+              {meta ? <div className="mt-1.5 break-words text-[11px] text-muted-foreground">{meta}</div> : null}
+            </div>
+          </div>
+          <div className={`flex min-w-0 items-center break-words text-sm text-civic-ink ${columnRule} ${columns.date ? "" : "hidden md:flex"}`}>{columns.date}</div>
+          <div className={`flex min-w-0 items-center break-words text-sm text-civic-ink ${columnRule} ${columns.department ? "" : "hidden md:flex"}`}>{columns.department}</div>
+          {actions ? <div className={`flex flex-wrap items-center gap-1.5 md:justify-end ${columnRule}`}>{actions}</div> : <div className={`hidden md:block ${columnRule}`} />}
         </div>
-        {actions ? <div className="flex flex-wrap items-center gap-1.5 lg:shrink-0 lg:justify-end">{actions}</div> : null}
-      </div>
+      ) : (
+        <div className="flex-1 min-w-0 p-3.5 sm:px-4 sm:py-3.5 flex flex-col gap-3 lg:flex-row lg:items-center">
+          <div className="flex-1 min-w-0">
+            <h3 className="font-serif text-[15px] font-bold text-civic-blue leading-snug break-words">{title}</h3>
+            {description ? <div className="text-xs text-muted-foreground mt-1">{description}</div> : null}
+            {meta ? <div className="text-[11px] text-muted-foreground mt-1.5 break-words">{meta}</div> : null}
+          </div>
+          {actions ? <div className="flex flex-wrap items-center gap-1.5 lg:shrink-0 lg:justify-end">{actions}</div> : null}
+        </div>
+      )}
     </article>
   );
 }
