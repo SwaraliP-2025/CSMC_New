@@ -69,7 +69,7 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
     setSearching(true);
     setSearched(true);
     setHits({});
-    const pdfs = sorted.filter((doc) => !doc.externalUrl && isPdfFile(doc.file) && !verifiedDriveFileId(hrefFor(doc.file)));
+    const pdfs = sorted.filter((doc) => !doc.externalUrl && !doc.linkUnavailable && isPdfFile(doc.file) && !verifiedDriveFileId(hrefFor(doc.file)));
     const next: Record<string, PdfSearchHit[]> = {};
     for (let index = 0; index < pdfs.length; index += 1) {
       if (controller.signal.aborted) break;
@@ -183,7 +183,8 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
           {visible.map((doc) => {
             const url = doc.externalUrl ?? hrefFor(doc.file);
             const pdf = !doc.externalUrl && isPdfFile(doc.file);
-            const label = doc.externalUrl
+            const notStored = Boolean(doc.externalUrl || doc.linkUnavailable);
+            const label = notStored
               ? en
                 ? doc.titleEn ?? archiveDisplayName(doc.file)
                 : doc.titleMr ?? doc.titleEn ?? archiveDisplayName(doc.file)
@@ -204,13 +205,13 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
               <li key={doc.id}>
                 <DocumentListingCard
                   title={label}
-                  kind={doc.externalUrl ? fileKindLabel(doc.externalUrl) : fileKindLabel(doc.file)}
+                  kind={doc.externalUrl && /\.[a-z0-9]{2,5}(?:$|\?)/i.test(doc.externalUrl) ? fileKindLabel(doc.externalUrl) : fileKindLabel(doc.file)}
                   columns={alignedCards ? { date: doc.date && formatTenderDate(doc.date) ? d(formatTenderDate(doc.date)) : undefined, department: doc.department } : undefined}
                   description={
-                    alignedCards || doc.externalUrl ? null : <p className="break-all">{doc.file}</p>
+                    alignedCards || notStored ? null : <p className="break-all">{doc.file}</p>
                   }
                   meta={
-                    alignedCards && matches.length === 0 ? undefined : (
+                    (alignedCards || doc.linkUnavailable) && matches.length === 0 ? undefined : (
                     <>
                       {alignedCards ? null : (
                         <p>
@@ -239,7 +240,11 @@ export function DocumentArchiveBrowser({ documents, folderSegments = [], fileUrl
                     )
                   }
                   actions={
-                    doc.externalUrl ? (
+                    doc.linkUnavailable ? (
+                      <span className={`${documentActionClass} border border-dashed border-border text-muted-foreground`}>
+                        {en ? "Document link unavailable" : "दस्तऐवज दुवा उपलब्ध नाही"}
+                      </span>
+                    ) : doc.externalUrl ? (
                       <a
                         href={doc.externalUrl}
                         target="_blank"

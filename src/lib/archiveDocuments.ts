@@ -20,6 +20,8 @@ export type ArchiveFile = {
   department?: string;
   /** External resource. The file is not stored in this site. */
   externalUrl?: string;
+  /** Listed by name only: no verified URL exists and no file is stored on this site. */
+  linkUnavailable?: boolean;
   titleEn?: string;
   titleMr?: string;
 };

@@ -7,6 +7,7 @@ import { administrationEstablishmentEntries } from "@/data/administrationEstabli
 import { DISASTER_GUIDELINES_DOCUMENT, SEVEN_STAR_FAQ_DOCUMENT } from "@/data/citizenRepositoryDocuments";
 import { dastavezDocuments, municipalArchiveFiles, policyDocuments } from "@/data/municipalDocuments";
 import { MUNICIPAL_SECRETARIES_DOCUMENT, SECRETARIES_FOLDER } from "@/data/municipalSecretaries";
+import { websitePolicyDocuments } from "@/data/websitePolicyDocuments";
 import { RTI_DEPARTMENT_FOLDER, RTI_FOLDER, RTI_OFFICERS_FOLDER, RTI_OFFICERS_ORDER, rtiArchiveDocuments } from "@/data/rtiDocuments";
 import { rtsArchiveDocuments, RTS_FOLDER } from "@/data/rtsDocuments";
 import { chiefAccountsOfficerDocuments, CHIEF_ACCOUNTS_OFFICER_FOLDER } from "@/data/chiefAccountsOfficerDocuments";
@@ -192,6 +193,12 @@ export function repositoryShelves(): RepositoryShelf[] {
     titleMr: "धोरणे व मार्गदर्शक सूचना",
     documents: municipalArchiveFiles(policyDocuments),
     folderSegments: [policyDocuments[0].folder],
+  });
+  add(shelves, "policy", {
+    id: "website-policies",
+    titleEn: "Website Policies",
+    titleMr: "संकेतस्थळ धोरणे",
+    documents: websitePolicyDocuments,
   });
   add(shelves, "rti", {
     id: "municipal-secretaries",

@@ -232,6 +232,13 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
     title: "Public Facilities | CSMC",
     description: "Public facilities in Chhatrapati Sambhajinagar — parks, hospitals, schools and more (CSMC).",
   },
+  "/drama-theatre": {
+    path: "/drama-theatre",
+    title: "Drama / Theatre | CSMC",
+    titleMr: "नाट्य / रंगमंच | CSMC",
+    description: "Drama, theatre and cinema venues in Chhatrapati Sambhajinagar with addresses and contact numbers.",
+    descriptionMr: "छत्रपती संभाजीनगरमधील नाट्यगृहे, रंगमंच व चित्रपटगृहांचे पत्ते आणि संपर्क क्रमांक.",
+  },
   "/explore": {
     path: "/explore",
     title: "Explore Sambhajinagar | CSMC",
@@ -359,9 +366,12 @@ export const ROUTE_SEO: Record<string, PageSeo> = {
   },
   "/privacy-policy": {
     path: "/privacy-policy",
-    title: "Privacy Policy | CSMC",
-    titleMr: "गोपनीयता धोरण | CSMC",
-    description: "Privacy policy for the Chhatrapati Sambhajinagar Municipal Corporation digital portal.",
+    title: "CSMC Privacy Policy | CSMC",
+    titleMr: "CSMC गोपनीयता धोरण | CSMC",
+    description:
+      "CSMC privacy policy and website policy documents: CMAP, copyright, data privacy, hyperlinking, terms of use and website security.",
+    descriptionMr:
+      "CSMC गोपनीयता धोरण व संकेतस्थळ धोरण दस्तऐवज: CMAP, कॉपीराइट, डेटा गोपनीयता, हायपरलिंकिंग, वापराच्या अटी व संकेतस्थळ सुरक्षा.",
   },
   "/disclaimer": {
     path: "/disclaimer",

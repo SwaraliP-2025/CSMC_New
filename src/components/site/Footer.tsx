@@ -44,7 +44,7 @@ export const Footer = () => {
   const othersLinks: FootLink[] = [
     { en: "FAQ's", mr: "वारंवार विचारले जाणारे प्रश्न", to: "/faq" },
     { en: "Web Site Policies", mr: "संकेतस्थळ धोरणे", to: "/website-policies" },
-    { en: "Privacy Policy", mr: "गोपनीयता धोरण", to: "/privacy-policy" },
+    { en: "CSMC Privacy Policy", mr: "CSMC गोपनीयता धोरण", to: "/privacy-policy" },
     { en: "Disclaimer", mr: "अस्वीकरण", to: "/disclaimer" },
     { en: "Copyright & Terms", mr: "कॉपीराइट व अटी", to: "/terms" },
     { en: "Accessibility Statement", mr: "सुलभता निवेदन", to: "/accessibility-statement" },

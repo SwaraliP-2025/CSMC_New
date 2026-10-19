@@ -84,10 +84,6 @@ const Contact = () => {
                 <a href="mailto:contact@aurangabadmahapalika.org" className="text-civic-blue hover:underline">
                   contact@aurangabadmahapalika.org
                 </a>
-                {" / "}
-                <a href="mailto:contact@chhsambhajinagarmc.org" className="text-civic-blue hover:underline">
-                  contact@chhsambhajinagarmc.org
-                </a>
               </p>
             </div>
             <div className="px-4 py-3">

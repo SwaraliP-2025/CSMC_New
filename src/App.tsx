@@ -31,6 +31,7 @@ import FAQ from "./pages/site/FAQ.tsx";
 import RTIAct from "./pages/site/RTIAct.tsx";
 import RTSAct from "./pages/site/RTSAct.tsx";
 import Recruitment from "./pages/site/Recruitment.tsx";
+import DramaTheatre from "./pages/site/DramaTheatre.tsx";
 import DisasterManagement from "./pages/site/DisasterManagement.tsx";
 import Elections from "./pages/site/Elections.tsx";
 import GovtOrders from "./pages/site/GovtOrders.tsx";
@@ -101,6 +102,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/public-facilities" element={<PublicFacilities />} />
             <Route path="/public-facilities/:slug" element={<FacilityDetails />} />
+            <Route path="/drama-theatre" element={<DramaTheatre />} />
             <Route path="/explore" element={<TouristPlaces />} />
             <Route path="/tourist-attraction/:slug" element={<TouristAttractionDetail />} />
             <Route path="/notices" element={<Notices />} />

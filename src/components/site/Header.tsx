@@ -153,7 +153,7 @@ const NavItemDesktop = ({
         <ChevronDown className={`h-3 w-3 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
       {open && (() => {
-        const hasGroups = item.children!.some(c => c.children && c.children.length > 0);
+        const hasGroups = item.children!.every(c => c.children && c.children.length > 0);
         const renderLink = (child: NavItem) => {
           const childLabel = resolveLabel(child);
           const cls = `block px-3 py-1.5 ${dropdownTextCls} text-[#D8B36A] hover:bg-[#D8B36A] hover:text-civic-ink transition-colors rounded-sm focus-visible:bg-[#D8B36A] focus-visible:text-civic-ink`;
@@ -207,19 +207,41 @@ const NavItemDesktop = ({
           >
             {item.children!.map(child => {
               const childLabel = resolveLabel(child);
+              const flatCls = `block px-5 py-2 ${dropdownTextCls} text-[#D8B36A] hover:bg-[#D8B36A] hover:text-civic-ink focus-visible:bg-[#D8B36A] focus-visible:text-civic-ink transition-colors`;
               return (
                 <div key={child.labelEn} className="border-b border-white/10 last:border-0">
                   {isExternalHref(child.to, child.external) ? (
-                    <a href={child.to} target="_blank" rel="noopener noreferrer"
-                      className={`block px-5 py-2 ${dropdownTextCls} text-[#D8B36A] hover:bg-[#D8B36A] hover:text-civic-ink focus-visible:bg-[#D8B36A] focus-visible:text-civic-ink transition-colors`}>
+                    <a href={child.to} target="_blank" rel="noopener noreferrer" className={flatCls}>
                       <NavLabel text={childLabel} />
                     </a>
-                  ) : (
-                    <Link to={child.to!} onClick={closeMenu}
-                      className={`block px-5 py-2 ${dropdownTextCls} text-[#D8B36A] hover:bg-[#D8B36A] hover:text-civic-ink focus-visible:bg-[#D8B36A] focus-visible:text-civic-ink transition-colors`}>
+                  ) : child.to ? (
+                    <Link to={child.to} onClick={closeMenu} className={flatCls}>
                       <NavLabel text={childLabel} />
                     </Link>
+                  ) : (
+                    <span className={`block px-5 py-2 ${dropdownTextCls} text-[#D8B36A]`}>
+                      <NavLabel text={childLabel} />
+                    </span>
                   )}
+                  {child.children?.length ? (
+                    <ul className="pb-1">
+                      {child.children.map(sub => (
+                        <li key={sub.labelEn}>
+                          {isExternalHref(sub.to, sub.external) ? (
+                            <a href={sub.to} target="_blank" rel="noopener noreferrer"
+                              className={`block pl-9 pr-5 py-1.5 ${dropdownTextCls} text-[#D8B36A] hover:bg-[#D8B36A] hover:text-civic-ink focus-visible:bg-[#D8B36A] focus-visible:text-civic-ink transition-colors`}>
+                              <NavLabel text={resolveLabel(sub)} />
+                            </a>
+                          ) : (
+                            <Link to={sub.to!} onClick={closeMenu}
+                              className={`block pl-9 pr-5 py-1.5 ${dropdownTextCls} text-[#D8B36A] hover:bg-[#D8B36A] hover:text-civic-ink focus-visible:bg-[#D8B36A] focus-visible:text-civic-ink transition-colors`}>
+                              <NavLabel text={resolveLabel(sub)} />
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
               );
             })}
@@ -430,7 +452,28 @@ export const Header = () => {
                     <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpanded === item.labelEn ? "rotate-180" : ""}`} aria-hidden />
                   </button>
                   {mobileExpanded === item.labelEn && item.children.map(child => (
-                    child.children ? (
+                    child.children && child.to && !isExternalHref(child.to, child.external) ? (
+                      <div key={child.labelEn}>
+                        <Link to={child.to} onClick={() => setMobileOpen(false)}
+                          className="block px-8 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
+                          <NavLabel text={label(child)} />
+                        </Link>
+                        {child.children.map(sub => (
+                          isExternalHref(sub.to, sub.external) ? (
+                            <a key={sub.labelEn} href={sub.to} target="_blank" rel="noopener noreferrer"
+                              onClick={() => setMobileOpen(false)}
+                              className="block pl-12 pr-4 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
+                              <NavLabel text={label(sub)} />
+                            </a>
+                          ) : (
+                            <Link key={sub.labelEn} to={sub.to!} onClick={() => setMobileOpen(false)}
+                              className="block pl-12 pr-4 py-2.5 text-[13px] font-normal leading-snug border-b border-border text-muted-foreground">
+                              <NavLabel text={label(sub)} />
+                            </Link>
+                          )
+                        ))}
+                      </div>
+                    ) : child.children ? (
                       <div key={child.labelEn}>
                         <div className="px-6 py-2 text-xs font-bold uppercase tracking-wider text-civic-blue bg-civic-blue/5 border-b border-border">
                           <NavLabel text={label(child)} />

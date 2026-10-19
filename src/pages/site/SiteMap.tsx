@@ -60,6 +60,11 @@ function LinkList({ items, en }: { items: NavItem[]; en: boolean }) {
       {items.map((item) => (
         <li key={`${item.labelEn}-${item.to ?? ""}`}>
           <NavLink item={item} en={en} />
+          {item.children?.length ? (
+            <div className="mt-2 pl-5">
+              <LinkList items={item.children} en={en} />
+            </div>
+          ) : null}
         </li>
       ))}
     </ul>
@@ -138,7 +143,7 @@ const SiteMap = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SITE_NAV.map((item) => {
             const title = en ? item.labelEn : item.labelMr;
-            const hasGroups = item.children?.some((c) => c.children && c.children.length > 0);
+            const hasGroups = item.children?.every((c) => c.children && c.children.length > 0);
 
             // Leaf top-level item (Home, RTI, RTS, DP Plan, Site Map)
             if (!item.children?.length) {

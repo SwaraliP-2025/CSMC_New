@@ -1,14 +1,16 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
+import { websitePolicyDocuments } from "@/data/websitePolicyDocuments";
 import { useLang } from "@/i18n/LanguageContext";
+import { ExternalLink, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 
 type PolicyKind = "privacy" | "disclaimer" | "terms" | "accessibility" | "policies";
 
 const META: Record<PolicyKind, { en: string; mr: string; eyebrowEn: string; eyebrowMr: string }> = {
   privacy: {
-    en: "Privacy Policy",
-    mr: "गोपनीयता धोरण",
+    en: "CSMC Privacy Policy",
+    mr: "CSMC गोपनीयता धोरण",
     eyebrowEn: "Legal",
     eyebrowMr: "कायदेशीर",
   },
@@ -52,7 +54,7 @@ function PolicyBody({ kind, en }: { kind: PolicyKind; en: boolean }) {
         <ul className="space-y-2 list-disc pl-5">
           <li>
             <Link className="text-civic-blue font-semibold hover:underline" to="/privacy-policy">
-              {en ? "Privacy Policy" : "गोपनीयता धोरण"}
+              {en ? "CSMC Privacy Policy" : "CSMC गोपनीयता धोरण"}
             </Link>
           </li>
           <li>
@@ -186,7 +188,105 @@ export function PolicyPage({ kind }: { kind: PolicyKind }) {
   );
 }
 
-export const PrivacyPolicy = () => <PolicyPage kind="privacy" />;
+function PolicyDocumentsTable({ en }: { en: boolean }) {
+  const { d } = useLang();
+  const viewLabel = en ? "View Document" : "दस्तऐवज पहा";
+  const actionClass =
+    "inline-flex min-h-11 md:min-h-0 items-center gap-1.5 rounded-lg border border-civic-blue px-3 py-2 md:py-1.5 text-xs font-bold text-civic-blue transition-colors hover:bg-civic-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue";
+  const action = (doc: (typeof websitePolicyDocuments)[number]) => {
+    const name = en ? doc.titleEn : doc.titleMr;
+    if (!doc.externalUrl) {
+      return (
+        <span className="inline-flex min-h-11 md:min-h-0 items-center rounded-lg border border-dashed border-border px-3 py-2 md:py-1.5 text-xs font-bold text-muted-foreground">
+          {en ? "Document link unavailable" : "दस्तऐवज दुवा उपलब्ध नाही"}
+        </span>
+      );
+    }
+    return (
+      <a
+        href={doc.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={actionClass}
+        aria-label={en ? `${viewLabel}: ${name} (opens in a new tab)` : `${viewLabel}: ${name} (नवीन टॅबमध्ये उघडेल)`}
+      >
+        {viewLabel}
+        <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+      </a>
+    );
+  };
+
+  return (
+    <section aria-labelledby="policy-documents-heading" className="mb-8">
+      <h2 id="policy-documents-heading" className="mb-4 font-serif text-xl font-bold text-civic-blue">
+        {en ? "Policy documents" : "धोरण दस्तऐवज"}
+      </h2>
+      <ol className="flex flex-col gap-3 md:hidden">
+        {websitePolicyDocuments.map((doc, index) => (
+          <li key={doc.id} className="rounded-2xl border border-border bg-white p-4 shadow-sm">
+            <div className="flex items-start gap-3">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-civic-blue/10 text-xs font-bold text-civic-blue">
+                <span className="sr-only">{en ? "Sr. No." : "अ. क्र."} </span>
+                {d(index + 1)}
+              </span>
+              <p className="min-w-0 break-words pt-0.5 font-semibold text-civic-ink">{en ? doc.titleEn : doc.titleMr}</p>
+            </div>
+            <div className="mt-3 pl-10">{action(doc)}</div>
+          </li>
+        ))}
+      </ol>
+      <div className="hidden md:block overflow-x-auto rounded-2xl border border-border shadow-sm">
+        <table className="civic-table w-full text-sm">
+          <caption className="sr-only">{en ? "CSMC privacy and website policy documents" : "CSMC गोपनीयता व संकेतस्थळ धोरण दस्तऐवज"}</caption>
+          <colgroup>
+            <col className="w-24" />
+            <col />
+            <col className="w-48" />
+          </colgroup>
+          <thead className="bg-civic-blue text-white">
+            <tr>
+              <th scope="col" className="px-5 py-3 text-left font-bold">{en ? "Sr. No." : "अ. क्र."}</th>
+              <th scope="col" className="px-4 py-3 text-left font-bold">{en ? "Document Name" : "दस्तऐवजाचे नाव"}</th>
+              <th scope="col" className="px-4 py-3 text-left font-bold">{en ? "Action" : "कृती"}</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border bg-white">
+            {websitePolicyDocuments.map((doc, index) => (
+              <tr key={doc.id} className="hover:bg-muted/30 transition-colors">
+                <td className="px-5 py-4 font-bold text-civic-blue">{d(index + 1)}</td>
+                <th scope="row" className="px-4 py-4 text-left font-semibold text-civic-ink">
+                  <span className="inline-flex items-center gap-2">
+                    <FileText className="h-4 w-4 shrink-0 text-civic-blue" aria-hidden />
+                    {en ? doc.titleEn : doc.titleMr}
+                  </span>
+                </th>
+                <td className="px-4 py-4">{action(doc)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+export const PrivacyPolicy = () => {
+  const { lang } = useLang();
+  const en = lang === "en";
+  const meta = META.privacy;
+  return (
+    <Layout>
+      <PageHeader eyebrow={en ? meta.eyebrowEn : meta.eyebrowMr} title={en ? meta.en : meta.mr} />
+      <section className="py-12 container max-w-4xl">
+        <h1 className="mb-6 font-serif text-2xl font-bold text-civic-blue md:text-3xl">{en ? meta.en : meta.mr}</h1>
+        <PolicyDocumentsTable en={en} />
+        <article className="bg-white border border-border rounded-2xl p-6 md:p-8">
+          <PolicyBody kind="privacy" en={en} />
+        </article>
+      </section>
+    </Layout>
+  );
+};
 export const DisclaimerPage = () => <PolicyPage kind="disclaimer" />;
 export const TermsPage = () => <PolicyPage kind="terms" />;
 export const AccessibilityStatement = () => <PolicyPage kind="accessibility" />;

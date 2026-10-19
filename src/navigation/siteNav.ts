@@ -149,7 +149,12 @@ export const SITE_NAV: NavItem[] = [
     labelMr: "नागरिक सेवा",
     children: [
       { labelEn: "All Services", labelMr: "सर्व सेवा", to: "/services" },
-      { labelEn: "Public Facilities", labelMr: "सार्वजनिक सुविधा", to: "/public-facilities" },
+      {
+        labelEn: "Public Facilities",
+        labelMr: "सार्वजनिक सुविधा",
+        to: "/public-facilities",
+        children: [{ labelEn: "Drama / Theatre", labelMr: "नाट्य / रंगमंच", to: "/drama-theatre" }],
+      },
       {
         labelEn: "Know Your Zone / Prabhag / Ward",
         labelMr: "तुमचा झोन / प्रभाग / वॉर्ड जाणून घ्या",
@@ -326,7 +331,7 @@ export const CITIZEN_TOOLS_PAGES: NavItem[] = [
 /** Footer policy & legal pages. */
 export const POLICY_PAGES: NavItem[] = [
   { labelEn: "Website Policies", labelMr: "संकेतस्थळ धोरणे", to: "/website-policies" },
-  { labelEn: "Privacy Policy", labelMr: "गोपनीयता धोरण", to: "/privacy-policy" },
+  { labelEn: "CSMC Privacy Policy", labelMr: "CSMC गोपनीयता धोरण", to: "/privacy-policy" },
   { labelEn: "Disclaimer", labelMr: "अस्वीकरण", to: "/disclaimer" },
   { labelEn: "Copyright & Terms", labelMr: "कॉपीराइट व अटी", to: "/terms" },
   { labelEn: "Accessibility Statement", labelMr: "सुलभता निवेदन", to: "/accessibility-statement" },
