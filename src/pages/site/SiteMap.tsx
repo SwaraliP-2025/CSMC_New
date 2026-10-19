@@ -14,7 +14,7 @@ import {
   type NavItem,
 } from "@/navigation/siteNav";
 import { DEPARTMENTS } from "./DepartmentDetail";
-import { facilityCategories } from "@/lib/facilities";
+import { facilityCategories, facilityCategoryHref } from "@/lib/facilities";
 import type { TouristPlaceRecord } from "@/lib/facilities";
 
 const linkCls =
@@ -119,7 +119,7 @@ const SiteMap = () => {
   const facilityPages: NavItem[] = facilityCategories.map((cat) => ({
     labelEn: cat.titleEn,
     labelMr: cat.titleMr,
-    to: `/public-facilities/${cat.slug}`,
+    to: facilityCategoryHref(cat),
   }));
 
   const touristPages: NavItem[] = touristPlaces.map((place) => ({

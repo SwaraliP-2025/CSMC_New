@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { NoticesPopup, BannerPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
 import { FacilityCategoryCard } from "@/components/site/FacilityCategoryCard";
 import { TouristCard } from "@/components/site/TouristCard";
-import { facilityCategories, type TouristPlaceRecord } from "@/lib/facilities";
+import { facilityCategories, facilityCategoryHref, type TouristPlaceRecord } from "@/lib/facilities";
 
 // Static imports for leadership images — avoids new URL() crashes on GitHub Pages
 import presidentImg from "@/assets/leadership/President_of_India_Droupadi_Murmu_official_pic.png";
@@ -392,7 +392,7 @@ const PublicFacilitiesSlider = ({ en }: { en: boolean }) => {
           return (
             <Link
               key={category.slug}
-              to={`/public-facilities/${category.slug}`}
+              to={facilityCategoryHref(category)}
               className="group flex-shrink-0 w-[260px] bg-white border border-border hover:border-civic-blue/30 hover:shadow-elegant rounded-2xl p-5 transition-all flex flex-col gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
             >
               <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-civic-blue/10 text-civic-blue group-hover:bg-civic-blue group-hover:text-white transition-colors">

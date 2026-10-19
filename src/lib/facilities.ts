@@ -8,6 +8,7 @@ import {
   Users,
   MapPin,
   Flag,
+  Theater,
 } from "lucide-react";
 
 /** Curated public-facing extra field (never dump raw GIS columns). */
@@ -36,12 +37,19 @@ export interface FacilityCategoryDef {
   titleMr: string;
   descriptionEn: string;
   descriptionMr: string;
-  dataset: string;
+  /** JSON file in public/data for the /public-facilities/:slug map page. Omitted when `href` is set. */
+  dataset?: string;
   icon: LucideIcon;
   groupEn: string;
   groupMr: string;
   /** When false, hide from homepage overview slider. */
   showInOverview?: boolean;
+  /** Dedicated page that replaces the /public-facilities/:slug map page. */
+  href?: string;
+}
+
+export function facilityCategoryHref(category: FacilityCategoryDef): string {
+  return category.href ?? `/public-facilities/${category.slug}`;
 }
 
 export const facilityCategories: FacilityCategoryDef[] = [
@@ -133,6 +141,17 @@ export const facilityCategories: FacilityCategoryDef[] = [
     icon: Flag,
     groupEn: "Municipal Infrastructure",
     groupMr: "महापालिका पायाभूत सुविधा",
+  },
+  {
+    slug: "drama-theatre",
+    titleEn: "Drama / Theatre",
+    titleMr: "नाट्य / रंगमंच",
+    descriptionEn: "Drama theatres, auditoriums and cinema halls in the city, with address and contact number.",
+    descriptionMr: "शहरातील नाट्यगृहे, सभागृहे व चित्रपटगृहे, पत्ता व संपर्क क्रमांकासह.",
+    icon: Theater,
+    groupEn: "Culture & Entertainment",
+    groupMr: "संस्कृती व मनोरंजन",
+    href: "/drama-theatre",
   },
 ];
 

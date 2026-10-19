@@ -149,12 +149,7 @@ export const SITE_NAV: NavItem[] = [
     labelMr: "नागरिक सेवा",
     children: [
       { labelEn: "All Services", labelMr: "सर्व सेवा", to: "/services" },
-      {
-        labelEn: "Public Facilities",
-        labelMr: "सार्वजनिक सुविधा",
-        to: "/public-facilities",
-        children: [{ labelEn: "Drama / Theatre", labelMr: "नाट्य / रंगमंच", to: "/drama-theatre" }],
-      },
+      { labelEn: "Public Facilities", labelMr: "सार्वजनिक सुविधा", to: "/public-facilities" },
       {
         labelEn: "Know Your Zone / Prabhag / Ward",
         labelMr: "तुमचा झोन / प्रभाग / वॉर्ड जाणून घ्या",

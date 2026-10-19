@@ -1,7 +1,7 @@
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { facilityCategories } from "@/lib/facilities";
+import { facilityCategories, facilityCategoryHref } from "@/lib/facilities";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
@@ -47,7 +47,7 @@ const PublicFacilities = () => {
                     return (
                       <Link
                         key={category.slug}
-                        to={`/public-facilities/${category.slug}`}
+                        to={facilityCategoryHref(category)}
                         className="group flex items-center gap-4 bg-white border border-border hover:border-civic-blue/30 hover:shadow-md rounded-2xl px-5 py-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
                       >
                         <div className="shrink-0 inline-flex items-center justify-center h-11 w-11 rounded-xl bg-civic-blue/10 text-civic-blue group-hover:bg-civic-blue group-hover:text-white transition-colors">

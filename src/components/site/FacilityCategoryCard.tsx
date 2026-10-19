@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useLang } from "@/i18n/LanguageContext";
-import type { FacilityCategoryDef } from "@/lib/facilities";
+import { facilityCategoryHref, type FacilityCategoryDef } from "@/lib/facilities";
 
 export const FacilityCategoryCard = ({ category }: { category: FacilityCategoryDef }) => {
   const { lang, t } = useLang();
@@ -24,7 +24,7 @@ export const FacilityCategoryCard = ({ category }: { category: FacilityCategoryD
       </div>
       <div className="p-6 pt-0 bg-slate-50">
         <Link
-          to={`/public-facilities/${category.slug}`}
+          to={facilityCategoryHref(category)}
           className="inline-flex items-center gap-2 text-sm font-semibold text-civic-blue hover:text-civic-red transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue rounded"
         >
           {t.facilities.viewAll} <ArrowRight className="h-4 w-4" aria-hidden />

@@ -18,7 +18,7 @@ import { RTI_DOCS, RTI_OFFICERS } from "@/data/rtiPublic";
 import { SITE_NOTICES } from "@/data/siteNotices";
 import { dastavezDocuments } from "@/data/municipalDocuments";
 import { getGalleryStories } from "@/data/visualStories";
-import { facilityCategories } from "@/lib/facilities";
+import { facilityCategories, facilityCategoryHref } from "@/lib/facilities";
 import { ncapFileUrl } from "@/lib/ncap";
 import { getPublishedOrganogram } from "@/lib/organogram";
 import type { CivicRecord } from "@/types/civicCatalog";
@@ -267,7 +267,7 @@ function buildFacilityCategoryRecords(existingIds: Set<string>): CivicRecord[] {
         descriptionMr: cat.descriptionMr,
         departmentEn: cat.groupEn,
         departmentMr: cat.groupMr,
-        href: `/public-facilities/${cat.slug}`,
+        href: facilityCategoryHref(cat),
         keywords: [
           cat.slug,
           cat.titleEn,
@@ -293,6 +293,9 @@ function buildFacilityCategoryRecords(existingIds: Set<string>): CivicRecord[] {
           ...(cat.slug === "phcs" ? ["phc", "primary health", "आरोग्य केंद्र"] : []),
           ...(cat.slug === "hoardings"
             ? ["hoarding", "hoardings", "banner", "banners", "होर्डिंग", "बॅनर"]
+            : []),
+          ...(cat.slug === "drama-theatre"
+            ? ["drama", "theatre", "theater", "natya", "natyagruha", "cinema", "नाट्यगृह", "नाटक", "रंगमंच", "चित्रपटगृह"]
             : []),
         ],
       }),

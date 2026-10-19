@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
@@ -29,7 +29,7 @@ const FacilityDetails = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!category) return;
+    if (!category?.dataset) return;
     setLoading(true);
     setError("");
     setSelectedId(null);
@@ -106,6 +106,8 @@ const FacilityDetails = () => {
     }
     return `${d(n)} ${unit}`;
   })();
+
+  if (category?.href) return <Navigate to={category.href} replace />;
 
   if (!category) {
     return (
