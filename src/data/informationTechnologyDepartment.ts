@@ -174,7 +174,7 @@ export const IT_DEPARTMENT_HIERARCHY: { en: string; mr: string }[] = [
 ];
 
 export const IT_DEPARTMENT_HEADINGS = {
-  officers: { en: "Employee Contact (Department Head Shown Above)", mr: "कर्मचारी संपर्क (विभागप्रमुख वरील प्रोफाइलमध्ये)" },
+  officers: { en: "Employee Contact", mr: "कर्मचारी संपर्क" },
   functions: { en: "Main Functions of the Department", mr: "विभागाची प्रमुख कामे" },
   hierarchy: { en: "Structural Details of the Department", mr: "विभागाचे संरचनात्मक विवरण" },
   introduction: { en: "Introduction", mr: "प्रस्तावना" },

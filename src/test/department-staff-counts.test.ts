@@ -8,7 +8,8 @@ describe("department headcounts and staff lists", () => {
     const department = DEPARTMENTS.find(({ slug }) => slug === "information-technology");
 
     expect(department?.employeeCount).toBe(5);
-    expect(department?.employeeCountDetailsEn).toContain("includes the department head");
+    expect(department?.employeeCountDetailsEn).toBeUndefined();
+    expect(department?.employeeCountDetailsMr).toBeUndefined();
     expect(IT_DEPARTMENT_OFFICERS).toHaveLength(1);
     expect(IT_DEPARTMENT_OFFICERS.map(({ nameEn }) => nameEn)).not.toContain("Smt. Aparna Thete");
   });

@@ -69,4 +69,45 @@ describe("officer phone privacy", () => {
       view.unmount();
     }
   }, 120000);
+
+  it("keeps Information & Technology contacts after the profile grid and department details in the right column", () => {
+    const view = renderInSite(
+      <MemoryRouter initialEntries={["/departments/information-technology"]}>
+        <Routes>
+          <Route path="/departments/:slug" element={<DepartmentDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const officerHeading = view.getByRole("heading", { level: 3, name: "अधिकारी कक्ष" });
+    const leftColumn = officerHeading.parentElement?.parentElement;
+    const grid = leftColumn?.parentElement;
+    const rightColumn = grid?.children[1];
+
+    expect(rightColumn?.querySelector("#it-functions-heading")).toBeInTheDocument();
+    expect(rightColumn?.querySelector("#it-hierarchy-heading")).toBeInTheDocument();
+    expect(grid?.nextElementSibling?.querySelector("#it-officers-heading")).toBeInTheDocument();
+    expect(rightColumn?.querySelector("#it-officers-heading")).not.toBeInTheDocument();
+    expect(view.container.textContent).not.toContain("The total includes the department head shown above");
+    expect(view.container.textContent).not.toContain("Department Head Shown Above");
+  });
+
+  it("keeps City Engineer staff tables after the profile grid and documents after staff", () => {
+    const view = renderInSite(
+      <MemoryRouter initialEntries={["/departments/city-engineer"]}>
+        <Routes>
+          <Route path="/departments/:slug" element={<DepartmentDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const officerHeading = view.getByRole("heading", { level: 3, name: "अधिकारी कक्ष" });
+    const leftColumn = officerHeading.parentElement?.parentElement;
+    const layoutGrid = leftColumn?.parentElement;
+    const permanentStaff = view.container.querySelector("#city-engineer-permanent-heading");
+    const departmentDocuments = [...view.container.querySelectorAll("h3")].find(
+      (heading) => heading.textContent === "संबंधित दस्तऐवज",
+    );
+
+    expect(layoutGrid?.nextElementSibling?.contains(permanentStaff ?? null)).toBe(true);
+    expect(layoutGrid?.nextElementSibling?.nextElementSibling?.contains(departmentDocuments ?? null)).toBe(true);
+  });
 });

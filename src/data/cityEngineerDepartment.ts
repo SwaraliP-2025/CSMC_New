@@ -125,8 +125,8 @@ export const CITY_ENGINEER_OUTSOURCED_EMPLOYEES: CityEngineerEmployee[] = [
 
 export const CITY_ENGINEER_DEPARTMENT_HEADINGS = {
   permanent: {
-    en: "Other Permanent Employees (City Engineer shown above)",
-    mr: "इतर कायम कर्मचारी (शहर अभियंता वरील प्रोफाइलमध्ये)",
+    en: "Permanent Employees (excluding the City Engineer)",
+    mr: "शहर अभियंत्यांना वगळून कायम कर्मचारी",
   },
   outsourced: { en: "Outsourced Employees", mr: "बाह्यस्रोत कर्मचारी" },
   srNo: { en: "Sr. No.", mr: "अ.क्र." },

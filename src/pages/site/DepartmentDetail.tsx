@@ -588,7 +588,10 @@ import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
 import { Mail, MapPin, ArrowLeft, Bell, Users } from "lucide-react";
-import { InformationTechnologyDepartmentSections } from "@/components/site/InformationTechnologyDepartmentSections";
+import {
+  InformationTechnologyDetails,
+  InformationTechnologyEmployeeContacts,
+} from "@/components/site/InformationTechnologyDepartmentSections";
 import { CityEngineerDepartmentSections } from "@/components/site/CityEngineerDepartmentSections";
 import { IT_DEPARTMENT_MOTTO, IT_DEPARTMENT_SLUG } from "@/data/informationTechnologyDepartment";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
@@ -2310,8 +2313,6 @@ const DEPARTMENTS: DeptInfo[] = [
     addressEn: "",
     addressMr: "",
     employeeCount: 5,
-    employeeCountDetailsEn: "The total includes the department head shown above. The contact list below shows the documented non-head employee and does not repeat the department head.",
-    employeeCountDetailsMr: "वरील विभागप्रमुखांचा एकूण संख्येत समावेश आहे. खालील संपर्क यादीत नोंद असलेला इतर कर्मचारी दाखवला आहे; विभागप्रमुखांची पुनरावृत्ती केलेली नाही.",
     updates: [],
   },
 
@@ -2855,31 +2856,57 @@ function DepartmentHeadCard({
 
 function DepartmentInformationCard({
   brief,
+  dept,
   en,
   motto,
 }: {
-  brief: DepartmentBrief;
+  brief: DepartmentBrief | null;
+  dept: DeptInfo;
   en: boolean;
   motto?: { label: string; motto: string; separator: string; text: string };
 }) {
+  const responsibilities = en ? dept.responsibilitiesEn : dept.responsibilitiesMr;
+  const services = en ? dept.servicesEn : dept.servicesMr;
+  const hasBriefContent = Boolean(brief?.description || brief?.activities.length);
+
   return (
     <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm min-w-0">
       <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
         {en ? "Department Information" : "विभागाची माहिती"}
       </h3>
-      {brief.description ? (
+      {brief?.description ? (
         <p className="text-sm text-muted-foreground leading-relaxed break-words">{brief.description}</p>
       ) : null}
-      {brief.activities.length > 0 ? (
+      {brief?.activities.length ? (
         <ul
           className={`text-sm text-muted-foreground space-y-1.5 list-disc list-inside break-words ${
-            brief.description ? "mt-4" : ""
+            brief?.description ? "mt-4" : ""
           }`}
         >
           {brief.activities.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
+      ) : null}
+      {responsibilities?.length ? (
+        <div className={hasBriefContent ? "mt-4" : ""}>
+          <h4 className="text-sm font-bold text-civic-blue">
+            {en ? "Responsibilities" : "जबाबदाऱ्या"}
+          </h4>
+          <ul className="mt-2 list-disc list-inside space-y-1.5 text-sm leading-relaxed text-muted-foreground break-words">
+            {responsibilities.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
+      ) : null}
+      {services?.length ? (
+        <div className={hasBriefContent || Boolean(responsibilities?.length) ? "mt-4" : ""}>
+          <h4 className="text-sm font-bold text-civic-blue">
+            {en ? "Services" : "सेवा"}
+          </h4>
+          <ul className="mt-2 list-disc list-inside space-y-1.5 text-sm leading-relaxed text-muted-foreground break-words">
+            {services.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
       ) : null}
       {motto ? (
         <div className="mt-4 rounded-xl border-l-4 border-civic-gold bg-civic-gold/10 px-4 py-3 text-sm leading-relaxed text-civic-ink break-words">
@@ -2981,8 +3008,8 @@ const DepartmentDetail = () => {
         <div className="space-y-8">
           <UpdatesTicker updates={dept.updates} en={en} />
 
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(300px,340px)_minmax(0,1fr)] gap-8 items-start">
-            <div className="min-w-0 w-full md:max-w-[340px]">
+          <div className="grid grid-cols-1 gap-8 items-start md:grid-cols-[minmax(300px,340px)_minmax(0,1fr)]">
+            <div className="min-w-0 w-full space-y-8 md:max-w-[340px]">
               <DepartmentHeadCard
                 dept={dept}
                 en={en}
@@ -2990,25 +3017,29 @@ const DepartmentDetail = () => {
                 portrait={portrait}
               />
             </div>
-            {brief ? (
-              <DepartmentInformationCard
-                brief={brief}
-                en={en}
-                motto={
-                  dept.slug === IT_DEPARTMENT_SLUG
-                    ? {
-                        label: en ? IT_DEPARTMENT_MOTTO.labelEn : IT_DEPARTMENT_MOTTO.labelMr,
-                        motto: IT_DEPARTMENT_MOTTO.motto,
-                        separator: en ? IT_DEPARTMENT_MOTTO.separatorEn : IT_DEPARTMENT_MOTTO.separatorMr,
-                        text: en ? IT_DEPARTMENT_MOTTO.en : IT_DEPARTMENT_MOTTO.mr,
-                      }
-                    : undefined
-                }
-              />
-            ) : null}
+            <div className="min-w-0 space-y-8">
+              {brief || dept.responsibilitiesEn?.length || dept.responsibilitiesMr?.length || dept.servicesEn?.length || dept.servicesMr?.length ? (
+                <DepartmentInformationCard
+                  brief={brief}
+                  dept={dept}
+                  en={en}
+                  motto={
+                    dept.slug === IT_DEPARTMENT_SLUG
+                      ? {
+                          label: en ? IT_DEPARTMENT_MOTTO.labelEn : IT_DEPARTMENT_MOTTO.labelMr,
+                          motto: IT_DEPARTMENT_MOTTO.motto,
+                          separator: en ? IT_DEPARTMENT_MOTTO.separatorEn : IT_DEPARTMENT_MOTTO.separatorMr,
+                          text: en ? IT_DEPARTMENT_MOTTO.en : IT_DEPARTMENT_MOTTO.mr,
+                        }
+                      : undefined
+                  }
+                />
+              ) : null}
+              {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDetails en={en} /> : null}
+            </div>
           </div>
 
-          {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDepartmentSections en={en} /> : null}
+          {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyEmployeeContacts en={en} /> : null}
           {dept.slug === "city-engineer" ? <CityEngineerDepartmentSections en={en} /> : null}
 
           {dept.slug === "chief-accounts-finance-officer" ? (

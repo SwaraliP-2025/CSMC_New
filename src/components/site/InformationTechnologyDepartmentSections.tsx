@@ -131,11 +131,15 @@ function ItHierarchy({ en }: { en: boolean }) {
   );
 }
 
-/** Officer contacts, main functions and structure for the Information & Technology Department page. */
-export function InformationTechnologyDepartmentSections({ en }: { en: boolean }) {
+/** Non-head employee contacts for the Information & Technology Department page. */
+export function InformationTechnologyEmployeeContacts({ en }: { en: boolean }) {
+  return <ItOfficerTable en={en} />;
+}
+
+/** Department functions and hierarchy for the information column. */
+export function InformationTechnologyDetails({ en }: { en: boolean }) {
   return (
     <div className="min-w-0 space-y-8">
-      <ItOfficerTable en={en} />
       <ItFunctionsList en={en} />
       <ItHierarchy en={en} />
     </div>
