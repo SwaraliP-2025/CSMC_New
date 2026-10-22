@@ -12,8 +12,9 @@ export function voiceStartErrorCode(error: unknown): string {
       : "";
   switch (name) {
     case "NotAllowedError":
-    case "SecurityError":
       return "not-allowed";
+    case "SecurityError":
+      return "insecure-context";
     case "NotFoundError":
     case "DevicesNotFoundError":
       return "audio-capture";
@@ -42,18 +43,9 @@ export function normalizeVoiceTranscript(raw: string): string {
   return out.join(" ");
 }
 
-/** Browser language first, site language only when the browser has neither English nor Marathi. */
-export function pickRecognitionLang(siteLang: "en" | "mr", navigatorLangs: readonly string[], useAlternate: boolean): "en-IN" | "mr-IN" {
-  const prefs = navigatorLangs.map((lang) => lang.toLowerCase());
-  const first = prefs[0] ?? "";
-  let primary: "en-IN" | "mr-IN";
-  if (first.startsWith("mr")) primary = "mr-IN";
-  else if (first.startsWith("en")) primary = "en-IN";
-  else if (prefs.some((lang) => lang.startsWith("mr")) && !prefs.some((lang) => lang.startsWith("en"))) primary = "mr-IN";
-  else if (prefs.some((lang) => lang.startsWith("en"))) primary = "en-IN";
-  else primary = siteLang === "mr" ? "mr-IN" : "en-IN";
-  if (!useAlternate) return primary;
-  return primary === "mr-IN" ? "en-IN" : "mr-IN";
+/** Use the selected site language; do not silently switch to browser preferences. */
+export function pickRecognitionLang(siteLang: "en" | "mr"): "en-IN" | "mr-IN" {
+  return siteLang === "mr" ? "mr-IN" : "en-IN";
 }
 
 export function voiceStatusMessage(code: string, en: boolean): string {
@@ -70,6 +62,10 @@ export function voiceStatusMessage(code: string, en: boolean): string {
       return en
         ? "Microphone permission is blocked. Please allow microphone access for this site."
         : "मायक्रोफोन परवानगी अवरोधित आहे. या संकेतस्थळासाठी मायक्रोफोन परवानगी द्या.";
+    case "insecure-context":
+      return en
+        ? "Voice search requires a secure HTTPS page. Open this site over HTTPS, or use text search."
+        : "आवाज शोधासाठी सुरक्षित HTTPS पृष्ठ आवश्यक आहे. संकेतस्थळ HTTPS वर उघडा किंवा मजकूर शोध वापरा.";
     case "audio-capture":
       return en
         ? "No microphone was found. Check the device and try again."

@@ -592,6 +592,7 @@ import {
   InformationTechnologyDetails,
   InformationTechnologyEmployeeContacts,
 } from "@/components/site/InformationTechnologyDepartmentSections";
+import { InformationTechnologyDocuments } from "@/components/site/InformationTechnologyDocuments";
 import { CityEngineerDepartmentSections } from "@/components/site/CityEngineerDepartmentSections";
 import { IT_DEPARTMENT_MOTTO, IT_DEPARTMENT_SLUG } from "@/data/informationTechnologyDepartment";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
@@ -3151,6 +3152,8 @@ const DepartmentDetail = () => {
               />
             </div>
           ) : null}
+
+          {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDocuments /> : null}
 
         </div>
       </section>

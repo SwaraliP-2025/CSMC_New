@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { ExternalLink, Mic, MicOff, Search, X } from "lucide-react";
@@ -61,7 +61,6 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const voiceGotResultRef = useRef(false);
   const voiceErrorRef = useRef("");
   const voiceSnapshotRef = useRef({ query: "", searchQuery: "" });
-  const voiceAlternateRef = useRef(false);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,9 +68,12 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const [voicePhase, setVoicePhase] = useState<VoicePhase>("idle");
   const [voiceNote, setVoiceNote] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
-  const speechAvailable = !!getSpeechRecognitionCtor();
+  const speechSupported = !!getSpeechRecognitionCtor();
+  const secureContext = typeof window === "undefined" || window.isSecureContext !== false;
+  const speechAvailable = speechSupported && secureContext;
   const voiceBusy = voicePhase === "listening" || voicePhase === "processing";
-  const visibleVoiceNote = voiceNote || (!speechAvailable ? voiceStatusMessage("not-supported", en) : "");
+  const unavailableVoiceCode = !speechSupported ? "not-supported" : "insecure-context";
+  const visibleVoiceNote = voiceNote || (!speechAvailable ? voiceStatusMessage(unavailableVoiceCode, en) : "");
 
   const hits = useMemo(() => (searchQuery.trim().length >= 2 ? searchHits(searchQuery) : []), [searchQuery]);
   const didYouMean = useMemo(
@@ -126,7 +128,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     setActiveIndex(-1);
   }, [searchQuery]);
 
-  const syncPos = () => {
+  const syncPos = useCallback(() => {
     const el = wrapRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -134,7 +136,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     let left = compact ? r.left : r.right - width;
     left = Math.max(8, Math.min(left, window.innerWidth - width - 8));
     setPos({ top: r.bottom + 8, left, width });
-  };
+  }, [compact]);
 
   useEffect(() => {
     if (!showPanel) return;
@@ -146,7 +148,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       window.removeEventListener("resize", onScroll);
       window.removeEventListener("scroll", onScroll, true);
     };
-  }, [showPanel, compact]);
+  }, [showPanel, syncPos]);
 
   useEffect(() => {
     if (!open) return;
@@ -179,7 +181,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     };
     window.addEventListener("csmc-tour-focus-search", onTourSearch);
     return () => window.removeEventListener("csmc-tour-focus-search", onTourSearch);
-  }, []);
+  }, [syncPos]);
 
   const goToResultsPage = (q: string) => {
     const trimmed = q.trim();
@@ -302,11 +304,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     voiceErrorRef.current = "";
     voiceSnapshotRef.current = { query, searchQuery };
 
-    const recognitionLang = pickRecognitionLang(
-      lang === "en" ? "en" : "mr",
-      typeof navigator !== "undefined" ? navigator.languages : [],
-      voiceAlternateRef.current,
-    );
+    const recognitionLang = pickRecognitionLang(lang === "en" ? "en" : "mr");
     let recognition: SpeechRecognitionLike;
     try {
       recognition = new Ctor();
@@ -337,7 +335,6 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       if (applyTranscript(text)) {
         voiceGotResultRef.current = true;
         if (finalText) {
-          voiceAlternateRef.current = false;
           finishVoice("processing", voiceStatusMessage("processing", en));
         }
       }
@@ -376,7 +373,6 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
         finishVoice("idle", "");
         return;
       }
-      if (code === "no-speech" || code === "language-not-supported") voiceAlternateRef.current = !voiceAlternateRef.current;
       restoreVoiceSnapshot();
       finishVoice("error", voiceStatusMessage(code, en));
     };
@@ -455,7 +451,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           type="button"
           aria-label={
             !speechAvailable
-              ? voiceStatusMessage("not-supported", en)
+              ? voiceStatusMessage(unavailableVoiceCode, en)
               : voiceBusy
                 ? en
                   ? "Stop voice search"
@@ -467,7 +463,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
           aria-pressed={voiceBusy}
           aria-describedby={visibleVoiceNote ? voiceStatusId : undefined}
           disabled={!speechAvailable}
-          title={voiceNote || (speechAvailable ? undefined : voiceStatusMessage("not-supported", en))}
+          title={voiceNote || (speechAvailable ? undefined : voiceStatusMessage(unavailableVoiceCode, en))}
           onClick={toggleVoice}
           className={`grid min-h-11 min-w-11 shrink-0 touch-manipulation place-items-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue disabled:opacity-40 ${voiceBusy ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
         >

@@ -34,6 +34,8 @@ import {
 } from "@/data/reviewedPublicDocuments";
 import { TOWN_PLANNING_DOCUMENTS_FOLDER, townPlanningDocuments } from "@/data/townPlanningDocuments";
 import { driveHostedPdfIds } from "@/data/driveHostedPdfs";
+import { INFORMATION_TECHNOLOGY_DOCUMENT_GROUPS } from "@/data/informationTechnologyDocuments";
+import { tenderArchiveGroups } from "@/data/officialLinkedDocuments";
 import { publishedDocumentUrl, publicDocumentUrl, verifiedDriveFileId } from "@/lib/archiveDocuments";
 import { isSameOriginPdfHref } from "@/lib/pdfPreview";
 
@@ -102,6 +104,35 @@ describe("document mapping", () => {
     const ncap = JSON.parse(readFileSync(path.join(publicRoot, "data", "ncap-documents.json"), "utf8"));
     const ncapDocs = Array.isArray(ncap) ? ncap : ncap.documents;
     for (const doc of ncapDocs) expectPublicFile(["ncap", "documents", doc.fileName]);
+  });
+
+  it("cross-lists only verified Computer Section tender and RTI documents on the IT page", () => {
+    const itDocuments = INFORMATION_TECHNOLOGY_DOCUMENT_GROUPS.flatMap((group) =>
+      group.documents.map((document) => ({ document, folder: group.folderSegments })),
+    );
+    const expectedTenderDocuments = tenderArchiveGroups.flatMap((group) =>
+      group.documents
+        .filter((document) => ["computer", "computer section", "computer sectiom"].includes(document.department?.trim().toLocaleLowerCase() ?? ""))
+        .map((document) => ({ document, folder: group.folder })),
+    );
+    const expectedRtiDocuments = rtiDocuments
+      .filter((document) => document.departmentName.trim().toLocaleLowerCase() === "computer section")
+      .map((document) => ({
+        document: { id: document.id, file: document.fileName, bytes: document.bytes },
+        folder: ["rti", "Department-wise RTI Documents"],
+      }));
+    const expected = [...expectedTenderDocuments, ...expectedRtiDocuments];
+    const key = ({ document, folder }: { document: { file: string }; folder: string[] }) =>
+      [...folder, document.file].join("/").toLocaleLowerCase();
+
+    expect(itDocuments).toHaveLength(18);
+    expect(new Set(itDocuments.map(key)).size).toBe(itDocuments.length);
+    expect(itDocuments.map(key).sort()).toEqual(expected.map(key).sort());
+    for (const { document, folder } of itDocuments) {
+      const segments = ["documents", ...folder, document.file];
+      expectPublicFile(segments);
+      expect(statSync(path.join(publicRoot, ...segments)).size).toBe(document.bytes);
+    }
   });
 
   it("shows Education, Town Planning, Drainage, and Administration in the repository and keeps department listings", () => {
