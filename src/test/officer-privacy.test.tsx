@@ -62,7 +62,7 @@ describe("officer phone privacy", () => {
           </Routes>
         </MemoryRouter>,
       );
-      if (dept.headMr) expect(view.getByText(dept.headMr)).toBeInTheDocument();
+      if (dept.headMr) expect(view.getAllByText(dept.headMr).length).toBeGreaterThan(0);
       const card = view.getByRole("heading", { level: 3, name: "अधिकारी कक्ष" }).parentElement;
       expect(card).toBeTruthy();
       expectNoOfficerPhones(card!);

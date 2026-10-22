@@ -19,8 +19,8 @@ export const DEPARTMENT_DIRECTORY: DepartmentDirectoryEntry[] = [
   },
   {
     "slug": "city-engineer",
-    "nameEn": "City Engineer & Executive Engineer",
-    "nameMr": "कार्यकारी अभियंता तथा प्रभारी शहर अभियंता"
+    "nameEn": "City Engineer Department",
+    "nameMr": "शहर अभियंता विभाग"
   },
   {
     "slug": "additional-city-engineer",
@@ -174,8 +174,8 @@ export const DEPARTMENT_DIRECTORY: DepartmentDirectoryEntry[] = [
   },
   {
     "slug": "information-technology",
-    "nameEn": "Information & Technology Department",
-    "nameMr": "माहिती व तंत्रज्ञान विभाग (संगणक/ई-गव्हर्नन्स/ई-निविदा)"
+    "nameEn": "Information & Technology Department (Computer Section)",
+    "nameMr": "माहिती व तंत्रज्ञान विभाग (संगणक कक्ष)"
   },
   {
     "slug": "information-public-relations",

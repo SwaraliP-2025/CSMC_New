@@ -1,3 +1,5 @@
+import { IT_DEPARTMENT_INTRODUCTION } from "@/data/informationTechnologyDepartment";
+
 /**
  * Public Department Information briefs for department detail pages.
  * Each description is written for the vacant information column: about 100–120 words
@@ -284,12 +286,10 @@ export const DEPARTMENT_BRIEFS: Record<string, DepartmentBriefCopy> = {
     activitiesMr: ["नागरी उपजीविका अर्ज", "स्वयंसाह्य गट मदत", "कौशल्य प्रशिक्षण समन्वय", "अभियान प्रगती नोंदी"],
   },
   "information-technology": {
-    descriptionEn:
-      "The Information and Technology Department looks after the computer systems, e-governance and e-tender support of Chhatrapati Sambhajinagar Municipal Corporation. It maintains the municipal network and the applications the departments use, attends to system faults reported by offices, and coordinates the technical side of online citizen services that the Corporation hosts. E-tender publication support, user access and the safe keeping of municipal data are followed here. A department that wants a new online module is asked to state the process first, so that the system matches the actual work. The department does not decide a tax assessment or a building permission. It keeps the digital tools through which those departments work.",
-    descriptionMr:
-      "माहिती व तंत्रज्ञान विभाग छत्रपती संभाजीनगर महानगरपालिकेची संगणक यंत्रणा, ई-गव्हर्नन्स आणि ई-निविदा सहाय्य पाहतो. महापालिका नेटवर्क आणि विभाग वापरत असलेली प्रणाली, कार्यालये नोंदवतात ते दोष, आणि महापालिका चालवत असलेल्या ऑनलाइन नागरिक सेवांची तांत्रिक बाजू येथे येते. ई-निविदा प्रसिद्धीस मदत, वापरकर्ता प्रवेश आणि महापालिका माहितीची जपणूक पाहिली जाते. नवीन ऑनलाइन सुविधा मागणारा विभाग आधी कार्यपद्धती सांगतो, म्हणून प्रणाली प्रत्यक्ष कामाशी जुळते. कर आकारणी किंवा बांधकाम परवानगी हा विभाग ठरवत नाही. ज्या डिजिटल साधनांवर ते विभाग काम करतात ती साधने तो सांभाळतो. कार्यालयातील यंत्रणा दोष आणि ई-निविदा व ऑनलाइन सेवेची तांत्रिक बाजू येथे येते आणि कर किंवा परवानगीचा निर्णय संबंधित विभागच करतो.",
-    activitiesEn: ["Municipal computer systems", "E-governance support", "E-tender technical help", "Network and data upkeep"],
-    activitiesMr: ["महापालिका संगणक यंत्रणा", "ई-गव्हर्नन्स मदत", "ई-निविदा तांत्रिक सहाय्य", "नेटवर्क व माहिती जपणूक"],
+    descriptionEn: IT_DEPARTMENT_INTRODUCTION.en,
+    descriptionMr: IT_DEPARTMENT_INTRODUCTION.mr,
+    activitiesEn: [],
+    activitiesMr: [],
   },
   "information-public-relations": {
     descriptionEn:

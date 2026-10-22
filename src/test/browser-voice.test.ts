@@ -1,7 +1,23 @@
 import { readFileSync } from "node:fs";
-import { describe, expect, it } from "vitest";
-import { normalizeVoiceTranscript, pickRecognitionLang, voiceStatusMessage } from "@/lib/browserVoice";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { render, fireEvent, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { createElement } from "react";
+import { LanguageProvider } from "@/i18n/LanguageContext";
+import { GlobalSearch } from "@/components/site/GlobalSearch";
+import { normalizeVoiceTranscript, pickRecognitionLang, voiceStartErrorCode, voiceStatusMessage } from "@/lib/browserVoice";
 import { searchHits, suggestDidYouMean } from "@/lib/unifiedSearch";
+
+const originalSpeechRecognition = Object.getOwnPropertyDescriptor(window, "SpeechRecognition");
+const originalWebkitSpeechRecognition = Object.getOwnPropertyDescriptor(window, "webkitSpeechRecognition");
+
+afterEach(() => {
+  if (originalSpeechRecognition) Object.defineProperty(window, "SpeechRecognition", originalSpeechRecognition);
+  else Reflect.deleteProperty(window, "SpeechRecognition");
+  if (originalWebkitSpeechRecognition) Object.defineProperty(window, "webkitSpeechRecognition", originalWebkitSpeechRecognition);
+  else Reflect.deleteProperty(window, "webkitSpeechRecognition");
+  vi.restoreAllMocks();
+});
 
 describe("browser voice", () => {
   it("normalizes punctuation, spacing and immediate repeats without translating", () => {
@@ -22,8 +38,67 @@ describe("browser voice", () => {
   it("keeps voice errors out of the query text", () => {
     expect(voiceStatusMessage("no-speech", true)).toMatch(/No speech detected/);
     expect(voiceStatusMessage("not-allowed", true)).toMatch(/Microphone permission is blocked/);
+    expect(voiceStatusMessage("audio-capture", true)).toMatch(/No microphone was found/);
+    expect(voiceStatusMessage("network", true)).toMatch(/speech service/);
     expect(voiceStatusMessage("not-supported", true)).toMatch(/not supported/);
     expect(voiceStatusMessage("aborted", true)).toBe("");
+  });
+
+  it("maps browser microphone/start failures to actionable feedback", () => {
+    expect(voiceStartErrorCode(new DOMException("Denied", "NotAllowedError"))).toBe("not-allowed");
+    expect(voiceStartErrorCode(new DOMException("No device", "NotFoundError"))).toBe("audio-capture");
+    expect(voiceStartErrorCode(new DOMException("Offline", "NetworkError"))).toBe("network");
+  });
+
+  it("keeps text search available and explains when speech recognition is unsupported", () => {
+    Object.defineProperty(window, "SpeechRecognition", { configurable: true, value: undefined });
+    Object.defineProperty(window, "webkitSpeechRecognition", { configurable: true, value: undefined });
+    render(
+      createElement(MemoryRouter, null, createElement(LanguageProvider, null, createElement(GlobalSearch))),
+    );
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    expect(screen.getByRole("status").textContent).toMatch(/not supported|समर्थित/);
+    expect(screen.getByRole("button", { name: /not supported|समर्थित/ })).toBeDisabled();
+  });
+
+  it("detects the vendor-prefixed speech recognition implementation", () => {
+    class PrefixedRecognition {
+      start() {}
+      stop() {}
+      abort() {}
+    }
+    Object.defineProperty(window, "SpeechRecognition", { configurable: true, value: undefined });
+    Object.defineProperty(window, "webkitSpeechRecognition", { configurable: true, value: PrefixedRecognition });
+    render(
+      createElement(MemoryRouter, null, createElement(LanguageProvider, null, createElement(GlobalSearch))),
+    );
+    expect(screen.getByRole("button", { name: /Voice search|आवाजाने शोधा/ })).toBeEnabled();
+  });
+
+  it("reports recognition errors while leaving the text query usable", () => {
+    class MockRecognition {
+      lang = "";
+      continuous = false;
+      interimResults = false;
+      maxAlternatives = 0;
+      onresult: ((event: { results: ArrayLike<{ isFinal?: boolean; 0?: { transcript: string } }> }) => void) | null = null;
+      onerror: ((event: { error?: string }) => void) | null = null;
+      onend: (() => void) | null = null;
+      onspeechend: (() => void) | null = null;
+      start() {
+        this.onerror?.({ error: "network" });
+        this.onend?.();
+      }
+      stop() {}
+      abort() {}
+    }
+    Object.defineProperty(window, "SpeechRecognition", { configurable: true, value: MockRecognition });
+    render(
+      createElement(MemoryRouter, null, createElement(LanguageProvider, null, createElement(GlobalSearch))),
+    );
+    fireEvent.click(screen.getByRole("button", { name: /Voice search|आवाजाने शोधा/ }));
+    expect(screen.getByRole("status").textContent).toMatch(/speech service|वाचा ओळख सेवा/);
+    expect(screen.getByRole("combobox")).toBeEnabled();
   });
 
   it("sends a normalized transcript through the same search pipeline as typing", () => {

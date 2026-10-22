@@ -11,6 +11,7 @@ import {
   normalizeVoiceTranscript,
   pickRecognitionLang,
   voiceDebug,
+  voiceStartErrorCode,
   voiceStatusMessage,
   type VoicePhase,
 } from "@/lib/browserVoice";
@@ -70,6 +71,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const speechAvailable = !!getSpeechRecognitionCtor();
   const voiceBusy = voicePhase === "listening" || voicePhase === "processing";
+  const visibleVoiceNote = voiceNote || (!speechAvailable ? voiceStatusMessage("not-supported", en) : "");
 
   const hits = useMemo(() => (searchQuery.trim().length >= 2 ? searchHits(searchQuery) : []), [searchQuery]);
   const didYouMean = useMemo(
@@ -305,7 +307,14 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       typeof navigator !== "undefined" ? navigator.languages : [],
       voiceAlternateRef.current,
     );
-    const recognition = new Ctor();
+    let recognition: SpeechRecognitionLike;
+    try {
+      recognition = new Ctor();
+    } catch (error) {
+      finishVoice("error", voiceStatusMessage(voiceStartErrorCode(error), en));
+      voiceDebug({ event: "constructor-failed", error: voiceStartErrorCode(error) });
+      return;
+    }
     recognition.lang = recognitionLang;
     recognition.continuous = false;
     recognition.interimResults = true;
@@ -341,6 +350,7 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
     recognition.onerror = (event) => {
       const code = event.error || "unknown";
       voiceErrorRef.current = code;
+      finishVoice("error", voiceStatusMessage(code, en));
       voiceDebug({ event: "error", lang: recognitionLang, error: code });
     };
     recognition.onend = () => {
@@ -371,14 +381,15 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
       finishVoice("error", voiceStatusMessage(code, en));
     };
     recognitionRef.current = recognition;
+    finishVoice("listening", voiceStatusMessage("listening", en));
     try {
       recognition.start();
-      finishVoice("listening", voiceStatusMessage("listening", en));
       voiceDebug({ event: "start", lang: recognitionLang });
-    } catch {
+    } catch (error) {
       recognitionRef.current = null;
-      finishVoice("error", voiceStatusMessage("unknown", en));
-      voiceDebug({ event: "start-failed", lang: recognitionLang });
+      const code = voiceStartErrorCode(error);
+      finishVoice("error", voiceStatusMessage(code, en));
+      voiceDebug({ event: "start-failed", lang: recognitionLang, error: code });
     }
   };
 
@@ -454,31 +465,31 @@ export function GlobalSearch({ compact = false }: { compact?: boolean }) {
                   : "आवाजाने शोधा (मराठी किंवा इंग्रजी)"
           }
           aria-pressed={voiceBusy}
-          aria-describedby={voiceNote ? voiceStatusId : undefined}
+          aria-describedby={visibleVoiceNote ? voiceStatusId : undefined}
           disabled={!speechAvailable}
           title={voiceNote || (speechAvailable ? undefined : voiceStatusMessage("not-supported", en))}
           onClick={toggleVoice}
-          className={`shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue disabled:opacity-40 ${voiceBusy ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
+          className={`grid min-h-11 min-w-11 shrink-0 touch-manipulation place-items-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue disabled:opacity-40 ${voiceBusy ? "text-muted-foreground hover:text-civic-blue" : "text-civic-red"}`}
         >
           {voiceBusy ? (
-            <Mic className="h-4 w-4" aria-hidden />
-          ) : (
             <MicOff className="h-4 w-4" aria-hidden />
+          ) : (
+            <Mic className="h-4 w-4" aria-hidden />
           )}
         </button>
-        {voiceNote ? (
+        {visibleVoiceNote ? (
           <p
             id={voiceStatusId}
             role="status"
             className="absolute left-0 right-0 top-full z-[2060] mt-1 rounded-lg border border-border bg-white px-3 py-1.5 text-[11px] leading-snug text-civic-blue shadow-sm"
           >
-            {voiceNote}
+            {visibleVoiceNote}
           </p>
         ) : null}
       </div>
 
       <p className="sr-only" aria-live="polite" aria-atomic="true">
-        {voiceNote ? `${voiceNote} ` : ""}
+        {visibleVoiceNote ? `${visibleVoiceNote} ` : ""}
         {resultsStatus}
       </p>
 

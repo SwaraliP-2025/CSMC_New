@@ -587,7 +587,10 @@ import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/site/Layout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useLang } from "@/i18n/LanguageContext";
-import { Mail, MapPin, ArrowLeft, Bell } from "lucide-react";
+import { Mail, MapPin, ArrowLeft, Bell, Users } from "lucide-react";
+import { InformationTechnologyDepartmentSections } from "@/components/site/InformationTechnologyDepartmentSections";
+import { CityEngineerDepartmentSections } from "@/components/site/CityEngineerDepartmentSections";
+import { IT_DEPARTMENT_MOTTO, IT_DEPARTMENT_SLUG } from "@/data/informationTechnologyDepartment";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
 import { findOrganogramOfficerForHead } from "@/lib/organogram";
@@ -632,6 +635,10 @@ interface DeptInfo {
   email: string;
   addressEn: string;
   addressMr: string;
+  /** Verified number of employees currently working in the department. Never a count of sanctioned posts. */
+  employeeCount?: number;
+  employeeCountDetailsEn?: string;
+  employeeCountDetailsMr?: string;
   image?: string;
   photoSize?: string;
   photoTop?: string;
@@ -1817,16 +1824,19 @@ const DEPARTMENTS: DeptInfo[] = [
 
   {
   slug: "city-engineer",
-  nameEn: "City Engineer & Executive Engineer",
-  nameMr: "कार्यकारी अभियंता तथा प्रभारी शहर अभियंता",
+  nameEn: "City Engineer Department",
+  nameMr: "शहर अभियंता विभाग",
   headEn: "Shri Sanjay Kombde",
   headMr: "श्री संजय कोंबडे",
-  designationEn: "Executive Engineer",
-  designationMr: "कार्यकारी अभियंता",
+  designationEn: "City Engineer",
+  designationMr: "शहर अभियंता",
   phone: DEPARTMENT_CONTACT_PHONE,
   email: "",
   addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar - 431001",
   addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
+  employeeCount: 10,
+  employeeCountDetailsEn: "7 permanent employees, including the City Engineer, and 3 outsourced employees.",
+  employeeCountDetailsMr: "शहर अभियंत्यांसह ७ कायम कर्मचारी आणि ३ बाह्यस्रोत कर्मचारी.",
   updates: [],
 },
 
@@ -2289,16 +2299,19 @@ const DEPARTMENTS: DeptInfo[] = [
 
   {
     slug: "information-technology",
-    nameEn: "Information & Technology Department",
-    nameMr: "माहिती व तंत्रज्ञान विभाग (संगणक/ई-गव्हर्नन्स/ई-निविदा)",
+    nameEn: "Information & Technology Department (Computer Section)",
+    nameMr: "माहिती व तंत्रज्ञान विभाग (संगणक कक्ष)",
     headEn: "Smt. Aparna Thete",
     headMr: "श्रीमती अपर्णा थेटे",
-    designationEn: "Deputy Municipal Commissioner",
-    designationMr: "उप आयुक्त",
+    designationEn: "Deputy Commissioner & Head of Section (E-Gov. & E-Tender)",
+    designationMr: "उपआयुक्त तथा कक्ष प्रमुख (E-Gov.& E-Tender)",
     phone: DEPARTMENT_CONTACT_PHONE,
-    email: "",
-    addressEn: "CSMC IT Department, Chhatrapati Sambhajinagar – 431001",
-    addressMr: "छत्रपती संभाजीनगर महानगरपालिका, माहिती व तंत्रज्ञान विभाग, छत्रपती संभाजीनगर – ४३१००१",
+    email: "compdept@gmail.com",
+    addressEn: "",
+    addressMr: "",
+    employeeCount: 5,
+    employeeCountDetailsEn: "The total includes the department head shown above. The contact list below shows the documented non-head employee and does not repeat the department head.",
+    employeeCountDetailsMr: "वरील विभागप्रमुखांचा एकूण संख्येत समावेश आहे. खालील संपर्क यादीत नोंद असलेला इतर कर्मचारी दाखवला आहे; विभागप्रमुखांची पुनरावृत्ती केलेली नाही.",
     updates: [],
   },
 
@@ -2738,13 +2751,11 @@ function DepartmentHeadCard({
   en,
   localize,
   portrait,
-  stacked = false,
 }: {
   dept: DeptInfo;
   en: boolean;
   localize: (value: string | number | null | undefined) => string;
   portrait?: string;
-  stacked?: boolean;
 }) {
   const name = en ? dept.headEn : dept.headMr;
   const designation = en ? dept.designationEn : dept.designationMr;
@@ -2754,17 +2765,13 @@ function DepartmentHeadCard({
     !designation.toLowerCase().includes(departmentName.toLowerCase());
 
   return (
-    <div className={stacked ? "min-w-0" : undefined}>
+    <div className="min-w-0">
       <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
         {en ? "Officer's Corner" : "अधिकारी कक्ष"}
       </h3>
-    <div className={`bg-white border border-border rounded-3xl overflow-hidden shadow-sm ${stacked ? "min-w-0" : ""}`}>
+    <div className="bg-white border border-border rounded-3xl overflow-hidden shadow-sm min-w-0">
       <div
-        className={
-          stacked
-            ? "bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col items-start gap-5 text-left"
-            : "bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left"
-        }
+        className="bg-gradient-to-br from-civic-blue to-civic-blue/80 p-6 md:p-8 flex flex-col items-center gap-5 text-center"
       >
         <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/20 border-4 border-white/30 shadow-xl shrink-0 overflow-hidden">
           {portrait ? (
@@ -2791,7 +2798,7 @@ function DepartmentHeadCard({
             </span>
           )}
         </div>
-        <div className={stacked ? "min-w-0 w-full break-words" : undefined}>
+        <div className="min-w-0 w-full break-words">
           <h2 className="font-serif text-lg md:text-xl font-bold text-white mb-1">{name}</h2>
           {designation ? <p className="text-civic-gold text-sm font-semibold">{designation}</p> : null}
           {showDepartment ? <p className="text-white/70 text-xs mt-1">{departmentName}</p> : null}
@@ -2802,7 +2809,7 @@ function DepartmentHeadCard({
           <div className="flex items-start gap-3 text-sm">
             <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
             <div className="min-w-0">
-              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Email" : "ई-मेल"}</p>
+              <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Official Email" : "अधिकृत ई-मेल"}</p>
               <a href={`mailto:${dept.email}`} className="font-semibold text-civic-ink break-all hover:text-civic-blue hover:underline">{dept.email}</a>
             </div>
           </div>
@@ -2820,6 +2827,26 @@ function DepartmentHeadCard({
             </div>
           </div>
         ) : null}
+        <div className="flex items-start gap-3 text-sm">
+          <Users className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
+          <div className="min-w-0">
+            <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">
+              {en ? "Total Employees" : "एकूण कर्मचारी"}
+            </p>
+            {typeof dept.employeeCount === "number" ? (
+              <>
+                <p className="font-semibold text-civic-ink">{localize(dept.employeeCount)}</p>
+                {(en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr) ? (
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr}
+                  </p>
+                ) : null}
+              </>
+            ) : (
+              <p className="text-muted-foreground">{en ? "Not available" : "माहिती उपलब्ध नाही"}</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
     </div>
@@ -2829,9 +2856,11 @@ function DepartmentHeadCard({
 function DepartmentInformationCard({
   brief,
   en,
+  motto,
 }: {
   brief: DepartmentBrief;
   en: boolean;
+  motto?: { label: string; motto: string; separator: string; text: string };
 }) {
   return (
     <div className="bg-white border border-border rounded-2xl p-5 md:p-6 shadow-sm min-w-0">
@@ -2851,6 +2880,14 @@ function DepartmentInformationCard({
             <li key={item}>{item}</li>
           ))}
         </ul>
+      ) : null}
+      {motto ? (
+        <div className="mt-4 rounded-xl border-l-4 border-civic-gold bg-civic-gold/10 px-4 py-3 text-sm leading-relaxed text-civic-ink break-words">
+          <span className="font-bold text-civic-blue">{motto.label} </span>
+          <em className="font-semibold text-civic-blue">{motto.motto}</em>
+          {motto.separator}
+          {motto.text}
+        </div>
       ) : null}
     </div>
   );
@@ -2951,11 +2988,28 @@ const DepartmentDetail = () => {
                 en={en}
                 localize={d}
                 portrait={portrait}
-                stacked
               />
             </div>
-            {brief ? <DepartmentInformationCard brief={brief} en={en} /> : null}
+            {brief ? (
+              <DepartmentInformationCard
+                brief={brief}
+                en={en}
+                motto={
+                  dept.slug === IT_DEPARTMENT_SLUG
+                    ? {
+                        label: en ? IT_DEPARTMENT_MOTTO.labelEn : IT_DEPARTMENT_MOTTO.labelMr,
+                        motto: IT_DEPARTMENT_MOTTO.motto,
+                        separator: en ? IT_DEPARTMENT_MOTTO.separatorEn : IT_DEPARTMENT_MOTTO.separatorMr,
+                        text: en ? IT_DEPARTMENT_MOTTO.en : IT_DEPARTMENT_MOTTO.mr,
+                      }
+                    : undefined
+                }
+              />
+            ) : null}
           </div>
+
+          {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDepartmentSections en={en} /> : null}
+          {dept.slug === "city-engineer" ? <CityEngineerDepartmentSections en={en} /> : null}
 
           {dept.slug === "chief-accounts-finance-officer" ? (
             <div className="min-w-0">

@@ -5,6 +5,25 @@
 
 export type VoicePhase = "idle" | "listening" | "processing" | "error";
 
+export function voiceStartErrorCode(error: unknown): string {
+  const name =
+    typeof error === "object" && error !== null && "name" in error && typeof error.name === "string"
+      ? error.name
+      : "";
+  switch (name) {
+    case "NotAllowedError":
+    case "SecurityError":
+      return "not-allowed";
+    case "NotFoundError":
+    case "DevicesNotFoundError":
+      return "audio-capture";
+    case "NetworkError":
+      return "network";
+    default:
+      return "unknown";
+  }
+}
+
 export function normalizeVoiceTranscript(raw: string): string {
   const cleaned = raw
     .normalize("NFC")
@@ -47,6 +66,7 @@ export function voiceStatusMessage(code: string, en: boolean): string {
       return en ? "No speech detected. Please try again." : "आवाज ऐकू आला नाही. कृपया पुन्हा प्रयत्न करा.";
     case "not-allowed":
     case "service-not-allowed":
+    case "permission-denied":
       return en
         ? "Microphone permission is blocked. Please allow microphone access for this site."
         : "मायक्रोफोन परवानगी अवरोधित आहे. या संकेतस्थळासाठी मायक्रोफोन परवानगी द्या.";
