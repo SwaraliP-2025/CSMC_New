@@ -594,6 +594,12 @@ import {
 } from "@/components/site/InformationTechnologyDepartmentSections";
 import { InformationTechnologyDocuments } from "@/components/site/InformationTechnologyDocuments";
 import { CityEngineerDepartmentSections } from "@/components/site/CityEngineerDepartmentSections";
+import {
+  CulturalDepartmentContact,
+  CulturalDepartmentSections,
+  FireDepartmentContact,
+  FireDepartmentSections,
+} from "@/components/site/CulturalFireDepartmentSections";
 import { IT_DEPARTMENT_MOTTO, IT_DEPARTMENT_SLUG } from "@/data/informationTechnologyDepartment";
 import amolSir from "@/assets/leadership/shri_amol_sir.png";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
@@ -625,7 +631,11 @@ import {
   nulmDocuments,
 } from "@/data/reviewedPublicDocuments";
 import { mergedOfficialGroups } from "@/data/officialVerifiedDocuments";
-import { officialLinkedGroups } from "@/data/officialLinkedDocuments";
+import { officialLinkedGroups, tenderArchiveGroups } from "@/data/officialLinkedDocuments";
+import {
+  CULTURAL_DEPARTMENT_EMAIL,
+  FIRE_DEPARTMENT_PUBLISHED_STAFFING,
+} from "@/data/culturalFireDepartments";
 
 interface DeptInfo {
   slug: string;
@@ -643,6 +653,8 @@ interface DeptInfo {
   employeeCount?: number;
   employeeCountDetailsEn?: string;
   employeeCountDetailsMr?: string;
+  employeeCountStatusEn?: string;
+  employeeCountStatusMr?: string;
   image?: string;
   photoSize?: string;
   photoTop?: string;
@@ -843,52 +855,6 @@ const DEPT_EXTRAS: Record<
     servicesMr: [
       "पर्यटन माहिती",
       "पर्यटन प्रकल्प सहाय्य",
-    ],
-    relatedDocIds: [],
-  },
-
-  "cultural": {
-    responsibilitiesEn: [
-      "Cultural activities",
-      "Civic cultural programmes",
-      "Cultural event coordination",
-    ],
-    responsibilitiesMr: [
-      "सांस्कृतिक उपक्रम",
-      "महापालिका सांस्कृतिक कार्यक्रम",
-      "सांस्कृतिक कार्यक्रम समन्वय",
-    ],
-    servicesEn: [
-      "Cultural programme coordination",
-      "Event-related assistance",
-    ],
-    servicesMr: [
-      "सांस्कृतिक कार्यक्रम समन्वय",
-      "कार्यक्रम संबंधित सहाय्य",
-    ],
-    relatedDocIds: [],
-  },
-
-  "fire-disaster-management": {
-    responsibilitiesEn: [
-      "Fire and rescue services",
-      "Fire safety and emergency response",
-      "Disaster management coordination",
-    ],
-    responsibilitiesMr: [
-      "अग्निशमन व बचाव सेवा",
-      "अग्निसुरक्षा व आपत्कालीन प्रतिसाद",
-      "आपत्ती व्यवस्थापन समन्वय",
-    ],
-    servicesEn: [
-      "Fire emergency services",
-      "Fire safety guidance",
-      "Disaster response",
-    ],
-    servicesMr: [
-      "अग्निशमन आपत्कालीन सेवा",
-      "अग्निसुरक्षा मार्गदर्शन",
-      "आपत्ती प्रतिसाद",
     ],
     relatedDocIds: [],
   },
@@ -2031,14 +1997,15 @@ const DEPARTMENTS: DeptInfo[] = [
     slug: "cultural",
     nameEn: "Cultural Department",
     nameMr: "सांस्कृतिक विभाग",
-    headEn: "Shri Ankush Pandhare",
-    headMr: "श्री अंकुश पांढरे",
-    designationEn: "Deputy Municipal Commissioner",
-    designationMr: "उप आयुक्त",
+    headEn: "Dr. Ankush Pandhare",
+    headMr: "डॉ. अंकुश पांढरे",
+    designationEn: "Deputy Commissioner and Head of the Cultural Department",
+    designationMr: "उप आयुक्त तथा सांस्कृतिक विभाग प्रमुख",
     phone: DEPARTMENT_CONTACT_PHONE,
-    email: "",
-    addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar – 431001",
-    addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर – ४३१००१",
+    email: CULTURAL_DEPARTMENT_EMAIL,
+    addressEn: "3rd Floor, Main Administrative Building, Town Hall, Chhatrapati Sambhajinagar Municipal Corporation",
+    addressMr: "तिसरा मजला, मुख्य प्रशासकीय इमारत, टाउन हॉल, छत्रपती संभाजीनगर महानगरपालिका",
+    employeeCount: 4,
     updates: [],
   },
 
@@ -2046,14 +2013,17 @@ const DEPARTMENTS: DeptInfo[] = [
     slug: "fire-disaster-management",
     nameEn: "Fire & Disaster Management Department",
     nameMr: "अग्निशमन विभाग व आपत्ती व्यवस्थापन विभाग",
-    headEn: "Shri Ankush Pandhare",
-    headMr: "श्री अंकुश पांढरे",
-    designationEn: "Deputy Municipal Commissioner",
-    designationMr: "उप आयुक्त",
+    headEn: "Dr. Ankush Pandhare",
+    headMr: "डॉ. अंकुश पांढरे",
+    designationEn: "Deputy Commissioner-4",
+    designationMr: "उप आयुक्त-४",
     phone: DEPARTMENT_CONTACT_PHONE,
     email: "",
-    addressEn: "CSMC Fire Department, Chhatrapati Sambhajinagar – 431001",
-    addressMr: "छत्रपती संभाजीनगर महानगरपालिका अग्निशमन विभाग, छत्रपती संभाजीनगर – ४३१००१",
+    addressEn: "",
+    addressMr: "",
+    employeeCount: FIRE_DEPARTMENT_PUBLISHED_STAFFING.total,
+    employeeCountDetailsEn: `${FIRE_DEPARTMENT_PUBLISHED_STAFFING.permanentIncludingHead} permanent employees (including the Head of Department) and ${FIRE_DEPARTMENT_PUBLISHED_STAFFING.temporaryContractual} temporary/contractual employees.`,
+    employeeCountDetailsMr: `विभागप्रमुखांसह ${FIRE_DEPARTMENT_PUBLISHED_STAFFING.permanentIncludingHead} कायम कर्मचारी आणि ${FIRE_DEPARTMENT_PUBLISHED_STAFFING.temporaryContractual} तात्पुरते/कंत्राटी कर्मचारी.`,
     updates: [],
   },
 
@@ -2762,7 +2732,11 @@ function DepartmentHeadCard({
   const name = en ? dept.headEn : dept.headMr;
   const designation = en ? dept.designationEn : dept.designationMr;
   const departmentName = en ? dept.nameEn : dept.nameMr;
+  const email = dept.email.toLowerCase();
+  const showProfileContactDetails = dept.slug !== "cultural" && dept.slug !== "fire-disaster-management";
   const showDepartment =
+    dept.slug !== "cultural" &&
+    dept.slug !== "fire-disaster-management" &&
     departmentName !== designation &&
     !designation.toLowerCase().includes(departmentName.toLowerCase());
 
@@ -2807,16 +2781,16 @@ function DepartmentHeadCard({
         </div>
       </div>
       <div className="p-5 md:p-6 space-y-4">
-        {dept.email ? (
+        {showProfileContactDetails && email ? (
           <div className="flex items-start gap-3 text-sm">
             <Mail className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
             <div className="min-w-0">
               <p className="text-xs text-muted-foreground font-semibold uppercase mb-0.5">{en ? "Official Email" : "अधिकृत ई-मेल"}</p>
-              <a href={`mailto:${dept.email}`} className="font-semibold text-civic-ink break-all hover:text-civic-blue hover:underline">{dept.email}</a>
+              <a href={`mailto:${email}`} className="font-semibold text-civic-ink break-all hover:text-civic-blue hover:underline">{email}</a>
             </div>
           </div>
         ) : null}
-        {(en ? dept.addressEn : dept.addressMr) ? (
+        {showProfileContactDetails && (en ? dept.addressEn : dept.addressMr) ? (
           <div className="flex items-start gap-3 text-sm">
             <MapPin className="h-4 w-4 text-civic-blue mt-0.5 shrink-0" />
             <div className="min-w-0">
@@ -2840,7 +2814,18 @@ function DepartmentHeadCard({
                 <p className="font-semibold text-civic-ink">{localize(dept.employeeCount)}</p>
                 {(en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr) ? (
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    {en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr}
+                    {localize(en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr)}
+                  </p>
+                ) : null}
+              </>
+            ) : dept.employeeCountStatusEn || dept.employeeCountStatusMr ? (
+              <>
+                <p className="font-semibold text-amber-700">
+                  {en ? dept.employeeCountStatusEn : dept.employeeCountStatusMr}
+                </p>
+                {(en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr) ? (
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {localize(en ? dept.employeeCountDetailsEn : dept.employeeCountDetailsMr)}
                   </p>
                 ) : null}
               </>
@@ -2980,6 +2965,17 @@ const DepartmentDetail = () => {
     );
   }
 
+  const relatedTenderGroups = dept.slug === "cultural"
+    ? tenderArchiveGroups
+        .map((group) => ({
+          ...group,
+          documents: group.documents.filter(
+            (document) => document.department?.trim().toLowerCase() === "cultural department",
+          ),
+        }))
+        .filter((group) => group.documents.length > 0)
+    : [];
+
   return (
     <Layout>
       <PageHeader
@@ -3017,6 +3013,10 @@ const DepartmentDetail = () => {
                 localize={d}
                 portrait={portrait}
               />
+              {dept.slug === "cultural" ? (
+                <CulturalDepartmentContact en={en} localize={d} address={en ? dept.addressEn : dept.addressMr} />
+              ) : null}
+              {dept.slug === "fire-disaster-management" ? <FireDepartmentContact en={en} localize={d} /> : null}
             </div>
             <div className="min-w-0 space-y-8">
               {brief || dept.responsibilitiesEn?.length || dept.responsibilitiesMr?.length || dept.servicesEn?.length || dept.servicesMr?.length ? (
@@ -3037,6 +3037,8 @@ const DepartmentDetail = () => {
                 />
               ) : null}
               {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDetails en={en} /> : null}
+              {dept.slug === "cultural" ? <CulturalDepartmentSections en={en} /> : null}
+              {dept.slug === "fire-disaster-management" ? <FireDepartmentSections en={en} /> : null}
             </div>
           </div>
 
@@ -3154,6 +3156,15 @@ const DepartmentDetail = () => {
           ) : null}
 
           {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDocuments /> : null}
+
+          {relatedTenderGroups.map((group) => (
+            <div className="min-w-0" key={group.headingEn}>
+              <h3 className="font-serif text-lg font-bold text-civic-blue mb-3">
+                {en ? "Related Documents" : "संबंधित दस्तऐवज"}
+              </h3>
+              <DocumentArchiveBrowser documents={group.documents} folderSegments={group.folder} />
+            </div>
+          ))}
 
         </div>
       </section>

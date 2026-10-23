@@ -110,4 +110,72 @@ describe("officer phone privacy", () => {
     expect(layoutGrid?.nextElementSibling?.contains(permanentStaff ?? null)).toBe(true);
     expect(layoutGrid?.nextElementSibling?.nextElementSibling?.contains(departmentDocuments ?? null)).toBe(true);
   });
+
+  it("places Cultural contacts below the profile and keeps functions and documents in their page sections", () => {
+    const view = renderInSite(
+      <MemoryRouter initialEntries={["/departments/cultural"]}>
+        <Routes>
+          <Route path="/departments/:slug" element={<DepartmentDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const officerHeading = view.getByRole("heading", { level: 3, name: "अधिकारी कक्ष" });
+    const profileColumn = officerHeading.parentElement?.parentElement;
+    const profileCard = profileColumn?.children[0];
+    const layoutGrid = profileColumn?.parentElement;
+    const rightColumn = layoutGrid?.children[1];
+    const email = view.container.querySelector<HTMLAnchorElement>(
+      'a[href="mailto:cultural@chhsambhajinagarmc.org"]',
+    );
+    const relatedDocumentsHeading = view.getByRole("heading", { level: 3, name: "संबंधित दस्तऐवज" });
+    const contactHeading = view.getByRole("heading", { level: 3, name: "विभाग संपर्क" });
+
+    expect(view.getByText("डॉ. अंकुश पांढरे")).toBeInTheDocument();
+    expect(email?.textContent).toBe("cultural@chhsambhajinagarmc.org");
+    expect(profileColumn?.children[1]?.contains(contactHeading)).toBe(true);
+    expect(profileCard?.querySelector('a[href="mailto:cultural@chhsambhajinagarmc.org"]')).toBeNull();
+    expect(contactHeading.parentElement?.textContent).toContain("०२४०२३३३५३६");
+    expect(contactHeading.parentElement?.textContent).toContain("०२४०२३३३५३७");
+    expect(contactHeading.parentElement?.textContent).toContain("तिसरा मजला");
+    expect(rightColumn?.textContent).toContain("कार्यक्रम व उपक्रम");
+    expect(rightColumn?.textContent).not.toContain("cultural@chhsambhajinagarmc.org");
+    expect(rightColumn?.textContent).toContain("महापौर राज्यस्तरीय एकांकिका स्पर्धा");
+    expect(layoutGrid?.nextElementSibling?.contains(relatedDocumentsHeading)).toBe(true);
+    expect(view.container.textContent).toContain("Cultural 31 dt 27 08 2026");
+  });
+
+  it("places Fire contacts below the profile and shows the requested employee breakdown", () => {
+    const view = renderInSite(
+      <MemoryRouter initialEntries={["/departments/fire-disaster-management"]}>
+        <Routes>
+          <Route path="/departments/:slug" element={<DepartmentDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const officerHeading = view.getByRole("heading", { level: 3, name: "अधिकारी कक्ष" });
+    const profileColumn = officerHeading.parentElement?.parentElement;
+    const profileCard = profileColumn?.children[0];
+    const rightColumn = profileColumn?.parentElement?.children[1];
+    const email = profileColumn?.children[1]?.querySelector<HTMLAnchorElement>(
+      'a[href="mailto:aur.firebrigade@gmail.com"]',
+    );
+    const contactHeading = view.getByRole("heading", { level: 3, name: "विभाग संपर्क" });
+
+    expect(view.getByText("डॉ. अंकुश पांढरे")).toBeInTheDocument();
+    expect(email?.textContent).toBe("aur.firebrigade@gmail.com");
+    expect(profileCard?.querySelector('a[href="mailto:aur.firebrigade@gmail.com"]')).toBeNull();
+    expect(view.container.textContent).toContain("१४०");
+    expect(view.container.textContent).toContain("विभागप्रमुखांसह ११३ कायम कर्मचारी");
+    expect(view.container.textContent).toContain("२७ तात्पुरते/कंत्राटी कर्मचारी");
+    expect(view.container.textContent).toContain("२७ कायम आणि ११२ कंत्राटी कर्मचारी");
+    expect(rightColumn?.textContent).toContain("कार्यरत अग्निशमन केंद्रे");
+    expect(rightColumn?.textContent).toContain("अद्याप कार्यरत नाहीत");
+    expect(rightColumn?.textContent).toContain("३,४५० इमारती");
+    expect(profileColumn?.children[1]?.contains(contactHeading)).toBe(true);
+    expect(profileCard?.querySelector('a[href="mailto:aur.firebrigade@gmail.com"]')).toBeNull();
+    expect(contactHeading.parentElement?.textContent).toContain("०२४०-२३३४०००");
+    expect(view.container.textContent).not.toContain("8689888190");
+    expect(contactHeading.parentElement?.textContent).not.toContain("431001");
+    expect(rightColumn?.textContent).not.toContain("aur.firebrigade@gmail.com");
+  });
 });
