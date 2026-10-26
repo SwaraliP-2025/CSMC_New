@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CITY_ENGINEER_OUTSOURCED_EMPLOYEES, CITY_ENGINEER_PERMANENT_EMPLOYEES } from "@/data/cityEngineerDepartment";
 import { CULTURAL_DEPARTMENT_EMAIL, FIRE_DEPARTMENT_STAFFING } from "@/data/culturalFireDepartments";
+import { LIBRARY_DEPARTMENT_STAFF } from "@/data/libraryDepartment";
 import { IT_DEPARTMENT_OFFICERS } from "@/data/informationTechnologyDepartment";
 import { DEPARTMENTS } from "@/pages/site/DepartmentDetail";
 
@@ -11,6 +12,9 @@ describe("department headcounts and staff lists", () => {
     expect(department?.employeeCount).toBe(5);
     expect(department?.employeeCountDetailsEn).toBeUndefined();
     expect(department?.employeeCountDetailsMr).toBeUndefined();
+    expect(department?.headEn).toBe("Smt. Aparna Thete");
+    expect(department?.designationEn).toBe("Deputy Commissioner & Head of Section (E-Gov. & E-Tender)");
+    expect(department?.email).toBe("compdept@gmail.com");
     expect(IT_DEPARTMENT_OFFICERS).toHaveLength(1);
     expect(IT_DEPARTMENT_OFFICERS.map(({ nameEn }) => nameEn)).not.toContain("Smt. Aparna Thete");
   });
@@ -54,5 +58,26 @@ describe("department headcounts and staff lists", () => {
       sourceContractualOnDuty: 112,
       sanctionedPositions: 359,
     });
+  });
+
+  it("records five Library Department employees without fabricating the incomplete staff roster", () => {
+    const library = DEPARTMENTS.find(({ slug }) => slug === "library");
+    const informationTechnology = DEPARTMENTS.find(({ slug }) => slug === "information-technology");
+
+    expect(library?.employeeCount).toBe(5);
+    expect(library?.headEn).toBe("Smt. Aparna Thete");
+    expect(library?.designationEn).toBe("Deputy Commissioner & Cell Head (E-Gov & E-Tender)");
+    expect(library?.email).toBe("");
+    expect(library?.addressEn).toBe("");
+    expect(LIBRARY_DEPARTMENT_STAFF).toHaveLength(2);
+    expect(LIBRARY_DEPARTMENT_STAFF.map(({ nameEn }) => nameEn)).toEqual([
+      "Smt. Samata Shivajirao Wange-Londhe",
+      "Shri Devdutta V. Mahajan",
+    ]);
+    expect(LIBRARY_DEPARTMENT_STAFF.map(({ nameEn }) => nameEn)).not.toContain("Smt. Aparna Thete");
+
+    expect(informationTechnology?.employeeCount).toBe(5);
+    expect(informationTechnology?.email).toBe("compdept@gmail.com");
+    expect(informationTechnology?.designationEn).toBe("Deputy Commissioner & Head of Section (E-Gov. & E-Tender)");
   });
 });

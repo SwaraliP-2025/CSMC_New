@@ -595,6 +595,10 @@ import {
 import { InformationTechnologyDocuments } from "@/components/site/InformationTechnologyDocuments";
 import { CityEngineerDepartmentSections } from "@/components/site/CityEngineerDepartmentSections";
 import {
+  LibraryDepartmentInformation,
+  LibraryDepartmentStaff,
+} from "@/components/site/LibraryDepartmentSections";
+import {
   CulturalDepartmentContact,
   CulturalDepartmentSections,
   FireDepartmentContact,
@@ -1161,28 +1165,6 @@ const DEPT_EXTRAS: Record<
     servicesMr: [
       "समाज विकास सेवा",
       "महिला व बालकल्याण माहिती",
-    ],
-    relatedDocIds: [],
-  },
-
-  "library": {
-    responsibilitiesEn: [
-      "Municipal library administration",
-      "Library services",
-      "Reading and information facilities",
-    ],
-    responsibilitiesMr: [
-      "महापालिका ग्रंथालय प्रशासन",
-      "ग्रंथालय सेवा",
-      "वाचन व माहिती सुविधा",
-    ],
-    servicesEn: [
-      "Library services",
-      "Library information",
-    ],
-    servicesMr: [
-      "ग्रंथालय सेवा",
-      "ग्रंथालय माहिती",
     ],
     relatedDocIds: [],
   },
@@ -2243,16 +2225,17 @@ const DEPARTMENTS: DeptInfo[] = [
 
   {
     slug: "library",
-    nameEn: "Library Department",
-    nameMr: "ग्रंथालय विभाग",
+    nameEn: "Library Department — Main Library Khadkeshwar (Library Section)",
+    nameMr: "ग्रंथालय विभाग — मुख्य वाचनालय खडकेश्वर (वाचनालय कक्ष)",
     headEn: "Smt. Aparna Thete",
     headMr: "श्रीमती अपर्णा थेटे",
-    designationEn: "Deputy Municipal Commissioner",
-    designationMr: "उप आयुक्त",
-    phone: DEPARTMENT_CONTACT_PHONE,
+    designationEn: "Deputy Commissioner & Cell Head (E-Gov & E-Tender)",
+    designationMr: "उप आयुक्त तथा कक्ष प्रमुख (ई-गव्हर्नन्स व ई-निविदा)",
+    phone: "",
     email: "",
-    addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar – 431001",
-    addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर – ४३१००१",
+    addressEn: "",
+    addressMr: "",
+    employeeCount: 5,
     updates: [],
   },
 
@@ -3038,12 +3021,14 @@ const DepartmentDetail = () => {
               ) : null}
               {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyDetails en={en} /> : null}
               {dept.slug === "cultural" ? <CulturalDepartmentSections en={en} /> : null}
+              {dept.slug === "library" ? <LibraryDepartmentInformation en={en} /> : null}
               {dept.slug === "fire-disaster-management" ? <FireDepartmentSections en={en} /> : null}
             </div>
           </div>
 
           {dept.slug === IT_DEPARTMENT_SLUG ? <InformationTechnologyEmployeeContacts en={en} /> : null}
           {dept.slug === "city-engineer" ? <CityEngineerDepartmentSections en={en} /> : null}
+          {dept.slug === "library" ? <LibraryDepartmentStaff en={en} /> : null}
 
           {dept.slug === "chief-accounts-finance-officer" ? (
             <div className="min-w-0">
@@ -3075,7 +3060,12 @@ const DepartmentDetail = () => {
           ) : null}
 
           {dept.slug === "library" ? (
-            <DocumentArchiveBrowser documents={libraryDocuments} folderSegments={[...LIBRARY_DOCUMENTS_FOLDER]} />
+            <div className="min-w-0">
+              <h3 className="mb-3 font-serif text-lg font-bold text-civic-blue">
+                {en ? "Related Documents" : "संबंधित दस्तऐवज"}
+              </h3>
+              <DocumentArchiveBrowser documents={libraryDocuments} folderSegments={[...LIBRARY_DOCUMENTS_FOLDER]} />
+            </div>
           ) : null}
 
           {dept.slug === "nulm" ? (

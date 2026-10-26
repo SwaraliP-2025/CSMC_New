@@ -253,14 +253,6 @@ export const DEPARTMENT_BRIEFS: Record<string, DepartmentBriefCopy> = {
     activitiesEn: ["Women’s programmes", "Child development support", "Disability facilities", "Beneficiary records"],
     activitiesMr: ["महिला कार्यक्रम", "बालविकास मदत", "दिव्यांग सोयी", "लाभार्थी नोंदी"],
   },
-  library: {
-    descriptionEn:
-      "The Library Department runs the public library service of Chhatrapati Sambhajinagar Municipal Corporation. It maintains the municipal library collection, membership, issue and return of books, and the reading-room arrangement for citizens. New books and periodicals acquired for the municipal libraries are accessioned here, and the staff and timings of the libraries are followed by this department. A reader is helped to find whether a title is in the municipal collection. School libraries of the education department and private libraries in the city are not managed from this desk unless they have been placed under it. The purpose is to keep the Corporation’s own libraries open, catalogued and usable.",
-    descriptionMr:
-      "ग्रंथालय विभाग छत्रपती संभाजीनगर महानगरपालिकेची सार्वजनिक ग्रंथालय सेवा चालवतो. महापालिका ग्रंथालयातील संग्रह, सभासदत्व, पुस्तके देणे आणि परत घेणे, आणि नागरिकांसाठीचे वाचनकक्ष येथे सांभाळले जातात. महापालिका ग्रंथालयांसाठी आलेली नवी पुस्तके आणि नियतकालिके नोंदवली जातात आणि ग्रंथालयातील कर्मचारी व वेळा या विभागाकडे पाहिल्या जातात. एखादे पुस्तक महापालिका संग्रहात आहे का हे वाचकाला शोधण्यास मदत होते. शिक्षण विभागाची शाळा ग्रंथालये आणि शहरातील खाजगी ग्रंथालये या टेबलाखाली नसतील तर ती येथून चालवली जात नाहीत. महापालिकेची स्वतःची ग्रंथालये खुली, सूचीबद्ध आणि वापरण्यायोग्य ठेवणे हा हेतू आहे. सभासदत्व, पुस्तके देणे-घेणे आणि वाचनकक्ष या विभागात चालतो आणि शाळेचे ग्रंथालय शिक्षण विभागाकडे असेल तर ते येथून काढले जात नाही.",
-    activitiesEn: ["Municipal library collection", "Membership and issue", "Reading rooms", "Accession of books"],
-    activitiesMr: ["महापालिका ग्रंथसंग्रह", "सभासदत्व व पुस्तके", "वाचनकक्ष", "पुस्तक नोंद"],
-  },
   nulm: {
     descriptionEn:
       "The NULM Department implements the National Urban Livelihoods Mission work assigned to Chhatrapati Sambhajinagar Municipal Corporation. It receives applications and group proposals related to urban livelihood support, checks them against the mission guidelines, and forwards eligible cases through the prescribed committee or sanction path. Skill training, self-help group support and shelter components that the Corporation is required to carry out under the mission are coordinated from this office. The department keeps the beneficiary list and the progress the mission authority asks for. It does not give a general trade licence. That remains with the licence department. This office is limited to the livelihood mission components placed with the Corporation.",

@@ -164,8 +164,8 @@ export const DEPARTMENT_DIRECTORY: DepartmentDirectoryEntry[] = [
   },
   {
     "slug": "library",
-    "nameEn": "Library Department",
-    "nameMr": "ग्रंथालय विभाग"
+    "nameEn": "Library Department — Main Library Khadkeshwar (Library Section)",
+    "nameMr": "ग्रंथालय विभाग — मुख्य वाचनालय खडकेश्वर (वाचनालय कक्ष)"
   },
   {
     "slug": "nulm",
