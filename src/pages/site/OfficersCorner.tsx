@@ -110,6 +110,10 @@ const OfficersCorner = () => {
             const designation = organogramDisplayDesignation(person, en);
             const office = organogramDisplayDepartment(person, en);
             const emails = unique(posts.map((dept) => dept.email));
+            const displayedEmails =
+              person.id === "ranjit-patil" || person.id === "kalpita-pimple"
+                ? emails.slice(0, 1)
+                : emails;
             const primaryPost = posts[0];
             const addresses = uniqueAddresses(
               primaryPost ? [en ? primaryPost.addressEn : primaryPost.addressMr] : [],
@@ -151,7 +155,7 @@ const OfficersCorner = () => {
                       </p>
                       {office ? <p className="mt-1 text-sm text-muted-foreground">{office}</p> : null}
                       <ul className="mt-3 space-y-1.5 text-sm text-civic-ink">
-                        {emails.map((email) => (
+                        {displayedEmails.map((email) => (
                           <li key={email} className="flex items-start gap-2 break-all">
                             <Mail className="mt-0.5 h-4 w-4 shrink-0 text-civic-blue" aria-hidden />
                             <a href={`mailto:${email}`} className="hover:text-civic-blue hover:underline">{email}</a>

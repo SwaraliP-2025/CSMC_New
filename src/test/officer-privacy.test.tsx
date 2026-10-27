@@ -52,6 +52,12 @@ describe("officer phone privacy", () => {
     const profiles = [...view.container.querySelectorAll("article")];
     expect(profiles.length).toBeGreaterThan(0);
     for (const profile of profiles) expectNoOfficerPhones(profile);
+    const ranjitProfile = profiles.find((profile) => profile.textContent?.includes("श्री रणजीत आ. पाटील"));
+    const kalpitaProfile = profiles.find((profile) => profile.textContent?.includes("श्रीमती कल्पिता पिंपळे"));
+    expect(ranjitProfile?.textContent).toContain("acomm1@chhsambhajinagarmc.org");
+    expect(ranjitProfile?.textContent).not.toContain("cultural@chhsambhajinagarmc.org");
+    expect(kalpitaProfile?.textContent).toContain("acomm2@chhsambhajinagarmc.org");
+    expect(kalpitaProfile?.textContent).not.toContain("compdept@gmail.com");
   });
 
   it("does not show officer telephone numbers on department pages", () => {
