@@ -87,11 +87,21 @@ export const DEPARTMENT_BRIEFS: Record<string, DepartmentBriefCopy> = {
   },
   "audit-department": {
     descriptionEn:
-      "The Audit Department examines the accounts and expenditure of Chhatrapati Sambhajinagar Municipal Corporation. Vouchers, sanctions and procedures are checked to see that money was used for the purpose for which it was approved and that the required papers are on the file. Objections are issued to the concerned department, and the department is expected to give a reply or recover an irregular amount where the rules so require. The audit office also helps the administration understand recurring mistakes so that the same lapse is not repeated in later bills. It does not make the original payment. It reviews the payment after the accounts branch and the spending department have acted.",
+      "Established in 1982, the Audit Department is a statutory department of Chhatrapati Sambhajinagar Municipal Corporation. It audits the Corporation's accounts, including pre-audit of expenditure of ₹25 lakh and above and post-audit of municipal accounts. Under Sections 105 and 106 of the Maharashtra Municipal Corporations Act, 1949, the annual audit report is submitted to the Chairman of the Standing Committee and the Municipal Commissioner.",
     descriptionMr:
-      "लेखापरीक्षण विभाग छत्रपती संभाजीनगर महानगरपालिकेचे हिशोब आणि खर्च तपासतो. प्रमाणके, मंजुरी आणि कार्यपद्धती पाहिली जाते, म्हणून रक्कम ज्या कारणासाठी मंजूर झाली त्यासाठी वापरली गेली का आणि आवश्यक कागद फायलीवर आहेत का हे समजते. संबंधित विभागाला आक्षेप दिले जातात आणि नियमांनुसार उत्तर किंवा अनियमित रकमेची वसुली अपेक्षित असते. वारंवार होणाऱ्या चुका प्रशासनाच्या निर्दर्शनास आणल्या जातात, म्हणून नंतरच्या देयकात तीच चूक होऊ नये. मूळ प्रदान हा विभाग करत नाही. लेखा शाखा आणि खर्च करणारा विभाग कारवाई केल्यानंतर तो त्या प्रदानाची तपासणी करतो. आक्षेप बंद होईपर्यंत संबंधित विभागाकडे पाठपुरावा राहतो आणि तोच आक्षेप पुढील देयकात पुन्हा येऊ नये याकडे लक्ष दिले जाते. आक्षेप बंद होईपर्यंत विभागाकडे पाठपुरावा सुरू राहतो.",
-    activitiesEn: ["Voucher examination", "Sanction check", "Audit objections", "Reply and recovery follow-up"],
-    activitiesMr: ["प्रमाणक तपासणी", "मंजुरी पडताळणी", "लेखापरीक्षण आक्षेप", "उत्तर व वसुली पाठपुरावा"],
+      "लेखापरीक्षण विभागाची स्थापना १९८२ मध्ये झाली. हा छत्रपती संभाजीनगर महानगरपालिकेचा संवैधानिक विभाग आहे. विभागामार्फत महानगरपालिकेच्या लेख्यांचे लेखापरीक्षण केले जाते. २५ लाख व त्यावरील खर्चाच्या देयकांचे पूर्व लेखापरीक्षण तसेच प्रदानोत्तर लेखापरीक्षण केले जाते. महाराष्ट्र महानगरपालिका अधिनियम, १९४९ मधील कलम १०५ व १०६ अन्वये वार्षिक लेखापरीक्षण अहवाल स्थायी समितीचे मा. सभापती आणि मा. आयुक्त यांना सादर केला जातो.",
+    activitiesEn: [
+      "Under the 2026–2027 audit programme, audits of the Electrical Department and Mechanical (Vehicles) Department are in progress.",
+      "Follow-up is being carried out to recover excess payments identified through audit objections.",
+      "The 2026–2027 programme aims to audit 100% of the various departments.",
+      "Compliance with outstanding audit objections is followed up continuously.",
+    ],
+    activitiesMr: [
+      "सन २०२६–२०२७ च्या लेखापरीक्षण कार्यक्रमानुसार विद्युत विभाग आणि यांत्रिकी (वाहने) विभागाचे लेखापरीक्षण सुरू आहे.",
+      "लेखा आक्षेपांद्वारे निदर्शनास आलेल्या विविध विभागांकडील अतिप्रदानाच्या रकमेच्या वसुलीसाठी पाठपुरावा केला जात आहे.",
+      "सन २०२६–२०२७ च्या कार्यक्रमानुसार विविध विभागांचे १००% लेखापरीक्षण करण्याचे उद्दिष्ट आहे.",
+      "विविध विभागांकडे प्रलंबित असलेल्या लेखा आक्षेपांच्या अनुपालनाबाबत सातत्याने पाठपुरावा केला जात आहे.",
+    ],
   },
   "municipal-secretary-department": {
     descriptionEn:

@@ -599,6 +599,7 @@ import {
   LibraryDepartmentStaff,
 } from "@/components/site/LibraryDepartmentSections";
 import {
+  DepartmentContactSection,
   CulturalDepartmentContact,
   CulturalDepartmentSections,
   FireDepartmentContact,
@@ -1874,14 +1875,17 @@ const DEPARTMENTS: DeptInfo[] = [
     slug: "audit-department",
     nameEn: "Audit Department",
     nameMr: "लेखापरीक्षण विभाग",
-    headEn: "Shri Shivaji Naikwade",
-    headMr: "श्री. शिवाजी नाईकवाडे",
+    headEn: "Mr. Shivaji Bajirao Naikwade",
+    headMr: "श्री. शिवाजी बाजीराव नाईकवाडे",
     designationEn: "Chief Auditor",
     designationMr: "मुख्य लेखापरीक्षक",
-    phone: DEPARTMENT_CONTACT_PHONE,
+    phone: "0240-2333536",
     email: "",
-    addressEn: "CSMC Main Building, Town Hall, Chhatrapati Sambhajinagar - 431001",
-    addressMr: "छत्रपती संभाजीनगर महानगरपालिका, मुख्य इमारत, टाऊन हॉल, छत्रपती संभाजीनगर, ४३१००१",
+    addressEn: "",
+    addressMr: "",
+    employeeCount: 13,
+    employeeCountDetailsEn: "11 Class III employees and 2 Class IV employees.",
+    employeeCountDetailsMr: "११ वर्ग ३ कर्मचारी आणि २ वर्ग ४ कर्मचारी.",
     updates: [],
   },
   
@@ -3000,6 +3004,20 @@ const DepartmentDetail = () => {
                 <CulturalDepartmentContact en={en} localize={d} address={en ? dept.addressEn : dept.addressMr} />
               ) : null}
               {dept.slug === "fire-disaster-management" ? <FireDepartmentContact en={en} localize={d} /> : null}
+              {dept.slug === "audit-department" ? (
+                <DepartmentContactSection
+                  en={en}
+                  email="ca@chhsambhajinagarmc.org"
+                  phones={[
+                    en
+                      ? "0240 2333536–40 (Ext. 228)"
+                      : "०२४० २३३३५३६–४० (विस्तार २२८)",
+                  ]}
+                  phoneHref="tel:02402333536;ext=228"
+                  mobile="9421431518"
+                  localize={d}
+                />
+              ) : null}
             </div>
             <div className="min-w-0 space-y-8">
               {brief || dept.responsibilitiesEn?.length || dept.responsibilitiesMr?.length || dept.servicesEn?.length || dept.servicesMr?.length ? (

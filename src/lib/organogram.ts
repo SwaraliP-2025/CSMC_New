@@ -48,6 +48,7 @@ export function getOrganogramPerson(id: string): OrganogramPerson | undefined {
 /** Spellings used on department pages for the same organogram officer. */
 const DEPARTMENT_HEAD_IDS: Record<string, string> = {
   "ranjit patil": "ranjit-patil",
+  "mr shivaji bajirao naikwade": "shivaji-naikwade",
   "ujjwala bhamre": "ujwala-bhamare",
   "ujwala bhamare": "ujwala-bhamare",
   "savita sonawane": "savita-sonewane",

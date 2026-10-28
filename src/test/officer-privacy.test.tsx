@@ -1,8 +1,8 @@
-import { render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ORGANOGRAM_PEOPLE } from "@/data/organogram";
 import { DEPARTMENT_CONTACT_PHONE } from "@/lib/departmentIcons";
-import { LanguageProvider } from "@/i18n/LanguageContext";
+import { LanguageProvider, useLang } from "@/i18n/LanguageContext";
 import { ColorBlindProvider } from "@/i18n/ColorBlindContext";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { localizeDigits } from "@/i18n/digits";
@@ -28,6 +28,11 @@ function renderInSite(ui: React.ReactElement) {
       </TooltipProvider>
     </ColorBlindProvider>,
   );
+}
+
+function EnglishLanguageButton() {
+  const { setLang } = useLang();
+  return <button onClick={() => setLang("en")}>English</button>;
 }
 
 function expectNoOfficerPhones(root: HTMLElement) {
@@ -222,6 +227,41 @@ describe("officer phone privacy", () => {
     expect(staffSection?.contains(documentsHeading ?? null)).toBe(false);
     expect(view.container.textContent).toContain("library.pdf");
     expect(libraryDocuments).toHaveLength(1);
+  });
+
+  it("shows Audit Department contacts below the profile and renders the source information", async () => {
+    const view = renderInSite(
+      <MemoryRouter initialEntries={["/departments/audit-department"]}>
+        <EnglishLanguageButton />
+        <Routes>
+          <Route path="/departments/:slug" element={<DepartmentDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    const officerHeading = view.getByRole("heading", { level: 3, name: "अधिकारी कक्ष" });
+    const profileColumn = officerHeading.parentElement?.parentElement;
+    const contactHeading = view.getByRole("heading", { level: 3, name: "विभाग संपर्क" });
+    const profileCard = profileColumn?.children[0];
+
+    expect(view.getByText("श्री. शिवाजी बाजीराव नाईकवाडे")).toBeInTheDocument();
+    expect(profileCard?.querySelector("img")).toHaveAttribute("src", expect.stringContaining("shivaji-naikwade"));
+    expect(profileColumn?.children[1]?.contains(contactHeading)).toBe(true);
+    expect(view.container.querySelector('a[href="mailto:ca@chhsambhajinagarmc.org"]')).toBeInTheDocument();
+    expect(view.container.querySelector('a[href="tel:02402333536;ext=228"]')).toHaveTextContent("०२४० २३३३५३६–४० (विस्तार २२८)");
+    expect(view.container.querySelector('a[href="tel:9421431518"]')).toHaveTextContent("९४२१४३१५१८");
+    expect(view.container.textContent).toContain("एकूण कर्मचारी");
+    expect(view.container.textContent).toContain("११ वर्ग ३ कर्मचारी आणि २ वर्ग ४ कर्मचारी");
+    expect(view.container.textContent).toContain("विद्युत विभाग आणि यांत्रिकी (वाहने) विभागाचे लेखापरीक्षण सुरू आहे");
+    expect(view.container.textContent).toContain("audit");
+
+    await act(async () => {
+      fireEvent.click(view.getByRole("button", { name: "English" }));
+    });
+    expect(view.getByText("Mr. Shivaji Bajirao Naikwade")).toBeInTheDocument();
+    expect(view.container.textContent).toContain("Established in 1982");
+    expect(view.container.textContent).toContain("11 Class III employees and 2 Class IV employees.");
+    expect(view.container.textContent).toContain("audits of the Electrical Department and Mechanical (Vehicles) Department are in progress");
+    expect(view.getByRole("heading", { name: "Department Contact" })).toBeInTheDocument();
   });
 
 });

@@ -43,12 +43,16 @@ export function DepartmentContactSection({
   en,
   email,
   phones,
+  phoneHref,
+  mobile,
   address,
   localize,
 }: {
   en: boolean;
   email: string;
   phones: readonly string[];
+  phoneHref?: string;
+  mobile?: string;
   address?: string;
   localize: (value: string | number | null | undefined) => string;
 }) {
@@ -75,12 +79,22 @@ export function DepartmentContactSection({
             <ul className="space-y-1">
               {phones.map((phone) => (
                 <li key={phone}>
-                  <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} className="font-semibold text-civic-blue hover:underline">
+                  <a href={phoneHref ?? `tel:${phone.replace(/[^\d+]/g, "")}`} className="font-semibold text-civic-blue hover:underline">
                     {localize(phone)}
                   </a>
                 </li>
               ))}
             </ul>
+          </ContactRow>
+        ) : null}
+        {mobile ? (
+          <ContactRow
+            icon={<Phone className="mt-0.5 h-4 w-4 shrink-0 text-civic-blue" aria-hidden />}
+            label={en ? "Department Head's Mobile" : "विभागप्रमुखांचा मोबाईल"}
+          >
+            <a href={`tel:${mobile}`} className="font-semibold text-civic-blue hover:underline">
+              {localize(mobile)}
+            </a>
           </ContactRow>
         ) : null}
         {address ? (

@@ -3,6 +3,9 @@ import { CITY_ENGINEER_OUTSOURCED_EMPLOYEES, CITY_ENGINEER_PERMANENT_EMPLOYEES }
 import { CULTURAL_DEPARTMENT_EMAIL, FIRE_DEPARTMENT_STAFFING } from "@/data/culturalFireDepartments";
 import { LIBRARY_DEPARTMENT_STAFF } from "@/data/libraryDepartment";
 import { IT_DEPARTMENT_OFFICERS } from "@/data/informationTechnologyDepartment";
+import { DEPARTMENT_BRIEFS } from "@/data/departmentBriefs";
+import { DEPARTMENT_DIRECTORY } from "@/data/departmentDirectory";
+import { findOrganogramOfficerForHead } from "@/lib/organogram";
 import { DEPARTMENTS } from "@/pages/site/DepartmentDetail";
 
 describe("department headcounts and staff lists", () => {
@@ -79,5 +82,33 @@ describe("department headcounts and staff lists", () => {
     expect(informationTechnology?.employeeCount).toBe(5);
     expect(informationTechnology?.email).toBe("compdept@gmail.com");
     expect(informationTechnology?.designationEn).toBe("Deputy Commissioner & Head of Section (E-Gov. & E-Tender)");
+  });
+
+  it("adds the Audit Department with source-supported staff, contact, bilingual information and portrait", () => {
+    const audit = DEPARTMENTS.find(({ slug }) => slug === "audit-department");
+    const brief = DEPARTMENT_BRIEFS["audit-department"];
+    const directoryEntry = DEPARTMENT_DIRECTORY.find(({ slug }) => slug === "audit-department");
+
+    expect(audit).toMatchObject({
+      nameEn: "Audit Department",
+      nameMr: "लेखापरीक्षण विभाग",
+      headEn: "Mr. Shivaji Bajirao Naikwade",
+      headMr: "श्री. शिवाजी बाजीराव नाईकवाडे",
+      designationEn: "Chief Auditor",
+      designationMr: "मुख्य लेखापरीक्षक",
+      employeeCount: 13,
+      employeeCountDetailsEn: "11 Class III employees and 2 Class IV employees.",
+      employeeCountDetailsMr: "११ वर्ग ३ कर्मचारी आणि २ वर्ग ४ कर्मचारी.",
+    });
+    expect(directoryEntry).toMatchObject({ nameEn: "Audit Department", nameMr: "लेखापरीक्षण विभाग" });
+    expect(audit?.phone).toBe("0240-2333536");
+    expect(audit?.addressEn).toBe("");
+    expect(findOrganogramOfficerForHead(audit?.headEn ?? "")?.id).toBe("shivaji-naikwade");
+    expect(brief.descriptionEn).toContain("Sections 105 and 106");
+    expect(brief.descriptionMr).toContain("कलम १०५ व १०६");
+    expect(brief.activitiesEn).toHaveLength(4);
+    expect(brief.activitiesMr).toHaveLength(4);
+    expect(brief.activitiesEn[0]).toContain("2026–2027");
+    expect(brief.activitiesMr[0]).toContain("२०२६–२०२७");
   });
 });
