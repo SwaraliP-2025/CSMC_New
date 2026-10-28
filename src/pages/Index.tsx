@@ -5,6 +5,7 @@ import { useLang } from "@/i18n/LanguageContext";
 import { ArrowRight, Receipt, Droplets, Baby, ScrollText, Store, Building2, MessageSquareWarning, Calculator, HousePlus, LayoutGrid, ChevronLeft, ChevronRight, Facebook, Instagram, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { NoticesPopup, BannerPopup, useNoticesPopup } from "@/components/site/NoticesPopup";
 import { FacilityCategoryCard } from "@/components/site/FacilityCategoryCard";
 import { TouristCard } from "@/components/site/TouristCard";
@@ -638,38 +639,50 @@ const Index = () => {
       <GallerySection />
 
       {/* Leader Modal */}
-      {selectedLeader && (
+      {selectedLeader && createPortal(
         <div
-          className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-2 md:px-0"
+          className="fixed inset-0 z-[2100] flex items-center justify-center bg-black/40 px-2"
           onClick={() => setSelectedLeader(null)}
           role="presentation"
+          style={{
+            paddingTop: "max(0.5rem, env(safe-area-inset-top))",
+            paddingRight: "max(0.5rem, env(safe-area-inset-right))",
+            paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))",
+            paddingLeft: "max(0.5rem, env(safe-area-inset-left))",
+          }}
         >
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="leader-dialog-title"
-            className="bg-white rounded-2xl max-w-xs w-full shadow-2xl relative top-8 p-0"
+            className="relative flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-white p-0 shadow-2xl max-h-[calc(100vh-2rem)]"
             onClick={e => e.stopPropagation()}
+            style={{
+              maxHeight: "calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1rem)",
+            }}
           >
             <button
               ref={leaderModalCloseRef}
               type="button"
-              className="absolute top-2 right-2 text-civic-blue hover:text-civic-red transition-colors z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue rounded"
+              className="absolute right-2 top-2 z-10 rounded-full bg-white/95 p-2 text-civic-blue shadow hover:text-civic-red transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-civic-blue"
               onClick={() => setSelectedLeader(null)}
               aria-label={en ? "Close profile" : "प्रोफाइल बंद करा"}
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
-            <div className="w-full flex items-center justify-center bg-civic-blue/10 pt-4 pb-2 px-2 rounded-t-2xl">
+            <div className="flex min-h-0 w-full shrink items-center justify-center overflow-hidden rounded-t-2xl bg-civic-blue/10 px-2 pb-2 pt-12">
               <img
                 src={selectedLeader.image}
                 alt={en ? selectedLeader.nameEn : selectedLeader.nameMr}
-                className="max-h-48 max-w-full rounded-xl shadow border-2 border-white"
-                style={{ objectFit: 'contain', background: '#fff' }}
+                className="h-auto max-h-[min(55vh,calc(100vh-12rem))] max-w-full rounded-xl border-2 border-white object-contain shadow"
+                style={{
+                  maxHeight: "min(55dvh, calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 12rem))",
+                  background: "#fff",
+                }}
               />
             </div>
             {/* Info */}
-            <div className="px-3 pb-4 pt-2 text-center">
+            <div className="shrink-0 overflow-y-auto overscroll-contain px-3 pb-4 pt-2 text-center">
               <div className="w-8 h-0.5 bg-civic-gold rounded-full mx-auto mb-2" aria-hidden />
               <h3 id="leader-dialog-title" className="font-serif text-base font-bold text-civic-blue mb-1 leading-tight">{en ? selectedLeader.nameEn : selectedLeader.nameMr}</h3>
               <p className={`text-xs text-muted-foreground font-medium leading-tight whitespace-normal ${en ? "" : "devanagari"}`}>
@@ -678,6 +691,7 @@ const Index = () => {
             </div>
           </div>
         </div>
+      , document.body
       )}
 
       <BannerPopup open={notices.bannerOpen} onClose={notices.hideBanner} />
