@@ -15,7 +15,7 @@ const XIcon = () => (
   </svg>
 );
 
-const LAST_UPDATED = "03-09-2026";
+const LAST_UPDATED = import.meta.env.VITE_LAST_SITE_UPDATE;
 
 const AppleIcon = () => (
   <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white" aria-hidden>
