@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 import { Facebook, Instagram, ChevronRight, ExternalLink } from "lucide-react";
 import { CSMC_OFFICE_MAPS_URL, OFFICIAL } from "@/data/officialLinks";
+import {
+  getNextIndiaMidnight,
+  loadVisitorCounts,
+  type VisitorCounts,
+} from "@/lib/visitorCounter";
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -9,9 +15,6 @@ const XIcon = () => (
   </svg>
 );
 
-/** Prototype display figures — labelled in UI as sample. */
-const TOTAL_VISITORS = 662770;
-const TODAY_VISITORS = 2659;
 const LAST_UPDATED = "03-09-2026";
 
 const AppleIcon = () => (
@@ -40,6 +43,31 @@ type FootLink = { en: string; mr: string; to: string; external?: boolean };
 export const Footer = () => {
   const { lang, d } = useLang();
   const en = lang === "en";
+  const { pathname } = useLocation();
+  const [visitorCounts, setVisitorCounts] = useState<VisitorCounts | null>(null);
+
+  useEffect(() => {
+    let midnightTimer: number;
+    let isActive = true;
+
+    const refreshCounts = async (countHomepageVisit: boolean) => {
+      const counts = await loadVisitorCounts(countHomepageVisit).catch((error: unknown) => {
+        console.error("Could not load the shared visitor counts.", error);
+        return null;
+      });
+      if (isActive) setVisitorCounts(counts);
+      const delay = Math.max(0, getNextIndiaMidnight() - Date.now());
+      midnightTimer = window.setTimeout(() => {
+        if (isActive) void refreshCounts(false);
+      }, delay);
+    };
+
+    void refreshCounts(pathname === "/");
+    return () => {
+      isActive = false;
+      window.clearTimeout(midnightTimer);
+    };
+  }, [pathname]);
 
   const othersLinks: FootLink[] = [
     { en: "FAQ's", mr: "वारंवार विचारले जाणारे प्रश्न", to: "/faq" },
@@ -199,12 +227,12 @@ export const Footer = () => {
               <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{d(LAST_UPDATED)}</span>
             </span>
             <span>
-              {en ? "Visitors (sample):" : "भेटी (नमुना):"}{" "}
-              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{d(TOTAL_VISITORS.toLocaleString("en-IN"))}</span>
+              {en ? "Total Visitors:" : "एकूण भेटी:"}{" "}
+              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{visitorCounts?.total !== null && visitorCounts?.total !== undefined ? d(visitorCounts.total.toLocaleString("en-IN")) : "—"}</span>
             </span>
             <span>
-              {en ? "Today (sample):" : "आज (नमुना):"}{" "}
-              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{d(TODAY_VISITORS.toLocaleString("en-IN"))}</span>
+              {en ? "Today:" : "आजच्या भेटी:"}{" "}
+              <span className="bg-civic-gold text-civic-ink font-bold px-1.5 py-0.5 rounded text-[10px]">{visitorCounts?.today !== null && visitorCounts?.today !== undefined ? d(visitorCounts.today.toLocaleString("en-IN")) : "—"}</span>
             </span>
             <span>
               {en ? "Designed & developed by" : "निर्मिती:"}{" "}
